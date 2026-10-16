@@ -1,0 +1,27 @@
+name: repo-integrity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run repository integrity checks
+        run: python scripts/repo_checks.py
+
+      - name: Secret scan (gitleaks-style patterns, redacted output)
+        run: python scripts/secret_scan.py --redact

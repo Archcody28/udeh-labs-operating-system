@@ -11,3 +11,9 @@ build/
 .next/
 __pycache__/
 *.pyc
+.venv/
+coverage/
+.vscode/
+.idea/
+*.log
+
