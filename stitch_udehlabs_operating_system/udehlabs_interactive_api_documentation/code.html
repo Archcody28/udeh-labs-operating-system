@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UdehLabs Interactive API Documentation</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom scrollbar for terminal/code areas */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #010f1f; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3a494b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #849495; 
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#eaddff",
+                      "surface-tint": "#00dbe7",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "primary-fixed-dim": "#00dbe7",
+                      "on-surface": "#d5e4fa",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "inverse-primary": "#00696f",
+                      "surface-dim": "#051424",
+                      "surface-variant": "#283647",
+                      "on-secondary-container": "#c9aeff",
+                      "on-primary": "#00363a",
+                      "surface-container-highest": "#283647",
+                      "error-container": "#93000a",
+                      "on-background": "#d5e4fa",
+                      "on-error": "#690005",
+                      "tertiary-fixed-dim": "#b5c8e6",
+                      "primary-fixed": "#74f5ff",
+                      "on-tertiary-container": "#4f617b",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-high": "#1d2b3c",
+                      "on-secondary-fixed": "#25005a",
+                      "surface": "#051424",
+                      "inverse-surface": "#d5e4fa",
+                      "on-primary-fixed": "#002022",
+                      "outline-variant": "#3a494b",
+                      "on-secondary": "#3f008e",
+                      "surface-container": "#122031",
+                      "inverse-on-surface": "#233143",
+                      "surface-container-low": "#0e1c2d",
+                      "primary": "#e1fdff",
+                      "background": "#051424",
+                      "tertiary": "#f5f7ff",
+                      "secondary-container": "#6001d1",
+                      "error": "#ffb4ab",
+                      "surface-bright": "#2c3a4c",
+                      "surface-container-lowest": "#010f1f",
+                      "on-primary-container": "#006a71",
+                      "on-tertiary-fixed": "#081c33",
+                      "outline": "#849495",
+                      "tertiary-container": "#cadcfb",
+                      "tertiary-fixed": "#d3e3ff",
+                      "on-primary-fixed-variant": "#004f54",
+                      "primary-container": "#00f2ff",
+                      "on-surface-variant": "#b9cacb",
+                      "on-tertiary": "#1f3149",
+                      "secondary": "#d2bbff",
+                      "on-tertiary-fixed-variant": "#364861"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "1.5rem",
+                      "stack-compact": "0.5rem",
+                      "stack-default": "1rem",
+                      "margin-page": "2rem",
+                      "stack-loose": "2rem",
+                      "sidebar-width": "280px"
+              },
+              "fontFamily": {
+                      "code-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-xl": [
+                              "Hanken Grotesk"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "code-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.7",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.25",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-xl": [
+                              "40px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "code-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.7",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex flex-col font-body-md">
+
+    <!-- TopNavBar (Hidden on MD up to favor Sidebar context, but present for mobile/tablet) -->
+    <nav class="md:hidden flex justify-between items-center h-16 px-gutter w-full bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm sticky top-0 z-50">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary-fixed-dim">api</span>
+            <span class="font-headline-md text-headline-md font-bold text-primary-fixed-dim">UdehLabs Developer</span>
+        </div>
+        <div class="flex gap-4">
+            <span class="material-symbols-outlined text-on-surface-variant cursor-pointer active:scale-95">menu</span>
+        </div>
+    </nav>
+
+    <div class="flex flex-1 overflow-hidden h-full">
+        <!-- SideNavBar -->
+        <aside class="hidden md:flex flex-col h-screen sticky top-0 py-stack-default bg-surface-container-low border-r border-outline-variant/10 w-sidebar-width shrink-0">
+            <!-- Header -->
+            <div class="px-gutter mb-8 flex flex-col gap-2">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-DEFAULT bg-primary/10 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary-fixed-dim text-[20px]">api</span>
+                    </div>
+                    <div>
+                        <h1 class="font-headline-sm text-headline-sm text-on-surface">UdehLabs</h1>
+                        <p class="font-label-caps text-label-caps text-on-surface-variant">Developer Portal</p>
+                    </div>
+                </div>
+                <button class="mt-4 w-full py-2 px-4 bg-primary-fixed-dim text-on-primary font-body-sm font-bold rounded-DEFAULT hover:bg-primary transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">add</span>
+                    New Project
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex-1 overflow-y-auto px-2 space-y-1">
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">dashboard</span>
+                    Dashboard
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">layers</span>
+                    Apps & Projects
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">vpn_key</span>
+                    API Keys
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">webhook</span>
+                    Webhooks
+                </a>
+                
+                <!-- Documentation Section (Active) -->
+                <div class="pt-4 pb-2">
+                    <p class="px-3 text-on-surface-variant font-label-caps text-label-caps mb-2 opacity-50">API REFERENCE</p>
+                    <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-primary-fixed-dim border-l-2 border-primary-fixed-dim bg-primary/5 transition-all font-label-caps text-label-caps ml-1">
+                        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">description</span>
+                        Documentation
+                    </a>
+                    
+                    <!-- Nested API Categories -->
+                    <div class="ml-8 mt-1 space-y-1 border-l border-outline-variant/30 pl-2">
+                        <a href="#" class="block px-2 py-1.5 text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm rounded-DEFAULT hover:bg-surface-variant/20">Authentication</a>
+                        <a href="#" class="block px-2 py-1.5 text-primary-fixed-dim bg-primary/5 font-body-sm text-body-sm rounded-DEFAULT border-l border-primary-fixed-dim -ml-[1px]">AI Agents</a>
+                        <a href="#" class="block px-2 py-1.5 text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm rounded-DEFAULT hover:bg-surface-variant/20">Workflows</a>
+                        <a href="#" class="block px-2 py-1.5 text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm rounded-DEFAULT hover:bg-surface-variant/20">Billing</a>
+                    </div>
+                </div>
+
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps mt-2">
+                    <span class="material-symbols-outlined text-[18px]">terminal</span>
+                    SDKs
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">list_alt</span>
+                    Logs
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">bar_chart</span>
+                    Usage
+                </a>
+            </nav>
+
+            <!-- Footer -->
+            <div class="mt-auto px-2 pt-4 border-t border-outline-variant/10">
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">settings</span>
+                    Settings
+                </a>
+                <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps">
+                    <span class="material-symbols-outlined text-[18px]">contact_support</span>
+                    Support
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area: Split 50/50 -->
+        <main class="flex-1 flex overflow-hidden flex-col lg:flex-row">
+            
+            <!-- Documentation Center (Middle Column) -->
+            <div class="flex-1 overflow-y-auto bg-surface p-gutter lg:p-margin-page lg:max-w-3xl border-r border-outline-variant/10">
+                
+                <!-- Endpoint Header -->
+                <div class="mb-stack-loose">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-2 py-1 bg-surface-container-highest text-tertiary-fixed-dim font-code-sm text-code-sm rounded-DEFAULT border border-outline-variant/30">v1.2.0</span>
+                        <span class="px-2 py-1 bg-secondary-container/20 text-on-secondary-container font-code-sm text-code-sm rounded-DEFAULT border border-secondary-container/30">beta</span>
+                    </div>
+                    
+                    <h1 class="font-headline-xl text-headline-xl text-on-surface mb-2">Execute AI Agent</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant">Synchronously executes a predefined AI agent with custom payload parameters, returning the deterministic output.</p>
+                </div>
+
+                <!-- Endpoint URL -->
+                <div class="bg-surface-container-low rounded-lg p-4 flex items-center gap-4 mb-stack-loose border border-outline-variant/20 shadow-[0_0_15px_rgba(0,219,231,0.03)]">
+                    <span class="px-2 py-1 bg-surface-tint text-on-primary font-label-caps text-label-caps rounded-sm">POST</span>
+                    <code class="font-code-md text-code-md text-inverse-surface">https://api.udehlabs.com/v1/agents/execute</code>
+                    <button class="ml-auto text-on-surface-variant hover:text-primary-fixed-dim transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">content_copy</span>
+                    </button>
+                </div>
+
+                <div class="space-y-stack-loose">
+                    <!-- Authentication section -->
+                    <section>
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-stack-default flex items-center gap-2">
+                            <span class="material-symbols-outlined text-outline">lock</span>
+                            Authentication
+                        </h2>
+                        <p class="font-body-md text-body-md text-on-surface-variant mb-3">Requires a valid Bearer token in the Authorization header.</p>
+                        <div class="bg-surface-container p-4 rounded-lg border border-outline-variant/10">
+                            <code class="font-code-sm text-code-sm text-primary-fixed-dim">Authorization: Bearer &lt;YOUR_API_KEY&gt;</code>
+                        </div>
+                    </section>
+
+                    <!-- Parameters Table -->
+                    <section>
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-stack-default border-b border-outline-variant/20 pb-2">Request Body Schema</h2>
+                        
+                        <div class="w-full overflow-x-auto rounded-lg border border-outline-variant/20">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-surface-container-highest">
+                                        <th class="p-3 font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/20">PROPERTY</th>
+                                        <th class="p-3 font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/20">TYPE</th>
+                                        <th class="p-3 font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/20">DESCRIPTION</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-outline-variant/10 hover:bg-surface-variant/10">
+                                        <td class="p-3 font-code-sm text-code-sm text-primary-fixed-dim">agent_id<span class="text-error ml-1">*</span></td>
+                                        <td class="p-3 font-code-sm text-code-sm text-secondary-fixed">string</td>
+                                        <td class="p-3 font-body-sm text-body-sm text-on-surface-variant">The unique identifier of the configured agent to execute.</td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant/10 bg-surface-container/30 hover:bg-surface-variant/10">
+                                        <td class="p-3 font-code-sm text-code-sm text-primary-fixed-dim">payload<span class="text-error ml-1">*</span></td>
+                                        <td class="p-3 font-code-sm text-code-sm text-secondary-fixed">object</td>
+                                        <td class="p-3 font-body-sm text-body-sm text-on-surface-variant">Key-value pairs matching the agent's expected input schema.</td>
+                                    </tr>
+                                    <tr class="border-b border-outline-variant/10 hover:bg-surface-variant/10">
+                                        <td class="p-3 font-code-sm text-code-sm text-primary-fixed-dim">stream</td>
+                                        <td class="p-3 font-code-sm text-code-sm text-secondary-fixed">boolean</td>
+                                        <td class="p-3 font-body-sm text-body-sm text-on-surface-variant">If true, returns a Server-Sent Events stream instead of JSON. <br><span class="text-tertiary-fixed-dim">Default: false</span></td>
+                                    </tr>
+                                    <tr class="bg-surface-container/30 hover:bg-surface-variant/10">
+                                        <td class="p-3 font-code-sm text-code-sm text-primary-fixed-dim">temperature</td>
+                                        <td class="p-3 font-code-sm text-code-sm text-secondary-fixed">number</td>
+                                        <td class="p-3 font-body-sm text-body-sm text-on-surface-variant">Overrides the agent's default temperature setting (0.0 to 2.0).</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- API Playground (Right Column) -->
+            <div class="flex-1 bg-surface-container-lowest flex flex-col border-l border-outline-variant/20 shadow-[-10px_0_30px_rgba(0,0,0,0.5)] z-10 lg:max-w-xl xl:max-w-2xl">
+                
+                <!-- Playground Header -->
+                <div class="h-16 px-4 flex justify-between items-center bg-surface-container-low border-b border-outline-variant/20 shrink-0">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary-fixed-dim">terminal</span>
+                        <span class="font-label-caps text-label-caps text-on-surface">API PLAYGROUND</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <select class="bg-surface-container-highest border border-outline-variant/30 text-on-surface font-code-sm text-code-sm rounded-DEFAULT py-1 px-2 focus:ring-1 focus:ring-primary-fixed-dim focus:border-primary-fixed-dim">
+                            <option value="sandbox">Sandbox Key (...a7B2)</option>
+                            <option value="prod">Production Key (Hidden)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Playground Content Area (Scrollable) -->
+                <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-4">
+                    
+                    <!-- Request Setup -->
+                    <div class="bg-surface-container rounded-lg border border-outline-variant/20 flex flex-col h-[300px] shadow-[0_4px_20px_rgba(0,0,0,0.2)]">
+                        <div class="flex items-center justify-between px-3 py-2 border-b border-outline-variant/20 bg-surface-container-highest rounded-t-lg">
+                            <span class="font-label-caps text-label-caps text-on-surface-variant">REQUEST BODY (JSON)</span>
+                            <div class="flex gap-2">
+                                <button class="text-on-surface-variant hover:text-primary-fixed-dim">
+                                    <span class="material-symbols-outlined text-[16px]">format_align_left</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-1 bg-[#000000] p-4 font-code-sm text-code-sm overflow-auto relative font-[JetBrains Mono] text-inverse-surface rounded-b-lg">
+                            <pre><span class="text-tertiary-fixed-dim">{</span>
+  <span class="text-secondary-fixed-dim">"agent_id"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"agt_8f92bd3a1"</span><span class="text-tertiary-fixed-dim">,</span>
+  <span class="text-secondary-fixed-dim">"payload"</span><span class="text-tertiary-fixed-dim">: {</span>
+    <span class="text-secondary-fixed-dim">"customer_query"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"How do I reset my password?"</span><span class="text-tertiary-fixed-dim">,</span>
+    <span class="text-secondary-fixed-dim">"user_tier"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"enterprise"</span>
+  <span class="text-tertiary-fixed-dim">},</span>
+  <span class="text-secondary-fixed-dim">"stream"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#79c0ff]">false</span>
+<span class="text-tertiary-fixed-dim">}</span><span class="inline-block w-2 h-4 bg-primary-fixed-dim/70 ml-1 animate-pulse align-middle"></span></pre>
+                        </div>
+                    </div>
+
+                    <!-- Action Bar -->
+                    <div class="flex items-center justify-between py-2">
+                        <div class="flex items-center gap-2">
+                            <span class="relative flex h-3 w-3">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-fixed-dim opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-primary-fixed-dim"></span>
+                            </span>
+                            <span class="font-code-sm text-code-sm text-primary-fixed-dim">Sandbox Environment Ready</span>
+                        </div>
+                        <button class="bg-primary-fixed-dim text-on-primary font-label-caps text-label-caps px-6 py-2.5 rounded-DEFAULT hover:bg-primary transition-all flex items-center gap-2 shadow-[0_0_10px_rgba(0,219,231,0.3)] hover:shadow-[0_0_20px_rgba(0,219,231,0.5)]">
+                            <span class="material-symbols-outlined text-[18px]">play_arrow</span>
+                            EXECUTE REQUEST
+                        </button>
+                    </div>
+
+                    <!-- Response Window -->
+                    <div class="bg-surface-container rounded-lg border border-outline-variant/20 flex flex-col flex-1 min-h-[250px] shadow-[0_4px_20px_rgba(0,0,0,0.2)] mt-2">
+                        <div class="flex items-center justify-between px-3 py-2 border-b border-outline-variant/20 bg-surface-container-highest rounded-t-lg">
+                            <div class="flex items-center gap-3">
+                                <span class="font-label-caps text-label-caps text-on-surface-variant">RESPONSE</span>
+                                <span class="px-2 py-0.5 bg-[#1a4d2e] text-[#4ade80] font-code-sm text-code-sm rounded-sm border border-[#4ade80]/30">200 OK</span>
+                                <span class="font-code-sm text-code-sm text-on-surface-variant">342ms</span>
+                            </div>
+                            <button class="text-on-surface-variant hover:text-primary-fixed-dim">
+                                <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                            </button>
+                        </div>
+                        <div class="flex-1 bg-[#000000] p-4 font-code-sm text-code-sm overflow-auto opacity-80 rounded-b-lg">
+<pre><span class="text-tertiary-fixed-dim">{</span>
+  <span class="text-secondary-fixed-dim">"id"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"exe_9f3j29xna"</span><span class="text-tertiary-fixed-dim">,</span>
+  <span class="text-secondary-fixed-dim">"object"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"agent.execution"</span><span class="text-tertiary-fixed-dim">,</span>
+  <span class="text-secondary-fixed-dim">"created"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#79c0ff]">1715429381</span><span class="text-tertiary-fixed-dim">,</span>
+  <span class="text-secondary-fixed-dim">"model"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"udeh-agent-v2-turbo"</span><span class="text-tertiary-fixed-dim">,</span>
+  <span class="text-secondary-fixed-dim">"choices"</span><span class="text-tertiary-fixed-dim">: [</span>
+    <span class="text-tertiary-fixed-dim">{</span>
+      <span class="text-secondary-fixed-dim">"index"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#79c0ff]">0</span><span class="text-tertiary-fixed-dim">,</span>
+      <span class="text-secondary-fixed-dim">"message"</span><span class="text-tertiary-fixed-dim">: {</span>
+        <span class="text-secondary-fixed-dim">"role"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"assistant"</span><span class="text-tertiary-fixed-dim">,</span>
+        <span class="text-secondary-fixed-dim">"content"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"To reset your password, please navigate to the Account Settings page, click on 'Security', and select 'Send Reset Link'. An email will be dispatched to your registered address."</span>
+      <span class="text-tertiary-fixed-dim">},</span>
+      <span class="text-secondary-fixed-dim">"finish_reason"</span><span class="text-tertiary-fixed-dim">:</span> <span class="text-[#a5d6ff]">"stop"</span>
+    <span class="text-tertiary-fixed-dim">}</span>
+  <span class="text-tertiary-fixed-dim">],</span>
+  <span class="text-secondary-fixed-dim">"usage"</span><span class="text-tertiary-fixed-dim">: {</span>
+    <span class="text-secondary-fixed-dim">"prompt_tokens"</span><span class="text-tertiary-fixed-

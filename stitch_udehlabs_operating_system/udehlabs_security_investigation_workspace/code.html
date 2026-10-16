@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentinel-X - Investigation Workspace</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "data-blue": "#1C85E8",
+                        "primary-fixed-dim": "#b9c8de",
+                        "on-surface": "#dbe3f2",
+                        "surface-container-lowest": "#070f19",
+                        "secondary": "#d2bbff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary": "#ffffff",
+                        "surface-card": "#0d1b2a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-background": "#dbe3f2",
+                        "outline-variant": "#44474c",
+                        "primary-container": "#d5e4fb",
+                        "inverse-primary": "#515f73",
+                        "secondary-fixed": "#eaddff",
+                        "on-primary-container": "#576579",
+                        "on-surface-variant": "#c4c6cd",
+                        "execution-violet": "#7c3aed",
+                        "surface-container-high": "#232a36",
+                        "tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-error-container": "#ffdad6",
+                        "status-success": "#10b981",
+                        "surface-bright": "#323a45",
+                        "outline": "#8e9197",
+                        "surface-tint": "#b9c8de",
+                        "surface-container-highest": "#2d3541",
+                        "surface-variant": "#2d3541",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface": "#0c141e",
+                        "tertiary-container": "#6ffbbe",
+                        "status-risk": "#f59e0b",
+                        "error": "#ffb4ab",
+                        "border-muted": "#1e293b",
+                        "terminal-black": "#091017",
+                        "status-critical": "#ef4444",
+                        "secondary-container": "#6001d1",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "on-primary-fixed": "#0d1c2d",
+                        "background": "#0c141e",
+                        "inverse-on-surface": "#29313c",
+                        "surface-container": "#18202b",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#c9aeff",
+                        "surface-dim": "#0c141e",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#dbe3f2",
+                        "on-tertiary-container": "#00734e",
+                        "primary-fixed": "#d5e4fb",
+                        "on-tertiary": "#003824",
+                        "on-secondary": "#3f008e",
+                        "on-primary": "#233143",
+                        "surface-container-low": "#141c27",
+                        "on-secondary-fixed": "#25005a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "density-compact": "8px",
+                        "container-margin": "24px",
+                        "density-comfortable": "16px",
+                        "sidebar_width": "260px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .pulse-dot { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased font-body-md">
+<!-- SideNavBar (Shared Component) -->
+<aside class="bg-surface-container dark:bg-surface-container w-sidebar_width h-screen fixed left-0 top-0 border-r border-muted flex flex-col h-full z-20">
+<div class="hidden">SENTINEL-X</div>
+<div class="p-density-comfortable border-b border-muted">
+<div class="flex items-center gap-density-compact">
+<img alt="System Operator" class="w-10 h-10 rounded object-cover border border-outline-variant" data-alt="A futuristic, high-tech stylized operator avatar icon in dark mode with execution-violet accents, signifying a level 4 clearance system operator in a minimalist brutalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ-T9Qe1tZpsFQN8XkBNVFjw6ZIZgDohZ2ovysBBiOOqGl60sFxUg7B5Rqpz5l9nxuMDbhWAuXIOHQULYSsffcTR8PQFXn9zUNXTPoueU8wH20v5t6Ll5Eyla1smS2hWL7DdVpb2MLVyb1JXNgMM176oQAnTF4owv26f6a68_uhgUQKxLQVWLseIpN0fIbl_2XEbw9pjWw7E83s244rZiOHoamgjATbVv6UP-3A7iTSTR8wBnzpu-bcw"/>
+<div>
+<div class="font-headline-sm text-headline-sm text-primary">OPERATOR_01</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Level 4 Clearance</div>
+</div>
+</div>
+<button class="mt-density-comfortable w-full bg-execution-violet text-primary py-density-compact px-density-comfortable rounded font-body-md text-body-md font-bold hover:opacity-90 transition-opacity">
+                New Analysis
+            </button>
+</div>
+<nav class="flex-1 py-density-comfortable overflow-y-auto">
+<ul class="space-y-base">
+<li class="group cursor-pointer">
+<div class="flex items-center gap-compact text-on-surface-variant px-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150 pl-density-comfortable">
+<span class="material-symbols-outlined mr-density-compact" style="font-variation-settings: 'FILL' 0;">security</span>
+<span class="font-label-caps text-label-caps">Posture</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center gap-compact text-on-surface-variant px-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150 pl-density-comfortable">
+<span class="material-symbols-outlined mr-density-compact" style="font-variation-settings: 'FILL' 0;">fingerprint</span>
+<span class="font-label-caps text-label-caps">Identity</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center gap-compact text-on-surface-variant px-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150 pl-density-comfortable">
+<span class="material-symbols-outlined mr-density-compact" style="font-variation-settings: 'FILL' 0;">search_check</span>
+<span class="font-label-caps text-label-caps">Findings</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center gap-compact bg-surface-container-highest text-primary border-l-4 border-execution-violet px-comfortable py-density-compact pl-3">
+<span class="material-symbols-outlined text-execution-violet mr-density-compact" style="font-variation-settings: 'FILL' 1;">crisis_alert</span>
+<span class="font-label-caps text-label-caps text-execution-violet">Incidents</span>
+</div>
+</li>
+</ul>
+</nav>
+<div class="border-t border-muted p-density-comfortable">
+<ul class="space-y-base">
+<li class="group cursor-pointer">
+<div class="flex items-center gap-compact text-on-surface-variant px-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150">
+<span class="material-symbols-outlined mr-density-compact" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+<span class="font-label-caps text-label-caps">Documentation</span>
+</div>
+</li>
+<li class="group cursor-pointer">
+<div class="flex items-center gap-compact text-on-surface-variant px-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150">
+<span class="material-symbols-outlined mr-density-compact" style="font-variation-settings: 'FILL' 0;">support_agent</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</div>
+</li>
+</ul>
+</div>
+</aside>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[260px] flex flex-col h-screen bg-background">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary font-body-md text-body-md w-full h-16 border-b border-muted flat no shadows flex justify-between items-center px-container-margin w-full bg-surface shrink-0 z-10">
+<div class="flex items-center gap-density-comfortable">
+<div class="font-display-lg text-headline-sm font-bold tracking-tighter text-execution-violet">SENTINEL-X</div>
+<div class="ml-container-margin relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant">search</span>
+<input class="bg-surface-container text-on-surface border border-muted rounded pl-10 pr-4 py-1.5 focus:border-execution-violet focus:ring-1 focus:ring-execution-violet font-data-mono text-data-mono outline-none w-64" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<nav class="flex h-full items-end gap-gutter">
+<div class="cursor-pointer active:opacity-80 text-on-surface-variant font-medium pb-4 hover:text-primary transition-colors duration-200 px-2 pt-5">Network</div>
+<div class="cursor-pointer active:opacity-80 text-on-surface-variant font-medium pb-4 hover:text-primary transition-colors duration-200 px-2 pt-5">Assets</div>
+<div class="cursor-pointer active:opacity-80 text-on-surface-variant font-medium pb-4 hover:text-primary transition-colors duration-200 px-2 pt-5">Compliance</div>
+</nav>
+<div class="flex items-center gap-density-comfortable">
+<button class="bg-transparent border border-muted text-on-surface hover:text-primary px-3 py-1.5 rounded font-label-caps text-label-caps transition-colors">Emergency Lockdown</button>
+<button class="bg-execution-violet text-primary px-3 py-1.5 rounded font-label-caps text-label-caps font-bold hover:opacity-90 transition-opacity">Deploy Policy</button>
+<div class="flex items-center gap-density-compact ml-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">settings</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin">
+<div class="mb-density-comfortable flex items-center justify-between">
+<div>
+<h1 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-critical pulse-dot"></span>
+                        INCIDENT // INVX-992A
+                    </h1>
+<p class="font-data-mono text-data-mono text-on-surface-variant mt-1">Suspicious Lateral Movement Detected</p>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 rounded bg-status-critical/10 border border-status-critical/30 text-status-critical font-label-caps text-label-caps">SEV-1</span>
+<span class="px-2 py-1 rounded bg-execution-violet/10 border border-execution-violet/30 text-execution-violet font-label-caps text-label-caps">ACTIVE</span>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-container-margin h-[calc(100%-80px)]">
+<!-- Left Column: Investigation Details -->
+<div class="col-span-3 flex flex-col gap-container-margin">
+<div class="bg-surface-card border border-muted rounded relative overflow-hidden flex-1">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-status-risk"></div>
+<div class="p-density-comfortable border-b border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">Target Entity</h2>
+</div>
+<div class="p-density-comfortable space-y-density-comfortable">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Actor Identity</label>
+<div class="font-data-mono text-data-mono text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">person</span> dev-svc-acct-04
+                                </div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Device Status</label>
+<div class="inline-block px-2 py-1 rounded bg-status-risk/10 border border-status-risk/30 text-status-risk font-label-caps text-label-caps">
+                                    UNTRUSTED
+                                </div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">IP Metadata</label>
+<div class="bg-terminal-black p-density-compact rounded border border-muted font-data-mono text-data-mono mt-1">
+<div class="text-data-blue">IPv4: <span class="text-on-surface-variant">192.168.4.102</span></div>
+<div class="text-data-blue">ASN: <span class="text-on-surface-variant">AS15169</span></div>
+<div class="text-data-blue">LOC: <span class="text-on-surface-variant">Frankfurt, DE</span></div>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-1">Context</label>
+<p class="font-body-sm text-body-sm text-on-surface">Service account instantiated outside normal working hours, attempting broad repository access.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Column: Timeline & Correlation -->
+<div class="col-span-6 flex flex-col gap-container-margin">
+<!-- Correlation Graph -->
+<div class="bg-surface-card border border-muted rounded relative overflow-hidden h-1/2 flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-execution-violet"></div>
+<div class="p-density-comfortable border-b border-muted flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm text-primary">Correlation Graph</h2>
+<span class="material-symbols-outlined text-on-surface-variant">hub</span>
+</div>
+<div class="flex-1 bg-terminal-black relative p-density-comfortable overflow-hidden flex items-center justify-center">
+<!-- Abstract Representation of a graph -->
+<div class="relative w-full h-full max-w-md">
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded border border-status-critical bg-status-critical/10 flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-status-critical">person</span>
+</div>
+<!-- Lines -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+<line stroke="#44474c" stroke-dasharray="4" stroke-width="2" x1="50%" x2="20%" y1="50%" y2="20%"></line>
+<line stroke="#44474c" stroke-width="2" x1="50%" x2="80%" y1="50%" y2="30%"></line>
+<line stroke="#7c3aed" stroke-width="2" x1="50%" x2="30%" y1="50%" y2="80%"></line>
+</svg>
+<!-- Nodes -->
+<div class="absolute top-[20%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 p-2 border border-muted bg-surface rounded text-center z-10">
+<span class="material-symbols-outlined text-data-blue text-sm block">vpn_key</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant block mt-1">Auth_DB</span>
+</div>
+<div class="absolute top-[30%] left-[80%] transform -translate-x-1/2 -translate-y-1/2 p-2 border border-muted bg-surface rounded text-center z-10">
+<span class="material-symbols-outlined text-status-risk text-sm block">api</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant block mt-1">Core_API</span>
+</div>
+<div class="absolute top-[80%] left-[30%] transform -translate-x-1/2 -translate-y-1/2 p-2 border border-execution-violet bg-execution-violet/10 rounded text-center z-10">
+<span class="material-symbols-outlined text-execution-violet text-sm block">source</span>
+<span class="font-label-caps text-label-caps text-primary block mt-1">Repo_Main</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Investigation Timeline -->
+<div class="bg-surface-card border border-muted rounded relative overflow-hidden flex-1 flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-secondary-container"></div>
+<div class="p-density-comfortable border-b border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">Investigation Timeline</h2>
+</div>
+<div class="p-density-comfortable overflow-y-auto flex-1">
+<div class="relative border-l border-muted ml-3 space-y-6">
+<!-- Timeline Item 1 -->
+<div class="relative pl-6">
+<div class="absolute left-[-6px] top-1 w-3 h-3 rounded-full border-2 border-surface-card bg-muted"></div>
+<div class="font-data-mono text-data-mono text-on-surface-variant mb-1">08:42:12 UTC</div>
+<div class="bg-surface border border-muted p-density-compact rounded inline-block">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">login</span>
+<span class="font-label-caps text-label-caps text-primary">Auth Event</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Successful login from unrecognized IP.</div>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-6">
+<div class="absolute left-[-6px] top-1 w-3 h-3 rounded-full border-2 border-surface-card bg-muted"></div>
+<div class="font-data-mono text-data-mono text-on-surface-variant mb-1">08:45:03 UTC</div>
+<div class="bg-surface border border-muted p-density-compact rounded inline-block">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-data-blue">api</span>
+<span class="font-label-caps text-label-caps text-primary">API Scoped Retrieval</span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Accessed endpoints: /v1/secrets/list</div>
+</div>
+</div>
+<!-- Timeline Item 3 (Active) -->
+<div class="relative pl-6">
+<div class="absolute left-[-6px] top-1 w-3 h-3 rounded-full border-2 border-surface-card bg-execution-violet"></div>
+<div class="font-data-mono text-data-mono text-execution-violet mb-1">08:47:55 UTC</div>
+<div class="bg-terminal-black border border-execution-violet/50 p-density-compact rounded inline-block">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-sm text-execution-violet">smart_toy</span>
+<span class="font-label-caps text-label-caps text-primary">AI Agent Execution</span>
+</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-xs">
+<span class="text-data-blue">CMD:</span> script_runner.sh --payload=obfuscated
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Action Panel -->
+<div class="col-span-3">
+<div class="bg-surface-card border border-muted rounded relative overflow-hidden h-full">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-status-critical"></div>
+<div class="p-density-comfortable border-b border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">Action Panel</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Remediation Automation</p>
+</div>
+<div class="p-density-comfortable flex flex-col gap-density-comfortable">
+<button class="w-full bg-surface border border-status-critical/30 hover:border-status-critical text-primary py-2 px-3 rounded flex items-center justify-between group transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-critical group-hover:animate-pulse">person_off</span>
+<span class="font-body-md text-body-md font-semibold">Revoke Identity</span>
+</div>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">chevron_right</span>
+</button>
+<button class="w-full bg-surface border border-status-risk/30 hover:border-status-risk text-primary py-2 px-3 rounded flex items-center justify-between group transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-risk">power_settings_new</span>
+<span class="font-body-md text-body-md font-semibold">Invalidate Sessions</span>
+</div>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">chevron_right</span>
+</button>
+<button class="w-full bg-surface border border-execution-violet/30 hover:border-execution-violet text-primary py-2 px-3 rounded flex items-center justify-between group transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-execution-violet">lock</span>
+<span class="font-body-md text-body-md font-semibold">Quarantine Repository</span>
+</div>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">chevron_right</span>
+</button>
+<button class="w-full bg-surface border border-data-blue/30 hover:border-data-blue text-primary py-2 px-3 rounded flex items-center justify-between group transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-data-blue">key</span>
+<span class="font-body-md text-body-md font-semibold">Rotate Secrets</span>
+</div>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">chevron_right</span>
+</button>
+<div class="mt-auto border-t border-muted pt-density-comfortable">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Execution Logs</div>
+<div class="bg-terminal-black border border-muted rounded p-2 h-32 overflow-y-auto font-data-mono text-data-mono text-[10px] text-on-surface-variant leading-tight">
+<div>[SYS] Awaiting manual override...</div>
+<div>[SYS] Policies loaded.</div>
+<div class="text-data-blue">READY &gt;_</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

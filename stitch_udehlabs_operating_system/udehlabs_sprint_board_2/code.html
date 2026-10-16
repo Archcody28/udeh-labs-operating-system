@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Alpha - Sprint Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#233143",
+                        "on-secondary-container": "#c9aeff",
+                        "on-primary-fixed": "#0d1c2d",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#003824",
+                        "background": "#0c141e",
+                        "status-critical": "#ef4444",
+                        "status-risk": "#f59e0b",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "secondary-container": "#6001d1",
+                        "surface-dim": "#0c141e",
+                        "outline-variant": "#44474c",
+                        "inverse-primary": "#515f73",
+                        "on-tertiary-container": "#00734e",
+                        "on-background": "#dbe3f2",
+                        "on-tertiary-fixed": "#002113",
+                        "terminal-black": "#091017",
+                        "data-blue": "#1C85E8",
+                        "secondary-fixed": "#eaddff",
+                        "tertiary": "#ffffff",
+                        "surface-container-low": "#141c27",
+                        "surface-container": "#18202b",
+                        "surface-container-lowest": "#070f19",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#576579",
+                        "on-error": "#690005",
+                        "execution-violet": "#7c3aed",
+                        "primary-fixed": "#d5e4fb",
+                        "on-secondary": "#3f008e",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#8e9197",
+                        "surface-card": "#0d1b2a",
+                        "surface-container-high": "#232a36",
+                        "on-surface": "#dbe3f2",
+                        "status-success": "#10b981",
+                        "inverse-surface": "#dbe3f2",
+                        "inverse-on-surface": "#29313c",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#2d3541",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-tint": "#b9c8de",
+                        "surface-variant": "#2d3541",
+                        "on-surface-variant": "#c4c6cd",
+                        "surface": "#0c141e",
+                        "tertiary-container": "#6ffbbe",
+                        "border-muted": "#1e293b",
+                        "primary-fixed-dim": "#b9c8de",
+                        "on-secondary-fixed": "#25005a",
+                        "primary": "#ffffff",
+                        "surface-bright": "#323a45",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "secondary": "#d2bbff",
+                        "primary-container": "#d5e4fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "gutter": "16px",
+                        "density-comfortable": "16px",
+                        "sidebar_width": "260px",
+                        "base": "4px",
+                        "density-compact": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "data-mono": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Custom Scrollbar for Terminal Aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #091017;
+            border-left: 1px solid #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3541;
+            border-radius: 0px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #44474c;
+        }
+        
+        /* Hide scrollbar for kanban columns to keep it clean, but allow scroll */
+        .kanban-col-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .kanban-col-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md h-screen w-screen overflow-hidden flex selection:bg-execution-violet selection:text-white">
+<!-- JSON Component: SideNavBar -->
+<nav class="w-sidebar_width h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-muted flex flex-col py-density-comfortable z-20">
+<!-- Header -->
+<div class="px-container-margin mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-terminal-black border border-outline-variant flex items-center justify-center overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A highly detailed, ultra-crisp abstract geometric logo for a tech company, featuring sharp intersecting lines forming an 'A' shape in vibrant purple against a pitch-black background. The lighting is artificial and precise, typical of a modern dark-mode software interface. The mood is authoritative and technical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3nZnIzRY4MJUR9TOaSbqtEoM7LNGd4aMSp9stcSCa6ko7I2rgMU_sMzmJSb4QByVkBjsi50BnJwVSO-QwW_xsX4MO-vr3shuXCRMXjjOSM3N1AZN6BjvswhvJaVOWaY9MnJ971iIWiHRbjlswEm-re_PUCGdmSM7YVSii0_9blH5u9wK9safbRj_lzU2xSeFh6eM8fuMHJ6jdTDu_q2VsyO7wmXgwQXTFBRoYroDLDP2fHf8zUZyomA"/>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">Project Alpha</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider text-[10px]">AI Delivery Engine</p>
+</div>
+</div>
+<!-- Main Navigation -->
+<ul class="flex-1 space-y-1 px-3">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+</li>
+<!-- Active Tab: Board -->
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-primary bg-surface-container-high border-l-4 border-execution-violet" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="view_kanban">view_kanban</span>
+<span>Board</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="list_alt">list_alt</span>
+<span>Backlog</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="rebase_edit">rebase_edit</span>
+<span>Sprints</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="package_2">package_2</span>
+<span>Releases</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="psychology">psychology</span>
+<span>AI Delivery Intelligence</span>
+</a>
+</li>
+</ul>
+<!-- Footer Navigation -->
+<ul class="space-y-1 px-3 mt-auto">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded transition-colors duration-150 ease-in-out hover:bg-surface-container text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="menu_book">menu_book</span>
+<span>Documentation</span>
+</a>
+</li>
+</ul>
+<div class="px-container-margin mt-4">
+<button class="w-full bg-surface-container border border-outline-variant text-primary font-data-mono text-data-mono py-2 rounded flex items-center justify-center gap-2 hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Invite Team
+            </button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<div class="ml-sidebar_width flex-1 flex flex-col h-full relative z-10 bg-background">
+<!-- JSON Component: TopAppBar -->
+<header class="fixed top-0 right-0 left-sidebar_width h-16 bg-surface border-b border-muted flex justify-between items-center px-container-margin z-20">
+<!-- Left Side / Nav Links -->
+<div class="flex items-center gap-6 h-full">
+<div class="h-full flex items-center border-b-2 border-execution-violet text-primary transition-all duration-200">
+<a class="font-label-caps text-label-caps uppercase tracking-wider" href="#">Sprint 12 Health: 94%</a>
+</div>
+<div class="h-full flex items-center border-b-2 border-transparent text-on-surface-variant hover:text-primary transition-all duration-200">
+<a class="font-label-caps text-label-caps uppercase tracking-wider" href="#">Live Deployments</a>
+</div>
+</div>
+<!-- Right Side / Actions -->
+<div class="flex items-center gap-4">
+<div class="flex items-center text-on-surface-variant gap-2 border-r border-muted pr-4">
+<button class="hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span></button>
+<button class="hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]" data-icon="search">search</span></button>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface border border-outline-variant text-on-surface font-data-mono text-data-mono px-3 py-1.5 rounded hover:bg-surface-container transition-colors">Start Sprint</button>
+<button class="bg-execution-violet text-white font-data-mono text-data-mono px-3 py-1.5 rounded hover:bg-secondary-container transition-colors shadow-[0_0_10px_rgba(124,58,237,0.2)]">New Task</button>
+</div>
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden ml-2 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up portrait photograph of a focused female software engineer in a dimly lit server room setting. The lighting is cool, with subtle blue and purple neon reflections on her face, consistent with a dark-mode tech environment. She looks professional and serious." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTTgdFFJiQSlKIPD4BoSVAOF6wNrkbvw7BMTFU4Ew73du7aRCE0_t3WQxa2BI5k0VF4MlN2n32A1CWLaNcZBTHbejr4AIUSbbwZhSJEZiMHNqGS7zBh5OQVGL7KdY4xEYGeFhx74DeZgpkkQ3gZUmzzPHcIxHUK0BT2gcXiY_26u3ZOk_m4LFqIgDdZr5I2lnBXTVwy69Wme_Cl_GNJXvNY_cQic9Y1j1d7BwG-4eEG29BVjSU_FWh8g"/>
+</div>
+</div>
+</header>
+<!-- Filter Bar -->
+<div class="mt-16 bg-surface-container-low border-b border-muted p-density-comfortable flex items-center justify-between flex-shrink-0">
+<div class="flex items-center gap-4">
+<!-- Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="bg-terminal-black border border-outline-variant rounded pl-9 pr-3 py-1.5 font-data-mono text-data-mono text-on-surface placeholder:text-on-surface-variant/50 focus:border-execution-violet focus:ring-1 focus:ring-execution-violet focus:outline-none w-64" placeholder="Filter by keyword..." type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex items-center gap-2 border-l border-muted pl-4">
+<button class="flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded px-2.5 py-1 text-on-surface-variant hover:text-primary hover:border-primary-fixed-dim transition-colors font-data-mono text-[12px]">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+                        Status
+                    </button>
+<button class="flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded px-2.5 py-1 text-on-surface-variant hover:text-primary hover:border-primary-fixed-dim transition-colors font-data-mono text-[12px]">
+<span class="material-symbols-outlined text-[16px]">person</span>
+                        Member
+                    </button>
+<button class="flex items-center gap-1.5 bg-surface-container border border-outline-variant rounded px-2.5 py-1 text-on-surface-variant hover:text-primary hover:border-primary-fixed-dim transition-colors font-data-mono text-[12px]">
+<span class="material-symbols-outlined text-[16px]">label</span>
+                        Label
+                    </button>
+</div>
+</div>
+<!-- Stats/Controls -->
+<div class="flex items-center gap-4 text-on-surface-variant font-data-mono text-[12px]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-critical animate-pulse"></span>
+<span>1 Blocked</span>
+</div>
+<div class="border-l border-muted h-4"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span>32 Story Points</span>
+</div>
+</div>
+</div>
+<!-- Kanban Board Area -->
+<main class="flex-1 overflow-x-auto overflow-y-hidden p-container-margin">
+<div class="flex gap-gutter h-full min-w-max pb-4">
+<!-- Column: Backlog -->
+<div class="w-[320px] flex flex-col bg-surface-container-lowest border border-muted rounded flex-shrink-0 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-inverse-primary/30"></div>
+<div class="p-3 border-b border-muted flex justify-between items-center bg-surface-container-low pl-4">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase">Backlog</h2>
+<span class="font-data-mono text-[11px] bg-surface-bright px-1.5 py-0.5 rounded text-on-surface-variant">2</span>
+</div>
+<div class="flex-1 overflow-y-auto kanban-col-scroll p-density-compact space-y-density-compact">
+<!-- Card: Standard -->
+<div class="bg-surface-card border border-outline-variant rounded p-3 cursor-pointer hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-inverse-primary">TSK-101</span>
+<span class="material-symbols-outlined text-[16px] text-inverse-primary" title="Low Priority">keyboard_arrow_down</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 group-hover:text-primary transition-colors">Implement Redis caching layer for API responses</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-data-blue bg-terminal-black border border-outline-variant px-1 rounded">Backend</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">3 SP</span>
+<div class="w-5 h-5 rounded-full bg-surface-bright border border-outline-variant border-dashed flex items-center justify-center text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[12px]">person_add</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Standard -->
+<div class="bg-surface-card border border-outline-variant rounded p-3 cursor-pointer hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-inverse-primary">TSK-109</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" title="Medium Priority">drag_handle</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 group-hover:text-primary transition-colors">Update documentation for v2.4 endpoint deprecation</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-inverse-primary bg-terminal-black border border-outline-variant px-1 rounded">Docs</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">1 SP</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed close-up headshot of a male technical writer wearing glasses, lit by the glow of a computer monitor in a modern, dark-themed office environment. The style is realistic and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAVeVjakVWEA6NPPCTxS6E7r7mIebMW5pM_LDQWt59U2NH8DBH40aA8aTlL92P3ovwVluF5kKokIS6qidUIcxIsaMkptHcJKWL60EZUsyhDz-a99fwVTBGYfyzbOL8ficZlCVS8ayqjx8lH6bzK0ycelgohUJq4sYc4IQAiJSuxVGm_g4KG3YOtRohVV_W-KseB0g8-lcwoNpQs_2fiaN9U2uJgDLJIaExPjNVGGJhPWtPd5n4l7QdTw"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Ready -->
+<div class="w-[320px] flex flex-col bg-surface-container-lowest border border-muted rounded flex-shrink-0 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-on-primary-fixed-variant"></div>
+<div class="p-3 border-b border-muted flex justify-between items-center bg-surface-container-low pl-4">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase">Ready</h2>
+<span class="font-data-mono text-[11px] bg-surface-bright px-1.5 py-0.5 rounded text-on-surface-variant">1</span>
+</div>
+<div class="flex-1 overflow-y-auto kanban-col-scroll p-density-compact space-y-density-compact">
+<!-- Card: Standard High Priority -->
+<div class="bg-surface-card border border-outline-variant rounded p-3 cursor-pointer hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-inverse-primary">TSK-102</span>
+<span class="material-symbols-outlined text-[16px] text-status-risk" title="High Priority">keyboard_double_arrow_up</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 group-hover:text-primary transition-colors">Migrate user authentication tokens to new JWT standard</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-status-risk bg-terminal-black border border-outline-variant px-1 rounded">Security</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">5 SP</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed avatar image of a female DevOps engineer. She is wearing a dark hoodie. The background is a stark, terminal-black color. The aesthetic matches a high-end, brutalist dark mode software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWENb0wmEvexEUOOmhqVsAcF9JIpNv0zVW9AuJDJSTXCDPcUbP-4_OhMg21tRkucuWDs3inJCIjZsYXztPaLSCK1GSm8UvDhW_CWhFrRnxlzAOh6p6Z7w_RiDchBO8cIMTqIUu29JeNLlOCR6RP9D89AnfykSnPrlVJOHnkEdiwAyz9yZGrubHUAu31AnBt_aVUyIjMgTpDp8llJdshu06Fx0e7BFd1k16vrZCB-xbiAbJXqDZ3v4_sA"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: In Progress -->
+<div class="w-[320px] flex flex-col bg-surface-container-lowest border border-muted rounded flex-shrink-0 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-execution-violet"></div>
+<div class="p-3 border-b border-muted flex justify-between items-center bg-surface-container-low pl-4">
+<div class="flex items-center gap-2">
+<h2 class="font-label-caps text-label-caps text-primary uppercase text-execution-violet">In Progress</h2>
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-execution-violet opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-execution-violet"></span>
+</span>
+</div>
+<span class="font-data-mono text-[11px] bg-execution-violet/20 border border-execution-violet/30 text-execution-violet px-1.5 py-0.5 rounded">2</span>
+</div>
+<div class="flex-1 overflow-y-auto kanban-col-scroll p-density-compact space-y-density-compact">
+<!-- Card: BLOCKED STATE (Critical Visual Treatment) -->
+<div class="bg-surface-card border-2 border-status-critical/50 border-l-4 border-l-status-critical rounded p-3 cursor-pointer shadow-[0_0_15px_rgba(239,68,68,0.1)] relative overflow-hidden group">
+<!-- Subtle red background glow -->
+<div class="absolute inset-0 bg-error-container/5 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-2 relative z-10">
+<span class="font-data-mono text-[11px] text-status-critical font-bold">TSK-103</span>
+<div class="flex items-center gap-1 bg-status-critical/10 border border-status-critical/30 px-1.5 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px] text-status-critical">block</span>
+<span class="font-label-caps text-[9px] text-status-critical uppercase">Blocked</span>
+</div>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 relative z-10">Resolve deadlocks in concurrent database transaction processing</h3>
+<div class="flex justify-between items-end mt-auto relative z-10">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-data-blue bg-terminal-black border border-outline-variant px-1 rounded">DBA</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-status-critical font-medium">8 SP</span>
+<div class="w-5 h-5 rounded-full border border-status-critical overflow-hidden ring-1 ring-status-critical/50">
+<img class="w-full h-full object-cover" data-alt="A highly detailed avatar of a senior systems architect, male, looking stressed. The lighting is harsh and slightly red, indicating an emergency or critical error state within a dark-mode command center environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjCRcnHorr3UNQOXcE3vDUqoPwawe8Rq5ps3QXx79EsFuYmiP_n54srz_cpSDo9h4nbTL6sy_HoP-dfTn6zWihQimy5WYl7-q5ExSmvsdx4RekDi7uKubSCcUPV3GlQ2Grf4ANAwx5hVZA30f60ygJHYnznlwSqOYAKXWfbb9Mh-awP_bGjJhG_Za3_pa5ElVc_djmvUNPzoeF4ViDut0lcKg7fLUBsMfhrLysAbthsJNZg_J6BJ1cJQ"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Card: Standard Active -->
+<div class="bg-surface-card border border-execution-violet/30 rounded p-3 cursor-pointer hover:border-execution-violet/70 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-inverse-primary">TSK-104</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant" title="Medium Priority">drag_handle</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 group-hover:text-primary transition-colors">Design new 'Terminal View' UI components for logging dashboard</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-on-secondary-container bg-terminal-black border border-outline-variant px-1 rounded">Frontend</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">5 SP</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A detailed, sharp avatar of a female UI designer. She is in a dark, minimalist studio space illuminated by the glow of screens displaying complex data visualizations. The aesthetic is modern, brutalist, and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQ9rqW4AHbBHhJLg_0r7_xT553zJtLPTkcc3mXb8h_WQfj_gpTEWDDx6D795DKrzW7oAy0bUaBDuPBgp4NeakogWs0uAAA8ZJ36kzhL1ERscekULDWN_4Nvwiz1q0nKO0WZQcC17_aljtyQLgrxYbs7mg4Ck5vvH6KvxykDmL3vyTrqu0rc2PWuac8prLL6Z-W9WKkeu78Rt4A62F5C45KZrmXh1CkyfOTRyW5UOyiOkGwucJr2NPEGQ"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: In Review -->
+<div class="w-[320px] flex flex-col bg-surface-container-lowest border border-muted rounded flex-shrink-0 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-status-risk"></div>
+<div class="p-3 border-b border-muted flex justify-between items-center bg-surface-container-low pl-4">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase">In Review</h2>
+<span class="font-data-mono text-[11px] bg-surface-bright px-1.5 py-0.5 rounded text-on-surface-variant">1</span>
+</div>
+<div class="flex-1 overflow-y-auto kanban-col-scroll p-density-compact space-y-density-compact">
+<!-- Card: Standard -->
+<div class="bg-surface-card border border-outline-variant rounded p-3 cursor-pointer hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-inverse-primary">TSK-105</span>
+<span class="material-symbols-outlined text-[16px] text-inverse-primary" title="Low Priority">keyboard_arrow_down</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 group-hover:text-primary transition-colors">Refactor utility functions in core data processing pipeline</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-data-blue bg-terminal-black border border-outline-variant px-1 rounded">Core</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">2 SP</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed avatar of a male backend developer, lit by cool, blue-toned screen light against a pitch-black background. The style is sharp, focused, and fits a high-end technical interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVkOe24rlJozONHx9duWdHfJ1uLtA8SprUj6A6rK4ETEiDUwVZ4fBpMtyS6XycDBMZIlNYLKrBQ-8xsIVfMCfNLRYgrUauLpWEEEy_0hrLD2lVAC_5Cn6OauE1ZenoduIGI2UIIyDNr88TsyBi22VLjfQww8H3DYU6owieM73NdU89gJ42Q51yj10BndZHpZ-Zic3LaJ-U-wyrcBpjP57oYBvD1iceaAW_gRpul4fR1xlctKJb3lxm0Q"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: QA -->
+<div class="w-[320px] flex flex-col bg-surface-container-lowest border border-muted rounded flex-shrink-0 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-secondary-fixed-dim"></div>
+<div class="p-3 border-b border-muted flex justify-between items-center bg-surface-container-low pl-4">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase">QA</h2>
+<span class="font-data-mono text-[11px] bg-surface-bright px-1.5 py-0.5 rounded text-on-surface-variant">1</span>
+</div>
+<div class="flex-1 overflow-y-auto kanban-col-scroll p-density-compact space-y-density-compact">
+<!-- Card: Standard High -->
+<div class="bg-surface-card border border-outline-variant rounded p-3 cursor-pointer hover:border-primary-fixed-dim transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-inverse-primary">TSK-106</span>
+<span class="material-symbols-outlined text-[16px] text-status-risk" title="High Priority">keyboard_double_arrow_up</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface font-medium leading-tight mb-4 group-hover:text-primary transition-colors">Integration testing for 3rd party payment gateway webhooks</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-secondary-fixed bg-terminal-black border border-outline-variant px-1 rounded">Testing</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">5 SP</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed avatar of a female QA engineer, intensely focused. The lighting is low-key, emphasizing structural forms and a high-stakes operational environment typical of a mission control center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGWFFA8Ub4O70LsNcIbNir09M1DN9VnPwZ-A8yBypTOfenp21nUAYAYpiZOwaa0JyST8zYSewx8wItBG68OssI7UzrdLe7J3ES0v0zPOwWq2Un4sKZ9cPPMObGlnDWpu6NJFV73975J_J0NuLNDaElJAIz5G8MNFCx4PbyJ7FLHw00crjdjMDMkzU8beFhiOeSXnpaYL8XClbNoZ74eGF6Cil5XZ2oqnHyFv6zx5700NC65IqqK6lktg"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Done -->
+<div class="w-[320px] flex flex-col bg-surface-container-lowest border border-muted rounded flex-shrink-0 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-status-success"></div>
+<div class="p-3 border-b border-muted flex justify-between items-center bg-surface-container-low pl-4">
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase">Done</h2>
+<span class="font-data-mono text-[11px] bg-status-success/10 text-status-success border border-status-success/30 px-1.5 py-0.5 rounded">1</span>
+</div>
+<div class="flex-1 overflow-y-auto kanban-col-scroll p-density-compact space-y-density-compact opacity-75"> <!-- Slightly dim done items -->
+<!-- Card: Standard Done -->
+<div class="bg-surface-card border border-outline-variant rounded p-3 cursor-default group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant line-through">TSK-107</span>
+<span class="material-symbols-outlined text-[16px] text-status-success">check_circle</span>
+</div>
+<h3 class="font-body-md text-body-md text-on-surface-variant font-medium leading-tight mb-4 line-through">Update dependencies for node-sass and react-scripts</h3>
+<div class="flex justify-between items-end mt-auto">
+<div class="flex items-center gap-1.5">
+<span class="font-data-mono text-[10px] text-on-surface-variant bg-terminal-black border border-outline-variant px-1 rounded">Infra</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-data-mono text-[11px] text-on-surface-variant">1 SP</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant overflow-hidden grayscale">
+<img class="w-full h-full object-cover" data-alt="A detailed avatar of a male systems administrator, desaturated to grayscale to indicate completed work. The background is a stark, dark terminal color." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFKN_4gZR8ZVi8EW-iX5I34CaXEb1m63eklfE3bt8xUEhdYwxcRR8dHt88P3deWmH5Vlv5Z-k-AlIFkdqP8zZvQoFjwN2bS8LkmKuMm0fuMRx6K6i2N4-Ppe1f0iM7Bk6p9B59qyp1kc_Tedkracb14oOskvEl-YwaCuiPjwrY6Ui79ZmF_PcgEmyvhnj2du5chVFK4jA5YEsgy7hilehqVfuU-KZnf5gD0YR5iuGtqlbTxkwU77-njA"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

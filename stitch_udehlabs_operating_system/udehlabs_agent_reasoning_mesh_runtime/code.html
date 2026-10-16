@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agent Mesh - Active Autonomy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "surface-variant": "#273647",
+                            "error": "#ffb4ab",
+                            "outline-variant": "#464555",
+                            "on-tertiary-container": "#d4dbf5",
+                            "secondary-fixed": "#ffdadb",
+                            "surface-bright": "#2c3a4c",
+                            "on-tertiary-fixed-variant": "#3f465c",
+                            "error-container": "#93000a",
+                            "on-error-container": "#ffdad6",
+                            "on-primary-container": "#dad7ff",
+                            "outline": "#918fa1",
+                            "on-primary-fixed": "#0f0069",
+                            "tertiary-fixed-dim": "#bec6e0",
+                            "inverse-on-surface": "#233143",
+                            "secondary-container": "#b50036",
+                            "on-secondary-fixed-variant": "#92002a",
+                            "surface-container-lowest": "#010f1f",
+                            "secondary": "#ffb2b7",
+                            "surface-container-highest": "#273647",
+                            "surface-tint": "#c3c0ff",
+                            "on-tertiary": "#283044",
+                            "tertiary": "#bec6e0",
+                            "primary-fixed": "#e2dfff",
+                            "background": "#051424",
+                            "on-secondary-fixed": "#40000d",
+                            "tertiary-fixed": "#dae2fd",
+                            "on-surface-variant": "#c7c4d8",
+                            "on-primary-fixed-variant": "#3323cc",
+                            "tertiary-container": "#586076",
+                            "primary-container": "#4f46e5",
+                            "inverse-surface": "#d4e4fa",
+                            "surface": "#051424",
+                            "on-error": "#690005",
+                            "on-tertiary-fixed": "#131b2e",
+                            "on-secondary-container": "#ffc2c4",
+                            "on-primary": "#1d00a5",
+                            "surface-container-low": "#0d1c2d",
+                            "surface-dim": "#051424",
+                            "on-surface": "#d4e4fa",
+                            "surface-container-high": "#1c2b3c",
+                            "primary": "#c3c0ff",
+                            "on-background": "#d4e4fa",
+                            "primary-fixed-dim": "#c3c0ff",
+                            "surface-container": "#122131",
+                            "inverse-primary": "#4d44e3",
+                            "on-secondary": "#67001b",
+                            "secondary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.125rem",
+                            "lg": "0.25rem",
+                            "xl": "0.5rem",
+                            "full": "0.75rem"
+                    },
+                    "spacing": {
+                            "gutter": "16px",
+                            "margin": "24px",
+                            "unit": "4px",
+                            "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                            "display-lg": ["Geist"],
+                            "mono-data": ["JetBrains Mono"],
+                            "mono-label": ["JetBrains Mono"],
+                            "body-base": ["Geist"],
+                            "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                            "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                            "mono-label": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                            "body-base": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #0F172A; } /* Neural Navy base layer override */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .neural-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+        .reasoning-rose { color: #ffb2b7; } /* secondary */
+        .intelligence-indigo { color: #c3c0ff; } /* primary */
+        
+        .pulse-border {
+            animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-glow {
+            0%, 100% { border-color: rgba(195, 192, 255, 0.2); box-shadow: 0 0 0px rgba(195,192,255,0); }
+            50% { border-color: rgba(195, 192, 255, 0.8); box-shadow: 0 0 8px rgba(195,192,255,0.3); }
+        }
+    </style>
+</head>
+<body class="text-on-background font-body-base text-body-base overflow-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md dark:bg-surface/90 border-b border-white/10 flex justify-between items-center px-margin h-16 max-w-container-max mx-auto">
+<div class="flex items-center gap-6">
+<span class="font-display-lg text-headline-md tracking-tighter text-primary">Phase P.09</span>
+<div class="hidden md:flex items-center gap-1">
+<span class="material-symbols-outlined text-on-surface-variant font-medium">search</span>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Overview</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Mesh</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Fabric</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Workflow</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Gov</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded font-mono-label text-mono-label hover:bg-opacity-90">Command</button>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img alt="Chief Architect Avatar" class="w-full h-full object-cover" data-alt="A highly detailed, futuristic avatar of a system architect, featuring glowing neon accents and cybernetic elements against a dark, minimalist background. The lighting is dramatic and cinematic, emphasizing the technological aspect of the persona. The overall mood is serious and analytical." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhKCllzl-MvesM_McMH4zf67ro54YX45L5d9LbIc_ZYp_uG1K8pli8JGKS9mmQ5WuepoY1e6dzlQugIm4yAzSLaD9WjItoR4xyKT_ltuBf3vhL2s1A9xTi5PUz-qlvPmSbs_kxvkegT5CuzYuk86JaGc67UR8TxpjWO5KMo8NgF77JNs86S2ypvHoPOg-EEjWK_IqB3M_vjEq8gDWhDgaiMD1ssLXP3gcSL-Wq6XtXa0VBmGmnJELamA"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-low border-r border-white/10 pt-16 z-40 py-margin">
+<div class="px-6 pb-6 pt-4 border-b border-white/10 mb-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded bg-primary-container/20 border border-primary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">memory</span>
+</div>
+<div>
+<h2 class="font-headline-md text-[16px] leading-[20px] text-primary">Core Reasoning</h2>
+<p class="font-mono-label text-[10px] text-on-surface-variant">Active Autonomy: Level 4</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span class="font-mono-label text-mono-label">Intelligence Overview</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container/20 text-primary border-l-4 border-primary px-4 py-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200 rounded-r" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+<span class="font-mono-label text-mono-label">Agent Mesh</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">database</span>
+<span class="font-mono-label text-mono-label">Knowledge Fabric</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">cloud_download</span>
+<span class="font-mono-label text-mono-label">Automation Workflows</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200 rounded" href="#">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+<span class="font-mono-label text-mono-label">AI Governance</span>
+</a>
+</nav>
+<div class="px-4 mt-auto mb-4">
+<button class="w-full border border-primary text-primary bg-transparent hover:bg-primary/10 py-2 rounded font-mono-label text-mono-label transition-colors">Deploy New Agent</button>
+</div>
+<div class="border-t border-white/10 flex px-2 pt-2 gap-1">
+<a class="flex-1 flex flex-col items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] mb-1">description</span>
+<span class="font-mono-label text-[10px]">Docs</span>
+</a>
+<a class="flex-1 flex flex-col items-center justify-center p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px] mb-1">sensors</span>
+<span class="font-mono-label text-[10px]">Status</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 pt-16 h-screen flex flex-col bg-surface-container-lowest">
+<!-- Header Toolbar -->
+<header class="glass-panel px-margin py-4 flex items-center justify-between z-10 shrink-0 border-b border-white/10">
+<div class="flex items-center gap-4">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary">Lead Architect</h1>
+<p class="font-mono-label text-mono-label text-on-surface-variant flex items-center gap-2">
+<span>TASK: Refactor Microservices Graph</span>
+<span class="w-px h-3 bg-white/20"></span>
+<span class="text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> High Complexity</span>
+</p>
+</div>
+</div>
+<!-- Autonomy Switcher -->
+<div class="flex bg-surface-container-high rounded p-1 border border-white/10">
+<button class="px-3 py-1 font-mono-label text-[10px] rounded text-on-surface-variant hover:text-white transition-colors">ASSIST</button>
+<button class="px-3 py-1 font-mono-label text-[10px] rounded text-on-surface-variant hover:text-white transition-colors">SUGGEST</button>
+<button class="px-3 py-1 font-mono-label text-[10px] rounded text-on-surface-variant hover:text-white transition-colors">CONFIRM</button>
+<button class="px-3 py-1 font-mono-label text-[10px] rounded bg-primary-container text-white transition-colors shadow-[0_0_8px_rgba(79,70,229,0.5)]">EXECUTE</button>
+</div>
+</header>
+<!-- Confidence Bar -->
+<div class="h-[2px] w-full bg-surface-container-high">
+<div class="h-full bg-gradient-to-r from-secondary to-primary w-[82%] relative">
+<div class="absolute right-0 -top-6 font-mono-label text-[10px] text-primary">82% CONFIDENCE</div>
+</div>
+</div>
+<!-- Split View -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Reasoning Canvas (Center) -->
+<section class="flex-1 flex flex-col p-6 overflow-y-auto custom-scrollbar relative neural-pattern">
+<div class="max-w-3xl mx-auto w-full space-y-6 pb-20">
+<!-- Completed Step -->
+<div class="glass-panel rounded-lg p-4 border-l-2 border-l-surface-variant opacity-70">
+<div class="flex justify-between items-start mb-2">
+<span class="font-mono-label text-mono-label text-on-surface-variant">STEP 01</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">check_circle</span>
+</div>
+<h3 class="font-body-base text-body-base text-on-surface font-semibold mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">visibility</span>
+                            Observation: Dependency Cycle Detected
+                        </h3>
+<p class="font-mono-data text-mono-data text-on-surface-variant mb-3">Analyzed `UserAuth` and `ProfileData` services. Identified circular dependency via `NotificationHook`.</p>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-surface-container-high border border-white/10 font-mono-label text-[10px] text-tertiary">
+<span class="material-symbols-outlined text-[12px]">dataset</span> Graph Analysis
+                            </span>
+</div>
+</div>
+<!-- Active Step -->
+<div class="glass-panel rounded-lg p-5 border border-primary/30 pulse-border relative overflow-hidden bg-primary/5">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex justify-between items-start mb-3">
+<span class="font-mono-label text-mono-label text-primary">STEP 02 (ACTIVE)</span>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-mono-label text-[10px] text-primary">REASONING</span>
+</div>
+</div>
+<h3 class="font-body-base text-body-base text-white font-semibold mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">psychology</span>
+                            Hypothesis: Decouple via Event Bus
+                        </h3>
+<p class="font-mono-data text-mono-data text-on-surface-variant mb-4 leading-relaxed">
+                            Implementing an Event-Driven architecture will resolve the circular dependency. `UserAuth` should emit `UserAuthenticated` event, rather than directly calling `ProfileData`.
+                        </p>
+<!-- Source Citation -->
+<div class="bg-surface-container-lowest/80 border border-white/5 rounded p-3 mb-4">
+<p class="font-mono-label text-[10px] text-on-surface-variant mb-2">SOURCE CITATIONS:</p>
+<a class="flex items-center gap-2 text-primary hover:underline font-mono-data text-[12px]" href="#">
+<span class="material-symbols-outlined text-[14px]">description</span>
+                                ADR-014: Asynchronous Communication Patterns
+                            </a>
+</div>
+<!-- Tool Chip -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded bg-surface-container-high border border-primary/40 font-mono-label text-mono-label text-white shadow-[0_0_10px_rgba(195,192,255,0.1)]">
+<span class="material-symbols-outlined text-primary text-[16px]">terminal</span>
+                            Executing: AST Refactor Script
+                        </div>
+</div>
+</div>
+</section>
+<!-- Tool Execution Log (Right Panel) -->
+<aside class="w-96 border-l border-white/10 glass-panel flex flex-col bg-surface-container-lowest/50">
+<div class="px-4 py-3 border-b border-white/10 flex justify-between items-center bg-surface-container-high/50">
+<h3 class="font-mono-label text-mono-label text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">code_blocks</span>
+                        Execution Log
+                    </h3>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px] cursor-pointer hover:text-white">filter_list</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4 font-mono-data text-[12px] custom-scrollbar">
+<div class="space-y-1">
+<div class="text-on-surface-variant flex items-center gap-2">
+<span class="text-tertiary">14:02:11</span>
+<span class="text-primary">[System]</span> Initiating AST parsing...
+                        </div>
+</div>
+<div class="space-y-1">
+<div class="text-on-surface-variant flex items-start gap-2">
+<span class="text-tertiary">14:02:14</span>
+<span class="text-primary">[Input]</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded border border-white/5 text-gray-400 overflow-x-auto">
+<code>{<br/>  "target": "src/services/auth.ts",<br/>  "operation": "extract_method",<br/>  "pattern": "direct_call"<br/>}</code>
+</div>
+</div>
+<div class="space-y-1">
+<div class="text-on-surface-variant flex items-start gap-2">
+<span class="text-tertiary">14:02:16</span>
+<span class="text-secondary">[Alert]</span>
+</div>
+<div class="bg-error-container/20 p-2 rounded border border-secondary/30 text-secondary overflow-x-auto">
+                            Warning: Potential side-effect in `auth.ts` line 142.
+                        </div>
+</div>
+<div class="space-y-1">
+<div class="text-on-surface-variant flex items-start gap-2">
+<span class="text-tertiary">14:02:18</span>
+<span class="text-primary">[Output]</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded border border-white/5 text-green-400 overflow-x-auto">
+<span class="text-gray-400">// Refactored Code Segment</span><br/>
+<code>await eventBus.publish('UserAuthenticated', { id: user.id });</code>
+</div>
+<div class="text-[10px] text-tertiary flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">verified</span> Validation Passed
+                        </div>
+</div>
+<div class="flex items-center gap-2 text-primary animate-pulse mt-4">
+<span class="material-symbols-outlined text-[14px] animate-spin">refresh</span>
+                        Awaiting next sequence...
+                    </div>
+</div>
+</aside>
+</div>
+</main>
+<style>
+        /* Custom scrollbar for dense log areas */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</body></html>

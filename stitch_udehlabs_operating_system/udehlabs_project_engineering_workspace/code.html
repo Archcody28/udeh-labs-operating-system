@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Codebase - UdehLabs Forge</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00a572",
+                        "surface-container-highest": "#31353b",
+                        "on-surface": "#e0e2eb",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "outline-variant": "#404753",
+                        "on-surface-variant": "#c0c7d5",
+                        "status-review": "#f59e0b",
+                        "secondary-container": "#6001d1",
+                        "on-tertiary": "#003824",
+                        "surface-container-high": "#272a31",
+                        "primary": "#a4c9ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "surface-bright": "#363940",
+                        "secondary": "#d2bbff",
+                        "outline": "#8a919e",
+                        "electric-cyan": "#22d3ee",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary": "#3f008e",
+                        "surface-container": "#1c2026",
+                        "on-secondary-container": "#c9aeff",
+                        "inverse-primary": "#005fad",
+                        "on-tertiary-container": "#00311f",
+                        "surface-variant": "#31353b",
+                        "error-container": "#93000a",
+                        "surface-tint": "#a4c9ff",
+                        "on-primary-container": "#002a52",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-primary": "#00315d",
+                        "deep-space-navy": "#0c141e",
+                        "status-fail": "#ef4444",
+                        "on-secondary-fixed": "#25005a",
+                        "surface": "#101419",
+                        "inverse-surface": "#e0e2eb",
+                        "status-pass": "#10b981",
+                        "tertiary": "#4edea3",
+                        "inverse-on-surface": "#2d3137",
+                        "terminal-surface": "#091017",
+                        "background": "#101419",
+                        "surface-container-lowest": "#0b0e14",
+                        "on-primary-fixed-variant": "#004884",
+                        "on-background": "#e0e2eb",
+                        "error": "#ffb4ab",
+                        "charcoal-container": "#18202b",
+                        "surface-dim": "#101419",
+                        "primary-container": "#3492f6",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#001c39",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-fixed": "#eaddff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#181c22",
+                        "border-technical": "#1e293b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "margin-lg": "24px",
+                        "compact": "8px",
+                        "unit": "4px",
+                        "margin-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Hanken Grotesk"],
+                        "code-md": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "code-md": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "label-caps": ["10px", { "lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { @apply bg-background text-on-background font-body-md; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
+    </style>
+</head>
+<body class="overflow-hidden h-screen w-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-lg h-14 w-full bg-surface border-b border-border-technical">
+<div class="flex items-center gap-margin-md">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">UdehLabs Forge</span>
+</div>
+<div class="flex items-center gap-margin-md">
+<div class="flex items-center gap-compact text-on-surface-variant">
+<span class="material-symbols-outlined hover:bg-surface-container-high transition-colors p-1 rounded">notifications</span>
+<span class="material-symbols-outlined hover:bg-surface-container-high transition-colors p-1 rounded">terminal</span>
+</div>
+<button class="bg-primary-container text-on-primary-container px-3 py-1 rounded font-body-sm hover:brightness-110 transition-all">Create PR</button>
+<img alt="Lead Engineer Profile" class="w-8 h-8 rounded-full border border-border-technical object-cover" data-alt="A stylized, technical avatar for a Lead Engineer profile. It features abstract geometric shapes in electric cyan and deep space navy, resembling a futuristic blueprint or circuit node. The style is sharp, clean, and perfectly suited for a high-end engineering workspace UI in dark mode." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE49wpoHDql8h3_AXLkZj5Ed9jImnF-cy-G94XTBp1wNzgKOPZEzO0Na0JDkVR0hMzUb9omjAsgukfDRPlRHte7NzE6OouISJm1d9gV6Ywdwsc-XFqFtmTTxlgxIvpFE8JjY2osUK8j7Rgz-k-JJA8pNO65mPJXh37r_Xun4b3_KSf02Yw3vYx8W4g-AthwXg4tcsuEJd1Sd4jzji0Lu8RwXDCJnDhcby8hUc0CVg91-MOQjZRPZs-JQ"/>
+</div>
+</nav>
+<div class="flex flex-1 pt-14 pb-8 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 h-[calc(100vh-14px)] w-64 bg-surface-container-low border-r border-border-technical flex flex-col py-margin-md">
+<div class="px-margin-md mb-margin-md">
+<div class="flex items-center gap-3">
+<img alt="Project Forge Icon" class="w-10 h-10 rounded border border-border-technical object-cover" data-alt="A sleek, highly abstract icon representing 'Project Forge'. It uses deep space navy backgrounds with sharp, intersecting electric cyan and secondary violet lines, suggesting structured architecture and data flow. The aesthetic is minimal, high-tech, and directly aligned with a dark-mode engineering platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiskaFxxmpDrukNcUyw6q8RPJtUd6PiPGLyfE_lopmpDtNmwjLAwtd1xJ-IaToT96njZpOixatUAGoKfNjqr0a4eEmPeMSmm8yk0vTzAJMGzJzOZj6GZLSa2rlr2jnKCWXH9cR1aE7cY-ydj7M1JLGa4dSRT2wuwNcD75SxNmfjMFjfCxjog5HYKfVTdc_Q1-Tn3C5cJr6fsMU8x7x88lYGteuziZgw-RbczPzlsIE3_ivK73L5CFsEQ"/>
+<div>
+<div class="font-headline-md text-headline-md text-on-surface text-sm">Project Forge</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Production Cluster</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 mt-4">
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">dashboard</span> Dashboard</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-compact text-electric-cyan border-l-2 border-electric-cyan bg-surface-container-high px-margin-md py-3 font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">code</span> Codebase</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">merge_type</span> Pull Requests</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">alt_route</span> CI/CD</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">security</span> Security Checks</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">rocket_launch</span> Deployments</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">settings</span> Settings</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 border-t border-border-technical pt-4">
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-2 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">description</span> Docs</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-2 hover:bg-surface-container transition-all font-label-caps text-label-caps uppercase" href="#"><span class="material-symbols-outlined text-[16px]">help_outline</span> Support</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col bg-surface h-full overflow-hidden">
+<!-- Repository Header -->
+<header class="px-margin-lg py-margin-md border-b border-border-technical bg-charcoal-container shrink-0">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface">udeh-labs/core-engine</h1>
+<span class="bg-surface-container-highest border border-outline-variant text-on-surface-variant px-2 py-0.5 rounded font-label-caps text-[10px] uppercase">Private</span>
+</div>
+<div class="flex gap-4 font-body-sm text-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-[#3178c6]"></span> TypeScript</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">call_split</span> main</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high border border-border-technical text-on-surface px-4 py-1.5 rounded font-body-sm hover:bg-surface-container-highest transition-colors">Connect Repo</button>
+<button class="bg-primary-container text-on-primary-container px-4 py-1.5 rounded font-body-sm hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span> Create Branch
+                        </button>
+</div>
+</div>
+</header>
+<!-- Sub Navigation -->
+<div class="px-margin-lg border-b border-border-technical shrink-0">
+<div class="flex gap-6">
+<button class="text-electric-cyan border-b-2 border-electric-cyan py-3 font-body-sm font-semibold">Files</button>
+<button class="text-on-surface-variant hover:text-on-surface py-3 font-body-sm transition-colors">Commits</button>
+<button class="text-on-surface-variant hover:text-on-surface py-3 font-body-sm transition-colors">Branches</button>
+<button class="text-on-surface-variant hover:text-on-surface py-3 font-body-sm transition-colors">Releases</button>
+</div>
+</div>
+<!-- Workspace Grid -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left: File Explorer -->
+<div class="w-64 border-r border-border-technical bg-terminal-surface overflow-y-auto shrink-0 flex flex-col p-compact">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase p-2 tracking-wider">Explorer</div>
+<div class="flex flex-col gap-1 font-body-sm text-body-sm text-on-surface">
+<div class="flex items-center gap-2 p-1.5 hover:bg-surface-container-high rounded cursor-pointer group">
+<span class="material-symbols-outlined text-[16px] text-outline group-hover:text-electric-cyan transition-colors">folder</span> src
+                        </div>
+<div class="flex items-center gap-2 p-1.5 hover:bg-surface-container-high rounded cursor-pointer group">
+<span class="material-symbols-outlined text-[16px] text-outline group-hover:text-electric-cyan transition-colors">folder</span> server
+                        </div>
+<div class="flex items-center gap-2 p-1.5 hover:bg-surface-container-high rounded cursor-pointer group">
+<span class="material-symbols-outlined text-[16px] text-outline group-hover:text-electric-cyan transition-colors">folder</span> tests
+                        </div>
+<div class="flex items-center gap-2 p-1.5 hover:bg-surface-container-high rounded cursor-pointer group">
+<span class="material-symbols-outlined text-[16px] text-outline group-hover:text-electric-cyan transition-colors">folder</span> prisma
+                        </div>
+<div class="flex items-center gap-2 p-1.5 pl-6 hover:bg-surface-container-high rounded cursor-pointer group text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-outline">description</span> schema.prisma
+                        </div>
+</div>
+</div>
+<!-- Center: Main Panel (Commits/Files) -->
+<div class="flex-1 bg-surface flex flex-col overflow-hidden">
+<div class="p-margin-md border-b border-border-technical flex justify-between items-center shrink-0 bg-surface-container-lowest">
+<div class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-2">
+<span>core-engine</span> <span class="text-outline">/</span> <span class="text-on-surface">Recent Activity</span>
+</div>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead class="sticky top-0 bg-surface-container-lowest border-b border-border-technical">
+<tr>
+<th class="p-2 font-medium text-on-surface-variant w-24">Commit</th>
+<th class="p-2 font-medium text-on-surface-variant">Message</th>
+<th class="p-2 font-medium text-on-surface-variant w-32">Task</th>
+<th class="p-2 font-medium text-on-surface-variant w-24">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-technical">
+<tr class="hover:bg-charcoal-container transition-colors h-8">
+<td class="p-2 font-code-sm text-code-sm text-electric-cyan">a1b2c3d</td>
+<td class="p-2 text-on-surface truncate max-w-[200px]">Update Prisma schema for user roles</td>
+<td class="p-2"><span class="bg-surface-container-highest border border-outline px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant">REQ-042</span></td>
+<td class="p-2"><span class="flex items-center gap-1 text-[10px] text-status-pass bg-status-pass/10 border border-status-pass/30 px-1.5 py-0.5 rounded w-fit"><span class="material-symbols-outlined text-[12px]">check_circle</span> Verified</span></td>
+</tr>
+<tr class="hover:bg-charcoal-container transition-colors h-8">
+<td class="p-2 font-code-sm text-code-sm text-electric-cyan">f9e8d7c</td>
+<td class="p-2 text-on-surface truncate max-w-[200px]">Refactor auth middleware</td>
+<td class="p-2"><span class="bg-surface-container-highest border border-outline px-1.5 py-0.5 rounded text-[10px] text-on-surface-variant">TASK-108</span></td>
+<td class="p-2"><span class="flex items-center gap-1 text-[10px] text-status-review bg-status-review/10 border border-status-review/30 px-1.5 py-0.5 rounded w-fit"><span class="material-symbols-outlined text-[12px]">pending</span> Review</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right: AI Assistant -->
+<div class="w-80 border-l border-border-technical bg-charcoal-container flex flex-col shrink-0">
+<div class="p-3 border-b border-border-technical flex items-center justify-between bg-surface-container-lowest">
+<div class="font-label-caps text-label-caps text-electric-cyan uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span> Forge Assistant
+                        </div>
+</div>
+<div class="flex-1 p-margin-md overflow-y-auto flex flex-col gap-4 font-body-sm text-body-sm">
+<div class="bg-surface-container-high p-3 rounded border border-border-technical">
+<div class="text-on-surface font-semibold mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-status-review">lightbulb</span> Plan: TASK-108</div>
+<div class="text-on-surface-variant text-[11px] leading-relaxed">
+                                Suggested implementation for refactoring Auth Middleware:
+                                <ul class="list-disc pl-4 mt-2 space-y-1">
+<li>Extract JWT validation to separate util.</li>
+<li>Implement rate limiting per tenant.</li>
+</ul>
+</div>
+</div>
+<div class="bg-terminal-surface p-3 rounded border border-border-technical text-[11px] font-code-sm text-on-surface-variant">
+<span class="text-electric-cyan">assistant</span> ~ $ ready to review suggestions...
+                        </div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- EngineeringStatusBar -->
+<footer class="fixed bottom-0 w-full h-8 z-50 flex justify-between items-center px-gutter overflow-hidden bg-terminal-surface border-t border-border-technical">
+<div class="flex items-center gap-4">
+<span class="font-code-md text-code-md text-primary">Forge</span>
+<span class="font-code-sm text-code-sm text-status-pass flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">check_circle</span> System Healthy</span>
+</div>
+<div class="flex items-center gap-4 font-code-sm text-code-sm text-outline">
+<span class="hover:text-electric-cyan cursor-pointer transition-colors hover:brightness-125">us-east-1</span>
+<span class="hover:text-electric-cyan cursor-pointer transition-colors hover:brightness-125">v2.4.1</span>
+</div>
+</footer>
+</body></html>

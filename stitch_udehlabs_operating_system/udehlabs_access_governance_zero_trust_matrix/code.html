@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zero-Trust Access Governance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "data-blue": "#1C85E8",
+                        "primary-fixed-dim": "#b9c8de",
+                        "on-surface": "#dbe3f2",
+                        "surface-container-lowest": "#070f19",
+                        "secondary": "#d2bbff",
+                        "on-tertiary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary": "#ffffff",
+                        "surface-card": "#0d1b2a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-background": "#dbe3f2",
+                        "outline-variant": "#44474c",
+                        "primary-container": "#d5e4fb",
+                        "inverse-primary": "#515f73",
+                        "secondary-fixed": "#eaddff",
+                        "on-primary-container": "#576579",
+                        "on-surface-variant": "#c4c6cd",
+                        "execution-violet": "#7c3aed",
+                        "surface-container-high": "#232a36",
+                        "tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-error-container": "#ffdad6",
+                        "status-success": "#10b981",
+                        "surface-bright": "#323a45",
+                        "outline": "#8e9197",
+                        "surface-tint": "#b9c8de",
+                        "surface-container-highest": "#2d3541",
+                        "surface-variant": "#2d3541",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface": "#0c141e",
+                        "tertiary-container": "#6ffbbe",
+                        "status-risk": "#f59e0b",
+                        "error": "#ffb4ab",
+                        "border-muted": "#1e293b",
+                        "terminal-black": "#091017",
+                        "status-critical": "#ef4444",
+                        "secondary-container": "#6001d1",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "on-primary-fixed": "#0d1c2d",
+                        "background": "#0c141e",
+                        "inverse-on-surface": "#29313c",
+                        "surface-container": "#18202b",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#c9aeff",
+                        "surface-dim": "#0c141e",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#dbe3f2",
+                        "on-tertiary-container": "#00734e",
+                        "primary-fixed": "#d5e4fb",
+                        "on-tertiary": "#003824",
+                        "on-secondary": "#3f008e",
+                        "on-primary": "#233143",
+                        "surface-container-low": "#141c27",
+                        "on-secondary-fixed": "#25005a"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.25rem",
+                        lg: "0.5rem",
+                        xl: "0.75rem",
+                        full: "9999px"
+                    },
+                    spacing: {
+                        base: "4px",
+                        "density-compact": "8px",
+                        "container-margin": "24px",
+                        "density-comfortable": "16px",
+                        sidebar_width: "260px",
+                        gutter: "16px"
+                    },
+                    fontFamily: {
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "label-caps": ["11px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "data-mono": ["13px", { lineHeight: "20px", fontWeight: "500" }],
+                        "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom scrollbar for terminals and matrices */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070f19; 
+            border-left: 1px solid #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3541; 
+            border: 1px solid #1e293b;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #44474c; 
+        }
+
+        .animate-pulse-dot {
+            animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex selection:bg-execution-violet selection:text-white">
+<!-- SideNavBar (from JSON) -->
+<nav class="hidden md:flex flex-col w-sidebar_width h-screen fixed left-0 top-0 bg-surface-container dark:bg-surface-container border-r border-muted z-50">
+<!-- Header (Intent matched to Identity/Security) -->
+<div class="px-container-margin py-density-comfortable border-b border-muted">
+<div class="flex items-center gap-density-comfortable mb-density-comfortable">
+<div class="w-10 h-10 rounded bg-terminal-black border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly stylized, minimalist avatar for a System Operator in a cyberpunk terminal environment. Dark monochromatic tones with subtle violet execution accents. Sharp geometric lines, technical precision, brutalist aesthetic. The face is obscured or abstract, emphasizing a high-security clearance persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzoTBn06lXiZZYvZJDjpwYei4Qt8jcbVoU4R5BCJHl-inQPJea3kOPA5zXDjMrJMQe8vu8ZnOWUjQN5iX1pfjVTvFpxr6BoqI8FK3FW2LxmWqE5OqACFS56VJVlURICV-ujAVyh7vQxvEwBzR5mAs1Wp3q2jeW-ijklwB3Qifcpk1pkujC63MtGfg9OuPrfHWL5G8THXnGhijfjmKRNfeVIQz4Yi85zEsfcm8UKkSynWWlRz83qVObTg"/>
+</div>
+<div>
+<h2 class="font-label-caps text-label-caps text-primary tracking-widest uppercase">OPERATOR_01</h2>
+<p class="font-body-sm text-body-sm text-execution-violet uppercase tracking-wider">Level 4 Clearance</p>
+</div>
+</div>
+<button class="w-full py-density-compact px-density-comfortable bg-execution-violet text-white font-label-caps text-label-caps tracking-widest uppercase rounded border border-execution-violet hover:bg-secondary-container transition-colors flex items-center justify-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                New Analysis
+            </button>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 py-density-comfortable flex flex-col gap-base">
+<a class="group flex items-center gap-density-compact text-on-surface-variant px-density-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Posture</span>
+</a>
+<!-- Active Tab: Identity (Mapping to Identity & Access Governance intent) -->
+<a class="flex items-center gap-density-compact bg-surface-container-highest text-primary border-l-4 border-execution-violet px-density-comfortable py-density-compact" href="#">
+<span class="material-symbols-outlined text-[20px]">fingerprint</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Identity</span>
+</a>
+<a class="group flex items-center gap-density-compact text-on-surface-variant px-density-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">search_check</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Findings</span>
+</a>
+<a class="group flex items-center gap-density-compact text-on-surface-variant px-density-comfortable py-density-compact hover:bg-surface-bright hover:text-primary transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">crisis_alert</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Incidents</span>
+</a>
+</div>
+<!-- Footer Links -->
+<div class="border-t border-muted p-density-comfortable flex flex-col gap-base">
+<a class="group flex items-center gap-density-compact text-on-surface-variant px-density-compact py-base hover:text-primary transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Documentation</span>
+</a>
+<a class="group flex items-center gap-density-compact text-on-surface-variant px-density-compact py-base hover:text-primary transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[16px]">support_agent</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 ml-0 md:ml-sidebar_width min-h-screen flex flex-col bg-background">
+<!-- TopNavBar (from JSON - Desktop Only visibility logic overridden to show standard Top Bar per design guidelines, but respecting styles) -->
+<header class="w-full h-16 flex justify-between items-center px-container-margin bg-surface border-b border-muted z-40 sticky top-0">
+<!-- Brand -->
+<div class="font-display-lg text-headline-sm font-bold tracking-tighter text-execution-violet uppercase">
+                SENTINEL-X
+            </div>
+<!-- Navigation Links (Hidden on small screens) -->
+<nav class="hidden lg:flex gap-container-margin h-full">
+<!-- Using Network, Assets, Compliance from JSON -->
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 h-full flex items-center border-b-2 border-transparent" href="#">Network</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 h-full flex items-center border-b-2 border-transparent" href="#">Assets</a>
+<!-- Active match fallback - Identity maps closer to Assets/Compliance, but we highlight Compliance for governance -->
+<a class="text-primary font-bold border-b-2 border-execution-violet h-full flex items-center" href="#">Compliance</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-density-comfortable">
+<button class="hidden md:block px-density-comfortable py-density-compact bg-transparent border border-muted text-on-surface hover:border-outline-variant transition-colors rounded font-label-caps text-label-caps uppercase tracking-wider">
+                    Emergency Lockdown
+                </button>
+<button class="px-density-comfortable py-density-compact bg-execution-violet text-white border border-execution-violet hover:bg-secondary-container transition-colors rounded font-label-caps text-label-caps uppercase tracking-wider">
+                    Deploy Policy
+                </button>
+<div class="flex items-center gap-density-compact border-l border-muted pl-density-comfortable ml-density-compact">
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-container-margin flex-1 overflow-auto">
+<!-- Page Header -->
+<div class="mb-container-margin">
+<h1 class="font-headline-md text-headline-md text-primary mb-base">Zero-Trust Access Governance</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Global principal authorization matrix and step-up policy enforcement.</p>
+</div>
+<!-- 12-Column Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Left Column (8 cols): Access Matrix -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<!-- Access Matrix Section -->
+<section class="bg-surface-card border border-muted rounded flex flex-col relative overflow-hidden h-[500px]">
+<!-- Violet Accent Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-execution-violet z-10"></div>
+<div class="p-density-comfortable border-b border-muted bg-surface-container flex justify-between items-center ml-1">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-execution-violet">grid_view</span>
+                                Principal-to-Resource Access Matrix
+                            </h3>
+<div class="flex gap-density-compact">
+<button class="p-1 border border-outline-variant rounded text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+</button>
+<button class="p-1 border border-outline-variant rounded text-on-surface-variant hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+</div>
+</div>
+<!-- Matrix Table -->
+<div class="flex-1 overflow-auto ml-1 bg-terminal-black">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-high border-b border-outline-variant z-10">
+<tr>
+<th class="p-density-comfortable font-label-caps text-label-caps text-on-surface-variant uppercase border-r border-outline-variant w-1/4">Principal</th>
+<th class="p-density-comfortable font-label-caps text-label-caps text-on-surface-variant uppercase border-r border-outline-variant">DB_Prod_Cluster</th>
+<th class="p-density-comfortable font-label-caps text-label-caps text-on-surface-variant uppercase border-r border-outline-variant">Repo_Core_API</th>
+<th class="p-density-comfortable font-label-caps text-label-caps text-on-surface-variant uppercase border-r border-outline-variant">AI_Model_v4</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono">
+<!-- Row 1: Human User -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="p-density-comfortable border-r border-outline-variant flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-data-blue">person</span>
+<span class="text-primary">E.Dijkstra</span>
+<span class="text-[10px] bg-outline-variant/30 text-on-surface-variant px-1 rounded ml-auto">USR</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block px-2 py-1 bg-status-success/10 border border-status-success/30 text-status-success text-[10px] rounded uppercase">READ</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<div class="flex justify-center gap-1">
+<span class="inline-block px-2 py-1 bg-status-success/10 border border-status-success/30 text-status-success text-[10px] rounded uppercase">READ</span>
+<span class="inline-block px-2 py-1 bg-execution-violet/10 border border-execution-violet/30 text-execution-violet text-[10px] rounded uppercase">EXECUTE</span>
+</div>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block w-4 h-[1px] bg-outline-variant"></span>
+</td>
+</tr>
+<!-- Row 2: Machine Identity -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group">
+<td class="p-density-comfortable border-r border-outline-variant flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">memory</span>
+<span class="text-primary">SVC_ETL_Job</span>
+<span class="text-[10px] bg-outline-variant/30 text-on-surface-variant px-1 rounded ml-auto">SVC</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block px-2 py-1 bg-execution-violet/10 border border-execution-violet/30 text-execution-violet text-[10px] rounded uppercase">EXECUTE</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block px-2 py-1 bg-status-success/10 border border-status-success/30 text-status-success text-[10px] rounded uppercase">READ</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block w-4 h-[1px] bg-outline-variant"></span>
+</td>
+</tr>
+<!-- Row 3: AI Agent -->
+<tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors group bg-status-risk/5">
+<td class="p-density-comfortable border-r border-outline-variant flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-status-risk">smart_toy</span>
+<span class="text-primary">Agent_LogScrape</span>
+<span class="text-[10px] bg-status-risk/30 text-status-risk px-1 rounded ml-auto">AGT</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block px-2 py-1 bg-status-success/10 border border-status-success/30 text-status-success text-[10px] rounded uppercase">READ</span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center">
+<span class="inline-block w-4 h-[1px] bg-outline-variant"></span>
+</td>
+<td class="p-density-comfortable border-r border-outline-variant text-center relative">
+<div class="flex justify-center gap-1">
+<span class="inline-block px-2 py-1 bg-status-success/10 border border-status-success/30 text-status-success text-[10px] rounded uppercase">READ</span>
+<span class="inline-block px-2 py-1 bg-status-risk/10 border border-status-risk/30 text-status-risk text-[10px] rounded uppercase animate-pulse-dot">ANALYZE</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Step-Up Policy Manager -->
+<section class="bg-surface-card border border-muted rounded flex flex-col relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk z-10"></div>
+<div class="p-density-comfortable border-b border-muted ml-1 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-status-risk">gavel</span>
+                                Step-Up Policy Manager
+                            </h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors text-[12px] uppercase font-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add</span> Add Rule
+                            </button>
+</div>
+<div class="p-density-comfortable ml-1 grid grid-cols-1 md:grid-cols-2 gap-density-comfortable">
+<!-- Policy Card 1 -->
+<div class="border border-outline-variant rounded bg-surface-container-low p-density-comfortable flex flex-col gap-density-compact hover:border-status-risk transition-colors">
+<div class="flex justify-between items-start">
+<div class="font-data-mono text-data-mono text-primary">DB_Write_Op</div>
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-status-risk/10 border border-status-risk/30 text-status-risk text-[10px] font-label-caps rounded uppercase">
+<span class="material-symbols-outlined text-[12px]">security</span> MFA Required
+                                    </span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant border-t border-outline-variant/50 pt-2 mt-1">
+                                    Applies to: <span class="text-data-blue font-data-mono">role:db_admin</span><br/>
+                                    Condition: Source IP untrusted.
+                                </div>
+</div>
+<!-- Policy Card 2 -->
+<div class="border border-outline-variant rounded bg-surface-container-low p-density-comfortable flex flex-col gap-density-compact hover:border-status-risk transition-colors">
+<div class="flex justify-between items-start">
+<div class="font-data-mono text-data-mono text-primary">Model_Deploy</div>
+<span class="inline-flex items-center gap-1 px-2 py-1 bg-execution-violet/10 border border-execution-violet/30 text-execution-violet text-[10px] font-label-caps rounded uppercase">
+<span class="material-symbols-outlined text-[12px]">how_to_reg</span> Lvl 4 Approval
+                                    </span>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant border-t border-outline-variant/50 pt-2 mt-1">
+                                    Applies to: <span class="text-data-blue font-data-mono">role:ml_engineer</span><br/>
+                                    Condition: Always.
+                                </div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (4 cols): Access Review & Principal Explorer -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- Access Review Queue -->
+<section class="bg-surface-card border border-muted rounded flex flex-col relative h-[300px]">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk z-10"></div>
+<div class="p-density-comfortable border-b border-muted ml-1 flex justify-between items-center sticky top-0 bg-surface-card z-20">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-status-risk">fact_check</span>
+                                Access Review Queue
+                            </h3>
+<span class="text-[10px] bg-status-risk text-background font-bold px-2 py-0.5 rounded">3 PENDING</span>
+</div>
+<div class="flex-1 overflow-auto ml-1 p-density-comfortable flex flex-col gap-density-compact">
+<!-- Review Item -->
+<div class="border border-outline-variant rounded bg-background p-density-comfortable flex flex-col gap-density-compact">
+<div class="flex justify-between items-center">
+<span class="font-data-mono text-data-mono text-primary text-[12px]">Agent_LogScrape</span>
+<span class="text-[10px] text-on-surface-variant">Due: 2h</span>
+</div>
+<div class="text-[11px] text-on-surface-variant mb-2">
+                                    Requested: <span class="text-status-risk border border-status-risk/30 px-1 rounded bg-status-risk/10">ANALYZE</span> on AI_Model_v4
+                                </div>
+<div class="flex gap-2 mt-auto">
+<button class="flex-1 py-1 bg-status-success/10 border border-status-success/30 text-status-success text-[10px] font-label-caps rounded uppercase hover:bg-status-success hover:text-background transition-colors">Approve</button>
+<button class="flex-1 py-1 bg-status-critical/10 border border-status-critical/30 text-status-critical text-[10px] font-label-caps rounded uppercase hover:bg-status-critical hover:text-white transition-colors">Deny</button>
+</div>
+</div>
+<!-- Checkered past item style -->
+<div class="border border-outline-variant rounded bg-background p-density-comfortable flex flex-col gap-density-compact opacity-75">
+<div class="flex justify-between items-center">
+<span class="font-data-mono text-data-mono text-primary text-[12px]">SVC_ETL_Job</span>
+<span class="text-[10px] text-status-risk">Overdue</span>
+</div>
+<div class="text-[11px] text-on-surface-variant mb-2">
+                                    Quarterly privilege audit.
+                                </div>
+<button class="w-full py-1 bg-transparent border border-outline-variant text-on-surface text-[10px] font-label-caps rounded uppercase hover:border-primary transition-colors">Review</button>
+</div>
+</div>
+</section>
+<!-- Identity & Principal Explorer snippet -->
+<section class="bg-surface-card border border-muted rounded flex flex-col relative flex-1">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-data-blue z-10"></div>
+<div class="p-density-comfortable border-b border-muted ml-1">
+<h3 class="font-label-caps text-label-caps text-primary uppercase tracking-widest flex items-center gap-density-compact">
+<span class="material-symbols-outlined text-[16px] text-data-blue">account_tree</span>
+                                Principal Explorer
+                            </h3>
+</div>
+<div class="p-0 ml-1 bg-terminal-black flex-1 overflow-auto">
+<!-- Terminal-style tree -->
+<div class="font-data-mono text-[12px] p-density-comfortable leading-loose text-on-surface-variant">
+<div><span class="text-data-blue">├──</span> <span class="text-primary">Users</span></div>
+<div><span class="text-data-blue">│   ├──</span> E.Dijkstra <span class="text-status-success text-[10px]">[ACTIVE]</span></div>
+<div><span class="text-data-blue">│   └──</span> A.Turing <span class="text-outline text-[10px]">[IDLE]</span></div>
+<div><span class="text-data-blue">├──</span> <span class="text-tertiary-fixed-dim">Machine Identities</span></div>
+<div><span class="text-data-blue">│   ├──</span> SVC_ETL_Job</div>
+<div><span class="text-data-blue">│   └──</span> SVC_K8s_Node</div>
+<div><span class="text-data-blue">└──</span> <span class="text-status-risk">AI Agents</span></div>
+<div><span class="text-data-blue">    └──</span> Agent_LogScrape <span class="animate-pulse-dot inline-block w-2 h-2 rounded-full bg-status-risk ml-1"></span></div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

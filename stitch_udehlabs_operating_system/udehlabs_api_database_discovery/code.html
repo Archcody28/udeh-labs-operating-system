@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Intelligence | APIs &amp; Database Discovery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#45464d",
+                        "on-primary-fixed": "#131b2e",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#dae2fd",
+                        "on-background": "#d4e4fa",
+                        "inverse-primary": "#565e74",
+                        "tertiary-fixed": "#ffddb8",
+                        "primary-container": "#bec6e0",
+                        "on-tertiary-container": "#754900",
+                        "on-primary-fixed-variant": "#3e465c",
+                        "on-tertiary-fixed": "#2a1700",
+                        "error-bright": "#ffb4ab",
+                        "surface-container-high": "#1c2b3c",
+                        "outline": "#909097",
+                        "surface-bright": "#2c3a4c",
+                        "surface-variant": "#273647",
+                        "surface-graph": "#0f172a",
+                        "secondary-fixed-dim": "#4edea3",
+                        "tertiary": "#ffddb8",
+                        "on-secondary-fixed": "#002114",
+                        "tertiary-container": "#ffb95f",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#4a5268",
+                        "surface-tint": "#bec6e0",
+                        "on-error": "#690005",
+                        "on-primary": "#283044",
+                        "surface": "#051424",
+                        "surface-container-lowest": "#010f1f",
+                        "surface-deep": "#051424",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "surface-container": "#122131",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-container-highest": "#273647",
+                        "on-secondary-container": "#003e28",
+                        "secondary": "#4edea3",
+                        "on-surface-variant": "#c6c6cd",
+                        "border-muted": "#334155",
+                        "primary": "#dae2fd",
+                        "on-tertiary": "#472a00",
+                        "on-secondary-fixed-variant": "#005236",
+                        "primary-fixed-dim": "#bec6e0",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "on-secondary": "#003824",
+                        "inverse-surface": "#d4e4fa",
+                        "inverse-on-surface": "#233143",
+                        "on-surface": "#d4e4fa",
+                        "secondary-container": "#00b47d",
+                        "surface-dim": "#051424",
+                        "warning-gold": "#f59e0b",
+                        "background": "#051424",
+                        "surface-container-low": "#0d1c2d",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "sidebar-width": "240px",
+                        "margin-compact": "16px",
+                        "topbar-height": "48px",
+                        "margin-wide": "32px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "code-md": ["JetBrains Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["10px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "code-md": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.surface'); color: theme('colors.on-surface'); margin: 0; padding: 0; font-family: 'Hanken Grotesk', sans-serif; overflow-x: hidden; }
+        .cyber-glow { box-shadow: 0 0 12px theme('colors.secondary/30'); }
+        .cyber-glow-error { box-shadow: 0 0 12px theme('colors.error/30'); }
+        .cyber-glow-warn { box-shadow: 0 0 12px theme('colors.warning-gold/30'); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased h-screen flex overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-wide bg-surface-container dark:bg-surface-container border-b border-border-muted h-topbar-height">
+<div class="flex items-center gap-4">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">UdehLabs Intelligence</div>
+</div>
+<div class="flex items-center gap-gutter h-full">
+<nav class="flex h-full mr-4">
+<a class="h-full flex items-center px-3 font-label-caps text-label-caps text-on-surface-variant font-medium hover:bg-surface-bright transition-colors" href="#">Rescan</a>
+<a class="h-full flex items-center px-3 font-label-caps text-label-caps text-on-surface-variant font-medium hover:bg-surface-bright transition-colors" href="#">Export Graph</a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="p-1 hover:bg-surface-bright rounded text-secondary transition-colors" title="notifications"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-1 hover:bg-surface-bright rounded text-secondary transition-colors" title="settings"><span class="material-symbols-outlined" data-icon="settings">settings</span></button>
+<button class="p-1 hover:bg-surface-bright rounded text-secondary transition-colors" title="help"><span class="material-symbols-outlined" data-icon="help">help</span></button>
+<img alt="Lead Architect Avatar" class="w-8 h-8 rounded-full border border-border-muted ml-2" data-alt="A small, stylized avatar portrait of a lead software architect. The style is sharp, modern, and cyber-influenced, fitting a high-tech dashboard. High contrast, dark background, luminous accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBd9-djBsLeNIuf455eJ1Zi2klM7hBmLFQWzUaCdXE2KYKzhTi2iFAKo8L9hrejAGoxHjjLLM1X-C7CPU0Fs_EGNoQaFg42S6d4ZpibCTWIcxt4KOhiVuUO-_gCO4bE1bJf7Bw53tmQTkIneHIqEjPD9pxx--UN1SwCTTFzDg8zFDUl8MSLA6lKdg4bPuCUC82K8wKDW5F8rdo_Ilgux9KOfqK_JoC9pwooN7YBvAY26a6VSC0KsGvZ8g"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] z-40 flex flex-col py-unit bg-surface-container-low dark:bg-surface-container-low border-r border-border-muted pt-topbar-height">
+<div class="p-4 border-b border-border-muted flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary/20 border border-secondary flex items-center justify-center cyber-glow">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="memory">memory</span>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-secondary font-bold">CYBER-INTELLIGENCE</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">V2.4.0-STABLE</div>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full py-2 border border-secondary text-secondary font-label-caps text-label-caps flex items-center justify-center gap-2 hover:bg-secondary/10 transition-colors rounded">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span> New Analysis
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto scrollbar-hide py-2 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="dashboard">dashboard</span> Overview
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="inventory_2">inventory_2</span> Repositories
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="folder_open">folder_open</span> Files
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="token">token</span> Symbols
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="hub">hub</span> Dependencies
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-secondary bg-surface-container-high border-l-2 border-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="api">api</span> APIs
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="database">database</span> Database
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="rule">rule</span> Tests
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="security">security</span> Findings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="history">history</span> Snapshots
+            </a>
+</nav>
+<div class="mt-auto border-t border-border-muted pt-2 pb-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="menu_book">menu_book</span> Docs
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-secondary transition-colors" data-icon="logout">logout</span> Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-[240px] mt-[48px] p-margin-wide flex-1 overflow-y-auto w-full h-[calc(100vh-48px)]">
+<header class="mb-8 flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">API &amp; Database Discovery</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Mapping the external surface area to internal logic and integrations.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-lowest border border-border-muted rounded flex items-center px-3 py-1.5 focus-within:border-secondary transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none outline-none text-body-sm font-body-sm text-on-surface w-48 placeholder-on-surface-variant" placeholder="Search routes or models..." type="text"/>
+<kbd class="font-code-sm text-code-sm text-on-surface-variant bg-surface-container px-1.5 rounded border border-border-muted ml-2">⌘K</kbd>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- API Route Map -->
+<div class="col-span-12 xl:col-span-8 flex flex-col gap-gutter">
+<div class="bg-surface-container-high border border-border-muted rounded-lg overflow-hidden flex flex-col">
+<div class="px-4 py-3 border-b border-border-muted flex justify-between items-center bg-surface-container">
+<h2 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="api">api</span> API Route Map
+                        </h2>
+<span class="font-code-sm text-code-sm text-on-surface-variant">42 Endpoints Discovered</span>
+</div>
+<div class="flex flex-col p-2 gap-1 bg-surface-container-lowest">
+<!-- Route 1 -->
+<div class="flex items-center justify-between p-3 border border-border-muted rounded bg-surface-container hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4 w-1/3">
+<span class="font-code-sm text-code-sm font-bold text-secondary bg-secondary/10 px-2 py-1 rounded">POST</span>
+<span class="font-code-md text-code-md text-on-surface">/api/v1/projects</span>
+</div>
+<div class="flex items-center gap-4 w-1/3">
+<span class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="code">code</span> createProjectHandler
+                                </span>
+</div>
+<div class="flex items-center justify-end gap-3 w-1/3">
+<span class="font-code-sm text-code-sm text-on-surface-variant border border-border-muted px-1.5 py-0.5 rounded">JWT</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant border border-border-muted px-1.5 py-0.5 rounded">v1.2</span>
+<div class="w-2 h-2 rounded-full bg-secondary cyber-glow" title="Tested"></div>
+</div>
+</div>
+<!-- Route 2 -->
+<div class="flex items-center justify-between p-3 border border-border-muted rounded bg-surface-container hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4 w-1/3">
+<span class="font-code-sm text-code-sm font-bold text-primary bg-primary/10 px-2 py-1 rounded">GET</span>
+<span class="font-code-md text-code-md text-on-surface">/api/v1/projects/{id}</span>
+</div>
+<div class="flex items-center gap-4 w-1/3">
+<span class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="code">code</span> getProjectHandler
+                                </span>
+</div>
+<div class="flex items-center justify-end gap-3 w-1/3">
+<span class="font-code-sm text-code-sm text-on-surface-variant border border-border-muted px-1.5 py-0.5 rounded">JWT</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant border border-border-muted px-1.5 py-0.5 rounded">v1.2</span>
+<div class="w-2 h-2 rounded-full bg-secondary cyber-glow" title="Tested"></div>
+</div>
+</div>
+<!-- Route 3 -->
+<div class="flex items-center justify-between p-3 border border-border-muted rounded bg-surface-container hover:bg-surface-bright transition-colors group">
+<div class="flex items-center gap-4 w-1/3">
+<span class="font-code-sm text-code-sm font-bold text-warning-gold bg-warning-gold/10 px-2 py-1 rounded">PUT</span>
+<span class="font-code-md text-code-md text-on-surface">/api/v1/tasks/{id}</span>
+</div>
+<div class="flex items-center gap-4 w-1/3">
+<span class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="code">code</span> updateTaskHandler
+                                </span>
+</div>
+<div class="flex items-center justify-end gap-3 w-1/3">
+<span class="font-code-sm text-code-sm text-on-surface-variant border border-border-muted px-1.5 py-0.5 rounded">JWT</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant border border-border-muted px-1.5 py-0.5 rounded">v1.1</span>
+<div class="w-2 h-2 rounded-full bg-warning-gold cyber-glow-warn" title="Documented Only"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Database Model Matrix & Side Elements -->
+<div class="col-span-12 xl:col-span-4 flex flex-col gap-gutter">
+<!-- Database Matrix -->
+<div class="bg-surface-container-high border border-border-muted rounded-lg overflow-hidden flex flex-col">
+<div class="px-4 py-3 border-b border-border-muted flex justify-between items-center bg-surface-container">
+<h2 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="database">database</span> DB Models
+                        </h2>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<!-- Model Node -->
+<div class="border border-border-muted rounded p-3 bg-surface-container-lowest">
+<div class="flex justify-between items-center mb-2">
+<span class="font-code-md text-code-md text-primary font-bold">Project</span>
+<span class="font-code-sm text-code-sm text-secondary bg-secondary/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="shield">shield</span> Isolated
+                                </span>
+</div>
+<div class="flex flex-col gap-1 mt-2 border-t border-border-muted pt-2">
+<div class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_right_alt">arrow_right_alt</span> owns -&gt; <span class="text-on-surface">Task</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="integration_instructions">integration_instructions</span> ProjectRepository.ts
+                                </div>
+</div>
+</div>
+<!-- Model Node -->
+<div class="border border-border-muted rounded p-3 bg-surface-container-lowest">
+<div class="flex justify-between items-center mb-2">
+<span class="font-code-md text-code-md text-primary font-bold">User</span>
+<span class="font-code-sm text-code-sm text-warning-gold bg-warning-gold/10 px-1.5 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="warning">warning</span> Global
+                                </span>
+</div>
+<div class="flex flex-col gap-1 mt-2 border-t border-border-muted pt-2">
+<div class="font-code-sm text-code-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_right_alt">arrow_right_alt</span> belongsTo -&gt; <span class="text-on-surface">Organization</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Findings -->
+<div class="bg-surface-container-high border border-border-muted rounded-lg overflow-hidden flex flex-col border-l-2 border-l-error">
+<div class="px-4 py-3 border-b border-border-muted flex justify-between items-center bg-surface-container">
+<h2 class="font-label-caps text-label-caps text-error flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="security">security</span> Critical Findings
+                        </h2>
+</div>
+<div class="p-3 flex flex-col gap-2">
+<div class="flex gap-2 items-start bg-error-container/20 p-2 rounded border border-error-container/50">
+<span class="material-symbols-outlined text-error text-[16px] mt-0.5" data-icon="error">error</span>
+<p class="font-body-sm text-body-sm text-on-surface">Missing validation for field <code class="font-code-sm text-code-sm text-error">"priority"</code> in Task model.</p>
+</div>
+<div class="flex gap-2 items-start bg-error-container/20 p-2 rounded border border-error-container/50">
+<span class="material-symbols-outlined text-error text-[16px] mt-0.5" data-icon="error">error</span>
+<p class="font-body-sm text-body-sm text-on-surface">API route <code class="font-code-sm text-code-sm text-error">/v1/health</code> missing rate limits.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- External Integrations -->
+<div class="col-span-12 mt-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="extension">extension</span> External Integrations
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Integration 1 -->
+<div class="bg-surface-container-high border border-border-muted rounded p-4 flex items-center justify-between hover:border-secondary transition-colors group cursor-default">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-lowest border border-border-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors" data-icon="psychology">psychology</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Gemini AI</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Adapter Found</div>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-secondary cyber-glow"></div>
+</div>
+<!-- Integration 2 -->
+<div class="bg-surface-container-high border border-border-muted rounded p-4 flex items-center justify-between hover:border-secondary transition-colors group cursor-default">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-lowest border border-border-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors" data-icon="storage">storage</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Prisma/PostgreSQL</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Connected</div>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-secondary cyber-glow"></div>
+</div>
+<!-- Integration 3 -->
+<div class="bg-surface-container-high border border-border-muted rounded p-4 flex items-center justify-between hover:border-secondary transition-colors group cursor-default">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-lowest border border-border-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors" data-icon="payments">payments</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-on-surface">Stripe</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Config Valid</div>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-secondary cyber-glow"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

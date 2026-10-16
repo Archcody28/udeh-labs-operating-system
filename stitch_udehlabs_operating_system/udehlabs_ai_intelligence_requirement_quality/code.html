@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Intelligent Engineering Intelligence Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-secondary": "#3f008e",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "primary-fixed": "#d3e4fe",
+                      "primary-container": "#031427",
+                      "surface-elevation-2": "#0F2944",
+                      "surface-bright": "#2c3a4c",
+                      "on-error": "#690005",
+                      "on-surface": "#d4e4fa",
+                      "on-secondary-container": "#c9aeff",
+                      "surface-variant": "#273647",
+                      "border-muted": "#1E293B",
+                      "surface-tint": "#b7c8e1",
+                      "inverse-primary": "#505f76",
+                      "surface-container-low": "#0d1c2d",
+                      "on-tertiary-fixed": "#001e2f",
+                      "secondary": "#d2bbff",
+                      "surface-dim": "#051424",
+                      "surface-container-lowest": "#010f1f",
+                      "secondary-fixed": "#eaddff",
+                      "primary-fixed-dim": "#b7c8e1",
+                      "surface-container": "#122131",
+                      "surface-container-highest": "#273647",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "on-tertiary-container": "#0086bf",
+                      "on-surface-variant": "#c4c6cd",
+                      "error": "#ffb4ab",
+                      "outline-variant": "#44474c",
+                      "inverse-on-surface": "#233143",
+                      "status-available": "#10B981",
+                      "on-primary-fixed-variant": "#38485d",
+                      "on-tertiary": "#00344d",
+                      "on-primary": "#213146",
+                      "surface-container-high": "#1c2b3c",
+                      "surface-elevation-1": "#0A1F35",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "status-pending": "#64748B",
+                      "on-secondary-fixed": "#25005a",
+                      "primary": "#b7c8e1",
+                      "inverse-surface": "#d4e4fa",
+                      "error-container": "#93000a",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed": "#0b1c30",
+                      "tertiary-container": "#001522",
+                      "on-background": "#d4e4fa",
+                      "status-busy": "#F59E0B",
+                      "status-unavailable": "#EF4444",
+                      "outline": "#8e9197",
+                      "engineering-accent": "#8B5CF6",
+                      "secondary-container": "#6001d1",
+                      "background": "#051424",
+                      "surface": "#051424",
+                      "on-primary-container": "#6f7f97",
+                      "tertiary": "#89ceff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "engineering-density": "0.5rem",
+                      "grid-gutter": "1rem",
+                      "grid-margin": "2rem",
+                      "stack-gap": "1.25rem",
+                      "client-density": "1.5rem"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "code-snippet": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-command": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code-snippet": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-command": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .status-chip-available {
+            background-color: rgba(16, 185, 129, 0.15);
+            border-color: theme('colors.status-available');
+            color: theme('colors.status-available');
+        }
+        
+        .status-chip-pending {
+            background-color: rgba(100, 116, 139, 0.15);
+            border-color: theme('colors.status-pending');
+            color: theme('colors.status-pending');
+        }
+        
+        .status-chip-busy {
+            background-color: rgba(245, 158, 11, 0.15);
+            border-color: theme('colors.status-busy');
+            color: theme('colors.status-busy');
+        }
+        
+        .status-chip-unavailable {
+            background-color: rgba(239, 68, 68, 0.15);
+            border-color: theme('colors.status-unavailable');
+            color: theme('colors.status-unavailable');
+        }
+        
+        .glow-active {
+            box-shadow: inset 0 0 0 1px theme('colors.engineering-accent');
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-lowest'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.inverse-primary'); 
+        }
+    </style>
+</head>
+<body class="h-screen w-full flex overflow-hidden font-body-sm text-body-sm">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-engineering-density px-4 bg-surface-container-low dark:bg-surface-container-low border-r border-border-muted w-64 z-10 shrink-0">
+<!-- Header / Context Switcher -->
+<div class="mb-8 mt-2 px-2 flex items-center space-x-3 cursor-pointer hover:bg-surface-container-highest rounded-lg transition-colors p-2 -mx-2">
+<div class="w-8 h-8 rounded bg-surface-elevation-2 flex items-center justify-center border border-border-muted shrink-0 overflow-hidden">
+<img alt="Organization Logo" class="object-cover w-full h-full" data-alt="A minimalist logo for an engineering workspace, featuring a geometric 'U' in electric violet against a dark background, evoking precision and technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK362TLTEt0WRpGf7SAbanbhIgjoAWlvS09dhnoOk5zQTEBocywJJBhsR8Y1ISd8fBDBYu-r3YjLj2HGtIyXEnzThg_-zf9KUOcQ7TwvynnRhCO-nJzjKfBAnVaGw5GjxwdEmeRk9oBFb2TzryM9OjjoO0I4ocTJ2wuri6fjg_zaSaAYWfZfVByXrJLb6C_ktPDnh25vQlBPqS3aDhjQUwd7jDrJ16tkTWUU-aV6SON8glyVW2QKP12A"/>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-primary truncate leading-tight">UdehLabs</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant truncate">AI Workspace</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 overflow-y-auto space-y-1">
+<a class="flex items-center px-3 py-2 bg-secondary-container text-on-secondary-container rounded-lg Active: scale-95 duration-150 font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" style="font-variation-settings: 'FILL' 1;">insights</span>
+                Intelligence Overview
+            </a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg hover:bg-surface-container-highest transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">high_quality</span>
+                Requirement Quality
+            </a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg hover:bg-surface-container-highest transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">warning</span>
+                Risks &amp; Dependencies
+            </a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg hover:bg-surface-container-highest transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">history</span>
+                Analysis History
+            </a>
+</div>
+<!-- Footer / CTA -->
+<div class="mt-auto pt-4 space-y-4">
+<button class="w-full bg-engineering-accent text-white py-2 rounded font-label-caps text-label-caps hover:bg-opacity-90 transition-opacity">
+                Run New Analysis
+            </button>
+<div class="space-y-1">
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center px-3 py-2 text-on-surface-variant hover:bg-surface-container-highest rounded-lg transition-colors font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">contact_support</span>
+                    Support
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Workspace Area -->
+<div class="flex-1 flex flex-col min-w-0 bg-background relative overflow-hidden">
+<!-- TopAppBar (Mobile Nav & Context) -->
+<header class="flex justify-between items-center w-full px-grid-margin h-16 bg-surface-container dark:bg-surface-container border-b border-border-muted z-10 shrink-0">
+<div class="flex items-center">
+<div class="md:hidden mr-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-engineering-accent dark:text-engineering-accent tracking-tight">UdehLabs AI Intelligence</h1>
+</div>
+<!-- Mobile Navigation Cluster (Hidden on Mobile) -->
+<nav class="hidden md:flex space-x-6 h-full items-end pt-2">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-caps text-label-caps Active: opacity-80 transition-all hover:text-primary transition-colors duration-200" href="#">Overview</a>
+<a class="text-on-surface-variant font-normal font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Quality</a>
+<a class="text-on-surface-variant font-normal font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Risks</a>
+<a class="text-on-surface-variant font-normal font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">History</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-muted ml-2">
+<img alt="User profile" class="object-cover w-full h-full" data-alt="A stylized, low-poly abstract avatar in shades of deep blue and electric violet, designed for a technical user profile in a command center interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_PIeSUqGH5apMheJ48SaVre68f1ipXpKefZDU_1-TmCZNLPB_iZ8WNvUgxSatzUypr5QupcIf6wflCmlDkBG0j1VJM8hSnU4zNr6LAitjUuQhuzFarwMMLqHMp1p3JcUHHrzIcuVsFraXcemmuC3FQbbY9fS60LUiYW36VWBVT0E10yz3w0QDD4opRW7dT5JTQgNwhuuGcnYjO9rnEBFCmAbBQca85PTdsh9ECoWpLGfK2N3jbvW1Wg"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-grid-margin custom-scrollbar">
+<!-- Header Actions -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Requirement Analysis Workspace</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Project: Apollo Core Refactor v2.4</p>
+</div>
+<div class="flex space-x-4">
+<button class="flex items-center px-4 py-2 border border-border-muted text-on-surface rounded font-label-caps text-label-caps hover:bg-surface-elevation-1 transition-colors">
+<span class="material-symbols-outlined mr-2 text-sm">download</span>
+                        Export Intelligence Report
+                    </button>
+<button class="flex items-center px-4 py-2 bg-engineering-accent text-white rounded font-label-caps text-label-caps hover:bg-opacity-90 transition-opacity">
+<span class="material-symbols-outlined mr-2 text-sm" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                        Run Full Analysis
+                    </button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-grid-gutter lg:gap-grid-margin">
+<!-- Left Column: Overview & Stats -->
+<div class="xl:col-span-8 flex flex-col gap-grid-gutter lg:gap-grid-margin">
+<!-- Top Stats Bento -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-grid-gutter">
+<!-- Readiness Gauge Card -->
+<div class="md:col-span-2 bg-surface-elevation-1 border border-border-muted rounded-xl p-6 relative overflow-hidden flex items-center">
+<!-- Status Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-available"></div>
+<div class="flex-1">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">AI Readiness Score</div>
+<div class="font-display-command text-display-command text-primary">82%</div>
+<div class="font-body-sm text-body-sm text-status-available mt-2 flex items-start">
+<span class="material-symbols-outlined text-sm mr-1 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    Project is nearly ready for development. 3 critical ambiguities detected.
+                                </div>
+</div>
+<div class="w-24 h-24 relative shrink-0 ml-4">
+<!-- Minimal SVG Gauge -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-engineering-accent stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="82, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+</div>
+</div>
+<!-- Stats Cards -->
+<div class="bg-surface-elevation-1 border border-border-muted rounded-xl p-4 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant">Total Findings</div>
+<div class="flex items-end justify-between mt-4">
+<div class="font-headline-lg text-headline-lg text-primary">24</div>
+<span class="material-symbols-outlined text-on-surface-variant">analytics</span>
+</div>
+</div>
+<div class="bg-surface-elevation-1 border border-status-unavailable rounded-xl p-4 flex flex-col justify-between glow-active">
+<div class="font-label-caps text-label-caps text-on-surface-variant">Critical Risks</div>
+<div class="flex items-end justify-between mt-4">
+<div class="font-headline-lg text-headline-lg text-status-unavailable">2</div>
+<span class="material-symbols-outlined text-status-unavailable">warning</span>
+</div>
+</div>
+</div>
+<!-- Requirement Quality Matrix -->
+<div class="bg-surface-elevation-1 border border-border-muted rounded-xl flex flex-col h-[500px]">
+<div class="px-6 py-4 border-b border-border-muted flex justify-between items-center shrink-0">
+<h3 class="font-headline-md text-headline-md text-primary">Requirement Quality Matrix</h3>
+<div class="flex space-x-2">
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container"><span class="material-symbols-outlined text-sm">filter_list</span></button>
+<button class="p-1 text-on-surface-variant hover:text-primary rounded hover:bg-surface-container"><span class="material-symbols-outlined text-sm">sort</span></button>
+</div>
+</div>
+<div class="flex-1 overflow-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low sticky top-0 z-10">
+<tr>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant font-normal w-24">ID</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant font-normal">Requirement text</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant font-normal w-32">Status</th>
+<th class="px-6 py-3 font-label-caps text-label-caps text-on-surface-variant font-normal w-24 text-right">Score</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-muted font-code-snippet text-code-snippet">
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer border-l-2 border-transparent hover:border-engineering-accent">
+<td class="px-6 py-4 text-on-surface-variant">REQ-101</td>
+<td class="px-6 py-4 text-primary">The system must handle 10,000 concurrent user sessions.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-caps border status-chip-available">
+                                                Analyzed
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right text-status-available">95</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer border-l-2 border-status-busy bg-surface-container/30">
+<td class="px-6 py-4 text-on-surface-variant">REQ-102</td>
+<td class="px-6 py-4 text-primary">
+                                            The application should be fast and responsive.
+                                            <div class="mt-1 flex items-center text-status-busy font-body-sm text-xs">
+<span class="material-symbols-outlined text-[14px] mr-1">info</span>
+                                                Intelligence: Ambiguous wording detected.
+                                            </div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-caps border status-chip-busy">
+                                                Needs Review
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right text-status-busy">42</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer border-l-2 border-transparent hover:border-engineering-accent">
+<td class="px-6 py-4 text-on-surface-variant">REQ-103</td>
+<td class="px-6 py-4 text-primary">Data must be encrypted at rest using AES-256.</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-caps border status-chip-available">
+                                                Analyzed
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right text-status-available">98</td>
+</tr>
+<tr class="hover:bg-surface-container/50 transition-colors cursor-pointer border-l-2 border-status-unavailable bg-surface-container/30">
+<td class="px-6 py-4 text-on-surface-variant">REQ-104</td>
+<td class="px-6 py-4 text-primary">
+                                            Admin users can access the database directly.
+                                            <div class="mt-1 flex items-center text-status-unavailable font-body-sm text-xs">
+<span class="material-symbols-outlined text-[14px] mr-1">block</span>
+                                                Intelligence: Security risk / Contradicts SEC-05.
+                                            </div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-label-caps border status-chip-unavailable">
+                                                Violation
+                                            </span>
+</td>
+<td class="px-6 py-4 text-right text-status-unavailable">15</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Intelligence Feed & HITL -->
+<div class="xl:col-span-4 flex flex-col gap-grid-gutter lg:gap-grid-margin">
+<!-- HITL Suggestion Card (High Priority) -->
+<div class="bg-surface-elevation-2 border border-engineering-accent rounded-xl p-0 relative overflow-hidden glow-active shadow-[0_0_15px_rgba(139,92,246,0.1)]">
+<div class="px-5 py-3 bg-engineering-accent/10 border-b border-engineering-accent/30 flex items-center justify-between">
+<div class="flex items-center text-engineering-accent font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-sm mr-2" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+                                AI Suggestion: Requires Approval
+                            </div>
+<span class="text-xs bg-engineering-accent text-white px-2 py-0.5 rounded">REQ-102</span>
+</div>
+<div class="p-5 space-y-4">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">Original Draft</div>
+<div class="bg-surface-dim p-3 rounded border border-border-muted font-code-snippet text-code-snippet text-on-surface opacity-70">
+                                    "The application should be fast and responsive."
+                                </div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-status-available mb-1 flex items-center">
+<span class="material-symbols-outlined text-[14px] mr-1">arrow_downward</span>
+                                    Proposed Improvement
+                                </div>
+<div class="bg-status-available/10 p-3 rounded border border-status-available/30 font-code-snippet text-code-snippet text-primary">
+                                    "The system must respond to core API requests within 200ms for 95% of calls under peak load."
+                                </div>
+</div>
+<div class="flex space-x-2 pt-2">
+<button class="flex-1 bg-status-available text-surface-container-lowest py-2 rounded font-label-caps text-label-caps hover:bg-opacity-90 transition-opacity">
+                                    Accept
+                                </button>
+<button class="flex-1 border border-border-muted text-on-surface py-2 rounded font-label-caps text-label-caps hover:bg-surface-container transition-colors">
+                                    Modify
+                                </button>
+<button class="flex-none px-3 border border-border-muted text-status-unavailable py-2 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Findings Feed -->
+<div class="bg-surface-elevation-1 border border-border-muted rounded-xl flex flex-col flex-1 min-h-[400px]">
+<div class="px-5 py-4 border-b border-border-muted flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-primary text-lg">Intelligence Feed</h3>
+<span class="bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded-full font-label-caps text-[10px]">24 Items</span>
+</div>
+<div class="flex border-b border-border-muted px-2 pt-2 font-label-caps text-label-caps">
+<button class="px-3 py-1.5 text-engineering-accent border-b-2 border-engineering-accent">All</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:text-primary">Ambiguity</button>
+<button class="px-3 py-1.5 text-on-surface-variant hover:text-primary">Contradiction</button>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
+<!-- Finding Card: Critical -->
+<div class="p-3 border border-border-muted rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-caps border status-chip-unavailable">
+                                        Critical Contradiction
+                                    </span>
+<span class="text-xs font-label-caps text-on-surface-variant">REQ-104</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary mb-2 line-clamp-2">Direct database access requested contradicts overriding security policy SEC-05.</p>
+<div class="flex justify-end">
+<button class="text-xs font-label-caps text-engineering-accent hover:underline flex items-center">
+                                        Review <span class="material-symbols-outlined text-[14px] ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Finding Card: Med -->
+<div class="p-3 border border-border-muted rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-caps border status-chip-busy">
+                                        Missing AC
+                                    </span>
+<span class="text-xs font-label-caps text-on-surface-variant">REQ-088</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary mb-2 line-clamp-2">User authentication requirement lacks specific multi-factor authentication (MFA) criteria.</p>
+<div class="flex justify-end">
+<button class="text-xs font-label-caps text-engineering-accent hover:underline flex items-center">
+                                        Review <span class="material-symbols-outlined text-[14px] ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Finding Card: Low -->
+<div class="p-3 border border-border-muted rounded bg-surface-container-low hover:bg-surface-container transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-label-caps border status-chip-pending">
+                                        Formatting
+                                    </span>
+<span class="text-xs font-label-caps text-on-surface-variant">REQ-210</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary mb-2 line-clamp-2">Inconsistent naming convention for 'User Dashboard' module.</p>
+<div class="flex justify-end">
+<button class="text-xs font-label-caps text-engineering-accent hover:underline flex items-center">
+                                        Review <span class="material-symbols-outlined text-[14px] ml-1">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

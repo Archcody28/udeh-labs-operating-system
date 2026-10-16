@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Request Details &amp; Requirements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#07006c",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "secondary": "#c0c1ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#007650",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed-dim": "#d2bbff",
+                        "outline-variant": "#4a4455",
+                        "surface-container-lowest": "#060e20",
+                        "surface-tint": "#d2bbff",
+                        "background": "#0b1326",
+                        "surface": "#0b1326",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#b0b2ff",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-high": "#222a3d",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary-container": "#ede0ff",
+                        "primary": "#d2bbff",
+                        "surface-container-low": "#131b2e",
+                        "outline": "#958da1",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "primary-fixed": "#eaddff",
+                        "tertiary": "#4edea3",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-tertiary": "#003824",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-primary-fixed": "#25005a",
+                        "secondary-container": "#3131c0",
+                        "on-primary": "#3f008e",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-secondary": "#1000a9",
+                        "primary-container": "#7c3aed",
+                        "on-tertiary-container": "#76ffc2",
+                        "surface-bright": "#31394d",
+                        "on-background": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "table-row-height": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "code-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["11px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "code-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        /* Custom scrollbar for dense areas */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: theme('colors.outline-variant'); border-radius: theme('borderRadius.full'); }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+        
+        .timeline-line {
+            position: absolute; left: 11px; top: 24px; bottom: 0; width: 2px;
+            background: linear-gradient(to bottom, theme('colors.primary') 0%, theme('colors.surface-container-high') 100%);
+        }
+        .glow-active {
+            box-shadow: 0 0 12px 2px rgba(210, 187, 255, 0.3);
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 8px 1px rgba(210, 187, 255, 0.2); }
+            50% { box-shadow: 0 0 16px 4px rgba(210, 187, 255, 0.5); }
+            100% { box-shadow: 0 0 8px 1px rgba(210, 187, 255, 0.2); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-hidden flex h-screen w-full">
+<!-- SideNavBar (From JSON) -->
+<nav class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant flex flex-col h-full py-6 px-4 z-50">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">hub</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary leading-tight">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Enterprise Portal</p>
+</div>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-weight="fill">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-weight="fill">account_tree</span>
+<span>Projects</span>
+</a>
+<!-- Active State: Requests -->
+<a class="flex items-center gap-3 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:bg-surface-container-high transition-colors duration-200 scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined" data-weight="fill">ad_units</span>
+<span>Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-weight="fill">forum</span>
+<span>Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-weight="fill">package_2</span>
+<span>Deliverables</span>
+</a>
+<div class="mt-auto pt-4 border-t border-outline-variant/30">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-weight="fill">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area (Offset by Sidebar) -->
+<div class="flex-1 ml-[240px] flex flex-col h-screen relative bg-background">
+<!-- TopAppBar (From JSON) -->
+<header class="fixed top-0 right-0 left-[240px] h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-md bg-surface-dim/50 border-b border-outline-variant flex justify-between items-center px-gutter w-[calc(100%-240px)] z-40">
+<div class="flex items-center gap-4">
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">Project: Quantum Nexus</div>
+<div class="h-4 w-px bg-outline-variant mx-2"></div>
+<div class="font-label-caps text-label-caps text-secondary px-2 py-1 bg-secondary/10 rounded border border-secondary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">sync</span> REQ-992A
+                </div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full bg-surface-container-high border border-outline-variant rounded-full py-1.5 pl-9 pr-4 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/50 focus:ring-2 focus:ring-primary-container focus:border-primary-container transition-all hover:bg-surface-container-highest/50" placeholder="Search requirements..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest/50 rounded-full transition-all">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-1 rounded-full border border-outline-variant overflow-hidden hover:ring-2 hover:ring-primary-container transition-all ml-2">
+<img class="w-8 h-8 object-cover" data-alt="A highly detailed professional corporate headshot of a female executive with glasses, wearing a dark blazer, lit by soft studio lighting against a dark slate background. The image has a clean, modern, high-contrast aesthetic fitting a tech enterprise portal." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0urDLgvEV3lf4iu3Ef51bR5ow0eERweJiun1KhGc6DABPymRKsz1Ln7g4dp4QtBpL2mxuXoL_5wVcUcl1_AFD_FgrW9-K8BdBMXQU_z-2OSYjqK7SDdCGEDSA97deqPeXCCd8csrTFUarlOxiKNorYbk7F2FUlscn2ZvbWnCbZ4JJfLL9RiDieo9YnsKU50zRXQKwwSXtZcm0ry_jy_FxFspOCVyyRf6u_0ewxbYgBrFzavwuWcvuXQ"/>
+</button>
+</div>
+</header>
+<!-- Canvas / Dashboard Content -->
+<main class="flex-1 mt-16 p-container-padding overflow-y-auto flex gap-6">
+<!-- Left Panel: Context & Details (Bento style) -->
+<aside class="w-80 flex-shrink-0 flex flex-col gap-6">
+<!-- Status Card -->
+<div class="bg-surface-container p-5 rounded-xl border border-outline-variant/50 flex flex-col gap-4">
+<div class="flex justify-between items-start">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-1">Request Status</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Clarification Phase</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center border border-tertiary-container/30">
+<span class="material-symbols-outlined text-tertiary">query_stats</span>
+</div>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden mt-2">
+<div class="bg-primary h-full w-[45%] rounded-full relative overflow-hidden">
+<div class="absolute inset-0 bg-white/20 w-full animate-[shimmer_2s_infinite]" style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: translateX(-100%); animation: shimmer 2s infinite;"></div>
+</div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps">
+<span class="text-primary">45% REVIEWED</span>
+<span class="text-on-surface-variant">5/11 REQS</span>
+</div>
+</div>
+<!-- AI Summary Card -->
+<div class="bg-surface-container p-5 rounded-xl border border-outline-variant/50 flex flex-col flex-1">
+<div class="flex items-center gap-2 mb-4 pb-3 border-b border-outline-variant/30">
+<span class="material-symbols-outlined text-secondary">auto_awesome</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Intake Summary</h3>
+</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant space-y-3 leading-relaxed">
+<p>The client has requested a data pipeline integration bridging their legacy CRM with the new Quantum Nexus analytics engine.</p>
+<p><strong>Key Objectives:</strong> Establish real-time sync, ensure data obfuscation for PII, and maintain sub-200ms latency.</p>
+<div class="mt-4 p-3 bg-surface-container-low border border-outline-variant/30 rounded-lg">
+<div class="font-label-caps text-label-caps text-on-surface mb-2">AI CONFIDENCE SCORE</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+<span class="text-tertiary font-code-mono text-code-mono">87.4% High Alignment</span>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-2">
+<button class="flex-1 py-2 bg-surface-container-high hover:bg-surface-bright text-on-surface rounded font-body-sm text-body-sm border border-outline-variant/50 transition-colors">View Source</button>
+<button class="flex-1 py-2 bg-secondary-container hover:bg-secondary-container/80 text-on-secondary-container rounded font-body-sm text-body-sm transition-colors">Regenerate</button>
+</div>
+</div>
+</aside>
+<!-- Right Panel: Requirements List -->
+<div class="flex-1 flex flex-col h-full bg-surface-container border border-outline-variant/50 rounded-xl overflow-hidden">
+<!-- Header -->
+<div class="px-6 py-4 border-b border-outline-variant/50 flex justify-between items-center bg-surface-container-low">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Extracted Requirements</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Review and approve criteria before scope lock.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 border border-outline-variant rounded hover:bg-surface-container-high text-on-surface font-body-sm text-body-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filter
+                        </button>
+</div>
+</div>
+<!-- List Area (Scrollable) -->
+<div class="flex-1 overflow-y-auto p-6 space-y-4">
+<!-- Requirement Item 1: Verified -->
+<div class="bg-surface p-5 rounded-lg border border-outline-variant flex flex-col gap-3 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="flex justify-between items-start pl-2">
+<div class="flex items-center gap-3">
+<span class="font-code-mono text-code-mono text-on-surface-variant bg-surface-container-high px-2 py-1 rounded">REQ-01</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Real-time Data Sync Endpoint</h4>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 bg-tertiary-container/20 border border-tertiary-container text-tertiary rounded font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> VERIFIED
+                            </div>
+</div>
+<div class="pl-2">
+<p class="font-body-md text-body-md text-on-surface-variant">System must expose a RESTful endpoint to ingest payload from legacy CRM instantly upon record creation.</p>
+</div>
+<div class="pl-2 mt-2 pt-3 border-t border-outline-variant/30 flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-6 h-6 rounded-full border border-surface" data-alt="Small circular avatar profile photo of a male software engineer with short hair, against a dark blue background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuALKqbF89Z5qn56EyXmVg2BqBEOO6rb3pSwGBWfz4hJ8tx1sarSFjYijAUg9vbLbs6ZhzN9ycr1sK9DCr9aaB93_WjcjAaaBc6Nc2SugzMHoUhHBX4v8mpGXjv-9X7EHjZyzl2ACLnRPS6DIYPZvaQy9-DscdPw0YSPPSQ2fm8HuHAAVxR6n9f_f_FF5WSZ3kduxxTEIT2hkaer2N7x9GdncUpg04mfHbJy8lbYQKwcMnbSBTyz-obd6A"/>
+<img class="w-6 h-6 rounded-full border border-surface" data-alt="Small circular avatar profile photo of a female product manager smiling, against a dark purple background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzJR_Xj2O9E_K4uP8h4_jknrDw4wdUBJj2n5DqEsadJZoWWC7FHp7RSkXoQEQlf0z-FzI6zoHNkbtO8hWlHV_GbPvzyy6ck5P5Vx8jqrmkwlA3l3_c4DJH-QbQ1riPa4ENWOTOLspWOU4EuZ1sSf-splTaPx-3xtqipX_E3T4KDhuD42TLqSOSRRFAoohO9A1uHRToQHpxOomUQDFt6wO68-B8aaqQtZT8p47RlSIQx7F8y4Nn1lYVlw"/>
+</div>
+<div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="px-3 py-1 bg-surface-container-high hover:bg-surface-bright text-on-surface rounded font-body-sm text-body-sm border border-outline-variant/50">Edit</button>
+</div>
+</div>
+</div>
+<!-- Requirement Item 2: Awaiting Approval (Active Focus) -->
+<div class="bg-surface-container-high p-5 rounded-lg border border-primary/50 shadow-[0_0_15px_rgba(210,187,255,0.1)] flex flex-col gap-4 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary glow-active"></div>
+<div class="flex justify-between items-start pl-2">
+<div class="flex items-center gap-3">
+<span class="font-code-mono text-code-mono text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">REQ-02</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">PII Obfuscation Layer</h4>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 bg-secondary-container/20 border border-secondary-container text-secondary rounded font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">pending_actions</span> REVIEW NEEDED
+                            </div>
+</div>
+<div class="pl-2">
+<p class="font-body-md text-body-md text-on-surface-variant">All incoming payloads must run through the masking utility to hash SSN and Email fields before touching the database.</p>
+</div>
+<div class="pl-2 bg-surface-dim/50 p-3 rounded border border-outline-variant/30 font-code-mono text-code-mono text-on-surface-variant/80">
+<div class="text-on-surface mb-1">Acceptance Criteria:</div>
+<ul class="list-disc list-inside space-y-1 ml-1">
+<li>Email fields convert to SHA-256 hash.</li>
+<li>SSN fields masked (e.g., ***-**-1234).</li>
+<li>Process adds &lt; 50ms overhead.</li>
+</ul>
+</div>
+<div class="pl-2 mt-2 pt-3 border-t border-outline-variant/30 flex justify-end items-center gap-3">
+<button class="px-4 py-1.5 text-on-surface hover:bg-surface-bright rounded font-body-sm text-body-sm border border-outline-variant/50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">forum</span> Ask Question
+                            </button>
+<button class="px-4 py-1.5 text-error hover:bg-error-container/20 hover:border-error-container rounded font-body-sm text-body-sm border border-outline-variant/50 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit_note</span> Request Change
+                            </button>
+<button class="px-5 py-1.5 bg-primary text-on-primary hover:bg-primary-fixed rounded font-body-sm text-body-sm transition-colors font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">thumb_up</span> Approve
+                            </button>
+</div>
+</div>
+<!-- Requirement Item 3: Draft -->
+<div class="bg-surface p-5 rounded-lg border border-outline-variant/40 border-dashed flex flex-col gap-3 relative opacity-70 hover:opacity-100 transition-opacity">
+<div class="flex justify-between items-start pl-2">
+<div class="flex items-center gap-3">
+<span class="font-code-mono text-code-mono text-on-surface-variant bg-surface-container-highest px-2 py-1 rounded">REQ-03</span>
+<h4 class="font-headline-sm text-headline-sm text-on-surface">Latency Monitoring Dashboard</h4>
+</div>
+<div class="flex items-center gap-1 px-2 py-1 bg-surface-container-highest text-on-surface-variant rounded font-label-caps text-label-caps">
+<span class="material-symbols-outlined text-[14px]">edit_document</span> DRAFT
+                            </div>
+</div>
+<div class="pl-2">
+<p class="font-body-md text-body-md text-on-surface-variant">Provide a UI widget showing rolling 5-minute average latency of the sync endpoint.</p>
+</div>
+<div class="pl-2 mt-2 pt-3 border-t border-outline-variant/30 flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant italic">AI generated - Needs elaboration</span>
+<button class="px-3 py-1 bg-surface-container-high hover:bg-surface-bright text-on-surface rounded font-body-sm text-body-sm border border-outline-variant/50">Expand Scope</button>
+</div>
+</div>
+</div>
+<!-- Footer: Scope Approval Lock -->
+<div class="p-4 bg-surface-container-highest border-t border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline">lock</span>
+<div>
+<div class="font-body-md text-body-md text-on-surface font-semibold">Scope Approval Gate</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Complete review of all 11 requirements to unlock project initialization.</div>
+</div>
+</div>
+<button class="px-6 py-2 bg-surface-dim text-on-surface-variant border border-outline-variant/50 rounded font-headline-sm text-headline-sm opacity-50 cursor-not-allowed flex items-center gap-2">
+                        Lock Scope <span class="material-symbols-outlined text-[18px]">key</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Data Lineage &amp; Flow Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#2a3548",
+                      "surface-container-high": "#1f2a3c",
+                      "primary-fixed-dim": "#c6c6c7",
+                      "on-surface-variant": "#c4c7c8",
+                      "tertiary-container": "#6ffbbe",
+                      "status-success": "#10b981",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary-container": "#e2e2e2",
+                      "on-secondary-fixed": "#25005a",
+                      "background": "#081425",
+                      "secondary-container": "#6001d1",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "inverse-on-surface": "#263143",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#e2e2e2",
+                      "on-secondary": "#3f008e",
+                      "on-primary-container": "#636565",
+                      "inverse-surface": "#d8e3fb",
+                      "on-background": "#d8e3fb",
+                      "on-primary": "#2f3131",
+                      "surface-bright": "#2f3a4c",
+                      "data-blue": "#1C85E8",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-primary-fixed": "#1a1c1c",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "outline-variant": "#444748",
+                      "surface-dim": "#081425",
+                      "secondary-fixed": "#eaddff",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-container": "#152031",
+                      "status-risk": "#f59e0b",
+                      "on-secondary-container": "#c9aeff",
+                      "error-container": "#93000a",
+                      "error": "#ffb4ab",
+                      "on-tertiary-container": "#00734e",
+                      "on-tertiary": "#003824",
+                      "surface-card": "#0d1b2a",
+                      "surface-container-highest": "#2a3548",
+                      "outline": "#8e9192",
+                      "surface-container-lowest": "#040e1f",
+                      "secondary": "#d2bbff",
+                      "terminal-black": "#091017",
+                      "tertiary": "#ffffff",
+                      "surface-container-low": "#111c2d",
+                      "on-primary-fixed-variant": "#454747",
+                      "surface": "#081425",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-error": "#690005",
+                      "execution-violet": "#7c3aed",
+                      "border-muted": "#1e293b",
+                      "status-critical": "#ef4444",
+                      "surface-tint": "#c6c6c7",
+                      "on-surface": "#d8e3fb",
+                      "primary": "#ffffff",
+                      "inverse-primary": "#5d5f5f"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "density-comfortable": "16px",
+                      "container-margin": "24px",
+                      "base": "4px",
+                      "sidebar_width": "260px",
+                      "density-compact": "8px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .graph-bg {
+            background-color: theme('colors.terminal-black');
+            background-image: linear-gradient(theme('colors.border-muted') 1px, transparent 1px),
+            linear-gradient(90deg, theme('colors.border-muted') 1px, transparent 1px);
+            background-size: 40px 40px;
+            background-position: center center;
+        }
+        
+        .animated-line {
+            stroke-dasharray: 8;
+            animation: dash 20s linear infinite;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-primary font-body-md h-screen w-screen overflow-hidden flex">
+<!-- Shared Component: SideNavBar -->
+<nav class="fixed left-0 top-0 bottom-0 flex flex-col z-40 bg-surface-container-low border-r border-border-muted w-[260px] transition-all duration-150 ease-in-out">
+<div class="p-container-margin border-b border-border-muted flex items-center gap-density-comfortable">
+<div class="w-10 h-10 bg-execution-violet rounded flex items-center justify-center font-headline-sm font-bold text-primary">UL</div>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary tracking-tight">UdehLabs</h1>
+<p class="text-label-caps font-label-caps text-on-surface-variant">Data Governance HQ</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto py-density-comfortable">
+<!-- Data Assets: Inactive -->
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">database</span>
+<span class="text-label-caps font-label-caps">Data Assets</span>
+</a>
+<!-- Lineage: Active -->
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact bg-surface-container-high border-l-4 border-execution-violet text-primary font-bold" href="#">
+<span class="material-symbols-outlined text-execution-violet">account_tree</span>
+<span class="text-label-caps font-label-caps">Lineage</span>
+</a>
+<!-- Quality: Inactive -->
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">verified_user</span>
+<span class="text-label-caps font-label-caps">Quality</span>
+</a>
+<!-- Contracts: Inactive -->
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">description</span>
+<span class="text-label-caps font-label-caps">Contracts</span>
+</a>
+<!-- Policies: Inactive -->
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">policy</span>
+<span class="text-label-caps font-label-caps">Policies</span>
+</a>
+<!-- AI Governance: Inactive -->
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">psychology</span>
+<span class="text-label-caps font-label-caps">AI Governance</span>
+</a>
+</div>
+<div class="p-container-margin border-t border-border-muted">
+<button class="w-full bg-execution-violet text-primary text-label-caps font-label-caps py-density-compact rounded hover:opacity-90 transition-opacity">Command Center</button>
+</div>
+<div class="border-t border-border-muted py-density-comfortable">
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">settings</span>
+<span class="text-label-caps font-label-caps">Settings</span>
+</a>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-execution-violet">help_center</span>
+<span class="text-label-caps font-label-caps">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col ml-[260px]">
+<!-- Shared Component: TopAppBar -->
+<header class="fixed top-0 right-0 left-[260px] h-16 bg-surface/80 backdrop-blur-md border-b border-border-muted flex justify-between items-center px-container-margin z-50">
+<div class="flex items-center gap-container-margin">
+<div class="text-headline-sm font-headline-sm font-black text-execution-violet uppercase tracking-widest">UDEHLABS // INTEL</div>
+<div class="h-8 w-px bg-border-muted"></div>
+<div class="flex items-center gap-density-comfortable bg-surface-container-lowest border border-border-muted rounded px-density-comfortable py-1">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">search</span>
+<input class="bg-transparent border-none text-data-mono font-data-mono text-primary placeholder-on-surface-variant focus:ring-0 text-sm w-64" placeholder="Search lineage, entities, policies..." style="outline:none;" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-container-margin">
+<div class="flex gap-container-margin">
+<span class="text-status-success font-data-mono text-data-mono flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-status-success"></span> Data Posture: 98.2%</span>
+<span class="text-on-surface-variant font-data-mono text-data-mono flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-status-risk"></span> Active Incidents: 2</span>
+</div>
+<button class="border border-execution-violet text-execution-violet hover:bg-execution-violet hover:text-primary transition-colors text-label-caps font-label-caps px-density-comfortable py-density-compact rounded">Deploy Policy</button>
+<div class="flex items-center gap-density-comfortable text-on-surface-variant">
+<button class="hover:text-primary transition-colors scale-95 active:opacity-80"><span class="material-symbols-outlined">notifications</span></button>
+<button class="hover:text-primary transition-colors scale-95 active:opacity-80"><span class="material-symbols-outlined">terminal</span></button>
+<button class="hover:text-primary transition-colors scale-95 active:opacity-80"><span class="material-symbols-outlined">account_circle</span></button>
+<img alt="Chief Data Officer" class="w-8 h-8 rounded border border-border-muted ml-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW3af4Moutxw4Kc7qFJL1a7v4olSq1zVBl98q6tH258HGzpnCz5l7xDjIkiN91FrXfu0feIPSz_QJoLbbPZhiY0N7D6x2JsDF6iK9ZXw580ViV3MOaYJC7DmqBlliaWviTSyL1OR0Rr0vtbx0ri3_AYj4aVHCmDkkTdmVao4Um4V69NAHNA3e1uRS1xPpViIHRzN7cdapQCTyP3UrKFTlJr0pevp39hQY0eVyfabtHM6u2dtKSkCH6og"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 mt-16 p-container-margin flex gap-container-margin overflow-hidden h-[calc(100vh-64px)]">
+<!-- Graph Visualization Canvas (Left/Main) -->
+<div class="flex-1 border border-border-muted bg-surface-card rounded flex flex-col relative overflow-hidden shadow-lg shadow-black/50">
+<!-- Toolbar -->
+<div class="h-12 border-b border-border-muted bg-surface-container-low flex items-center px-density-comfortable justify-between">
+<div class="flex items-center gap-2 text-data-mono font-data-mono text-primary">
+<span class="material-symbols-outlined text-sm">filter_alt</span>
+                        Flow: Customer Identity (End-to-End)
+                    </div>
+<div class="flex gap-2">
+<button class="bg-surface-container-highest border border-border-muted p-1 rounded hover:text-primary text-on-surface-variant"><span class="material-symbols-outlined text-sm">zoom_in</span></button>
+<button class="bg-surface-container-highest border border-border-muted p-1 rounded hover:text-primary text-on-surface-variant"><span class="material-symbols-outlined text-sm">zoom_out</span></button>
+<button class="bg-surface-container-highest border border-border-muted p-1 rounded hover:text-primary text-on-surface-variant"><span class="material-symbols-outlined text-sm">center_focus_strong</span></button>
+</div>
+</div>
+<!-- Graph Area -->
+<div class="flex-1 relative graph-bg overflow-auto p-12">
+<!-- SVG Edges connecting the nodes below (Simulated positions) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0" style="min-width: 1000px; min-height: 500px;">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="9" refy="3.5">
+<polygon fill="#7c3aed" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<!-- Stripe to Identity DB -->
+<path d="M 180 150 C 250 150, 250 250, 320 250" fill="none" marker-end="url(#arrowhead)" stroke="#1e293b" stroke-width="2"></path>
+<text fill="#c4c7c8" font-family="JetBrains Mono" font-size="10" font-weight="700" x="210" y="190">writes</text>
+<!-- Identity DB to Event Bus -->
+<path d="M 480 250 L 550 250" fill="none" marker-end="url(#arrowhead)" stroke="#1e293b" stroke-width="2"></path>
+<text fill="#c4c7c8" font-family="JetBrains Mono" font-size="10" font-weight="700" x="495" y="240">publishes</text>
+<!-- Event Bus to Knowledge Fabric -->
+<path d="M 710 250 L 780 250" fill="none" marker-end="url(#arrowhead)" stroke="#1e293b" stroke-width="2"></path>
+<text fill="#c4c7c8" font-family="JetBrains Mono" font-size="10" font-weight="700" x="720" y="240">indexes</text>
+<!-- Knowledge Fabric to AI Architect Agent -->
+<path class="animated-line" d="M 940 250 C 1000 250, 1000 150, 1060 150" fill="none" marker-end="url(#arrowhead)" stroke="#7c3aed" stroke-width="2"></path>
+<text fill="#7c3aed" font-family="JetBrains Mono" font-size="10" font-weight="700" x="960" y="190">retrieves</text>
+</svg>
+<!-- Node Structure Container (Relative positioning over SVG) -->
+<div class="relative w-full h-full min-w-[1200px] z-10 font-data-mono text-data-mono">
+<!-- Node 1: Stripe API -->
+<div class="absolute left-[20px] top-[110px] w-[160px] bg-surface-container-lowest border border-border-muted rounded p-3 shadow-md flex flex-col gap-2 hover:border-on-surface-variant transition-colors cursor-pointer">
+<div class="flex items-center justify-between border-b border-border-muted pb-2">
+<span class="material-symbols-outlined text-data-blue text-sm">api</span>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-high px-1 rounded">Ingest</span>
+</div>
+<div class="text-primary font-bold">Stripe API</div>
+<div class="text-[10px] text-on-surface-variant truncate">ext.stripe.customer_sync</div>
+</div>
+<!-- Node 2: Identity Database -->
+<div class="absolute left-[320px] top-[210px] w-[160px] bg-surface-container-lowest border border-border-muted rounded p-3 shadow-md flex flex-col gap-2 hover:border-on-surface-variant transition-colors cursor-pointer">
+<div class="flex items-center justify-between border-b border-border-muted pb-2">
+<span class="material-symbols-outlined text-status-success text-sm">database</span>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-high px-1 rounded">Storage</span>
+</div>
+<div class="text-primary font-bold">Identity Database</div>
+<div class="text-[10px] text-on-surface-variant truncate">pg.core_identity_v2</div>
+</div>
+<!-- Node 3: Event Bus -->
+<div class="absolute left-[550px] top-[210px] w-[160px] bg-surface-container-lowest border border-border-muted rounded p-3 shadow-md flex flex-col gap-2 hover:border-on-surface-variant transition-colors cursor-pointer">
+<div class="flex items-center justify-between border-b border-border-muted pb-2">
+<span class="material-symbols-outlined text-status-risk text-sm">dynamic_feed</span>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-high px-1 rounded">Stream</span>
+</div>
+<div class="text-primary font-bold">Event Bus</div>
+<div class="text-[10px] text-on-surface-variant truncate">kafka.customer.events</div>
+</div>
+<!-- Node 4: Knowledge Fabric Index -->
+<div class="absolute left-[780px] top-[210px] w-[160px] bg-surface-container-lowest border border-border-muted rounded p-3 shadow-md flex flex-col gap-2 hover:border-on-surface-variant transition-colors cursor-pointer">
+<div class="flex items-center justify-between border-b border-border-muted pb-2">
+<span class="material-symbols-outlined text-secondary text-sm">hub</span>
+<span class="text-[10px] text-on-surface-variant bg-surface-container-high px-1 rounded">Vector DB</span>
+</div>
+<div class="text-primary font-bold">Knowledge Fabric Index</div>
+<div class="text-[10px] text-on-surface-variant truncate">pinecone.identity_embed</div>
+</div>
+<!-- Node 5: AI Architect Agent (SELECTED) -->
+<div class="absolute left-[1060px] top-[110px] w-[160px] bg-surface-container-low border-2 border-execution-violet rounded p-3 shadow-[0_0_15px_rgba(124,58,237,0.3)] flex flex-col gap-2 cursor-pointer relative">
+<!-- Active indicator pip -->
+<div class="absolute -top-1 -right-1 w-3 h-3 bg-execution-violet rounded-full border border-background"></div>
+<div class="flex items-center justify-between border-b border-border-muted pb-2">
+<span class="material-symbols-outlined text-execution-violet text-sm">psychology</span>
+<span class="text-[10px] text-execution-violet bg-execution-violet/20 px-1 rounded border border-execution-violet/30">Consumer</span>
+</div>
+<div class="text-primary font-bold">AI Architect Agent</div>
+<div class="text-[10px] text-on-surface-variant truncate">agent.arch_assistant_v4</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel (Right) -->
+<div class="w-[340px] bg-surface-container-lowest border border-border-muted rounded flex flex-col overflow-hidden shadow-lg shadow-black/50">
+<!-- Panel Header -->
+<div class="p-container-margin border-b border-border-muted bg-surface-container-low flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<div class="text-label-caps font-label-caps text-execution-violet tracking-widest">Node Details</div>
+<button class="text-on-surface-variant hover:text-primary"><span class="material-symbols-outlined text-sm">close</span></button>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-execution-violet/10 border border-execution-violet/30 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-execution-violet">psychology</span>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-primary font-bold">AI Architect Agent</h2>
+<p class="text-data-mono font-data-mono text-on-surface-variant text-xs">agent.arch_assistant_v4</p>
+</div>
+</div>
+</div>
+<!-- Panel Content Scrollable -->
+<div class="flex-1 overflow-y-auto p-container-margin flex flex-col gap-container-margin">
+<!-- Confidence Score -->
+<div class="bg-surface-card border border-border-muted p-density-comfortable rounded flex flex-col gap-2">
+<div class="text-label-caps font-label-caps text-on-surface-variant">Lineage Confidence</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-success">check_circle</span>
+<span class="text-headline-sm font-headline-sm text-status-success font-bold">100% (Confirmed)</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 mt-2">
+<div class="bg-status-success h-1 w-full"></div>
+</div>
+</div>
+<!-- Metadata Grid -->
+<div>
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-2">Technical Metadata</div>
+<div class="border border-border-muted rounded bg-terminal-black font-data-mono text-[11px]">
+<div class="flex border-b border-border-muted/50 p-2">
+<div class="w-1/3 text-on-surface-variant">Node Type</div>
+<div class="w-2/3 text-primary">LLM Agent (Consumer)</div>
+</div>
+<div class="flex border-b border-border-muted/50 p-2">
+<div class="w-1/3 text-on-surface-variant">Owner</div>
+<div class="w-2/3 text-primary">Data Science Ops</div>
+</div>
+<div class="flex border-b border-border-muted/50 p-2">
+<div class="w-1/3 text-on-surface-variant">Region</div>
+<div class="w-2/3 text-primary">us-east-1</div>
+</div>
+<div class="flex p-2">
+<div class="w-1/3 text-on-surface-variant">Last Seen</div>
+<div class="w-2/3 text-primary">2 mins ago</div>
+</div>
+</div>
+</div>
+<!-- Policy Block -->
+<div>
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-2 flex justify-between items-center">
+<span>Data Consumption Policy</span>
+<span class="material-symbols-outlined text-xs text-on-surface-variant">info</span>
+</div>
+<div class="bg-terminal-black border border-border-muted rounded p-density-comfortable font-data-mono text-xs text-primary/90 overflow-x-auto whitespace-pre">
+<span class="text-execution-violet">policy</span>: strict_isolation
+<span class="text-execution-violet">allow_reads</span>:
+  - ext.stripe.customer_sync
+  - pinecone.identity_embed
+<span class="text-status-critical">deny_writes</span>: 
+  - * (all internal stores)
+<span class="text-status-risk">audit_level</span>: HIGH (log all requests)
+                        </div>
+</div>
+<!-- Actions -->
+<div class="mt-auto pt-4 border-t border-border-muted flex gap-2">
+<button class="flex-1 bg-surface-container-high border border-border-muted hover:bg-surface-container-highest text-primary text-label-caps font-label-caps py-2 rounded transition-colors">View Logs</button>
+<button class="flex-1 bg-execution-violet/10 border border-execution-violet hover:bg-execution-violet text-primary text-label-caps font-label-caps py-2 rounded transition-colors">Audit Flow</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

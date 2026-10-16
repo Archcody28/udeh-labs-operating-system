@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Engineering Execution Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#8e9197",
+                      "surface": "#051424",
+                      "on-tertiary-container": "#0086bf",
+                      "on-tertiary-fixed": "#001e2f",
+                      "on-primary": "#213146",
+                      "on-primary-fixed-variant": "#38485d",
+                      "error-container": "#93000a",
+                      "tertiary-container": "#001522",
+                      "on-secondary-fixed": "#25005a",
+                      "status-pending": "#64748B",
+                      "surface-container": "#122131",
+                      "surface-elevation-2": "#0F2944",
+                      "engineering-accent": "#8B5CF6",
+                      "primary": "#b7c8e1",
+                      "status-available": "#10B981",
+                      "surface-elevation-1": "#0A1F35",
+                      "on-error": "#690005",
+                      "on-primary-fixed": "#0b1c30",
+                      "background": "#051424",
+                      "surface-container-highest": "#273647",
+                      "on-background": "#d4e4fa",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "inverse-surface": "#d4e4fa",
+                      "surface-bright": "#2c3a4c",
+                      "on-surface": "#d4e4fa",
+                      "surface-container-high": "#1c2b3c",
+                      "on-secondary-container": "#c9aeff",
+                      "surface-dim": "#051424",
+                      "on-primary-container": "#6f7f97",
+                      "inverse-primary": "#505f76",
+                      "surface-container-lowest": "#010f1f",
+                      "primary-container": "#031427",
+                      "surface-container-low": "#0d1c2d",
+                      "inverse-on-surface": "#233143",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed-dim": "#b7c8e1",
+                      "primary-fixed": "#d3e4fe",
+                      "error": "#ffb4ab",
+                      "tertiary": "#89ceff",
+                      "secondary-container": "#6001d1",
+                      "surface-variant": "#273647",
+                      "surface-tint": "#b7c8e1",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-surface-variant": "#c4c6cd",
+                      "on-tertiary": "#00344d",
+                      "secondary": "#d2bbff",
+                      "status-unavailable": "#EF4444",
+                      "secondary-fixed": "#eaddff",
+                      "border-muted": "#1E293B",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-secondary": "#3f008e",
+                      "status-busy": "#F59E0B",
+                      "outline-variant": "#44474c",
+                      "on-tertiary-fixed-variant": "#004c6e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-gap": "1.25rem",
+                      "client-density": "1.5rem",
+                      "grid-gutter": "1rem",
+                      "engineering-density": "0.5rem",
+                      "grid-margin": "2rem"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "label-caps": ["JetBrains Mono"],
+                      "display-command": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "code-snippet": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "display-command": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "code-snippet": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.primary-container'); color: theme('colors.on-surface'); }
+        .pulse-dot {
+            animation: pulse-op 2s infinite;
+        }
+        @keyframes pulse-op {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.border-muted'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline-variant'); 
+        }
+    </style>
+</head>
+<body class="font-body-md bg-primary-container text-on-surface h-screen overflow-hidden flex flex-col antialiased selection:bg-engineering-accent selection:text-white">
+<!-- Top Navigation -->
+<header class="fixed top-0 right-0 w-full md:w-[calc(100%-16rem)] flex justify-between items-center px-engineering-density h-14 z-40 bg-surface-container/80 backdrop-blur-md border-b border-border-muted flat no shadows">
+<div class="flex items-center gap-4 text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+                Project Alpha
+            </span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Engineering Plan</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">Execution Session</span>
+</div>
+<div class="flex items-center gap-engineering-density">
+<div class="px-3 py-1 rounded-full border border-engineering-accent/30 bg-engineering-accent/10 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-engineering-accent pulse-dot"></div>
+<span class="font-label-caps text-label-caps text-engineering-accent">RUNNING - AI_ASSISTED</span>
+</div>
+<button aria-label="notifications" class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-elevation-2 transition-colors duration-200 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button aria-label="history" class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-elevation-2 transition-colors duration-200 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined">history</span>
+</button>
+<div class="h-8 w-8 rounded overflow-hidden border border-border-muted ml-2">
+<img class="w-full h-full object-cover" data-alt="A macro photograph of an abstract digital avatar featuring glowing cyan circuitry on a dark polished background. Sharp technical focus. Dark Mode aesthetic. Minimalist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXfGk9q2FaXbTaVksvZ0cWudup0baxBje7O6GSU2QbCNzdVH17eKFgZCJUPbQuvivwQzB-AjFIsfcl9MjwlpvFoSU0wnfyrbs-mFVaACmbTCchkoSLFWfREiSElaYpu5O58rAg_y3w1svl6okI_5h_OWUhkePne8hkrfzokxHH6ne1WmhXi1JRaUyoJuM_QK3V57gSIiuOdsmamWJ-Wf2aqx8MdSm6ilV-XAgcS93lJ_XjdhQT5UW_JA"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full flex-col w-64 bg-surface-container-low border-r border-border-muted z-50">
+<div class="h-14 flex flex-col justify-center px-4 border-b border-border-muted bg-surface-elevation-1">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-engineering-accent flex items-center justify-center text-white font-bold">U</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tighter leading-none">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant text-[10px] uppercase">AI Architecture Workspace</p>
+</div>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full bg-engineering-accent text-white font-label-caps text-label-caps py-2 rounded font-bold hover:bg-engineering-accent/90 transition-colors">
+                New ADR
+             </button>
+</div>
+<div class="flex-1 overflow-y-auto py-2">
+<ul class="flex flex-col gap-1 px-2">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">domain</span>
+                        Domain
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">database</span>
+                        Data
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">api</span>
+                        API
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-primary border-r-2 border-primary bg-surface-elevation-1 scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+                        Security
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">psychology</span>
+                        AI
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">foundation</span>
+                        Infrastructure
+                    </a>
+</li>
+</ul>
+</div>
+<div class="p-4 border-t border-border-muted mt-auto">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:text-on-surface hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Support
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Workspace Layout -->
+<main class="flex-1 mt-14 ml-0 md:ml-64 flex flex-col md:flex-row overflow-hidden bg-primary-container p-engineering-density gap-engineering-density h-[calc(100vh-3.5rem)]">
+<!-- Left Sidebar: Task Queue -->
+<aside class="w-full md:w-80 bg-surface-elevation-1 border border-border-muted rounded-lg flex flex-col overflow-hidden shrink-0">
+<div class="px-4 py-3 border-b border-border-muted bg-surface-elevation-2">
+<h2 class="font-label-caps text-label-caps text-on-surface tracking-wider">Engineering Task Queue</h2>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-2">
+<!-- Task Completed -->
+<div class="p-3 border border-border-muted rounded bg-surface-container/50 opacity-70">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-label-caps text-[10px] px-1.5 py-0.5 rounded border border-status-available/30 bg-status-available/10 text-status-available">COMPLETED</span>
+<span class="text-on-surface-variant text-[10px] font-code-snippet">TSK-102</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface line-through">Setup Base Monorepo Structure</p>
+</div>
+<!-- Task Active -->
+<div class="p-3 border border-engineering-accent rounded bg-surface-elevation-2 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-engineering-accent"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-engineering-accent pulse-dot"></div>
+<span class="font-label-caps text-label-caps text-[10px] text-engineering-accent">IN PROGRESS</span>
+</div>
+<span class="text-on-surface-variant text-[10px] font-code-snippet">TSK-103</span>
+</div>
+<p class="font-body-sm text-body-sm text-primary font-medium pl-2">Implement IAIEngineeringPlanningContextBuilder</p>
+</div>
+<!-- Task Blocked -->
+<div class="p-3 border border-border-muted rounded bg-surface-container/50">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-label-caps text-[10px] px-1.5 py-0.5 rounded border border-status-unavailable/30 bg-status-unavailable/10 text-status-unavailable">BLOCKED</span>
+<span class="text-on-surface-variant text-[10px] font-code-snippet">TSK-104</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Integrate Context Provider</p>
+</div>
+<!-- Task Ready -->
+<div class="p-3 border border-border-muted rounded bg-surface-container/50">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-label-caps text-[10px] px-1.5 py-0.5 rounded border border-status-pending/30 bg-status-pending/10 text-status-pending">READY</span>
+<span class="text-on-surface-variant text-[10px] font-code-snippet">TSK-105</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface">Define Core Abstractions</p>
+</div>
+</div>
+</aside>
+<!-- Center: Active Execution Canvas -->
+<section class="flex-1 flex flex-col gap-engineering-density min-w-0">
+<!-- Top: Target Info -->
+<div class="bg-surface-elevation-1 border border-border-muted rounded-lg p-client-density">
+<div class="flex justify-between items-start mb-4">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Current Execution Target</p>
+<h2 class="font-headline-md text-headline-md text-primary">Implement IAIEngineeringPlanningContextBuilder</h2>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-muted rounded text-on-surface font-label-caps text-label-caps hover:bg-surface-elevation-2 transition-colors">Request Refinement</button>
+<button class="px-4 py-2 border border-border-muted rounded text-on-surface font-label-caps text-label-caps hover:bg-surface-elevation-2 transition-colors">Manual Override</button>
+<button class="px-4 py-2 bg-engineering-accent text-white rounded font-label-caps text-label-caps hover:bg-engineering-accent/90 transition-colors">Approve Changes</button>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-3xl">
+                    Constructing the context builder interface to manage state hydration for the engineering planning agent. Requires integration with the VFS subsystem for workspace scanning.
+                </p>
+</div>
+<!-- Middle: Changeset & Verification -->
+<div class="flex-1 bg-surface-elevation-1 border border-border-muted rounded-lg flex flex-col overflow-hidden min-h-[200px]">
+<div class="px-4 py-3 border-b border-border-muted bg-surface-elevation-2 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface tracking-wider">Active Changeset</h3>
+<div class="font-code-snippet text-code-snippet flex gap-3 text-on-surface-variant">
+<span>4 Files Modified</span>
+<span class="text-status-available">+124</span>
+<span class="text-status-unavailable">-12</span>
+</div>
+</div>
+<div class="flex-1 p-4 overflow-y-auto flex flex-col gap-4">
+<!-- File list mock -->
+<div class="font-code-snippet text-code-snippet text-sm space-y-1">
+<div class="flex justify-between hover:bg-surface-elevation-2 px-2 py-1 rounded">
+<span class="text-on-surface">src/core/planning/IAIEngineeringPlanningContextBuilder.ts</span>
+<span class="text-status-available">Added</span>
+</div>
+<div class="flex justify-between hover:bg-surface-elevation-2 px-2 py-1 rounded">
+<span class="text-on-surface">src/core/planning/index.ts</span>
+<span class="text-status-busy">Modified</span>
+</div>
+</div>
+<!-- Verification -->
+<div class="mt-auto border-t border-border-muted pt-4">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">Verification Checks</p>
+<div class="grid grid-cols-3 gap-2">
+<div class="flex items-center justify-between p-2 rounded border border-status-available/30 bg-status-available/5">
+<span class="font-code-snippet text-[11px] text-on-surface">TypeScript</span>
+<span class="font-label-caps text-[10px] text-status-available">PASS</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded border border-status-available/30 bg-status-available/5">
+<span class="font-code-snippet text-[11px] text-on-surface">ESLint</span>
+<span class="font-label-caps text-[10px] text-status-available">PASS</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded border border-status-unavailable/30 bg-status-unavailable/5">
+<span class="font-code-snippet text-[11px] text-on-surface">Unit Tests</span>
+<span class="font-label-caps text-[10px] text-status-unavailable flex items-center gap-1">2 FAIL <span class="material-symbols-outlined text-[12px] animate-spin">sync</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: AI Activity Log -->
+<div class="h-48 bg-[#010f1f] border border-border-muted rounded-lg flex flex-col overflow-hidden shrink-0">
+<div class="px-3 py-1.5 border-b border-border-muted bg-surface-elevation-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">terminal</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-wider">AI Execution Log</span>
+</div>
+<div class="flex-1 p-3 font-code-snippet text-[12px] overflow-y-auto space-y-1.5">
+<div class="flex gap-3 text-on-surface-variant">
+<span class="w-16 shrink-0 opacity-50">14:02:11</span>
+<span class="text-primary w-20 shrink-0">[System]</span>
+<span>Initializing workspace context...</span>
+</div>
+<div class="flex gap-3 text-on-surface-variant">
+<span class="w-16 shrink-0 opacity-50">14:02:15</span>
+<span class="text-engineering-accent w-20 shrink-0">[Agent]</span>
+<span>Analyzing src/core/planning dependency graph...</span>
+</div>
+<div class="flex gap-3 text-on-surface-variant">
+<span class="w-16 shrink-0 opacity-50">14:02:22</span>
+<span class="text-status-available w-20 shrink-0">[Generate]</span>
+<span class="text-on-surface">Writing IAIEngineeringPlanningContextBuilder.ts</span>
+</div>
+<div class="flex gap-3 text-on-surface-variant">
+<span class="w-16 shrink-0 opacity-50">14:02:29</span>
+<span class="text-status-unavailable w-20 shrink-0">[Verify]</span>
+<span class="text-status-unavailable">Unit tests failed. 2 assertions did not match expected mock outputs. Attempting repair...</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Details & Traceability -->
+<aside class="w-full md:w-64 bg-surface-elevation-1 border border-border-muted rounded-lg flex flex-col overflow-hidden shrink-0 hidden lg:flex">
+<div class="px-4 py-3 border-b border-border-muted bg-surface-elevation-2">
+<h2 class="font-label-caps text-label-caps text-on-surface tracking-wider">Execution Context</h2>
+</div>
+<div class="p-4 space-y-6 overflow-y-auto">
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-2">Traceability</h4>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 font-code-snippet text-code-snippet text-on-surface hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                            Arch: Context Subsystem
+                        </li>
+<li class="flex items-center gap-2 font-code-snippet text-code-snippet text-on-surface hover:text-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                            Req: REQ-CORE-042
+                        </li>
+</ul>
+</div>
+<div class="h-px w-full bg-border-muted"></div>
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-3">Execution Policies</h4>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between font-label-caps text-[10px] text-on-surface-variant mb-1">
+<span>Iteration Limit</span>
+<span>3 / 5</span>
+</div>
+<!-- Technical Progress Bar -->
+<div class="h-1.5 w-full bg-border-muted rounded-full overflow-hidden flex gap-[1px]">
+<div class="h-full bg-status-busy w-1/5"></div>
+<div class="h-full bg-status-busy w-1/5"></div>
+<div class="h-full bg-status-busy w-1/5"></div>
+<div class="h-full bg-transparent w-1/5"></div>
+<div class="h-full bg-transparent w-1/5"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="p-2 border border-border-muted rounded bg-surface-container/30">
+<p class="font-label-caps text-[10px] text-on-surface-variant">Scope</p>
+<p class="font-code-snippet text-code-snippet text-on-surface">Local File</p>
+</div>
+<div class="p-2 border border-border-muted rounded bg-surface-container/30">
+<p class="font-label-caps text-[10px] text-on-surface-variant">Auto-Approve</p>
+<p class="font-code-snippet text-code-snippet text-status-unavailable">False</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</body></html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Memory Governance - NEXUS COMMAND</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#101c2d",
+                        "on-primary-fixed-variant": "#004884",
+                        "outline": "#8a919e",
+                        "on-tertiary-container": "#00311f",
+                        "surface-variant": "#2a3548",
+                        "surface-tint": "#a4c9ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "tertiary-container": "#00a572",
+                        "status-critical": "#ef4444",
+                        "on-primary-container": "#002a52",
+                        "on-surface": "#d7e3fb",
+                        "on-secondary-fixed": "#25005a",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary": "#3f008e",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "surface-container-high": "#1f2a3c",
+                        "border-active": "#1e293b",
+                        "primary": "#a4c9ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#d7e3fb",
+                        "secondary-container": "#6001d1",
+                        "secondary": "#d2bbff",
+                        "primary-container": "#3492f6",
+                        "tertiary": "#4edea3",
+                        "inverse-on-surface": "#263143",
+                        "background": "#081425",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-surface-variant": "#c0c7d5",
+                        "surface-container": "#152031",
+                        "surface-dim": "#081425",
+                        "on-primary-fixed": "#001c39",
+                        "outline-variant": "#404753",
+                        "on-tertiary": "#003824",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-bright": "#2f3a4c",
+                        "inverse-primary": "#005fad",
+                        "secondary-fixed": "#eaddff",
+                        "surface-deep": "#040e1f",
+                        "surface-container-lowest": "#030e1f",
+                        "on-primary": "#00315d",
+                        "on-background": "#d7e3fb",
+                        "on-secondary-container": "#c9aeff",
+                        "data-text": "#d8e3fb",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-highest": "#2a3548",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "status-warning": "#f59e0b",
+                        "status-healthy": "#10b981",
+                        "surface": "#081425"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "24px",
+                        "gutter": "12px",
+                        "compact": "8px",
+                        "sidebar": "240px",
+                        "margin-mobile": "12px",
+                        "standard": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "data-lg": ["Geist Mono"],
+                        "label-caps": ["Geist Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "data-sm": ["Geist Mono"],
+                        "data-md": ["Geist Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "data-sm": ["11px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "data-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .data-grid { font-family: 'Geist Mono', monospace; }
+        .glow-active { box-shadow: inset 0 0 0 2px theme('colors.primary'); }
+        .glow-critical { box-shadow: inset 0 0 0 2px theme('colors.status-critical'); }
+        .grid-bg { background-image: linear-gradient(to right, theme('colors.border-active') 1px, transparent 1px), linear-gradient(to bottom, theme('colors.border-active') 1px, transparent 1px); background-size: 24px 24px; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-deep'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex antialiased">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-standard fixed left-0 top-0 h-full w-[sidebar] border-r border-outline-variant bg-surface-deep z-50">
+<div class="px-standard mb-8">
+<div class="flex items-center gap-3">
+<img alt="User profile" class="w-10 h-10 rounded-full border border-primary object-cover" data-alt="A highly detailed, technical avatar representing a generic user profile in a high-tech command center. The image is rendered in a dark, clinical brutalist style with deep indigo and bright neon blue accents, fitting a modern dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARmmA4kQ3o5KsKK941HODa5kxsysj1HEh5BUB1B6WCnE8JWflQKpJfeOH3cBPJyOJqSu7E33dTOp3crMGVENJ_iTnqp_cu-0NqLkJw-lb6bEeHot7xBtbxf--uXe3qiTPd1zO8-LYxwnA4dDTZBziYdGI04Lly9iPhEgkpvLOM_0RjO4MKGWON1o6ax6N-b5QiErXNRGqjKCOy_Fu9i8CniFq3x6ILAEGJXgagMFtsf252fmDJNC4ZuQ"/>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary tracking-tighter">NEXUS SRE</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Command Center</p>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-compact space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 active:scale-95 transition-transform font-body-sm text-body-sm tracking-tight" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">hub</span>
+                Workforces
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 active:scale-95 transition-transform font-body-sm text-body-sm tracking-tight" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">smart_toy</span>
+                Agents
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 active:scale-95 transition-transform font-body-sm text-body-sm tracking-tight" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">assignment_turned_in</span>
+                Tasks
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 active:scale-95 transition-transform font-body-sm text-body-sm tracking-tight" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">play_circle</span>
+                Live Runs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-primary font-bold border-l-2 border-primary bg-surface-variant/30 hover:bg-surface-bright hover:text-primary transition-colors duration-150 active:scale-95 transition-transform font-body-sm text-body-sm tracking-tight" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">memory</span>
+                Memory
+            </a>
+</div>
+<div class="px-standard mt-auto">
+<button class="w-full bg-secondary text-surface-deep font-headline-sm text-headline-sm py-2 rounded-DEFAULT hover:bg-secondary-fixed-dim transition-colors active:scale-95 flex items-center justify-center gap-2">
+                Initialize Agent
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-[sidebar] min-w-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-desktop sticky top-0 z-40 border-b border-outline-variant bg-surface-container-lowest docked full-width h-14 flat no shadows">
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-label-caps text-primary border border-primary px-2 py-0.5">NEXUS COMMAND</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4 font-data-md text-data-md text-on-surface-variant">
+<span>Budget: $4.2k/5k</span>
+<span class="flex items-center gap-2 text-status-healthy">
+<span class="w-2 h-2 rounded-full bg-status-healthy animate-pulse"></span>
+                        Status: Healthy
+                    </span>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-surface-tint transition-colors cursor-pointer hover:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-surface-tint transition-colors cursor-pointer hover:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Operator Avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover ml-2" data-alt="A highly detailed, technical avatar representing an operator in a high-tech command center. The image is rendered in a dark, clinical brutalist style with deep indigo and bright neon blue accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtYZ4QCxscwHOaBhD9x74oCAFImGgVt0sSYDyODjtlKS4hPz-2ZpQGFLl9SLLaXFqHXNo-ldDl1K6uoRgHmhtS7D6ZDjwVg1Q4zgoi6ehQ3jRDtK-240ryNLRbBL9X_xgc87AmAUEJ9ch2x3ijBcQo7w2LvuHJuU7cceurT0RLeo94qhqdEVROc_roI2McThN9B2pNjDGlGmCVDc3mv6r_w9FNKL0ZrLrwhOWaQAQ_FCOnnBM0kkyGZA"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-margin-desktop overflow-y-auto bg-surface relative">
+<div class="absolute inset-0 grid-bg opacity-20 pointer-events-none"></div>
+<div class="relative z-10 max-w-7xl mx-auto space-y-gutter">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-standard gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Memory Governance</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Manage isolated memory tiers, retention policies, and audit data access.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-active text-primary font-data-sm text-data-sm rounded-DEFAULT hover:bg-surface-bright transition-colors uppercase tracking-wider">Export Audit Log</button>
+<button class="px-4 py-2 bg-secondary text-surface-deep font-data-sm text-data-sm rounded-DEFAULT hover:bg-secondary-fixed-dim transition-colors uppercase tracking-wider font-bold">Deploy Policy Update</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Isolated Memory Tiers (Spans 8 columns) -->
+<div class="lg:col-span-8 bg-surface-container border border-border-active rounded-lg flex flex-col p-compact">
+<div class="flex items-center justify-between border-b border-border-active pb-2 mb-2 px-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Isolated Memory Tiers</span>
+<span class="material-symbols-outlined text-outline text-[16px]">dns</span>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-compact p-2">
+<!-- Working Memory -->
+<div class="bg-surface-deep border border-outline-variant rounded-DEFAULT p-3 flex flex-col glow-active relative overflow-hidden">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary opacity-5 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-md text-data-md text-primary">Working</span>
+<span class="text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded-sm font-data-sm">VOLATILE</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">1.2 GB</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant mt-1">Usage: 85% of Quota</div>
+<div class="mt-auto pt-4 space-y-2">
+<div class="flex justify-between items-center text-[10px] font-data-sm text-on-surface-variant border-t border-border-active pt-2">
+<span>Retention</span>
+<span class="text-on-surface">Session End</span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-data-sm text-on-surface-variant">
+<span>Access Agents</span>
+<span class="text-on-surface">12 Active</span>
+</div>
+</div>
+</div>
+<!-- Session Memory -->
+<div class="bg-surface-deep border border-border-active rounded-DEFAULT p-3 flex flex-col relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-md text-data-md text-tertiary">Session</span>
+<span class="text-[10px] bg-tertiary/20 text-tertiary px-1.5 py-0.5 rounded-sm font-data-sm">EPHEMERAL</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">4.5 GB</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant mt-1">Usage: 45% of Quota</div>
+<div class="mt-auto pt-4 space-y-2">
+<div class="flex justify-between items-center text-[10px] font-data-sm text-on-surface-variant border-t border-border-active pt-2">
+<span>Retention</span>
+<span class="text-on-surface">24 Hours</span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-data-sm text-on-surface-variant">
+<span>Access Agents</span>
+<span class="text-on-surface">3 Active</span>
+</div>
+</div>
+</div>
+<!-- Long-term Memory -->
+<div class="bg-surface-deep border border-border-active rounded-DEFAULT p-3 flex flex-col relative overflow-hidden">
+<div class="flex justify-between items-start mb-4">
+<span class="font-data-md text-data-md text-secondary">Long-term</span>
+<span class="text-[10px] bg-secondary/20 text-secondary px-1.5 py-0.5 rounded-sm font-data-sm">PERSISTENT</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">128 TB</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant mt-1">Usage: Vector DB Size</div>
+<div class="mt-auto pt-4 space-y-2">
+<div class="flex justify-between items-center text-[10px] font-data-sm text-on-surface-variant border-t border-border-active pt-2">
+<span>Retention</span>
+<span class="text-on-surface">Indefinite</span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-data-sm text-on-surface-variant">
+<span>Access Agents</span>
+<span class="text-on-surface">Global Query</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Eligibility & Phase Integration (Spans 4 columns) -->
+<div class="lg:col-span-4 bg-surface-container border border-border-active rounded-lg flex flex-col p-compact">
+<div class="flex items-center justify-between border-b border-border-active pb-2 mb-2 px-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Compliance Flags</span>
+<span class="material-symbols-outlined text-outline text-[16px]">verified_user</span>
+</div>
+<div class="p-2 space-y-3">
+<div class="bg-surface-deep border border-border-active p-3 rounded-DEFAULT">
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-sm text-data-sm text-on-surface">Organizational Data (Org-Level)</span>
+<span class="text-[10px] bg-status-healthy/20 text-status-healthy px-1.5 py-0.5 rounded-sm font-data-sm border border-status-healthy/50">ELIGIBLE</span>
+</div>
+<p class="text-[10px] text-on-surface-variant font-data-sm leading-tight">Data classified as non-sensitive is available for general agent querying under Policy A.2.</p>
+</div>
+<div class="bg-surface-deep border border-status-warning/50 p-3 rounded-DEFAULT relative overflow-hidden">
+<div class="absolute top-0 right-0 w-1 h-full bg-status-warning"></div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-data-sm text-data-sm text-on-surface">Phase A.64 Integration</span>
+<span class="text-[10px] bg-status-warning/20 text-status-warning px-1.5 py-0.5 rounded-sm font-data-sm border border-status-warning/50">RESTRICTED</span>
+</div>
+<p class="text-[10px] text-on-surface-variant font-data-sm leading-tight">Requires explicit token authorization for cross-boundary memory sharing. Audit logging enforced.</p>
+</div>
+</div>
+</div>
+<!-- Knowledge Retrieval Audit (Spans 12 columns) -->
+<div class="lg:col-span-12 bg-surface-container border border-border-active rounded-lg flex flex-col overflow-hidden">
+<div class="flex items-center justify-between border-b border-border-active p-3 bg-surface-container-high">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Knowledge Retrieval Audit</span>
+<div class="flex gap-2">
+<input class="bg-surface-deep border border-border-active rounded-sm px-2 py-1 text-[11px] font-data-sm text-on-surface focus:outline-none focus:border-primary w-48 placeholder-outline-variant" placeholder="Filter agents or endpoints..." type="text"/>
+<button class="p-1 hover:bg-surface-bright rounded-sm text-outline-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse data-grid text-[12px]">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant border-b border-border-active">
+<th class="p-2 font-medium w-32">Timestamp (UTC)</th>
+<th class="p-2 font-medium">Agent ID</th>
+<th class="p-2 font-medium">Target Memory Tier</th>
+<th class="p-2 font-medium">Data Endpoint accessed</th>
+<th class="p-2 font-medium w-24">Status</th>
+</tr>
+</thead>
+<tbody class="text-on-surface">
+<tr class="border-b border-border-active hover:bg-surface-bright transition-colors">
+<td class="p-2 text-on-surface-variant">2023-10-27T14:32:01</td>
+<td class="p-2 text-primary">AGT-9942-OMEGA</td>
+<td class="p-2">Long-term (Vector)</td>
+<td class="p-2 text-on-surface-variant">/api/v1/corp-policies/hr</td>
+<td class="p-2"><span class="text-status-healthy bg-status-healthy/10 px-1 py-0.5 rounded-sm">200 OK</span></td>
+</tr>
+<tr class="border-b border-border-active hover:bg-surface-bright transition-colors">
+<td class="p-2 text-on-surface-variant">2023-10-27T14:31:45</td>
+<td class="p-2 text-primary">AGT-1102-ALPHA</td>
+<td class="p-2">Working (Volatile)</td>
+<td class="p-2 text-on-surface-variant">/cache/session-context-db</td>
+<td class="p-2"><span class="text-status-healthy bg-status-healthy/10 px-1 py-0.5 rounded-sm">200 OK</span></td>
+</tr>
+<tr class="border-b border-border-active hover:bg-surface-bright transition-colors bg-error-container/10">
+<td class="p-2 text-on-surface-variant">2023-10-27T14:28:12</td>
+<td class="p-2 text-primary">AGT-4041-BETA</td>
+<td class="p-2">Phase A.64 Secure</td>
+<td class="p-2 text-on-surface-variant">/api/v2/financials/q3-raw</td>
+<td class="p-2"><span class="text-status-critical bg-status-critical/10 px-1 py-0.5 rounded-sm">403 FORBIDDEN</span></td>
+</tr>
+<tr class="border-b border-border-active hover:bg-surface-bright transition-colors">
+<td class="p-2 text-on-surface-variant">2023-10-27T14:25:55</td>
+<td class="p-2 text-primary">AGT-9942-OMEGA</td>
+<td class="p-2">Session (Ephemeral)</td>
+<td class="p-2 text-on-surface-variant">/temp/user-query-stream</td>
+<td class="p-2"><span class="text-status-healthy bg-status-healthy/10 px-1 py-0.5 rounded-sm">200 OK</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-2 border-t border-border-active bg-surface-container-low flex justify-between items-center text-[10px] text-on-surface-variant font-data-sm">
+<span>Showing 4 of 1,204 records</span>
+<div class="flex gap-1">
+<button class="px-2 py-1 border border-border-active rounded-sm hover:bg-surface-bright disabled:opacity-50">Prev</button>
+<button class="px-2 py-1 border border-border-active rounded-sm hover:bg-surface-bright">Next</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

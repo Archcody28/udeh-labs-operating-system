@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Localization &amp; i18n Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#908fa0",
+                      "tertiary-fixed": "#e3dfff",
+                      "on-error": "#690005",
+                      "surface-container-lowest": "#060e20",
+                      "on-tertiary-fixed": "#100069",
+                      "on-primary-container": "#0d0096",
+                      "surface-container-high": "#222a3d",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "background": "#0b1326",
+                      "surface-variant": "#2d3449",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#89ceff",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "surface-bright": "#31394d",
+                      "on-tertiary": "#1f00a4",
+                      "on-secondary": "#00344d",
+                      "inverse-on-surface": "#283044",
+                      "inverse-surface": "#dae2fd",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#c3c0ff",
+                      "on-background": "#dae2fd",
+                      "on-tertiary-fixed-variant": "#372abf",
+                      "tertiary-fixed-dim": "#c3c0ff",
+                      "outline-variant": "#464554",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "surface-tint": "#c0c1ff",
+                      "secondary": "#89ceff",
+                      "on-surface": "#dae2fd",
+                      "on-primary-fixed": "#07006c",
+                      "surface-container": "#171f33",
+                      "tertiary-container": "#6a63f2",
+                      "surface-container-highest": "#2d3449",
+                      "on-secondary-container": "#00344e",
+                      "on-secondary-fixed": "#001e2f",
+                      "secondary-container": "#00a2e6",
+                      "primary-container": "#8083ff",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#e1e0ff",
+                      "inverse-primary": "#494bd6",
+                      "secondary-fixed": "#c9e6ff",
+                      "on-primary": "#1000a9",
+                      "primary": "#c0c1ff",
+                      "surface-dim": "#0b1326",
+                      "surface": "#0b1326",
+                      "on-surface-variant": "#c7c4d7",
+                      "surface-container-low": "#131b2e",
+                      "on-tertiary-container": "#020026"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "sm": "8px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "xl": "40px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "display": [
+                              "Hanken Grotesk"
+                      ],
+                      "title-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .glass-panel {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(144, 143, 160, 0.2);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+      </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface-container border-b border-outline-variant">
+<div class="flex items-center gap-lg">
+<div class="font-headline-md text-headline-md font-bold text-primary">UdehLabs Command</div>
+<nav class="hidden md:flex gap-md">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 py-1" href="#">Billing</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 py-1" href="#">Regions</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 py-1" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-primary hover:text-primary-fixed transition-colors"><span class="material-symbols-outlined" data-icon="language">language</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</header>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface-container-low border-r border-outline-variant p-md">
+<div class="mb-xl">
+<div class="font-title-lg text-title-lg text-on-surface">UdehLabs Admin</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Enterprise Tier</div>
+</div>
+<nav class="flex-1 flex flex-col gap-sm">
+<a class="flex items-center gap-md p-sm rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+                    Organization
+                </a>
+<a class="flex items-center gap-md p-sm rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+                    Distribution
+                </a>
+<a class="flex items-center gap-md p-sm rounded-DEFAULT text-primary bg-primary-container/10 border-l-4 border-primary transition-all duration-200 font-label-md text-label-md shadow-[0px_0px_8px_rgba(0,162,230,0.5)]" href="#">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+                    Localization
+                </a>
+<a class="flex items-center gap-md p-sm rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+                    Analytics
+                </a>
+</nav>
+<div class="mt-auto flex flex-col gap-sm pt-md border-t border-outline-variant/30">
+<button class="bg-primary/20 text-primary border border-primary/30 rounded-lg py-sm px-md font-label-md text-label-md hover:bg-primary/30 transition-colors w-full mb-md">Scale Up</button>
+<a class="flex items-center gap-md p-sm rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-md p-sm rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+                    Audit Log
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-lg md:p-xl mb-8">
+<div class="max-w-[1400px] mx-auto">
+<header class="mb-xl flex justify-between items-end">
+<div>
+<h1 class="font-display text-display text-on-surface mb-sm">Localization Hub</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Manage enterprise internationalization layers, translation registries, and regional formats.</p>
+</div>
+<div class="flex gap-md">
+<div class="flex items-center gap-sm bg-surface-container px-md py-sm rounded-full border border-outline-variant">
+<div class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">42 Regions Active</span>
+</div>
+</div>
+</header>
+<div class="bento-grid">
+<!-- Translation Registry (Spans 8 cols) -->
+<div class="col-span-12 lg:col-span-8 glass-panel rounded-xl p-md flex flex-col">
+<div class="flex justify-between items-center mb-md">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">g_translate</span>
+                                Translation Registry
+                            </h2>
+<div class="flex gap-sm">
+<button class="p-xs bg-surface-variant rounded-md text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="filter_list">filter_list</span></button>
+<button class="p-xs bg-surface-variant rounded-md text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined" data-icon="search">search</span></button>
+</div>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/50 text-on-surface-variant font-label-md text-label-md">
+<th class="pb-sm font-medium">Key</th>
+<th class="pb-sm font-medium">Source (EN)</th>
+<th class="pb-sm font-medium">Target (JA)</th>
+<th class="pb-sm font-medium text-center">Confidence</th>
+<th class="pb-sm font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="border-b border-outline-variant/20 hover:bg-surface-variant/30 transition-colors">
+<td class="py-sm"><span class="font-mono text-label-sm text-tertiary">nav.dashboard.overview</span></td>
+<td class="py-sm text-on-surface">System Overview</td>
+<td class="py-sm text-on-surface">システム概要</td>
+<td class="py-sm text-center">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-secondary-container/20 text-secondary-container font-label-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 98%
+                                            </div>
+</td>
+<td class="py-sm text-right">
+<button class="text-primary hover:text-primary-fixed font-label-sm text-label-sm px-2 py-1 border border-primary/30 rounded">Approve</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-surface-variant/30 transition-colors">
+<td class="py-sm"><span class="font-mono text-label-sm text-tertiary">err.auth.timeout</span></td>
+<td class="py-sm text-on-surface">Session expired. Please re-authenticate.</td>
+<td class="py-sm text-on-surface">セッションが切れました。再認証してください。</td>
+<td class="py-sm text-center">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-secondary-container/20 text-secondary-container font-label-sm">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 95%
+                                            </div>
+</td>
+<td class="py-sm text-right">
+<button class="text-primary hover:text-primary-fixed font-label-sm text-label-sm px-2 py-1 border border-primary/30 rounded">Approve</button>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-surface-variant/30 transition-colors bg-error-container/10 border-l-2 border-l-error">
+<td class="py-sm pl-2"><span class="font-mono text-label-sm text-tertiary">prompt.ai.generate</span></td>
+<td class="py-sm text-on-surface">Generate insights from regional data.</td>
+<td class="py-sm text-error">地域データからインサイトを生成。</td>
+<td class="py-sm text-center">
+<div class="inline-flex items-center gap-xs px-2 py-1 rounded-full bg-error-container/40 text-error font-label-sm">
+<span class="material-symbols-outlined text-[14px]">warning</span> 72%
+                                            </div>
+</td>
+<td class="py-sm text-right">
+<button class="text-on-surface hover:text-error font-label-sm text-label-sm px-2 py-1 border border-outline-variant rounded">Review</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Right Column (Spans 4 cols) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-md">
+<!-- Locale Configuration -->
+<div class="glass-panel rounded-xl p-md flex-1">
+<h2 class="font-title-lg text-title-lg text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">settings_applications</span>
+                                Locale Config
+                            </h2>
+<div class="space-y-md">
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-xs">Date/Time Format Default</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-md text-on-surface font-body-md text-body-md focus:border-primary focus:ring-1 focus:ring-primary p-2">
+<option>ISO 8601 (YYYY-MM-DD)</option>
+<option>Regional (DD/MM/YYYY)</option>
+<option>US (MM/DD/YYYY)</option>
+</select>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant block mb-xs">Currency Display</label>
+<div class="flex rounded-md shadow-sm">
+<span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-outline-variant bg-surface-variant text-on-surface-variant font-label-sm">
+                                        Sym
+                                      </span>
+<select class="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md bg-surface-container border border-outline-variant text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Native (¥, €, $)</option>
+<option>ISO (JPY, EUR, USD)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- RTL Preview -->
+<div class="glass-panel rounded-xl p-md">
+<div class="flex justify-between items-center mb-sm">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">swap_horiz</span>
+                                    RTL Preview
+                                </h2>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-9 h-5 bg-surface-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mb-md">Test UI mirroring for Arabic/Hebrew layouts.</p>
+<div class="bg-surface-container border border-outline-variant rounded p-sm flex items-center justify-between opacity-70">
+<span class="font-label-md text-on-surface">Button</span>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</div>
+</div>
+<!-- Font & Script Support -->
+<div class="glass-panel rounded-xl p-md">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-secondary">font_download</span>
+                                Script Support
+                            </h2>
+<div class="grid grid-cols-2 gap-sm">
+<div class="bg-surface-container p-sm rounded border border-outline-variant/50 border-l-2 border-l-secondary-container flex items-center justify-between">
+<span class="font-label-sm text-on-surface">CJK</span>
+<span class="material-symbols-outlined text-secondary-container text-[16px]">check</span>
+</div>
+<div class="bg-surface-container p-sm rounded border border-outline-variant/50 border-l-2 border-l-secondary-container flex items-center justify-between">
+<span class="font-label-sm text-on-surface">Devanagari</span>
+<span class="material-symbols-outlined text-secondary-container text-[16px]">check</span>
+</div>
+<div class="bg-surface-container p-sm rounded border border-outline-variant/50 border-l-2 border-l-error flex items-center justify-between">
+<span class="font-label-sm text-on-surface">Khmer</span>
+<span class="material-symbols-outlined text-error text-[16px]">close</span>
+</div>
+<div class="bg-surface-container p-sm rounded border border-outline-variant/50 border-l-2 border-l-secondary-container flex items-center justify-between">
+<span class="font-label-sm text-on-surface">Arabic</span>
+<span class="material-symbols-outlined text-secondary-container text-[16px]">check</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-50 flex justify-between items-center px-lg h-8 bg-surface-container-lowest border-t border-outline-variant text-secondary">
+<div class="font-label-sm text-label-sm font-bold">© 2024 UdehLabs Enterprise Global</div>
+<div class="hidden md:flex gap-md font-label-sm text-label-sm text-outline">
+<span class="hover:text-primary-fixed cursor-pointer transition-colors">US-EAST: 24ms</span>
+<span class="hover:text-primary-fixed cursor-pointer transition-colors">EU-CENTRAL: 42ms</span>
+<span class="hover:text-primary-fixed cursor-pointer transition-colors">AP-SOUTH: 112ms</span>
+</div>
+</footer>
+</body></html>

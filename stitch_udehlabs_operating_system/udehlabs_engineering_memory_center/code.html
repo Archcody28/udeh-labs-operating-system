@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Engineering Memory Center - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#89ceff",
+                        "on-surface-variant": "#c7c4d7",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "background": "#051424",
+                        "primary-fixed": "#e1e0ff",
+                        "surface-container": "#122031",
+                        "on-primary-fixed": "#07006c",
+                        "surface-container-high": "#1d2b3c",
+                        "primary-container": "#8083ff",
+                        "inverse-on-surface": "#233143",
+                        "primary": "#c0c1ff",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-secondary-container": "#c4abff",
+                        "surface-bright": "#2c3a4c",
+                        "surface-container-highest": "#283647",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#e9ddff",
+                        "inverse-primary": "#494bd6",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container-low": "#0e1c2d",
+                        "surface-container-lowest": "#010f1f",
+                        "on-tertiary-container": "#002d43",
+                        "on-primary-container": "#0d0096",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "outline-variant": "#464554",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#051424",
+                        "inverse-surface": "#d5e4fa",
+                        "surface-variant": "#283647",
+                        "on-secondary-fixed": "#23005c",
+                        "on-background": "#d5e4fa",
+                        "on-error": "#690005",
+                        "surface-tint": "#c0c1ff",
+                        "secondary-container": "#571bc1",
+                        "on-primary": "#1000a9",
+                        "tertiary-container": "#009ada",
+                        "on-tertiary": "#00344d",
+                        "outline": "#908fa0",
+                        "surface": "#051424",
+                        "on-secondary": "#3c0091",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#d5e4fa",
+                        "secondary": "#d0bcff",
+                        "tertiary-fixed": "#c9e6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "timeline-track": "64px",
+                        "margin-desktop": "32px",
+                        "unit": "4px",
+                        "sidebar-width": "280px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "label-mono": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "label-mono": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.fill { font-variation-settings: 'FILL' 1; }
+        .glow-sm { box-shadow: 0 0 8px theme('colors.primary'); }
+        .glow-active { box-shadow: 0 0 8px theme('colors.secondary-container'); }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-container-low'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.outline-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-sidebar-width border-r border-outline-variant bg-surface-container-low flex flex-col py-6 px-4 z-50 transition-transform duration-300 md:translate-x-0 -translate-x-full" id="mobile-menu">
+<div class="mb-8 px-2">
+<h1 class="text-headline-md font-headline-md font-bold text-primary tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary fill">memory</span>
+                Memory Center
+            </h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">V2.4.0 Live Engine</p>
+</div>
+<div class="flex-1 flex flex-col gap-2 overflow-y-auto">
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-xl px-4 py-2 shadow-[0_0_8px_rgba(208,188,255,0.3)] scale-95 duration-100 group" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Knowledge</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="menu_book">menu_book</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Graph</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-error transition-colors" data-icon="error">error</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Conflicts</span>
+<span class="ml-auto bg-error-container text-on-error-container text-[9px] px-1.5 py-0.5 rounded font-mono">2</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary-fixed transition-colors" data-icon="gavel">gavel</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Decisions</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-tertiary transition-colors" data-icon="description">description</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Charter</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="view_timeline">view_timeline</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Timeline</span>
+</a>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant/30 flex flex-col gap-2">
+<button class="w-full bg-gradient-to-r from-inverse-primary to-secondary-container text-white rounded px-4 py-2 text-label-mono font-label-mono uppercase font-bold tracking-wider hover:opacity-90 transition-opacity flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[18px]">sync</span> Sync Node
+            </button>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all duration-200 px-4 py-2 rounded-xl" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-mono font-label-mono uppercase tracking-wider">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-h-screen md:ml-sidebar-width relative w-full">
+<!-- TopAppBar -->
+<header class="fixed w-full md:w-[calc(100%-var(--sidebar-width))] top-0 z-40 border-b border-outline-variant/30 bg-background/80 backdrop-blur-md flex justify-between items-center h-16 px-gutter">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors" onclick="document.getElementById('mobile-menu').classList.toggle('-translate-x-full')">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="text-headline-sm font-headline-sm font-bold text-primary border-b-2 border-primary pb-1 hidden sm:block">UdehLabs Memory</span>
+</div>
+<div class="flex items-center gap-4">
+<!-- Search -->
+<div class="relative hidden md:block focus-within:ring-1 focus-within:ring-primary rounded">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="bg-[#020a12] border border-outline-variant/50 text-body-sm font-body-sm text-on-surface rounded pl-8 pr-4 py-1.5 focus:outline-none focus:border-primary focus:shadow-[inset_0_0_4px_rgba(192,193,255,0.3)] transition-all w-64 placeholder:text-on-surface-variant/50" placeholder="Query Memory..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded text-on-surface-variant hover:text-primary hover:glow-sm transition-all bg-surface-container-low flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:text-primary hover:glow-sm transition-all bg-surface-container-low flex items-center justify-center relative">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:text-primary hover:glow-sm transition-all bg-surface-container-low flex items-center justify-center relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full shadow-[0_0_4px_theme('colors.error')]"></span>
+</button>
+</div>
+<div class="h-8 w-8 rounded-full border border-primary p-0.5 overflow-hidden ml-2 bg-surface-container-low flex items-center justify-center">
+<img class="w-full h-full rounded-full object-cover" data-alt="A futuristic UI avatar representing a Chief Architect. The portrait is a highly stylized, vector-art rendering of an engineer wearing a sleek, high-tech headset with glowing blue and violet accents. The background is a dark navy void with faint circuit lines. Professional, technical, and authoritative style suitable for an enterprise dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJt5PAGc1xuklPPzm4JahNjp_ORciNEXZ19iQn9ZMvXSt3pMqn2g1DPz9WKEtjPOfGHH3s2ooeMHmD4sUpIaTFqJjbLM6wQVLou3fZyV1nsvAh9GIWNs1mNJSf3CQ1mRf7wcLsb9aSRcso8YFuHywFTUuiB_Wd3REqV5YE2ct4T7bTkSVyIRKaJbdc3_Ziqnjs5bGIH6LgVFr6qkN7FjS0jxIXqSdRdjmQIBP1XBTno13bqfi7rD4Uqg"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 mt-16 p-margin-mobile md:p-margin-desktop overflow-x-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-min">
+<!-- System Health Metrics (Top Row, Span Full) -->
+<section class="lg:col-span-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-[#0a1f35] border border-inverse-primary/10 rounded-lg p-4 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<span class="text-label-mono font-label-mono text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-tertiary">memory</span> Memory Drift
+                        </span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-2 flex items-baseline gap-2">
+                            Low <span class="text-body-sm font-body-sm text-tertiary">Optimal</span>
+</div>
+</div>
+<div class="bg-[#0a1f35] border border-inverse-primary/10 rounded-lg p-4 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<span class="text-label-mono font-label-mono text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">verified_user</span> Confidence Score
+                        </span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-2 flex items-baseline gap-2">
+                            92% <span class="text-body-sm font-body-sm text-primary">+1.2%</span>
+</div>
+</div>
+<div class="bg-[#0a1f35] border border-inverse-primary/10 rounded-lg p-4 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<span class="text-label-mono font-label-mono text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">update</span> Freshness
+                        </span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-2 flex items-baseline gap-2">
+                            2m <span class="text-body-sm font-body-sm text-on-surface-variant">Last Sync</span>
+</div>
+</div>
+<div class="bg-[#0a1f35] border border-inverse-primary/10 rounded-lg p-4 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<span class="text-label-mono font-label-mono text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">dns</span> Total Nodes
+                        </span>
+<div class="text-headline-lg font-headline-lg text-on-surface mt-2 flex items-baseline gap-2">
+                            1.2k <span class="text-body-sm font-body-sm text-on-surface-variant">Active</span>
+</div>
+</div>
+</section>
+<!-- Knowledge Graph Preview (Span 8) -->
+<section class="lg:col-span-8 bg-[#0a1f35] border border-inverse-primary/10 rounded-lg overflow-hidden flex flex-col min-h-[400px]">
+<div class="bg-[#0c1f30] px-4 py-2 border-b border-inverse-primary/10 flex justify-between items-center">
+<h2 class="text-label-mono font-label-mono text-on-surface uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">account_tree</span> Graph Preview
+                        </h2>
+<button class="text-label-mono font-label-mono text-primary hover:text-primary-fixed transition-colors flex items-center gap-1">
+                            Expand <span class="material-symbols-outlined text-[14px]">open_in_full</span>
+</button>
+</div>
+<div class="relative flex-1 bg-surface-container-lowest w-full h-full overflow-hidden p-6 group cursor-crosshair">
+<!-- Background Image Asset -->
+<div class="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida/AP1WRLulk_yN29uHXAQIXgEhNCDAf9XMFeBShGkJYPeIbk8C1LYlC6CaTxzFADrKuwYyu3bJSOsLEm3NNUaA1hL2InWOgORpov8ouTXRVWkSojMVWq1F_UiWr0KI_rweSFyOKHtxToKGxm-GWuFFrK6eQ99Yzsec9M3K9djqJ0K101HLOPj2L3QQrTAgusQpxAHeS4O3pcPK81tJjUfYT5JR5ZxEdt7-zKjavTPa7IgDkMG1vO53IZHFx6PJPJeh')"></div>
+<!-- Overlay Content to simulate interaction on top of image -->
+<div class="relative z-10 w-full h-full flex items-center justify-center">
+<!-- Simulated Graph Nodes via CSS -->
+<div class="absolute top-1/4 left-1/4 flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border border-tertiary bg-surface-container-low flex items-center justify-center glow-sm mb-2 relative z-20">
+<span class="material-symbols-outlined text-tertiary">lock</span>
+</div>
+<span class="text-label-mono font-label-mono bg-surface/80 px-2 py-1 rounded border border-outline-variant/30 backdrop-blur-sm">Auth Service</span>
+</div>
+<!-- Lines (SVG simulated) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10" style="opacity: 0.6;">
+<path class="animate-[dash_2s_linear_infinite]" d="M 25% 25% Q 40% 30% 50% 50%" fill="none" stroke="url(#indigo-grad)" stroke-dasharray="4,4" stroke-width="1.5"></path>
+<path d="M 75% 25% L 50% 50%" fill="none" stroke="url(#indigo-grad)" stroke-width="1.5"></path>
+<defs>
+<lineargradient id="indigo-grad" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#494bd6"></stop>
+<stop offset="100%" stop-color="#8083ff"></stop>
+</lineargradient>
+</defs>
+</svg>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full border-2 border-primary bg-[#051424] flex items-center justify-center glow-active mb-2 relative z-20">
+<span class="material-symbols-outlined text-primary text-[28px]">token</span>
+</div>
+<span class="text-label-mono font-label-mono bg-surface/80 px-2 py-1 rounded border border-primary/50 text-primary backdrop-blur-sm">JWT ADR</span>
+</div>
+<div class="absolute top-1/4 right-1/4 flex flex-col items-center">
+<div class="w-12 h-12 rounded-full border border-secondary bg-surface-container-low flex items-center justify-center mb-2 relative z-20">
+<span class="material-symbols-outlined text-secondary">database</span>
+</div>
+<span class="text-label-mono font-label-mono bg-surface/80 px-2 py-1 rounded border border-outline-variant/30 backdrop-blur-sm">Prisma Model</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Activity Feed (Span 4) -->
+<section class="lg:col-span-4 flex flex-col gap-6">
+<!-- Stats Breakdown -->
+<div class="bg-[#0a1f35] border border-inverse-primary/10 rounded-lg overflow-hidden">
+<div class="bg-[#0c1f30] px-4 py-2 border-b border-inverse-primary/10">
+<h2 class="text-label-mono font-label-mono text-on-surface uppercase tracking-wider">Memory Overview</h2>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded flex items-center justify-center bg-emerald-900/40 text-emerald-400 border border-emerald-500/20">
+<span class="text-[10px] font-bold font-mono">F</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Verified Facts</span>
+</div>
+<span class="text-headline-sm font-headline-sm text-emerald-400">85%</span>
+</div>
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded flex items-center justify-center bg-violet-900/40 text-violet-400 border border-violet-500/20">
+<span class="text-[10px] font-bold font-mono">D</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Pending Decisions</span>
+</div>
+<span class="text-headline-sm font-headline-sm text-violet-400">4</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded flex items-center justify-center bg-red-900/40 text-red-400 border border-red-500/20">
+<span class="text-[10px] font-bold font-mono">C</span>
+</div>
+<span class="text-body-md font-body-md text-on-surface">Active Conflicts</span>
+</div>
+<span class="text-headline-sm font-headline-sm text-red-400 glow-sm">2</span>
+</div>
+</div>
+</div>
+<!-- Recent Knowledge -->
+<div class="bg-[#0a1f35] border border-inverse-primary/10 rounded-lg overflow-hidden flex-1 flex flex-col">
+<div class="bg-[#0c1f30] px-4 py-2 border-b border-inverse-primary/10">
+<h2 class="text-label-mono font-label-mono text-on-surface uppercase tracking-wider">Recent Knowledge</h2>
+</div>
+<div class="p-4 flex flex-col gap-3 flex-1 overflow-y-auto">
+<!-- Item 1 -->
+<div class="bg-surface-container-low border border-outline-variant/30 rounded p-3 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex items-start gap-3">
+<div class="w-5 h-5 mt-0.5 rounded flex-shrink-0 flex items-center justify-center bg-violet-900/40 text-violet-400 border border-violet-500/20">
+<span class="text-[9px] font-bold font-mono">D</span>
+</div>
+<div>
+<p class="text-body-sm font-body-sm text-on-surface leading-tight group-hover:text-primary transition-colors">Adopted Redis for Caching</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] text-on-surface-variant/70 font-mono">Approved</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[10px] text-on-surface-variant/70 font-mono">10m ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="bg-surface-container-low border border-outline-variant/30 rounded p-3 hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="flex items-start gap-3">
+<div class="w-5 h-5 mt-0.5 rounded flex-shrink-0 flex items-center justify-center bg-emerald-900/40 text-emerald-400 border border-emerald-500/20">
+<span class="text-[9px] font-bold font-mono">F</span>
+</div>
+<div>
+<p class="text-body-sm font-body-sm text-on-surface leading-tight group-hover:text-primary transition-colors">Node.js v20 in use</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] text-on-surface-variant/70 font-mono">Verified</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[10px] text-on-surface-variant/70 font-mono">1h ago</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-surface-container-low border border-red-500/30 rounded p-3 hover:border-red-400/50 transition-colors cursor-pointer group relative overflow-hidden">
+<div class="absolute left-0 top-0 w-1 h-full bg-red-500/50"></div>
+<div class="flex items-start gap-3 pl-2">
+<div class="w-5 h-5 mt-0.5 rounded flex-shrink-0 flex items-center justify-center bg-red-900/40 text-red-400 border border-red-500/20">
+<span class="text-[9px] font-bold font-mono animate-pulse">C</span>
+</div>
+<div>
+<p class="text-body-sm font-body-sm text-on-surface leading-tight group-hover:text-red-300 transition-colors">API Contract Mismatch in Orders</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] text-red-400 font-mono">Active</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-[10px] text-on-surface-variant/70 font-mono">2h ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

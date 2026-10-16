@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proposal Review Interface</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#82d3de",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#233143",
+                        "background": "#0c141e",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#232b35",
+                        "inverse-primary": "#735c00",
+                        "border-subtle": "#1E293B",
+                        "secondary-fixed": "#9ff0fb",
+                        "on-primary": "#3c2f00",
+                        "surface-bright": "#323a45",
+                        "surface-container": "#18202b",
+                        "outline-variant": "#4d4635",
+                        "surface-container-lowest": "#070f18",
+                        "surface-dim": "#0c141e",
+                        "surface": "#0c141e",
+                        "contract-teal": "#006D77",
+                        "surface-card": "#121C29",
+                        "primary-fixed": "#ffe088",
+                        "on-primary-fixed": "#241a00",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#d0c5af",
+                        "on-tertiary-container": "#384658",
+                        "surface-container-low": "#141c26",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "on-secondary-container": "#98e9f4",
+                        "on-secondary-fixed": "#001f23",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "status-positive": "#10B981",
+                        "estimate-slate": "#94A3B8",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-container-highest": "#2d3540",
+                        "surface-variant": "#2d3540",
+                        "on-secondary": "#00363c",
+                        "outline": "#99907c",
+                        "on-background": "#dbe3f1",
+                        "inverse-on-surface": "#29313c",
+                        "secondary": "#82d3de",
+                        "approval-gold": "#D4AF37",
+                        "on-primary-container": "#554300",
+                        "surface-tint": "#e9c349",
+                        "status-caution": "#F59E0B",
+                        "inverse-surface": "#dbe3f1",
+                        "tertiary": "#c0d0e6",
+                        "error-container": "#93000a",
+                        "primary-container": "#d4af37",
+                        "primary": "#f2ca50",
+                        "on-surface": "#dbe3f1",
+                        "tertiary-container": "#a5b4ca",
+                        "tertiary-fixed": "#d4e4fa",
+                        "primary-fixed-dim": "#e9c349",
+                        "secondary-container": "#006b75",
+                        "on-tertiary-fixed": "#0d1c2d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "component-gap-md": "16px",
+                        "unit": "4px",
+                        "component-gap-sm": "8px",
+                        "section-padding": "48px",
+                        "margin": "32px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "summary-title": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "data-mono-lg": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "data-mono-sm": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "summary-title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "data-mono-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "data-mono-sm": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined[data-weight="fill"] { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        
+        /* Subtle ambient plum shadow */
+        .ambient-shadow {
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+        }
+        
+        /* Diagonal redacted pattern */
+        .redacted-pattern {
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(147, 0, 10, 0.05) 10px, rgba(147, 0, 10, 0.05) 20px);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md overflow-hidden selection:bg-primary selection:text-on-primary">
+<!-- TopNavBar -->
+<nav class="bg-background dark:bg-background text-primary dark:text-primary font-body-md text-body-md border-b border-subtle dark:border-subtle flex justify-between items-center w-full px-margin h-16 fixed top-0 w-full z-50">
+<div class="flex items-center gap-margin">
+<div class="font-display-lg text-display-lg font-bold text-primary tracking-tighter">ORCHESTRATOR_COMMERCIAL</div>
+<div class="hidden md:flex gap-component-gap-md ml-8">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Pipeline</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Clients</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Reporting</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-component-gap-md">
+<button class="bg-approval-gold text-on-primary font-label-caps text-label-caps px-4 py-2 rounded shadow-sm hover:opacity-90 transition-opacity uppercase">
+                New Proposal
+            </button>
+<div class="flex items-center gap-component-gap-sm text-on-surface-variant">
+<button class="hover:text-primary transition-colors duration-200 p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="hover:text-primary transition-colors duration-200 p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined" data-icon="history_edu">history_edu</span></button>
+<button class="hover:text-primary transition-colors duration-200 p-2 rounded-full hover:bg-surface-container-high"><span class="material-symbols-outlined" data-icon="account_circle">account_circle</span></button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container-low text-approval-gold dark:text-approval-gold font-label-caps text-label-caps border-r border-subtle dark:border-subtle shadow-sm flex flex-col h-screen fixed left-0 top-16 z-40 w-64 pt-6 pb-20">
+<div class="px-6 mb-8 flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-container-high flex items-center justify-center border border-subtle">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="corporate_fare">corporate_fare</span>
+</div>
+<div>
+<h2 class="font-summary-title text-summary-title font-semibold text-on-surface tracking-normal uppercase">Project Alpha</h2>
+<span class="text-on-surface-variant text-[10px]">v2.4.0-STABLE</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-status-positive"></span>
+<span class="text-status-positive uppercase tracking-widest text-[10px]">SENT_TO_CLIENT</span>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-150 rounded flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="dashboard">dashboard</span>
+<span class="uppercase">Summary</span>
+</a>
+<a class="text-primary bg-surface-container-highest border-l-4 border-primary px-4 py-3 translate-x-1 rounded-r flex items-center gap-3 opacity-80 scale-95 shadow-sm" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="inventory_2" data-weight="fill">inventory_2</span>
+<span class="uppercase">Deliverables</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-150 rounded flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="event_note">event_note</span>
+<span class="uppercase">Timeline</span>
+</a>
+<a class="text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-all duration-150 rounded flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="payments">payments</span>
+<span class="uppercase">Commercials</span>
+</a>
+</nav>
+<div class="px-6 mb-6">
+<button class="w-full bg-approval-gold text-on-primary py-3 rounded font-label-caps text-label-caps uppercase shadow-sm hover:brightness-110 transition-all text-center">
+                Approve Terms
+            </button>
+</div>
+<div class="mt-auto px-2 border-t border-subtle pt-4 flex flex-col gap-1">
+<a class="text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all duration-150 rounded flex items-center gap-3 text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="verified_user">verified_user</span>
+<span class="uppercase">Audit Log</span>
+</a>
+<a class="text-on-surface-variant px-4 py-2 hover:bg-surface-container-high transition-all duration-150 rounded flex items-center gap-3 text-xs" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
+<span class="uppercase">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-gutter h-[calc(100vh-4rem)] overflow-y-auto grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Center Canvas: Deliverables (Bento Grid Style) -->
+<div class="xl:col-span-8 flex flex-col gap-component-gap-md pb-32">
+<header class="mb-4">
+<h1 class="font-headline-md text-headline-md text-on-surface">Deliverables Scope</h1>
+<p class="text-on-surface-variant mt-2 font-body-md text-body-md">Detailed breakdown of engineering outputs and acceptance criteria for Project Alpha v2.4.</p>
+</header>
+<!-- Deliverable Card 1 -->
+<article class="bg-surface-card border border-subtle rounded-lg p-6 ambient-shadow hover:border-estimate-slate transition-colors relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<div class="font-label-caps text-label-caps text-estimate-slate uppercase mb-1 tracking-wider">ORG-77A :: HASH-8F92D</div>
+<h3 class="font-summary-title text-summary-title text-on-surface">Cloud Infrastructure Setup</h3>
+</div>
+<div class="bg-surface-container-high border border-subtle rounded px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="schedule">schedule</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">40 hrs</span>
+</div>
+</div>
+<p class="text-on-surface-variant mb-6 leading-relaxed relative z-10 w-5/6">
+                    Provisioning and configuration of highly available multi-region AWS environments utilizing Infrastructure as Code (IaC) principles. Includes setting up VPCs, subnets, routing tables, and security groups optimized for the orchestrator payload.
+                </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+<div class="bg-surface-container-lowest p-4 rounded border border-subtle">
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="done_all">done_all</span> Acceptance Criteria
+                        </h4>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-status-positive text-xs mt-1" data-icon="check_circle">check_circle</span>
+                                Terraform scripts thoroughly tested and committed to main branch.
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-status-positive text-xs mt-1" data-icon="check_circle">check_circle</span>
+                                Successful, zero-downtime deployment to staging environment verified by automated smoke tests.
+                            </li>
+</ul>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded border border-subtle flex flex-col justify-between">
+<div>
+<h4 class="font-label-caps text-label-caps text-secondary uppercase mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="link">link</span> Traceability Linkages
+                            </h4>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded text-xs font-data-mono-sm text-data-mono-sm border border-subtle text-on-surface-variant">REQ-001</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded text-xs font-data-mono-sm text-data-mono-sm border border-subtle text-on-surface-variant">REQ-005</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded text-xs font-data-mono-sm text-data-mono-sm border border-subtle text-on-surface-variant">ARCH-SEC-B</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-status-positive/10 text-status-positive border border-status-positive/30 font-label-caps text-[10px] uppercase">AI Validated</span>
+<span class="px-2 py-1 rounded bg-surface-container text-on-surface-variant border border-subtle font-label-caps text-[10px] uppercase">Human Approved</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Deliverable Card 2 -->
+<article class="bg-surface-card border border-subtle rounded-lg p-6 ambient-shadow hover:border-estimate-slate transition-colors relative overflow-hidden group mt-4">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary" data-icon="database">database</span>
+</div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<div class="font-label-caps text-label-caps text-estimate-slate uppercase mb-1 tracking-wider">ORG-77A :: HASH-2B41C</div>
+<h3 class="font-summary-title text-summary-title text-on-surface">Data Migration Pipeline</h3>
+</div>
+<div class="bg-surface-container-high border border-subtle rounded px-3 py-1 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="schedule">schedule</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">85 hrs</span>
+</div>
+</div>
+<p class="text-on-surface-variant mb-6 leading-relaxed relative z-10 w-5/6">
+                    Design and implementation of a secure ETL pipeline to migrate legacy client data into the new Orchestrator schema. Includes automated data cleansing, validation rules, and rollback mechanisms.
+                </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+<div class="bg-surface-container-lowest p-4 rounded border border-subtle">
+<h4 class="font-label-caps text-label-caps text-primary uppercase mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="done_all">done_all</span> Acceptance Criteria
+                        </h4>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-status-positive text-xs mt-1" data-icon="check_circle">check_circle</span>
+                                99.9% data fidelity verified via checksum validation post-migration.
+                            </li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-status-positive text-xs mt-1" data-icon="check_circle">check_circle</span>
+                                Pipeline execution time under 4 hours for full historical payload.
+                            </li>
+</ul>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded border border-subtle flex flex-col justify-between">
+<div>
+<h4 class="font-label-caps text-label-caps text-secondary uppercase mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="link">link</span> Traceability Linkages
+                            </h4>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded text-xs font-data-mono-sm text-data-mono-sm border border-subtle text-on-surface-variant">REQ-012</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-high px-2 py-1 rounded text-xs font-data-mono-sm text-data-mono-sm border border-subtle text-on-surface-variant">DATA-MIG-01</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-status-caution/10 text-status-caution border border-status-caution/30 font-label-caps text-[10px] uppercase">AI Review Pending</span>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Right SideBar: Executive Summary -->
+<aside class="xl:col-span-4 flex flex-col gap-component-gap-md sticky top-6 self-start pb-32">
+<div class="bg-surface-card border border-subtle rounded-lg overflow-hidden ambient-shadow flex flex-col">
+<div class="bg-surface-container-lowest p-4 border-b border-subtle">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="insights">insights</span> Executive Summary
+                    </h3>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<!-- Total Investment -->
+<div>
+<span class="font-label-caps text-label-caps text-estimate-slate uppercase block mb-2">Total Investment</span>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl text-on-surface-variant">$</span>
+<span class="font-data-mono-lg text-[32px] leading-tight font-semibold text-approval-gold">125,000.00</span>
+</div>
+</div>
+<hr class="border-subtle"/>
+<!-- Estimated Timeline -->
+<div>
+<span class="font-label-caps text-label-caps text-estimate-slate uppercase block mb-2">Estimated Timeline</span>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-3xl text-secondary" data-icon="calendar_month">calendar_month</span>
+<span class="font-summary-title text-summary-title text-on-surface">12 Weeks</span>
+</div>
+</div>
+<hr class="border-subtle"/>
+<!-- Risk Assessment -->
+<div>
+<span class="font-label-caps text-label-caps text-estimate-slate uppercase block mb-3">Risk Assessment</span>
+<div class="flex flex-col gap-3">
+<div class="bg-surface-container-lowest rounded p-3 border border-subtle flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Timeline Slippage</span>
+<span class="px-2 py-1 rounded bg-status-caution/10 text-status-caution border border-status-caution/30 font-label-caps text-[10px] uppercase">Medium</span>
+</div>
+<div class="bg-surface-container-lowest rounded p-3 border border-subtle flex justify-between items-center">
+<span class="text-sm text-on-surface-variant">Technical Feasibility</span>
+<span class="px-2 py-1 rounded bg-status-positive/10 text-status-positive border border-status-positive/30 font-label-caps text-[10px] uppercase">Low</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Internal Clarification Hub (Redacted) -->
+<div class="bg-surface-card border border-error/20 rounded-lg overflow-hidden ambient-shadow relative mt-4">
+<div class="absolute inset-0 redacted-pattern pointer-events-none"></div>
+<div class="bg-surface-container-lowest/90 p-4 border-b border-error/20 relative z-10 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-error uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="visibility_off">visibility_off</span> Internal Notes
+                    </h3>
+<span class="text-[10px] font-label-caps text-error/70 uppercase">Client Hidden</span>
+</div>
+<div class="p-4 relative z-10 text-sm text-on-surface-variant/80 italic">
+<p class="mb-2">Margin on Cloud Infrastructure is tight due to required multi-region setup. Push back on any additional region requests without budget increase.</p>
+<p class="text-xs text-estimate-slate mt-2">- Eng Lead (System)</p>
+</div>
+</div>
+</aside>
+</main>
+<!-- Footer Actions (Fixed Bottom) -->
+<footer class="fixed bottom-0 left-64 right-0 h-20 bg-surface-container-lowest border-t border-subtle z-40 flex items-center justify-end px-margin gap-4 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<button class="px-6 py-2 rounded font-label-caps text-label-caps uppercase border border-error text-error hover:bg-error/10 transition-colors flex items-center gap-2 mr-auto relative group overflow-hidden">
+<div class="absolute inset-0 redacted-pattern opacity-50 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-sm relative z-10" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="relative z-10">Internal Approve</span>
+</button>
+<button class="px-6 py-2.5 rounded font-label-caps text-label-caps uppercase border border-estimate-slate text-estimate-slate hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="rate_review">rate_review</span>
+            Request Revision
+        </button>
+<button class="px-8 py-2.5 rounded font-label-caps text-label-caps uppercase bg-contract-teal text-on-primary hover:brightness-110 transition-all flex items-center gap-2 shadow-[inset_0_0_10px_rgba(255,255,255,0.2)] font-bold tracking-wider">
+<span class="material-symbols-outlined text-sm" data-icon="draw">draw</span>
+            Sign & Authorize
+        </button>
+</footer>
+</body></html>

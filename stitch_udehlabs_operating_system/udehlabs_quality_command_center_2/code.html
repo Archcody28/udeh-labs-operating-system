@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs QE Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#25005a",
+                      "error": "#ffb4ab",
+                      "on-tertiary-container": "#00734e",
+                      "surface": "#0c141e",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container-highest": "#2d3541",
+                      "execution-violet": "#7c3aed",
+                      "tertiary-fixed": "#6ffbbe",
+                      "status-success": "#10b981",
+                      "data-blue": "#1C85E8",
+                      "error-container": "#93000a",
+                      "secondary-container": "#6001d1",
+                      "surface-container-high": "#232a36",
+                      "on-primary-fixed-variant": "#3a485a",
+                      "primary-fixed": "#d5e4fb",
+                      "on-tertiary": "#003824",
+                      "surface-container": "#18202b",
+                      "outline-variant": "#44474c",
+                      "secondary-fixed": "#eaddff",
+                      "inverse-on-surface": "#29313c",
+                      "status-risk": "#f59e0b",
+                      "tertiary": "#ffffff",
+                      "on-primary": "#233143",
+                      "secondary": "#d2bbff",
+                      "surface-bright": "#323a45",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "surface-variant": "#2d3541",
+                      "on-secondary": "#3f008e",
+                      "inverse-surface": "#dbe3f2",
+                      "on-surface-variant": "#c4c6cd",
+                      "inverse-primary": "#515f73",
+                      "on-error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-card": "#0d1b2a",
+                      "status-critical": "#ef4444",
+                      "on-tertiary-fixed": "#002113",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "terminal-black": "#091017",
+                      "background": "#0c141e",
+                      "on-surface": "#dbe3f2",
+                      "surface-container-low": "#141c27",
+                      "tertiary-container": "#6ffbbe",
+                      "surface-tint": "#b9c8de",
+                      "border-muted": "#1e293b",
+                      "surface-container-lowest": "#070f19",
+                      "outline": "#8e9197",
+                      "on-secondary-container": "#c9aeff",
+                      "on-primary-container": "#576579",
+                      "primary-container": "#d5e4fb",
+                      "on-primary-fixed": "#0d1c2d",
+                      "on-background": "#dbe3f2",
+                      "surface-dim": "#0c141e",
+                      "primary": "#ffffff",
+                      "on-error": "#690005",
+                      "primary-fixed-dim": "#b9c8de"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "sidebar_width": "260px",
+                      "base": "4px",
+                      "gutter": "16px",
+                      "container-margin": "24px",
+                      "density-comfortable": "16px",
+                      "density-compact": "8px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- TopNavBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary font-body-md text-body-md docked full-width top-0 border-b border-muted flat no shadows flex justify-between items-center w-full px-gutter h-16 z-50 fixed left-0 right-0">
+<div class="flex items-center gap-gutter ml-sidebar_width md:ml-sidebar_width pl-gutter">
+<span class="font-headline-sm text-headline-sm text-primary uppercase tracking-wider">UdehLabs QE</span>
+<div class="hidden md:flex relative ml-4">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm">search</span>
+<input class="bg-surface-container-highest border border-outline-variant text-on-surface font-data-mono text-data-mono rounded px-8 py-1 focus:outline-none focus:border-execution-violet transition-colors w-64" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-density-comfortable">
+<div class="flex items-center gap-2">
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 rounded hover:bg-surface-container-highest transition-colors flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<button class="bg-execution-violet hover:bg-secondary-container text-white px-4 py-1.5 rounded font-body-sm text-body-sm font-semibold transition-colors">Deploy Build</button>
+<div class="w-8 h-8 rounded-full border border-outline-variant overflow-hidden shrink-0 ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small circular avatar placeholder image showing a technical geometric pattern in deep purples and dark blues, suitable for a dark mode enterprise application user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuCmN1Ppog3to_EHImJcbArWVTUqHH3aQrPTR8gcct_HXVskm6MwWRgcoHu95rgJ-HkbAOYcXhIdYKvsxuqRdHTb0VfQOEPmSQxbxLsPUv9rQy_RZfwgYLSDZzF9k272kHOkAnF_ML3F_YLa7L3agV0c7IjAAzgGEvNdQsU-oIktHU4Nx20RJ4sjd27-pmVNd_1UMzLkyviyLTd40_j93cmb49Rx-7a86PV2B3Z74E8Pabq73ahZ-wqA"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest text-execution-violet dark:text-execution-violet font-label-caps text-label-caps docked left-0 h-full w-sidebar_width border-r border-muted flat no shadows fixed left-0 top-0 h-screen flex flex-col pt-16 z-40 hidden md:flex">
+<div class="p-container-margin border-b border-muted">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 rounded border border-execution-violet/30 overflow-hidden bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-execution-violet" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary leading-none">Command Center</h2>
+<p class="font-data-mono text-data-mono text-on-surface-variant mt-1 opacity-70">Phase A.49</p>
+</div>
+</div>
+<button class="w-full border border-execution-violet text-execution-violet hover:bg-execution-violet hover:text-white transition-colors py-2 rounded font-body-sm text-body-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                New Analysis
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto py-density-comfortable">
+<ul class="space-y-1 px-2">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-surface-container-high text-primary border-l-4 border-execution-violet hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+                        Quality Overview
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all pl-[15px]" href="#">
+<span class="material-symbols-outlined text-[18px]">biotech</span>
+                        Test Explorer
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all pl-[15px]" href="#">
+<span class="material-symbols-outlined text-[18px]">bug_report</span>
+                        Defect Center
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all pl-[15px]" href="#">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                        Release Intelligence
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all pl-[15px]" href="#">
+<span class="material-symbols-outlined text-[18px]">security</span>
+                        Quality Gates
+                    </a>
+</li>
+</ul>
+</div>
+<div class="p-density-comfortable border-t border-muted">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+                        Logs
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined text-[16px]">sensors</span>
+                        Status
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-0 md:ml-sidebar_width mt-16 p-container-margin overflow-y-auto h-[calc(100vh-4rem)] relative">
+<!-- Decorator Background -->
+<div class="absolute top-0 right-0 w-1/3 h-1/3 bg-execution-violet/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="max-w-7xl mx-auto space-y-container-margin relative z-10">
+<!-- Top Section: Metrics -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-density-comfortable">
+<!-- Metric 1 -->
+<div class="bg-surface-card border border-muted rounded flex flex-col p-density-comfortable relative overflow-hidden group hover:border-outline-variant transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-execution-violet"></div>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1 uppercase text-[10px]">Overall Pass Rate</span>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-display-lg text-primary">98.4<span class="text-headline-md">%</span></span>
+<span class="material-symbols-outlined text-status-success text-sm mb-2" style="font-variation-settings: 'FILL' 1;">arrow_upward</span>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-card border border-muted rounded flex flex-col p-density-comfortable relative overflow-hidden group hover:border-outline-variant transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-execution-violet"></div>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1 uppercase text-[10px]">Code Coverage</span>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-display-lg text-primary">86<span class="text-headline-md">%</span></span>
+<span class="text-status-risk font-data-mono text-[10px] mb-2 px-1.5 py-0.5 rounded bg-status-risk/10 border border-status-risk/30">TARGET: 90%</span>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-card border border-muted rounded flex flex-col p-density-comfortable relative overflow-hidden group hover:border-outline-variant transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-status-risk"></div>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1 uppercase text-[10px]">Open Defects</span>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-display-lg text-primary">12</span>
+<span class="text-on-surface-variant font-data-mono text-[10px] mb-2 px-1.5 py-0.5 rounded bg-surface-container-highest border border-outline-variant">ACTIVE</span>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-card border border-muted rounded flex flex-col p-density-comfortable relative overflow-hidden group hover:border-outline-variant transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-status-success"></div>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1 uppercase text-[10px]">Critical Defects</span>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-display-lg text-primary">0</span>
+<span class="material-symbols-outlined text-status-success text-sm mb-2" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Main Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-density-comfortable">
+<!-- Left Column (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-density-comfortable">
+<!-- Verification Health Chart -->
+<div class="bg-surface-card border border-muted rounded flex flex-col p-density-comfortable min-h-[300px]">
+<div class="flex justify-between items-center mb-density-comfortable border-b border-muted pb-2">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-execution-violet text-[18px]">monitoring</span>
+                                Verification Health (7D Trend)
+                            </h3>
+<div class="flex gap-2 font-data-mono text-data-mono text-[10px]">
+<span class="flex items-center gap-1 text-on-surface-variant"><div class="w-2 h-2 bg-status-success rounded-full"></div> Pass</span>
+<span class="flex items-center gap-1 text-on-surface-variant"><div class="w-2 h-2 bg-status-critical rounded-full"></div> Fail</span>
+</div>
+</div>
+<!-- Pseudo Chart Area -->
+<div class="flex-1 relative flex items-end justify-between pt-8 pb-4 border-b border-outline-variant/30">
+<!-- Y-Axis labels -->
+<div class="absolute left-0 top-0 bottom-8 w-8 flex flex-col justify-between font-data-mono text-[10px] text-on-surface-variant border-r border-outline-variant/30">
+<span>100</span>
+<span>50</span>
+<span>0</span>
+</div>
+<!-- Bars -->
+<div class="ml-10 flex-1 flex justify-around items-end h-full gap-2 px-2">
+<!-- Day 1 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[95%] group relative">
+<div class="w-full bg-status-critical h-[5%]"></div>
+<div class="w-full bg-status-success h-[95%] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-on-surface-variant">M</span>
+</div>
+<!-- Day 2 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[98%] group relative">
+<div class="w-full bg-status-critical h-[2%]"></div>
+<div class="w-full bg-status-success h-[98%] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-on-surface-variant">T</span>
+</div>
+<!-- Day 3 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[92%] group relative">
+<div class="w-full bg-status-critical h-[8%]"></div>
+<div class="w-full bg-status-success h-[92%] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-on-surface-variant">W</span>
+</div>
+<!-- Day 4 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[85%] group relative">
+<div class="w-full bg-status-critical h-[15%]"></div>
+<div class="w-full bg-status-success h-[85%] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-on-surface-variant">T</span>
+</div>
+<!-- Day 5 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[96%] group relative">
+<div class="w-full bg-status-critical h-[4%]"></div>
+<div class="w-full bg-status-success h-[96%] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-on-surface-variant">F</span>
+</div>
+<!-- Day 6 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[99%] group relative">
+<div class="w-full bg-status-critical h-[1%]"></div>
+<div class="w-full bg-status-success h-[99%] opacity-80 group-hover:opacity-100 transition-opacity"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-on-surface-variant">S</span>
+</div>
+<!-- Day 7 -->
+<div class="flex flex-col justify-end w-full max-w-[40px] h-[98.4%] group relative">
+<div class="w-full bg-status-critical h-[1.6%]"></div>
+<div class="w-full bg-status-success h-[98.4%] opacity-100 border border-execution-violet"></div>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-data-mono text-[10px] text-primary font-bold">S</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Traceability Matrix Table -->
+<div class="bg-surface-card border border-muted rounded flex flex-col p-density-comfortable">
+<div class="flex justify-between items-center mb-density-comfortable pb-2 border-b border-muted">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-execution-violet text-[18px]">account_tree</span>
+                                Traceability Matrix
+                            </h3>
+<button class="text-execution-violet font-data-mono text-[10px] uppercase hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="font-label-caps text-label-caps text-on-surface-variant border-b border-outline-variant/30">
+<th class="py-2 px-3 font-normal">Requirement</th>
+<th class="py-2 px-3 font-normal">Test Case</th>
+<th class="py-2 px-3 font-normal">Execution ID</th>
+<th class="py-2 px-3 font-normal text-right">Result</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono text-[12px]">
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 text-data-blue">REQ-112</td>
+<td class="py-2 px-3 text-on-surface">TC-204</td>
+<td class="py-2 px-3 text-on-surface-variant opacity-70">EXE-9982a</td>
+<td class="py-2 px-3 text-right">
+<span class="inline-flex items-center gap-1 bg-status-success/10 border border-status-success/30 text-status-success px-1.5 py-0.5 rounded text-[10px] uppercase">
+<div class="w-1.5 h-1.5 rounded-full bg-status-success"></div> Passed
+                                            </span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 text-data-blue">REQ-113</td>
+<td class="py-2 px-3 text-on-surface">TC-205</td>
+<td class="py-2 px-3 text-on-surface-variant opacity-70">EXE-9982b</td>
+<td class="py-2 px-3 text-right">
+<span class="inline-flex items-center gap-1 bg-status-success/10 border border-status-success/30 text-status-success px-1.5 py-0.5 rounded text-[10px] uppercase">
+<div class="w-1.5 h-1.5 rounded-full bg-status-success"></div> Passed
+                                            </span>
+</td>
+</tr>
+<tr class="border-b border-outline-variant/10 hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 text-data-blue">REQ-118</td>
+<td class="py-2 px-3 text-on-surface">TC-210</td>
+<td class="py-2 px-3 text-on-surface-variant opacity-70">EXE-9982c</td>
+<td class="py-2 px-3 text-right">
+<span class="inline-flex items-center gap-1 bg-status-critical/10 border border-status-critical/30 text-status-critical px-1.5 py-0.5 rounded text-[10px] uppercase">
+<div class="w-1.5 h-1.5 rounded-full bg-status-critical animate-pulse-dot"></div> Failed
+                                            </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 text-data-blue">REQ-120</td>
+<td class="py-2 px-3 text-on-surface">TC-215</td>
+<td class="py-2 px-3 text-on-surface-variant opacity-70">EXE-9982d</td>
+<td class="py-2 px-3 text-right">
+<span class="inline-flex items-center gap-1 bg-status-success/10 border border-status-success/30 text-status-success px-1.5 py-0.5 rounded text-[10px] uppercase">
+<div class="w-1.5 h-1.5 rounded-full bg-status-success"></div> Passed
+                                            </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-density-comfortable">
+<!-- Release Quality Gate -->
+<div class="bg-surface-card border border-muted rounded p-density-comfortable relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-[4px] bg-execution-violet"></div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">Release Quality Gate</h3>
+<p class="font-data-mono text-data-mono text-[11px] text-on-surface-variant mb-4">Target: RC-v4.3.0</p>
+<div class="space-y-4 relative">
+<!-- Vertical line connector -->
+<div class="absolute left-[11px] top-2 bottom-2 w-[1px] bg-outline-variant/50"></div>
+<!-- Gate 1 -->
+<div class="flex gap-3 relative z-10">
+<div class="w-[24px] h-[24px] rounded-full bg-status-success border border-status-success/30 flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+<span class="material-symbols-outlined text-terminal-black text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1 pb-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-primary font-semibold">Unit Tests</span>
+<span class="font-data-mono text-[10px] text-status-success uppercase">Pass</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant opacity-70">100% execution</span>
+</div>
+</div>
+<!-- Gate 2 -->
+<div class="flex gap-3 relative z-10">
+<div class="w-[24px] h-[24px] rounded-full bg-status-success border border-status-success/30 flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(16,185,129,0.2)]">
+<span class="material-symbols-outlined text-terminal-black text-[14px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<div class="flex-1 pb-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-primary font-semibold">Security Scan</span>
+<span class="font-data-mono text-[10px] text-status-success uppercase">Pass</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant opacity-70">0 Critical Vulns</span>
+</div>
+</div>
+<!-- Gate 3 -->
+<div class="flex gap-3 relative z-10">
+<div class="w-[24px] h-[24px] rounded-full bg-surface-container border border-status-risk flex items-center justify-center shrink-0">
+<div class="w-2 h-2 rounded-full bg-status-risk"></div>
+</div>
+<div class="flex-1 pb-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-primary font-semibold">Coverage</span>
+<span class="font-data-mono text-[10px] text-status-risk uppercase">Warning</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant opacity-70">Delta -1.2%</span>
+</div>
+</div>
+<!-- Gate 4 -->
+<div class="flex gap-3 relative z-10">
+<div class="w-[24px] h-[24px] rounded-full bg-surface-container border border-outline-variant flex items-center justify-center shrink-0">
+<div class="w-1.5 h-1.5 rounded-full bg-outline-variant"></div>
+</div>
+<div class="flex-1 pb-1">
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant font-semibold">Integration</span>
+<span class="font-data-mono text-[10px] text-on-surface-variant uppercase">Pending</span>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant opacity-50">Waiting for trigger</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Defect Triage Queue -->
+<div class="bg-surface-card border border-muted rounded flex flex-col h-full min-h-[300px]">
+<div class="p-density-comfortable border-b border-muted flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-execution-violet text-[18px]">psychiatry</span>
+                                AI Triage Queue
+                            </h3>
+<span class="bg-execution-violet/20 text-execution-violet font-data-mono text-[10px] px-2 py-0.5 rounded border border-execution-violet/30">LIVE</span>
+</div>
+<div class="flex-1 p-2 space-y-2 overflow-y-auto">
+<!-- Log Item 1 -->
+<div class="bg-terminal-black border border-outline-variant/30 rounded p-2 text-data-mono font-data-mono text-[11px]">
+<div class="flex justify-between mb-1">
+<span class="text-status-critical font-bold">SEV-1</span>
+<span class="text-on-surface-variant opacity-50">2m ago</span>
+</div>
+<div class="text-on-surface mb-2 break-all">
+<span class="text-data-blue">Exception:</span> NullReference in auth_module.go:142
+                                </div>
+<div class="border-t border-outline-variant/20 pt-1 mt-1 flex items-start gap-1">
+<span class="material-symbols-outlined text-[12px] text-execution-violet">robot_2</span>
+<span class="text-on-surface-variant opacity-80 leading-tight">Probable cause: DB schema mismatch post-migration. High confidence.</span>
+</div>
+</div>
+<!-- Log Item 2 -->
+<div class="bg-terminal-black border border-outline-variant/30 rounded p-2 text-data-mono font-data-mono text-[11px]">
+<div class="flex justify-between mb-1">
+<span class="text-status-risk font-bold">SEV-3</span>
+<span class="text-on-surface-variant opacity-50">15m ago</span>
+</div>
+<div class="text-on-surface mb-2 break-all">
+<span class="text-data-blue">Timeout:</span> API endpoint /v1/users &gt; 5000ms
+                                </div>
+<div class="border-t border-outline-variant/20 pt-1 mt-1 flex items-start gap-1">
+<span class="material-symbols-outlined text-[12px] text-execution-violet">robot_2</span>
+<span class="text-on-surface-variant opacity-80 leading-tight">Probable cause: Upstream dependency latency spike. Monitor.</span>
+</div>
+</div>
+<!-- Log Item 3 -->
+<div class="bg-terminal-black border border-outline-variant/30 rounded p-2 text-data-mono font-data-mono text-[11px] opacity-70">
+<div class="flex justify-between mb-1">
+<span class="text-outline font-bold">SEV-4</span>
+<span class="text-on-surface-variant opacity-50">1h ago</span>
+</div>
+<div class="text-on-surface mb-2 break-all">
+<span class="text-data-blue">Warn:</span> Deprecated API usage in util.js
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        /* Minimal custom css for the pulse animation if not caught by tailwind arbitrary values */
+        @keyframes pulse-dot {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .animate-pulse-dot {
+            animation: pulse-dot 2s infinite;
+        }
+        
+        /* Scrollbar styling for terminal aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #070f19; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3541; 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #44474c; 
+        }
+    </style>
+</body></html>

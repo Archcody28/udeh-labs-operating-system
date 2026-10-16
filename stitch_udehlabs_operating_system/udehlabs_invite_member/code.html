@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Invite Member</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "background": "#0b1326",
+                      "tertiary-fixed": "#d8e2ff",
+                      "on-primary-container": "#ede0ff",
+                      "on-tertiary": "#002e6a",
+                      "surface-bright": "#31394e",
+                      "secondary-fixed": "#6ffbbe",
+                      "surface-variant": "#2d3449",
+                      "inverse-primary": "#732ee4",
+                      "on-surface-variant": "#ccc3d8",
+                      "surface-dim": "#0b1326",
+                      "inverse-surface": "#dbe2fd",
+                      "on-primary-fixed-variant": "#5a00c6",
+                      "outline-variant": "#4a4455",
+                      "surface-container-low": "#131b2e",
+                      "on-tertiary-fixed": "#001a42",
+                      "on-error": "#690005",
+                      "surface": "#0b1326",
+                      "surface-container-highest": "#2d3449",
+                      "tertiary-container": "#0062d2",
+                      "on-surface": "#dbe2fd",
+                      "error-container": "#93000a",
+                      "primary": "#d2bbff",
+                      "on-secondary": "#003824",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed-variant": "#004395",
+                      "primary-container": "#7c3aed",
+                      "inverse-on-surface": "#283044",
+                      "on-background": "#dbe2fd",
+                      "tertiary": "#adc6ff",
+                      "surface-container-high": "#222a3e",
+                      "tertiary-fixed-dim": "#adc6ff",
+                      "secondary": "#4edea3",
+                      "surface-container": "#171f33",
+                      "on-tertiary-container": "#dce5ff",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed": "#25005a",
+                      "secondary-container": "#00a572",
+                      "on-secondary-container": "#00311f",
+                      "primary-fixed-dim": "#d2bbff",
+                      "surface-container-lowest": "#060d20",
+                      "secondary-fixed-dim": "#4edea3",
+                      "on-secondary-fixed-variant": "#005236",
+                      "on-secondary-fixed": "#002113",
+                      "primary-fixed": "#eaddff",
+                      "outline": "#958da1",
+                      "on-primary": "#3f008e",
+                      "surface-tint": "#d2bbff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-padding": "24px",
+                      "gutter": "16px",
+                      "section-gap": "32px",
+                      "data-row-height": "32px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "title-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "mono-data": [
+                              "monospace"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "title-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-lg": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "11px",
+                              {
+                                      "lineHeight": "14px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "mono-data": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .glass-modal {
+            background: rgba(19, 27, 46, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .input-dark {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.2s ease;
+        }
+        .input-dark:focus {
+            outline: none;
+            border-color: theme('colors.primary');
+            box-shadow: 0 0 0 1px theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4 md:p-8" data-alt="A highly detailed dark mode enterprise dashboard background showing complex data visualization, network graphs, and server metrics in deep blue and purple hues. The aesthetic is high-tech, command-center professional, with subtle glowing lines indicating data flow and system activity. It serves as a sophisticated, out-of-focus backdrop for a modal overlay, emphasizing a secure, enterprise-grade environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADNsGDaY7462Xy7pMlVpYd8JmF_lvv0-zVaV8_tZ96kWucjsi5OSuo254_7uib4wdEeJP2DVBmL_mUtI0tdtJGBy_EJp0f51hL9Xv0fn7IBMa6SD2FIBGHqkSq2990Nvt3i8s4PNqhA5WC_61oZY9TnBZ6V9dm_kWlbuf58E8Y5NNqqzQKRs0D1saloxCk5yCyiGBTo_AlxSdwpoa3WMDxSVqncsZ15diSaSRdFDTfs8qI7BkppC039Q'); background-size: cover; background-position: center;">
+<!-- Glassmorphism Modal -->
+<div class="glass-modal rounded-xl w-full max-w-4xl flex flex-col md:flex-row overflow-hidden shadow-2xl relative">
+<!-- Left Sidebar / Progress indicator -->
+<div class="w-full md:w-1/3 bg-surface-container-low/50 p-6 md:p-8 border-b md:border-b-0 md:border-r border-white/10 flex flex-col justify-between">
+<div>
+<div class="font-display-lg text-display-lg font-bold text-primary mb-8">UdehLabs</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Invite Member</h2>
+<div class="flex flex-col gap-6 relative">
+<!-- Progress Line -->
+<div class="absolute left-[11px] top-4 bottom-4 w-px bg-white/10 hidden md:block"></div>
+<!-- Step 1 (Active) -->
+<div class="flex items-start gap-4 relative z-10 group">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-[0_0_10px_rgba(210,187,255,0.5)]">
+<span class="font-label-lg text-label-lg text-on-primary">1</span>
+</div>
+<div>
+<div class="font-title-lg text-title-lg text-on-surface mb-1">Identity</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Email &amp; Basic Info</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-4 relative z-10 group opacity-50">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center shrink-0 border border-white/10">
+<span class="font-label-lg text-label-lg text-on-surface-variant">2</span>
+</div>
+<div>
+<div class="font-title-lg text-title-lg text-on-surface mb-1">Role Assignment</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Select permissions</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-4 relative z-10 group opacity-50">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center shrink-0 border border-white/10">
+<span class="font-label-lg text-label-lg text-on-surface-variant">3</span>
+</div>
+<div>
+<div class="font-title-lg text-title-lg text-on-surface mb-1">Access Scoping</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Projects &amp; Squads</div>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-start gap-4 relative z-10 group opacity-50">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center shrink-0 border border-white/10">
+<span class="font-label-lg text-label-lg text-on-surface-variant">4</span>
+</div>
+<div>
+<div class="font-title-lg text-title-lg text-on-surface mb-1">AI Quotas</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Resource allocation</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-white/10">
+<div class="flex items-center gap-2 text-secondary mb-2">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-lg text-label-lg uppercase">Security Verification</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enterprise Isolation Compliance Active. All invites are subject to audit logging.</p>
+</div>
+</div>
+<!-- Main Content Area (Step 1) -->
+<div class="w-full md:w-2/3 p-6 md:p-8 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-title-lg text-title-lg text-on-surface">Step 1: Identity</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">upload_file</span>
+<span class="font-label-md text-label-md uppercase">Bulk Import CSV</span>
+</button>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface-variant mb-2 uppercase">Email Address</label>
+<input class="input-dark w-full rounded p-3 font-body-md text-body-md placeholder:text-on-surface-variant/50" placeholder="colleague@company.com" type="email"/>
+<p class="mt-2 font-body-sm text-body-sm text-on-surface-variant">An invitation link will be sent to this address.</p>
+</div>
+<div class="p-4 bg-surface-container border border-white/5 rounded-lg flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary mt-0.5 text-[20px]">info</span>
+<div>
+<h4 class="font-label-lg text-label-lg text-tertiary uppercase mb-1">Single Sign-On (SSO)</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">If your organization uses SAML or OIDC, ensure the email domain matches your approved identity provider settings.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Actions -->
+<div class="mt-8 flex justify-end gap-4 border-t border-white/10 pt-6">
+<button class="px-6 py-2 rounded border border-white/20 text-on-surface font-label-lg text-label-lg uppercase hover:bg-white/5 transition-colors">
+                    Cancel
+                </button>
+<button class="px-6 py-2 rounded bg-primary text-on-primary font-label-lg text-label-lg uppercase hover:brightness-110 transition-all flex items-center gap-2 shadow-[0_0_15px_rgba(210,187,255,0.3)]">
+                    Continue
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

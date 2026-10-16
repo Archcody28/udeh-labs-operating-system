@@ -1,0 +1,43 @@
+# Phase A.58: Enterprise Data Intelligence, Analytics & Decision Intelligence Architecture
+
+## Overview
+Phase A.58 establishes the **Intelligence & Decision Layer**, transforming UdehLabs from an operational platform into a self-aware, data-driven ecosystem. It unifies telemetry from every previous phase—Engineering, AI, Billing, and Security—into a governed analytics fabric that provides high-fidelity observability, predictive forecasting, and actionable recommendations.
+
+## Core Components
+
+### 1. Data Intelligence Fabric (`IDataIntelligenceOrchestrator`)
+- **Event Normalization**: Uses existing event infrastructure (A.0-A.57) to normalize operational events into analytics-ready records with consistent schemas.
+- **Governed Metric Definitions**: Centralizes the logic for metrics (e.g., "Deployment Success Rate," "AI Token Efficiency") in a machine-readable registry, preventing formula drift across the UI.
+- **Query Authorization**: Enforces strict tenant isolation and RBAC at the query level, ensuring analytics never become a vector for cross-tenant data exfiltration.
+
+### 2. Observability & SLI/SLO Engine (`ISLOService`)
+- **Service Health Mapping**: Aggregates signals from logs, metrics, and traces to define service states: `HEALTHY`, `DEGRADED`, or `UNHEALTHY`.
+- **Error Budget Management**: Calculates consumed vs. remaining error budgets based on configurable Service Level Objectives (SLOs).
+- **Anomaly Detection**: Implements controlled detection of statistical outliers in traffic, latency, and cost, providing evidence-based explanations rather than raw alerts.
+
+### 3. Decision Intelligence & Forecasting (`IDecisionSupportService`)
+- **Predictive Analytics**: Provides forecasts for resource usage, AI consumption, and revenue trends based on historical data patterns.
+- **Actionable Recommendations**: Generates governed suggestions (e.g., "Review budget for rapidly increasing AI usage") anchored in real platform evidence.
+- **Recommendation Lifecycle**: Manages the flow from `SUGGESTED` -> `REVIEWED` -> `ACCEPTED`, ensuring no autonomous action bypasses human authorization.
+
+### 4. Natural Language Analytics (`IAIAnalyticsAgent`)
+- **Grounded NL-to-Query**: Translates natural language questions into approved, bounded analytics queries, avoiding unrestricted SQL execution.
+- **Causal Analysis Framework**: Correlates deployments, commits, and incidents to assist in root-cause analysis (RCA) without assuming correlation equals causation.
+
+## Data Models
+- **MetricDefinition**: The registry of truth for how metrics are calculated.
+- **MetricMeasurement / TimeSeries**: Aggregated, period-bound data points for performance.
+- **AnalyticsDashboard / Widget**: Configurable structural units for data visualization.
+- **Anomaly / Forecast**: Structured records of statistical outliers and predictions.
+- **SLODefinition / ErrorBudget**: The governance records for reliability targets.
+- **DataQualityCheck**: Monitors the integrity and freshness of the analytics pipeline.
+
+## Security & Privacy
+- **Zero-Trust Analytics**: Every query validates actor scope and resource classification (A.52).
+- **Non-Surveillance Policy**: Explicitly avoids individual employee surveillance metrics, focusing on team and organizational outcomes.
+- **Secret Redaction**: Telemetry and analytics pipelines redact PII and credentials before storage or AI analysis.
+
+## Vertical Integration
+- **A.57 Integration**: Uses the Knowledge Fabric to ground analytics explanations in historical context.
+- **A.56 Integration**: Powers AI Agents with analytics tools for autonomous decision support.
+- **A.53/A.54 Integration**: Feeds financial and customer health analytics into executive mission control.

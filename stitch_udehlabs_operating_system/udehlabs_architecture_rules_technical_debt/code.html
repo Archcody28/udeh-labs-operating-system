@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Architecture Rules &amp; Technical Debt</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-secondary": "#003824",
+                        "on-surface-variant": "#c6c6cd",
+                        "surface-container-lowest": "#010f1f",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#251400",
+                        "on-tertiary-container": "#b47300",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "primary": "#bec6e0",
+                        "outline-variant": "#45464d",
+                        "on-background": "#d4e4fa",
+                        "inverse-on-surface": "#233143",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#0d1c2d",
+                        "on-tertiary-fixed": "#2a1700",
+                        "secondary": "#4edea3",
+                        "on-secondary-fixed": "#002113",
+                        "on-primary": "#283044",
+                        "surface-dim": "#051424",
+                        "on-primary-container": "#798098",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-container-highest": "#273647",
+                        "surface": "#051424",
+                        "inverse-surface": "#d4e4fa",
+                        "surface-variant": "#273647",
+                        "on-tertiary": "#472a00",
+                        "tertiary": "#ffb95f",
+                        "on-primary-fixed": "#131b2e",
+                        "on-surface": "#d4e4fa",
+                        "background": "#051424",
+                        "surface-tint": "#bec6e0",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-container": "#0f172a",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary-fixed": "#ffddb8",
+                        "outline": "#909097",
+                        "inverse-primary": "#565e74",
+                        "surface-bright": "#2c3a4c",
+                        "surface-container": "#122131",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed": "#6ffbbe",
+                        "primary-fixed-dim": "#bec6e0",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-container": "#00a572"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "grid-columns": "12",
+                        "gutter": "12px",
+                        "margin-wide": "32px",
+                        "unit": "4px",
+                        "margin-compact": "16px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "code-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "label-caps": ["10px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-sm": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "code-md": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Grid background pattern */
+        .bg-grid-pattern {
+            background-image: 
+                linear-gradient(to right, rgba(51, 65, 85, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(51, 65, 85, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex flex-col antialiased bg-grid-pattern">
+<!-- TopNavBar -->
+<nav class="bg-surface h-12 w-full fixed top-0 z-50 border-b border-outline-variant flex items-center justify-between pl-[252px] pr-margin-wide shadow-[0_1px_3px_rgba(0,0,0,0.2)]">
+<div class="flex items-center space-x-4">
+<span class="font-headline-sm text-headline-sm font-bold text-secondary tracking-tight">UdehLabs EIC</span>
+<div class="h-4 w-px bg-outline-variant mx-2"></div>
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">rule</span> Architecture Rules
+            </span>
+</div>
+<div class="flex-1 max-w-md mx-8">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded py-1 pl-9 pr-3 text-code-sm font-code-sm text-on-surface focus:border-secondary focus:ring-1 focus:ring-secondary transition-all placeholder:text-on-surface-variant/50 focus:outline-none bg-surface-container-low transition-colors duration-200" placeholder="Search rules, technical debt, or ADRs..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-secondary transition-colors relative group">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full ring-2 ring-surface"></span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary transition-colors pl-2 border-l border-outline-variant">
+<span class="material-symbols-outlined text-[24px]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant flex flex-col py-gutter px-2 z-40 shadow-[1px_0_4px_rgba(0,0,0,0.1)]">
+<div class="flex items-center gap-3 px-2 mb-8 mt-2 cursor-pointer hover:opacity-80 transition-opacity">
+<div class="w-8 h-8 rounded bg-primary-container border border-outline-variant flex items-center justify-center overflow-hidden flex-shrink-0">
+<span class="material-symbols-outlined text-secondary icon-fill text-[20px]">hub</span>
+</div>
+<div class="flex flex-col overflow-hidden">
+<span class="font-headline-sm text-[15px] font-bold text-secondary truncate leading-tight">UdehLabs</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant truncate">Intelligence Center</span>
+</div>
+</div>
+<button class="mx-2 mb-6 bg-primary-container text-on-primary-container border border-outline-variant hover:border-secondary hover:text-secondary transition-all py-1.5 px-3 rounded flex items-center justify-center gap-2 group shadow-sm">
+<span class="material-symbols-outlined text-[16px] group-hover:scale-110 transition-transform">add</span>
+<span class="font-code-sm text-code-sm font-bold">New Analysis</span>
+</button>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto mt-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="account_tree">account_tree</span>
+<span class="font-label-caps text-label-caps mt-0.5">Codebase Map</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-surface-container-highest text-secondary border-l-2 border-secondary scale-[0.98] shadow-sm" href="#">
+<span class="material-symbols-outlined text-[18px] icon-fill" data-icon="rule">rule</span>
+<span class="font-label-caps text-label-caps mt-0.5 font-bold">Architecture Rules</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="assignment">assignment</span>
+<span class="font-label-caps text-label-caps mt-0.5">Requirements</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="analytics">analytics</span>
+<span class="font-label-caps text-label-caps mt-0.5">Impact Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="speed">speed</span>
+<span class="font-label-caps text-label-caps mt-0.5">Technical Debt</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px] group-hover:text-primary transition-colors" data-icon="library_books">library_books</span>
+<span class="font-label-caps text-label-caps mt-0.5">Knowledge Base</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps mt-0.5">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors group" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
+<span class="font-label-caps text-label-caps mt-0.5">Documentation</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[240px] mt-12 p-gutter overflow-y-auto flex flex-col gap-gutter custom-scrollbar">
+<!-- Header Section -->
+<header class="flex justify-between items-end mb-2">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary icon-fill">gavel</span>
+                    Architecture Rule Engine &amp; Debt
+                </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 max-w-2xl">
+                    Real-time enforcement of architectural constraints and technical debt inventory analysis across microservices.
+                </p>
+</div>
+<div class="flex gap-2">
+<button class="bg-surface-container border border-outline-variant hover:bg-surface-container-high text-on-surface px-3 py-1.5 rounded flex items-center gap-2 transition-colors font-code-sm">
+<span class="material-symbols-outlined text-[16px]">refresh</span> Rescan
+                </button>
+<button class="bg-primary-container border border-outline-variant hover:border-secondary text-primary hover:text-secondary px-3 py-1.5 rounded flex items-center gap-2 transition-colors font-code-sm">
+<span class="material-symbols-outlined text-[16px]">download</span> Export Report
+                </button>
+</div>
+</header>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter h-full">
+<!-- Left Section: Architecture Rule Engine (5 columns) -->
+<section class="col-span-5 bg-surface-container-low border border-outline-variant rounded flex flex-col shadow-sm h-[calc(100vh-[180px])]">
+<div class="p-3 border-b border-outline-variant bg-surface/50 flex justify-between items-center rounded-t">
+<h2 class="font-headline-sm text-[16px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-secondary">policy</span>
+                        Rule Engine Status
+                    </h2>
+<span class="bg-secondary/10 text-secondary border border-secondary/30 px-2 py-0.5 rounded font-label-caps text-[9px]">ACTIVE ENFORCEMENT</span>
+</div>
+<div class="flex-1 overflow-y-auto p-3 space-y-3 custom-scrollbar">
+<!-- Rule 1: Enforced, No Violations -->
+<div class="bg-surface border border-outline-variant hover:border-secondary/50 rounded p-3 transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]">check_circle</span>
+<h3 class="font-code-sm text-[12px] font-bold text-on-surface">Domain Dependency Isolation</h3>
+</div>
+<span class="bg-secondary/10 text-secondary px-1.5 py-0.5 rounded font-label-caps text-[9px] border border-secondary/20">ENFORCED</span>
+</div>
+<p class="font-body-sm text-[11px] text-on-surface-variant mb-3 pl-2 border-l border-outline-variant/30 ml-2">
+                            Domain models cannot import from Infrastructure or Application layers.
+                        </p>
+<div class="flex items-center justify-between pl-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">warning</span>
+<span class="font-code-sm text-[10px] text-on-surface-variant">0 Violations</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-secondary font-code-sm text-[10px] flex items-center gap-1 hover:underline">
+                                View Config <span class="material-symbols-outlined text-[12px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Rule 2: Warning, Violations -->
+<div class="bg-surface border border-error-container/50 hover:border-error-container rounded p-3 transition-colors group cursor-pointer relative overflow-hidden shadow-[inset_0_0_15px_rgba(147,0,10,0.05)]">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error-container"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-error-container text-[16px]">warning</span>
+<h3 class="font-code-sm text-[12px] font-bold text-error">UI Layer Isolation</h3>
+</div>
+<span class="bg-error-container/20 text-error px-1.5 py-0.5 rounded font-label-caps text-[9px] border border-error-container/30">WARNING</span>
+</div>
+<p class="font-body-sm text-[11px] text-on-surface-variant mb-3 pl-2 border-l border-outline-variant/30 ml-2">
+                            UI components cannot directly access Data Repositories or Services.
+                        </p>
+<div class="flex items-center justify-between pl-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-error-container icon-fill">error</span>
+<span class="font-code-sm text-[10px] text-error-container font-bold">12 Violations</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-error font-code-sm text-[10px] flex items-center gap-1 hover:underline">
+                                Inspect Nodes <span class="material-symbols-outlined text-[12px]">search</span>
+</button>
+</div>
+</div>
+<!-- Rule 3: Enforced, Violations -->
+<div class="bg-surface border border-tertiary-container/50 hover:border-tertiary-container rounded p-3 transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-container"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[16px]">sync_problem</span>
+<h3 class="font-code-sm text-[12px] font-bold text-on-surface">No Circular Dependencies</h3>
+</div>
+<span class="bg-secondary/10 text-secondary px-1.5 py-0.5 rounded font-label-caps text-[9px] border border-secondary/20">ENFORCED</span>
+</div>
+<p class="font-body-sm text-[11px] text-on-surface-variant mb-3 pl-2 border-l border-outline-variant/30 ml-2">
+                            Strict directed acyclic graph (DAG) enforcement across all modules.
+                        </p>
+<div class="flex items-center justify-between pl-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary icon-fill">warning</span>
+<span class="font-code-sm text-[10px] text-tertiary font-bold">3 Violations (Blocked Build)</span>
+</div>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-tertiary font-code-sm text-[10px] flex items-center gap-1 hover:underline">
+                                View Cycle <span class="material-symbols-outlined text-[12px]">loop</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Section: Technical Debt (7 columns) -->
+<section class="col-span-7 flex flex-col gap-gutter h-[calc(100vh-[180px])]">
+<!-- Radial Gauges Row -->
+<div class="grid grid-cols-3 gap-gutter h-[140px]">
+<!-- Gauge 1: Complexity -->
+<div class="bg-surface-container-low border border-outline-variant rounded p-3 flex flex-col relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-error-container/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<span class="font-label-caps text-on-surface-variant flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[14px]">timeline</span> Code Complexity
+                        </span>
+<div class="flex-1 flex items-center justify-center relative">
+<!-- SVG Radial Gauge Placeholder -->
+<svg class="w-20 h-20 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-error-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="85, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-code-md text-error font-bold leading-none">85<span class="text-[10px] text-on-surface-variant">%</span></span>
+</div>
+</div>
+<div class="mt-1 text-center font-code-sm text-[9px] text-error">High Cognitive Load</div>
+</div>
+<!-- Gauge 2: Coverage -->
+<div class="bg-surface-container-low border border-outline-variant rounded p-3 flex flex-col relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary-container/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<span class="font-label-caps text-on-surface-variant flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[14px]">flaky</span> Test Coverage
+                        </span>
+<div class="flex-1 flex items-center justify-center relative">
+<svg class="w-20 h-20 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-tertiary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="62, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-code-md text-tertiary font-bold leading-none">62<span class="text-[10px] text-on-surface-variant">%</span></span>
+</div>
+</div>
+<div class="mt-1 text-center font-code-sm text-[9px] text-tertiary">Below Threshold (80%)</div>
+</div>
+<!-- Gauge 3: Dependencies -->
+<div class="bg-surface-container-low border border-outline-variant rounded p-3 flex flex-col relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<span class="font-label-caps text-on-surface-variant flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-[14px]">package_2</span> Outdated Deps
+                        </span>
+<div class="flex-1 flex items-center justify-center relative">
+<svg class="w-20 h-20 transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-secondary stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="15, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-code-md text-secondary font-bold leading-none">15<span class="text-[10px] text-on-surface-variant">%</span></span>
+</div>
+</div>
+<div class="mt-1 text-center font-code-sm text-[9px] text-secondary">Healthy Status</div>
+</div>
+</div>
+<!-- Debt Inventory Table -->
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded flex flex-col overflow-hidden shadow-sm">
+<div class="p-2.5 border-b border-outline-variant bg-surface/50 flex justify-between items-center">
+<h2 class="font-headline-sm text-[14px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">inventory_2</span>
+                            Technical Debt Inventory
+                        </h2>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto overflow-y-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container font-label-caps text-on-surface-variant">
+<th class="p-2 font-normal sticky top-0 bg-surface-container z-10 w-8">Severity</th>
+<th class="p-2 font-normal sticky top-0 bg-surface-container z-10">Issue Details</th>
+<th class="p-2 font-normal sticky top-0 bg-surface-container z-10">Location</th>
+<th class="p-2 font-normal sticky top-0 bg-surface-container z-10 w-24 text-right">Age</th>
+</tr>
+</thead>
+<tbody class="font-code-sm text-on-surface">
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container transition-colors group cursor-pointer">
+<td class="p-2 text-center">
+<div class="w-2 h-2 rounded-full bg-error mx-auto"></div>
+</td>
+<td class="p-2">
+<div class="text-[12px] font-bold text-error">Circular dependency</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Auth -&gt; User -&gt; Auth</div>
+</td>
+<td class="p-2 text-primary font-code-sm text-[11px]">src/modules/core</td>
+<td class="p-2 text-right text-on-surface-variant text-[10px]">12d</td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container transition-colors group cursor-pointer">
+<td class="p-2 text-center">
+<div class="w-2 h-2 rounded-full bg-tertiary mx-auto"></div>
+</td>
+<td class="p-2">
+<div class="text-[12px] font-bold">Large file</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">God object detected (1.2k lines)</div>
+</td>
+<td class="p-2 text-primary font-code-sm text-[11px]">OrderService.ts</td>
+<td class="p-2 text-right text-on-surface-variant text-[10px]">45d</td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container transition-colors group cursor-pointer">
+<td class="p-2 text-center">
+<div class="w-2 h-2 rounded-full bg-tertiary mx-auto"></div>
+</td>
+<td class="p-2">
+<div class="text-[12px] font-bold">Missing tests</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">0% coverage on critical path</div>
+</td>
+<td class="p-2 text-primary font-code-sm text-[11px]">API Gateway Router</td>
+<td class="p-2 text-right text-on-surface-variant text-[10px]">5d</td>
+</tr>
+<tr class="border-b border-outline-variant/50 hover:bg-surface-container transition-colors group cursor-pointer">
+<td class="p-2 text-center">
+<div class="w-2 h-2 rounded-full bg-secondary mx-auto"></div>
+</td>
+<td class="p-2">
+<div class="text-[12px] font-bold">Deprecated API usage</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Using v1 endpoints, v2 available</div>
+</td>
+<td class="p-2 text-primary font-code-sm text-[11px]">PaymentClient.ts</td>
+<td class="p-2 text-right text-on-surface-variant text-[10px]">60d</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+<!-- Bottom Section: ADRs -->
+<section class="bg-surface-container-low border border-outline-variant rounded p-3 shadow-sm shrink-0">
+<h2 class="font-headline-sm text-[14px] text-on-surface flex items-center gap-2 mb-3 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-[16px] text-primary">book</span>
+                Recent Architecture Decisions (ADRs)
+            </h2>
+<div class="flex gap-4 overflow-x-auto pb-1 custom-scrollbar">
+<div class="min-w-[280px] bg-surface border border-outline-variant hover:border-primary/50 rounded p-2.5 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-primary font-bold text-[11px]">ADR-012</span>
+<span class="bg-secondary/10 text-secondary border border-secondary/20 px-1 py-0.5 rounded font-label-caps text-[8px]">ACCEPTED</span>
+</div>
+<h3 class="font-body-md text-[13px] font-bold text-on-surface mb-1">Adopt PostgreSQL for multi-tenant isolation</h3>
+<p class="font-body-sm text-[11px] text-on-surface-variant line-clamp-2">Moving from shared NoSQL tables to schema-per-tenant architecture in Postgres to meet new compliance requirements.</p>
+</div>
+<div class="min-w-[280px] bg-surface border border-outline-variant hover:border-primary/50 rounded p-2.5 transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-primary font-bold text-[11px]">ADR-011</span>
+<span class="bg-secondary/10 text-secondary border border-secondary/20 px-1 py-0.5 rounded font-label-caps text-[8px]">ACCEPTED</span>
+</div>
+<h3 class="font-body-md text-[13px] font-bold text-on-surface mb-1">Migrate to gRPC for Internal Services</h3>
+<p class="font-body-sm text-[11px] text-on-surface-variant line-clamp-2">Replacing REST over HTTP/1.1 with gRPC to reduce serialization overhead and improve latency in microservice communication.</p>
+</div>
+<div class="min-w-[280px] bg-surface border border-outline-variant hover:border-primary/50 rounded p-2.5 transition-colors cursor-pointer group opacity-70">
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-on-surface-variant font-bold text-[11px]">ADR-010</span>
+<span class="bg-outline-variant/20 text-on-surface-variant border border-outline-variant/30 px-1 py-0.5 rounded font-label-caps text-[8px]">SUPERSEDED</span>
+</div>
+<h3 class="font-body-md text-[13px] font-bold text-on-surface mb-1">Use Redis for Event Sourcing</h3>
+<p class="font-body-sm text-[11px] text-on-surface-variant line-clamp-2">Superseded by ADR-014 (Kafka adoption). Initial implementation proved difficult to scale for durable event storage.</p>
+</div>
+</div>
+</section>
+</main>
+<style>
+        /* Custom Scrollbar for dark theme */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #334155;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #45464d;
+        }
+    </style>
+</body></html>

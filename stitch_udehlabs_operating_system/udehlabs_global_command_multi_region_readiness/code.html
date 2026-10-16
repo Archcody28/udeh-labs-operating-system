@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Global Command &amp; Multi-Region Readiness</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline": "#908fa0",
+                      "tertiary-fixed": "#e3dfff",
+                      "on-error": "#690005",
+                      "surface-container-lowest": "#060e20",
+                      "on-tertiary-fixed": "#100069",
+                      "on-primary-container": "#0d0096",
+                      "surface-container-high": "#222a3d",
+                      "primary-fixed-dim": "#c0c1ff",
+                      "background": "#0b1326",
+                      "surface-variant": "#2d3449",
+                      "error-container": "#93000a",
+                      "secondary-fixed-dim": "#89ceff",
+                      "on-primary-fixed-variant": "#2f2ebe",
+                      "surface-bright": "#31394d",
+                      "on-tertiary": "#1f00a4",
+                      "on-secondary": "#00344d",
+                      "inverse-on-surface": "#283044",
+                      "inverse-surface": "#dae2fd",
+                      "on-error-container": "#ffdad6",
+                      "tertiary": "#c3c0ff",
+                      "on-background": "#dae2fd",
+                      "on-tertiary-fixed-variant": "#372abf",
+                      "tertiary-fixed-dim": "#c3c0ff",
+                      "outline-variant": "#464554",
+                      "on-secondary-fixed-variant": "#004c6e",
+                      "surface-tint": "#c0c1ff",
+                      "secondary": "#89ceff",
+                      "on-surface": "#dae2fd",
+                      "on-primary-fixed": "#07006c",
+                      "surface-container": "#171f33",
+                      "tertiary-container": "#6a63f2",
+                      "surface-container-highest": "#2d3449",
+                      "on-secondary-container": "#00344e",
+                      "on-secondary-fixed": "#001e2f",
+                      "secondary-container": "#00a2e6",
+                      "primary-container": "#8083ff",
+                      "error": "#ffb4ab",
+                      "primary-fixed": "#e1e0ff",
+                      "inverse-primary": "#494bd6",
+                      "secondary-fixed": "#c9e6ff",
+                      "on-primary": "#1000a9",
+                      "primary": "#c0c1ff",
+                      "surface-dim": "#0b1326",
+                      "surface": "#0b1326",
+                      "on-surface-variant": "#c7c4d7",
+                      "surface-container-low": "#131b2e",
+                      "on-tertiary-container": "#020026"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "sm": "8px",
+                      "unit": "4px",
+                      "md": "16px",
+                      "xl": "40px",
+                      "gutter": "16px",
+                      "xs": "4px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "display": [
+                              "Hanken Grotesk"
+                      ],
+                      "title-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glowing-border {
+            box-shadow: inset 0px 0px 8px rgba(0, 162, 230, 0.5);
+        }
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hidden {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden antialiased">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-lg h-16 bg-surface-container border-b border-outline-variant">
+<div class="flex items-center gap-lg">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">UdehLabs Command</h1>
+</div>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="font-label-sm text-label-sm text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Billing</a>
+<a class="font-label-sm text-label-sm text-primary font-bold border-b-2 border-primary pb-1" href="#">Regions</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant font-medium hover:text-primary transition-colors duration-200" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200"><span class="material-symbols-outlined">language</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors duration-200"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+</header>
+<!-- Main Layout -->
+<div class="flex pt-16 h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex-col bg-surface-container-low border-r border-outline-variant py-md">
+<div class="px-lg mb-lg">
+<div class="flex items-center gap-md mb-xs">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional, modern 3D rendered avatar of a tech enterprise user, sleek corporate style, neutral lighting, minimalist background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKdxrRLTM-6gkyidR_-1JuKn7G-YX9pZxVRlbEXQugA-qFI3jOUTJPHc_bxRKrq7elYh3WaoheJFGXqaiArDqt4YNPLRAMNPRHIQPjN1Wd1DS_ywCjBxe1Trw-8T5L8b33cTYkGCpcktpUorFVn4aICVntUxex1N0MFYTB-jq4nl3wqY8Rj5qzuqHn90Z8m_U1Fg8P7jAUBsW35fE0wA6-h84ABRBWBiDnRlSzupfyGoJI-xX3C3IPZw"/>
+</div>
+<div>
+<h2 class="font-label-md text-label-md font-bold text-on-surface">UdehLabs Admin</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Enterprise Tier</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-xs px-md">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">domain</span>
+                    Organization
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary bg-primary-container/10 border-l-4 border-primary shadow-[0px_0px_8px_rgba(0,162,230,0.5)] transition-all duration-200 font-label-md text-label-md font-bold" href="#">
+<span class="material-symbols-outlined text-[20px]">public</span>
+                    Distribution
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">translate</span>
+                    Localization
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">query_stats</span>
+                    Analytics
+                </a>
+</nav>
+<div class="mt-auto px-md pb-md flex flex-col gap-xs">
+<button class="w-full py-sm bg-primary text-on-primary rounded-lg font-label-md text-label-md font-bold hover:brightness-110 transition-all mb-md">Scale Up</button>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+                    Settings
+                </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+                    Audit Log
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 bg-background p-lg overflow-y-auto scroll-hidden pb-24">
+<div class="max-w-7xl mx-auto space-y-lg">
+<!-- Header -->
+<div class="flex justify-between items-end border-b border-surface-container-high pb-md">
+<div>
+<h2 class="font-display text-display text-on-surface">Global Distribution</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Multi-Region Readiness &amp; Telemetry</p>
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm bg-surface-container rounded-lg border border-outline-variant font-label-md text-label-md text-on-surface flex items-center gap-sm hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">sync</span> Refresh
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Global Distribution Map (Spans 8 cols on large screens) -->
+<div class="lg:col-span-8 bg-surface-container rounded-xl border border-outline-variant overflow-hidden flex flex-col relative min-h-[400px]">
+<div class="p-md border-b border-surface-variant flex justify-between items-center bg-surface-container-high z-10">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">public</span>
+                                Active Cloud Regions
+                            </h3>
+<div class="flex gap-xs">
+<span class="px-sm py-xs bg-surface-variant rounded-md font-label-sm text-label-sm border border-outline-variant text-on-surface-variant">Live View</span>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-dim flex items-center justify-center p-lg overflow-hidden">
+<!-- Map Background (Placeholder for actual map image) -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-screen" data-alt="A highly detailed, stylized minimalist digital world map vector graphic in dark cyber-enterprise aesthetic. Dark navy background (#0b1326) with subtle glowing cyan grid lines and dotted continents. Modern, clean, tech-focused data visualization style." data-location="World Map" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcoW1zDxF561ZaRcb_PHs6boAJeFIrcIyTYUuMlNvKDIVG66eBtY_jlQc6CT_cLmTBfS9DSG62Ti-3HPxpPZNiyGTzVpch3coDSTgdF-gulYH3gESxMQCnxbndNQn66KicaiZzJLzeIRfLGWxb4zIKPkYsZ6RXrJuXViZM8PDBh0LvK26L7DG2hFXwMy8-iF4GTAA5o2WtC9sCp-ffGcUFzADaM2I9PgE6TRisnpBWwh1Q69UfN3c-gQ"/>
+<!-- Region Nodes Overlay -->
+<div class="absolute inset-0 w-full h-full">
+<!-- US-EAST -->
+<div class="absolute top-1/3 left-1/4 flex flex-col items-center group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-secondary shadow-[0_0_12px_rgba(137,206,255,0.8)] border-2 border-background animate-pulse relative z-10"></div>
+<div class="mt-2 bg-surface-container/90 backdrop-blur-sm px-sm py-xs rounded border border-outline-variant/50 text-center transition-all group-hover:scale-110 group-hover:border-secondary">
+<p class="font-label-sm text-label-sm text-on-surface">US-EAST</p>
+<p class="font-label-sm text-[10px] text-secondary">4,210 Nodes</p>
+</div>
+</div>
+<!-- EU-WEST -->
+<div class="absolute top-1/4 left-1/2 flex flex-col items-center group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-secondary shadow-[0_0_12px_rgba(137,206,255,0.8)] border-2 border-background animate-pulse relative z-10"></div>
+<div class="mt-2 bg-surface-container/90 backdrop-blur-sm px-sm py-xs rounded border border-outline-variant/50 text-center transition-all group-hover:scale-110 group-hover:border-secondary">
+<p class="font-label-sm text-label-sm text-on-surface">EU-WEST</p>
+<p class="font-label-sm text-[10px] text-secondary">2,845 Nodes</p>
+</div>
+</div>
+<!-- AP-SOUTH -->
+<div class="absolute top-1/2 right-1/4 flex flex-col items-center group cursor-pointer">
+<div class="w-4 h-4 rounded-full bg-error shadow-[0_0_12px_rgba(255,180,171,0.5)] border-2 border-background relative z-10"></div>
+<div class="mt-2 bg-surface-container/90 backdrop-blur-sm px-sm py-xs rounded border border-outline-variant/50 text-center transition-all group-hover:scale-110 group-hover:border-error">
+<p class="font-label-sm text-label-sm text-on-surface">AP-SOUTH</p>
+<p class="font-label-sm text-[10px] text-error">Latency Alert</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Localization Posture (Spans 4 cols on large screens) -->
+<div class="lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md flex flex-col">
+<div class="flex justify-between items-center mb-md pb-sm border-b border-surface-variant">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">translate</span>
+                                Localization Posture
+                            </h3>
+</div>
+<div class="flex-1 space-y-md">
+<!-- Lang Item -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<div class="flex items-center gap-sm">
+<span class="px-sm py-unit bg-surface-variant rounded font-label-sm text-label-sm text-on-surface border border-outline-variant">EN-US</span>
+<span class="font-label-md text-label-md text-on-surface-variant">English</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">100%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[100%] rounded-full"></div>
+</div>
+</div>
+<!-- Lang Item -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<div class="flex items-center gap-sm">
+<span class="px-sm py-unit bg-surface-variant rounded font-label-sm text-label-sm text-on-surface border border-outline-variant">DE-DE</span>
+<span class="font-label-md text-label-md text-on-surface-variant">German</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">94%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[94%] rounded-full"></div>
+</div>
+</div>
+<!-- Lang Item -->
+<div>
+<div class="flex justify-between items-end mb-xs">
+<div class="flex items-center gap-sm">
+<span class="px-sm py-unit bg-surface-variant rounded font-label-sm text-label-sm text-on-surface border border-outline-variant">JA-JP</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Japanese</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary">88%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[88%] rounded-full"></div>
+</div>
+</div>
+<div class="mt-auto pt-md border-t border-surface-variant">
+<div class="flex justify-between items-center p-sm bg-surface-container-high rounded-lg border border-outline-variant">
+<span class="font-label-md text-label-md text-on-surface-variant">RTL Readiness</span>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-secondary"></div>
+<span class="font-label-sm text-label-sm text-on-surface">Verified</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Currency & FinOps (Spans 4 cols on large screens) -->
+<div class="lg:col-span-4 bg-surface-container rounded-xl border border-outline-variant p-md">
+<div class="flex justify-between items-center mb-md pb-sm border-b border-surface-variant">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">payments</span>
+                                Currency &amp; FinOps
+                            </h3>
+</div>
+<div class="space-y-md">
+<!-- MRR Item -->
+<div class="flex items-center justify-between p-sm bg-surface-container-highest rounded-lg border border-outline-variant/50 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex items-center gap-md pl-sm">
+<div class="w-10 h-10 rounded bg-surface-variant flex items-center justify-center font-label-md text-on-surface">USD</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">US-East MRR</p>
+<p class="font-headline-md text-headline-md text-on-surface">$1.2M</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity">arrow_outward</span>
+</div>
+<!-- MRR Item -->
+<div class="flex items-center justify-between p-sm bg-surface-container-highest rounded-lg border border-outline-variant/50 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center gap-md pl-sm">
+<div class="w-10 h-10 rounded bg-surface-variant flex items-center justify-center font-label-md text-on-surface">EUR</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">EU-West MRR</p>
+<p class="font-headline-md text-headline-md text-on-surface">€840K</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary opacity-0 group-hover:opacity-100 transition-opacity">arrow_outward</span>
+</div>
+</div>
+</div>
+<!-- Scale Intelligence Table (Spans 8 cols on large screens) -->
+<div class="lg:col-span-8 bg-surface-container rounded-xl border border-outline-variant flex flex-col overflow-hidden">
+<div class="p-md border-b border-surface-variant flex justify-between items-center bg-surface-container-high">
+<h3 class="font-title-lg text-title-lg text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-container">memory</span>
+                                Scale Intelligence
+                            </h3>
+<button class="font-label-sm text-label-sm text-primary hover:underline">View All Diagnostics</button>
+</div>
+<div class="flex-1 overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-variant/50 border-b border-surface-variant">
+<tr>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">Region</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">Noisy Tenant Detection</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium">Resource Allocation</th>
+<th class="py-sm px-md font-label-sm text-label-sm text-on-surface-variant font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface divide-y divide-surface-variant">
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<span class="font-label-md">US-EAST</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded bg-surface-variant border border-outline-variant font-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Clear
+                                            </span>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm w-32">
+<div class="h-1 flex-1 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-secondary w-[45%]"></div></div>
+<span class="font-label-sm text-on-surface-variant">45%</span>
+</div>
+</td>
+<td class="py-md px-md text-right"><span class="font-label-sm text-secondary">Optimal</span></td>
+</tr>
+<tr class="hover:bg-surface-container-highest transition-colors">
+<td class="py-md px-md">
+<div class="flex items-center gap-sm">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+<span class="font-label-md">AP-SOUTH</span>
+</div>
+</td>
+<td class="py-md px-md">
+<span class="inline-flex items-center gap-xs px-sm py-xs rounded bg-error-container/20 border border-error/30 font-label-sm text-error">
+<span class="material-symbols-outlined text-[14px]">warning</span> Tenant ID: 94A2
+                                            </span>
+</td>
+<td class="py-md px-md">
+<div class="flex items-center gap-sm w-32">
+<div class="h-1 flex-1 bg-surface-variant rounded-full overflow-hidden"><div class="h-full bg-error w-[92%]"></div></div>
+<span class="font-label-sm text-error">92%</span>
+</div>
+</td>
+<td class="py-md px-md text-right"><span class="font-label-sm text-error">Throttling</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 w-full z-50 flex justify-between items-center px-lg h-8 bg-surface-container-lowest border-t border-outline-variant">
+<div class="font-label-sm text-label-sm font-bold text-secondary">© 2024 UdehLabs Enterprise Global</div>
+<div class="flex gap-md">
+<span class="font-label-sm text-label-sm text-outline hover:text-primary-fixed transition-colors">US-EAST: 24ms</span>
+<span class="font-label-sm text-label-sm text-outline hover:text-primary-fixed transition-colors">EU-CENTRAL: 42ms</span>
+<span class="font-label-sm text-label-sm text-outline hover:text-primary-fixed transition-colors">AP-SOUTH: 112ms</span>
+</div>
+</footer>
+</body></html>

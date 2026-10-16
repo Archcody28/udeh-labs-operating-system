@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Developer Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#c9e6ff",
+                        "outline": "#918fa1",
+                        "surface-variant": "#26364a",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container": "#102034",
+                        "on-tertiary": "#00344d",
+                        "surface-panel": "rgba(30, 41, 59, 0.7)",
+                        "error": "#ffb4ab",
+                        "primary-container": "#4f46e5",
+                        "inverse-surface": "#d3e4fe",
+                        "outline-variant": "#464555",
+                        "surface-container-highest": "#26364a",
+                        "on-tertiary-container": "#b8e0ff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-tertiary-fixed": "#001e2f",
+                        "surface-bright": "#2a3a4f",
+                        "secondary-container": "#571bc1",
+                        "surface-tint": "#c3c0ff",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#c4abff",
+                        "outline-muted": "#464555",
+                        "error-container": "#93000a",
+                        "surface-dim": "#031427",
+                        "on-surface": "#d3e4fe",
+                        "on-background": "#d3e4fe",
+                        "surface-container-lowest": "#000f21",
+                        "secondary": "#d0bcff",
+                        "tertiary-container": "#006693",
+                        "ai-glow": "rgba(139, 92, 246, 0.15)",
+                        "background": "#031427",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-surface-variant": "#c7c4d8",
+                        "secondary-fixed": "#e9ddff",
+                        "inverse-primary": "#4d44e3",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-on-surface": "#213145",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-primary": "#1d00a5",
+                        "surface-container-high": "#1b2b3f",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#dad7ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "tertiary": "#89ceff",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-secondary-fixed": "#23005c",
+                        "surface": "#031427",
+                        "error-accent": "#ffb4ab",
+                        "primary": "#c3c0ff",
+                        "surface-container-low": "#0b1c30",
+                        "on-secondary": "#3c0091"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "header-height": "64px",
+                        "sidebar": "260px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "display": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "code-md": ["JetBrains Mono"],
+                        "code-sm": ["JetBrains Mono"],
+                        "status-tiny": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "status-tiny": ["10px", { "lineHeight": "12px", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-image: radial-gradient(circle at 50% 0%, #1b2b3f 0%, #031427 60%);
+        }
+        .ai-glow-shadow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+        .glass-edge {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex items-center justify-center p-md sm:p-lg antialiased">
+<!-- Content Canvas (Navigation Shell Suppressed for Linear/Transactional Onboarding Intent) -->
+<main class="w-full max-w-[800px]">
+<!-- Brand Header -->
+<div class="text-center mb-xl">
+<h1 class="font-display text-display text-on-surface tracking-tight mb-xs">UdehLabs</h1>
+<p class="font-body-md text-body-md text-primary font-code-md tracking-wider uppercase">Console Initialization</p>
+</div>
+<!-- Wizard Container (Glassmorphism Card) -->
+<div class="bg-surface-panel backdrop-blur-md border border-outline-variant rounded-xl p-xl shadow-2xl glass-edge relative overflow-hidden">
+<!-- Subtle background ambient glow -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container opacity-10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Progress Stepper -->
+<div class="flex items-center justify-between w-full mb-xl relative z-10">
+<!-- Step 1: Active -->
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-caps text-label-caps ai-glow-shadow ring-4 ring-primary-container/20">
+                        1
+                    </div>
+<span class="font-label-caps text-label-caps text-primary">Identity</span>
+</div>
+<div class="flex-1 h-[2px] bg-primary-container/30 mx-md"></div>
+<!-- Step 2: Pending -->
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps">
+                        2
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Skills</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant/50 mx-md"></div>
+<!-- Step 3: Pending -->
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps">
+                        3
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Preferences</span>
+</div>
+<div class="flex-1 h-[2px] bg-outline-variant/50 mx-md"></div>
+<!-- Step 4: Pending -->
+<div class="flex flex-col items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center font-label-caps text-label-caps">
+                        4
+                    </div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Portfolio</span>
+</div>
+</div>
+<!-- Form Content: Step 1 -->
+<div class="space-y-lg relative z-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Professional Identity</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Define your role and core focus within the UdehLabs ecosystem.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mt-md">
+<!-- Job Title -->
+<div class="space-y-sm col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">Job Title</label>
+<input class="w-full bg-surface-container-high border border-transparent rounded-lg text-on-surface font-body-md text-body-md px-md py-[10px] focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none placeholder-on-surface-variant/40 transition-all" placeholder="e.g. Senior Backend Engineer" type="text"/>
+</div>
+<!-- Primary Specialization Dropdown -->
+<div class="space-y-sm col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant">Primary Specialization</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-high border border-transparent rounded-lg text-on-surface font-body-md text-body-md px-md py-[10px] pr-xl focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none cursor-pointer transition-all">
+<option disabled="" selected="" value="">Select primary focus area...</option>
+<option value="frontend">Frontend Engineering</option>
+<option value="backend">Backend Engineering</option>
+<option value="fullstack">Fullstack Development</option>
+<option value="ai">AI / Machine Learning</option>
+<option value="data">Data Engineering</option>
+<option value="devops">DevOps &amp; Infrastructure</option>
+<option value="mobile">Mobile Development</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-md text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Bio -->
+<div class="space-y-sm col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant flex items-center justify-between">
+<span>Professional Bio</span>
+<span class="font-status-tiny text-status-tiny text-on-surface-variant/50">Markdown supported</span>
+</label>
+<textarea class="w-full bg-surface-container-high border border-transparent rounded-lg text-on-surface font-body-md text-body-md px-md py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none placeholder-on-surface-variant/40 resize-none transition-all" placeholder="Briefly describe your technical background, current focus, and what you aim to achieve..." rows="4"></textarea>
+</div>
+</div>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-xl pt-lg border-t border-outline-variant/40 flex items-center justify-between relative z-10">
+<!-- Hidden Back button for structural balance on step 1, though it could be completely omitted. Keeping it invisible for layout. -->
+<button class="px-md py-[10px] rounded-lg bg-transparent text-on-surface-variant font-label-caps text-label-caps flex items-center gap-sm invisible pointer-events-none">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_back">arrow_back</span>
+                    Back
+                </button>
+<button class="px-lg py-[10px] rounded-lg bg-primary-container text-on-primary-container font-label-caps text-label-caps flex items-center gap-sm hover:bg-primary transition-colors duration-150 active:scale-95 ai-glow-shadow">
+                    Next: Skills
+                    <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</body></html>

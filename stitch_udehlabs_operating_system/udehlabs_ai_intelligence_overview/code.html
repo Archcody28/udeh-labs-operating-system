@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intelligence Overview - Phase P.09</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS Setup -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#273647",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#464555",
+                        "on-tertiary-container": "#d4dbf5",
+                        "secondary-fixed": "#ffdadb",
+                        "surface-bright": "#2c3a4c",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#dad7ff",
+                        "outline": "#918fa1",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "inverse-on-surface": "#233143",
+                        "secondary-container": "#b50036",
+                        "on-secondary-fixed-variant": "#92002a",
+                        "surface-container-lowest": "#010f1f",
+                        "secondary": "#ffb2b7",
+                        "surface-container-highest": "#273647",
+                        "surface-tint": "#c3c0ff",
+                        "on-tertiary": "#283044",
+                        "tertiary": "#bec6e0",
+                        "primary-fixed": "#e2dfff",
+                        "background": "#051424",
+                        "on-secondary-fixed": "#40000d",
+                        "tertiary-fixed": "#dae2fd",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "tertiary-container": "#586076",
+                        "primary-container": "#4f46e5",
+                        "inverse-surface": "#d4e4fa",
+                        "surface": "#051424",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-secondary-container": "#ffc2c4",
+                        "on-primary": "#1d00a5",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-dim": "#051424",
+                        "on-surface": "#d4e4fa",
+                        "surface-container-high": "#1c2b3c",
+                        "primary": "#c3c0ff",
+                        "on-background": "#d4e4fa",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container": "#122131",
+                        "inverse-primary": "#4d44e3",
+                        "on-secondary": "#67001b",
+                        "secondary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "unit": "4px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "mono-data": ["JetBrains Mono"],
+                        "mono-label": ["JetBrains Mono"],
+                        "body-base": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mono-data": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "mono-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Geist', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .pattern-bg { background-image: radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 16px 16px; }
+        
+        /* Custom scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #273647; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #464555; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col md:flex-row overflow-hidden font-body-base text-body-base">
+<!-- TopNavBar Container (Shared Component) -->
+<nav class="bg-surface/90 backdrop-blur-md dark:bg-surface/90 fixed top-0 w-full z-50 border-b border-white/10 hidden md:block">
+<div class="flex justify-between items-center px-margin h-16 w-full max-w-container-max mx-auto pl-72"> <!-- Added pl-72 to offset SideNav visually while adhering to top-0 w-full structural mandate -->
+<div class="flex items-center gap-6">
+<span class="font-display-lg text-headline-md tracking-tighter text-primary">Phase P.09</span>
+<div class="flex items-center gap-4 ml-8">
+<!-- Navigation Links with Active Logic (Overview is active) -->
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Overview</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Mesh</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Fabric</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Workflow</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 active:opacity-80 transition-opacity" href="#">Gov</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative flex items-center border border-white/10 bg-surface-container-low px-3 py-1.5 rounded">
+<span class="material-symbols-outlined text-on-surface-variant text-sm mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 text-on-surface placeholder:text-on-surface-variant/50 p-0" placeholder="Search..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded font-mono-label text-mono-label hover:opacity-90 transition-opacity">Command</button>
+<div class="flex gap-2 text-on-surface-variant">
+<button class="hover:text-primary transition-colors duration-200"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="hover:text-primary transition-colors duration-200"><span class="material-symbols-outlined" data-icon="settings">settings</span></button>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-white/10">
+<img alt="Chief Architect Avatar" class="w-full h-full object-cover" data-alt="A detailed headshot avatar of a technical chief architect in a dark, atmospheric setting, professional lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOA1DpsNlFJep77_pvXWoohDVJXRYlcfdHjVmcn0o4BPD_nfMHZ_D8BfPKq8Mhsjj2QpqKxtcRRimU73QDjI0Aw8DKFrDseRYH7MXd4b2Vk5zmtdKjZ9eRxIQMgplQST6DnQHyNm_Bgt8qToGw5rRrDYPblHyiRBncQxnxOD1IJnbvO2GZOzBNOWhwarp1bpO4U6n4Ns-Oik4pATnaomxhWLopOsnvFbv1HYd_ts5RQrsgyCn4PND0Vw"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar Container (Shared Component) -->
+<aside class="bg-surface-container-low dark:bg-surface-container-low h-screen w-64 fixed left-0 top-0 border-r border-white/10 flex flex-col py-margin z-40 hidden md:flex">
+<!-- Header -->
+<div class="px-margin mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+</div>
+<div>
+<h2 class="font-display-lg text-headline-md text-primary text-base">Core Reasoning</h2>
+<p class="font-mono-label text-mono-label text-on-surface-variant text-[10px]">Active Autonomy: Level 4</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 flex flex-col font-mono-label text-mono-label">
+<!-- Active Tab -->
+<a class="bg-primary-container/20 text-primary border-l-4 border-primary px-4 py-3 flex items-center gap-3 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="insights">insights</span>
+                Intelligence Overview
+            </a>
+<!-- Inactive Tabs -->
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="hub">hub</span>
+                Agent Mesh
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="database">database</span>
+                Knowledge Fabric
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="auto_settings">cloud_download</span>
+                Automation Workflows
+            </a>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="gavel">gavel</span>
+                AI Governance
+            </a>
+</nav>
+<!-- CTA & Footer -->
+<div class="px-margin mt-auto flex flex-col gap-4">
+<button class="w-full bg-primary-container text-on-primary-container border border-primary/50 py-2 rounded font-mono-label text-mono-label hover:bg-primary-container/80 transition-colors">
+                Deploy New Agent
+            </button>
+<div class="flex flex-col gap-2 font-mono-label text-mono-label">
+<a class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span> Docs
+                </a>
+<a class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="sensors">sensors</span> Status
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-64 mt-16 p-gutter md:p-margin h-[calc(100vh-4rem)] overflow-y-auto bg-surface relative pattern-bg">
+<div class="max-w-container-max mx-auto flex flex-col gap-6 relative z-10">
+<!-- Global Command Input -->
+<section class="w-full max-w-3xl mx-auto">
+<div class="relative bg-surface-container-high/80 backdrop-blur-md border border-white/10 rounded-lg p-1 group focus-within:border-primary/50 transition-colors shadow-2xl shadow-black/50">
+<div class="flex items-center px-4 py-2">
+<span class="material-symbols-outlined text-primary mr-3 animate-pulse" data-icon="blur_on">blur_on</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-body-base text-body-base text-on-surface placeholder:text-on-surface-variant/40" placeholder="Summarize our project activity and send to the team..." type="text" value="Summarize our project activity and send to the team"/>
+<button class="ml-2 bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 px-3 py-1.5 rounded font-mono-label text-mono-label transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="send">send</span> Execute
+                        </button>
+</div>
+</div>
+</section>
+<!-- Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Global Reasoning Flow (Main Viz) -->
+<section class="col-span-1 lg:col-span-8 bg-surface-container-low border border-white/5 rounded-lg overflow-hidden flex flex-col h-[400px]">
+<div class="p-4 border-b border-white/5 flex justify-between items-center bg-surface-container-lowest/50">
+<h3 class="font-mono-label text-mono-label text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="account_tree">account_tree</span>
+                            Global Reasoning Flow
+                        </h3>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono-data bg-primary/10 text-primary border border-primary/20">72 Active Nodes</span>
+</div>
+</div>
+<div class="flex-1 relative bg-[radial-gradient(ellipse_at_center,rgba(79,70,229,0.1)_0%,transparent_70%)] overflow-hidden flex items-center justify-center group cursor-crosshair">
+<!-- Simulated Node Graph structure -->
+<div class="absolute w-full h-full opacity-30 flex items-center justify-center">
+<svg height="100%" width="100%">
+<path class="opacity-50" d="M100,200 Q250,50 400,200 T700,200" fill="none" stroke="#4f46e5" stroke-dasharray="4 4" stroke-width="1"></path>
+<path class="opacity-20" d="M100,200 Q250,350 400,200 T700,200" fill="none" stroke="#4f46e5" stroke-width="1"></path>
+</svg>
+</div>
+<div class="relative z-10 flex flex-col items-center gap-8">
+<!-- Core Node -->
+<div class="w-16 h-16 rounded-full border border-primary bg-surface shadow-[0_0_15px_rgba(79,70,229,0.5)] flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+</div>
+<div class="flex gap-16">
+<!-- Sub Nodes -->
+<div class="bg-surface-container-high border border-white/10 px-4 py-2 rounded flex flex-col items-center">
+<span class="font-mono-label text-[10px] text-on-surface-variant mb-1">Data Ingestion</span>
+<div class="h-1 w-12 bg-surface-variant rounded overflow-hidden">
+<div class="h-full bg-primary w-[85%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-high border border-primary/30 px-4 py-2 rounded flex flex-col items-center relative before:absolute before:inset-0 before:border before:border-primary before:animate-pulse before:rounded">
+<span class="font-mono-label text-[10px] text-primary mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="sync">sync</span> Synthesizing
+                                    </span>
+<div class="h-1 w-12 bg-surface-variant rounded overflow-hidden">
+<div class="h-full bg-primary w-[45%]"></div>
+</div>
+</div>
+<div class="bg-surface-container-high border border-white/10 px-4 py-2 rounded flex flex-col items-center opacity-60">
+<span class="font-mono-label text-[10px] text-on-surface-variant mb-1">Output Routing</span>
+<div class="h-1 w-12 bg-surface-variant rounded overflow-hidden">
+<div class="h-full bg-primary w-0"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Autonomy Distribution -->
+<section class="col-span-1 lg:col-span-4 bg-surface-container-low border border-white/5 rounded-lg overflow-hidden flex flex-col">
+<div class="p-4 border-b border-white/5 bg-surface-container-lowest/50">
+<h3 class="font-mono-label text-mono-label text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="tune">tune</span>
+                            Autonomy Distribution
+                        </h3>
+</div>
+<div class="p-6 flex-1 flex flex-col gap-5 justify-center">
+<!-- Level L4 -->
+<div>
+<div class="flex justify-between font-mono-label text-mono-label mb-2">
+<span class="text-primary font-bold">L4 Agentic</span>
+<span class="text-on-surface">68%</span>
+</div>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[68%]"></div>
+</div>
+</div>
+<!-- Level L3 -->
+<div>
+<div class="flex justify-between font-mono-label text-mono-label mb-2">
+<span class="text-on-surface-variant">L3 Supervised</span>
+<span class="text-on-surface-variant">22%</span>
+</div>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed-dim w-[22%]"></div>
+</div>
+</div>
+<!-- Level L2 -->
+<div>
+<div class="flex justify-between font-mono-label text-mono-label mb-2">
+<span class="text-on-surface-variant">L2 Assisted</span>
+<span class="text-on-surface-variant">8%</span>
+</div>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed-dim w-[8%] opacity-70"></div>
+</div>
+</div>
+<!-- Level L1/0 -->
+<div>
+<div class="flex justify-between font-mono-label text-mono-label mb-2">
+<span class="text-error/80">L0-L1 Manual</span>
+<span class="text-error/80">2%</span>
+</div>
+<div class="h-1 w-full bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-error w-[2%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Intelligent Insights List -->
+<section class="col-span-1 lg:col-span-7 bg-surface-container-low border border-white/5 rounded-lg overflow-hidden flex flex-col min-h-[300px]">
+<div class="p-4 border-b border-white/5 bg-surface-container-lowest/50 flex justify-between items-center">
+<h3 class="font-mono-label text-mono-label text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="lightbulb">lightbulb</span>
+                            Intelligent Insights
+                        </h3>
+<button class="text-[10px] font-mono-label text-on-surface-variant hover:text-primary transition-colors">View Log</button>
+</div>
+<div class="p-4 flex flex-col gap-3 overflow-y-auto">
+<!-- Insight Card 1 (High Confidence) -->
+<div class="bg-surface-container-high/50 border border-white/5 p-4 rounded relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="flex items-center gap-2 font-mono-label text-[10px]">
+<span class="bg-primary-container/20 text-primary px-1.5 py-0.5 rounded border border-primary/20">AGENT_04</span>
+<span class="text-on-surface-variant">Source: Knowledge Fabric</span>
+</div>
+<span class="text-primary font-mono-data text-xs">96% Conf</span>
+</div>
+<p class="font-body-base text-sm text-on-surface pl-2 leading-relaxed">
+                                Detected a 14% anomaly in workflow execution times for 'Project Alpha' overnight. Root cause localized to latency in third-party API integration. Mitigation strategy applied.
+                            </p>
+</div>
+<!-- Insight Card 2 (Medium Confidence) -->
+<div class="bg-surface-container-high/50 border border-white/5 p-4 rounded relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary-fixed-dim"></div>
+<div class="flex justify-between items-start mb-2 pl-2">
+<div class="flex items-center gap-2 font-mono-label text-[10px]">
+<span class="bg-surface-variant text-on-surface-variant px-1.5 py-0.5 rounded border border-white/10">GOV_AGENT</span>
+<span class="text-on-surface-variant">Source: Compliance Scan</span>
+</div>
+<span class="text-tertiary-fixed-dim font-mono-data text-xs">72% Conf</span>
+</div>
+<p class="font-body-base text-sm text-on-surface pl-2 leading-relaxed">
+                                Potential policy friction identified in newly generated automated response templates. Recommend human-in-the-loop review for tone consistency before full deployment.
+                            </p>
+</div>
+</div>
+</section>
+<!-- Neural Activity Graph (Placeholder) -->
+<section class="col-span-1 lg:col-span-5 bg-surface-container-low border border-white/5 rounded-lg overflow-hidden flex flex-col h-[300px]">
+<div class="p-4 border-b border-white/5 bg-surface-container-lowest/50">
+<h3 class="font-mono-label text-mono-label text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="ssid_chart">ssid_chart</span>
+                            Neural Activity (Compute)
+                        </h3>
+</div>
+<div class="flex-1 p-4 relative flex items-end">
+<!-- Simulated Bar Chart using HTML/CSS -->
+<div class="w-full h-full flex items-end justify-between gap-1 opacity-70">
+<div class="w-full bg-surface-variant rounded-t" style="height: 20%"></div>
+<div class="w-full bg-surface-variant rounded-t" style="height: 35%"></div>
+<div class="w-full bg-surface-variant rounded-t" style="height: 25%"></div>
+<div class="w-full bg-primary/40 rounded-t" style="height: 60%"></div>
+<div class="w-full bg-primary/60 rounded-t" style="height: 85%"></div>
+<div class="w-full bg-primary/80 rounded-t border-t border-primary relative" style="height: 95%">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface text-primary font-mono-data text-[10px] px-1 rounded border border-primary/30">Peak</div>
+</div>
+<div class="w-full bg-primary/40 rounded-t" style="height: 50%"></div>
+<div class="w-full bg-surface-variant rounded-t" style="height: 30%"></div>
+<div class="w-full bg-surface-variant rounded-t" style="height: 40%"></div>
+<div class="w-full bg-surface-variant rounded-t" style="height: 20%"></div>
+</div>
+<!-- Gradient Overlay for base -->
+<div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-surface-container-low to-transparent pointer-events-none"></div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

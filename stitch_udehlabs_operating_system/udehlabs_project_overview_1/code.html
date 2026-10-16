@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Overview - Quantum Nexus</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#07006c",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "secondary": "#c0c1ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#007650",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed-dim": "#d2bbff",
+                        "outline-variant": "#4a4455",
+                        "surface-container-lowest": "#060e20",
+                        "surface-tint": "#d2bbff",
+                        "background": "#0b1326",
+                        "surface": "#0b1326",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#b0b2ff",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-high": "#222a3d",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary-container": "#ede0ff",
+                        "primary": "#d2bbff",
+                        "surface-container-low": "#131b2e",
+                        "outline": "#958da1",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "primary-fixed": "#eaddff",
+                        "tertiary": "#4edea3",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-tertiary": "#003824",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-primary-fixed": "#25005a",
+                        "secondary-container": "#3131c0",
+                        "on-primary": "#3f008e",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-secondary": "#1000a9",
+                        "primary-container": "#7c3aed",
+                        "on-tertiary-container": "#76ffc2",
+                        "surface-bright": "#31394d",
+                        "on-background": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "table-row-height": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "code-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["11px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "code-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Shared Component: SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-6 px-4 w-[240px] fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant z-50">
+<div class="mb-12 px-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center shrink-0">
+<img alt="UdehLabs Corporate Logo" class="w-6 h-6 object-contain" data-alt="A highly geometric and modern corporate logo for 'UdehLabs'. The logo features sharp angles, deep blue and electric violet tones, conveying a sense of high-tech enterprise infrastructure and precision engineering. The aesthetic is clean, minimalist, and authoritative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBijXOias49lF4w36sg-g8AyXaKo8b-w09RItotf_KtTuekSzT-UmuhTHQhPw9MSM4-j_yq-5jKGpj7HGVxGnJOcwJOU8Lrs1eLSJT8_Dl2tYHjq5lbZi7zPgox2_CnhWurAIbtHp9QIj_cDLGS9zyIAD_CLqlUXfbTDbsmUNFOMIbeclTT-Gx-NoZstEVE6YkyKoCOmtq0M3wXjJ2nYaORj09oRYdj8MFPeusWI6K2vzlq5KVswVgu1g"/>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">Enterprise Portal</p>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Active Tab: Projects (Semantically matches "Project Overview") -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-xl font-bold font-body-sm text-body-sm scale-[0.98] transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px] text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span>Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">ad_units</span>
+<span class="font-body-sm text-body-sm">Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">forum</span>
+<span class="font-body-sm text-body-sm">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">package_2</span>
+<span class="font-body-sm text-body-sm">Deliverables</span>
+</a>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:scale-110 transition-transform">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Shared Component: TopAppBar -->
+<header class="hidden md:flex justify-between items-center px-gutter w-full ml-[240px] fixed top-0 right-0 left-[240px] h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-md bg-surface-dim/50 border-b border-outline-variant z-40 transition-all">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Project: Quantum Nexus</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="bg-surface-container rounded-full py-1.5 pl-10 pr-4 text-body-sm font-body-sm border border-outline-variant focus:outline-none focus:ring-2 focus:ring-primary-container text-on-surface placeholder:text-on-surface-variant w-64 transition-all" placeholder="Search..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/50 transition-all hover:text-primary focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/50 transition-all hover:text-primary focus:ring-2 focus:ring-primary-container focus:outline-none">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/50 transition-all hover:text-primary focus:ring-2 focus:ring-primary-container focus:outline-none overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of an enterprise user, set against a dark, modern corporate background with subtle neon blue rim lighting. The style is sharp, focused, and high-quality, suitable for a tech portal profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUCDcuxV-ZU9J-DAmunq13QEFOx3YKrv2r93F4hUItZvR2Zh7yuxSHy2HlYLEcY1vzxSxWcObTi9IT0iwbMp9uRy3gu3Sd6E8bfpuiDyQODZj5lvEHAHoPdB7afQfcCr735mMUTEHEyqFNjK0Dc7SKe7LnKc93zticq7rntSE87q5TExvD3d3pVmM4Qd0qTI9Yt4cKXq3wBbcW--PIH_vO_247n_O-O0bAm3fBoOEtx0KyOYOHWHBmvA"/>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="md:ml-[240px] pt-24 px-4 md:px-8 pb-12 w-full max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/30 text-tertiary font-label-caps text-label-caps border border-tertiary-container">ACTIVE</span>
+<span class="text-on-surface-variant font-code-mono text-code-mono">ID: QNX-0992</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Quantum Nexus</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">Next-generation distributed ledger implementation for high-frequency trading networks.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg bg-surface-container border border-outline-variant text-on-surface font-body-sm text-body-sm hover:bg-surface-container-high transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                    Report
+                </button>
+<button class="px-4 py-2 rounded-lg bg-primary text-on-primary font-body-sm text-body-sm hover:bg-primary-fixed transition-colors shadow-[0_0_15px_rgba(210,187,255,0.3)] flex items-center gap-2 font-semibold">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                    Deploy Options
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Real-time Progress (Col Span 8) -->
+<div class="md:col-span-8 bg-surface-container rounded-xl border border-outline-variant overflow-hidden relative group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<div class="p-6 border-b border-outline-variant/50 flex justify-between items-center relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">donut_large</span>
+                        Real-time Progress
+                    </h3>
+<span class="font-code-mono text-code-mono text-tertiary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                        LIVE SYNC
+                    </span>
+</div>
+<div class="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-10">
+<!-- Metric 1 -->
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/30">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">REQUIREMENT COMPLETION</p>
+<div class="flex items-end gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">72%</span>
+<span class="font-body-sm text-body-sm text-tertiary mb-1">+4% this week</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 mt-4 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 72%"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/30">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">TASK VELOCITY (SPRINT)</p>
+<div class="flex items-end gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">45</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-1">pts/week</span>
+</div>
+<div class="mt-4 flex items-center gap-1 h-8 items-end">
+<!-- Mini bar chart -->
+<div class="w-1/5 bg-primary/40 h-[40%] rounded-t-sm"></div>
+<div class="w-1/5 bg-primary/60 h-[60%] rounded-t-sm"></div>
+<div class="w-1/5 bg-primary/80 h-[90%] rounded-t-sm"></div>
+<div class="w-1/5 bg-primary h-[100%] rounded-t-sm shadow-[0_0_8px_rgba(210,187,255,0.4)]"></div>
+<div class="w-1/5 bg-surface-container-highest h-[30%] rounded-t-sm"></div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant/30 relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[80px] text-tertiary">check_circle</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2 relative z-10">RELEASE READINESS</p>
+<div class="flex flex-col gap-1 mt-2 relative z-10">
+<span class="font-headline-md text-headline-md text-tertiary">High</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">All critical path items cleared.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Deployment Status (Col Span 4) -->
+<div class="md:col-span-4 bg-surface-container rounded-xl border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-5 border-b border-outline-variant/50 bg-surface-container-high/50 flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">cloud_done</span>
+                        Deployment Status
+                    </h3>
+</div>
+<div class="p-5 flex-grow flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">TARGET ENVIRONMENT</p>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(192,193,255,0.6)]"></span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">STAGING</span>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">HEALTH</p>
+<span class="px-2 py-1 bg-tertiary-container/30 text-tertiary text-[11px] font-bold rounded flex items-center gap-1 border border-tertiary-container/50">
+<span class="material-symbols-outlined text-[14px]">favorite</span>
+                                OPTIMAL
+                            </span>
+</div>
+</div>
+<div class="bg-[#000000] rounded-lg p-3 border border-outline-variant/50 font-code-mono text-code-mono mb-4 flex-grow relative overflow-hidden">
+<!-- Simulated Terminal Glow -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-secondary/50 to-transparent opacity-50"></div>
+<div class="flex flex-col gap-1.5 text-[11px]">
+<div class="flex gap-2">
+<span class="text-outline">14:02:11</span>
+<span class="text-tertiary">[INFO]</span>
+<span class="text-on-surface-variant">Container qnx-api-stg started</span>
+</div>
+<div class="flex gap-2">
+<span class="text-outline">14:02:15</span>
+<span class="text-tertiary">[INFO]</span>
+<span class="text-on-surface-variant">DB migrations applied successfully</span>
+</div>
+<div class="flex gap-2">
+<span class="text-outline">14:02:18</span>
+<span class="text-secondary">[OK]</span>
+<span class="text-on-surface">Healthcheck passed on port 8080</span>
+</div>
+<div class="flex gap-2 mt-2">
+<span class="text-secondary animate-pulse">_</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm text-on-surface-variant">
+<span>Last deployment:</span>
+<span class="text-on-surface font-medium">2 hours ago</span>
+</div>
+</div>
+</div>
+<!-- Delivery Roadmap (Col Span 12) -->
+<div class="md:col-span-12 bg-surface-container rounded-xl border border-outline-variant p-6">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">timeline</span>
+                        Delivery Roadmap
+                    </h3>
+<button class="text-primary text-body-sm font-body-sm hover:underline">View Full Timeline</button>
+</div>
+<!-- Timeline Visualization -->
+<div class="relative">
+<!-- Base Track -->
+<div class="absolute top-1/2 left-0 w-full h-1 bg-surface-container-highest -translate-y-1/2 rounded-full"></div>
+<!-- Active Track (Gradient) -->
+<div class="absolute top-1/2 left-0 w-[60%] h-1 bg-gradient-to-r from-secondary via-primary to-primary-container -translate-y-1/2 rounded-full shadow-[0_0_10px_rgba(210,187,255,0.4)]"></div>
+<div class="relative flex justify-between items-center px-4">
+<!-- Milestone 1: Completed -->
+<div class="flex flex-col items-center group relative cursor-default">
+<div class="w-6 h-6 rounded-full bg-secondary border-2 border-surface flex items-center justify-center z-10 shadow-[0_0_10px_rgba(192,193,255,0.5)]">
+<span class="material-symbols-outlined text-[14px] text-on-secondary font-bold">check</span>
+</div>
+<div class="absolute top-8 text-center w-32 -ml-16 left-1/2">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Phase 1: Inception</p>
+<p class="font-code-mono text-code-mono text-[10px] text-on-surface-variant mt-1">Oct 15 - Nov 01</p>
+</div>
+</div>
+<!-- Milestone 2: Completed -->
+<div class="flex flex-col items-center group relative cursor-default">
+<div class="w-6 h-6 rounded-full bg-secondary border-2 border-surface flex items-center justify-center z-10 shadow-[0_0_10px_rgba(192,193,255,0.5)]">
+<span class="material-symbols-outlined text-[14px] text-on-secondary font-bold">check</span>
+</div>
+<div class="absolute top-8 text-center w-32 -ml-16 left-1/2">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Architecture Sync</p>
+<p class="font-code-mono text-code-mono text-[10px] text-on-surface-variant mt-1">Nov 05</p>
+</div>
+</div>
+<!-- Milestone 3: Active (Pulsing) -->
+<div class="flex flex-col items-center group relative cursor-default">
+<div class="absolute w-8 h-8 rounded-full bg-primary/30 animate-ping z-0"></div>
+<div class="w-6 h-6 rounded-full bg-primary border-2 border-surface flex items-center justify-center z-10 shadow-[0_0_15px_rgba(210,187,255,0.8)]">
+<span class="material-symbols-outlined text-[14px] text-on-primary">sync</span>
+</div>
+<!-- Active Label above -->
+<div class="absolute bottom-8 px-2 py-1 bg-surface-container-highest rounded text-[10px] font-label-caps text-primary border border-primary/30 whitespace-nowrap">
+                                CURRENT SPRINT
+                            </div>
+<div class="absolute top-8 text-center w-32 -ml-16 left-1/2">
+<p class="font-body-sm text-body-sm font-bold text-primary">Core API Dev</p>
+<p class="font-code-mono text-code-mono text-[10px] text-primary mt-1">Nov 10 - Nov 24</p>
+</div>
+</div>
+<!-- Milestone 4: Upcoming -->
+<div class="flex flex-col items-center group relative cursor-default">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border-2 border-outline-variant flex items-center justify-center z-10">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="absolute top-8 text-center w-32 -ml-16 left-1/2 opacity-70">
+<p class="font-body-sm text-body-sm font-medium text-on-surface-variant">UAT Testing</p>
+<p class="font-code-mono text-code-mono text-[10px] text-outline mt-1">Dec 01 - Dec 10</p>
+</div>
+</div>
+<!-- Milestone 5: Upcoming -->
+<div class="flex flex-col items-center group relative cursor-default">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest border-2 border-outline-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[14px] text-outline-variant">flag</span>
+</div>
+<div class="absolute top-8 text-center w-32 -ml-16 left-1/2 opacity-70">
+<p class="font-body-sm text-body-sm font-medium text-on-surface-variant">Production GA</p>
+<p class="font-code-mono text-code-mono text-[10px] text-outline mt-1">Dec 15</p>
+</div>
+</div>
+</div>
+</div>
+<div class="h-16"></div> <!-- Spacer for absolute positioning -->
+</div>
+<!-- Assigned Squad (Col Span 6) -->
+<div class="md:col-span-6 bg-surface-container rounded-xl border border-outline-variant p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">groups</span>
+                        Assigned Squad
+                    </h3>
+<span class="px-2 py-1 bg-surface-container-highest rounded text-[11px] font-label-caps text-on-surface-variant border border-outline-variant/50">
+                        SQUAD: ALPHA
+                    </span>
+</div>
+<div class="flex flex-col gap-4 flex-grow">
+<!-- Team Member 1 -->
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-high transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0 border border-outline-variant/50">
+<img alt="Alex - Lead Architect" class="w-full h-full object-cover" data-alt="A portrait of a male lead software architect in his 30s. He looks professional and focused, lit by cool monitor light in a high-tech corporate office environment. Deep blacks and subtle blue tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCFzV8OsdvOkwiz4LmQFfGDE9gw_nfusuqbDu0obhEDZ8I63ALi_vPEWlTUlezHB7MGJ-G0m3uMT7XZb62CW1aDUbSu-BTZNfAdiLEJx6qRVaJXoueLkxRCEynwpRbnGy5QN1FipD2JljxjzuB59rV4R7qeSoK4nNA9fKWB3SlV8JyQslGDd6zqxWhAApusrezBlgsRBQUq9PCsedIqD-AADZWsKsl5eErv3iA_Lvlc4GxamE7jTj11w"/>
+</div>
+<div class="flex-grow">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Alex</p>
+<p class="font-code-mono text-code-mono text-[11px] text-on-surface-variant">Lead Architect</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+<!-- Team Member 2 -->
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-surface-container-high transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden shrink-0 border border-outline-variant/50">
+<img alt="Sarah - Lead Engineer" class="w-full h-full object-cover" data-alt="A portrait of a female lead engineer in her late 20s. She is smiling slightly, professional, in a modern tech office setting with dark backgrounds and soft neon teal accent lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABnE5b5HZ78j2gJ3-42Y1dgIq-Yx-vo4cDx-d51gXQJEqlOagPp6T24bMLge2N7PrqdFPiA5ik3DZh87NW0IKqBmgCnnSD7Bo4DSmyJAMI5_ImqUVkXUF6Wzb7jbaQgwDKxOp-r_ypFmchEuTP2Ws5r4hJZBljwjwKecBTgLjWF5N2wHOFMvg8vbYY7lSPX1mbA9KLgNsHp4xBy9DT0l6xSlXSagD-u9v_OOO2mbUCZmBBQdZ72qvCRw"/>
+</div>
+<div class="flex-grow">
+<p class="font-body-sm text-body-sm font-semibold text-on-surface">Sarah</p>
+<p class="font-code-mono text-code-mono text-[11px] text-on-surface-variant">Lead Engineer</p>
+</div>
+<button class="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</button>
+</div>
+<div class="mt-auto pt-2">
+<button class="w-full py-2 rounded border border-outline-variant/50 text-body-sm font-body-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors border-dashed">
+                            + View All 8 Members
+                        </button>
+</div>
+</div>
+</div>
+<!-- Deliverables (Col Span 6) -->
+<div class="md:col-span-6 bg-surface-container rounded-xl border border-outline-variant p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">folder_special</span>
+                        Deliverables
+                    </h3>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="group flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant/30 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary/10 text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">description</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">Architecture Spec v1.1</p>
+<p class="font-code-mono text-[10px] text-on-surface-variant">PDF • 2.4 MB • Updated 2d ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">download</span>
+</div>
+<!-- Item 2 -->
+<div class="group flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant/30 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary/10 text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">design_services</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">UI Design System</p>
+<p class="font-code-mono text-[10px] text-on-surface-variant">Figma Link • Updated 5h ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">open_in_new</span>
+</div>
+<!-- Item 3 -->
+<div class="group flex items-center justify-between p-3 rounded-lg bg-surface-container-low border border-outline-variant/30 hover:border-primary/50 transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary/10 text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[18px]">api</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm font-medium text-on-surface group-hover:text-primary transition-colors">API Documentation</p>
+<p class="font-code-mono text-[10px] text-on-surface-variant">Swagger Link • Live Sync</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors opacity-0 group-hover:opacity-100">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

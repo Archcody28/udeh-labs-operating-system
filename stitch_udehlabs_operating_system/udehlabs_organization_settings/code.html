@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Organization Settings - UdehLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#1b2b3f",
+                        "outline": "#918fa1",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "secondary": "#d0bcff",
+                        "on-secondary-container": "#c4abff",
+                        "surface-container-lowest": "#000f21",
+                        "secondary-container": "#571bc1",
+                        "surface": "#031427",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-background": "#d3e4fe",
+                        "error": "#ffb4ab",
+                        "on-surface": "#d3e4fe",
+                        "primary-container": "#4f46e5",
+                        "background": "#031427",
+                        "on-secondary": "#3c0091",
+                        "on-tertiary": "#00344d",
+                        "error-container": "#93000a",
+                        "surface-container": "#102034",
+                        "outline-variant": "#464555",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "surface-dim": "#031427",
+                        "on-primary-container": "#dad7ff",
+                        "surface-variant": "#26364a",
+                        "tertiary-container": "#006693",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#89ceff",
+                        "on-tertiary-container": "#b8e0ff",
+                        "inverse-surface": "#d3e4fe",
+                        "on-primary": "#1d00a5",
+                        "on-surface-variant": "#c7c4d8",
+                        "surface-tint": "#c3c0ff",
+                        "surface-container-highest": "#26364a",
+                        "surface-bright": "#2a3a4f",
+                        "on-tertiary-fixed": "#001e2f",
+                        "tertiary-fixed": "#c9e6ff",
+                        "secondary-fixed": "#e9ddff",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container-low": "#0b1c30",
+                        "inverse-on-surface": "#213145",
+                        "inverse-primary": "#4d44e3",
+                        "primary": "#c3c0ff",
+                        "on-secondary-fixed": "#23005c",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed": "#e2dfff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "sm": "8px",
+                        "max_content_width": "1440px",
+                        "md": "16px",
+                        "sidebar_width": "260px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "sidebar_collapsed": "64px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "2xl": "48px"
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "code-md": ["JetBrains Mono", "monospace"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "code-sm": ["JetBrains Mono", "monospace"]
+                    },
+                    fontSize: {
+                        "display": ["48px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "code-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "label-caps": ["11px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "code-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-[#0F172A]/80 backdrop-blur-xl border border-[#1E293B] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)];
+            }
+            .ai-glow {
+                @apply shadow-[0_0_15px_rgba(139,92,246,0.1)];
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-low dark:bg-surface-container-low text-primary dark:text-primary font-label-caps text-label-caps docked fixed left-0 top-0 h-full w-sidebar_width flex flex-col py-md px-sm border-r border-outline-variant z-50 transition-all duration-200 ease-in-out">
+<!-- Header -->
+<div class="px-md pb-lg flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]" data-icon="corporate_fare" data-weight="fill" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+</div>
+<div class="overflow-hidden">
+<h1 class="font-headline-sm text-headline-sm font-black text-on-surface truncate">UdehLabs</h1>
+<p class="text-on-surface-variant opacity-80 truncate text-[10px]">Enterprise Admin</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto space-y-xs pt-sm border-t border-outline-variant/30">
+<a class="bg-secondary-container text-on-secondary-container border-l-4 border-primary hover:text-on-surface transition-all Active: scale-[0.99] transition-transform flex items-center gap-sm px-md py-sm rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-90 group-hover:opacity-100 transition-opacity" data-icon="corporate_fare">corporate_fare</span>
+<span class="tracking-wider">Organization</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/30 border-l-4 border-transparent hover:text-on-surface transition-all flex items-center gap-sm px-md py-sm rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="group">group</span>
+<span class="tracking-wider">Members</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/30 border-l-4 border-transparent hover:text-on-surface transition-all flex items-center gap-sm px-md py-sm rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="mail">mail</span>
+<span class="tracking-wider">Invitations</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/30 border-l-4 border-transparent hover:text-on-surface transition-all flex items-center gap-sm px-md py-sm rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="payments">payments</span>
+<span class="tracking-wider">Billing</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/30 border-l-4 border-transparent hover:text-on-surface transition-all flex items-center gap-sm px-md py-sm rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="grid_view">grid_view</span>
+<span class="tracking-wider">Workspaces</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/30 border-l-4 border-transparent hover:text-on-surface transition-all flex items-center gap-sm px-md py-sm rounded-r-lg group" href="#">
+<span class="material-symbols-outlined text-[18px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="settings">settings</span>
+<span class="tracking-wider">Settings</span>
+</a>
+</div>
+<!-- Footer -->
+<div class="pt-md border-t border-outline-variant/30 mt-auto space-y-sm">
+<button class="w-full bg-primary-container text-on-primary-container hover:bg-primary-container/90 py-sm rounded-md transition-colors flex items-center justify-center gap-xs font-bold text-[12px]">
+<span class="material-symbols-outlined text-[16px]" data-icon="rocket_launch">rocket_launch</span> Upgrade Plan
+            </button>
+<div class="space-y-xs">
+<a class="text-on-surface-variant hover:bg-surface-variant/30 hover:text-on-surface transition-all flex items-center gap-sm px-md py-[6px] rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[16px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="description">description</span>
+<span>Docs</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-variant/30 hover:text-on-surface transition-all flex items-center gap-sm px-md py-[6px] rounded-lg group" href="#">
+<span class="material-symbols-outlined text-[16px] opacity-70 group-hover:opacity-100 transition-opacity" data-icon="contact_support">contact_support</span>
+<span>Support</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-sidebar_width min-w-0 bg-background relative">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary font-body-md text-body-md docked full-width top-0 border-b border-outline-variant dark:border-outline-variant flat no shadows transition-all duration-200 ease-in-out flex justify-between items-center px-lg h-16 w-full z-40 sticky">
+<div class="flex items-center gap-md">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-sm rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="md:hidden font-headline-md text-headline-md font-bold text-primary dark:text-primary">
+                    UdehLabs
+                </div>
+</div>
+<!-- Global Search -->
+<div class="flex-1 max-w-md mx-lg hidden md:block">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px] group-focus-within:text-primary transition-colors" data-icon="search">search</span>
+<input class="w-full bg-surface-container-highest border border-outline-variant/50 rounded-lg pl-10 pr-4 py-2 text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-code-md text-code-md" placeholder="Search resources, commands (Cmd+K)..." type="text"/>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex items-center gap-sm">
+<button class="text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-sm rounded-full relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-sm rounded-full hidden sm:block">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+<button class="text-primary font-bold border-b-2 border-primary pb-1 hover:bg-surface-variant/50 transition-colors p-sm rounded-t-lg hidden sm:block">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-px h-6 bg-outline-variant mx-sm hidden md:block"></div>
+<button class="hidden md:flex bg-primary text-on-primary hover:bg-primary-fixed transition-colors px-md py-1.5 rounded-md font-medium text-[13px] items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span> Create Workspace
+                </button>
+<button class="ml-xs relative rounded-full overflow-hidden border border-outline-variant hover:border-primary transition-colors h-8 w-8 shrink-0">
+<img alt="User profile" class="object-cover w-full h-full" data-alt="A highly detailed, professional headshot of a software engineer in a modern, dark-themed office environment. The lighting is moody with subtle cyan and purple neon accents reflecting in the background. The subject is well-lit with soft, dramatic studio lighting. The image conveys a sense of technical expertise and focus, aligning perfectly with a premium developer tools interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCev24aHoUc8df7vjvOrK-h23hcf3OHDjKRuRQygdSEmFhIn1ZTRCpL0dyheZfzu2DbGsvtiMU-df-mWzRzQThroSObheJzYvF82UaRWqx7fuF50l0NyUSV6Z9iUrceYlurqHxsNBvnW1vjsZWqsjuY777yZusbdM06qOtanB6qUfwLLLx1J64QK0lXSasLi4q-uWCCAm0Zsx6Gs5lNtCiHzKjvbSjO3GBu_R9xvy-vZsb9-MmRI6aaCg"/>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto p-md md:p-lg xl:p-xl">
+<div class="max-w-4xl mx-auto space-y-lg">
+<!-- Page Header -->
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Organization Settings</h2>
+<p class="text-on-surface-variant mt-1 text-body-lg">Manage your organization's configuration, members, and billing.</p>
+</div>
+<!-- Tabs -->
+<div class="border-b border-outline-variant/50 flex space-x-md overflow-x-auto no-scrollbar">
+<button class="px-xs py-sm border-b-2 border-primary text-primary font-medium flex items-center gap-2 whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span> General
+                    </button>
+<button class="px-xs py-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-colors font-medium flex items-center gap-2 whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]" data-icon="security">security</span> Security
+                    </button>
+<button class="px-xs py-sm border-b-2 border-transparent text-on-surface-variant hover:text-on-surface transition-colors font-medium flex items-center gap-2 whitespace-nowrap">
+<span class="material-symbols-outlined text-[18px]" data-icon="credit_card">credit_card</span> Billing
+                    </button>
+<button class="px-xs py-sm border-b-2 border-transparent text-error hover:text-error-container transition-colors font-medium flex items-center gap-2 whitespace-nowrap ml-auto">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span> Danger Zone
+                    </button>
+</div>
+<!-- Settings Forms Container -->
+<div class="space-y-xl">
+<!-- Profile Section -->
+<section class="glass-panel rounded-xl p-lg">
+<div class="flex items-start gap-lg">
+<div class="relative group cursor-pointer shrink-0">
+<div class="w-24 h-24 rounded-lg bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-[40px] text-on-surface-variant" data-icon="corporate_fare">corporate_fare</span>
+<div class="absolute inset-0 bg-background/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary" data-icon="upload">upload</span>
+</div>
+</div>
+<input class="hidden" type="file"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Organization Logo</h3>
+<p class="text-on-surface-variant text-body-md mb-md">Recommended size: 256x256px. Max size: 2MB. Format: PNG or JPG.</p>
+<div class="flex gap-sm">
+<button class="bg-surface-container-highest text-on-surface border border-outline-variant hover:bg-surface-variant px-md py-1.5 rounded-md transition-colors text-body-md font-medium">Upload Image</button>
+<button class="text-error hover:bg-error/10 px-md py-1.5 rounded-md transition-colors text-body-md font-medium">Remove</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Basic Info Section -->
+<section class="glass-panel rounded-xl p-lg space-y-md">
+<h3 class="font-headline-md text-headline-md text-on-surface border-b border-outline-variant/30 pb-sm">Basic Information</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Organization Name</label>
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-md px-md py-2 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="text" value="UdehLabs"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Organization Slug</label>
+<div class="flex rounded-md shadow-sm">
+<span class="inline-flex items-center px-sm rounded-l-md border border-r-0 border-outline-variant/50 bg-surface-container-highest text-on-surface-variant font-code-md text-code-md">udeh.app/</span>
+<input class="flex-1 min-w-0 block w-full px-md py-2 rounded-none rounded-r-md bg-surface-container border border-outline-variant/50 text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-code-md text-code-md" type="text" value="udehlabs"/>
+</div>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Website URL</label>
+<input class="w-full bg-surface-container border border-outline-variant/50 rounded-md px-md py-2 text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="https://udehlabs.com" type="url"/>
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Country / Region</label>
+<div class="relative">
+<select class="w-full bg-surface-container border border-outline-variant/50 rounded-md pl-md pr-10 py-2 text-on-surface appearance-none focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+<option>United States</option>
+<option>United Kingdom</option>
+<option>Canada</option>
+<option>Australia</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<div class="pt-sm flex justify-end">
+<button class="bg-primary-container text-on-primary-container hover:bg-primary-container/90 px-lg py-2 rounded-md font-medium transition-colors shadow-sm ai-glow">Save Changes</button>
+</div>
+</section>
+</div>
+</div>
+</div>
+</main>
+</body></html>

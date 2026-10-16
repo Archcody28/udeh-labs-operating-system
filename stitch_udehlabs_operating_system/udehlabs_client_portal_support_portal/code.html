@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Client Support &amp; Success Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-background": "#dbe3f1",
+                        "primary-fixed": "#e1e0ff",
+                        "inverse-primary": "#494bd6",
+                        "tertiary": "#ffb783",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#18202b",
+                        "primary-fixed-dim": "#c0c1ff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#452000",
+                        "surface-container-low": "#141c26",
+                        "on-tertiary": "#4f2500",
+                        "outline": "#908fa0",
+                        "surface-container-highest": "#2d3540",
+                        "surface-dim": "#0c141e",
+                        "on-secondary-fixed-variant": "#004c6e",
+                        "outline-variant": "#464554",
+                        "surface": "#0c141e",
+                        "primary-container": "#8083ff",
+                        "on-surface": "#dbe3f1",
+                        "on-error": "#690005",
+                        "on-secondary": "#00344d",
+                        "tertiary-fixed-dim": "#ffb783",
+                        "secondary-fixed-dim": "#89ceff",
+                        "surface-tint": "#c0c1ff",
+                        "error-container": "#93000a",
+                        "surface-variant": "#2d3540",
+                        "primary": "#c0c1ff",
+                        "on-primary-fixed": "#07006c",
+                        "surface-container-high": "#232b35",
+                        "secondary-container": "#00a2e6",
+                        "secondary-fixed": "#c9e6ff",
+                        "on-primary": "#1000a9",
+                        "tertiary-container": "#d97721",
+                        "inverse-surface": "#dbe3f1",
+                        "tertiary-fixed": "#ffdcc5",
+                        "surface-bright": "#323a45",
+                        "on-primary-container": "#0d0096",
+                        "on-secondary-container": "#00344e",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-container-lowest": "#070f18",
+                        "on-tertiary-fixed-variant": "#703700",
+                        "on-primary-fixed-variant": "#2f2ebe",
+                        "background": "#0c141e",
+                        "on-surface-variant": "#c7c4d7",
+                        "inverse-on-surface": "#29313c",
+                        "secondary": "#89ceff",
+                        "on-secondary-fixed": "#001e2f"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "xl": "32px",
+                        "unit": "4px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "label-sm": ["10px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+                        "display": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-lg-mobile": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+                        "body-lg": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+                        "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom scrollbar for dense data areas */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2d3540; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #464554; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Client Portal JSON Variant) -->
+<nav class="bg-surface-container-low dark:bg-surface-container-low h-screen w-64 fixed left-0 top-0 border-r border-outline-variant z-50">
+<div class="flex flex-col h-full py-lg px-md">
+<!-- Brand Area -->
+<div class="mb-xl flex items-center gap-md px-sm">
+<div class="w-10 h-10 rounded-lg overflow-hidden border border-outline-variant bg-surface-container-highest flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A polished, minimalist 3D rendering of an abstract geometric client avatar logo, featuring sleek dark metallic textures and subtle indigo lighting accents, set against a completely black background. High resolution, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwYZtLoH2Mi9StEcBlh91FQ70iiX1_PKHHLhJijuwf19uyBFwHKESAIXQOGj5k6Rp8bRl59ROBSJngxWxK-2zkPjWrz7R-2iESMAAfPhilIPcW6vTBh7I9gWkP-5p6AweNA3ouRmVcmtlAXi4lHM5dBqhV5UtYFKEoAzqvn5qGnnQTmfbInU_yx6dv-T9Rtd9t0qFC1DZ3ec9N5rmIcHvGKnke00CnXjW-44EKva7KIauCWkMD7bNTyg"/>
+</div>
+<div>
+<h1 class="font-display text-[20px] leading-tight text-secondary tracking-tighter">Client Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Account Overview</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-sm flex-grow">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-secondary font-bold border-r-2 border-secondary bg-secondary/10 hover:bg-surface-container-highest transition-colors scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined icon-fill">space_dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-label-md text-label-md">Usage</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Billing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant font-medium hover:bg-surface-container-highest transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-label-md text-label-md">Success</span>
+</a>
+</li>
+</ul>
+<!-- Bottom Area / User Profile (Implied by standard patterns) -->
+<div class="mt-auto pt-lg border-t border-outline-variant px-sm">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Admin User</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[10px]">UdehLabs Org</span>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="bg-surface-container dark:bg-surface-container fixed top-0 right-0 h-16 border-b border-outline-variant z-40 flex items-center justify-between w-[calc(100%-256px)] ml-64 px-lg">
+<!-- Search (on_left) -->
+<div class="flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm w-96 hover:border-primary/50 transition-colors focus-within:border-primary focus-within:ring-1 focus-within:ring-primary">
+<span class="material-symbols-outlined text-on-surface-variant mr-sm text-[18px]">search</span>
+<input class="bg-transparent border-none outline-none text-body-sm font-body-sm text-on-surface w-full placeholder:text-on-surface-variant/50 focus:ring-0 p-0" placeholder="Search resources, tickets, or knowledge base..." type="text"/>
+</div>
+<!-- Right Actions & Brand -->
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center text-on-surface-variant hover:text-primary hover:bg-surface-container-highest transition-all duration-200">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">ServiceOps</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A clean, professional headshot of a corporate user avatar, featuring dramatic studio lighting against a dark neutral grey background. High contrast, sharp focus, modern business aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxEN-i0DIPEM2RABS2y5bcLDW6UuUXw0-meHqowQYJCxu2fVJjM61269O3MSASOlA4g5eIrv_9nE9Ag61UyguvhjeDZPrxtYiDC5UwAhXZX1TSFiaX6_QLz8N2BRB48mq1pQVBq4TsZ6N1BYOuQztoYigKAltUH_fgyQjNJNholjakRMgMM_wBoXP-0EC0gmGGckx77FLu529HFx96P6wDPArDU15RAOn4QwmhXjNTEhg0n4BR4YL_MA"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Layout (Mission Control Dense Grid) -->
+<!-- Reserving 320px on the right for the fixed AI Assistant Sidebar -->
+<main class="ml-64 mt-16 p-margin-desktop w-[calc(100%-256px-320px)] float-left">
+<!-- Header -->
+<div class="mb-lg flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Command Center</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time overview of your deployment health and success metrics.</p>
+</div>
+<div class="flex gap-md">
+<span class="px-sm py-xs border border-outline-variant rounded bg-surface-container-low flex items-center gap-xs font-label-sm text-label-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                    API Status: Healthy
+                </span>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter auto-rows-min">
+<!-- Support Overview (Col 8) -->
+<section class="col-span-8 bg-surface-container rounded-xl border border-outline-variant flex flex-col overflow-hidden group hover:border-primary/30 transition-colors duration-300">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[20px]">support_agent</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Support Overview</h3>
+</div>
+<button class="bg-primary text-on-primary px-md py-sm rounded-lg font-label-md text-label-md hover:bg-primary-fixed transition-colors shadow-[0_0_12px_rgba(192,193,255,0.2)]">
+                        New Support Request
+                    </button>
+</div>
+<div class="p-md flex-grow flex flex-col gap-sm">
+<!-- Ticket Row 1 -->
+<div class="flex items-center justify-between p-sm rounded border border-outline-variant bg-surface hover:border-outline transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="px-2 py-1 rounded bg-error-container text-on-error-container font-label-sm text-label-sm border border-error/50">CRITICAL</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">Database Connection Latency Spike (EU-West)</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">TKT-8942 • Updated 12m ago by SysOps</p>
+</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">engineering</span>
+<span class="font-label-sm text-label-sm">Investigating</span>
+</div>
+</div>
+<!-- Ticket Row 2 -->
+<div class="flex items-center justify-between p-sm rounded border border-outline-variant bg-surface hover:border-outline transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="px-2 py-1 rounded bg-tertiary-container/30 text-tertiary border border-tertiary/30 font-label-sm text-label-sm">HIGH</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">SSO Integration mapping failure for Group B</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">TKT-8931 • Updated 2h ago by Support</p>
+</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">pending_actions</span>
+<span class="font-label-sm text-label-sm">Awaiting Client</span>
+</div>
+</div>
+<!-- Ticket Row 3 -->
+<div class="flex items-center justify-between p-sm rounded border border-outline-variant bg-surface hover:border-outline transition-colors cursor-pointer opacity-70">
+<div class="flex items-center gap-md">
+<div class="px-2 py-1 rounded bg-surface-container-highest text-on-surface-variant border border-outline-variant font-label-sm text-label-sm">LOW</div>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-semibold">Request for additional telemetry dash widgets</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">TKT-8805 • Updated 1d ago by Success Manager</p>
+</div>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span class="font-label-sm text-label-sm">Scheduled</span>
+</div>
+</div>
+</div>
+<div class="px-md py-sm bg-surface-container-low border-t border-outline-variant text-center">
+<a class="font-label-sm text-label-sm text-secondary hover:text-secondary-fixed transition-colors" href="#">View all 12 open tickets →</a>
+</div>
+</section>
+<!-- Success Journey (Col 4) -->
+<section class="col-span-4 bg-surface-container rounded-xl border border-outline-variant flex flex-col group hover:border-primary/30 transition-colors duration-300">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">explore</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Success Journey</h3>
+</div>
+</div>
+<div class="p-md flex flex-col gap-lg flex-grow">
+<!-- Progress Graphic -->
+<div class="flex items-center gap-md">
+<div class="relative w-16 h-16 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="75, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-none">75%</span>
+</div>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Phase 2: Integration</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">On track for Q3 deployment.</p>
+</div>
+</div>
+<!-- Checklist -->
+<div class="flex flex-col gap-sm">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined icon-fill text-emerald-500 text-[18px]">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through">Organization Setup</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined icon-fill text-emerald-500 text-[18px]">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant line-through">Team Provisioning</span>
+</div>
+<div class="flex items-center gap-sm p-sm rounded border border-secondary/30 bg-secondary/5 -mx-sm">
+<span class="material-symbols-outlined text-secondary text-[18px]">radio_button_unchecked</span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">First Data Pipeline Deployment</span>
+</div>
+<div class="flex items-center gap-sm opacity-50">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">radio_button_unchecked</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">AI Config Calibration</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Success Objectives (Col 12 - spans full width of the bento grid) -->
+<section class="col-span-12 bg-surface-container rounded-xl border border-outline-variant flex flex-col group hover:border-primary/30 transition-colors duration-300">
+<div class="p-md border-b border-outline-variant flex justify-between items-center bg-surface-container-low/50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px]">track_changes</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Success Objectives &amp; Telemetry</h3>
+</div>
+<div class="flex gap-xs">
+<button class="p-1 rounded hover:bg-surface-container-highest transition-colors"><span class="material-symbols-outlined text-on-surface-variant text-[18px]">more_vert</span></button>
+</div>
+</div>
+<div class="p-md grid grid-cols-3 gap-md">
+<!-- Metric Card 1 -->
+<div class="bg-surface rounded-lg border border-outline-variant p-md relative overflow-hidden">
+<div class="absolute right-0 top-0 w-24 h-24 bg-primary/5 rounded-bl-full blur-xl pointer-events-none"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-sm uppercase">Obj: Reduce Deploy Time</p>
+<div class="flex items-end gap-sm mb-md">
+<span class="font-display text-[32px] leading-none text-on-surface">14.2</span>
+<span class="font-body-md text-body-md text-on-surface-variant pb-1">mins</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 80%"></div>
+</div>
+<div class="flex justify-between mt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant text-[9px]">Current Avg</span>
+<span class="font-label-sm text-label-sm text-primary text-[9px]">Target: 12.0m (-20%)</span>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface rounded-lg border border-outline-variant p-md relative overflow-hidden">
+<div class="absolute right-0 top-0 w-24 h-24 bg-emerald-500/5 rounded-bl-full blur-xl pointer-events-none"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-sm uppercase">Obj: System Uptime</p>
+<div class="flex items-end gap-sm mb-md">
+<span class="font-display text-[32px] leading-none text-emerald-400">99.98</span>
+<span class="font-body-md text-body-md text-on-surface-variant pb-1">%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 99%"></div>
+</div>
+<div class="flex justify-between mt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant text-[9px]">Last 30 Days</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant text-[9px]">SLA: 99.95%</span>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface rounded-lg border border-outline-variant p-md relative overflow-hidden">
+<div class="absolute right-0 top-0 w-24 h-24 bg-secondary/5 rounded-bl-full blur-xl pointer-events-none"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-sm uppercase">Obj: User Adoption</p>
+<div class="flex items-end gap-sm mb-md">
+<span class="font-display text-[32px] leading-none text-secondary">842</span>
+<span class="font-body-md text-body-md text-on-surface-variant pb-1">MAU</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden flex">
+<div class="bg-secondary h-full" style="width: 60%"></div>
+<div class="bg-secondary/30 h-full" style="width: 20%"></div>
+</div>
+<div class="flex justify-between mt-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant text-[9px]">+12% MoM</span>
+<span class="font-label-sm text-label-sm text-secondary text-[9px]">Target: 1000</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- AI Assistant Right Sidebar (Support Grounding) -->
+<aside class="fixed right-0 top-16 w-[320px] h-[calc(100vh-64px)] bg-surface-container-low border-l border-outline-variant z-40 flex flex-col shadow-[-8px_0_24px_rgba(0,0,0,0.2)]">
+<!-- Header -->
+<div class="p-md border-b border-outline-variant flex items-center justify-between bg-surface-container/50">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">smart_toy</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface leading-tight">Support Grounding AI</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-[10px]">Powered by Knowledge Base</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">open_in_new</span></button>
+</div>
+<!-- Chat History Area -->
+<div class="flex-grow p-md overflow-y-auto flex flex-col gap-md text-body-sm font-body-sm">
+<!-- System/AI Message -->
+<div class="flex gap-sm">
+<div class="w-6 h-6 rounded-sm bg-surface-container-highest border border-outline-variant flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary">smart_toy</span>
+</div>
+<div class="bg-surface rounded-lg rounded-tl-none border border-outline-variant p-sm text-on-surface">
+                    Hello. I have analyzed your current deployment telemetry. I notice you are encountering mapping failures for SSO Group B. Would you like me to pull the exact configuration docs for Okta integration?
+                </div>
+</div>
+<!-- User Message -->
+<div class="flex gap-sm flex-row-reverse">
+<div class="w-6 h-6 rounded-sm bg-surface-container-highest border border-outline-variant flex items-center justify-center shrink-0 mt-1 overflow-hidden">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">person</span>
+</div>
+<div class="bg-primary/20 rounded-lg rounded-tr-none border border-primary/30 p-sm text-on-surface">
+                    Yes, please show the attribute mapping specific to custom roles.
+                </div>
+</div>
+<!-- AI Response -->
+<div class="flex gap-sm">
+<div class="w-6 h-6 rounded-sm bg-surface-container-highest border border-outline-variant flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[14px] text-primary">smart_toy</span>
+</div>
+<div class="bg-surface rounded-lg rounded-tl-none border border-outline-variant p-sm text-on-surface flex flex-col gap-2">
+<p>Based on our Knowledge Base article <a class="text-secondary hover:underline" href="#">KB-4092</a>, here is the required mapping:</p>
+<pre class="bg-surface-dim p-2 rounded border border-outline-variant text-[10px] text-primary font-mono overflow-x-auto">{
+  "source": "appuser.customRole",
+  "target": "udeh_role_id",
+  "action": "SYNC"
+}</pre>
+<p class="text-[10px] text-on-surface-variant">Ensure that `appuser.customRole` is explicitly defined in your IdP schema.</p>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-md border-t border-outline-variant bg-surface-container/50">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-dim border border-outline-variant rounded-full py-2 pl-4 pr-10 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="Ask a technical question..." type="text"/>
+<button class="absolute right-2 w-6 h-6 flex items-center justify-center text-primary hover:text-primary-fixed bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined text-[14px]">send</span>
+</button>
+</div>
+<div class="flex gap-2 mt-2 justify-center">
+<span class="font-label-sm text-[9px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded cursor-pointer hover:bg-outline-variant transition-colors">How to reset API key?</span>
+<span class="font-label-sm text-[9px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded cursor-pointer hover:bg-outline-variant transition-colors">Check telemetry logs</span>
+</div>
+</div>
+</aside>
+</body></html>

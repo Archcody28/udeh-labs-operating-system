@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Reliability Center - Phase A.50</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected by system -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#44474c",
+                        "surface-variant": "#2d3541",
+                        "secondary-container": "#6001d1",
+                        "on-error": "#690005",
+                        "secondary": "#d2bbff",
+                        "background": "#0c141e",
+                        "status-critical": "#ef4444",
+                        "surface-container": "#18202b",
+                        "surface-container-high": "#232a36",
+                        "tertiary": "#ffffff",
+                        "secondary-fixed": "#eaddff",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#d5e4fb",
+                        "on-surface": "#dbe3f2",
+                        "on-primary": "#233143",
+                        "on-primary-container": "#576579",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "on-secondary-container": "#c9aeff",
+                        "border-muted": "#1e293b",
+                        "on-secondary-fixed": "#25005a",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#0c141e",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary-fixed-dim": "#b9c8de",
+                        "error-container": "#93000a",
+                        "on-tertiary-container": "#00734e",
+                        "inverse-on-surface": "#29313c",
+                        "execution-violet": "#7c3aed",
+                        "terminal-black": "#091017",
+                        "outline": "#8e9197",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-highest": "#2d3541",
+                        "status-success": "#10b981",
+                        "on-background": "#dbe3f2",
+                        "on-tertiary-fixed": "#002113",
+                        "surface": "#0c141e",
+                        "inverse-primary": "#515f73",
+                        "status-risk": "#f59e0b",
+                        "primary": "#ffffff",
+                        "on-surface-variant": "#c4c6cd",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-secondary": "#3f008e",
+                        "surface-container-lowest": "#070f19",
+                        "tertiary-container": "#6ffbbe",
+                        "on-tertiary": "#003824",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-bright": "#323a45",
+                        "inverse-surface": "#dbe3f2",
+                        "primary-container": "#d5e4fb",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-tint": "#b9c8de",
+                        "data-blue": "#1C85E8",
+                        "surface-card": "#0d1b2a",
+                        "on-primary-fixed": "#0d1c2d",
+                        "surface-container-low": "#141c27"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "density-compact": "8px",
+                        "density-comfortable": "16px",
+                        "sidebar_width": "260px",
+                        "container-margin": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Chart.js for visualizations -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+        
+        .accent-bar-execution { border-left: 4px solid theme('colors.execution-violet'); }
+        .accent-bar-risk { border-left: 4px solid theme('colors.status-risk'); }
+        .accent-bar-success { border-left: 4px solid theme('colors.status-success'); }
+        .accent-bar-critical { border-left: 4px solid theme('colors.status-critical'); }
+        .accent-bar-data { border-left: 4px solid theme('colors.data-blue'); }
+
+        .terminal-block {
+            background-color: theme('colors.terminal-black');
+            color: theme('colors.data-blue');
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Pulse animation for live indicators */
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+        .animate-pulse-dot {
+            animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        /* Custom Scrollbar for terminal blocks if needed */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-dim');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant');
+            border-radius: theme('borderRadius.DEFAULT');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row">
+<!-- TopAppBar (Web) -->
+<header class="hidden md:flex justify-between items-center px-md py-sm w-full z-50 bg-surface-container-highest dark:bg-surface-container-highest border-b border-outline-variant shadow-sm fixed top-0 h-16">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary dark:text-primary" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">OpsCompanion</span>
+</div>
+<nav class="flex gap-8">
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1 transition-all duration-200 hover:text-primary/80" href="#">Health</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant transition-all duration-200 hover:text-primary/80" href="#">Alerts</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant transition-all duration-200 hover:text-primary/80" href="#">Squads</a>
+</nav>
+<div>
+<span class="material-symbols-outlined text-primary dark:text-primary cursor-pointer hover:bg-white/5 p-2 rounded transition-all duration-200 active:scale-95" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 w-full p-container-margin pt-24 md:pt-24 pb-24 md:pb-container-margin max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Header Section -->
+<div class="md:col-span-12 mb-4 flex justify-between items-end border-b border-outline-variant pb-density-comfortable">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">Reliability Center</h1>
+<p class="font-data-mono text-data-mono text-on-surface-variant mt-2 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse-dot"></span>
+                    SYS_STATE: OPERATIONAL | PHASE: A.50
+                </p>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="bg-execution-violet text-white font-label-caps text-label-caps px-4 py-2 rounded uppercase tracking-wider transition-all duration-200 hover:bg-execution-violet/90 active:scale-95 border border-execution-violet">Acknowledge All</button>
+<button class="bg-transparent text-primary font-label-caps text-label-caps px-4 py-2 rounded uppercase tracking-wider transition-all duration-200 hover:bg-surface-variant active:scale-95 border border-border-muted">Runbook Library</button>
+</div>
+</div>
+<!-- 1. System Health Overview (Top Row - 3 cols) -->
+<section class="md:col-span-12 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Global Availability -->
+<div class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-success flex flex-col justify-between h-32 hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-start">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Global Availability</h3>
+<span class="material-symbols-outlined text-status-success text-sm">public</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-primary leading-none">99.98%</div>
+<div class="font-data-mono text-data-mono text-status-success mt-1 text-xs">↑ 0.01% vs 30d trailing</div>
+</div>
+</div>
+<!-- Average Latency -->
+<div class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-execution flex flex-col justify-between h-32 hover:border-outline-variant transition-colors">
+<div class="flex justify-between items-start">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Average Latency (P95)</h3>
+<span class="material-symbols-outlined text-execution-violet text-sm">speed</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-primary leading-none">142<span class="text-headline-md font-headline-md text-on-surface-variant ml-1">ms</span></div>
+<div class="font-data-mono text-data-mono text-on-surface-variant mt-1 text-xs">Global Edge Aggregated</div>
+</div>
+</div>
+<!-- Active SEV-1 -->
+<div class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-critical flex flex-col justify-between h-32 hover:border-outline-variant transition-colors relative overflow-hidden">
+<!-- Subtle warning background pattern -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, theme('colors.status-critical') 10px, theme('colors.status-critical') 20px);"></div>
+<div class="flex justify-between items-start relative z-10">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Active SEV-1</h3>
+<span class="material-symbols-outlined text-status-critical text-sm">warning</span>
+</div>
+<div class="relative z-10">
+<div class="font-display-lg text-display-lg text-primary leading-none">0</div>
+<div class="font-data-mono text-data-mono text-status-success mt-1 text-xs">0 Active / 1 Resolved (24h)</div>
+</div>
+</div>
+</section>
+<!-- Main Bento Content Area -->
+<!-- Left Column (8 cols): Service Map & Deployments -->
+<div class="md:col-span-8 flex flex-col gap-gutter">
+<!-- 2. Service Map / Dependency Health -->
+<section class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-data">
+<div class="flex justify-between items-center mb-density-comfortable pb-2 border-b border-border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">Dependency Matrix</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-dim px-2 py-1 rounded border border-border-muted">LIVE</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<!-- Core Services -->
+<div class="border border-border-muted rounded p-density-compact hover:bg-surface-variant/30 transition-colors cursor-default">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-data-mono text-data-mono text-primary text-xs">Core API</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-on-surface-variant text-[10px]">99.99% | 45ms</div>
+</div>
+<div class="border border-border-muted rounded p-density-compact hover:bg-surface-variant/30 transition-colors cursor-default">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-data-mono text-data-mono text-primary text-xs">Primary DB</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-on-surface-variant text-[10px]">99.99% | 12ms</div>
+</div>
+<div class="border border-border-muted rounded p-density-compact border-l-2 border-l-status-risk hover:bg-surface-variant/30 transition-colors cursor-default">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-status-risk animate-pulse-dot"></span>
+<span class="font-data-mono text-data-mono text-primary text-xs">AI Engine</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-status-risk text-[10px]">98.50% | 850ms</div>
+</div>
+<div class="border border-border-muted rounded p-density-compact hover:bg-surface-variant/30 transition-colors cursor-default">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-status-success"></span>
+<span class="font-data-mono text-data-mono text-primary text-xs">Sec Vault</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-on-surface-variant text-[10px]">100.0% | 8ms</div>
+</div>
+<!-- External Providers -->
+<div class="border border-border-muted rounded p-density-compact mt-2 border-dashed">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">api</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">Gemini (Ext)</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-status-risk text-[10px]">Degraded</div>
+</div>
+<div class="border border-border-muted rounded p-density-compact mt-2 border-dashed">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">code</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">GitHub (Ext)</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-status-success text-[10px]">Operational</div>
+</div>
+<div class="border border-border-muted rounded p-density-compact mt-2 border-dashed">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">payments</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">Stripe (Ext)</span>
+</div>
+<div class="text-right font-data-mono text-data-mono text-status-success text-[10px]">Operational</div>
+</div>
+</div>
+</section>
+<!-- 5. Deployment Correlation -->
+<section class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-execution flex-1 min-h-[300px] flex flex-col">
+<div class="flex justify-between items-center mb-density-comfortable pb-2 border-b border-border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">Deployment Correlation &amp; Error Rates</h2>
+<div class="flex gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-dim px-2 py-1 rounded border border-border-muted flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-execution-violet inline-block"></span> Deployments</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-dim px-2 py-1 rounded border border-border-muted flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-status-critical inline-block"></span> Errors</span>
+</div>
+</div>
+<div class="flex-1 relative w-full h-full">
+<!-- Chart.js Canvas -->
+<canvas id="deploymentChart"></canvas>
+</div>
+</section>
+</div>
+<!-- Right Column (4 cols): Incidents, SLOs, AI Metrics -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<!-- 4. Active Incidents & Alerts -->
+<section class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-risk">
+<div class="flex justify-between items-center mb-density-comfortable pb-2 border-b border-border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-status-risk" style="font-size: 20px;">notifications_active</span>
+                        Active Alerts
+                    </h2>
+<span class="font-label-caps text-label-caps text-status-risk bg-status-risk/10 border border-status-risk/30 px-2 py-1 rounded">2 OPEN</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Alert Item 1 -->
+<div class="border border-border-muted rounded p-density-compact bg-surface-dim hover:border-outline-variant transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<div class="font-label-caps text-label-caps text-status-risk bg-status-risk/10 border border-status-risk/30 px-1.5 py-0.5 rounded text-[9px]">SEV-2</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-[10px]">T+45m</div>
+</div>
+<h4 class="font-body-md text-body-md text-primary font-semibold leading-tight mb-1">AI Provider Latency Spike</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight mb-2">Gemini API responding &gt; 2000ms. Retries exhausting.</p>
+<div class="flex gap-2">
+<span class="font-data-mono text-data-mono text-data-blue text-[10px] bg-terminal-black px-1 rounded border border-border-muted">ACK: jsmith</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-[10px] bg-terminal-black px-1 rounded border border-border-muted">#ai-ops</span>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="border border-border-muted rounded p-density-compact bg-surface-dim hover:border-outline-variant transition-colors cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<div class="font-label-caps text-label-caps text-status-risk bg-status-risk/10 border border-status-risk/30 px-1.5 py-0.5 rounded text-[9px]">SEV-3</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-[10px]">T+12m</div>
+</div>
+<h4 class="font-body-md text-body-md text-primary font-semibold leading-tight mb-1">High Memory DB-Replica-02</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-tight mb-2">Usage at 88%. Threshold is 85%.</p>
+<div class="flex gap-2">
+<span class="font-data-mono text-data-mono text-status-risk text-[10px] bg-terminal-black px-1 rounded border border-border-muted">UNACKNOWLEDGED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. SLO & Error Budgets -->
+<section class="bg-surface-card border border-border-muted rounded-DEFAULT p-density-comfortable accent-bar-data">
+<div class="flex justify-between items-center mb-density-comfortable pb-2 border-b border-border-muted">
+<h2 class="font-headline-sm text-headline-sm text-primary">SLO Budgets (28d)</h2>
+</div>
+<div class="flex flex-col gap-4">
+<!-- Availability SLO -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-body-md text-body-md text-primary">Core Availability (99.9%)</span>
+<span class="font-data-mono text-data-mono text-status-success text-xs">92% Remaining</span>
+</div>
+<div class="w-full bg-surface-dim h-1.5 rounded-full overflow-hidden border border-border-muted">
+<div class="bg-status-success h-full" style="width: 92%"></div>
+</div>
+<div class="text-right font-data-mono text-data-mono text-on-surface-variant text-[9px] mt-1">Burn Rate: 0.8x (Normal)</div>
+</div>
+<!-- Latency SLO -->
+<div>
+<div class="flex justify-between items-end mb-1">
+<span class="font-body-md text-body-md text-primary">API Latency &lt; 200ms</span>
+<span class="font-data-mono text-data-mono text-status-risk text-xs">14% Remaining</span>
+</div>
+<div class="w-full bg-surface-dim h-1.5 rounded-full overflow-hidden border border-border-muted">
+<div class="bg-status-risk h-full" style="width: 14%"></div>
+</div>
+<div class="text-right font-data-mono text-data-mono text-status-critical text-[9px] mt-1">Burn Rate: 4.2x (High)</div>
+</div>
+</div>
+</section>
+<!-- 6. AI Reliability Metrics (Terminal Style) -->
+<section class="terminal-block border border-border-muted rounded-DEFAULT p-density-comfortable flex-1 min-h-[150px] shadow-inner">
+<div class="flex justify-between items-center border-b border-outline-variant pb-1 mb-2">
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">&gt;_ AI_METRICS_DUMP</span>
+<span class="w-1.5 h-1.5 bg-data-blue animate-pulse-dot rounded-full"></span>
+</div>
+<div class="font-data-mono text-data-mono text-[11px] leading-relaxed break-all">
+<span class="text-on-surface-variant">[14:02:11]</span> <span class="text-execution-violet">SYS</span> fetching token_usage...<br/>
+<span class="text-on-surface-variant">[14:02:11]</span> <span class="text-status-success">OK</span> input_tokens: 14.2M ($7.10)<br/>
+<span class="text-on-surface-variant">[14:02:11]</span> <span class="text-status-success">OK</span> output_tokens: 4.8M ($72.00)<br/>
+<span class="text-on-surface-variant">[14:02:12]</span> <span class="text-execution-violet">SYS</span> checking provider_health...<br/>
+<span class="text-on-surface-variant">[14:02:12]</span> <span class="text-status-risk">WARN</span> gemini_pro_v1.5_succ: 94.2%<br/>
+<span class="text-on-surface-variant">[14:02:12]</span> <span class="text-on-surface-variant">INFO</span> fallback_triggered: 142x (1h)
+                </div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-md pb-md pt-sm bg-surface-container dark:bg-surface-container border-t border-outline-variant shadow-lg rounded-t-xl z-50">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs transition-transform duration-150 active:scale-90 hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">notifications_active</span>
+<span class="font-label-caps text-label-caps">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-lg py-xs transition-transform duration-150 active:scale-90 hover:bg-surface-variant/50" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">groups</span>
+<span class="font-label-caps text-label-caps">Squads</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-lg py-xs transition-transform duration-150 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dns</span>
+<span class="font-label-caps text-label-caps">Health</span>
+</a>
+</nav>
+<!-- Chart.js Initialization -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('deploymentChart').getContext('2d');
+            
+            // Extract Tailwind colors for chart
+            const colors = {
+                muted: '#1e293b',
+                grid: '#2d3541',
+                text: '#c4c6cd',
+                error: '#ef4444',
+                errorFill: 'rgba(239, 68, 68, 0.1)',
+                deploy: '#7c3aed'
+            };
+
+            const data = {
+                labels: ['10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00'],
+                datasets: [
+                    {
+                        label: 'Error Rate (5xx)',
+                        data: [12, 19, 15, 25, 22, 85, 60, 45, 30],
+                        borderColor: colors.error,
+                        backgroundColor: colors.errorFill,
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: true,
+                        pointRadius: 0,
+                        pointHoverRadius: 4,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'Deployments',
+                        data: [null, null, null, null, null, 100, null, null, null], // Marker at 12:30
+                        type: 'bar',
+                        backgroundColor: colors.deploy,
+                        barThickness: 4,
+                        yAxisID: 'y1'
+                    }
+                ]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#091017',
+                            titleColor: '#dbe3f2',
+                            bodyColor: '#1C85E8',
+                            titleFont: { family: 'JetBrains Mono', size: 11 },
+                            bodyFont: { family: 'JetBrains Mono', size: 11 },
+                            borderColor: '#44474c',
+                            borderWidth: 1,
+                            cornerRadius: 2
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: colors.grid, drawBorder: false },
+                            ticks: { color: colors.text, font: { family: 'JetBrains Mono', size: 10 } }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: colors.grid, drawBorder: false, borderDash: [2, 4] },
+                            ticks: { color: colors.text, font: { family: 'JetBrains Mono', size: 10 } },
+                            max: 100
+                        },
+                        y1: {
+                            beginAtZero: true,
+                            display: false, // Hide second axis, just use it for the bar height scaling
+                            max: 100
+                        }
+                    }
+                }
+            };
+
+            new Chart(ctx, config);
+        });
+    </script>
+</body></html>

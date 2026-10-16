@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Project Overview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#6001d1",
+                        "surface": "#051424",
+                        "primary-container": "#031427",
+                        "inverse-primary": "#505f76",
+                        "surface-container": "#122131",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "engineering-accent": "#8B5CF6",
+                        "surface-bright": "#2c3a4c",
+                        "primary-fixed-dim": "#b7c8e1",
+                        "status-available": "#10B981",
+                        "on-tertiary-container": "#0086bf",
+                        "on-error-container": "#ffdad6",
+                        "background": "#051424",
+                        "on-secondary": "#3f008e",
+                        "secondary": "#d2bbff",
+                        "surface-container-high": "#1c2b3c",
+                        "secondary-fixed": "#eaddff",
+                        "on-background": "#d4e4fa",
+                        "status-busy": "#F59E0B",
+                        "surface-elevation-2": "#0F2944",
+                        "tertiary-fixed": "#c9e6ff",
+                        "surface-dim": "#051424",
+                        "outline": "#8e9197",
+                        "surface-variant": "#273647",
+                        "on-primary-fixed": "#0b1c30",
+                        "status-unavailable": "#EF4444",
+                        "on-secondary-fixed": "#25005a",
+                        "on-primary-fixed-variant": "#38485d",
+                        "border-muted": "#1E293B",
+                        "status-pending": "#64748B",
+                        "on-surface-variant": "#c4c6cd",
+                        "on-error": "#690005",
+                        "primary-fixed": "#d3e4fe",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#001522",
+                        "surface-container-low": "#0d1c2d",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "surface-elevation-1": "#0A1F35",
+                        "surface-container-highest": "#273647",
+                        "on-tertiary": "#00344d",
+                        "surface-tint": "#b7c8e1",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "inverse-on-surface": "#233143",
+                        "tertiary": "#89ceff",
+                        "on-secondary-container": "#c9aeff",
+                        "primary": "#b7c8e1",
+                        "inverse-surface": "#d4e4fa",
+                        "on-primary": "#213146",
+                        "outline-variant": "#44474c",
+                        "on-surface": "#d4e4fa",
+                        "on-primary-container": "#6f7f97",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-container-lowest": "#010f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "grid-margin": "2rem",
+                        "grid-gutter": "1rem",
+                        "engineering-density": "0.5rem",
+                        "stack-gap": "1.25rem",
+                        "client-density": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter", "sans-serif"],
+                        "code-snippet": ["JetBrains Mono", "monospace"],
+                        "headline-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+                        "headline-lg": ["Hanken Grotesk", "sans-serif"],
+                        "body-sm": ["Inter", "sans-serif"],
+                        "display-command": ["Hanken Grotesk", "sans-serif"],
+                        "headline-md": ["Hanken Grotesk", "sans-serif"],
+                        "label-caps": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "code-snippet": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-command": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen font-body-md flex flex-col">
+<!-- TopNavBar -->
+<nav class="sticky top-0 z-50 flex items-center justify-between px-grid-margin w-full h-16 bg-surface-container dark:bg-surface-container bg-surface-container/80 backdrop-blur-md border-b border-border-muted docked full-width top-0">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">UdehLabs Engineering</span>
+</div>
+<div class="hidden md:flex items-center gap-6 h-full">
+<a class="h-full flex items-center text-primary font-bold border-b-2 border-primary pb-1 font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Overview</a>
+<a class="h-full flex items-center text-on-surface-variant font-medium font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Requirements</a>
+<a class="h-full flex items-center text-on-surface-variant font-medium font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Tasks</a>
+<a class="h-full flex items-center text-on-surface-variant font-medium font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Milestones</a>
+<a class="h-full flex items-center text-on-surface-variant font-medium font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Team</a>
+<a class="h-full flex items-center text-on-surface-variant font-medium font-label-caps text-label-caps hover:text-primary transition-colors duration-200" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block bg-engineering-accent text-white px-4 py-2 rounded font-label-caps text-label-caps hover:bg-engineering-accent/90 transition-colors">Deploy Project</button>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<button class="p-2 hover:text-primary transition-colors duration-200 scale-95 transition-transform"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="p-2 hover:text-primary transition-colors duration-200 scale-95 transition-transform"><span class="material-symbols-outlined" data-icon="help">help</span></button>
+<button class="p-2 hover:text-primary transition-colors duration-200 scale-95 transition-transform"><span class="material-symbols-outlined" data-icon="settings">settings</span></button>
+</div>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-border-muted object-cover" data-alt="A small, circular avatar image of a software engineer, professional and clear, suitable for a dark-mode technical dashboard top navigation bar." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKsVsRteEodkerElfaeuxbIbdinHBgUzPI1zWl3UMd1T2NeWIiz3_HxqWORBTx1KMbpV20XhUnptUoJ6LI8ULYGW-Otw2bSOYZgzTyveDaYZzgHwv1SpmyJu17HsKPmRzh4_CErhb17SFPxJCRhb-nmh7X5nGGpp44D0iG7WrRRYOBi1dB5DRXOgGuMRrOJFrljN1uM8UjPMmQll-55kVynG_qdvMzqPy-nVkf8tgeRfLO7xidwr_D8w"/>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col h-full p-4 gap-stack-gap bg-surface-container-low dark:bg-surface-container-low bg-surface-container-low/90 backdrop-blur-xl border-r border-border-muted docked left-0 h-screen w-64 shrink-0">
+<div class="flex flex-col gap-2 mb-4">
+<div class="flex items-center gap-3">
+<img alt="Organization Logo" class="w-10 h-10 rounded border border-border-muted object-cover" data-alt="A stylized, geometric logo for an engineering organization, using subtle blue and violet tones, suitable for a dark technical UI sidebar header." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO-cNv0dXgfrRXzT1I6DiY4EgghDdR-YdOSJn_9gsLGCHNV6Mx70ij5vZOGyJ3rCbPY3cKQsVeFy4DNm4EPQJO-llt3ITyv0L7KfOGcyZbRcA2lxXjml_6Rv48tqMnHmqr3srQRt6NyUBrYiWejGAz8G0E5tL0zDbvqn8fCanHf525BYs7-W1sSGqRC5EwNbAucfL2TDr4lT7cu7mR7VzDihivejZanw_YXUsFAC9Bzs6O-HEuyiKbEg"/>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-primary leading-tight text-[16px]">Client Workspace</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">UdehLabs Dual-Tenant</span>
+</div>
+</div>
+<button class="mt-2 w-full py-1.5 border border-border-muted rounded font-label-caps text-label-caps text-on-surface-variant hover:text-primary hover:border-primary transition-colors">Switch Project</button>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-engineering-density p-2 my-1 bg-secondary-container text-on-secondary-container rounded-lg font-bold font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+                    Overview
+                </a>
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+                    Requirements
+                </a>
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="checklist">checklist</span>
+                    Tasks
+                </a>
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="flag">flag</span>
+                    Milestones
+                </a>
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="group">group</span>
+                    Team
+                </a>
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 pt-4 border-t border-border-muted">
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="menu_book">menu_book</span>
+                    Docs
+                </a>
+<a class="flex items-center gap-engineering-density p-2 my-1 text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps hover:bg-surface-bright transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="contact_support">contact_support</span>
+                    Support
+                </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-grid-margin md:p-6 lg:p-8 bg-background">
+<div class="max-w-7xl mx-auto space-y-stack-gap">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="px-2 py-0.5 rounded border border-status-available/30 bg-status-available/10 text-status-available font-code-snippet text-code-snippet">ACTIVE</span>
+<span class="px-2 py-0.5 rounded border border-primary/30 bg-primary/10 text-primary font-code-snippet text-code-snippet">HEALTHY</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface m-0">Cyber-Enterprise Core</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Project ID: PRJ-9942A | Started: Oct 12, 2023</p>
+</div>
+</header>
+</div>
+</main>
+</div>
+</body></html>

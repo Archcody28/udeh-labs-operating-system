@@ -1,0 +1,238 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Accept Invitation | UdehLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #031427; /* surface-dim */
+            color: #d3e4fe; /* on-surface */
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, transparent, rgba(195, 192, 255, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#004c6e",
+                    "on-secondary-container": "#c4abff",
+                    "primary-fixed": "#e2dfff",
+                    "outline-variant": "#464555",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "tertiary-fixed-dim": "#89ceff",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-primary": "#1d00a5",
+                    "primary": "#c3c0ff",
+                    "surface-bright": "#2a3a4f",
+                    "surface": "#031427",
+                    "surface-container-high": "#1b2b3f",
+                    "secondary": "#d0bcff",
+                    "surface-dim": "#031427",
+                    "error": "#ffb4ab",
+                    "inverse-surface": "#d3e4fe",
+                    "primary-container": "#4f46e5",
+                    "on-secondary": "#3c0091",
+                    "surface-tint": "#c3c0ff",
+                    "tertiary-container": "#006693",
+                    "on-primary-container": "#dad7ff",
+                    "on-surface-variant": "#c7c4d8",
+                    "on-error-container": "#ffdad6",
+                    "inverse-primary": "#4d44e3",
+                    "inverse-on-surface": "#213145",
+                    "tertiary": "#89ceff",
+                    "on-surface": "#d3e4fe",
+                    "outline": "#918fa1",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "surface-variant": "#26364a",
+                    "on-background": "#d3e4fe",
+                    "secondary-container": "#571bc1",
+                    "secondary-fixed": "#e9ddff",
+                    "on-tertiary-fixed": "#001e2f",
+                    "on-error": "#690005",
+                    "on-secondary-fixed": "#23005c",
+                    "background": "#031427",
+                    "error-container": "#93000a",
+                    "surface-container-highest": "#26364a",
+                    "on-tertiary-container": "#b8e0ff",
+                    "surface-container": "#102034",
+                    "surface-container-lowest": "#000f21",
+                    "tertiary-fixed": "#c9e6ff",
+                    "on-primary-fixed": "#0f0069",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "on-tertiary": "#00344d",
+                    "surface-container-low": "#0b1c30"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "lg": "24px",
+                    "md": "16px",
+                    "sidebar_collapsed": "64px",
+                    "sidebar_width": "260px",
+                    "xl": "32px",
+                    "max_content_width": "1440px",
+                    "2xl": "48px",
+                    "sm": "8px",
+                    "base": "4px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "code-sm": ["JetBrains Mono"],
+                    "label-caps": ["Inter"],
+                    "display": ["Inter"],
+                    "code-md": ["JetBrains Mono"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-body-md text-body-md overflow-hidden h-screen flex flex-col items-center justify-center relative">
+<!-- Background Shader -->
+
+<!-- Main Container -->
+<div class="relative z-10 w-full max-w-lg px-md">
+<!-- Organization Invite Card -->
+<div class="glass-panel p-xl rounded-xl border border-outline-variant shadow-2xl flex flex-col gap-lg ai-glow">
+<!-- Logo / Header -->
+<div class="flex flex-col items-center gap-md">
+<div class="w-16 h-16 rounded-lg bg-primary-container flex items-center justify-center mb-base">
+<span class="material-symbols-outlined text-on-primary-container text-4xl" data-icon="rocket_launch">rocket_launch</span>
+</div>
+<div class="text-center">
+<h1 class="font-headline-md text-headline-md text-on-surface mb-xs">Welcome to UdehLabs</h1>
+<p class="font-body-md text-on-surface-variant">You've been invited to join <span class="text-primary font-bold">Acme Corp</span></p>
+</div>
+</div>
+<!-- Bento-style details -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="bg-surface-container-high p-md rounded-lg border border-outline-variant flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps text-outline uppercase">Organization</span>
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist logo for a tech corporation named Acme Corp, featuring sharp geometric lines and a dark navy and violet color scheme, professional and modern fintech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEp6qmn4H98GiWpFmxnpth1j9gRPMtbJ-tsm-_Brv3sHuy8k3JdUKw3j0zTmekCj-EmE27YQ_6JaC16Bz4ataEf0lBo7i4utTvJRqkcwfxLFGVhyhHzkfXJzTpIFlB01Y-YNxTa3LnHB4vgUERJ_jqEN7JRU7QWKu67FbH5sz-rBPhga0NgKYoERzWPgbiR0thuOkSg1NVq0YMi3AbDi4WSEvVtE_TrR_kE8Ha9WnqofQpwo7ZqqsMSw">
+</div>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Acme Corp</span>
+</div>
+<span class="font-body-md text-on-surface-variant text-xs mt-xs">Enterprise AI &amp; Workspace Solutions</span>
+</div>
+<div class="bg-surface-container-high p-md rounded-lg border border-outline-variant flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps text-outline uppercase">Invited By</span>
+<div class="flex items-center gap-sm">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A professional headshot of a female executive in a modern workspace, soft focused background with warm atmospheric lighting, high-end corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCicVlFd1TlLCFHhFi6NgW7cf07kCbEv5OYWrwY07HO6t6Yir0OGhbrTCQzC3OViNOGJ85-c4NzC0lHT3cTQzs4MXSSD3omCb9367irTA-06byVOHwVLrthGbV6KVaB8s9EhGF6PZCZ9FW8FkPlUIyUkA86HTs0WKECYJzS586HnsTIxG9lJNLSZnnafwmF5JY_3oYZNry8ReDShYoDRadaC-T03iMZQPHpzjRsihwDgDU2-0DcqZstSQ">
+<span class="font-body-lg text-body-lg text-on-surface">Sarah Chen</span>
+</div>
+<span class="font-body-md text-on-surface-variant text-xs mt-xs">Head of Engineering</span>
+</div>
+</div>
+<!-- Login Requirement Notice -->
+<div class="bg-primary-container/10 border border-primary/20 p-md rounded-lg flex items-start gap-md">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<p class="font-body-md text-on-primary-container">
+                    To accept this invitation and access Acme Corp's workspace, you must be signed in to your UdehLabs account.
+                </p>
+</div>
+<!-- Actions Area -->
+<div class="flex flex-col gap-md">
+<!-- Accept Flow (Primary) -->
+<div class="grid grid-cols-1 gap-sm">
+<button class="w-full py-md px-lg bg-primary text-on-primary rounded-lg font-headline-md text-headline-md font-bold transition-all hover:brightness-110 active:scale-[0.98] shadow-lg shadow-primary/20 flex items-center justify-center gap-sm" onclick="handleAccept()">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        Accept Invitation
+                    </button>
+<div class="flex items-center gap-sm px-base">
+<hr class="flex-grow border-outline-variant">
+<span class="font-label-caps text-label-caps text-outline uppercase">Proceed with</span>
+<hr class="flex-grow border-outline-variant">
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<button class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-lg bg-surface-container-low hover:bg-surface-variant transition-colors font-body-lg text-body-lg">
+<span class="material-symbols-outlined text-primary" data-icon="login">login</span>
+                            Log In
+                        </button>
+<button class="flex items-center justify-center gap-sm py-md px-md border border-outline-variant rounded-lg bg-surface-container-low hover:bg-surface-variant transition-colors font-body-lg text-body-lg">
+<span class="material-symbols-outlined text-primary" data-icon="person_add">person_add</span>
+                            Sign Up
+                        </button>
+</div>
+</div>
+<!-- Decline (Secondary) -->
+<button class="w-full py-sm text-on-surface-variant hover:text-error transition-colors font-body-md text-body-md">
+                    Decline Invitation
+                </button>
+</div>
+</div>
+<!-- Footer / Branding -->
+<div class="mt-lg text-center flex flex-col gap-xs">
+<div class="flex items-center justify-center gap-xs font-headline-md text-headline-md font-extrabold text-primary opacity-60">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+                UdehLabs
+            </div>
+<p class="font-label-caps text-label-caps text-outline tracking-widest uppercase">Precision Engineering for Enterprise AI</p>
+</div>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        function handleAccept() {
+            // Simulated interaction
+            const btn = event.currentTarget;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Processing...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed');
+            
+            setTimeout(() => {
+                alert('Redirecting to authentication flow...');
+                btn.innerHTML = '<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span> Accept Invitation';
+                btn.classList.remove('opacity-80', 'cursor-not-allowed');
+            }, 1200);
+        }
+
+        // Atmosphere effect: Follow mouse with subtle light
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            document.body.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, #0B1C30 0%, #031427 70%)`;
+        });
+    </script>
+</body></html>

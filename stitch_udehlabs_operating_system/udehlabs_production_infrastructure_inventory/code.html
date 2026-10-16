@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Production Inventory Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#ccc3d8",
+                      "inverse-on-surface": "#29313c",
+                      "on-secondary-fixed": "#002022",
+                      "surface-variant": "#2d3540",
+                      "inverse-surface": "#dbe3f1",
+                      "primary": "#d2bbff",
+                      "on-tertiary-fixed": "#002113",
+                      "secondary-fixed": "#74f5ff",
+                      "secondary": "#ddfcff",
+                      "secondary-container": "#00f1fe",
+                      "surface-container-highest": "#2d3540",
+                      "on-surface": "#dbe3f1",
+                      "tertiary-container": "#007650",
+                      "outline": "#958da1",
+                      "on-primary-fixed": "#25005a",
+                      "secondary-fixed-dim": "#00dbe7",
+                      "surface-bright": "#323a45",
+                      "tertiary-fixed": "#6ffbbe",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "error": "#ffb4ab",
+                      "surface-dim": "#0c141e",
+                      "on-primary": "#3f008e",
+                      "surface-container-low": "#141c26",
+                      "surface-container-lowest": "#070f18",
+                      "on-secondary-container": "#006a70",
+                      "tertiary": "#4edea3",
+                      "on-primary-fixed-variant": "#5a00c6",
+                      "primary-container": "#7c3aed",
+                      "on-tertiary-container": "#76ffc2",
+                      "inverse-primary": "#732ee4",
+                      "on-secondary": "#00363a",
+                      "surface-tint": "#d2bbff",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#18202b",
+                      "outline-variant": "#4a4455",
+                      "primary-fixed": "#eaddff",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "on-secondary-fixed-variant": "#004f54",
+                      "surface": "#0c141e",
+                      "on-background": "#dbe3f1",
+                      "on-tertiary": "#003824",
+                      "background": "#0c141e",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-container": "#ede0ff",
+                      "primary-fixed-dim": "#d2bbff",
+                      "surface-container-high": "#232b35"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "container-padding": "24px",
+                      "gutter": "16px",
+                      "unit": "4px",
+                      "stack-lg": "32px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display": [
+                              "Hanken Grotesk"
+                      ],
+                      "caption": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-mono": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #05080b; /* Base Layer */
+            color: #dbe3f1;
+        }
+        .surface-card {
+            background: linear-gradient(135deg, #0c141e, #111b27);
+            border: 1px solid #1e293b;
+        }
+        .surface-card-active {
+             box-shadow: inset 0 0 0 1px #00f2ff;
+        }
+        .data-log-row {
+            background-color: #05080b;
+            color: #94a3b8;
+        }
+      </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface-dim dark:bg-surface-dim text-primary dark:text-primary font-body-md text-body-md docked full-width top-0 border-b border-outline-variant flat no shadows flex justify-between items-center w-full px-container-padding h-16 z-50 fixed">
+<div class="flex items-center gap-6">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary tracking-tight">UdehLabs Infra</h1>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Status</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Inventory</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Logs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Regions</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="settings">settings</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-outline-variant">
+<img alt="Operator Profile" class="object-cover w-full h-full" data-alt="A futuristic avatar of a system operator, cybperbunk style, high contrast dark theme, neon violet and cyan accents. The avatar is stylized as a technical engineer profile photo. It represents sovereign infrastructure control." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3DJnBrKSa6xG84cvCEKHGytWnBu6VA1SlaaG9J3tmoXbNK-8rH6OdLFjG0jF0X3JKkmGUhjXweO__Uo7_QW7DUsTA28vFc2t93LKk2KSnj7f2qeGCVW1X5pBPH1nzovWNCsPbb1wmsT3NZoKvUbLZRJ_FDMKlHJRMjHnQSdsL9GcRpIecZVyId7JolT-IE3Uat2l_Wd1z9IXFDNUya3jSFC1YVcUN35I0tMl972aF7Qg2kHkBo8o7BA"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar & Main Content Wrapper -->
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar -->
+<aside class="bg-surface dark:bg-surface text-secondary dark:text-secondary font-body-md text-body-md docked left-0 h-full w-64 border-r border-outline-variant flat no shadows fixed left-0 top-16 h-[calc(100vh-64px)] hidden md:flex flex-col p-stack-md z-40">
+<div class="mb-stack-lg">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-lg bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="System Node" class="object-cover w-full h-full" data-alt="A stylized technical icon representing a system node or cluster. Industrial engineering aesthetic, dark metallic tones with a glowing cyan core. Sharp, angular, high-density visualization." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt6P4bV5BhtUG_2lJTiayWoEuyCGKd5z9qa2yJWXTkAIvNVn3QHfXhdE6gabg2b1uqqx7gwF0eZ630a3yIqKHuDQRa93hlc-rs5365hHZugE8T_zDdyvMfXLuyt3wh25yUncB8ZwDStAan7WPJhud3NdLRWJ77BJYXcw3vht85X5aVDfFKJiRfoteOUeT0wWwUI2ZFNSxRdBARRaxZtRROaKgU4VtVCXaWqEgRPKBUs6oh70AJnfuoWw"/>
+</div>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-primary font-bold leading-tight">UdehLabs Admin</h2>
+<p class="text-caption font-caption text-on-surface-variant">Production Cluster v2.4</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-3 py-2 border-r-4 border-secondary-container hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-medium">Inventory</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+<span class="font-medium">Secrets</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span class="font-medium">Pipelines</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-medium">Monitoring</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-medium">Rollback</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-1 mb-stack-md">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-medium">Terminal</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-medium">Docs</span>
+</a>
+</div>
+<button class="w-full bg-primary-container text-on-primary-container font-medium py-2 rounded flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+                Deploy Now
+            </button>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-64 p-container-padding overflow-y-auto">
+<header class="mb-stack-lg flex justify-between items-end">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Production Inventory</h2>
+<p class="text-on-surface-variant mt-1">Live status of active services and sovereign infrastructure.</p>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Production Fleet Overview (Span 8) -->
+<section class="col-span-12 lg:col-span-8 surface-card rounded-xl p-stack-md flex flex-col h-[400px]">
+<div class="flex justify-between items-center mb-stack-md pb-2 border-b border-[#1e293b]">
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary-container" data-icon="dns">dns</span>
+                            Production Fleet Overview
+                        </h3>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-label-mono font-label-mono text-outline border-b border-[#1e293b]">
+<th class="py-2 font-medium">Service</th>
+<th class="py-2 font-medium">Version/Type</th>
+<th class="py-2 font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody class="text-body-md font-body-md">
+<tr class="border-b border-[#1e293b]/50 hover:bg-surface-container-high transition-colors">
+<td class="py-3 text-on-surface font-medium flex items-center gap-2"><span class="material-symbols-outlined text-outline-variant text-[18px]" data-icon="web">web</span> Frontend</td>
+<td class="py-3 text-on-surface-variant font-label-mono">v2.4.0</td>
+<td class="py-3 text-right">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#1e293b] text-secondary bg-surface-container-lowest"><span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span> Running</span>
+</td>
+</tr>
+<tr class="border-b border-[#1e293b]/50 hover:bg-surface-container-high transition-colors">
+<td class="py-3 text-on-surface font-medium flex items-center gap-2"><span class="material-symbols-outlined text-outline-variant text-[18px]" data-icon="api">api</span> Backend API</td>
+<td class="py-3 text-on-surface-variant font-label-mono">v2.4.0</td>
+<td class="py-3 text-right">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#1e293b] text-[#4edea3] bg-surface-container-lowest"><span class="w-1.5 h-1.5 rounded-full bg-[#4edea3]"></span> Healthy</span>
+</td>
+</tr>
+<tr class="border-b border-[#1e293b]/50 hover:bg-surface-container-high transition-colors">
+<td class="py-3 text-on-surface font-medium flex items-center gap-2"><span class="material-symbols-outlined text-outline-variant text-[18px]" data-icon="database">database</span> Database</td>
+<td class="py-3 text-on-surface-variant font-label-mono">Prisma v72</td>
+<td class="py-3 text-right">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#1e293b] text-[#4edea3] bg-surface-container-lowest"><span class="w-1.5 h-1.5 rounded-full bg-[#4edea3]"></span> Healthy</span>
+</td>
+</tr>
+<tr class="border-b border-[#1e293b]/50 hover:bg-surface-container-high transition-colors">
+<td class="py-3 text-on-surface font-medium flex items-center gap-2"><span class="material-symbols-outlined text-outline-variant text-[18px]" data-icon="cloud">cloud</span> Object Storage</td>
+<td class="py-3 text-on-surface-variant font-label-mono">GCS/S3</td>
+<td class="py-3 text-right">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#1e293b] text-[#4edea3] bg-surface-container-lowest"><span class="w-1.5 h-1.5 rounded-full bg-[#4edea3]"></span> Healthy</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3 text-on-surface font-medium flex items-center gap-2"><span class="material-symbols-outlined text-outline-variant text-[18px]" data-icon="psychology">psychology</span> AI Mesh</td>
+<td class="py-3 text-on-surface-variant font-label-mono">Gemini/OpenAI</td>
+<td class="py-3 text-right">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#1e293b] text-[#fbbf24] bg-surface-container-lowest"><span class="w-1.5 h-1.5 rounded-full bg-[#fbbf24]"></span> Warning</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Regional Distribution (Span 4) -->
+<section class="col-span-12 lg:col-span-4 surface-card rounded-xl p-stack-md flex flex-col h-[400px]">
+<div class="flex justify-between items-center mb-stack-md pb-2 border-b border-[#1e293b]">
+<h3 class="text-headline-md font-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="public">public</span>
+                            Regional Distribution
+                        </h3>
+</div>
+<div class="flex-1 relative rounded overflow-hidden border border-[#1e293b] bg-surface-container-lowest">
+<div class="bg-cover bg-center w-full h-full absolute inset-0 opacity-50 mix-blend-screen" data-alt="A stylized, dark mode data visualization map of the world. High contrast industrial aesthetic with deep navy oceans and dark grey landmasses. Bright cyan and neon violet dots indicate active server regions in US-EAST-1 and EU-CENTRAL-1. Technical UI overlays, grid lines, glowing connections." data-location="World Map Server Locations" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')"></div>
+<div class="absolute inset-0 flex flex-col justify-end p-3 z-10 bg-gradient-to-t from-surface-dim to-transparent">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-mono text-label-mono text-on-surface">US-EAST-1</span>
+<span class="text-secondary-container text-caption">Active</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-on-surface">EU-CENTRAL-1</span>
+<span class="text-secondary-container text-caption">Active</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

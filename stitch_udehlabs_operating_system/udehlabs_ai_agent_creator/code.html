@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Create AI Agent</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "tertiary-fixed-dim": "#89ceff",
+                "surface-tint": "#c3c0ff",
+                "secondary-fixed": "#e9ddff",
+                "on-tertiary-fixed-variant": "#004c6e",
+                "on-tertiary-fixed": "#001e2f",
+                "on-secondary": "#3c0091",
+                "error": "#ffb4ab",
+                "on-primary-fixed-variant": "#3323cc",
+                "on-secondary-container": "#c4abff",
+                "primary": "#c3c0ff",
+                "tertiary-container": "#006693",
+                "surface-bright": "#2a3a4f",
+                "secondary": "#d0bcff",
+                "on-primary-fixed": "#0f0069",
+                "on-secondary-fixed": "#23005c",
+                "on-primary": "#1d00a5",
+                "on-surface": "#d3e4fe",
+                "secondary-fixed-dim": "#d0bcff",
+                "on-surface-variant": "#c7c4d8",
+                "error-container": "#93000a",
+                "tertiary": "#89ceff",
+                "on-primary-container": "#dad7ff",
+                "surface-container-highest": "#26364a",
+                "surface-variant": "#26364a",
+                "surface": "#031427",
+                "on-tertiary-container": "#b8e0ff",
+                "on-background": "#d3e4fe",
+                "surface-container": "#102034",
+                "outline": "#918fa1",
+                "primary-fixed": "#e2dfff",
+                "background": "#031427",
+                "surface-container-high": "#1b2b3f",
+                "outline-variant": "#464555",
+                "on-error-container": "#ffdad6",
+                "secondary-container": "#571bc1",
+                "tertiary-fixed": "#c9e6ff",
+                "surface-dim": "#031427",
+                "on-secondary-fixed-variant": "#5516be",
+                "primary-container": "#4f46e5",
+                "on-error": "#690005",
+                "on-tertiary": "#00344d",
+                "surface-container-low": "#0b1c30",
+                "primary-fixed-dim": "#c3c0ff",
+                "inverse-surface": "#d3e4fe",
+                "inverse-on-surface": "#213145",
+                "surface-container-lowest": "#000f21",
+                "inverse-primary": "#4d44e3"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.125rem",
+                "lg": "0.25rem",
+                "xl": "0.5rem",
+                "full": "0.75rem"
+              },
+              "spacing": {
+                "max_content_width": "1440px",
+                "sm": "8px",
+                "base": "4px",
+                "xl": "32px",
+                "sidebar_width": "260px",
+                "lg": "24px",
+                "sidebar_collapsed": "64px",
+                "md": "16px",
+                "2xl": "48px",
+                "xs": "4px"
+              },
+              "fontFamily": {
+                "headline-lg": ["Inter"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"],
+                "code-sm": ["JetBrains Mono"],
+                "code-md": ["JetBrains Mono"],
+                "headline-md": ["Inter"],
+                "display": ["Inter"],
+                "label-caps": ["Inter"]
+              },
+              "fontSize": {
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+            -webkit-font-smoothing: antialiased;
+        }
+        .step-transition {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-panel {
+            background: rgba(16, 32, 52, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e293b;
+        }
+        .rim-light {
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #c3c0ff !important;
+            box-shadow: 0 0 0 1px #c3c0ff !important;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="flex overflow-hidden h-screen font-body-md text-body-md">
+<!-- Sidebar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full w-[260px] bg-surface border-r border-outline-variant py-md shrink-0">
+<div class="px-lg mb-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mt-1">Enterprise AI</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center px-lg py-3 text-primary border-l-2 border-primary bg-primary-container/10 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">folder_open</span>
+<span class="font-label-caps text-label-caps uppercase">Projects</span>
+</a>
+<a class="flex items-center px-lg py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">smart_toy</span>
+<span class="font-label-caps text-label-caps uppercase">AI Workspace</span>
+</a>
+<a class="flex items-center px-lg py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">monitoring</span>
+<span class="font-label-caps text-label-caps uppercase">Analytics</span>
+</a>
+<a class="flex items-center px-lg py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">rocket_launch</span>
+<span class="font-label-caps text-label-caps uppercase">Deployments</span>
+</a>
+<a class="flex items-center px-lg py-3 text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label-caps text-label-caps uppercase">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-lg pt-md border-t border-outline-variant/30 space-y-1">
+<button class="w-full bg-primary-container text-on-primary-container py-2 px-4 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Project
+            </button>
+<div class="pt-4 space-y-1">
+<a class="flex items-center px-2 py-2 text-on-surface-variant hover:text-primary transition-colors text-sm" href="#">
+<span class="material-symbols-outlined mr-3 text-[20px]">help</span>
+                    Help
+                </a>
+<div class="flex items-center px-2 py-2 text-on-surface-variant">
+<img class="w-8 h-8 rounded-full border border-outline-variant mr-3" data-alt="A professional circular avatar of a technical user with soft studio lighting and a clean tech-inspired background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcpoU5M98vxadhEEG0TEJ3yyStBMX3xY1C3qtPGQNBhhBakZMrN5P1P9gXBS9hsXDXyFPR8HY5BiVJaMo79yi1qzuvtgMF82XBJiAXKqcX85hKwi4Oca6zD69RPVff1EcFWHG4_ByJemzUyHpmVH400laTxYRjDnuWitLd2onOvzMjh10SVU0rN7R1IQ0tKmoL9oiPCxN4gz20cQNPeOqaEwixdkvdUwoLuvfv_EugGKkmNm5uiHUFjQ"/>
+<span class="text-sm">User Profile</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col min-w-0 bg-background relative overflow-hidden">
+<!-- Subtle Ambient Background -->
+
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant shrink-0 z-10">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer md:hidden">menu</span>
+<h2 class="font-headline-sm text-headline-sm font-extrabold text-primary">Build Custom Agent</h2>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant mx-2"></div>
+<button class="px-4 py-1.5 bg-secondary-container text-on-secondary-container text-sm font-bold rounded-lg hover:opacity-80 transition-all">
+                    Save Draft
+                </button>
+</div>
+</header>
+<!-- Wizard Content -->
+<div class="flex-1 overflow-y-auto p-lg md:p-xl z-10">
+<div class="max-w-[800px] mx-auto">
+<!-- Stepper Progress -->
+<div class="mb-xl">
+<div class="flex justify-between items-center relative mb-4">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-container-highest -translate-y-1/2 -z-10"></div>
+<div class="absolute top-1/2 left-0 h-[2px] bg-primary -translate-y-1/2 -z-10 transition-all duration-500" id="progress-bar" style="width: 0%"></div>
+<!-- Steps -->
+<div class="flex flex-col items-center group cursor-pointer" onclick="goToStep(1)">
+<div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold ring-4 ring-background transition-all" id="step-1-dot">1</div>
+<span class="mt-2 font-label-caps text-label-caps uppercase text-primary">Persona</span>
+</div>
+<div class="flex flex-col items-center group cursor-pointer" onclick="goToStep(2)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold ring-4 ring-background transition-all" id="step-2-dot">2</div>
+<span class="mt-2 font-label-caps text-label-caps uppercase text-on-surface-variant">Capabilities</span>
+</div>
+<div class="flex flex-col items-center group cursor-pointer" onclick="goToStep(3)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold ring-4 ring-background transition-all" id="step-3-dot">3</div>
+<span class="mt-2 font-label-caps text-label-caps uppercase text-on-surface-variant">Knowledge</span>
+</div>
+<div class="flex flex-col items-center group cursor-pointer" onclick="goToStep(4)">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold ring-4 ring-background transition-all" id="step-4-dot">4</div>
+<span class="mt-2 font-label-caps text-label-caps uppercase text-on-surface-variant">Review</span>
+</div>
+</div>
+</div>
+<!-- Form Card -->
+<div class="glass-panel rim-light rounded-xl p-md md:p-lg ai-glow">
+<!-- Step 1: Core Persona -->
+<div class="step-transition" id="step-1-content">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Core Persona</h3>
+<p class="text-on-surface-variant">Define the fundamental identity and brains of your autonomous agent.</p>
+</div>
+<div class="space-y-lg">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Agent Name</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg p-3 font-code-md text-code-md text-on-surface focus:ring-1 focus:ring-primary transition-all" placeholder="e.g. Architect-Prime-01" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Primary Domain</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-lg p-3 font-code-md text-code-md text-on-surface focus:ring-1 focus:ring-primary appearance-none">
+<option>Cloud Infrastructure</option>
+<option>Full-stack Development</option>
+<option>Data Engineering</option>
+<option>Security Auditing</option>
+</select>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Base Model</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-lg p-3 font-code-md text-code-md text-on-surface focus:ring-1 focus:ring-primary appearance-none">
+<option>GPT-4o (Omni)</option>
+<option>Claude 3.5 Sonnet</option>
+<option>Llama 3 (70B)</option>
+<option>DeepSeek Coder V2</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">System Prompt / Instructions</label>
+<textarea class="w-full bg-surface-container border border-outline-variant rounded-lg p-3 font-code-md text-code-md text-on-surface focus:ring-1 focus:ring-primary transition-all" placeholder="You are an expert systems architect..." rows="4"></textarea>
+</div>
+</div>
+</div>
+<!-- Step 2: Capabilities (Hidden by default) -->
+<div class="step-transition hidden opacity-0" id="step-2-content">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Capabilities &amp; Governance</h3>
+<p class="text-on-surface-variant">Configure hardware and software access levels for the agent.</p>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">code</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Code Write Access</h4>
+<p class="text-xs text-on-surface-variant">Allow agent to push commits to linked repositories.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-tertiary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">terminal</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Terminal Execution</h4>
+<p class="text-xs text-on-surface-variant">Grant access to a sandboxed shell environment.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low border border-outline-variant rounded-lg hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">cloud_done</span>
+</div>
+<div>
+<h4 class="font-bold text-on-surface">Infra Access (AWS/GCP)</h4>
+<p class="text-xs text-on-surface-variant">Enable provisioning of cloud resources via Terraform.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+<div class="mt-lg p-4 bg-error-container/10 border border-error/20 rounded-lg flex gap-3">
+<span class="material-symbols-outlined text-error">warning</span>
+<p class="text-sm text-error/80">Enabling terminal execution requires explicit multi-factor confirmation upon deployment for security compliance.</p>
+</div>
+</div>
+<!-- Step 3: Knowledge Base (Hidden by default) -->
+<div class="step-transition hidden opacity-0" id="step-3-content">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Knowledge Base</h3>
+<p class="text-on-surface-variant">Upload or link documents to ground your agent in specific data.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-lg mb-lg">
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-surface-container transition-all cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl mb-3">upload_file</span>
+<p class="font-bold">Drop Files Here</p>
+<p class="text-xs text-on-surface-variant mt-1">PDF, JSONL, TXT, MD</p>
+</div>
+<div class="border border-outline-variant rounded-xl p-6 bg-surface-container-low">
+<h4 class="font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">link</span>
+                                    Connect Repo
+                                </h4>
+<div class="space-y-3">
+<input class="w-full bg-surface border border-outline-variant rounded-lg p-2 text-sm font-code-sm" placeholder="https://github.com/..." type="text"/>
+<button class="w-full py-2 bg-surface-variant text-on-surface font-bold text-xs rounded uppercase tracking-wider hover:bg-outline-variant transition-colors">Fetch Metadata</button>
+</div>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase">Current Attachments</label>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
+<div class="flex items-center justify-between p-3 border-b border-outline-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm">description</span>
+<span class="text-sm font-code-sm">v4-api-spec.jsonl</span>
+</div>
+<span class="text-[10px] bg-secondary-container/20 text-secondary px-2 py-0.5 rounded">INDEXED</span>
+</div>
+<div class="flex items-center justify-between p-3">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm">integration_instructions</span>
+<span class="text-sm font-code-sm">internal-wiki-docs/</span>
+</div>
+<span class="text-[10px] bg-surface-container-highest text-on-surface-variant px-2 py-0.5 rounded">QUEUED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Step 4: Review & Deploy (Hidden by default) -->
+<div class="step-transition hidden opacity-0" id="step-4-content">
+<div class="mb-lg">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Review &amp; Deploy</h3>
+<p class="text-on-surface-variant">Final validation of your agent configuration.</p>
+</div>
+<div class="space-y-6">
+<div class="bg-surface-container-low rounded-lg p-4 border border-outline-variant">
+<h4 class="text-xs font-bold text-primary uppercase tracking-widest mb-4">Configuration Manifest</h4>
+<div class="font-code-sm text-code-sm space-y-2 text-on-surface-variant">
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span>Identifier:</span>
+<span class="text-on-surface">Architect-Prime-01</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span>Engine:</span>
+<span class="text-on-surface">Claude 3.5 Sonnet</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/10 pb-2">
+<span>Auth Tokens:</span>
+<span class="text-on-surface">AWS_READ_ONLY, GH_READ_WRITE</span>
+</div>
+<div class="flex justify-between">
+<span>Sandboxing:</span>
+<span class="text-tertiary">ENABLED (Docker)</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 border border-primary/20 bg-primary/5 rounded-lg">
+<div class="w-12 h-12 rounded-full border-2 border-primary border-t-transparent animate-spin flex-shrink-0"></div>
+<div>
+<p class="text-sm font-bold">Simulating first run...</p>
+<p class="text-xs text-on-surface-variant">Running safety check on system prompt against UdehLabs governance policies.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Controls -->
+<div class="mt-xl flex justify-between items-center border-t border-outline-variant pt-lg">
+<button class="flex items-center gap-2 px-6 py-2 border border-outline-variant text-on-surface-variant font-bold rounded-lg hover:bg-surface-variant/20 transition-all opacity-0 pointer-events-none" id="prev-btn" onclick="prevStep()">
+<span class="material-symbols-outlined">arrow_back</span>
+                            Back
+                        </button>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-8 py-2 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all" id="next-btn" onclick="nextStep()">
+                                Next Step
+                                <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="hidden flex items-center gap-2 px-8 py-2 bg-primary text-on-primary font-bold rounded-lg hover:opacity-90 active:scale-[0.98] transition-all ai-glow" id="deploy-btn">
+<span class="material-symbols-outlined">rocket_launch</span>
+                                Initialize Agent
+                            </button>
+</div>
+</div>
+</div>
+<!-- Technical Footer Info -->
+<div class="mt-lg flex justify-between text-[10px] font-code-sm text-on-surface-variant uppercase tracking-tighter">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+<span>UdehLabs Engine Connected</span>
+</div>
+<div>
+                        Session: 88AF-22XC-99
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        let currentStep = 1;
+        const totalSteps = 4;
+
+        function updateUI() {
+            // Hide all contents
+            for (let i = 1; i <= totalSteps; i++) {
+                const content = document.getElementById(`step-${i}-content`);
+                content.classList.add('hidden', 'opacity-0');
+            }
+
+            // Show current content
+            const activeContent = document.getElementById(`step-${currentStep}-content`);
+            activeContent.classList.remove('hidden');
+            setTimeout(() => activeContent.classList.remove('opacity-0'), 10);
+
+            // Update Progress Bar
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+
+            // Update Step Dots
+            for (let i = 1; i <= totalSteps; i++) {
+                const dot = document.getElementById(`step-${i}-dot`);
+                const label = dot.nextElementSibling;
+                if (i <= currentStep) {
+                    dot.classList.replace('bg-surface-container-highest', 'bg-primary');
+                    dot.classList.replace('text-on-surface-variant', 'text-on-primary');
+                    label.classList.replace('text-on-surface-variant', 'text-primary');
+                } else {
+                    dot.classList.replace('bg-primary', 'bg-surface-container-highest');
+                    dot.classList.replace('text-on-primary', 'text-on-surface-variant');
+                    label.classList.replace('text-primary', 'text-on-surface-variant');
+                }
+            }
+
+            // Button visibility
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const deployBtn = document.getElementById('deploy-btn');
+
+            if (currentStep === 1) {
+                prevBtn.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                prevBtn.classList.remove('opacity-0', 'pointer-events-none');
+            }
+
+            if (currentStep === totalSteps) {
+                nextBtn.classList.add('hidden');
+                deployBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                deployBtn.classList.add('hidden');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function goToStep(step) {
+            currentStep = step;
+            updateUI();
+        }
+
+        // Initialize UI
+        updateUI();
+    </script>
+</body></html>

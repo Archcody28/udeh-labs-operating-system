@@ -1,0 +1,45 @@
+# Phase A.56: Enterprise AI Agent Platform & Agent Marketplace Architecture
+
+## Overview
+Phase A.56 establishes the **Autonomous Intelligence Layer**, transforming UdehLabs from a platform with AI features into a sovereign Agent Platform. It unifies model routing, specialized agents, tool governance, and the marketplace into a single, observable, and policy-enforced ecosystem.
+
+## Core Components
+
+### 1. Model Registry & Intelligent Router (`IAIRouter`)
+- **Provider-Agnostic Registry**: Maintains a dynamic catalog of available models (Gemini, OpenAI, Anthropic) with metadata for capabilities (Vision, Tool Calling) and real-time pricing.
+- **Policy-Aware Routing**: Selects the optimal model based on task complexity, data classification (A.52), and active budget constraints (A.53).
+- **Governance Integration**: Prevents restricted data from being sent to unauthorized external providers based on organization-level privacy rules.
+
+### 2. Specialized Agent Domain (`IAgentOrchestrator`)
+- **Identity-First Agents**: Every agent is a first-class security principal with a dedicated ID, instructions, and scoped tool permissions.
+- **Versioned Intelligence**: Agents are version-pinned to their instructions and toolsets to ensure execution traceability.
+- **Autonomy Levels**: Supports a spectrum of control from `ASSIST` to `FULL_AUTONOMY`, with mandatory human-in-the-loop gates for high-risk actions (e.g., Prod Merge, Billing Change).
+
+### 3. Governed Tool Registry (`IToolExecutionEngine`)
+- **Capability-Based Access**: Agents discover and use tools (repo.write, build.run, db.read) only when explicitly authorized by organization policy.
+- **Risk-Level Classification**: Categorizes tools from `READ_ONLY` to `CRITICAL`, automatically triggering approval requests for moderate-to-high risk operations.
+- **Untrusted Output Defense**: Treats all tool results and retrieved content as untrusted DATA, preventing indirect prompt injection.
+
+### 4. Agent Marketplace & Lifecycle (`IMarketplaceManager`)
+- **Validated Publishing**: A formal lifecycle for agents: `DRAFT` -> `UNDER_REVIEW` -> `PUBLISHED`.
+- **Security-First Review**: Mandatory security evaluation of tool access and data policies before marketplace availability.
+- **Organization Installation**: Admins install and configure agents with specific budgets, allowed environments, and autonomy constraints.
+
+## Data Models
+- **AIModel / AIModelVersion**: The technical backbone of the platform.
+- **Agent / AgentVersion**: The cognitive workers with instructions and policies.
+- **AgentExecution / AgentStep**: Stateful records of autonomous journeys.
+- **AgentApproval**: Formal human-in-the-loop decision records.
+- **AgentMarketplaceListing**: The commercial record for third-party or internal agents.
+- **AgentMemory**: Scoped, permission-aware snapshots of context and history.
+
+## Security & Isolation
+- **Tenant-Isolated Memory**: Prevents agents from retrieving context or memory from unrelated organizations.
+- **Prompt Injection Shield**: Hardened boundaries between system instructions and external data sources.
+- **Resource Limits**: Strict hard budgets on tokens, tool calls, and execution duration to prevent infinite loops and cost spikes.
+
+## Vertical Integration
+- **A.53 Integration**: Tracks estimated vs. actual agent execution costs and enforces spending limits.
+- **A.52 Integration**: Evaluates data eligibility for AI context and provider routing.
+- **A.48/A.49 Integration**: Connects engineering agents to live repositories, CI/CD, and quality gates.
+- **A.54 Integration**: Reuses existing support AI for customer service agent foundations.

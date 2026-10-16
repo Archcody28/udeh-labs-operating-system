@@ -1,0 +1,42 @@
+# Phase A.42: Client Intake, Requirements Engineering & AI-Powered Discovery Architecture
+
+## Overview
+Phase A.42 establishes the **Discovery Operating Layer**, the intelligent gateway for UdehLabs. It provides the structured pipeline for transforming raw client ideas into validated, traceable software specifications using vendor-agnostic AI orchestration.
+
+## Core Components
+
+### 1. Structured Intake & Discovery (`IDiscoveryOrchestrator`)
+- **Multi-Step Lifecycle**: Governs the journey from `DRAFT` -> `DISCOVERY` -> `TECHNICAL_SPEC` -> `CONVERTED_TO_PROJECT`.
+- **Intelligent Intake**: A premium 10-step wizard that abstracts technical complexity, focusing on business outcomes and user needs.
+- **AI Discovery Assistant**: An active agent that analyzes input in real-time, generating specific, relevant follow-up questions to fill requirements gaps.
+
+### 2. Requirements Intelligence & Extraction (`IRequirementExtractor`)
+- **Automated Extraction**: Uses the AI workforce to derive functional, non-functional, security, and data requirements from natural language.
+- **Confidence Modeling**: Every extracted requirement is tagged with a confidence score (HIGH/MEDIUM/LOW) and a source reference to maintain provenance.
+- **Contradiction Detection**: Statically analyzes the requirement set to flag semantic conflicts (e.g., Requirement A requires Feature X, Requirement B prohibits it).
+
+### 3. Technical Specification & Architecture Discovery (`ISpecificationGenerator`)
+- **Technical Mapping**: Proposes architecture options (Modular Monolith vs SOA) based on the extracted requirements and business constraints.
+- **Complexity Modeling**: Calculates project complexity (TRIVIAL to VERY_HIGH) using effort, uncertainty, and integration risk factors.
+- **Traceability Linkage**: Maintains an unbroken chain: `Client Request` -> `Discovery Session` -> `Requirements` -> `Scope` -> `Technical Spec` -> `Project`.
+
+### 4. Human-AI Validation Loop (`IReviewOrchestrator`)
+- **Engineering Review**: UdehLabs staff can review, edit, and authorize AI technical recommendations before they become the authoritative spec.
+- **Clarification Center**: A dedicated hub for managing client clarification requests and responses, linked directly to specific requirements or features.
+
+## Data Models
+- **ClientRequest**: The root entity for the intake journey with multi-step status.
+- **DiscoverySession**: A versioned record of the exploration and Q&A phase.
+- **Requirement / RequirementVersion**: Atomic, versioned engineering intent with acceptance criteria.
+- **TechnicalSpecification**: The structured, auditable document defining the project blueprint.
+- **DiscoveryRisk / Assumption**: Lifecycle-managed threats and constraints identified during discovery.
+
+## Security & Isolation
+- **Tenant-Scoped Discovery**: All requests, requirements, and AI conversations are strictly isolated by `organizationId`.
+- **Internal/External Separation**: Engineering-only notes and AI reasoning summaries are redacted from the Client Portal view.
+- **Prompt Injection Defense**: Treats client input and documents as untrusted DATA, ensuring system-level governance remains sovereign.
+
+## Vertical Integration
+- **A.40/A.41 Integration**: Seamlessly converts approved discovery requests into Projects with pre-populated milestones, requirements, and workspaces.
+- **A.21/A.22 Integration**: Powers the discovery assistant and requirements extraction using the existing Agent Runtime and Engineering Factory.
+- **A.39 Integration**: Links client profiles and organization settings to the intake process.

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | AI Debugger</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#031427",
+                    "inverse-surface": "#d3e4fe",
+                    "tertiary-fixed": "#c9e6ff",
+                    "secondary": "#d0bcff",
+                    "inverse-primary": "#4d44e3",
+                    "surface-tint": "#c3c0ff",
+                    "on-background": "#d3e4fe",
+                    "background": "#031427",
+                    "surface-container-high": "#1b2b3f",
+                    "on-tertiary": "#00344d",
+                    "on-secondary-fixed": "#23005c",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-container": "#b8e0ff",
+                    "on-secondary": "#3c0091",
+                    "tertiary": "#89ceff",
+                    "primary-container": "#4f46e5",
+                    "primary": "#c3c0ff",
+                    "surface-variant": "#26364a",
+                    "error": "#ffb4ab",
+                    "on-primary": "#1d00a5",
+                    "tertiary-container": "#006693",
+                    "surface-container-highest": "#26364a",
+                    "secondary-container": "#571bc1",
+                    "on-primary-container": "#dad7ff",
+                    "outline-variant": "#464555",
+                    "secondary-fixed": "#e9ddff",
+                    "outline": "#918fa1",
+                    "tertiary-fixed-dim": "#89ceff",
+                    "surface-container-lowest": "#000f21",
+                    "on-tertiary-fixed-variant": "#004c6e",
+                    "on-surface": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "on-error": "#690005",
+                    "error-container": "#93000a",
+                    "surface-container": "#102034",
+                    "primary-fixed": "#e2dfff",
+                    "surface-container-low": "#0b1c30",
+                    "surface-bright": "#2a3a4f",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-tertiary-fixed": "#001e2f",
+                    "inverse-on-surface": "#213145",
+                    "surface-dim": "#031427",
+                    "on-secondary-container": "#c4abff",
+                    "on-surface-variant": "#c7c4d8",
+                    "on-primary-fixed": "#0f0069"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "max_content_width": "1440px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "sidebar_width": "260px",
+                    "lg": "24px",
+                    "sidebar_collapsed": "64px",
+                    "xl": "32px",
+                    "2xl": "48px",
+                    "base": "4px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "code-sm": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "code-md": ["JetBrains Mono"],
+                    "body-md": ["Inter"],
+                    "display": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #464555;
+            border-radius: 2px;
+        }
+
+        .log-row:hover {
+            background-color: rgba(38, 54, 74, 0.5);
+        }
+
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(12px);
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(30, 41, 59, 0.5);
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col">
+<!-- Top Navigation Anchor -->
+<header class="flex justify-between items-center h-xl px-lg ml-[260px] w-[calc(100%-260px)] bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-outline-variant z-50 fixed top-0">
+<div class="flex items-center gap-md">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">UdehLabs Portal</span>
+<div class="h-4 w-px bg-outline-variant mx-sm"></div>
+<nav class="flex gap-lg">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-on-surface transition-colors" href="#">Docs</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-on-surface transition-colors" href="#">API</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-on-surface transition-colors" href="#">Changelog</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative group">
+<input class="bg-surface-container-low border border-outline-variant rounded-lg px-md py-xs font-body-md text-body-md focus:outline-none focus:border-primary w-64 transition-all" placeholder="Search logs..." type="text"/>
+<span class="material-symbols-outlined absolute right-2 top-1.5 text-on-surface-variant text-[18px]">search</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-opacity duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-opacity duration-200">
+<span class="material-symbols-outlined">history_edu</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary-container flex items-center justify-center border border-outline-variant overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A professional user profile avatar for a lead software engineer. The photo is a clean, modern studio portrait with dramatic side lighting and a minimalist dark slate background. The individual has a focused, intelligent expression, wearing high-tech developer-friendly apparel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDab1vDwCpvGXvYf0QjPsjAnTjhxMXOrc6Dv3dOx0AmkrpWq4M9iN0sUOuD6Jz1RoZjSqTbN1oIICM2pXclx5kmALQM32AUFvfrCXmcqwy0gb4Q_eT2mfYA-pVxOY7H4hRgUQMM3wEmN0Fwrq_UO4gJj7DeHf3PF27Gigep0EflF36hcxZJ06FKL6WXWFsjG9YWiAOJpOMn-D_l9GgeakQB2WQlHd4vNdclEqAuWkHQxysiE_taV5CGeg"/>
+</div>
+</div>
+</header>
+<!-- Sidebar Anchor -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant flex flex-col z-50">
+<div class="p-lg">
+<div class="flex items-center gap-sm mb-xl">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface leading-tight">UdehLabs</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">Enterprise AI</p>
+</div>
+</div>
+<nav class="space-y-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                    AI Workspace
+                </a>
+<a class="flex items-center gap-md px-md py-sm text-primary border-l-2 border-primary bg-surface-container-highest font-body-md text-body-md rounded-r-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+                    Analytics
+                </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                    Deployments
+                </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant font-body-md text-body-md hover:bg-surface-container-high hover:text-on-surface transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+</div>
+<div class="mt-auto p-lg border-t border-outline-variant">
+<button class="w-full bg-primary-container text-on-primary-container py-sm rounded-xl font-body-md text-body-md font-bold flex items-center justify-center gap-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Project
+            </button>
+<div class="mt-lg space-y-xs">
+<a class="flex items-center gap-md px-md py-xs text-on-surface-variant font-body-md text-body-md hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+                    Documentation
+                </a>
+<a class="flex items-center gap-md px-md py-xs text-on-surface-variant font-body-md text-body-md hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+                    Support
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] mt-xl flex-1 p-lg grid grid-cols-12 grid-rows-[auto_1fr_auto] gap-lg overflow-hidden h-[calc(100vh-64px)]">
+<!-- Header / Stats Row -->
+<div class="col-span-12 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-md">
+                    AI Debugging Hub
+                    <span class="px-sm py-xs bg-error-container text-on-error-container text-[12px] font-bold rounded-lg flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                        CRITICAL ERROR DETECTED
+                    </span>
+</h2>
+<p class="text-on-surface-variant font-body-md text-body-md mt-xs">Inspecting <span class="font-code-md text-primary">cluster-prod-02 / pod-auth-service-v4</span></p>
+</div>
+<div class="flex gap-md">
+<button class="flex items-center gap-sm px-md py-sm bg-surface-container-high border border-outline-variant rounded-lg text-on-surface hover:bg-surface-container-highest transition-all group">
+<span class="material-symbols-outlined text-error transition-transform group-hover:rotate-180">restart_alt</span>
+<span class="font-label-caps text-label-caps uppercase">Restart Pod</span>
+</button>
+<button class="flex items-center gap-sm px-md py-sm bg-primary-container text-on-primary-container rounded-lg font-label-caps text-label-caps uppercase hover:brightness-110 active:scale-95 transition-all ai-glow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">sync</span>
+                    Sync AI Context
+                </button>
+<button class="flex items-center gap-sm px-md py-sm bg-surface-container-high border border-outline-variant rounded-lg text-on-surface hover:border-error transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-error">history</span>
+<span class="font-label-caps text-label-caps uppercase">Rollback</span>
+</button>
+</div>
+</div>
+<!-- Multi-pane Workspace -->
+<div class="col-span-12 grid grid-cols-12 gap-lg overflow-hidden">
+<!-- Live Log Stream (Left Panel) -->
+<div class="col-span-5 bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col overflow-hidden">
+<div class="p-md border-b border-outline-variant bg-surface-container flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+<span class="font-label-caps text-label-caps uppercase">Live Log Stream</span>
+</div>
+<div class="flex gap-xs">
+<span class="px-2 py-0.5 bg-error/20 text-error rounded font-code-sm text-code-sm border border-error/30">ERROR: 12</span>
+<span class="px-2 py-0.5 bg-tertiary/20 text-tertiary rounded font-code-sm text-code-sm border border-tertiary/30">WARN: 4</span>
+<span class="px-2 py-0.5 bg-on-surface-variant/20 text-on-surface-variant rounded font-code-sm text-code-sm border border-outline-variant">INFO: 142</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto font-code-sm text-code-sm p-sm custom-scrollbar bg-surface-dim/50">
+<div class="space-y-1" id="log-container">
+<!-- Dynamic Logs Mock -->
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors">
+<span class="text-on-surface-variant opacity-50">14:23:45.001</span>
+<span class="text-tertiary font-bold">[INFO]</span>
+<span class="text-on-surface truncate">Initializing auth handshake with provider: OAUTH2_PROD</span>
+</div>
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors">
+<span class="text-on-surface-variant opacity-50">14:23:45.042</span>
+<span class="text-tertiary font-bold">[INFO]</span>
+<span class="text-on-surface truncate">Encryption module loaded successfully (AES-256-GCM)</span>
+</div>
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors bg-error/10">
+<span class="text-on-surface-variant opacity-50">14:23:45.102</span>
+<span class="text-error font-bold">[ERR ]</span>
+<span class="text-on-error-container font-medium">Uncaught Exception: InternalServerError - Database response timeout exceeded (3000ms)</span>
+</div>
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors">
+<span class="text-on-surface-variant opacity-50">14:23:45.105</span>
+<span class="text-on-surface-variant font-bold">[WARN]</span>
+<span class="text-on-surface-variant italic">Retrying connection (1/3)...</span>
+</div>
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors bg-error/10">
+<span class="text-on-surface-variant opacity-50">14:23:46.102</span>
+<span class="text-error font-bold">[ERR ]</span>
+<span class="text-on-error-container font-medium">Critical Failure: Memory Leak detected at heap_segment_0x04</span>
+</div>
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors">
+<span class="text-on-surface-variant opacity-50">14:23:46.110</span>
+<span class="text-tertiary font-bold">[INFO]</span>
+<span class="text-on-surface">Telemetry push to edge-hub-west-1 initiated.</span>
+</div>
+<!-- Add many more rows to show scroll -->
+<div class="log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors" v-for="i in 15">
+<span class="text-on-surface-variant opacity-50">14:23:47.{{i}}</span>
+<span class="text-on-surface-variant">DEBUG</span>
+<span class="text-on-surface-variant/70">Buffer flush at {{i * 1024}} bytes.</span>
+</div>
+</div>
+</div>
+<div class="p-xs bg-surface-container-high border-t border-outline-variant flex items-center justify-between">
+<div class="flex gap-sm">
+<button class="px-2 py-0.5 bg-primary/10 text-primary border border-primary/20 rounded font-code-sm text-code-sm">Pause Stream</button>
+<button class="px-2 py-0.5 text-on-surface-variant hover:bg-surface-container-highest rounded font-code-sm text-code-sm transition-colors">Clear</button>
+</div>
+<div class="text-[10px] text-on-surface-variant/50 font-code-sm">v4.12.0-STABLE</div>
+</div>
+</div>
+<!-- AI Trace Analyzer (Center Panel) -->
+<div class="col-span-7 grid grid-rows-[1.2fr_1fr] gap-lg overflow-hidden">
+<!-- Root Cause Analysis -->
+<div class="bg-surface-container-low rounded-xl border border-primary/30 relative overflow-hidden flex flex-col ai-glow">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<div class="p-md border-b border-outline-variant/30 flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="font-label-caps text-label-caps uppercase text-primary">AI Trace Analyzer</span>
+</div>
+<div class="flex-1 p-lg space-y-md overflow-y-auto custom-scrollbar">
+<div class="bg-primary-container/10 p-md rounded-xl border border-primary/20">
+<h3 class="font-headline-sm text-headline-sm text-on-primary-container flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">bolt</span>
+                                Probable Root Cause Identified
+                            </h3>
+<p class="font-body-md text-body-md text-on-surface mt-sm leading-relaxed">
+                                The crash is being triggered by a <span class="bg-error/20 text-error px-1 rounded font-code-md">NullPointerException</span> in the <span class="font-code-md text-primary">AuthenticationInterceptor.java:142</span>. 
+                                Analysis shows the <span class="font-code-md text-secondary">token_claims</span> object is missing the mandatory <span class="font-code-md text-secondary">'sub'</span> field during the JWT decoding phase, which is not being handled safely.
+                            </p>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Confidence Score</span>
+<div class="flex items-end gap-sm mt-xs">
+<span class="text-headline-md font-display text-primary">94.2%</span>
+<div class="flex-1 h-2 bg-surface-container-highest rounded-full mb-2">
+<div class="h-full bg-primary rounded-full" style="width: 94%"></div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container p-md rounded-xl border border-outline-variant">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Impact Scope</span>
+<div class="flex items-center gap-sm mt-xs text-error font-body-lg text-body-lg font-bold">
+<span class="material-symbols-outlined">warning</span>
+                                    High: Auth Service
+                                </div>
+</div>
+</div>
+<div class="space-y-sm">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Suggested Resolution</span>
+<div class="bg-surface-container-highest/50 p-sm rounded-lg border border-outline-variant font-code-sm text-code-sm">
+<pre class="text-secondary"><code>// Patch line 142 in AuthenticationInterceptor
+if (claims == null || !claims.containsKey("sub")) {
+    throw new AuthException("Missing subject in token");
+}</code></pre>
+<button class="mt-sm flex items-center gap-xs text-primary hover:underline">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+                                    Copy Patch
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- State Inspector (Bottom Right) -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col overflow-hidden">
+<div class="p-md border-b border-outline-variant bg-surface-container flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">data_object</span>
+<span class="font-label-caps text-label-caps uppercase">State Inspector (Snapshot: T-0ms)</span>
+</div>
+<div class="flex-1 grid grid-cols-3 divide-x divide-outline-variant overflow-hidden">
+<!-- Memory -->
+<div class="p-md flex flex-col">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase mb-sm">Memory Stack</span>
+<div class="flex-1 flex flex-col gap-xs overflow-y-auto custom-scrollbar pr-2">
+<div class="flex justify-between items-center bg-surface-container p-2 rounded text-code-sm">
+<span class="text-on-surface-variant">Heap Used</span>
+<span class="text-primary">1.2 GB</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container p-2 rounded text-code-sm">
+<span class="text-on-surface-variant">Heap Max</span>
+<span class="text-on-surface-variant">4.0 GB</span>
+</div>
+<div class="flex-1 bg-surface-container-high/30 rounded mt-sm relative overflow-hidden border border-outline-variant/30">
+<!-- Visualizing memory as a small grid -->
+<div class="absolute inset-0 grid grid-cols-8 grid-rows-8 gap-0.5 p-1">
+<div class="bg-primary/20 rounded-xs" v-for="i in 64"></div>
+</div>
+<div class="absolute top-4 left-4 bg-error w-4 h-4 rounded-full blur-md opacity-50"></div>
+</div>
+</div>
+</div>
+<!-- Variables -->
+<div class="p-md col-span-2 flex flex-col">
+<div class="flex justify-between items-center mb-sm">
+<span class="text-label-caps font-label-caps text-on-surface-variant uppercase">Local Variables</span>
+<span class="text-code-sm text-secondary">Active Scope: AuthProxy.invoke()</span>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar font-code-sm space-y-xs">
+<div class="flex items-center gap-md py-1 border-b border-outline-variant/20 group">
+<span class="w-24 text-on-surface-variant group-hover:text-primary transition-colors">request_id</span>
+<span class="text-on-surface">"req_9921_ax02"</span>
+</div>
+<div class="flex items-center gap-md py-1 border-b border-outline-variant/20 group">
+<span class="w-24 text-on-surface-variant group-hover:text-primary transition-colors">retry_count</span>
+<span class="text-primary font-bold">1</span>
+</div>
+<div class="flex items-center gap-md py-1 border-b border-outline-variant/20 group">
+<span class="w-24 text-on-surface-variant group-hover:text-primary transition-colors">auth_token</span>
+<span class="text-secondary truncate">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."</span>
+</div>
+<div class="flex items-center gap-md py-1 border-b border-outline-variant/20 group bg-error/5">
+<span class="w-24 text-error font-bold">token_claims</span>
+<span class="text-error italic">NULL (Reference Error)</span>
+</div>
+<div class="flex items-center gap-md py-1 border-b border-outline-variant/20 group">
+<span class="w-24 text-on-surface-variant group-hover:text-primary transition-colors">is_internal</span>
+<span class="text-tertiary">true</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- System Visualizations (Bottom Bar) -->
+<div class="col-span-12 grid grid-cols-4 gap-lg">
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant flex items-center gap-lg">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">speed</span>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-on-surface-variant uppercase">Network Latency</div>
+<div class="text-headline-sm font-display text-on-surface">14ms <span class="text-code-sm text-tertiary font-normal">(-2ms)</span></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant flex items-center gap-lg">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">memory</span>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-on-surface-variant uppercase">CPU Load</div>
+<div class="text-headline-sm font-display text-on-surface">42% <span class="text-code-sm text-on-surface-variant font-normal">STABLE</span></div>
+</div>
+</div>
+<div class="bg-surface-container-low p-md rounded-xl border border-outline-variant flex items-center gap-lg col-span-2 relative overflow-hidden">
+<div class="flex-1 z-10">
+<div class="text-label-caps font-label-caps text-on-surface-variant uppercase">Infrastructure Health</div>
+<div class="flex gap-4 mt-sm">
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-body-md font-body-md text-on-surface">Gateway-West</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-body-md font-body-md text-on-surface">Redis-Cache</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<span class="text-body-md font-body-md text-error font-bold">Auth-API</span>
+</div>
+</div>
+</div>
+<div class="absolute right-0 top-0 h-full w-1/3 opacity-20 pointer-events-none">
+<svg class="h-full w-full stroke-primary fill-none stroke-2" viewbox="0 0 100 40">
+<path d="M0 30 Q 10 35, 20 20 T 40 25 T 60 10 T 80 28 T 100 20"></path>
+</svg>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive Layer: Command Palette (Hidden initially) -->
+<div class="fixed inset-0 bg-surface/60 backdrop-blur-sm z-[100] flex items-center justify-center pointer-events-none opacity-0 transition-all" id="command-palette">
+<div class="w-full max-w-2xl glass-panel rounded-2xl shadow-2xl overflow-hidden border border-primary/20 transform scale-95 transition-all">
+<div class="p-lg border-b border-outline-variant">
+<div class="flex items-center gap-md text-primary">
+<span class="material-symbols-outlined text-[28px]">terminal</span>
+<input class="w-full bg-transparent border-none focus:ring-0 font-code-md text-code-md text-on-surface placeholder:text-on-surface-variant/50" placeholder="Type a command or ask AI..." type="text"/>
+</div>
+</div>
+<div class="p-md bg-surface-container/50">
+<div class="space-y-sm">
+<div class="text-label-caps font-label-caps text-on-surface-variant uppercase px-sm">Quick Actions</div>
+<button class="w-full flex items-center justify-between p-sm hover:bg-primary/10 rounded-lg group transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">rocket</span>
+<span class="text-body-md font-body-md text-on-surface">Deploy Hotpatch to v4.12.1</span>
+</div>
+<span class="text-code-sm text-on-surface-variant">⌘ P</span>
+</button>
+<button class="w-full flex items-center justify-between p-sm hover:bg-primary/10 rounded-lg group transition-colors">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">analytics</span>
+<span class="text-body-md font-body-md text-on-surface">Export Stack Trace to Sentry</span>
+</div>
+<span class="text-code-sm text-on-surface-variant">⌘ E</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Micro-interaction for logs
+        const logContainer = document.getElementById('log-container');
+        const logs = [
+            { time: '14:24:01.002', level: 'DEBUG', text: 'Health check completed: healthy.' },
+            { time: '14:24:02.045', level: 'INFO', text: 'Received ingress request from 192.168.1.1' },
+            { time: '14:24:03.112', level: 'WARN', text: 'Slow query detected: SELECT * FROM users LIMIT 1000' }
+        ];
+
+        let logIndex = 0;
+        setInterval(() => {
+            const l = logs[logIndex % logs.length];
+            const div = document.createElement('div');
+            div.className = 'log-row flex gap-md py-1 border-b border-outline-variant/30 px-sm transition-colors opacity-0 translate-y-2';
+            div.style.transition = 'all 0.3s ease';
+            
+            let levelClass = 'text-on-surface-variant';
+            if(l.level === 'INFO') levelClass = 'text-tertiary font-bold';
+            if(l.level === 'WARN') levelClass = 'text-on-surface-variant font-bold';
+            
+            div.innerHTML = `
+                <span class="text-on-surface-variant opacity-50">${l.time}</span>
+                <span class="${levelClass}">[${l.level}]</span>
+                <span class="text-on-surface truncate">${l.text}</span>
+            `;
+            logContainer.appendChild(div);
+            
+            // Animation
+            requestAnimationFrame(() => {
+                div.classList.remove('opacity-0', 'translate-y-2');
+            });
+
+            // Scroll to bottom
+            logContainer.parentElement.scrollTop = logContainer.parentElement.scrollHeight;
+            
+            logIndex++;
+            if(logContainer.children.length > 50) logContainer.removeChild(logContainer.firstChild);
+        }, 3000);
+
+        // Command Palette Logic
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                const palette = document.getElementById('command-palette');
+                palette.classList.toggle('opacity-0');
+                palette.classList.toggle('pointer-events-none');
+                palette.children[0].classList.toggle('scale-95');
+                palette.children[0].classList.toggle('scale-100');
+            }
+        });
+    </script>
+</body></html>

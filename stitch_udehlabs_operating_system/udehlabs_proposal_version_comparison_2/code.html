@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proposal Version Comparison - UdehLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "outline": "#99907c",
+                        "secondary-container": "#006b75",
+                        "on-surface-variant": "#d0c5af",
+                        "estimate-slate": "#94A3B8",
+                        "outline-variant": "#4d4635",
+                        "on-primary": "#3c2f00",
+                        "tertiary": "#c0d0e6",
+                        "surface-container": "#18202b",
+                        "on-secondary": "#00363c",
+                        "approval-gold": "#D4AF37",
+                        "secondary-fixed-dim": "#82d3de",
+                        "on-background": "#dbe3f1",
+                        "surface-container-high": "#232b35",
+                        "primary-container": "#d4af37",
+                        "surface-card": "#121C29",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#241a00",
+                        "surface-variant": "#2d3540",
+                        "on-tertiary": "#233143",
+                        "surface": "#0c141e",
+                        "on-secondary-fixed": "#001f23",
+                        "status-caution": "#F59E0B",
+                        "contract-teal": "#006D77",
+                        "border-subtle": "#1E293B",
+                        "inverse-primary": "#735c00",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "surface-container-highest": "#2d3540",
+                        "secondary-fixed": "#9ff0fb",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "inverse-on-surface": "#29313c",
+                        "primary-fixed-dim": "#e9c349",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "on-tertiary-container": "#384658",
+                        "primary": "#f2ca50",
+                        "primary-fixed": "#ffe088",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-dim": "#0c141e",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#141c26",
+                        "background": "#0c141e",
+                        "surface-tint": "#e9c349",
+                        "surface-bright": "#323a45",
+                        "tertiary-container": "#a5b4ca",
+                        "surface-container-lowest": "#070f18",
+                        "tertiary-fixed": "#d4e4fa",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#98e9f4",
+                        "on-primary-container": "#554300",
+                        "inverse-surface": "#dbe3f1",
+                        "on-tertiary-fixed": "#0d1c2d",
+                        "on-surface": "#dbe3f1",
+                        "secondary": "#82d3de",
+                        "status-positive": "#10B981"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "component-gap-sm": "8px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "section-padding": "48px",
+                        "gutter": "24px",
+                        "component-gap-md": "16px"
+                    },
+                    "fontFamily": {
+                        "data-mono-sm": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono-lg": ["JetBrains Mono"],
+                        "summary-title": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-mono-sm": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "summary-title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface flex justify-between items-center w-full px-margin h-16 border-b border-outline-variant dark:border-outline-variant docked full-width top-0">
+<div class="flex items-center gap-gutter">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">
+                UdehLabs Commercial
+            </div>
+<nav class="hidden md:flex gap-component-gap-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-caps text-label-caps hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 transition-all" href="#">Pipeline</a>
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 font-label-caps text-label-caps hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 transition-all" href="#">Negotiations</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-caps text-label-caps hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 transition-all" href="#">Approvals</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-label-caps text-label-caps hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 transition-all" href="#">Archives</a>
+</nav>
+</div>
+<div class="flex items-center gap-component-gap-sm">
+<button class="text-primary dark:text-primary hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 transition-all p-2 rounded-full hover:bg-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline overflow-hidden ml-2">
+<img alt="User profile switcher" class="w-full h-full object-cover" data-alt="A macro photography shot of an abstract metallic texture serving as a professional avatar placeholder. The metal reflects deep blues and subtle warm gold tones, representing trust and commercial stability. High resolution, sharp focus, corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEGR1BulKAzyFapaxGgr8HmLqMHtbvvLjnd4xCHpkfZykIlfHCznWSfFSRDMNjS9qwbkAkakMuYtWCJmzy60hmPvzGS6RksU0xQnJDKyq8OiySfgVyjJlQoN66TLfogYpCS3uK1tnBaIWarOM7wz-mFJes18YLRnBveu8Oj5NqIhN5SrlCmuqOCkhsYgOcYheP2U9AlNuuLPS5jT8DtjZzZ66w5uHQ-uxKUnaQxa5e8ckP12qA_iQzIA"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-surface-container dark:bg-surface-container docked left-0 h-full w-64 border-r border-outline-variant dark:border-outline-variant shadow-sm dark:shadow-none flex flex-col py-component-gap-md px-4 shrink-0 overflow-y-auto">
+<div class="mb-gutter pb-component-gap-md border-b border-outline-variant">
+<div class="font-headline-md text-headline-md text-on-surface mb-unit">Proposal v2.4</div>
+<div class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">ID: PR-9928-X</div>
+<button class="mt-component-gap-md w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-2 rounded-DEFAULT hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-unit">
+<span class="material-symbols-outlined text-[16px]">compare_arrows</span> Compare Versions
+                </button>
+</div>
+<nav class="flex flex-col gap-unit flex-1">
+<a class="flex items-center gap-component-gap-sm px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">summarize</span> Summary
+                </a>
+<a class="flex items-center gap-component-gap-sm px-3 py-2 bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-lg font-bold font-label-caps text-label-caps translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined text-[18px]">list_alt</span> Scope &amp; Features
+                </a>
+<a class="flex items-center gap-component-gap-sm px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">inventory_2</span> Deliverables
+                </a>
+<a class="flex items-center gap-component-gap-sm px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span> Timeline
+                </a>
+<a class="flex items-center gap-component-gap-sm px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">payments</span> Commercials
+                </a>
+<a class="flex items-center gap-component-gap-sm px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">gavel</span> Legal &amp; Terms
+                </a>
+<a class="flex items-center gap-component-gap-sm px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">history</span> Audit History
+                </a>
+</nav>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 flex flex-col bg-surface-dim overflow-hidden">
+<!-- TopAppBar -->
+<div class="bg-surface-container-high dark:bg-surface-container-high border-b border-outline-variant shadow-md flex items-center justify-between px-margin py-2 w-full full-width shrink-0">
+<div class="flex items-center gap-component-gap-md">
+<button class="text-approval-gold dark:text-approval-gold hover:bg-primary-container hover:text-on-primary-container press-down transition-all duration-150 p-1 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-primary">Proposal v2.4 | SENT_TO_CLIENT</span>
+<h1 class="font-summary-title text-summary-title text-approval-gold dark:text-approval-gold">Version Comparison</h1>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex items-center gap-unit bg-surface-card border border-border-subtle rounded-DEFAULT px-3 py-1">
+<span class="font-label-caps text-label-caps text-estimate-slate">Comparing:</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface">v2.3</span>
+<span class="material-symbols-outlined text-[14px] text-estimate-slate">arrow_right_alt</span>
+<span class="font-data-mono-sm text-data-mono-sm text-primary">v2.4</span>
+</div>
+<button class="bg-surface-variant text-primary font-bold hover:bg-primary-container hover:text-on-primary-container press-down transition-all duration-150 px-4 py-1.5 rounded-DEFAULT font-label-caps text-label-caps border border-primary">
+                        Compare
+                    </button>
+</div>
+</div>
+<!-- Content Canvas -->
+<div class="flex-1 overflow-y-auto p-section-padding">
+<div class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Diff View Pane -->
+<div class="xl:col-span-9 flex flex-col gap-gutter">
+<!-- Scope & Features Section -->
+<section class="bg-surface-card border border-border-subtle rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] overflow-hidden">
+<div class="border-b border-border-subtle px-component-gap-md py-3 flex justify-between items-center bg-surface-container">
+<h2 class="font-summary-title text-summary-title text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">list_alt</span> Scope &amp; Features
+                                </h2>
+<div class="font-label-caps text-label-caps text-estimate-slate flex gap-4">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-contract-teal inline-block"></span> 2 Added</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-status-caution inline-block"></span> 1 Modified</span>
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-estimate-slate inline-block"></span> 0 Removed</span>
+</div>
+</div>
+<div class="p-0">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle bg-surface-container-lowest">
+<th class="py-2 px-4 font-label-caps text-label-caps text-estimate-slate w-1/12">Status</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-estimate-slate w-3/12">Component</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-estimate-slate w-4/12">v2.3 (Previous)</th>
+<th class="py-2 px-4 font-label-caps text-label-caps text-estimate-slate w-4/12">v2.4 (Current)</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-on-surface-variant">
+<tr class="border-b border-border-subtle bg-contract-teal/5 border-l-4 border-l-contract-teal">
+<td class="py-3 px-4">
+<span class="bg-contract-teal/20 text-contract-teal px-2 py-0.5 rounded-DEFAULT font-label-caps text-[9px]">ADDED</span>
+</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-on-surface">SYS-REQ-045</td>
+<td class="py-3 px-4 text-estimate-slate italic">—</td>
+<td class="py-3 px-4 text-on-surface">Mobile Push Notifications (iOS/Android) via Firebase integration.</td>
+</tr>
+<tr class="border-b border-border-subtle bg-status-caution/5 border-l-4 border-l-status-caution">
+<td class="py-3 px-4">
+<span class="bg-status-caution/20 text-status-caution px-2 py-0.5 rounded-DEFAULT font-label-caps text-[9px]">MODIFIED</span>
+</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-on-surface">SYS-REQ-012</td>
+<td class="py-3 px-4 text-estimate-slate line-through decoration-status-caution/50">Basic user authentication with email/password.</td>
+<td class="py-3 px-4 text-on-surface">SSO Integration (SAML 2.0) with enterprise active directory mapping.</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-low transition-colors">
+<td class="py-3 px-4">
+<span class="text-estimate-slate px-2 py-0.5 font-label-caps text-[9px]">UNCHANGED</span>
+</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-on-surface">SYS-REQ-003</td>
+<td class="py-3 px-4">Data export to CSV/PDF formats.</td>
+<td class="py-3 px-4">Data export to CSV/PDF formats.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Commercial Summary Section -->
+<section class="bg-surface-card border border-border-subtle rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] overflow-hidden">
+<div class="border-b border-border-subtle px-component-gap-md py-3 flex justify-between items-center bg-surface-container">
+<h2 class="font-summary-title text-summary-title text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-approval-gold text-[20px]">payments</span> Commercial Summary
+                                </h2>
+</div>
+<div class="p-component-gap-md">
+<div class="grid grid-cols-3 gap-component-gap-md mb-6">
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg p-4 flex flex-col">
+<span class="font-label-caps text-label-caps text-estimate-slate mb-2">Total Contract Value</span>
+<div class="flex items-end gap-2">
+<span class="font-data-mono-lg text-data-mono-lg text-on-surface line-through text-estimate-slate decoration-status-caution">$145,000</span>
+<span class="material-symbols-outlined text-status-caution text-[16px] mb-1">arrow_forward</span>
+<span class="font-data-mono-lg text-data-mono-lg text-status-caution">$162,500</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg p-4 flex flex-col">
+<span class="font-label-caps text-label-caps text-estimate-slate mb-2">Estimated Timeline</span>
+<div class="flex items-end gap-2">
+<span class="font-data-mono-lg text-data-mono-lg text-on-surface">14 Weeks</span>
+<span class="material-symbols-outlined text-contract-teal text-[16px] mb-1">arrow_forward</span>
+<span class="font-data-mono-lg text-data-mono-lg text-contract-teal">16 Weeks</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg p-4 flex flex-col">
+<span class="font-label-caps text-label-caps text-estimate-slate mb-2">Service Level</span>
+<div class="flex items-end gap-2">
+<span class="font-data-mono-lg text-data-mono-lg text-on-surface line-through text-estimate-slate decoration-estimate-slate">Standard</span>
+<span class="material-symbols-outlined text-estimate-slate text-[16px] mb-1">arrow_forward</span>
+<span class="font-data-mono-lg text-data-mono-lg text-estimate-slate">Removed</span>
+</div>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<tbody class="font-body-md text-body-md text-on-surface-variant">
+<tr class="border-b border-border-subtle bg-status-caution/5 border-l-4 border-l-status-caution">
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-on-surface w-1/3">Infrastructure Cost</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-estimate-slate line-through decoration-status-caution/50 w-1/3">$12,000 / yr</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-status-caution w-1/3 flex items-center justify-between">
+                                                $18,500 / yr 
+                                                <span class="bg-status-caution/20 text-status-caution px-2 py-0.5 rounded-DEFAULT font-label-caps text-[9px]">+54%</span>
+</td>
+</tr>
+<tr class="border-b border-border-subtle bg-contract-teal/5 border-l-4 border-l-contract-teal">
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-on-surface w-1/3">SSO Implementation Fee</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-estimate-slate italic w-1/3">—</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-contract-teal w-1/3 flex items-center justify-between">
+                                                $7,500
+                                                <span class="bg-contract-teal/20 text-contract-teal px-2 py-0.5 rounded-DEFAULT font-label-caps text-[9px]">NEW</span>
+</td>
+</tr>
+<tr class="border-b border-border-subtle bg-surface-container-lowest opacity-50 border-l-4 border-l-estimate-slate">
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-estimate-slate line-through w-1/3">Legacy Data Migration</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-estimate-slate line-through w-1/3">$4,000</td>
+<td class="py-3 px-4 font-data-mono-sm text-data-mono-sm text-estimate-slate w-1/3 flex items-center justify-between">
+                                                $0
+                                                <span class="bg-estimate-slate/20 text-estimate-slate px-2 py-0.5 rounded-DEFAULT font-label-caps text-[9px]">REMOVED</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Side Panel: Version History Timeline -->
+<div class="xl:col-span-3 flex flex-col gap-component-gap-md">
+<div class="bg-surface-card border border-border-subtle rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.1)] h-full flex flex-col overflow-hidden">
+<div class="border-b border-border-subtle px-4 py-3 bg-surface-container">
+<h3 class="font-summary-title text-summary-title text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span> Audit Trail
+                                </h3>
+</div>
+<div class="p-4 flex-1 overflow-y-auto relative">
+<!-- Timeline Line -->
+<div class="absolute left-6 top-4 bottom-4 w-px bg-border-subtle z-0"></div>
+<!-- Timeline Event 1 -->
+<div class="relative z-10 flex gap-3 mb-6">
+<div class="w-5 h-5 rounded-full bg-primary-container border-2 border-surface-card flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[12px] text-on-primary-container">edit</span>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-primary mb-1">Today, 09:42 AM</div>
+<div class="font-body-md text-body-md text-on-surface mb-1">
+<span class="font-semibold text-primary">Staff jdoe</span> adjusted estimates.
+                                        </div>
+<div class="bg-surface-container-low border border-border-subtle rounded-DEFAULT p-2 font-data-mono-sm text-data-mono-sm text-on-surface-variant text-[11px]">
+                                            "Increased infra cost based on discovery follow-up regarding high availability requirements."
+                                        </div>
+</div>
+</div>
+<!-- Timeline Event 2 -->
+<div class="relative z-10 flex gap-3 mb-6">
+<div class="w-5 h-5 rounded-full bg-contract-teal border-2 border-surface-card flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[12px] text-on-secondary">add</span>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-estimate-slate mb-1">Yesterday, 14:15 PM</div>
+<div class="font-body-md text-body-md text-on-surface mb-1">
+<span class="font-semibold text-primary">Lead ssmith</span> added scope.
+                                        </div>
+<div class="bg-surface-container-low border border-border-subtle rounded-DEFAULT p-2 font-data-mono-sm text-data-mono-sm text-on-surface-variant text-[11px]">
+                                            "Client requested mobile push notifications for phase 1."
+                                        </div>
+</div>
+</div>
+<!-- Timeline Event 3 -->
+<div class="relative z-10 flex gap-3 mb-6">
+<div class="w-5 h-5 rounded-full bg-surface-variant border-2 border-surface-card flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-[12px] text-estimate-slate">save</span>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-estimate-slate mb-1">Oct 12, 11:00 AM</div>
+<div class="font-body-md text-body-md text-on-surface mb-1">
+<span class="font-semibold text-primary">System</span> generated v2.3 snapshot.
+                                        </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-surface-container-highest dark:bg-surface-container-highest border-t border-approval-gold shadow-[0_-4px_20px_rgba(0,0,0,0.25)] shadow-2xl fixed bottom-0 left-0 w-full z-50 flex justify-end items-center gap-component-gap-md px-margin py-4 w-full">
+<div class="mr-auto font-label-caps text-label-caps text-on-surface opacity-50">
+            UdehLabs Executive Control Layer
+        </div>
+<button class="border border-estimate-slate text-estimate-slate px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 transition-all">Request Revision</button>
+<button class="border border-estimate-slate text-estimate-slate px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 transition-all">Internal Approve</button>
+<button class="border border-estimate-slate text-estimate-slate px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 transition-all">Send to Client</button>
+<button class="bg-approval-gold text-on-primary font-bold px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 transition-all Active: scale-98 transition-transform">Sign &amp; Authorize</button>
+</footer>
+</body></html>

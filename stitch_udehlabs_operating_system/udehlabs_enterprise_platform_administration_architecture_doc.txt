@@ -1,0 +1,45 @@
+# Phase A.61: Enterprise Platform Administration & Tenant Control Plane Architecture
+
+## Overview
+Phase A.61 establishes the **Platform Control Layer**, a secure operational environment for UdehLabs super-administrators. It decouples platform-level operations from customer organization management, ensuring that UdehLabs staff can monitor and maintain the ecosystem without gaining unrestricted or un-audited access to sensitive tenant data.
+
+## Core Components
+
+### 1. Platform Administration Boundaries
+- **Administrative Scoping**: Explicitly separates `PLATFORM`, `ORGANIZATION`, `PROJECT`, and `USER` scopes in the IAM engine.
+- **Staff Principle of Least Privilege**: Defines granular platform roles (e.g., `PLATFORM_SECURITY_ADMIN`, `PLATFORM_SUPPORT_ADMIN`) that grant access only to necessary operational metadata.
+- **Zero-Trust Super-Admin Access**: Privileged actions require strong authentication, explicit justification, and, for high-risk tasks, dual-party approval (Four-Eyes Principle).
+
+### 2. Tenant Control Plane (`IPlatformOrchestrator`)
+- **Organization Lifecycle Management**: Governs platform-level status transitions (`ACTIVE`, `SUSPENDED`, `RESTRICTED`) with auditable trails.
+- **Suspension & Restoration Workflows**: High-risk operations requiring justification and multi-step confirmation, ensuring customer continuity isn't compromised by accident.
+- **Subscription & Plan Governance**: Centrally manages commercial entitlements and plan catalogs across the multi-tenant landscape.
+
+### 3. Privileged Operations & Audit (`IAdminAuditService`)
+- **Administrator Action History**: Captures a non-repudiable timeline of every super-admin decision (e.g., user locks, feature flag shifts).
+- **Approval Center**: A unified queue for temporary privilege elevation requests and high-risk administrative actions.
+- **Permission & Access Matrix**: An inspection tool that traceably explains *why* an actor has access to a specific resource across the organizational hierarchy.
+
+### 4. System Governance & Rollouts
+- **Feature Flag Control**: Centralized management of global and targeted rollouts, supporting `BETA`, `LIMITED`, and `GENERAL` availability.
+- **Maintenance & Announcements**: Orchestrates platform-wide maintenance windows and severe-incident announcements with audience targeting.
+- **Platform Health & Reliability Dashboard**: Integrates A.60 telemetry to provide a global view of service health, SLO adherence, and recovery readiness.
+
+## Data Models
+- **PlatformRole / PlatformPermission**: IAM extensions for UdehLabs staff.
+- **AdminApproval / AdminAction**: Stateful records of privileged operations.
+- **MaintenanceWindow**: Managed scheduling for system downtime.
+- **PlatformAnnouncement**: Targeted communication records.
+- **ModelCatalogEntry / IntegrationCatalog**: Governed registries for AI and connectivity.
+- **SystemConfiguration**: Auditable record of global environment settings.
+
+## Security & Isolation
+- **Server-Side Authorization**: Every administrative endpoint enforces scope-aware authorization; UI visibility is never a substitute for security.
+- **Audit Sovereignty**: Admin logs are read-only and immutable to standard administrators, preventing history tampering.
+- **Restricted Support Access**: Impersonation and support views are time-limited, purpose-bound, and strictly audited, never exposing raw customer secrets.
+
+## Vertical Integration
+- **A.60 Integration**: Surfaces global reliability and recovery status to platform operators.
+- **A.59 Integration**: Detections monitor for platform-level privilege escalation or administrative account misuse.
+- **A.58 Integration**: Powers the executive platform overview with growth and adoption analytics.
+- **A.56 Integration**: Manages the global AI agent and model availability catalogs.

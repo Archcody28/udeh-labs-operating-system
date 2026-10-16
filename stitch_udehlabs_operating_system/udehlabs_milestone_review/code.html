@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Milestone Approval | UdehLabs Enterprise AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e293b;
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #031427;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #464555;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#89ceff",
+                      "on-secondary": "#3c0091",
+                      "surface-container-low": "#0b1c30",
+                      "primary": "#c3c0ff",
+                      "on-surface-variant": "#c7c4d8",
+                      "on-secondary-container": "#c4abff",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "surface": "#031427",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "surface-container-highest": "#26364a",
+                      "on-surface": "#d3e4fe",
+                      "on-primary-container": "#dad7ff",
+                      "surface-container-lowest": "#000f21",
+                      "surface-bright": "#2a3a4f",
+                      "background": "#031427",
+                      "inverse-on-surface": "#213145",
+                      "secondary": "#d0bcff",
+                      "on-primary": "#1d00a5",
+                      "inverse-primary": "#4d44e3",
+                      "on-primary-fixed": "#0f0069",
+                      "surface-dim": "#031427",
+                      "secondary-fixed": "#e9ddff",
+                      "error-container": "#93000a",
+                      "surface-container": "#102034",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#e2dfff",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "secondary-container": "#571bc1",
+                      "tertiary-container": "#006693",
+                      "outline-variant": "#464555",
+                      "error": "#ffb4ab",
+                      "on-error": "#690005",
+                      "surface-tint": "#c3c0ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "outline": "#918fa1",
+                      "primary-container": "#4f46e5",
+                      "on-tertiary": "#00344d",
+                      "on-secondary-fixed": "#23005c",
+                      "inverse-surface": "#d3e4fe",
+                      "on-tertiary-container": "#b8e0ff",
+                      "surface-variant": "#26364a",
+                      "on-background": "#d3e4fe",
+                      "surface-container-high": "#1b2b3f",
+                      "tertiary-fixed": "#c9e6ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "xs": "4px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "max_content_width": "1440px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "sidebar_width": "260px",
+                      "sidebar_collapsed": "64px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "display": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "code-sm": ["JetBrains Mono"],
+                      "headline-md": ["Inter"],
+                      "code-md": ["JetBrains Mono"],
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- SideNavBar Anchor -->
+<aside class="flex flex-col h-full py-md w-sidebar_width bg-surface border-r border-outline-variant flex-shrink-0">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm">
+<span class="font-headline-md text-headline-md font-bold text-primary">UdehLabs</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-xs">ENTERPRISE AI</p>
+</div>
+<nav class="flex-1 px-sm space-y-xs">
+<!-- Navigation Items -->
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                    Projects
+                </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-primary border-l-2 border-primary bg-primary-container/10 transition-colors rounded-r" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                    AI Workspace
+                </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                    Analytics
+                </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                    Deployments
+                </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="px-md mt-auto pt-md border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors rounded" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Help
+                </a>
+<div class="flex items-center gap-md px-md py-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">JD</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-label-caps text-label-caps truncate">User Profile</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 flex flex-col min-w-0 bg-surface-dim overflow-hidden">
+<!-- TopAppBar Anchor -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant z-10">
+<div class="flex items-center gap-lg">
+<h1 class="font-headline-sm text-headline-sm font-extrabold text-primary">Milestone Approval</h1>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Logs</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Agents</a>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-xs px-md py-xs bg-surface-container rounded border border-outline-variant">
+<span class="material-symbols-outlined text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48" placeholder="Search project logs..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">history</button>
+<button class="bg-primary-container text-on-primary-container px-md py-xs rounded font-label-caps text-label-caps hover:opacity-80 transition-all">Create New</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Column: Details & Audit -->
+<div class="w-[400px] flex flex-col border-r border-outline-variant bg-surface-container-lowest overflow-y-auto">
+<!-- Milestone Summary -->
+<div class="p-lg space-y-md">
+<div class="flex justify-between items-start">
+<div>
+<span class="px-xs py-0.5 bg-tertiary-container text-on-tertiary-container font-label-caps text-[10px] rounded mb-sm block w-fit">MILESTONE 04</span>
+<h2 class="font-headline-md text-headline-md">Beta Release 1.0</h2>
+<p class="text-on-surface-variant font-body-md mt-xs">Final feature-complete build for internal stakeholder validation.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-sm">
+<div class="p-sm bg-surface-container border border-outline-variant rounded">
+<p class="font-label-caps text-label-caps text-outline">DUE DATE</p>
+<p class="font-body-lg text-body-lg font-bold">Oct 24, 2023</p>
+</div>
+<div class="p-sm bg-surface-container border border-outline-variant rounded">
+<p class="font-label-caps text-label-caps text-outline">VERSION</p>
+<p class="font-body-lg text-body-lg font-bold">v1.0.4-beta</p>
+</div>
+</div>
+</div>
+<!-- Deliverables List -->
+<div class="px-lg pb-lg space-y-md">
+<h3 class="font-label-caps text-label-caps text-outline border-b border-outline-variant pb-xs">DELIVERABLES</h3>
+<div class="space-y-sm">
+<div class="p-md bg-surface border border-primary/20 rounded flex items-center justify-between group cursor-pointer hover:bg-surface-variant/30 transition-all">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary">description</span>
+<div>
+<p class="font-body-md font-bold">UI Design System Spec</p>
+<p class="font-label-caps text-[10px] text-primary">READY FOR REVIEW</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div class="p-md bg-surface border border-outline-variant rounded flex items-center justify-between opacity-60">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined">api</span>
+<div>
+<p class="font-body-md font-bold">Core Engine API v2</p>
+<p class="font-label-caps text-[10px] text-outline">PENDING</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+</div>
+<div class="p-md bg-surface border border-outline-variant rounded flex items-center justify-between opacity-60">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined">security</span>
+<div>
+<p class="font-body-md font-bold">Security Audit Report</p>
+<p class="font-label-caps text-[10px] text-outline">PENDING</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+</div>
+</div>
+</div>
+<!-- AI Verification Report -->
+<div class="px-lg pb-lg">
+<div class="ai-glow p-md rounded bg-surface-container-high relative overflow-hidden">
+<div class="absolute top-0 right-0 p-sm opacity-20">
+<span class="material-symbols-outlined text-primary scale-150">auto_awesome</span>
+</div>
+<h3 class="font-label-caps text-label-caps text-primary flex items-center gap-xs mb-md">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                                AI VERIFICATION REPORT
+                            </h3>
+<div class="space-y-sm">
+<div class="flex justify-between items-center">
+<span class="text-body-md">Compliance Score</span>
+<span class="text-body-md font-bold text-tertiary">98.2%</span>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 98%;"></div>
+</div>
+<div class="pt-md space-y-xs">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-green-400 text-sm">check_circle</span>
+<span class="text-body-md text-on-surface-variant">Automated accessibility passed</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-green-400 text-sm">check_circle</span>
+<span class="text-body-md text-on-surface-variant">Token economy validation ok</span>
+</div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-yellow-400 text-sm">warning</span>
+<span class="text-body-md text-on-surface-variant">3 Minor styling deviations noted</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Split Screen Review Area -->
+<div class="flex-1 flex flex-col bg-surface-container-low overflow-hidden">
+<!-- Toolbar -->
+<div class="h-12 border-b border-outline-variant flex items-center justify-between px-md bg-surface/50">
+<div class="flex items-center gap-md">
+<span class="font-label-caps text-label-caps">PREVIEW: UI DESIGN SYSTEM SPEC</span>
+<div class="flex border border-outline-variant rounded overflow-hidden">
+<button class="px-sm py-1 bg-surface-variant text-primary material-symbols-outlined text-sm">grid_view</button>
+<button class="px-sm py-1 hover:bg-surface-variant transition-colors material-symbols-outlined text-sm">article</button>
+</div>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-on-surface-variant text-xs">Zoom 100%</span>
+<button class="material-symbols-outlined text-sm">zoom_in</button>
+<button class="material-symbols-outlined text-sm">zoom_out</button>
+<button class="material-symbols-outlined text-sm ml-md">fullscreen</button>
+</div>
+</div>
+<!-- Main Preview Surface -->
+<div class="flex-1 overflow-auto p-2xl flex items-start justify-center relative">
+<!-- Simulated Document/UI Mock -->
+<div class="w-[800px] bg-[#020617] border border-outline-variant rounded-xl shadow-2xl p-xl space-y-xl min-h-[1000px]">
+<div class="flex justify-between border-b border-outline-variant pb-md">
+<h1 class="text-headline-lg font-headline-lg text-primary">UdehLabs Core UI Spec</h1>
+<p class="font-code-md text-code-md text-outline">Rev. 2023.10.12</p>
+</div>
+<!-- Placeholder Content Blocks -->
+<div class="space-y-lg">
+<div class="grid grid-cols-2 gap-lg">
+<div class="space-y-md">
+<div class="h-4 bg-surface-container rounded w-3/4"></div>
+<div class="h-32 bg-surface-container-high rounded border border-outline-variant flex items-center justify-center">
+<span class="text-outline font-label-caps">COMPONENT PREVIEW: BUTTON_GROUP</span>
+</div>
+</div>
+<div class="space-y-md">
+<div class="h-4 bg-surface-container rounded w-2/3"></div>
+<div class="h-32 bg-surface-container-high rounded border border-outline-variant flex items-center justify-center">
+<span class="text-outline font-label-caps">COMPONENT PREVIEW: DATA_INPUT</span>
+</div>
+</div>
+</div>
+<div class="h-4 bg-surface-container rounded w-full"></div>
+<div class="h-4 bg-surface-container rounded w-5/6"></div>
+<div class="h-64 bg-surface-container rounded-lg relative overflow-hidden">
+<div class="w-full h-full bg-cover bg-center opacity-40" data-alt="A sophisticated data visualization dashboard showing complex AI model performance metrics with sleek purple and blue gradient charts, minimalist glowing UI elements, and high-density information architecture in a dark mode aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC72ex8_39aAoMksx3if0kBNm7YeL2XMvTZyBrGIgIKYJI3CISGdWSBP4_Dxmi1E-rh2Ah8F5CcMwRJCEP3tPDD4Ln8GuYzSq0acuin6Mt0LYeCB0U2FWs1gHNUbRKp4IS9U2RoFwQe5tkmJ6Xz4HYoWgkcJe344szM44O1aP9dcI-89SE3AhNGvPurN9TKUm2o7zSOiRgPFx5zFzMs4-9ryQ9YhxqNeEULPbmlJ3PLeYhZpJXmlZWPaA')"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="px-md py-sm glass-panel rounded border border-primary/30">
+<p class="font-label-caps text-primary">FIGURE 01: ANALYTICS INTEGRATION</p>
+</div>
+</div>
+</div>
+<div class="h-4 bg-surface-container rounded w-full"></div>
+<div class="h-4 bg-surface-container rounded w-4/6"></div>
+</div>
+</div>
+</div>
+<!-- Feedback & Actions Footer -->
+<div class="h-[240px] border-t border-outline-variant bg-surface flex">
+<!-- Comment Thread -->
+<div class="flex-1 border-r border-outline-variant flex flex-col">
+<div class="p-sm border-b border-outline-variant bg-surface-container-lowest">
+<span class="font-label-caps text-label-caps text-outline">FEEDBACK THREAD</span>
+</div>
+<div class="flex-1 overflow-y-auto p-md space-y-md">
+<div class="flex gap-md">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex-shrink-0 flex items-center justify-center text-xs font-bold">AS</div>
+<div class="space-y-xs">
+<p class="text-body-md font-bold">Alex Simmons <span class="font-normal text-outline text-xs ml-sm">2 hours ago</span></p>
+<div class="p-sm bg-surface-container rounded text-body-md">
+                                            The color contrast on the primary action button seems slightly off in the dark mode preview. Can we verify WCAG AA compliance?
+                                        </div>
+</div>
+</div>
+<div class="flex gap-md">
+<div class="w-8 h-8 rounded-full bg-primary-container flex-shrink-0 flex items-center justify-center text-xs font-bold">AI</div>
+<div class="space-y-xs">
+<p class="text-body-md font-bold text-primary flex items-center gap-xs">
+                                            UdehLabs AI <span class="material-symbols-outlined text-[10px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-normal text-outline text-xs ml-sm">1 hour ago</span>
+</p>
+<div class="p-sm bg-primary-container/10 border border-primary/20 rounded text-body-md italic">
+                                            Verified: The contrast ratio for hex #C3C0FF on #031427 is 14.2:1, which exceeds WCAG AAA standards.
+                                        </div>
+</div>
+</div>
+</div>
+<div class="p-md bg-surface-container-low flex gap-sm items-center">
+<input class="flex-1 bg-surface border-outline-variant rounded px-md py-sm focus:ring-1 focus:ring-primary text-body-md" placeholder="Add a comment or reference a line..." type="text"/>
+<button class="material-symbols-outlined text-primary p-sm hover:bg-primary-container/10 rounded transition-all">send</button>
+</div>
+</div>
+<!-- Action Panel -->
+<div class="w-[300px] p-lg flex flex-col justify-between">
+<div class="space-y-md">
+<h4 class="font-label-caps text-label-caps text-outline">MILESTONE ACTIONS</h4>
+<div class="space-y-sm">
+<label class="flex items-center gap-md p-md border border-outline-variant rounded cursor-pointer hover:bg-surface-variant/30 transition-all">
+<input class="rounded text-primary focus:ring-primary bg-surface border-outline" type="checkbox"/>
+<span class="text-body-md">I have reviewed all files</span>
+</label>
+<label class="flex items-center gap-md p-md border border-outline-variant rounded cursor-pointer hover:bg-surface-variant/30 transition-all">
+<input class="rounded text-primary focus:ring-primary bg-surface border-outline" type="checkbox"/>
+<span class="text-body-md">Mark as audit-ready</span>
+</label>
+</div>
+</div>
+<div class="space-y-sm">
+<button class="w-full py-md bg-surface-container-highest text-on-surface border border-outline-variant rounded font-bold hover:bg-surface-variant transition-all flex items-center justify-center gap-sm">
+<span class="material-symbols-outlined text-sm">history_edu</span>
+                                    Request Revision
+                                </button>
+<button class="w-full py-md bg-primary text-on-primary rounded font-bold hover:opacity-90 transition-all flex items-center justify-center gap-sm shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                    Approve Milestone
+                                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple interactive simulation for the reviewer screen
+        document.querySelectorAll('.material-symbols-outlined').forEach(icon => {
+            icon.addEventListener('mousedown', () => {
+                icon.style.transform = 'scale(0.92)';
+            });
+            icon.addEventListener('mouseup', () => {
+                icon.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add visual interest to the preview area
+        const previewArea = document.querySelector('main > div > div:nth-child(2) > div:nth-child(2)');
+        previewArea.addEventListener('scroll', (e) => {
+            // Can add subtle parallax or header adjustments here
+        });
+    </script>
+</body></html>

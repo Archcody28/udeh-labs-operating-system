@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Console - Profile Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "tertiary-fixed": "#c9e6ff",
+                    "outline": "#918fa1",
+                    "surface-variant": "#26364a",
+                    "on-secondary-fixed-variant": "#5516be",
+                    "surface-container": "#102034",
+                    "on-tertiary": "#00344d",
+                    "surface-panel": "rgba(30, 41, 59, 0.7)",
+                    "error": "#ffb4ab",
+                    "primary-container": "#4f46e5",
+                    "inverse-surface": "#d3e4fe",
+                    "outline-variant": "#464555",
+                    "surface-container-highest": "#26364a",
+                    "on-tertiary-container": "#b8e0ff",
+                    "on-primary-fixed": "#0f0069",
+                    "on-tertiary-fixed": "#001e2f",
+                    "surface-bright": "#2a3a4f",
+                    "secondary-container": "#571bc1",
+                    "surface-tint": "#c3c0ff",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#c4abff",
+                    "outline-muted": "#464555",
+                    "error-container": "#93000a",
+                    "surface-dim": "#031427",
+                    "on-surface": "#d3e4fe",
+                    "on-background": "#d3e4fe",
+                    "surface-container-lowest": "#000f21",
+                    "secondary": "#d0bcff",
+                    "tertiary-container": "#006693",
+                    "ai-glow": "rgba(139, 92, 246, 0.15)",
+                    "background": "#031427",
+                    "secondary-fixed-dim": "#d0bcff",
+                    "on-surface-variant": "#c7c4d8",
+                    "secondary-fixed": "#e9ddff",
+                    "inverse-primary": "#4d44e3",
+                    "primary-fixed": "#e2dfff",
+                    "inverse-on-surface": "#213145",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-primary": "#1d00a5",
+                    "surface-container-high": "#1b2b3f",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#dad7ff",
+                    "tertiary-fixed-dim": "#89ceff",
+                    "tertiary": "#89ceff",
+                    "on-tertiary-fixed-variant": "#004c6e",
+                    "on-secondary-fixed": "#23005c",
+                    "surface": "#031427",
+                    "error-accent": "#ffb4ab",
+                    "primary": "#c3c0ff",
+                    "surface-container-low": "#0b1c30",
+                    "on-secondary": "#3c0091"
+                },
+                "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+                },
+                "spacing": {
+                    "header-height": "64px",
+                    "sidebar": "260px",
+                    "lg": "24px",
+                    "sm": "8px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "md": "16px"
+                },
+                "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "code-md": ["JetBrains Mono"],
+                    "code-sm": ["JetBrains Mono"],
+                    "status-tiny": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-lg": ["Inter"]
+                },
+                "fontSize": {
+                    "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                    "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                    "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                    "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "code-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                    "code-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                    "status-tiny": ["10px", { "lineHeight": "12px", "fontWeight": "700" }],
+                    "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                    "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                }
+            }
+        }
+    }
+    </script>
+<style>
+        .glass-panel {
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 1px solid rgba(255, 255, 255, 0.02);
+            border-right: 1px solid rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+        }
+        .ai-glow-shadow {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+        }
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-background text-on-background antialiased flex">
+<!-- SideNavBar Component -->
+<nav class="fixed left-0 top-0 h-screen w-sidebar border-r border-outline-variant bg-surface-container dark:bg-surface-container flex flex-col h-full p-md z-50">
+<div class="mb-xl flex flex-col items-center pt-md">
+<img alt="Developer Profile" class="w-16 h-16 rounded-full border-2 border-primary object-cover mb-sm" data-alt="A highly detailed close-up portrait of a developer's digital avatar, featuring glowing blue and violet neon accents set against a deep navy background. The style is modern, technical, and slightly cyberpunk, with sharp details and soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKSW3RefjPNCE8aN4FOatEobOwocUoyCl7f9e2bWcICOlss9cFzNhhzUYqeBwASkgW01f2houyFokElpF3K5XChXXaj8jvG6a3LkV9Bv9kBtmRo9NiFtsabapACLcuGUB4tJxuw21Eifw_qftBMQ0TU9dL6oRmaofpKn_8V4-zS-3_9SG05pkON--e09T8nZoxC-8i3-E6FkThcgSSCVDgEd8YHNrwgOqkvWAksZi42P44CfXsTmFHAw"/>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">UdehLabs</h2>
+<span class="font-code-sm text-code-sm text-on-surface-variant">v2.4.0-stable</span>
+<button class="mt-md w-full bg-primary-container text-on-primary-container font-label-caps text-label-caps py-sm px-md rounded hover:bg-surface-container-highest transition-colors duration-150 active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">visibility</span> View Public Profile
+            </button>
+</div>
+<ul class="flex flex-col gap-sm flex-grow">
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-150 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md">Overview</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-150 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-body-md">My Work</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-150 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+<span class="font-body-md">Portfolio</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-bold active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-body-md">Skills</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-150 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-body-md">Availability</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-150 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto pt-md border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-error hover:bg-error-container/20 transition-colors duration-150 active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">Logout</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="ml-sidebar flex-grow flex flex-col min-h-screen">
+<!-- TopNavBar Component -->
+<header class="fixed top-0 right-0 h-header-height z-40 bg-surface-panel backdrop-blur-md flex items-center justify-between px-lg w-[calc(100%-260px)] border-b border-outline-variant ai-glow-shadow">
+<div class="flex items-center">
+<h1 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">UdehLabs Console</h1>
+</div>
+<div class="flex items-center gap-lg">
+<div class="relative w-64 hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-[6px] pl-xl pr-md text-on-surface font-body-md text-body-md focus:ring-1 focus:ring-primary focus:outline-none transition-shadow" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm rounded text-on-surface-variant hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-sm rounded text-on-surface-variant hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<button class="p-sm rounded text-on-surface-variant hover:text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="w-8 h-8 rounded-full ml-sm overflow-hidden border border-outline-variant">
+<img alt="Developer Avatar" class="w-full h-full object-cover" data-alt="A small circular avatar image showing a highly detailed, abstract representation of artificial intelligence, featuring glowing purple and blue nodes on a dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4P9X55HgbgHvxi7vjdxQY0v436iurBD8nR4_BPhSiK6S3GZoLEShng4MJCPveeFpCpE3tPgPNOvY0ctmtC7qPUy6zrq7Xn5t_-ZkBF8rJR0GJ5NmHOxePSej7776cfnqqVtfKWkzGSxqDCfWG-VNWijgEbD5DscTbECIi3lw6BluYIkE0KNKLTb-broXhncXexY-J_COIrLs4mtEvWyS_87LhHR7AruMKH6YX0slsljX62HEg1DWvyg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<main class="pt-[calc(64px+24px)] px-lg pb-xl flex-grow overflow-y-auto">
+<!-- Header Section -->
+<section class="glass-panel rounded-xl p-lg mb-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-md relative overflow-hidden">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background: radial-gradient(circle at right top, var(--tw-colors-secondary-container), transparent 40%);"></div>
+<div class="flex items-center gap-lg z-10">
+<div class="w-24 h-24 rounded-lg overflow-hidden border-2 border-outline-variant">
+<img alt="Principal Architect Profile" class="w-full h-full object-cover" data-alt="A high-quality, professional headshot of a software architect in a dimly lit, high-tech server room environment. The lighting is cool and moody, emphasizing a serious and intelligent persona." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwn27IM4Q-R0md5JeBM8i6z92REXFq4q3N1iWvTxR5nKOLxVxIJ_g142_1MYYYOepzDTIogD25PL4I2s2o9bKZooA2v21PkemyDdx5CJCtdmPPhBA63Ha71Z9It_4NL4dpHew8S6byjXcTotkQATuL7HkAr0DbD9obtGZhaGfNiub9CcGXtJqELcc0Tpq2lXqfItFniaTMTjjAV6u98asv1JxYjZC-YIbkAea9MvhaxxH-1ZWH_xZaRg"/>
+</div>
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Dr. Elias Vance</h2>
+<p class="font-code-md text-code-md text-on-surface-variant flex items-center gap-sm">
+<span class="material-symbols-outlined text-[16px]">integration_instructions</span> Principal Software Architect
+                        </p>
+</div>
+</div>
+<div class="flex items-center gap-md z-10">
+<label class="flex items-center cursor-pointer gap-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Public Profile</span>
+<div class="relative">
+<input checked="" class="sr-only" type="checkbox"/>
+<div class="block bg-surface-container-high w-10 h-6 rounded-full border border-outline-variant transition-colors"></div>
+<div class="dot absolute left-1 top-1 bg-primary w-4 h-4 rounded-full transition-transform translate-x-4"></div>
+</div>
+</label>
+<button class="bg-surface-container-high border border-outline-variant text-on-surface font-label-caps text-label-caps py-sm px-md rounded hover:bg-surface-container-highest transition-colors active:scale-95">
+                        Edit Profile
+                    </button>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Left Column (Stack & Portfolio) -->
+<div class="lg:col-span-8 flex flex-col gap-lg">
+<!-- Technical Stack Bento Grid -->
+<section>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">memory</span> Technical Stack
+                        </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Languages -->
+<div class="glass-panel rounded-lg p-md">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-md border-b border-outline-variant pb-xs">Languages</h4>
+<ul class="flex flex-col gap-sm">
+<li>
+<div class="flex justify-between font-code-sm text-code-sm mb-xs"><span>Rust</span><span class="text-primary">95%</span></div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 95%;"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between font-code-sm text-code-sm mb-xs"><span>Go</span><span class="text-primary">88%</span></div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 88%;"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between font-code-sm text-code-sm mb-xs"><span>TypeScript</span><span class="text-primary">92%</span></div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 92%;"></div>
+</div>
+</li>
+</ul>
+</div>
+<!-- AI/ML -->
+<div class="glass-panel rounded-lg p-md ai-glow-shadow">
+<h4 class="font-label-caps text-label-caps text-secondary mb-md border-b border-outline-variant pb-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">psychology</span> AI & Machine Learning
+                                </h4>
+<ul class="flex flex-col gap-sm">
+<li>
+<div class="flex justify-between font-code-sm text-code-sm mb-xs text-on-surface"><span>PyTorch</span><span class="text-secondary">85%</span></div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 85%;"></div>
+</div>
+</li>
+<li>
+<div class="flex justify-between font-code-sm text-code-sm mb-xs text-on-surface"><span>TensorFlow</span><span class="text-secondary">70%</span></div>
+<div class="w-full bg-surface-container-lowest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary-container h-full" style="width: 70%;"></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (Availability & Certs) -->
+<div class="lg:col-span-4 flex flex-col gap-lg">
+<!-- Availability Panel -->
+<section class="glass-panel rounded-lg p-md">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-md border-b border-outline-variant pb-sm flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">schedule</span> Availability Settings
+                        </h3>
+<div class="mb-md">
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-xs">Timezone</label>
+<div class="relative">
+<select class="w-full bg-surface-container border border-outline-variant rounded p-sm font-code-md text-code-md text-on-surface appearance-none focus:ring-1 focus:ring-primary focus:outline-none">
+<option>UTC (Coordinated Universal Time)</option>
+<option>EST (Eastern Standard Time)</option>
+<option>PST (Pacific Standard Time)</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">Weekly Grid (Hours)</label>
+<div class="grid grid-cols-5 gap-xs">
+<!-- Fake heat map -->
+<div class="bg-surface-container-highest h-8 rounded border border-outline-variant flex items-center justify-center font-status-tiny text-status-tiny text-on-surface-variant">M</div>
+<div class="bg-primary/20 h-8 rounded border border-primary/30 flex items-center justify-center font-status-tiny text-status-tiny text-primary">T</div>
+<div class="bg-primary/40 h-8 rounded border border-primary/50 flex items-center justify-center font-status-tiny text-status-tiny text-primary">W</div>
+<div class="bg-primary/80 h-8 rounded border border-primary flex items-center justify-center font-status-tiny text-status-tiny text-on-primary-container">T</div>
+<div class="bg-primary/20 h-8 rounded border border-primary/30 flex items-center justify-center font-status-tiny text-status-tiny text-primary">F</div>
+</div>
+<p class="font-status-tiny text-status-tiny text-on-surface-variant mt-xs text-right">Current Load: Medium</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+<script>
+        // Simple toggle switch logic
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const dot = e.target.nextElementSibling.nextElementSibling;
+                const bg = e.target.nextElementSibling;
+                if (e.target.checked) {
+                    dot.classList.add('translate-x-4');
+                    bg.classList.add('bg-primary');
+                    bg.classList.remove('bg-surface-container-high');
+                } else {
+                    dot.classList.remove('translate-x-4');
+                    bg.classList.remove('bg-primary');
+                    bg.classList.add('bg-surface-container-high');
+                }
+            });
+        });
+    </script>
+</body></html>

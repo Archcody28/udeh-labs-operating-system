@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Support Desk - UdehLabs Internal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-tint": "#c3c0ff",
+                      "surface-container-low": "#0b1c30",
+                      "on-tertiary-container": "#67f4b7",
+                      "surface-container": "#102034",
+                      "surface-variant": "#26364a",
+                      "error-container": "#93000a",
+                      "outline": "#918fa1",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-lowest": "#000f21",
+                      "primary-fixed": "#e2dfff",
+                      "surface-dim": "#031427",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-primary-container": "#dad7ff",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-bright": "#2a3a4f",
+                      "outline-variant": "#464555",
+                      "surface-container-high": "#1b2b3f",
+                      "inverse-on-surface": "#213145",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "primary-container": "#4f46e5",
+                      "inverse-surface": "#d3e4fe",
+                      "background": "#031427",
+                      "tertiary-fixed": "#6ffbbe",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "secondary": "#bec6e0",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-secondary-fixed": "#131b2e",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "secondary-container": "#3f465c",
+                      "on-background": "#d3e4fe",
+                      "on-tertiary-fixed": "#002113",
+                      "tertiary": "#4edea3",
+                      "on-surface-variant": "#c7c4d8",
+                      "on-primary": "#1d00a5",
+                      "on-secondary": "#283044",
+                      "surface-container-highest": "#26364a",
+                      "on-secondary-container": "#adb4ce",
+                      "on-surface": "#d3e4fe",
+                      "on-primary-fixed": "#0f0069",
+                      "on-error": "#690005",
+                      "inverse-primary": "#4d44e3",
+                      "secondary-fixed": "#dae2fd",
+                      "surface": "#031427",
+                      "error": "#ffb4ab",
+                      "primary": "#c3c0ff",
+                      "on-tertiary": "#003824",
+                      "tertiary-container": "#006e4b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "container-max": "1440px",
+                      "unit": "4px",
+                      "margin-desktop": "32px",
+                      "margin-mobile": "16px",
+                      "stack-xs": "4px",
+                      "gutter": "16px",
+                      "stack-md": "16px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@600;700&amp;family=Inter:wght@400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar -->
+<nav class="bg-surface-dim dark:bg-surface-dim docked fixed left-0 top-0 h-full w-[280px] border-r border-outline-variant flat no shadows transition-all duration-200 ease-in-out flex flex-col h-full p-stack-md gap-stack-sm z-50">
+<!-- Header -->
+<div class="flex items-center gap-stack-sm mb-stack-lg p-unit">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container flex items-center justify-center border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A stylized geometric logo representing technical command operations, utilizing deep indigo and bright teal accents against a dark background, reflecting a sleek, modern enterprise software aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC61ge7nv18yRFAr0pxGB48xfhfAV8opKA5E5FDbLTw4dHtXSu_HpWYwRUZYAoJ4H09uzSXlnmrDXiVPOOHU4g9kITPSaZj8LklvI-qvHgF7-xQ3Z9lmkfHmySJgUfQP36h_j6gsVdrzF3yhJJGEuQfc5TkhqPgPbOxHFTBWzcIff7ybwpa-jwYfN0UNou6ctXOBD8xcUYG6aZh61PcPGuiOuvJWQT7WQnRK65H-M-qF-vEK41Wp2UeSg"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary">Command Center</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Nexus SRE Edition</p>
+</div>
+</div>
+<!-- Primary Actions -->
+<button class="w-full bg-primary-container text-on-primary-container font-label-sm text-label-sm py-stack-sm px-stack-md rounded-lg flex items-center justify-center gap-unit mb-stack-md hover:bg-opacity-90 transition-opacity">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            New Ticket
+        </button>
+<!-- Main Tabs -->
+<div class="flex-1 flex flex-col gap-unit">
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Overview
+            </a>
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Accounts
+            </a>
+<!-- Active Tab -->
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg bg-primary-container text-on-primary-container font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number" data-weight="fill">confirmation_number</span>
+                Support Desk
+            </a>
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+                Feedback
+            </a>
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+                Retention Analytics
+            </a>
+</div>
+<!-- Footer Tabs -->
+<div class="mt-auto border-t border-outline-variant pt-stack-sm flex flex-col gap-unit">
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+                System Health
+            </a>
+<a class="flex items-center gap-stack-sm px-stack-sm py-stack-sm rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 font-label-sm text-label-sm transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+                Admin
+            </a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="ml-[280px] flex-1 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-surface-container dark:bg-surface-container flex justify-between items-center w-full px-margin-desktop h-16 border-b border-outline-variant flat no shadows sticky top-0 z-40">
+<div class="flex items-center gap-stack-md w-1/3">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-variant border border-outline-variant rounded-lg pl-10 pr-4 py-1.5 text-on-surface font-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder:text-on-surface-variant/50" placeholder="Search tickets, orgs, or knowledge base..." type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-center flex-1">
+<!-- Brand Anchor (Optional if in SideNav, but keeping for structural integrity) -->
+</div>
+<div class="flex items-center gap-stack-md justify-end w-1/3">
+<div class="flex items-center gap-unit text-tertiary-fixed px-2 py-1 rounded-full bg-tertiary-fixed/10 border border-tertiary-fixed/20 font-label-sm text-label-sm">
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></div>
+                     Online
+                 </div>
+<div class="flex items-center gap-unit">
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-variant rounded-full transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-stack-sm cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A small, professional headshot of an operator in a dark, high-tech command center environment. The lighting is subtle with cool blue monitor glows reflecting on the face." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDySVODNrk94zbii5lLZVFR_5dpi70nkHm8zkd7-wZrmFaHuAXGKpKLymD2uiOk7Uoj5-TWiobrJewywLGVKC_sks_14FNpLtSBukmrr7NO9qLf9psZWY7KRahyiSzqFAOjT4DIIeRCHjeB6hWikfgWPtLaF6ivrRp2J4Ut0iyc_qRZZQG1cfILd9MeKPa7g7aJDyLbs1Rwm2AnQkMaaulp5Mg3NDxc6QHuEZ7oF3EuueUmaRo9WnnSbQ"/>
+</div>
+</div>
+</header>
+<!-- Workspace Container -->
+<div class="flex-1 p-margin-desktop flex flex-col gap-stack-lg max-w-container-max mx-auto w-full overflow-y-auto">
+<!-- Active Incident Banner -->
+<div class="bg-error-container/20 border border-error-container rounded-lg p-stack-md flex items-start gap-stack-md shadow-lg shadow-error-container/5">
+<div class="p-2 bg-error-container rounded-full text-on-error-container mt-1">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md text-error flex items-center gap-2">
+                        Active Incident: API Gateway Latency <span class="text-error font-data-mono text-data-mono px-2 py-0.5 rounded bg-error-container/50 border border-error/20">SEV-2</span>
+</h3>
+<p class="text-on-error-container/80 mt-1">Increased latency observed across EU-West regions affecting REST API endpoints. SRE team is actively investigating. Affecting approx 12% of requests.</p>
+</div>
+<button class="text-error font-label-sm text-label-sm border border-error/50 px-4 py-2 rounded hover:bg-error-container/30 transition-colors">
+                    View Details
+                </button>
+</div>
+<!-- Top Row Widgets -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-md">
+<!-- SLA Widget 1 -->
+<div class="bg-surface-container-high border border-outline-variant rounded-xl p-stack-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-stack-sm relative z-10">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-unit">
+<span class="material-symbols-outlined text-[16px]" data-icon="timer">timer</span>
+                             Avg Response Time
+                         </span>
+<span class="text-tertiary-fixed font-data-mono text-data-mono bg-tertiary-fixed/10 px-1.5 rounded">+12% vs last hr</span>
+</div>
+<div class="flex items-end gap-2 relative z-10">
+<span class="font-display-lg text-display-lg text-on-surface">14m</span>
+<span class="text-on-surface-variant mb-2">/ 30m SLA</span>
+</div>
+</div>
+<!-- SLA Widget 2 -->
+<div class="bg-surface-container-high border border-outline-variant rounded-xl p-stack-md relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-stack-sm relative z-10">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-unit">
+<span class="material-symbols-outlined text-[16px]" data-icon="task_alt">task_alt</span>
+                             Resolution Rate
+                         </span>
+<span class="text-tertiary-fixed font-data-mono text-data-mono bg-tertiary-fixed/10 px-1.5 rounded">Target: 95%</span>
+</div>
+<div class="flex items-end gap-2 relative z-10">
+<span class="font-display-lg text-display-lg text-on-surface">97.2%</span>
+</div>
+</div>
+<!-- Aggregated Issues -->
+<div class="bg-surface-container-high border border-outline-variant rounded-xl p-stack-md flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-unit mb-stack-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="bug_report">bug_report</span>
+                        Repeated Problems (1h)
+                    </span>
+<div class="flex-1 flex flex-col justify-center gap-2">
+<div class="flex justify-between items-center text-sm bg-surface-variant px-2 py-1 rounded">
+<span class="truncate text-on-surface">Auth Timeout (OIDC)</span>
+<span class="font-data-mono text-data-mono text-error font-bold flex items-center gap-1">5 <span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span></span>
+</div>
+<div class="flex justify-between items-center text-sm px-2 py-1">
+<span class="truncate text-on-surface-variant">Billing Sync Failure</span>
+<span class="font-data-mono text-data-mono text-secondary-fixed">2</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Layout Split -->
+<div class="flex flex-col lg:flex-row gap-stack-lg h-[600px]">
+<!-- Ticket Queue (Left Pane - 2/3) -->
+<div class="flex-1 bg-surface-container-low border border-outline-variant rounded-xl flex flex-col overflow-hidden">
+<!-- Queue Header -->
+<div class="p-stack-md border-b border-outline-variant bg-surface-container flex justify-between items-center sticky top-0 z-20">
+<h2 class="font-headline-md text-headline-md flex items-center gap-2">
+                            Global Queue
+                            <span class="font-data-mono text-data-mono text-on-surface-variant bg-surface-variant px-2 py-0.5 rounded text-sm font-normal">24 Unassigned</span>
+</h2>
+<div class="flex gap-unit">
+<button class="px-3 py-1.5 border border-outline-variant rounded bg-surface-variant text-on-surface hover:bg-surface-bright transition-colors font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="filter_list">filter_list</span>
+                                Filter
+                            </button>
+<button class="px-3 py-1.5 border border-outline-variant rounded bg-surface-variant text-on-surface hover:bg-surface-bright transition-colors font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="sort">sort</span>
+                                Sort
+                            </button>
+</div>
+</div>
+<!-- Queue List -->
+<div class="flex-1 overflow-y-auto">
+<!-- Table Header -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 p-stack-sm border-b border-outline-variant/50 bg-surface-container-low font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider sticky top-0 z-10 px-stack-md">
+<div class="w-16">ID</div>
+<div>Subject &amp; Org</div>
+<div class="w-24 text-center">Status</div>
+<div class="w-24 text-center">Priority</div>
+<div class="w-24 text-right">Age</div>
+</div>
+<!-- Ticket Row 1 (High Priority) -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 p-stack-sm border-b border-outline-variant/30 hover:bg-surface-variant/30 transition-colors px-stack-md cursor-pointer group">
+<div class="w-16 font-data-mono text-data-mono text-on-surface-variant flex items-center group-hover:text-primary transition-colors">#8942</div>
+<div class="flex flex-col justify-center">
+<span class="font-medium text-on-surface truncate">Unable to provision new nodes in eu-central</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="corporate_fare">corporate_fare</span>
+                                     Stark Industries
+                                     <span class="px-1 bg-surface-variant rounded text-[10px] ml-1">Cloud Compute</span>
+</span>
+</div>
+<div class="w-24 flex items-center justify-center">
+<span class="px-2 py-0.5 rounded text-xs font-label-sm bg-error-container/20 text-error border border-error/30">OPEN</span>
+</div>
+<div class="w-24 flex items-center justify-center">
+<span class="text-error flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]" data-icon="keyboard_double_arrow_up">keyboard_double_arrow_up</span> P1</span>
+</div>
+<div class="w-24 flex items-center justify-end font-data-mono text-data-mono text-error">14m</div>
+</div>
+<!-- Ticket Row 2 -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 p-stack-sm border-b border-outline-variant/30 hover:bg-surface-variant/30 transition-colors px-stack-md cursor-pointer group">
+<div class="w-16 font-data-mono text-data-mono text-on-surface-variant flex items-center group-hover:text-primary transition-colors">#8941</div>
+<div class="flex flex-col justify-center">
+<span class="font-medium text-on-surface truncate">API Request limits exceeded error</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="corporate_fare">corporate_fare</span>
+                                     Wayne Enterprises
+                                     <span class="px-1 bg-surface-variant rounded text-[10px] ml-1">Billing</span>
+</span>
+</div>
+<div class="w-24 flex items-center justify-center">
+<span class="px-2 py-0.5 rounded text-xs font-label-sm bg-surface-bright text-on-surface border border-outline-variant">OPEN</span>
+</div>
+<div class="w-24 flex items-center justify-center">
+<span class="text-secondary-fixed flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]" data-icon="keyboard_arrow_up">keyboard_arrow_up</span> P2</span>
+</div>
+<div class="w-24 flex items-center justify-end font-data-mono text-data-mono text-on-surface-variant">42m</div>
+</div>
+<!-- Ticket Row 3 (In Progress) -->
+<div class="grid grid-cols-[auto_1fr_auto_auto_auto] gap-4 p-stack-sm border-b border-outline-variant/30 hover:bg-surface-variant/30 transition-colors px-stack-md bg-surface-variant/10 cursor-pointer group">
+<div class="w-16 font-data-mono text-data-mono text-on-surface-variant flex items-center group-hover:text-primary transition-colors">#8938</div>
+<div class="flex flex-col justify-center">
+<span class="font-medium text-on-surface truncate">Data export job failing quietly</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="corporate_fare">corporate_fare</span>
+                                     Acme Corp
+                                     <span class="px-1 bg-surface-variant rounded text-[10px] ml-1">Data Pipeline</span>
+</span>
+</div>
+<div class="w-24 flex items-center justify-center">
+<span class="px-2 py-0.5 rounded text-xs font-label-sm bg-primary-container/20 text-primary-fixed border border-primary/30 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed animate-pulse"></span>
+                                     IN_PROG
+                                 </span>
+</div>
+<div class="w-24 flex items-center justify-center">
+<span class="text-secondary-fixed flex items-center gap-1 text-sm"><span class="material-symbols-outlined text-[16px]" data-icon="drag_handle">drag_handle</span> P3</span>
+</div>
+<div class="w-24 flex items-center justify-end font-data-mono text-data-mono text-on-surface-variant">2h 14m</div>
+</div>
+</div>
+</div>
+<!-- AI Support Assistant (Right Pane - 1/3) -->
+<div class="w-full lg:w-96 bg-surface-container-high border border-outline-variant rounded-xl flex flex-col overflow-hidden relative">
+<!-- Glassmorphism Header -->
+<div class="p-stack-md border-b border-outline-variant/50 bg-surface-container-high/80 backdrop-blur-md sticky top-0 z-20 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[18px]" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-base text-on-surface">Knowledge Fabric AI</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+<!-- AI Content Area -->
+<div class="flex-1 p-stack-md overflow-y-auto flex flex-col gap-stack-md relative z-10">
+<!-- Context Awareness -->
+<div class="bg-surface-container p-3 rounded-lg border border-outline-variant/50 text-sm">
+<span class="text-xs text-on-surface-variant uppercase tracking-wide font-label-sm mb-1 block">Context Detected</span>
+                            Viewing <span class="text-primary-fixed font-data-mono">#8942</span>: Provisioning failure in eu-central.
+                        </div>
+<!-- Suggested Response -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-on-surface font-medium text-sm">
+<span class="material-symbols-outlined text-tertiary-fixed text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+                                 Suggested Draft
+                             </div>
+<div class="bg-surface-variant/50 border border-outline-variant/50 rounded-lg p-3 text-sm text-on-surface leading-relaxed">
+                                 Hello [Name],<br/><br/>We are currently investigating an issue preventing new node provisioning in the <code class="bg-surface-container px-1 rounded text-primary-fixed text-xs font-data-mono">eu-central</code> region. This appears to be related to an active internal incident (SEV-2). <br/><br/>We will provide an update within 15 minutes.
+                             </div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary-container text-on-primary-container font-label-sm text-label-sm py-1.5 rounded flex justify-center items-center gap-1 hover:bg-opacity-90">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span> Copy
+                                 </button>
+<button class="flex-1 bg-surface-variant text-on-surface border border-outline-variant font-label-sm text-label-sm py-1.5 rounded flex justify-center items-center gap-1 hover:bg-surface-bright">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span> Edit
+                                 </button>
+</div>
+</div>
+<!-- Citations -->
+<div class="mt-4">
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide mb-2">Citations &amp; Resources</h4>
+<ul class="flex flex-col gap-2">
+<li class="bg-surface-container border border-outline-variant/30 rounded p-2 flex items-center gap-2 cursor-pointer hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]" data-icon="description">description</span>
+<span class="text-xs text-on-surface truncate flex-1">Runbook: Region Capacity Exhaustion</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[14px]" data-icon="open_in_new">open_in_new</span>
+</li>
+<li class="bg-surface-container border border-outline-variant/30 rounded p-2 flex items-center gap-2 cursor-pointer hover:bg-surface-variant/50 transition-colors">
+<span class="material-symbols-outlined text-error text-[16px]" data-icon="warning">warning</span>
+<span class="text-xs text-on-surface truncate flex-1">Active Incident: API Gateway Latency</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Decorative Background Elements -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-0 pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

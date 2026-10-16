@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proposal Management Dashboard - UdehLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "outline": "#99907c",
+                        "secondary-container": "#006b75",
+                        "on-surface-variant": "#d0c5af",
+                        "estimate-slate": "#94A3B8",
+                        "outline-variant": "#4d4635",
+                        "on-primary": "#3c2f00",
+                        "tertiary": "#c0d0e6",
+                        "surface-container": "#18202b",
+                        "on-secondary": "#00363c",
+                        "approval-gold": "#D4AF37",
+                        "secondary-fixed-dim": "#82d3de",
+                        "on-background": "#dbe3f1",
+                        "surface-container-high": "#232b35",
+                        "primary-container": "#d4af37",
+                        "surface-card": "#121C29",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#241a00",
+                        "surface-variant": "#2d3540",
+                        "on-tertiary": "#233143",
+                        "surface": "#0c141e",
+                        "on-secondary-fixed": "#001f23",
+                        "status-caution": "#F59E0B",
+                        "contract-teal": "#006D77",
+                        "border-subtle": "#1E293B",
+                        "inverse-primary": "#735c00",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "surface-container-highest": "#2d3540",
+                        "secondary-fixed": "#9ff0fb",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "inverse-on-surface": "#29313c",
+                        "primary-fixed-dim": "#e9c349",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "on-tertiary-container": "#384658",
+                        "primary": "#f2ca50",
+                        "primary-fixed": "#ffe088",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-dim": "#0c141e",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#141c26",
+                        "background": "#0c141e",
+                        "surface-tint": "#e9c349",
+                        "surface-bright": "#323a45",
+                        "tertiary-container": "#a5b4ca",
+                        "surface-container-lowest": "#070f18",
+                        "tertiary-fixed": "#d4e4fa",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#98e9f4",
+                        "on-primary-container": "#554300",
+                        "inverse-surface": "#dbe3f1",
+                        "on-tertiary-fixed": "#0d1c2d",
+                        "on-surface": "#dbe3f1",
+                        "secondary": "#82d3de",
+                        "status-positive": "#10B981"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "component-gap-sm": "8px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "section-padding": "48px",
+                        "gutter": "24px",
+                        "component-gap-md": "16px"
+                    },
+                    "fontFamily": {
+                        "data-mono-sm": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono-lg": ["JetBrains Mono"],
+                        "summary-title": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-mono-sm": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "summary-title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .ambient-shadow { box-shadow: 0 0 20px rgba(0, 0, 0, 0.25); }
+        .diagonal-stripe-bg { background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.05) 10px, rgba(212, 175, 55, 0.05) 20px); }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant flex justify-between items-center w-full px-margin h-16 shrink-0 sticky top-0 z-50">
+<div class="flex items-center gap-margin">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary tracking-tight">UdehLabs Commercial</div>
+<div class="hidden md:flex gap-6">
+<a class="text-primary dark:text-primary border-b-2 border-primary pb-1 font-label-caps text-label-caps uppercase transition-colors scale-95 active:opacity-80" href="#">Pipeline</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 font-label-caps text-label-caps uppercase" href="#">Negotiations</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 font-label-caps text-label-caps uppercase" href="#">Approvals</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors scale-95 active:opacity-80 font-label-caps text-label-caps uppercase" href="#">Archives</a>
+</div>
+</div>
+<div class="flex items-center gap-component-gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<img alt="User profile switcher" class="w-8 h-8 rounded-full border border-border-subtle object-cover" data-alt="A small circular profile image of a professional corporate executive wearing a dark suit against a neutral background. The lighting is soft and studio-quality, conveying authority and competence. The color palette is muted and sophisticated, matching a corporate modern dark theme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl1-J6xgPK0M2Qgbr20PEk1r6-9O3d2Wf_4_zyJRWYblJaO78x7MvhfcJRmMLR_zDdMRq68PdyOkacIOzwiw8mdTm77xIFmW4X4wCB6r-7Iw7oKUsHSY-hfS4pOGNCKdwVI8r-bEPIQTWz7FuAo-boFqmK60drsEE5b6cqnK-rpxp7gxvxggDpVC5oeER6dZ-X8cBvV6FcrmEsrUeS6byUGFKmB75dOQ4QSckSpqjjwVf50elMciGXRA"/>
+</div>
+</nav>
+<!-- Main Dashboard Content -->
+<main class="flex-1 flex flex-col md:flex-row gap-gutter p-margin overflow-hidden">
+<!-- Left/Main Column -->
+<div class="flex-1 flex flex-col gap-gutter overflow-y-auto pr-2">
+<!-- KPI Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<div class="bg-surface-card border border-border-subtle rounded ambient-shadow p-4 relative overflow-hidden group hover:border-primary-container transition-colors">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Active Proposals</div>
+<div class="font-data-mono-lg text-3xl font-bold text-on-surface">14</div>
+<div class="absolute top-4 right-4 text-primary opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">description</span>
+</div>
+</div>
+<div class="bg-surface-card border border-border-subtle rounded ambient-shadow p-4 relative overflow-hidden group hover:border-primary-container transition-colors">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Avg. Negotiation Cycle</div>
+<div class="font-data-mono-lg text-3xl font-bold text-on-surface">8<span class="text-data-mono-sm text-on-surface-variant ml-1">days</span></div>
+<div class="absolute top-4 right-4 text-contract-teal opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">timer</span>
+</div>
+</div>
+<div class="bg-surface-card border border-border-subtle rounded ambient-shadow p-4 relative overflow-hidden group hover:border-primary-container transition-colors">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Pipeline Value</div>
+<div class="font-data-mono-lg text-3xl font-bold text-primary-fixed-dim">$4.2M</div>
+<div class="absolute top-4 right-4 text-approval-gold opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+</div>
+<div class="bg-surface-card border border-border-subtle rounded ambient-shadow p-4 relative overflow-hidden group hover:border-primary-container transition-colors">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Conversion Rate</div>
+<div class="font-data-mono-lg text-3xl font-bold text-status-positive">68%</div>
+<div class="absolute top-4 right-4 text-status-positive opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+</div>
+</section>
+<!-- Filter Bar -->
+<section class="bg-surface-container-high border border-border-subtle p-3 rounded flex flex-wrap gap-4 items-center ambient-shadow">
+<div class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">filter_list</span> Filters
+                </div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<select class="bg-surface border-border-subtle text-data-mono-sm text-on-surface rounded focus:ring-approval-gold focus:border-approval-gold py-1 pl-2 pr-8">
+<option>Status: All</option>
+<option>Draft</option>
+<option>Internal Review</option>
+<option>Sent to Client</option>
+</select>
+<select class="bg-surface border-border-subtle text-data-mono-sm text-on-surface rounded focus:ring-approval-gold focus:border-approval-gold py-1 pl-2 pr-8">
+<option>Client: All</option>
+<option>Acme Corp</option>
+<option>Globex</option>
+</select>
+<select class="bg-surface border-border-subtle text-data-mono-sm text-on-surface rounded focus:ring-approval-gold focus:border-approval-gold py-1 pl-2 pr-8">
+<option>Value: Any</option>
+<option>&gt; $1M</option>
+<option>&lt; $1M</option>
+</select>
+<div class="flex-1"></div>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]">search</span>
+<input class="bg-surface border-border-subtle text-data-mono-sm text-on-surface rounded focus:ring-approval-gold focus:border-approval-gold py-1 pl-8 pr-2 w-48" placeholder="Search ID..." type="text"/>
+</div>
+</section>
+<!-- Data Table -->
+<section class="bg-surface-card border border-border-subtle rounded ambient-shadow flex-1 overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-subtle text-label-caps font-label-caps text-on-surface-variant">
+<th class="py-3 px-4 uppercase font-semibold">Proposal ID</th>
+<th class="py-3 px-4 uppercase font-semibold">Client Org</th>
+<th class="py-3 px-4 uppercase font-semibold">Status</th>
+<th class="py-3 px-4 uppercase font-semibold">Last Activity</th>
+<th class="py-3 px-4 uppercase font-semibold text-right">Value</th>
+<th class="py-3 px-4 uppercase font-semibold">Owner</th>
+</tr>
+</thead>
+<tbody class="font-data-mono-sm text-on-surface divide-y divide-border-subtle">
+<tr class="hover:bg-surface-variant transition-colors group cursor-pointer">
+<td class="py-3 px-4 font-bold text-approval-gold">PR-9928-X</td>
+<td class="py-3 px-4 text-on-background font-body-md">Acme Corporation</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-caution/15 text-status-caution border border-status-caution/30 text-[10px] uppercase tracking-wider">Internal Approval</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant text-xs">2 hours ago</td>
+<td class="py-3 px-4 text-right">$1,250,000</td>
+<td class="py-3 px-4 font-body-md text-sm">Sarah Jenkins</td>
+</tr>
+<tr class="hover:bg-surface-variant transition-colors group cursor-pointer">
+<td class="py-3 px-4 font-bold text-approval-gold">PR-8821-Y</td>
+<td class="py-3 px-4 text-on-background font-body-md">Globex Dynamics</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error/15 text-error border border-error/30 text-[10px] uppercase tracking-wider">Client Revision</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant text-xs">1 day ago</td>
+<td class="py-3 px-4 text-right">$850,000</td>
+<td class="py-3 px-4 font-body-md text-sm">Marcus Chen</td>
+</tr>
+<tr class="hover:bg-surface-variant transition-colors group cursor-pointer">
+<td class="py-3 px-4 font-bold text-approval-gold">PR-7734-Z</td>
+<td class="py-3 px-4 text-on-background font-body-md">Initech Solutions</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-contract-teal/15 text-contract-teal border border-contract-teal/30 text-[10px] uppercase tracking-wider">Drafting</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant text-xs">3 days ago</td>
+<td class="py-3 px-4 text-right">$2,100,000</td>
+<td class="py-3 px-4 font-body-md text-sm">Elena Rostova</td>
+</tr>
+<tr class="hover:bg-surface-variant transition-colors group cursor-pointer">
+<td class="py-3 px-4 font-bold text-approval-gold">PR-9012-A</td>
+<td class="py-3 px-4 text-on-background font-body-md">Soylent Corp</td>
+<td class="py-3 px-4">
+<span class="inline-flex items-center px-2 py-1 rounded bg-status-positive/15 text-status-positive border border-status-positive/30 text-[10px] uppercase tracking-wider">Sent to Client</span>
+</td>
+<td class="py-3 px-4 text-on-surface-variant text-xs">4 days ago</td>
+<td class="py-3 px-4 text-right">$450,000</td>
+<td class="py-3 px-4 font-body-md text-sm">Sarah Jenkins</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Side Panel (Urgent Actions) -->
+<aside class="w-full md:w-80 flex flex-col gap-component-gap-md shrink-0">
+<div class="bg-surface-container border border-error/50 rounded ambient-shadow p-4 flex flex-col h-full">
+<div class="flex items-center gap-2 border-b border-border-subtle pb-3 mb-4">
+<span class="material-symbols-outlined text-error">warning</span>
+<h2 class="font-summary-title text-summary-title text-on-surface tracking-tight">Urgent Actions</h2>
+<div class="ml-auto bg-error text-on-error font-data-mono-sm text-[10px] px-2 py-0.5 rounded-full">2</div>
+</div>
+<div class="flex flex-col gap-3 overflow-y-auto pr-1">
+<!-- Action Card 1 -->
+<div class="bg-surface-card border border-approval-gold/50 rounded p-3 relative group diagonal-stripe-bg">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono-sm text-approval-gold text-xs font-bold">PR-9928-X</span>
+<span class="text-[10px] text-on-surface-variant font-label-caps uppercase">2h ago</span>
+</div>
+<p class="font-body-md text-sm text-on-surface mb-3 leading-snug">Requires <span class="font-semibold text-primary">Internal Approval</span> before dispatch to Acme Corporation.</p>
+<div class="flex gap-2">
+<button class="bg-approval-gold text-on-primary font-label-caps text-[10px] uppercase px-3 py-1.5 rounded hover:brightness-110 transition-all flex-1 text-center font-bold">Review</button>
+<button class="border border-estimate-slate text-estimate-slate font-label-caps text-[10px] uppercase px-3 py-1.5 rounded hover:bg-surface-variant transition-all text-center">Decline</button>
+</div>
+</div>
+<!-- Action Card 2 -->
+<div class="bg-surface-card border border-error/30 rounded p-3 relative group">
+<div class="flex justify-between items-start mb-2">
+<span class="font-data-mono-sm text-error text-xs font-bold">PR-8821-Y</span>
+<span class="text-[10px] text-on-surface-variant font-label-caps uppercase">1d ago</span>
+</div>
+<p class="font-body-md text-sm text-on-surface mb-3 leading-snug">Globex Dynamics requested commercial revisions on payment terms.</p>
+<button class="w-full bg-surface-container-high border border-error text-error font-label-caps text-[10px] uppercase px-3 py-1.5 rounded hover:bg-error/10 transition-all text-center font-bold">Open Hub</button>
+</div>
+</div>
+</div>
+</aside>
+</main>
+</body></html>

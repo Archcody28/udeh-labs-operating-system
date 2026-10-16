@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Project Kickoff &amp; Scope Baseline - Cyber-Fleet Command</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-error": "#690005",
+                    "on-tertiary-container": "#005f40",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-primary-container": "#455466",
+                    "on-secondary-container": "#c9aeff",
+                    "primary": "#d5e4fb",
+                    "surface-container-highest": "#2d3541",
+                    "status-risk": "#f59e0b",
+                    "on-secondary-fixed": "#25005a",
+                    "execution-violet": "#7c3aed",
+                    "on-surface-variant": "#c4c6cd",
+                    "inverse-primary": "#516072",
+                    "surface-bright": "#323a45",
+                    "surface-dim": "#0c141e",
+                    "terminal-black": "#091017",
+                    "on-primary": "#233143",
+                    "error-container": "#93000a",
+                    "tertiary": "#70fcbe",
+                    "data-blue": "#1C85E8",
+                    "on-secondary": "#3f008e",
+                    "on-tertiary": "#003824",
+                    "outline": "#8e9197",
+                    "background": "#0c141e",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "surface-container": "#18202b",
+                    "surface-container-lowest": "#070f19",
+                    "status-success": "#10b981",
+                    "surface-card": "#0d1b2a",
+                    "primary-container": "#b9c8de",
+                    "inverse-on-surface": "#29313c",
+                    "on-error-container": "#ffdad6",
+                    "secondary": "#d2bbff",
+                    "border-muted": "#1e293b",
+                    "surface-container-low": "#141c27",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "status-critical": "#ef4444",
+                    "on-tertiary-fixed": "#002113",
+                    "on-primary-fixed": "#0d1c2d",
+                    "surface-variant": "#2d3541",
+                    "surface-tint": "#b9c8de",
+                    "primary-fixed": "#d5e4fa",
+                    "secondary-container": "#6001d1",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-container-high": "#232a36",
+                    "on-primary-fixed-variant": "#39485a",
+                    "on-surface": "#dbe3f2",
+                    "surface": "#0c141e",
+                    "tertiary-container": "#4fdfa4",
+                    "primary-fixed-dim": "#b9c8de",
+                    "outline-variant": "#44474c",
+                    "on-background": "#dbe3f2",
+                    "secondary-fixed": "#eaddff",
+                    "inverse-surface": "#dbe3f2",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "sidebar_width": "260px",
+                    "gutter": "16px",
+                    "density-compact": "8px",
+                    "base": "4px",
+                    "container-margin": "24px",
+                    "density-comfortable": "16px"
+            },
+            "fontFamily": {
+                    "data-mono": [
+                            "JetBrains Mono"
+                    ],
+                    "label-caps": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "display-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-sm": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "data-mono": [
+                            "13px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "label-caps": [
+                            "11px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.08em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-sm": [
+                            "18px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "18px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Pulse Animation for Status Indicators */
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--pulse-color), 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(var(--pulse-color), 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(var(--pulse-color), 0); }
+        }
+        .animate-pulse-dot {
+            animation: pulse-dot 2s infinite;
+        }
+
+        /* Custom Scrollbar for terminal vibe */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-dim'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.outline-variant'); 
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline'); 
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-hidden flex h-screen w-full">
+<!-- ==================== SIDE NAVIGATION (From JSON) ==================== -->
+<nav aria-label="Sidebar Navigation" class="hidden md:flex flex-col bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant dark:border-outline-variant w-sidebar_width h-full flex-shrink-0 z-40 relative py-md">
+<!-- Header -->
+<div class="px-gutter mb-container-margin mt-density-comfortable flex items-center gap-density-comfortable">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-container-high flex items-center justify-center border border-border-muted flex-shrink-0">
+<span class="material-symbols-outlined text-primary text-[24px]">hexagon</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Infrastructure</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Global Observability</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex-1 overflow-y-auto px-density-compact space-y-base">
+<!-- Inactive Tab -->
+<a class="flex items-center gap-density-comfortable px-density-comfortable py-density-compact rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<!-- Active Tab (Semantic Match for "Kickoff/New Project") -->
+<a class="flex items-center gap-density-comfortable px-density-comfortable py-density-compact rounded-DEFAULT text-primary font-bold border-l-2 border-primary bg-secondary-container/10 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+<span class="font-label-caps text-label-caps">Deployments</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-density-comfortable px-density-comfortable py-density-compact rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">account_tree</span>
+<span class="font-label-caps text-label-caps">Infrastructure</span>
+</a>
+<a class="flex items-center gap-density-comfortable px-density-comfortable py-density-compact rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">security</span>
+<span class="font-label-caps text-label-caps">Security</span>
+</a>
+<a class="flex items-center gap-density-comfortable px-density-comfortable py-density-compact rounded-DEFAULT text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">analytics</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+</div>
+<!-- Footer / Action -->
+<div class="px-gutter mt-auto pt-container-margin border-t border-border-muted space-y-density-compact pb-density-comfortable">
+<button class="w-full flex items-center justify-center gap-2 bg-execution-violet text-white font-label-caps text-label-caps py-2 px-4 rounded-DEFAULT hover:bg-execution-violet/90 transition-colors shadow-none mb-4">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Deployment
+            </button>
+<a class="flex items-center gap-density-comfortable px-density-compact py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span class="font-label-caps text-label-caps">Documentation</span>
+</a>
+<a class="flex items-center gap-density-comfortable px-density-compact py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</nav>
+<!-- ==================== MAIN CANVAS ==================== -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background relative">
+<!-- TopAppBar (From JSON) -->
+<header class="bg-surface dark:bg-surface font-body-md text-body-md docked full-width top-0 border-b border-outline-variant dark:border-outline-variant shadow-none flex justify-between items-center px-lg h-16 w-full z-50 px-gutter flex-shrink-0">
+<!-- Left: Mobile Menu Trigger & Context Context -->
+<div class="flex items-center gap-density-comfortable">
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="hidden sm:flex items-center gap-2 text-on-surface-variant font-data-mono text-data-mono">
+<span class="text-primary font-bold">UdehLabs Infrastructure</span>
+<span class="text-outline-variant">/</span>
+<span>Project: Nexus</span>
+</div>
+</div>
+<!-- Center: Search (on_left in JSON, but moving slightly center-left for balance in wide view) -->
+<div class="flex-1 max-w-md mx-container-margin hidden lg:block">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-execution-violet transition-colors">search</span>
+<input class="w-full bg-surface-container border border-border-muted rounded-DEFAULT py-1.5 pl-10 pr-4 text-data-mono font-data-mono text-on-surface placeholder-on-surface-variant focus:outline-none focus:border-execution-violet focus:ring-1 focus:ring-execution-violet transition-all" placeholder="Search resources, logs, or metrics..." type="text"/>
+</div>
+</div>
+<!-- Right: Navigation Links & Actions -->
+<div class="flex items-center gap-container-margin">
+<!-- Nav Links -->
+<nav class="hidden xl:flex items-center gap-gutter">
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Network Map</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Architecture</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Logs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Metrics</a>
+</nav>
+<div class="h-6 w-px bg-border-muted hidden xl:block"></div>
+<!-- Environment Actions -->
+<div class="flex items-center gap-density-compact">
+<button class="px-3 py-1 rounded-DEFAULT border border-border-muted text-on-surface-variant hover:text-primary hover:border-outline-variant transition-colors text-data-mono font-data-mono bg-surface-container-lowest">Staging</button>
+<button class="px-3 py-1 rounded-DEFAULT bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 transition-colors text-data-mono font-data-mono">Production</button>
+</div>
+<!-- Icon Actions -->
+<div class="flex items-center gap-density-compact text-on-surface-variant">
+<button class="p-1.5 rounded-full hover:bg-surface-container hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-execution-violet animate-pulse-dot" style="--pulse-color: 124, 58, 237"></span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<!-- Profile -->
+<div class="w-8 h-8 rounded-full border border-border-muted overflow-hidden shrink-0">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvXTcQ4CHHYK021DcmXa_K2oYpjXFIVeov-BuidAdAZYTDev45HHlOenA8i_libgb1PPhVAdeQol5pafkMf2sZNlVO5VecAXtE6BiUrrglKDNmZTz2Zhrqcbi37PCx_Mc9nJUF74vF32ZP31A3pYUWxjmKKX8i078JlpFQjrXdSsBY2hiSWCG0h0M_LhS5Asx7eSfxuoqpaders6drXrbvotdje04YDQUuLRpGnTRrhTHX3J09jSH8yw"/>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-container-margin relative">
+<!-- Page Header: Status Transition -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-container-margin border-b border-border-muted pb-density-comfortable">
+<div>
+<div class="flex items-center gap-density-compact mb-2">
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded-sm bg-status-success/10 text-status-success border border-status-success/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> COMMERCIAL AUTHORIZED
+                        </span>
+<span class="material-symbols-outlined text-outline-variant text-[16px]">arrow_forward</span>
+<span class="font-label-caps text-label-caps px-2 py-0.5 rounded-sm bg-execution-violet/10 text-execution-violet border border-execution-violet/30 flex items-center gap-1 relative">
+<span class="w-1.5 h-1.5 rounded-full bg-execution-violet animate-pulse-dot inline-block" style="--pulse-color: 124, 58, 237"></span>
+                            ACTIVE KICKOFF PREP
+                        </span>
+</div>
+<h2 class="font-display-lg text-display-lg text-on-surface">Project <span class="text-primary">Nexus-Alpha</span></h2>
+<p class="font-body-md text-on-surface-variant mt-1 max-w-2xl">Transitioning commercial baseline into engineering execution parameters. Awaiting Kickoff verification.</p>
+</div>
+<div class="mt-4 md:mt-0 flex gap-density-comfortable">
+<button class="px-4 py-2 bg-surface-container border border-border-muted text-on-surface font-label-caps text-label-caps rounded-DEFAULT hover:border-outline-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">history</span> History
+                    </button>
+<button class="px-4 py-2 bg-execution-violet text-white font-label-caps text-label-caps rounded-DEFAULT hover:bg-execution-violet/90 transition-colors shadow-none flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span> Initiate Execution
+                    </button>
+</div>
+</div>
+<!-- BENTO GRID LAYOUT -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-container-margin">
+<!-- LEFT COLUMN: The Baseline & Checklist (8 cols) -->
+<div class="xl:col-span-8 flex flex-col gap-container-margin">
+<!-- SCOPE BASELINE (Immutable) -->
+<section class="bg-surface-card rounded-xl border border-border-muted overflow-hidden relative">
+<!-- Accent Bar -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary/50"></div>
+<div class="p-density-comfortable border-b border-border-muted bg-surface-container-lowest/50 flex justify-between items-center pl-container-margin">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+                                Scope Baseline
+                            </h3>
+<span class="font-data-mono text-data-mono text-outline-variant text-[11px]">ID: NXS-SOW-0922</span>
+</div>
+<div class="p-container-margin grid grid-cols-1 md:grid-cols-2 gap-container-margin">
+<!-- Deliverables -->
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-density-comfortable">Core Deliverables</h4>
+<ul class="space-y-density-compact">
+<li class="flex items-start gap-3 p-2 rounded-DEFAULT bg-surface-container-lowest border border-border-muted/50">
+<span class="material-symbols-outlined text-status-success text-[18px] mt-0.5">verified</span>
+<div>
+<p class="font-body-md text-on-surface font-medium">Distributed Auth Microservice</p>
+<p class="font-body-sm text-on-surface-variant">OAuth2.0 &amp; OIDC compliant auth layer.</p>
+</div>
+</li>
+<li class="flex items-start gap-3 p-2 rounded-DEFAULT bg-surface-container-lowest border border-border-muted/50">
+<span class="material-symbols-outlined text-status-success text-[18px] mt-0.5">verified</span>
+<div>
+<p class="font-body-md text-on-surface font-medium">Real-time Telemetry Pipeline</p>
+<p class="font-body-sm text-on-surface-variant">Kafka-based event streaming architecture.</p>
+</div>
+</li>
+<li class="flex items-start gap-3 p-2 rounded-DEFAULT bg-surface-container-lowest border border-border-muted/50">
+<span class="material-symbols-outlined text-status-success text-[18px] mt-0.5">verified</span>
+<div>
+<p class="font-body-md text-on-surface font-medium">Admin Management Dashboard</p>
+<p class="font-body-sm text-on-surface-variant">React-based internal tool for user management.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- Milestones / Timeline -->
+<div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-density-comfortable">Contractual Milestones</h4>
+<div class="relative border-l border-border-muted ml-3 space-y-4 py-2">
+<!-- Milestone 1 -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-execution-violet rounded-full -left-[6px] top-1.5 ring-4 ring-surface-card"></div>
+<p class="font-data-mono text-data-mono text-execution-violet text-[11px] mb-1">M1: T+30 Days</p>
+<p class="font-body-md text-on-surface">Architecture Sign-off &amp; Environment Prov.</p>
+</div>
+<!-- Milestone 2 -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-surface-container-highest border-2 border-outline-variant rounded-full -left-[6px] top-1.5 ring-4 ring-surface-card"></div>
+<p class="font-data-mono text-data-mono text-outline-variant text-[11px] mb-1">M2: T+90 Days</p>
+<p class="font-body-md text-on-surface-variant">Auth Service Beta Release</p>
+</div>
+<!-- Milestone 3 -->
+<div class="relative pl-6">
+<div class="absolute w-3 h-3 bg-surface-container-highest border-2 border-outline-variant rounded-full -left-[6px] top-1.5 ring-4 ring-surface-card"></div>
+<p class="font-data-mono text-data-mono text-outline-variant text-[11px] mb-1">M3: T+150 Days</p>
+<p class="font-body-md text-on-surface-variant">Final UAT &amp; Handover</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Tech Requirements Log-style block -->
+<div class="bg-terminal-black border-t border-border-muted p-density-comfortable">
+<h4 class="font-label-caps text-label-caps text-outline-variant mb-2 pl-2">INFRA REQUIREMENTS BINDING</h4>
+<div class="font-data-mono text-data-mono text-[12px] space-y-1">
+<div class="flex gap-4 hover:bg-surface-dim px-2 py-0.5 rounded"><span class="text-data-blue w-24">CLOUD_PRV:</span> <span class="text-on-surface">AWS (us-east-1, eu-central-1)</span></div>
+<div class="flex gap-4 hover:bg-surface-dim px-2 py-0.5 rounded"><span class="text-data-blue w-24">COMPUTE:</span> <span class="text-on-surface">EKS Cluster (v1.28+), EC2 m5.large base</span></div>
+<div class="flex gap-4 hover:bg-surface-dim px-2 py-0.5 rounded"><span class="text-data-blue w-24">COMPLIANCE:</span> <span class="text-status-risk">SOC2 Type II Mandated Logging</span></div>
+<div class="flex gap-4 hover:bg-surface-dim px-2 py-0.5 rounded"><span class="text-data-blue w-24">SLA_TIER:</span> <span class="text-on-surface">Tier 1 (99.99% Uptime Req)</span></div>
+</div>
+</div>
+</section>
+<!-- ENGINEERING READINESS CHECKLIST -->
+<section class="bg-surface-card rounded-xl border border-border-muted overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk/50"></div>
+<div class="p-density-comfortable border-b border-border-muted bg-surface-container-lowest/50 pl-container-margin flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">rule</span>
+                                Kickoff Readiness Checklist
+                            </h3>
+<span class="font-data-mono text-data-mono text-execution-violet bg-execution-violet/10 px-2 py-0.5 rounded">2/4 COMPLETED</span>
+</div>
+<div class="p-density-comfortable">
+<div class="space-y-2">
+<!-- Checked Item -->
+<label class="flex items-start gap-density-comfortable p-density-comfortable rounded-lg border border-border-muted bg-surface-container/30 cursor-pointer hover:border-outline-variant transition-colors group">
+<div class="relative flex items-start pt-0.5">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="w-5 h-5 rounded border-2 border-status-success bg-status-success/20 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[16px] text-status-success font-bold">check</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface font-medium line-through opacity-70">Initialize Code Repositories</p>
+<p class="font-body-sm text-on-surface-variant mt-1">GitLab repos created (frontend, backend, infra-as-code) with standard branching policies.</p>
+</div>
+</label>
+<!-- Checked Item -->
+<label class="flex items-start gap-density-comfortable p-density-comfortable rounded-lg border border-border-muted bg-surface-container/30 cursor-pointer hover:border-outline-variant transition-colors group">
+<div class="relative flex items-start pt-0.5">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="w-5 h-5 rounded border-2 border-status-success bg-status-success/20 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[16px] text-status-success font-bold">check</span>
+</div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface font-medium line-through opacity-70">Provision Internal Comms Channels</p>
+<p class="font-body-sm text-on-surface-variant mt-1">Slack channels #proj-nexus-eng and #proj-nexus-client generated. Team added.</p>
+</div>
+</label>
+<!-- Unchecked Item (Active/Next) -->
+<label class="flex items-start gap-density-comfortable p-density-comfortable rounded-lg border border-execution-violet/50 bg-execution-violet/5 cursor-pointer hover:border-execution-violet transition-colors group">
+<div class="relative flex items-start pt-0.5">
+<input class="peer sr-only" type="checkbox"/>
+<div class="w-5 h-5 rounded border-2 border-outline-variant group-hover:border-execution-violet flex items-center justify-center transition-colors">
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<p class="font-body-md text-on-surface font-medium group-hover:text-execution-violet transition-colors">Client Onboarding Artifacts Sent</p>
+<span class="font-label-caps text-label-caps text-status-risk bg-status-risk/10 px-2 py-0.5 rounded">PENDING</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mt-1">Send access guides, Jira invites, and technical contact matrix to client stakeholders.</p>
+<div class="mt-3 flex gap-2">
+<button class="px-3 py-1 bg-surface border border-border-muted text-on-surface-variant hover:text-on-surface font-data-mono text-[11px] rounded transition-colors flex items-center gap-1" type="button"><span class="material-symbols-outlined text-[14px]">mail</span> Generate Draft</button>
+</div>
+</div>
+</label>
+<!-- Unchecked Item -->
+<label class="flex items-start gap-density-comfortable p-density-comfortable rounded-lg border border-border-muted bg-surface-container/30 cursor-pointer hover:border-outline-variant transition-colors group">
+<div class="relative flex items-start pt-0.5">
+<input class="peer sr-only" type="checkbox"/>
+<div class="w-5 h-5 rounded border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors">
+</div>
+</div>
+<div class="flex-1">
+<p class="font-body-md text-on-surface font-medium group-hover:text-primary transition-colors">Dev Environment Provisioning</p>
+<p class="font-body-sm text-on-surface-variant mt-1">Execute Terraform baseline for 'dev' environment cluster creation.</p>
+</div>
+</label>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN: Scheduler & Logs (4 cols) -->
+<div class="xl:col-span-4 flex flex-col gap-container-margin">
+<!-- KICKOFF SCHEDULER -->
+<section class="bg-surface-card rounded-xl border border-border-muted overflow-hidden flex flex-col h-full">
+<div class="p-density-comfortable border-b border-border-muted bg-surface-container-lowest/50">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary">calendar_month</span>
+                                Kickoff Scheduler
+                            </h3>
+</div>
+<div class="p-density-comfortable flex-1 flex flex-col">
+<!-- Date Time Pseudo-Picker -->
+<div class="mb-container-margin bg-surface-dim rounded-lg border border-border-muted p-3">
+<p class="font-label-caps text-label-caps text-outline-variant mb-2">PROPOSED TIME (CLIENT TZ: EST)</p>
+<div class="flex items-center justify-between bg-surface-container-high rounded p-2 border border-outline-variant/30">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px]">event</span>
+<span class="font-data-mono text-[13px]">Oct 12, 2023</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-data-mono text-[13px]">10:00 AM</span>
+</div>
+</div>
+<div class="mt-3 flex gap-2">
+<div class="flex -space-x-2">
+<img alt="Lead Engineer" class="w-6 h-6 rounded-full border border-surface-dim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzp_-UDryYM-DDUCobTDWYDyfniSKjzdazJ57-m5PqwgSFrNwcgU3Ifc-LMnXfc1ZLL51DBkxeW6Umo8d0KO2kYCOiy9XBkv101li38rjdAH6Qew3nBxqR4qsGwmsKJtYN-E_AE-oPY2yrjdkXyPiEgDeUYJtbo_AD2c0J17zN1fWD3blf0JJI3KlNYk7KtY6AAH_BmN3BJuBJ8p2wFDH-C7oztNxw9KVUQfzM5BJ-gdjZq_qZwhsdmA"/>
+<img alt="Project Manager" class="w-6 h-6 rounded-full border border-surface-dim" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3aglb3bFEteaQQazSTtNGfXa047aQgp9CFX7Bfe4BpNgitN0J3lYwu9N8rrz9QxdCxRaSZ6lgqICv2QAz11RTepEtgHF9XcQHjbjs5ipNEbOvSO5SPu_GWgCLzetZd_IklmEQjiu7KFOvfKMCTVsQxzSzDI5nrTbZQ-LYeQiWN9th6pgVM1TwBZQCNhY-OZEKRuQ6Bm5o_FyxNHfWd_d6bFWAnlbLSviMnTTyWEi1o-PPOsViu1y9PA"/>
+</div>
+<span class="text-body-sm text-on-surface-variant flex items-center">+ Client Stakeholders (3)</span>
+</div>
+</div>
+<!-- Pre-populated Agenda -->
+<div class="flex-1 mb-container-margin">
+<p class="font-label-caps text-label-caps text-outline-variant mb-2">AUTO-GENERATED AGENDA</p>
+<ul class="space-y-2 border-l-2 border-surface-container ml-2 pl-3">
+<li class="relative">
+<span class="absolute -left-[19px] top-1.5 w-2 h-2 rounded-full bg-outline-variant"></span>
+<p class="font-body-sm text-on-surface font-medium">1. Team Introductions &amp; Roles</p>
+</li>
+<li class="relative">
+<span class="absolute -left-[19px] top-1.5 w-2 h-2 rounded-full bg-primary"></span>
+<p class="font-body-sm text-on-surface font-medium">2. Review Scope Baseline</p>
+<p class="font-body-sm text-on-surface-variant text-[11px] mt-0.5">Focus: Out-of-scope clarification</p>
+</li>
+<li class="relative">
+<span class="absolute -left-[19px] top-1.5 w-2 h-2 rounded-full bg-outline-variant"></span>
+<p class="font-body-sm text-on-surface font-medium">3. Architecture Walkthrough</p>
+</li>
+<li class="relative">
+<span class="absolute -left-[19px] top-1.5 w-2 h-2 rounded-full bg-outline-variant"></span>
+<p class="font-body-sm text-on-surface font-medium">4. Communication Cadence (Agile rituals)</p>
+</li>
+<li class="relative">
+<span class="absolute -left-[19px] top-1.5 w-2 h-2 rounded-full bg-outline-variant"></span>
+<p class="font-body-sm text-on-surface font-medium">5. Immediate Next Steps / Unblockers</p>
+</li>
+</ul>
+<button class="mt-3 text-execution-violet font-label-caps text-label-caps hover:text-execution-violet/80 flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">edit</span> Edit Agenda
+                                </button>
+</div>
+<!-- CTA -->
+<button class="w-full mt-auto py-3 bg-execution-violet/10 border border-execution-violet/30 text-execution-violet font-label-caps text-label-caps rounded-DEFAULT hover:bg-execution-violet hover:text-white transition-all flex justify-center items-center gap-2 group">
+<span class="material-symbols-outlined text-[18px] group-hover:animate-pulse">send</span>
+                                Dispatch Invites &amp; Agenda
+                            </button>
+</div>
+</section>
+<!-- TERMINAL LOG (Flavor/Status) -->
+<section class="bg-terminal-black rounded-xl border border-border-muted overflow-hidden flex flex-col h-48">
+<div class="p-2 border-b border-border-muted/30 bg-surface-container-lowest/80 flex items-center justify-between">
+<span class="font-data-mono text-[11px] text-outline-variant">SYS.LOG // STATE_TRANSITION</span>
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-status-success"></div>
+<div class="w-2 h-2 rounded-full bg-execution-violet animate-pulse-dot" style="--pulse-color: 124, 58, 237"></div>
+</div>
+</div>
+<div class="p-3 font-data-mono text-[11px] text-on-surface-variant overflow-y-auto space-y-1 flex-1">
+<div class="opacity-50">[10:04:12] COMM_HANDOVER_SIG RECEIVED.</div>
+<div class="opacity-50">[10:04:14] PARSING SOW_0922... OK.</div>
+<div class="opacity-50">[10:04:15] EXTRACTING DELIVERABLES [3/3]... OK.</div>
+<div class="opacity-50">[10:04:18] GENERATING BASELINE LOCK... OK.</div>
+<div class="text-data-blue">[10:05:01] INFO: Awaiting Checklist Completion.</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="text-execution-violet">sys@nexus-ops:~$</span>
+<span class="w-1.5 h-3 bg-on-surface animate-pulse"></span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Bottom spacing -->
+<div class="h-container-margin"></div>
+</div>
+</main>
+</body></html>

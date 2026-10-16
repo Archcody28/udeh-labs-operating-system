@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Command - Security Posture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#232a36",
+                      "surface-tint": "#b9c8de",
+                      "tertiary": "#70fcbe",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-bright": "#323a45",
+                      "on-surface": "#dbe3f2",
+                      "surface-container-lowest": "#070f19",
+                      "inverse-primary": "#516072",
+                      "outline-variant": "#44474c",
+                      "on-surface-variant": "#c4c6cd",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "tertiary-container": "#4fdfa4",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary": "#d5e4fb",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-secondary-container": "#c9aeff",
+                      "status-risk": "#f59e0b",
+                      "on-secondary-fixed": "#25005a",
+                      "status-success": "#10b981",
+                      "surface-variant": "#2d3541",
+                      "on-primary": "#233143",
+                      "inverse-surface": "#dbe3f2",
+                      "background": "#0c141e",
+                      "status-critical": "#ef4444",
+                      "on-background": "#dbe3f2",
+                      "on-primary-container": "#455466",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-primary-fixed": "#0d1c2d",
+                      "on-tertiary": "#003824",
+                      "primary-fixed-dim": "#b9c8de",
+                      "secondary-fixed": "#eaddff",
+                      "surface-container-highest": "#2d3541",
+                      "secondary": "#d2bbff",
+                      "surface-container": "#18202b",
+                      "surface": "#0c141e",
+                      "border-muted": "#1e293b",
+                      "surface-dim": "#0c141e",
+                      "primary-fixed": "#d5e4fa",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#141c27",
+                      "outline": "#8e9197",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#29313c",
+                      "on-tertiary-fixed": "#002113",
+                      "on-error": "#690005",
+                      "terminal-black": "#091017",
+                      "execution-violet": "#7c3aed",
+                      "on-primary-fixed-variant": "#39485a",
+                      "error": "#ffb4ab",
+                      "data-blue": "#1C85E8",
+                      "secondary-container": "#6001d1",
+                      "primary-container": "#b9c8de",
+                      "on-secondary": "#3f008e",
+                      "on-tertiary-container": "#005f40",
+                      "surface-card": "#0d1b2a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "density-compact": "8px",
+                      "container-margin": "24px",
+                      "density-comfortable": "16px",
+                      "gutter": "16px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-caps": ["JetBrains Mono"],
+                      "display-lg": ["Hanken Grotesk"],
+                      "headline-sm": ["Hanken Grotesk"],
+                      "data-mono": ["JetBrains Mono"],
+                      "body-md": ["Hanken Grotesk"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "body-sm": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                      "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                      "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                      "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .pulse-dot {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .pulse-dot-risk {
+            animation: pulse-ring-risk 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring-risk {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen flex overflow-hidden font-body-md text-body-md selection:bg-execution-violet/30 selection:text-white">
+<!-- SideNavBar -->
+<nav class="docked left-0 h-full w-64 bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant flex flex-col py-density-comfortable shrink-0 z-20 hidden md:flex relative">
+<div class="px-4 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-border-muted relative group">
+<img class="w-full h-full object-cover" data-alt="A macro photography style extreme close-up of a high-tech glowing blue security optical sensor lens with geometric cybernetic patterns etched into the dark metal casing, soft volumetric lighting and deep dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATIuoHjvwlTwojnHiBqdPXBfyEbotbFqnkK7RbPqcoL7SKum3L-9ZP0i66H38dEEOTapwhUIjIJ61mos_678YOtMgKyPV5Pw6yclMIYYst6pKFclE67AgWrdzLeuGB98kwIAL9ZLv2WDnNgitMMELmb7eTmgO3ZFz8zkCiwCYN-7_mm0ZzcCHWBGB_uPDe8HrCzg5EHP5tlvdlTh45ENcj7n-pFPLtYfrg50FiF1PUDp9Y1ayFkCz8jg"/>
+</div>
+<div>
+<h2 class="font-label-caps text-label-caps text-surface-tint">SecOps Core</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Terminal Access: Level 5</p>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto space-y-1">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 bg-execution-violet/10 text-execution-violet border-r-4 border-execution-violet px-4 py-2 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield</span>
+<span class="font-data-mono text-data-mono">Security Posture</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 px-4 py-2 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">fingerprint</span>
+<span class="font-data-mono text-data-mono">Identity</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 px-4 py-2 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">psychology</span>
+<span class="font-data-mono text-data-mono">AI Security</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 px-4 py-2 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">key</span>
+<span class="font-data-mono text-data-mono">Secrets</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 px-4 py-2 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">history</span>
+<span class="font-data-mono text-data-mono">Audit</span>
+</a>
+</div>
+<div class="mt-auto pt-4 border-t border-border-muted space-y-1 px-4">
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 px-3 py-2 rounded-md transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-data-mono text-data-mono">Settings</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 px-3 py-2 rounded-md transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+<span class="font-data-mono text-data-mono">Support</span>
+</a>
+<button class="w-full mt-4 bg-execution-violet/10 border border-execution-violet/30 text-execution-violet hover:bg-execution-violet hover:text-white font-data-mono text-data-mono py-2 rounded transition-colors duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified</span> Approve Risk
+            </button>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col h-full overflow-hidden relative w-full">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 bg-surface-container-lowest border-b border-outline-variant flex justify-between items-center w-full px-container-margin h-16 shrink-0 z-10 flat no shadows">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-display-lg text-headline-md font-bold text-on-surface dark:text-on-surface tracking-tight">UdehLabs Command</h1>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-1.5 rounded-full scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-1.5 rounded-full scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">verified_user</span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/50 transition-colors p-1.5 rounded-full scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+<div class="h-6 w-px bg-border-muted hidden sm:block"></div>
+<div class="flex items-center gap-2 px-3 py-1 bg-execution-violet/5 border border-execution-violet/20 rounded-full hidden sm:flex">
+<div class="w-2 h-2 rounded-full bg-execution-violet pulse-dot"></div>
+<span class="text-execution-violet dark:text-execution-violet font-data-mono text-data-mono text-[12px] font-bold tracking-wider uppercase">MFA Active</span>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas (Scrollable) -->
+<main class="flex-1 overflow-y-auto p-container-margin relative z-0 scroll-smooth">
+<div class="max-w-[1600px] mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Widget 1: Security Posture Hero (Col Span 4) -->
+<div class="col-span-1 md:col-span-4 bg-surface-card border border-border-muted rounded-xl p-density-comfortable relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+<div class="absolute inset-0 bg-gradient-to-br from-execution-violet/10 to-transparent opacity-50 z-0 pointer-events-none"></div>
+<div class="relative z-10 flex justify-between items-start">
+<div>
+<h3 class="font-label-caps text-label-caps text-surface-tint mb-1">Global Posture</h3>
+<div class="flex items-center gap-2 text-status-success">
+<div class="w-2.5 h-2.5 rounded-full bg-status-success pulse-dot"></div>
+<span class="font-data-mono text-data-mono text-[12px] tracking-widest uppercase">System Healthy</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-execution-violet/40 text-3xl">public</span>
+</div>
+<div class="relative z-10 mt-6">
+<div class="flex items-baseline gap-1">
+<span class="font-display-lg text-display-lg font-bold tracking-tighter text-on-surface">98</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant">%</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-execution-violet h-full rounded-full w-[98%] shadow-[0_0_10px_rgba(124,58,237,0.5)]"></div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-3">+2% improvement since last audit</p>
+</div>
+</div>
+<!-- Widget 2: Identity Security (Col Span 8) -->
+<div class="col-span-1 md:col-span-8 bg-surface-card border border-border-muted rounded-xl p-density-comfortable relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+<div class="flex justify-between items-start mb-6">
+<h3 class="font-label-caps text-label-caps text-surface-tint flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">fingerprint</span> Identity Security
+                        </h3>
+<button class="font-data-mono text-data-mono text-[11px] text-data-blue hover:text-primary-fixed transition-colors flex items-center gap-1">
+                            View Logs <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter h-full">
+<div class="bg-surface-container-low border border-border-muted rounded-lg p-4 flex flex-col justify-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-2">MFA Enrollment</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-on-surface">99.9%</span>
+<span class="material-symbols-outlined text-status-success text-[16px]">trending_up</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-border-muted rounded-lg p-4 flex flex-col justify-center">
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-2">Active Sessions</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-data-blue">1,432</span>
+</div>
+</div>
+<div class="bg-surface-container-low border border-border-muted rounded-lg p-4 flex flex-col justify-center relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-2">Anomalous Logins</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md text-status-risk">3</span>
+<span class="font-data-mono text-data-mono text-[11px] text-status-risk bg-status-risk/10 px-1.5 py-0.5 rounded">Requires Review</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Widget 3: Active Incidents & Findings (Col Span 12) -->
+<div class="col-span-1 md:col-span-12 grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Incidents -->
+<div class="bg-surface-card border border-border-muted rounded-xl p-density-comfortable relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-critical rounded-l-xl"></div>
+<h3 class="font-label-caps text-label-caps text-surface-tint mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-critical">warning</span> Active Incidents
+                        </h3>
+<div class="bg-terminal-black border border-outline-variant/30 rounded-lg p-3 space-y-3">
+<div class="flex items-start gap-3">
+<div class="mt-1 w-2 h-2 rounded-full bg-status-critical pulse-dot shrink-0"></div>
+<div>
+<h4 class="font-data-mono text-data-mono text-status-critical">Suspicious Login Detected in Organization B</h4>
+<p class="font-data-mono text-[11px] text-on-surface-variant mt-1 opacity-70">IP: 192.168.1.104 • Location: Unknown • Time: 10:42 UTC</p>
+</div>
+<button class="ml-auto bg-surface-variant/30 border border-outline-variant hover:bg-status-critical/20 hover:border-status-critical/50 text-on-surface px-3 py-1 rounded text-[11px] font-data-mono transition-colors">Isolate</button>
+</div>
+</div>
+</div>
+<!-- Findings -->
+<div class="bg-surface-card border border-border-muted rounded-xl p-density-comfortable relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk rounded-l-xl"></div>
+<h3 class="font-label-caps text-label-caps text-surface-tint mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-risk">bug_report</span> Critical Findings
+                        </h3>
+<div class="bg-terminal-black border border-outline-variant/30 rounded-lg p-3 space-y-3">
+<div class="flex items-start gap-3">
+<div class="mt-1 w-2 h-2 rounded-full bg-status-risk pulse-dot-risk shrink-0"></div>
+<div>
+<h4 class="font-data-mono text-data-mono text-status-risk">Leaked API Key in Repository Alpha</h4>
+<p class="font-data-mono text-[11px] text-on-surface-variant mt-1 opacity-70">SecretType: AWS_ACCESS_KEY • Path: /config/deploy.yml</p>
+</div>
+<button class="ml-auto bg-surface-variant/30 border border-outline-variant hover:bg-status-risk/20 hover:border-status-risk/50 text-on-surface px-3 py-1 rounded text-[11px] font-data-mono transition-colors">Revoke</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Widget 4: Zero-Trust Enforcement (Col Span 7) -->
+<div class="col-span-1 md:col-span-7 bg-terminal-black border border-border-muted rounded-xl p-0 overflow-hidden flex flex-col h-[320px]">
+<div class="bg-surface-card border-b border-border-muted p-3 flex justify-between items-center shrink-0">
+<h3 class="font-label-caps text-label-caps text-surface-tint flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-execution-violet">psychology</span> Zero-Trust Enforcement (AI Agents)
+                        </h3>
+<div class="flex items-center gap-2">
+<div class="w-1.5 h-1.5 rounded-full bg-status-success pulse-dot"></div>
+<span class="font-data-mono text-[10px] text-status-success tracking-widest uppercase">Live Feed</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-3 space-y-2">
+<!-- Log Entry 1 -->
+<div class="font-data-mono text-data-mono flex items-start gap-3 border-b border-border-muted/50 pb-2">
+<span class="text-on-surface-variant opacity-50 shrink-0 text-[11px]">10:45:02</span>
+<span class="text-execution-violet shrink-0">[Agent-Coder]</span>
+<span class="text-on-surface flex-1">requesting write access to <span class="text-data-blue">src/auth/</span></span>
+<span class="text-status-risk shrink-0 uppercase text-[10px] bg-status-risk/10 px-1.5 py-0.5 rounded border border-status-risk/20">Evaluating</span>
+</div>
+<!-- Log Entry 2 -->
+<div class="font-data-mono text-data-mono flex items-start gap-3 border-b border-border-muted/50 pb-2">
+<span class="text-on-surface-variant opacity-50 shrink-0 text-[11px]">10:44:18</span>
+<span class="text-tertiary-fixed shrink-0">[Agent-Ops]</span>
+<span class="text-on-surface flex-1">querying production database read-replica</span>
+<span class="text-status-success shrink-0 uppercase text-[10px] bg-status-success/10 px-1.5 py-0.5 rounded border border-status-success/20">Allowed</span>
+</div>
+<!-- Log Entry 3 -->
+<div class="font-data-mono text-data-mono flex items-start gap-3 border-b border-border-muted/50 pb-2">
+<span class="text-on-surface-variant opacity-50 shrink-0 text-[11px]">10:42:55</span>
+<span class="text-execution-violet shrink-0">[Agent-Coder]</span>
+<span class="text-on-surface flex-1">attempting lateral movement to <span class="text-status-critical">/etc/shadow</span></span>
+<span class="text-status-critical shrink-0 uppercase text-[10px] bg-status-critical/10 px-1.5 py-0.5 rounded border border-status-critical/20">Denied</span>
+</div>
+<!-- Log Entry 4 -->
+<div class="font-data-mono text-data-mono flex items-start gap-3 border-b border-border-muted/50 pb-2 opacity-50">
+<span class="text-on-surface-variant opacity-50 shrink-0 text-[11px]">10:40:12</span>
+<span class="text-surface-tint shrink-0">[System]</span>
+<span class="text-on-surface flex-1">policy refresh completed successfully</span>
+<span class="text-on-surface-variant shrink-0 uppercase text-[10px] bg-surface-variant px-1.5 py-0.5 rounded border border-outline-variant">Info</span>
+</div>
+</div>
+</div>
+<!-- Widget 5: Threat Intelligence (Col Span 5) -->
+<div class="col-span-1 md:col-span-5 bg-surface-card border border-border-muted rounded-xl p-density-comfortable flex flex-col h-[320px]">
+<div class="flex justify-between items-start mb-4 shrink-0">
+<h3 class="font-label-caps text-label-caps text-surface-tint flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">monitoring</span> Threat Intelligence
+                        </h3>
+<span class="font-data-mono text-[10px] text-on-surface-variant">Last 24h</span>
+</div>
+<div class="flex-1 flex flex-col justify-end relative mt-2">
+<p class="font-body-sm text-body-sm text-on-surface-variant absolute top-0 left-0 z-10">Blocked Prompt Injections</p>
+<p class="font-display-lg text-headline-md font-bold text-status-risk absolute top-5 left-0 z-10">4,281</p>
+<!-- Mock Bar Chart using Flexbox -->
+<div class="h-32 flex items-end justify-between gap-1 mt-auto border-b border-border-muted pb-1 relative z-0">
+<!-- Background Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20 z-0">
+<div class="w-full border-t border-outline-variant h-0"></div>
+<div class="w-full border-t border-outline-variant h-0"></div>
+<div class="w-full border-t border-outline-variant h-0"></div>
+</div>
+<!-- Bars -->
+<div class="w-full bg-execution-violet/20 hover:bg-execution-violet/50 transition-colors h-[20%] rounded-t-sm z-10 relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface-container text-data-mono text-[10px] px-1 hidden group-hover:block rounded">210</div></div>
+<div class="w-full bg-execution-violet/20 hover:bg-execution-violet/50 transition-colors h-[35%] rounded-t-sm z-10 relative group"><div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface-container text-data-mono text-[10px] px-1 hidden group-hover:block rounded">380</div></div>
+<div class="w-full bg-execution-violet/20 hover:bg-execution-violet/50 transition-colors h-[15%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-execution-violet/40 hover:bg-execution-violet/70 transition-colors h-[60%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-execution-violet/30 hover:bg-execution-violet/60 transition-colors h-[40%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-status-risk/60 hover:bg-status-risk transition-colors h-[85%] rounded-t-sm z-10 relative group border-t border-status-risk"><div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface-container text-status-risk text-data-mono text-[10px] px-1 hidden group-hover:block rounded border border-status-risk/30">950</div></div>
+<div class="w-full bg-execution-violet/50 hover:bg-execution-violet/80 transition-colors h-[50%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-execution-violet/20 hover:bg-execution-violet/50 transition-colors h-[25%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-execution-violet/30 hover:bg-execution-violet/60 transition-colors h-[45%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-status-critical/80 hover:bg-status-critical transition-colors h-[100%] rounded-t-sm z-10 relative group shadow-[0_0_10px_rgba(239,68,68,0.4)]"><div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface-container text-status-critical text-data-mono text-[10px] px-1 hidden group-hover:block rounded border border-status-critical/50">1240</div></div>
+<div class="w-full bg-execution-violet/40 hover:bg-execution-violet/70 transition-colors h-[55%] rounded-t-sm z-10 relative group"></div>
+<div class="w-full bg-execution-violet/20 hover:bg-execution-violet/50 transition-colors h-[30%] rounded-t-sm z-10 relative group"></div>
+</div>
+<div class="flex justify-between mt-1 font-data-mono text-[10px] text-on-surface-variant opacity-60">
+<span>00:00</span>
+<span>12:00</span>
+<span>24:00</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

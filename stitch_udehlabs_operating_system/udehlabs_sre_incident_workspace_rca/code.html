@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Incident Workspace - Nexus Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; background-color: #081425; color: #d7e3fb; }
+        .font-mono { font-family: 'Geist Mono', monospace; }
+        
+        /* Custom scrollbar for clinical look */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #040e1f; }
+        ::-webkit-scrollbar-thumb { background: #2a3548; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #404753; }
+        
+        /* Pulse animation for active incidents */
+        @keyframes pulse-critical {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .pulse-critical { animation: pulse-critical 2s infinite; }
+        
+        /* Glitch effect for critical banners */
+        .glitch-bg {
+            background: repeating-linear-gradient(
+                45deg,
+                #93000a,
+                #93000a 10px,
+                #ef4444 10px,
+                #ef4444 20px
+            );
+            opacity: 0.1;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#081425",
+                        "secondary-container": "#6001d1",
+                        "status-critical": "#ef4444",
+                        "on-surface-variant": "#c0c7d5",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "surface-container-highest": "#2a3548",
+                        "outline-variant": "#404753",
+                        "border-active": "#1e293b",
+                        "on-background": "#d7e3fb",
+                        "on-tertiary": "#003824",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary-container": "#00311f",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-on-surface": "#263143",
+                        "tertiary": "#4edea3",
+                        "on-surface": "#d7e3fb",
+                        "inverse-surface": "#d7e3fb",
+                        "background": "#081425",
+                        "surface-deep": "#040e1f",
+                        "on-secondary-container": "#c9aeff",
+                        "status-healthy": "#10b981",
+                        "on-primary-container": "#002a52",
+                        "surface-container": "#152031",
+                        "surface-container-high": "#1f2a3c",
+                        "on-primary-fixed-variant": "#004884",
+                        "secondary": "#d2bbff",
+                        "surface-bright": "#2f3a4c",
+                        "outline": "#8a919e",
+                        "on-secondary": "#3f008e",
+                        "primary-fixed": "#d4e3ff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#002113",
+                        "inverse-primary": "#005fad",
+                        "on-primary-fixed": "#001c39",
+                        "status-warning": "#f59e0b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-lowest": "#030e1f",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-tint": "#a4c9ff",
+                        "primary-container": "#3492f6",
+                        "on-error": "#690005",
+                        "surface-container-low": "#101c2d",
+                        "surface-dim": "#081425",
+                        "on-primary": "#00315d",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "data-text": "#d8e3fb",
+                        "surface-variant": "#2a3548",
+                        "tertiary-container": "#00a572",
+                        "secondary-fixed": "#eaddff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "primary": "#a4c9ff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "standard": "16px",
+                        "base": "4px",
+                        "gutter": "12px",
+                        "margin-desktop": "24px",
+                        "sidebar": "240px",
+                        "compact": "8px",
+                        "margin-mobile": "12px"
+                    },
+                    fontFamily: {
+                        "data-md": ["Geist Mono"],
+                        "data-sm": ["Geist Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "data-lg": ["Geist Mono"],
+                        "label-caps": ["Geist Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "data-md": ["13px", { lineHeight: "18px", fontWeight: "500" }],
+                        "data-sm": ["11px", { lineHeight: "16px", fontWeight: "500" }],
+                        "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "data-lg": ["16px", { lineHeight: "24px", letterSpacing: "0.02em", fontWeight: "600" }],
+                        "label-caps": ["10px", { lineHeight: "12px", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }],
+                        "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface h-screen flex flex-col overflow-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="w-full h-14 border-b border-outline-variant bg-surface flex justify-between items-center px-standard sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">NEXUS COMMAND</div>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<nav class="hidden md:flex gap-6">
+<!-- Suppressed normal nav, as this is a focused incident workspace. Only showing breadcrumb/context -->
+<div class="text-on-surface-variant font-data-sm text-data-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span class="cursor-pointer hover:text-primary transition-colors">Incident Workspace</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">INC-9928</span>
+</div>
+</nav>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors hover:bg-surface-bright p-1 rounded DEFAULT">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors hover:bg-surface-bright p-1 rounded DEFAULT">settings</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors hover:bg-surface-bright p-1 rounded DEFAULT">account_circle</span>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col h-full bg-surface-deep overflow-hidden relative">
+<!-- Context Header / Banner -->
+<div class="w-full bg-surface-container border-b border-outline-variant relative overflow-hidden">
+<div class="absolute inset-0 glitch-bg"></div>
+<div class="relative px-margin-desktop py-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<span class="font-label-caps text-label-caps text-status-critical bg-error-container/20 px-2 py-0.5 border border-status-critical/30 uppercase rounded-sm flex items-center gap-1 pulse-critical">
+<span class="material-symbols-outlined text-[12px]">warning</span> CRITICAL
+                            </span>
+<span class="font-label-caps text-label-caps text-status-warning bg-status-warning/10 px-2 py-0.5 border border-status-warning/30 uppercase rounded-sm">
+                                INVESTIGATING
+                            </span>
+<span class="font-data-md text-data-md text-on-surface-variant">Elapsed: <span class="text-status-warning font-bold">14m 22s</span></span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-2">
+                            Incident #INC-9928: High Latency in AI Inference Node
+                        </h1>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-bright border border-outline-variant hover:border-primary text-on-surface font-data-md text-data-md rounded flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">share</span> Share
+                        </button>
+<button class="px-4 py-2 bg-secondary/10 border border-secondary text-secondary hover:bg-secondary/20 font-data-md text-data-md rounded flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add_call</span> Join Bridge
+                        </button>
+</div>
+</div>
+</div>
+<!-- Scrollable Workspace -->
+<div class="flex-1 overflow-y-auto p-margin-desktop space-y-gutter pb-40"> <!-- pb-40 to account for fixed action center and log pane -->
+<!-- Hero Visualization: Causal Timeline -->
+<div class="bg-surface-container border border-outline-variant rounded p-standard flex flex-col gap-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase border-b border-outline-variant pb-2">Causal Timeline</div>
+<div class="relative py-8 px-4 overflow-x-auto">
+<!-- Connecting Line -->
+<div class="absolute top-1/2 left-8 right-8 h-px bg-outline-variant -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-8 w-[60%] h-px bg-status-critical -translate-y-1/2 z-0"></div>
+<div class="flex justify-between items-center relative z-10 min-w-[600px]">
+<!-- Node 1 -->
+<div class="flex flex-col items-center gap-2 w-32 group cursor-help">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-outline-variant group-hover:border-primary flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary">rocket_launch</span>
+</div>
+<div class="text-center">
+<div class="font-data-md text-data-md text-on-surface">DEPLOYMENT</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">v2.4.1 (14:02)</div>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="flex flex-col items-center gap-2 w-32 group cursor-help">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-status-warning flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-status-warning">settings_alert</span>
+</div>
+<div class="text-center">
+<div class="font-data-md text-data-md text-status-warning">CONFIG DRIFT</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">timeout_ms altered</div>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="flex flex-col items-center gap-2 w-32 group cursor-help">
+<div class="w-8 h-8 rounded-full bg-error-container border-2 border-status-critical flex items-center justify-center pulse-critical">
+<span class="material-symbols-outlined text-[16px] text-status-critical">trending_up</span>
+</div>
+<div class="text-center">
+<div class="font-data-md text-data-md text-status-critical">LATENCY SPIKE</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">&gt; 5000ms</div>
+</div>
+</div>
+<!-- Node 4 -->
+<div class="flex flex-col items-center gap-2 w-32 group cursor-help">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">notifications_active</span>
+</div>
+<div class="text-center">
+<div class="font-data-md text-data-md text-on-surface">ALERT</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">PD-882 (14:08)</div>
+</div>
+</div>
+<!-- Node 5 -->
+<div class="flex flex-col items-center gap-2 w-32 group cursor-help">
+<div class="w-8 h-8 rounded-full bg-surface border-2 border-status-critical flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-status-critical">local_fire_department</span>
+</div>
+<div class="text-center">
+<div class="font-data-md text-data-md text-status-critical font-bold">INCIDENT</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Current State</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Grid Layout for Details and Copilot -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-start">
+<!-- Left Column: Investigation Grid -->
+<div class="lg:col-span-2 space-y-gutter">
+<!-- Top Row: Impact Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Affected Services -->
+<div class="bg-surface-container border border-outline-variant rounded p-compact flex flex-col h-full">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase border-b border-outline-variant pb-2 mb-2">Affected Services</div>
+<div class="flex-1 flex flex-col gap-2">
+<div class="flex justify-between items-center bg-surface-deep p-2 rounded border border-outline-variant/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-status-critical">memory</span>
+<span class="font-data-md text-data-md">AI Gateway</span>
+</div>
+<span class="font-data-sm text-data-sm text-status-critical">98% Err Rate</span>
+</div>
+<div class="flex justify-between items-center bg-surface-deep p-2 rounded border border-outline-variant/50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-status-warning">database</span>
+<span class="font-data-md text-data-md">Knowledge Retrieval</span>
+</div>
+<span class="font-data-sm text-data-sm text-status-warning">Degraded (2.1s)</span>
+</div>
+<div class="flex justify-between items-center bg-surface-deep p-2 rounded border border-outline-variant/50 opacity-50">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-status-healthy">api</span>
+<span class="font-data-md text-data-md">Auth Service</span>
+</div>
+<span class="font-data-sm text-data-sm text-status-healthy">Normal</span>
+</div>
+</div>
+</div>
+<!-- Customer Impact -->
+<div class="bg-surface-container border border-outline-variant rounded p-compact flex flex-col h-full">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase border-b border-outline-variant pb-2 mb-2 flex justify-between">
+<span>Customer Impact</span>
+<span class="text-status-critical">HIGH</span>
+</div>
+<div class="flex-1 flex flex-col justify-center items-center py-4">
+<div class="font-headline-lg text-headline-lg text-on-surface mb-1">14</div>
+<div class="font-data-md text-data-md text-on-surface-variant text-center">Organizations Affected<br/><span class="text-status-warning font-bold">Primarily Tier 1</span></div>
+</div>
+<div class="h-8 w-full mt-auto flex items-end gap-1 opacity-70">
+<!-- Sparkline placeholder using divs -->
+<div class="w-1/6 bg-status-healthy h-2"></div>
+<div class="w-1/6 bg-status-healthy h-3"></div>
+<div class="w-1/6 bg-status-warning h-8"></div>
+<div class="w-1/6 bg-status-critical h-16"></div>
+<div class="w-1/6 bg-status-critical h-20"></div>
+<div class="w-1/6 bg-status-critical h-18"></div>
+</div>
+</div>
+</div>
+<!-- Bottom Row: Error Fingerprinting -->
+<div class="bg-surface-container border border-outline-variant rounded p-compact">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase border-b border-outline-variant pb-2 mb-2 flex justify-between items-center">
+<span>Error Fingerprinting</span>
+<span class="font-data-sm text-data-sm text-primary cursor-pointer hover:underline">View All Traces</span>
+</div>
+<div class="space-y-2">
+<!-- Error Group 1 -->
+<div class="border border-status-critical/30 rounded bg-surface-deep overflow-hidden">
+<div class="flex justify-between items-center p-2 bg-error-container/10 border-b border-status-critical/20">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 bg-status-critical text-surface font-label-caps text-label-caps rounded-sm">1.2k</span>
+<span class="font-data-md text-data-md font-bold text-status-critical">ConnectionPoolTimeoutException</span>
+</div>
+<span class="font-data-sm text-data-sm text-on-surface-variant">Last seen: 2s ago</span>
+</div>
+<div class="p-2 font-mono text-[11px] leading-[16px] text-on-surface-variant overflow-x-auto whitespace-pre">
+<span class="text-error">at ai.gateway.pool.ConnectionManager.acquire(ConnectionManager.java:142)</span>
+at ai.gateway.inference.Worker.process(Worker.java:88)
+at ai.gateway.http.Controller.handleRequest(Controller.java:45)
+... 12 more frames (redacted PII)</div>
+</div>
+<!-- Error Group 2 -->
+<div class="border border-outline-variant rounded bg-surface-deep overflow-hidden">
+<div class="flex justify-between items-center p-2 bg-surface border-b border-outline-variant/50">
+<div class="flex items-center gap-2">
+<span class="px-1.5 py-0.5 bg-outline-variant text-on-surface font-label-caps text-label-caps rounded-sm">342</span>
+<span class="font-data-md text-data-md font-bold text-status-warning">ResourceExhaustedError</span>
+</div>
+<span class="font-data-sm text-data-sm text-on-surface-variant">Last seen: 1m ago</span>
+</div>
+<div class="p-2 font-mono text-[11px] leading-[16px] text-on-surface-variant/70 overflow-x-auto whitespace-pre">
+<span class="text-status-warning">message: "gRPC client limits exceeded for target: knowledge-retrieval:9090"</span>
+at grpc.client.StreamObserver.onError(StreamObserver.java:99)</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: SRE AI Copilot -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col h-full min-h-[400px]">
+<div class="p-compact border-b border-outline-variant flex items-center gap-2 bg-surface-bright/50">
+<span class="material-symbols-outlined text-[18px] text-secondary">smart_toy</span>
+<span class="font-label-caps text-label-caps text-secondary uppercase">SRE AI Copilot</span>
+</div>
+<div class="flex-1 p-compact overflow-y-auto space-y-4">
+<!-- Copilot Message -->
+<div class="flex gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center shrink-0 mt-1 border border-secondary/50">
+<span class="material-symbols-outlined text-[14px] text-secondary">smart_toy</span>
+</div>
+<div class="bg-surface-deep border border-outline-variant rounded p-3 rounded-tl-none">
+<p class="font-body-sm text-body-sm text-on-surface mb-2">
+                                        Analyzing telemetry across <span class="font-mono text-secondary">ai-gateway</span> and <span class="font-mono text-secondary">knowledge-retrieval</span>...
+                                    </p>
+<div class="border-l-2 border-status-warning pl-2 py-1 mb-2 bg-status-warning/5">
+<p class="font-data-md text-data-md font-bold text-status-warning">Hypothesis Found</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Likely cause: Connection pool exhaustion following v2.4.1 deploy. The new config <span class="font-mono">timeout_ms</span> caused workers to hold connections longer than anticipated.</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mt-2 font-bold">Recommended Action:</p>
+<p class="font-data-sm text-data-sm text-primary mt-1 flex items-center gap-1 cursor-pointer hover:underline">
+<span class="material-symbols-outlined text-[14px]">menu_book</span> Runbook RB-04: Scale Inference Workers
+                                    </p>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-2 flex-row-reverse">
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center shrink-0 mt-1 border border-outline-variant">
+<span class="material-symbols-outlined text-[14px] text-on-surface">person</span>
+</div>
+<div class="bg-surface-bright border border-outline-variant rounded p-2 rounded-tr-none">
+<p class="font-body-sm text-body-sm text-on-surface">What's the current worker saturation?</p>
+</div>
+</div>
+<!-- Copilot Message -->
+<div class="flex gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary/20 flex items-center justify-center shrink-0 mt-1 border border-secondary/50">
+<span class="material-symbols-outlined text-[14px] text-secondary">smart_toy</span>
+</div>
+<div class="bg-surface-deep border border-outline-variant rounded p-3 rounded-tl-none">
+<p class="font-body-sm text-body-sm text-on-surface">
+                                        Worker saturation is at <strong class="text-status-critical">99.8%</strong>. Scaling is highly advised to mitigate immediately.
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Copilot Input -->
+<div class="p-2 border-t border-outline-variant bg-surface-deep flex gap-2">
+<input class="w-full bg-[#040e1f] border border-outline-variant text-on-surface font-data-md text-data-md px-2 py-1 focus:outline-none focus:border-secondary transition-colors" placeholder="Ask copilot..." style="caret-color: #d2bbff;" type="text"/>
+<button class="bg-secondary/20 hover:bg-secondary/30 text-secondary border border-secondary/50 p-1 rounded transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</div> <!-- End Scrollable Area -->
+<!-- Action Center (Fixed Bottom, above logs/footer) -->
+<div class="absolute bottom-10 left-0 w-full bg-surface-container-highest border-t border-outline-variant z-40 p-3 flex justify-between items-center shadow-[0_-4px_20px_rgba(0,0,0,0.5)]">
+<div class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">build</span> Mitigation Controls
+                </div>
+<div class="flex gap-3">
+<button class="px-4 py-1.5 bg-surface-deep border border-outline-variant hover:border-status-critical text-on-surface font-data-md text-data-md transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-critical">undo</span> Rollback v2.4.1
+                    </button>
+<button class="px-4 py-1.5 bg-secondary text-on-secondary font-data-md text-data-md hover:bg-secondary-fixed font-bold transition-colors flex items-center gap-2 shadow-[0_0_10px_rgba(210,187,255,0.3)]">
+<span class="material-symbols-outlined text-[16px]">scale</span> Scale Workers (1x -&gt; 4x)
+                    </button>
+<button class="px-4 py-1.5 bg-surface-deep border border-outline-variant hover:border-status-warning text-on-surface font-data-md text-data-md transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-status-warning">pause</span> Pause Non-Critical Jobs
+                    </button>
+</div>
+</div>
+<!-- Log Pane (Collapsible, simplified for space) -->
+<div class="absolute bottom-8 left-0 w-full bg-surface-deep border-t border-outline-variant z-30 flex flex-col transition-all duration-300 h-10 hover:h-48 group">
+<div class="h-10 px-standard flex justify-between items-center border-b border-outline-variant cursor-ns-resize bg-surface-container-lowest">
+<div class="font-data-sm text-data-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">terminal</span> Correlated Logs (Trace: <span class="text-primary">#x9f22a1</span>)
+                    </div>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">expand_less</span>
+</div>
+<div class="flex-1 p-2 font-mono text-[11px] leading-[16px] text-on-surface-variant/70 overflow-y-auto">
+<div><span class="text-on-surface-variant">[14:10:02]</span> <span class="text-primary">[INF]</span> <span class="text-on-surface-variant/50">ai-gateway</span> Incoming request trace=#x9f22a1</div>
+<div><span class="text-on-surface-variant">[14:10:02]</span> <span class="text-status-warning">[WRN]</span> <span class="text-on-surface-variant/50">ai-gateway</span> Connection pool nearing exhaustion (95%)</div>
+<div><span class="text-on-surface-variant">[14:10:05]</span> <span class="text-status-critical">[ERR]</span> <span class="text-on-surface-variant/50">ai-gateway</span> ConnectionPoolTimeoutException: timeout_ms exceeded waiting for worker</div>
+<div><span class="text-on-surface-variant">[14:10:05]</span> <span class="text-primary">[INF]</span> <span class="text-on-surface-variant/50">knowledge-retrieval</span> Worker #42 stalled, dropping connection.</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 left-0 w-full h-8 border-t border-outline-variant bg-surface-deep flex justify-between items-center px-gutter z-50">
+<div class="font-label-caps text-label-caps text-on-surface">SYSTEM STATUS: OPTIMAL | L: 42ms | T: 1.2k/s</div>
+<div class="flex gap-4">
+<span class="font-data-sm text-data-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">Active Rotation: J. DOE</span>
+<span class="font-data-sm text-data-sm text-on-surface-variant hover:text-primary cursor-pointer transition-colors">Region: US-EAST-1</span>
+</div>
+</footer>
+</body></html>

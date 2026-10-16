@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Create Organization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#1b2b3f",
+                        "outline": "#918fa1",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "secondary": "#d0bcff",
+                        "on-secondary-container": "#c4abff",
+                        "surface-container-lowest": "#000f21",
+                        "secondary-container": "#571bc1",
+                        "surface": "#031427",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-background": "#d3e4fe",
+                        "error": "#ffb4ab",
+                        "on-surface": "#d3e4fe",
+                        "primary-container": "#4f46e5",
+                        "background": "#031427",
+                        "on-secondary": "#3c0091",
+                        "on-tertiary": "#00344d",
+                        "error-container": "#93000a",
+                        "surface-container": "#102034",
+                        "outline-variant": "#464555",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "surface-dim": "#031427",
+                        "on-primary-container": "#dad7ff",
+                        "surface-variant": "#26364a",
+                        "tertiary-container": "#006693",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#89ceff",
+                        "on-tertiary-container": "#b8e0ff",
+                        "inverse-surface": "#d3e4fe",
+                        "on-primary": "#1d00a5",
+                        "on-surface-variant": "#c7c4d8",
+                        "surface-tint": "#c3c0ff",
+                        "surface-container-highest": "#26364a",
+                        "surface-bright": "#2a3a4f",
+                        "on-tertiary-fixed": "#001e2f",
+                        "tertiary-fixed": "#c9e6ff",
+                        "secondary-fixed": "#e9ddff",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container-low": "#0b1c30",
+                        "inverse-on-surface": "#213145",
+                        "inverse-primary": "#4d44e3",
+                        "primary": "#c3c0ff",
+                        "on-secondary-fixed": "#23005c",
+                        "on-primary-fixed": "#0f0069",
+                        "primary-fixed": "#e2dfff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "max_content_width": "1440px",
+                        "md": "16px",
+                        "sidebar_width": "260px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "sidebar_collapsed": "64px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "2xl": "48px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "code-md": ["JetBrains Mono", "monospace"],
+                        "label-caps": ["Inter", "sans-serif"],
+                        "headline-md": ["Inter", "sans-serif"],
+                        "body-lg": ["Inter", "sans-serif"],
+                        "headline-lg": ["Inter", "sans-serif"],
+                        "code-sm": ["JetBrains Mono", "monospace"]
+                    },
+                    "fontSize": {
+                        "display": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "code-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex selection:bg-primary/30 selection:text-primary-fixed">
+<!-- Sidebar Navigation -->
+<nav class="hidden md:flex flex-col h-full py-md px-sm border-r border-outline-variant bg-surface-container-low w-sidebar_width fixed left-0 top-0">
+<div class="px-md mb-xl flex items-center space-x-sm">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-black text-on-surface">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Enterprise Admin</p>
+</div>
+</div>
+<div class="flex-grow">
+<!-- Navigation items suppressed for transactional setup flow, but keeping structure per UI constraints -->
+<div class="px-md mb-sm font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Setup Progress</div>
+<ul class="space-y-sm">
+<!-- Step 1: Active -->
+<li>
+<a class="flex items-center space-x-md px-md py-sm rounded bg-secondary-container text-on-secondary-container border-l-4 border-primary transition-all scale-[0.99]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+<span class="font-label-caps text-label-caps">Organization Profile</span>
+</a>
+</li>
+<!-- Step 2: Inactive -->
+<li>
+<div class="flex items-center space-x-md px-md py-sm rounded text-on-surface-variant opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-caps text-label-caps">Billing Setup</span>
+</div>
+</li>
+<!-- Step 3: Inactive -->
+<li>
+<div class="flex items-center space-x-md px-md py-sm rounded text-on-surface-variant opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-caps text-label-caps">Create Workspace</span>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-auto">
+<button class="w-full flex items-center justify-center space-x-sm bg-primary-container text-on-primary-container font-label-caps text-label-caps py-sm rounded hover:bg-primary-container/80 transition-colors mb-md">
+<span class="material-symbols-outlined text-[16px]">upgrade</span>
+<span>Upgrade Plan</span>
+</button>
+<ul class="space-y-xs pt-md border-t border-outline-variant">
+<li>
+<a class="flex items-center space-x-md px-md py-xs rounded text-on-surface-variant hover:bg-surface-variant/30 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span class="font-label-caps text-label-caps">Docs</span>
+</a>
+</li>
+<li>
+<a class="flex items-center space-x-md px-md py-xs rounded text-on-surface-variant hover:bg-surface-variant/30 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-sidebar_width p-lg md:p-2xl flex justify-center items-start min-h-screen relative overflow-hidden">
+<!-- Decorative Background Element -->
+<div class="absolute top-0 right-0 w-1/2 h-1/2 bg-primary/5 rounded-bl-[100%] pointer-events-none blur-3xl"></div>
+<div class="w-full max-w-2xl relative z-10 bg-surface-container rounded-xl border border-outline-variant shadow-lg overflow-hidden backdrop-blur-md backdrop-filter bg-opacity-90">
+<!-- Form Header -->
+<div class="p-lg border-b border-outline-variant bg-surface-container-high/50">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Create Your Organization</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Set up your enterprise space to start collaborating and managing workspaces securely.</p>
+</div>
+<!-- Form Content -->
+<form class="p-lg space-y-xl">
+<!-- Org Name & URL Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-on-surface" for="orgName">Organization Name</label>
+<input class="w-full bg-surface border border-outline-variant rounded p-sm font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors" id="orgName" name="orgName" placeholder="Acme Corp" required="" type="text"/>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-on-surface" for="orgSlug">Workspace URL</label>
+<div class="flex rounded border border-outline-variant overflow-hidden focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-colors">
+<span class="bg-surface-container-high px-sm py-sm text-on-surface-variant font-code-md text-code-md border-r border-outline-variant flex items-center select-none">udehlabs.ai/org/</span>
+<input class="flex-1 bg-surface p-sm font-code-md text-code-md text-on-surface placeholder:text-on-surface-variant/50 border-none focus:ring-0" id="orgSlug" name="orgSlug" placeholder="acme" required="" type="text"/>
+</div>
+</div>
+</div>
+<!-- Industry & Size Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-on-surface" for="industry">Industry</label>
+<div class="relative">
+<select class="w-full bg-surface border border-outline-variant rounded p-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors appearance-none cursor-pointer" id="industry" name="industry">
+<option disabled="" selected="" value="">Select Industry</option>
+<option value="technology">Technology &amp; Software</option>
+<option value="finance">Finance &amp; Banking</option>
+<option value="healthcare">Healthcare</option>
+<option value="education">Education</option>
+<option value="manufacturing">Manufacturing</option>
+<option value="other">Other</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-on-surface" for="companySize">Company Size</label>
+<div class="relative">
+<select class="w-full bg-surface border border-outline-variant rounded p-sm font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors appearance-none cursor-pointer" id="companySize" name="companySize">
+<option disabled="" selected="" value="">Select Size</option>
+<option value="1-10">1 - 10 employees</option>
+<option value="11-50">11 - 50 employees</option>
+<option value="51-200">51 - 200 employees</option>
+<option value="201-500">201 - 500 employees</option>
+<option value="500+">500+ employees</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Description -->
+<div class="space-y-sm">
+<label class="block font-label-caps text-label-caps text-on-surface" for="description">Organization Description <span class="text-on-surface-variant/70 font-normal">(Optional)</span></label>
+<textarea class="w-full bg-surface border border-outline-variant rounded p-sm font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-colors resize-y" id="description" name="description" placeholder="Briefly describe your organization's primary focus..." rows="4"></textarea>
+</div>
+<!-- AI Setup Toggle -->
+<div class="flex items-start space-x-md p-md bg-primary/5 border border-primary/20 rounded relative overflow-hidden group">
+<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-primary/0 via-primary/10 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+<div class="flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-primary shadow-[0_0_10px_rgba(139,92,246,0.4)] rounded-full" style="font-variation-settings: 'FILL' 1;">magic_button</span>
+</div>
+<div class="flex-1">
+<h3 class="font-body-md text-body-md font-semibold text-on-surface mb-xs">Enable AI Workspace Initialization</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Allow UdehLabs AI to auto-generate baseline workspaces, permission groups, and initial docs based on your industry selection.</p>
+</div>
+<div class="flex-shrink-0">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-md border-t border-outline-variant flex justify-end space-x-md items-center">
+<button class="px-lg py-sm rounded font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-outline-variant" type="button">
+                        Cancel
+                    </button>
+<button class="flex items-center space-x-sm px-lg py-sm rounded bg-primary-container text-on-primary-container font-label-caps text-label-caps hover:bg-primary-container/80 transition-colors shadow-lg shadow-primary-container/20 focus:outline-none focus:ring-2 focus:ring-primary" type="submit">
+<span>Create Organization</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</form>
+</div>
+</main>
+</body></html>

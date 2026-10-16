@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Verification Run Details</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error-container": "#93000a",
+                      "tertiary-fixed": "#ffddb8",
+                      "secondary-container": "#00b47d",
+                      "on-tertiary-fixed-variant": "#653e00",
+                      "on-tertiary": "#472a00",
+                      "surface": "#051424",
+                      "on-primary-fixed-variant": "#3e465c",
+                      "on-primary-fixed": "#131b2e",
+                      "on-secondary-container": "#003e28",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#002114",
+                      "error": "#ffb4ab",
+                      "warning-gold": "#f59e0b",
+                      "on-background": "#d4e4fa",
+                      "surface-container": "#122131",
+                      "on-primary": "#283044",
+                      "inverse-surface": "#d4e4fa",
+                      "on-secondary": "#003824",
+                      "outline-variant": "#45464d",
+                      "on-tertiary-fixed": "#2a1700",
+                      "surface-deep": "#051424",
+                      "surface-container-lowest": "#010f1f",
+                      "secondary-fixed-dim": "#4edea3",
+                      "inverse-primary": "#565e74",
+                      "tertiary": "#ffddb8",
+                      "primary-container": "#bec6e0",
+                      "on-surface-variant": "#c6c6cd",
+                      "surface-container-low": "#0d1c2d",
+                      "background": "#051424",
+                      "inverse-on-surface": "#233143",
+                      "primary": "#dae2fd",
+                      "surface-variant": "#273647",
+                      "on-primary-container": "#4a5268",
+                      "outline": "#909097",
+                      "tertiary-fixed-dim": "#ffb95f",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-graph": "#0f172a",
+                      "on-tertiary-container": "#754900",
+                      "surface-container-high": "#1c2b3c",
+                      "surface-dim": "#051424",
+                      "primary-fixed": "#dae2fd",
+                      "on-surface": "#d4e4fa",
+                      "border-muted": "#334155",
+                      "primary-fixed-dim": "#bec6e0",
+                      "tertiary-container": "#ffb95f",
+                      "surface-bright": "#2c3a4c",
+                      "surface-tint": "#bec6e0",
+                      "surface-container-highest": "#273647",
+                      "secondary-fixed": "#6ffbbe",
+                      "on-error-container": "#ffdad6",
+                      "error-bright": "#ffb4ab",
+                      "secondary": "#4edea3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-wide": "32px",
+                      "sidebar-width": "240px",
+                      "gutter": "12px",
+                      "margin-compact": "16px",
+                      "unit": "4px",
+                      "topbar-height": "48px"
+              },
+              "fontFamily": {
+                      "code-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "code-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "10px",
+                              {
+                                      "lineHeight": "1.0",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "36px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glow-error {
+            box-shadow: 0 0 12px rgba(255, 180, 171, 0.4);
+        }
+        .glow-success {
+            box-shadow: 0 0 12px rgba(78, 222, 163, 0.4);
+        }
+        .code-block {
+            background-color: #010f1f;
+            border: 1px solid #334155;
+            border-radius: 0.125rem;
+            padding: 12px;
+            overflow-x: auto;
+        }
+      </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-wide bg-surface-container dark:bg-surface-container docked full-width top-0 h-topbar-height border-b border-border-muted flat no shadows">
+<div class="flex items-center gap-6">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">UdehLabs Intelligence</div>
+<div class="flex items-center gap-unit bg-surface-container-lowest border border-border-muted px-3 py-1.5 rounded text-on-surface-variant focus-within:border-secondary transition-colors">
+<span class="material-symbols-outlined text-[16px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-code-sm font-code-sm outline-none w-64 placeholder:text-outline-variant text-on-surface" placeholder="Search resources (CMD+K)" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4">
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:bg-surface-bright transition-colors px-2 py-1 rounded flex items-center" href="#">Rescan</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant font-medium hover:bg-surface-bright transition-colors px-2 py-1 rounded flex items-center" href="#">Export Graph</a>
+</div>
+<div class="flex items-center gap-3 border-l border-border-muted pl-6">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1 rounded hover:bg-surface-bright"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1 rounded hover:bg-surface-bright"><span class="material-symbols-outlined">settings</span></button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-1 rounded hover:bg-surface-bright"><span class="material-symbols-outlined">help</span></button>
+<div class="w-8 h-8 bg-primary-container rounded-full flex items-center justify-center border border-border-muted overflow-hidden ml-2">
+<span class="font-code-sm text-on-primary-container font-bold">LA</span>
+</div>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 pt-[48px]">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] z-40 flex flex-col py-unit bg-surface-container-low dark:bg-surface-container-low docked left-0 w-sidebar-height h-screen border-r border-border-muted flat no shadows mt-[48px]">
+<div class="px-4 py-6 border-b border-border-muted mb-4">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-2 h-2 rounded-full bg-secondary glow-success"></div>
+<div class="font-code-md text-code-md text-secondary tracking-tight">CYBER-INTELLIGENCE</div>
+</div>
+<div class="font-code-sm text-code-sm text-outline-variant">V2.4.0-STABLE</div>
+</div>
+<nav class="flex-1 px-2 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">dashboard</span><span class="font-label-caps text-label-caps">Overview</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">inventory_2</span><span class="font-label-caps text-label-caps">Repositories</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">folder_open</span><span class="font-label-caps text-label-caps">Files</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">token</span><span class="font-label-caps text-label-caps">Symbols</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">hub</span><span class="font-label-caps text-label-caps">Dependencies</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">api</span><span class="font-label-caps text-label-caps">APIs</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">database</span><span class="font-label-caps text-label-caps">Database</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-secondary bg-surface-container-high border-l-2 border-secondary hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">rule</span><span class="font-label-caps text-label-caps">Tests</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">security</span><span class="font-label-caps text-label-caps">Findings</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[18px]">history</span><span class="font-label-caps text-label-caps">Snapshots</span></a>
+</nav>
+<div class="p-4 mt-auto border-t border-border-muted">
+<button class="w-full py-2 bg-surface-container-highest border border-border-muted text-on-surface font-label-caps text-label-caps rounded hover:bg-surface-bright transition-colors flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[16px]">add</span> New Analysis
+                </button>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-1.5 rounded text-outline-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[16px]">menu_book</span><span class="font-label-caps text-label-caps">Docs</span></a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded text-outline-variant hover:text-on-surface hover:bg-surface-container-highest transition-all" href="#"><span class="material-symbols-outlined text-[16px]">logout</span><span class="font-label-caps text-label-caps">Logout</span></a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[240px] p-margin-wide overflow-y-auto bg-surface-deep">
+<!-- Run Header -->
+<header class="mb-8 border-b border-border-muted pb-6">
+<div class="flex justify-between items-start">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-error-bright text-[24px]">cancel</span>
+<h1 class="font-headline-md text-headline-md text-on-surface">Verification Run #VR-9042</h1>
+</div>
+<div class="flex items-center gap-6 mt-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-error-bright glow-error"></div>
+<span class="font-code-sm text-code-sm text-error-bright uppercase tracking-wider">Failed</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+<span>Trigger: MIG-4092</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[16px]">timer</span>
+<span>Duration: 00:14:32</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-code-sm text-code-sm">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Executed: 2023-10-27 14:00 UTC</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-border-muted bg-surface-container hover:bg-surface-bright text-on-surface font-label-caps text-label-caps rounded flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">refresh</span> Re-run Task
+                        </button>
+<button class="px-4 py-2 border border-error-bright/50 bg-error-container/20 text-error-bright hover:bg-error-container/40 font-label-caps text-label-caps rounded flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">gavel</span> Request Waiver
+                        </button>
+</div>
+</div>
+</header>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Check Suite Details -->
+<div class="col-span-12 xl:col-span-8 flex flex-col gap-6">
+<div class="bg-surface-container-high border border-border-muted rounded">
+<div class="px-4 py-3 border-b border-border-muted bg-surface-container-lowest/50 flex justify-between items-center">
+<h2 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">list_alt</span> Execution Suite Results
+                            </h2>
+<span class="font-code-sm text-code-sm text-outline-variant">42 Checks / 1 Failed / 0 Warnings</span>
+</div>
+<div class="p-0">
+<!-- Failed Check Item -->
+<div class="border-b border-border-muted p-4 bg-error-container/5 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-[3px] bg-error-bright glow-error"></div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-error-bright mt-0.5 text-[20px]">error</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1">Tenant Isolation: Org Boundary Test</h3>
+<div class="flex gap-3 font-code-sm text-code-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-error-bright"><span class="material-symbols-outlined text-[14px]">priority_high</span> CRITICAL</span>
+<span>ID: CHK-SEC-092</span>
+<span>Module: auth-service</span>
+</div>
+</div>
+</div>
+<span class="font-code-sm text-code-sm text-error-bright bg-error-container/30 px-2 py-1 rounded border border-error-bright/30">FAILED</span>
+</div>
+<!-- Output / Evidence -->
+<div class="mb-4">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2 pl-8">Execution Trace:</div>
+<div class="code-block ml-8">
+<pre class="font-code-sm text-code-sm text-on-surface-variant leading-relaxed"><span class="text-secondary">[INFO]</span> Initializing test context for tenant boundary...
+<span class="text-secondary">[INFO]</span> Executing query simulation as Tenant_A...
+<span class="text-secondary">[INFO]</span> Attempting to access resources owned by Tenant_B...
+<span class="text-error-bright font-bold">[FAIL]</span> Access violation detected.
+<span class="text-error-bright">       Expected: 403 Forbidden</span>
+<span class="text-error-bright">       Received: 200 OK</span>
+<span class="text-outline-variant">       Stack trace:</span>
+<span class="text-outline-variant">         at ProjectRepository.getAllProjects (src/db/ProjectRepository.ts:142)</span>
+<span class="text-outline-variant">         at ProjectController.list (src/api/ProjectController.ts:45)</span>
+<span class="text-error-bright">[FATAL]</span> Tenant isolation breached. Halting execution.
+</pre>
+</div>
+</div>
+<!-- Recommendation AI -->
+<div class="ml-8 mt-4 p-4 border border-tertiary-fixed/30 bg-tertiary-fixed/5 rounded relative flex gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed text-[20px]">smart_toy</span>
+<div>
+<div class="font-label-caps text-label-caps text-tertiary-fixed mb-2">Automated Remediation Analysis</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                                            The <code class="font-code-sm bg-surface-container px-1 rounded text-on-surface">getAllProjects</code> method in <code class="font-code-sm bg-surface-container px-1 rounded text-on-surface">ProjectRepository.ts</code> (line 142) is missing the mandatory <code class="font-code-sm bg-surface-container px-1 rounded text-on-surface">organizationId</code> filter in the WHERE clause. This allows cross-tenant data leakage. Ensure that the active request context injects the tenant ID into all repository queries.
+                                        </p>
+<div class="mt-3 flex gap-2">
+<button class="font-code-sm text-code-sm text-tertiary-fixed border border-tertiary-fixed/50 hover:bg-tertiary-fixed/10 px-3 py-1 rounded transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">edit</span> View Source
+                                            </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Passed Check Item (Collapsed) -->
+<div class="border-b border-border-muted p-4 hover:bg-surface-bright/50 transition-colors flex justify-between items-center group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<div>
+<h3 class="font-body-md text-body-md text-on-surface">Database Encryption at Rest</h3>
+<div class="font-code-sm text-code-sm text-outline-variant mt-0.5">ID: CHK-SEC-014 • Module: infra-core</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-code-sm text-code-sm text-outline-variant">0.4s</span>
+<button class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-on-surface transition-all"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+</div>
+</div>
+<!-- Passed Check Item (Collapsed) -->
+<div class="border-b border-border-muted p-4 hover:bg-surface-bright/50 transition-colors flex justify-between items-center group">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<div>
+<h3 class="font-body-md text-body-md text-on-surface">API Rate Limiting Configured</h3>
+<div class="font-code-sm text-code-sm text-outline-variant mt-0.5">ID: CHK-NET-102 • Module: api-gateway</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="font-code-sm text-code-sm text-outline-variant">1.2s</span>
+<button class="opacity-0 group-hover:opacity-100 text-on-surface-variant hover:text-on-surface transition-all"><span class="material-symbols-outlined text-[18px]">expand_more</span></button>
+</div>
+</div>
+<div class="p-3 text-center border-t border-border-muted bg-surface-container-lowest/30">
+<button class="font-code-sm text-code-sm text-on-surface-variant hover:text-on-surface">Load 39 more passing checks...</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Context & Actions -->
+<div class="col-span-12 xl:col-span-4 flex flex-col gap-6">
+<!-- Architecture Context -->
+<div class="bg-surface-container-high border border-border-muted rounded">
+<div class="px-4 py-3 border-b border-border-muted bg-surface-container-lowest/50">
+<h2 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">account_tree</span> Architecture Context
+                            </h2>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="font-body-sm text-body-sm text-on-surface-variant">
+                                The failure occurred across the boundary between <span class="font-code-sm text-secondary bg-surface-container px-1 rounded">auth-service</span> and the <span class="font-code-sm text-secondary bg-surface-container px-1 rounded">postgres-primary</span> datastore.
+                             </div>
+<!-- Visual Graph Placeholder -->
+<div class="h-40 w-full bg-surface-container-lowest border border-border-muted rounded relative overflow-hidden flex items-center justify-center p-4">
+<!-- Simple structural representation -->
+<div class="flex items-center justify-between w-full h-full relative">
+<div class="flex flex-col items-center z-10">
+<div class="w-12 h-12 bg-surface-container border border-border-muted rounded flex items-center justify-center mb-2 shadow-lg">
+<span class="material-symbols-outlined text-on-surface">api</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline-variant">Gateway</span>
+</div>
+<div class="h-0.5 w-16 bg-border-muted"></div>
+<div class="flex flex-col items-center z-10">
+<div class="w-12 h-12 bg-surface-container border border-error-bright rounded flex items-center justify-center mb-2 shadow-lg relative glow-error">
+<span class="material-symbols-outlined text-error-bright">vpn_key</span>
+</div>
+<span class="font-code-sm text-code-sm text-error-bright font-bold">auth-service</span>
+</div>
+<div class="h-0.5 w-16 bg-error-bright relative">
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-surface-container border border-error-bright rounded-full p-0.5">
+<span class="material-symbols-outlined text-error-bright text-[12px]">lock_open</span>
+</div>
+</div>
+<div class="flex flex-col items-center z-10">
+<div class="w-12 h-12 bg-surface-container border border-border-muted rounded flex items-center justify-center mb-2 shadow-lg">
+<span class="material-symbols-outlined text-on-surface">database</span>
+</div>
+<span class="font-code-sm text-code-sm text-outline-variant">postgres-db</span>
+</div>
+</div>
+</div>
+<div class="flex items-start gap-2 bg-warning-gold/10 p-3 rounded border border-warning-gold/30">
+<span class="material-symbols-outlined text-warning-gold text-[16px] mt-0.5">warning</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                                     This boundary violation impacts 3 downstream services relying on isolated tenant context.
+                                 </p>
+</div>
+</div>
+</div>
+<!-- Waiver Actions Form -->
+<div class="bg-surface-container-high border border-border-muted rounded">
+<div class="px-4 py-3 border-b border-border-muted bg-surface-container-lowest/50">
+<h2 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">policy</span> Governance Actions
+                            </h2>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                                Critical failures require immediate remediation or formal architectural waiver to unblock deployment.
+                            </p>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface">Waiver Justification</label>
+<textarea class="w-full bg-surface-container-lowest border border-border-muted rounded p-3 font-body-sm text-body-sm text-on-surface focus:border-secondary focus:ring-0 outline-none h-24 placeholder:text-outline-variant" placeholder="Provide architectural context for ignoring this boundary violation..."></textarea>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface">Approver Role Required</label>
+<select class="w-full bg-surface-container-lowest border border-border-muted rounded p-2 font-code-sm text-code-sm text-on-surface focus:border-secondary focus:ring-0 outline-none">
+<option>Principal Security Architect</option>
+<option>VP of Engineering</option>
+<option>Lead Platform Engineer</option>
+</select>
+</div>
+<button class="w-full py-2 border border-warning-gold text-warning-gold hover:bg-warning-gold/10 font-label-caps text-label-caps rounded transition-colors mt-2 flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">send</span> Submit for Approval
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,43 @@
+# Phase A.39: Enterprise Organization, Client & Tenant Lifecycle Architecture
+
+## Overview
+Phase A.39 establishes the **Enterprise Operating Layer**, transforming UdehLabs from a collection of modules into a production-grade multi-tenant platform. It manages the end-to-end lifecycle of Organizations and Clients, ensuring that every entity—from a provisioning startup to a suspended enterprise—operates within strict security and governance boundaries.
+
+## Core Components
+
+### 1. Organization Lifecycle & Provisioning (`IOrganizationOrchestrator`)
+- **Lifecycle Management**: Manages transitions between `PROVISIONING` -> `ACTIVE` -> `SUSPENDED` -> `RESTRICTED` -> `ARCHIVED` -> `DELETED`.
+- **Idempotent Provisioning**: A retry-safe workflow that initializes the organization record, owner membership, default security/AI policies, and dedicated namespaces for storage and communication.
+- **Tenant Isolation Context**: A canonical request-level context that resolves identity, organization, and feature entitlements, ensuring no tenant-supplied ID is ever trusted blindly.
+
+### 2. Client Lifecycle & Onboarding (`IClientLifecycleManager`)
+- **Structured Onboarding**: A configurable journey including contact verification, requirements collection, security reviews, and developer assignment.
+- **Client Profile & Contacts**: Manages multi-point organizational contacts (Primary, Billing, Technical) with scoped permissions.
+- **Onboarding Checklist**: A reusable infrastructure to track progress, evidence, and approvals for new client activations.
+
+### 3. Membership & Role Governance (`IMembershipService`)
+- **Membership Operations**: Handles invitations, role changes, ownership transfers, and suspensions with full audit integration.
+- **Invitation Security**: Protects against replay, expiration, and cross-tenant access using the existing secure token infrastructure.
+- **Custom Organization Roles**: Allows tenants to define granular roles within platform-governed security boundaries.
+
+### 4. Client Portal & Approval Workflows (`IClientPortalService`)
+- **Unified Client Experience**: A dedicated interface for clients to manage projects, review milestones, track billing, and communicate with delivery teams.
+- **Requirement & Design Approval**: Formalizes the sign-off process for technical specifications and deliverables with auditable revision history.
+- **Support Foundation**: An integrated support-request system utilizing the existing communication architecture.
+
+## Data Models
+- **OrganizationSettings / Branding**: Tenant-level configuration for UI, defaults, and feature flags.
+- **OrganizationMembership / Invitation**: Structured records for user-to-tenant associations.
+- **ClientProfile / ClientContact**: Business-level metadata for external organizations.
+- **Requirement / RequirementRevision**: Versioned intake data for engineering projects.
+- **SupportRequest**: Integrated ticketing linked to organization and project context.
+
+## Security & Governance
+- **Canonical Context Resolution**: Every API and server action must resolve tenant context server-side, preventing cross-tenant exfiltration.
+- **Client-Developer Boundary**: Strict separation of internal engineering notes/evidence from client-visible views.
+- **Governance-Locked Deletion**: Deletion requests are blocked by legal holds, open security incidents, or active regulatory retention periods.
+
+## Vertical Integration
+- **A.38 Integration**: Inherits compliance evidence collection and policy enforcement.
+- **A.37 Integration**: Security detections monitor for cross-tenant access attempts and privilege escalation.
+- **A.1/A.35 Integration**: Organization state responds dynamically to billing lifecycle (Trial, Past Due, Suspended).

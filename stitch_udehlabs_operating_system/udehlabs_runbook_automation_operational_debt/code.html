@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEXUS COMMAND - Runbook Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#081425",
+                        "secondary-container": "#6001d1",
+                        "status-critical": "#ef4444",
+                        "on-surface-variant": "#c0c7d5",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "surface-container-highest": "#2a3548",
+                        "outline-variant": "#404753",
+                        "border-active": "#1e293b",
+                        "on-background": "#d7e3fb",
+                        "on-tertiary": "#003824",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary-container": "#00311f",
+                        "on-secondary-fixed": "#25005a",
+                        "inverse-on-surface": "#263143",
+                        "tertiary": "#4edea3",
+                        "on-surface": "#d7e3fb",
+                        "inverse-surface": "#d7e3fb",
+                        "background": "#081425",
+                        "surface-deep": "#040e1f",
+                        "on-secondary-container": "#c9aeff",
+                        "status-healthy": "#10b981",
+                        "on-primary-container": "#002a52",
+                        "surface-container": "#152031",
+                        "surface-container-high": "#1f2a3c",
+                        "on-primary-fixed-variant": "#004884",
+                        "secondary": "#d2bbff",
+                        "surface-bright": "#2f3a4c",
+                        "outline": "#8a919e",
+                        "on-secondary": "#3f008e",
+                        "primary-fixed": "#d4e3ff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed": "#002113",
+                        "inverse-primary": "#005fad",
+                        "on-primary-fixed": "#001c39",
+                        "status-warning": "#f59e0b",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-lowest": "#030e1f",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-tint": "#a4c9ff",
+                        "primary-container": "#3492f6",
+                        "on-error": "#690005",
+                        "surface-container-low": "#101c2d",
+                        "surface-dim": "#081425",
+                        "on-primary": "#00315d",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "data-text": "#d8e3fb",
+                        "surface-variant": "#2a3548",
+                        "tertiary-container": "#00a572",
+                        "secondary-fixed": "#eaddff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "primary": "#a4c9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "standard": "16px",
+                        "base": "4px",
+                        "gutter": "12px",
+                        "margin-desktop": "24px",
+                        "sidebar": "240px",
+                        "compact": "8px",
+                        "margin-mobile": "12px"
+                    },
+                    "fontFamily": {
+                        "data-md": ["Geist Mono"],
+                        "data-sm": ["Geist Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "data-lg": ["Geist Mono"],
+                        "label-caps": ["Geist Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "data-sm": ["11px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.surface'); color: theme('colors.on-surface'); }
+        .grid-bg {
+            background-size: 24px 24px;
+            background-image: linear-gradient(to right, theme('colors.outline-variant') 1px, transparent 1px),
+                              linear-gradient(to bottom, theme('colors.outline-variant') 1px, transparent 1px);
+            opacity: 0.1;
+        }
+        .glow-critical { box-shadow: 0 0 8px theme('colors.status-critical'); }
+        .glow-healthy { box-shadow: 0 0 8px theme('colors.status-healthy'); }
+        .bento-card {
+            background-color: theme('colors.surface-container');
+            border: 1px solid theme('colors.border-active');
+            border-radius: theme('borderRadius.DEFAULT');
+            padding: theme('spacing.standard');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center px-standard w-full sticky top-0 z-50 bg-surface h-14 border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">NEXUS COMMAND</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-bright transition-colors" data-icon="notifications_active">notifications_active</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-bright transition-colors" data-icon="settings">settings</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-surface-bright transition-colors" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden relative">
+<div class="absolute inset-0 grid-bg pointer-events-none z-0"></div>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-standard w-sidebar border-r border-outline-variant bg-surface-container-low dark:bg-surface-container-low z-10 shrink-0">
+<div class="px-standard mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-surface-bright overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A stylized, high-contrast, minimalist avatar icon for a Site Reliability Engineer, featuring cybernetic or technical motifs in dark indigo and bright cyan, fitting a modern brutalist dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-ge0QY_Kc5kMJ3BCLPCK9dK-jo0ghAK4yDF94o6UuiWAcdw6cSfOUXdcOkKN27kSfJOjo0MKShFPwWexmfpuMEx7taBX5f7CX5BdASCccTHg_Yk0mmFrNEMkMjOqNr4aUPnCI863jmMo2OVtN2hNlVYOySvbtUdKCeO0q0cA541yfGUjkjZNpiQbjCwXfhPa0UmzEkbWk_p18DoqThL5KxY5gl9dchUvsOvdt6n1amiYDxsNLWKFe0w"/>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-primary">OPERATOR_01</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">On-Call: Tier 2</div>
+</div>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-1 px-2 font-label-caps text-label-caps">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="monitor_heart">monitor_heart</span>
+                    Platform Health
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="error">error</span>
+                    Live Alerts
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="terminal">terminal</span>
+                    Incident Workspace
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="hub">hub</span>
+                    Service Map
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="query_stats">query_stats</span>
+                    SLOs
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-secondary font-bold bg-surface-container-highest border-r-2 border-secondary transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_mode" data-weight="fill" style="font-variation-settings: 'FILL' 1;">auto_mode</span>
+                    Runbook Automation
+                </a>
+</div>
+<div class="mt-auto px-4 mb-4">
+<button class="w-full bg-status-critical text-white font-label-caps text-label-caps py-2 rounded hover:opacity-90 transition-opacity">
+                    NEW INCIDENT
+                </button>
+</div>
+<div class="border-t border-outline-variant pt-4 px-2 flex flex-col gap-1 font-label-caps text-label-caps">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="description">description</span>
+                    Docs
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
+                    Support
+                </a>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto p-gutter z-10 flex flex-col md:flex-row gap-gutter">
+<!-- Left Column: Runbook Registry -->
+<div class="w-full md:w-64 flex flex-col gap-compact shrink-0">
+<div class="bento-card h-full flex flex-col p-0">
+<div class="p-standard border-b border-border-active bg-surface-deep">
+<h2 class="font-label-caps text-label-caps text-primary tracking-widest">RUNBOOK REGISTRY</h2>
+</div>
+<div class="p-compact flex-1 overflow-y-auto">
+<div class="mb-4">
+<div class="font-data-sm text-data-sm text-on-surface-variant mb-2 px-2 uppercase">Scale</div>
+<ul class="space-y-1">
+<li><button class="w-full text-left px-2 py-1.5 rounded hover:bg-surface-bright font-data-md text-data-md text-on-surface truncate">RB-101: Auto-Scale Web Tier</button></li>
+<li><button class="w-full text-left px-2 py-1.5 rounded hover:bg-surface-bright font-data-md text-data-md text-on-surface truncate">RB-102: Provision Read Replicas</button></li>
+</ul>
+</div>
+<div class="mb-4">
+<div class="font-data-sm text-data-sm text-on-surface-variant mb-2 px-2 uppercase">Failover</div>
+<ul class="space-y-1">
+<li><button class="w-full text-left px-2 py-1.5 rounded hover:bg-surface-bright font-data-md text-data-md text-on-surface truncate">RB-201: DB Primary Swap</button></li>
+<li><button class="w-full text-left px-2 py-1.5 rounded hover:bg-surface-bright font-data-md text-data-md text-status-warning truncate">RB-205: Region Evacuation</button></li>
+</ul>
+</div>
+<div class="mb-4">
+<div class="font-data-sm text-data-sm text-on-surface-variant mb-2 px-2 uppercase">Cleanup</div>
+<ul class="space-y-1">
+<li><button class="w-full text-left px-2 py-1.5 rounded bg-surface-bright border-l-2 border-primary font-data-md text-data-md text-primary truncate">RB-42: Clear Dead Letter Queue</button></li>
+<li><button class="w-full text-left px-2 py-1.5 rounded hover:bg-surface-bright font-data-md text-data-md text-on-surface truncate">RB-45: Purge Temp Storage</button></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Center Column: Workspace -->
+<div class="flex-1 flex flex-col gap-gutter min-w-0">
+<!-- Active Execution Stepper -->
+<div class="bento-card relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-[64px]" data-icon="terminal">terminal</span>
+</div>
+<div class="flex justify-between items-start mb-6 relative z-10">
+<div>
+<h2 class="font-label-caps text-label-caps text-secondary tracking-widest mb-1">ACTIVE EXECUTION</h2>
+<div class="font-headline-sm text-headline-sm text-on-surface">RB-42: Clear Dead Letter Queue</div>
+</div>
+<div class="text-right">
+<div class="font-data-sm text-data-sm text-status-warning animate-pulse">RUNNING</div>
+<div class="font-data-md text-data-md">00:02:14</div>
+</div>
+</div>
+<div class="relative z-10">
+<div class="font-data-sm text-data-sm text-on-surface-variant mb-4">STEP 3/5: Verifying Consistency</div>
+<div class="flex items-center gap-2 mb-2">
+<!-- Step 1 -->
+<div class="flex-1 h-1 bg-status-healthy"></div>
+<!-- Step 2 -->
+<div class="flex-1 h-1 bg-status-healthy"></div>
+<!-- Step 3 -->
+<div class="flex-1 h-1 bg-status-warning glow-critical"></div>
+<!-- Step 4 -->
+<div class="flex-1 h-1 bg-surface-deep"></div>
+<!-- Step 5 -->
+<div class="flex-1 h-1 bg-surface-deep"></div>
+</div>
+<div class="bg-surface-deep p-4 rounded font-data-sm text-data-sm text-on-surface-variant font-mono h-32 overflow-y-auto mt-4 border border-outline-variant">
+<div><span class="text-status-healthy">[OK]</span> Init connection to broker...</div>
+<div><span class="text-status-healthy">[OK]</span> Queue identified: prod-dlq-events</div>
+<div><span class="text-status-healthy">[OK]</span> Backing up current state...</div>
+<div><span class="text-tertiary">[INF]</span> Snapshot saved to s3://nexus-backups/dlq/</div>
+<div class="text-status-warning"><span class="text-status-warning">[RUN]</span> Verifying data consistency across nodes...</div>
+<div class="opacity-50">_</div>
+</div>
+</div>
+</div>
+<!-- Remediation History Table -->
+<div class="bento-card flex-1 flex flex-col p-0 overflow-hidden">
+<div class="p-standard border-b border-border-active flex justify-between items-center bg-surface-deep">
+<h2 class="font-label-caps text-label-caps text-primary tracking-widest">AUTOMATED REMEDIATION HISTORY</h2>
+<button class="border border-border-active text-primary font-data-sm text-data-sm px-3 py-1 rounded hover:bg-surface-bright transition-colors">
+                            VIEW ALL
+                        </button>
+</div>
+<div class="flex-1 overflow-x-auto overflow-y-auto">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-high font-data-sm text-data-sm text-on-surface-variant">
+<tr>
+<th class="p-2 border-b border-outline-variant whitespace-nowrap">TIME</th>
+<th class="p-2 border-b border-outline-variant">ACTION</th>
+<th class="p-2 border-b border-outline-variant">STATUS</th>
+<th class="p-2 border-b border-outline-variant">RESULT</th>
+<th class="p-2 border-b border-outline-variant text-right">AUDIT</th>
+</tr>
+</thead>
+<tbody class="font-data-md text-data-md divide-y divide-outline-variant">
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="p-2 text-on-surface-variant">10:42Z</td>
+<td class="p-2">Restart Pods: api-gateway</td>
+<td class="p-2"><span class="text-status-healthy">Completed</span></td>
+<td class="p-2 text-on-surface-variant">Latency resolved</td>
+<td class="p-2 text-right"><span class="material-symbols-outlined text-[16px] text-tertiary opacity-50 group-hover:opacity-100" data-icon="lock">lock</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="p-2 text-on-surface-variant">09:15Z</td>
+<td class="p-2">AI Proposal: Scale DB Tier</td>
+<td class="p-2"><span class="text-status-warning">Pending Auth</span></td>
+<td class="p-2 text-on-surface-variant">Awaiting operator</td>
+<td class="p-2 text-right"><span class="material-symbols-outlined text-[16px] text-tertiary opacity-50 group-hover:opacity-100" data-icon="lock">lock</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="p-2 text-on-surface-variant">08:00Z</td>
+<td class="p-2">Clear Cache: Redis Cluster</td>
+<td class="p-2"><span class="text-status-healthy">Completed</span></td>
+<td class="p-2 text-on-surface-variant">Hit rate stabilized</td>
+<td class="p-2 text-right"><span class="material-symbols-outlined text-[16px] text-tertiary opacity-50 group-hover:opacity-100" data-icon="lock">lock</span></td>
+</tr>
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="p-2 text-on-surface-variant">04:33Z</td>
+<td class="p-2">Rollback: deployment/auth-v2</td>
+<td class="p-2"><span class="text-status-critical">Failed</span></td>
+<td class="p-2 text-on-surface-variant">Manual intervention req</td>
+<td class="p-2 text-right"><span class="material-symbols-outlined text-[16px] text-tertiary opacity-50 group-hover:opacity-100" data-icon="lock">lock</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Column: Operational Debt -->
+<div class="w-full md:w-72 flex flex-col gap-gutter shrink-0">
+<div class="bento-card flex-1 flex flex-col">
+<h2 class="font-label-caps text-label-caps text-secondary tracking-widest mb-4 border-b border-outline-variant pb-2">OPERATIONAL DEBT &amp; SCORECARD</h2>
+<div class="space-y-6 overflow-y-auto flex-1 pr-2">
+<!-- Scorecard -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<div class="font-data-sm text-data-sm text-on-surface-variant">SYSTEM READINESS</div>
+<div class="font-data-lg text-data-lg text-status-warning">78%</div>
+</div>
+<div class="w-full bg-surface-deep h-2 rounded overflow-hidden">
+<div class="bg-status-warning h-full" style="width: 78%"></div>
+</div>
+</div>
+<!-- Action Items -->
+<div class="space-y-3">
+<div class="font-data-sm text-data-sm text-on-surface-variant mb-1 border-b border-outline-variant pb-1">OBSERVABILITY GAPS</div>
+<div class="bg-surface-deep border border-outline-variant p-2 rounded flex items-start gap-2">
+<span class="material-symbols-outlined text-status-critical text-[16px] mt-0.5" data-icon="warning">warning</span>
+<div>
+<div class="font-data-md text-data-md">Knowledge API</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Missing SLO definitions</div>
+</div>
+</div>
+<div class="bg-surface-deep border border-outline-variant p-2 rounded flex items-start gap-2">
+<span class="material-symbols-outlined text-status-warning text-[16px] mt-0.5" data-icon="info">info</span>
+<div>
+<div class="font-data-md text-data-md">Billing Service</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Trace coverage &lt; 50%</div>
+</div>
+</div>
+</div>
+<div class="space-y-3">
+<div class="font-data-sm text-data-sm text-on-surface-variant mb-1 border-b border-outline-variant pb-1">POSTMORTEM ACTIONS</div>
+<div class="flex items-center gap-2">
+<input class="rounded bg-surface-deep border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-data-md text-data-md">Update Redis failover docs</span>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded bg-surface-deep border-outline-variant text-primary focus:ring-primary focus:ring-offset-surface" type="checkbox"/>
+<span class="font-data-md text-data-md text-on-surface-variant line-through">Audit IAM permissions</span>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant">
+<button class="w-full border border-border-active text-primary font-data-sm text-data-sm py-2 rounded hover:bg-surface-bright transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="sync">sync</span>
+                            TRIGGER MANUAL RECONCILIATION
+                        </button>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="flex justify-between items-center px-gutter w-full z-50 bg-surface-deep fixed bottom-0 left-0 h-8 border-t border-outline-variant font-data-sm text-data-sm text-tertiary">
+<div class="text-status-healthy font-label-caps text-label-caps tracking-widest">SYSTEM STATUS: OPTIMAL | L: 42ms | T: 1.2k/s</div>
+<div class="flex gap-4 text-on-surface-variant">
+<span class="hover:text-primary transition-colors cursor-pointer">Active Rotation: J. DOE</span>
+<span class="hover:text-primary transition-colors cursor-pointer">Region: US-EAST-1</span>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Platform Administration Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "border-muted": "#1e293b",
+                      "data-blue": "#1C85E8",
+                      "error": "#ffb4ab",
+                      "on-tertiary-fixed": "#002113",
+                      "surface-container-high": "#232a36",
+                      "on-tertiary": "#003824",
+                      "on-tertiary-container": "#00734e",
+                      "on-secondary-container": "#c9aeff",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "status-success": "#10b981",
+                      "on-primary-container": "#576579",
+                      "status-risk": "#f59e0b",
+                      "execution-violet": "#7c3aed",
+                      "tertiary": "#ffffff",
+                      "surface-container-low": "#141c27",
+                      "terminal-black": "#091017",
+                      "primary-fixed": "#d5e4fb",
+                      "surface-container-highest": "#2d3541",
+                      "on-primary-fixed": "#0d1c2d",
+                      "surface": "#0c141e",
+                      "inverse-primary": "#515f73",
+                      "tertiary-container": "#6ffbbe",
+                      "inverse-surface": "#dbe3f2",
+                      "on-primary": "#233143",
+                      "inverse-on-surface": "#29313c",
+                      "surface-card": "#0d1b2a",
+                      "surface-container-lowest": "#070f19",
+                      "primary-container": "#d5e4fb",
+                      "on-primary-fixed-variant": "#3a485a",
+                      "secondary": "#d2bbff",
+                      "status-critical": "#ef4444",
+                      "on-error-container": "#ffdad6",
+                      "secondary-container": "#6001d1",
+                      "on-secondary-fixed": "#25005a",
+                      "outline": "#8e9197",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#18202b",
+                      "primary": "#ffffff",
+                      "background": "#0c141e",
+                      "surface-bright": "#323a45",
+                      "error-container": "#93000a",
+                      "on-background": "#dbe3f2",
+                      "on-surface-variant": "#c4c6cd",
+                      "outline-variant": "#44474c",
+                      "secondary-fixed": "#eaddff",
+                      "surface-dim": "#0c141e",
+                      "surface-tint": "#b9c8de",
+                      "surface-variant": "#2d3541",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-secondary": "#3f008e",
+                      "on-error": "#690005",
+                      "on-surface": "#dbe3f2",
+                      "tertiary-fixed": "#6ffbbe",
+                      "primary-fixed-dim": "#b9c8de"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "container-margin": "24px",
+                      "density-compact": "8px",
+                      "sidebar_width": "260px",
+                      "base": "4px",
+                      "density-comfortable": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased overflow-hidden flex h-screen">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest fixed left-0 top-0 h-full w-sidebar_width border-r border-border-muted flex flex-col py-density-comfortable z-20 flex-shrink-0">
+<!-- Header -->
+<div class="px-container-margin mb-8 flex items-center space-x-3">
+<img class="w-10 h-10 rounded-full border border-border-muted object-cover" data-alt="A small, high-tech glowing orb avatar symbolizing system status, deep space dark background, vibrant emerald green core, sharp digital rendering, minimalist brutalist UI aesthetic, isolated on dark." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwZN1MU74Zs1RuO8IVDxT0VOhvXnq2D3jmZm6hWovQi9sXDXGgwzCKnPXbMzuVUnJULkCBOb9e90ejP__JiGQ4fVAoFTBWQOlwZjv4_l8qwEb4M7k6bd0XoU5-J5B7ffiQRSeEwTC_-L3pTRZl9EYYz1TNFxy4ul9z5Ay6UmNwvCXnESbR3WI6XEBv_til3g5cbkv0qe8It0LfSpnrmzCRXJ07NB2Zl5VnCqaSeZIHJ0F3oz0eTPNizg"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-primary">System Admin</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">V0.4.2-STABLE</p>
+</div>
+</div>
+<!-- Main Nav -->
+<ul class="flex-1 space-y-1">
+<li>
+<a class="flex items-center px-container-margin py-3 bg-surface-container-high text-primary border-l-4 border-execution-violet transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined mr-3 text-execution-violet" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+<span class="font-label-caps text-label-caps uppercase">Organizations</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">group</span>
+<span class="font-label-caps text-label-caps uppercase">Users</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-label-caps text-label-caps uppercase">Billing</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">smart_toy</span>
+<span class="font-label-caps text-label-caps uppercase">AI Agents</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">hub</span>
+<span class="font-label-caps text-label-caps uppercase">Infrastructure</span>
+</a>
+</li>
+<li>
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">history</span>
+<span class="font-label-caps text-label-caps uppercase">Audit Log</span>
+</a>
+</li>
+</ul>
+<!-- Footer Nav -->
+<div class="mt-auto pt-4 border-t border-border-muted space-y-1">
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">security</span>
+<span class="font-label-caps text-label-caps uppercase">Security</span>
+</a>
+<a class="flex items-center px-container-margin py-3 text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-all duration-150 ease-in-out border-l-4 border-transparent" href="#">
+<span class="material-symbols-outlined mr-3">contact_support</span>
+<span class="font-label-caps text-label-caps uppercase">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-[260px] flex flex-col h-full bg-background overflow-hidden relative">
+<!-- TopNavBar -->
+<header class="bg-terminal-black flex justify-between items-center w-full px-container-margin h-16 border-b border-border-muted z-10 flex-shrink-0">
+<!-- Brand / Search (Left) -->
+<div class="flex items-center space-x-6 w-1/3">
+<h1 class="font-headline-md text-headline-md font-bold text-execution-violet tracking-tight">UdehLabs Console</h1>
+<div class="relative w-full max-w-xs hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full bg-surface-container-highest border border-border-muted rounded text-primary placeholder-on-surface-variant pl-9 pr-3 py-1.5 focus:outline-none focus:border-outline-variant font-data-mono text-data-mono transition-colors" placeholder="Search systems..." type="text"/>
+</div>
+</div>
+<!-- Actions (Right) -->
+<div class="flex items-center space-x-2">
+<button class="p-2 text-on-primary-container hover:bg-surface-container-high transition-colors rounded active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-primary-container hover:bg-surface-container-high transition-colors rounded active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-on-primary-container hover:bg-surface-container-high transition-colors rounded active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="pl-4 border-l border-border-muted ml-2">
+<img class="w-8 h-8 rounded border border-outline-variant object-cover" data-alt="A hyper-realistic close-up of a super admin avatar profile picture. Dark minimalist brutalist aesthetic. The face is obscured by high-tech geometric shadows, illuminated by harsh execution violet and status emerald rim lighting. Serious, authoritative vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFxrj8GU1F4vrKvQbt3EV_bmcy_Hu5GXSjNF9DuFKCKYl8zYp396gsY3y_kdG_5auynMUDBG_XDCQavZHnhoE5JLU60mSwppLCGYs6v2LfWrTw9rgtOwF_WLSz0L2vuewR-emmG2rXJVZeTEiRTJketQo_dvwIewnyw_acK48JUD3uZ93wpcEr2TyLR1WONWIKCierBl4X2AcO1xzvkgjA3sG2u3uQ5fmROtsblOXH_qu5hshbQLDX5g"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin">
+<div class="max-w-7xl mx-auto space-y-6">
+<!-- Section Header -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">Global Organizations Overview</h2>
+<p class="font-data-mono text-data-mono text-on-surface-variant mt-1">SYS_TIME: <span class="text-data-blue">2023-10-27T14:32:00Z</span> | ENV: <span class="text-status-success">PROD</span></p>
+</div>
+<button class="bg-execution-violet text-white px-4 py-2 font-label-caps text-label-caps rounded flex items-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined mr-2 text-sm">add</span>
+                        New Organization
+                    </button>
+</div>
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<!-- KPI 1 -->
+<div class="bg-surface-card border border-border-muted p-4 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-success"></div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">CORE API</span>
+<span class="material-symbols-outlined text-status-success">check_circle</span>
+</div>
+<div class="mt-4">
+<span class="font-headline-md text-headline-md text-primary">99.99%</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-1">Healthy</span>
+</div>
+<!-- Decorative background elements -->
+<div class="absolute -right-4 -bottom-4 text-border-muted opacity-20 pointer-events-none group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined" style="font-size: 80px;">dns</span>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-card border border-border-muted p-4 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-data-blue"></div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">AI GATEWAY</span>
+<span class="material-symbols-outlined text-data-blue">bolt</span>
+</div>
+<div class="mt-4">
+<span class="font-headline-md text-headline-md text-primary">14.2k</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-1">req/s</span>
+</div>
+<div class="absolute -right-4 -bottom-4 text-border-muted opacity-20 pointer-events-none group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined" style="font-size: 80px;">psychology</span>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-card border border-border-muted p-4 relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-success"></div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">DB CLUSTERS</span>
+<span class="material-symbols-outlined text-status-success">database</span>
+</div>
+<div class="mt-4 flex items-baseline space-x-1">
+<span class="font-headline-md text-headline-md text-primary">42</span>
+<span class="font-headline-sm text-headline-sm text-on-surface-variant">/42</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant block mt-1">nodes up</span>
+<div class="absolute -right-4 -bottom-4 text-border-muted opacity-20 pointer-events-none group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined" style="font-size: 80px;">schema</span>
+</div>
+</div>
+<!-- KPI 4 -->
+<div class="bg-surface-card border border-border-muted p-4 relative overflow-hidden group bg-surface-container-highest">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk"></div>
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-status-risk uppercase">GLOBAL CDN</span>
+<span class="material-symbols-outlined text-status-risk animate-pulse">warning</span>
+</div>
+<div class="mt-4">
+<span class="font-headline-md text-headline-md text-primary">98.1%</span>
+<span class="font-body-sm text-body-sm text-status-risk block mt-1 font-bold">DEGRADED in EU-West</span>
+</div>
+<div class="absolute -right-4 -bottom-4 text-border-muted opacity-20 pointer-events-none group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined" style="font-size: 80px;">public</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid for Main Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column (Area Chart & Heatmap) spanning 8 cols -->
+<div class="lg:col-span-8 flex flex-col space-y-6">
+<!-- Area Chart Card -->
+<div class="bg-surface-card border border-border-muted flex flex-col min-h-[300px]">
+<div class="p-4 border-b border-border-muted flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-label-caps text-label-caps text-primary uppercase flex items-center">
+<span class="w-2 h-2 bg-execution-violet rounded-full mr-2"></span>
+                                    Growth Metrics (Active Orgs &amp; MRR)
+                                </h3>
+<div class="flex space-x-2">
+<button class="px-2 py-1 text-data-mono font-data-mono text-xs bg-terminal-black border border-outline-variant text-primary rounded">30D</button>
+<button class="px-2 py-1 text-data-mono font-data-mono text-xs bg-surface-container border border-border-muted text-on-surface-variant rounded">90D</button>
+</div>
+</div>
+<div class="flex-1 p-4 relative" style="background: linear-gradient(to top, rgba(124, 58, 237, 0.05), transparent);">
+<!-- Faux Chart grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none py-6 px-4">
+<div class="border-t border-border-muted border-dashed opacity-50 w-full h-0"></div>
+<div class="border-t border-border-muted border-dashed opacity-50 w-full h-0"></div>
+<div class="border-t border-border-muted border-dashed opacity-50 w-full h-0"></div>
+<div class="border-t border-border-muted border-dashed opacity-50 w-full h-0"></div>
+</div>
+<!-- Faux Chart Data Representation -->
+<div class="absolute bottom-4 left-4 right-4 h-3/4 flex items-end">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,100 L0,80 Q25,90 50,60 T100,20 L100,100 Z" fill="rgba(28, 133, 232, 0.1)" stroke="#1C85E8" stroke-width="2"></path>
+<path d="M0,100 L0,90 Q20,80 40,70 T80,30 T100,10 L100,100 Z" fill="url(#violet-grad)" stroke="#7c3aed" stroke-width="2"></path>
+<defs>
+<lineargradient id="violet-grad" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="rgba(124, 58, 237, 0.3)"></stop>
+<stop offset="100%" stop-color="rgba(124, 58, 237, 0)"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="absolute bottom-1 w-full flex justify-between px-6 text-data-mono text-[10px] text-on-surface-variant">
+<span>Oct 01</span><span>Oct 08</span><span>Oct 15</span><span>Oct 22</span><span>Oct 29</span>
+</div>
+</div>
+</div>
+<!-- Security Heatmap Card -->
+<div class="bg-surface-card border border-border-muted flex flex-col">
+<div class="p-4 border-b border-border-muted bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-primary uppercase flex items-center">
+<span class="w-2 h-2 bg-status-critical rounded-full mr-2"></span>
+                                    Security Incident Heatmap
+                                </h3>
+<span class="font-data-mono text-[10px] px-2 py-1 bg-surface border border-border-muted rounded">Global Regions vs Types</span>
+</div>
+<div class="p-4 bg-terminal-black">
+<div class="grid grid-cols-[100px_repeat(5,_1fr)] gap-1 text-data-mono text-xs">
+<!-- Header Row -->
+<div class="text-on-surface-variant flex items-end pb-2">Region</div>
+<div class="text-center text-on-surface-variant pb-2 border-b border-border-muted">DDoS</div>
+<div class="text-center text-on-surface-variant pb-2 border-b border-border-muted">Auth Fail</div>
+<div class="text-center text-on-surface-variant pb-2 border-b border-border-muted">API Abuse</div>
+<div class="text-center text-on-surface-variant pb-2 border-b border-border-muted">Data Leak</div>
+<div class="text-center text-on-surface-variant pb-2 border-b border-border-muted">Malware</div>
+<!-- NA-EAST -->
+<div class="py-2 text-primary border-r border-border-muted pr-2 text-right">NA-EAST</div>
+<div class="bg-status-risk/20 border border-status-risk/30 m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-status-critical/40 border border-status-critical/50 m-0.5 relative group cursor-pointer">
+<div class="absolute hidden group-hover:block z-10 bg-surface-container-highest border border-outline-variant p-2 rounded -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap shadow-lg">14 Incidents</div>
+</div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<!-- EU-WEST -->
+<div class="py-2 text-primary border-r border-border-muted pr-2 text-right">EU-WEST</div>
+<div class="bg-status-critical/60 border border-status-critical m-0.5 relative group cursor-pointer">
+<div class="absolute hidden group-hover:block z-10 bg-surface-container-highest border border-outline-variant p-2 rounded -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap shadow-lg text-status-critical font-bold">28 Incidents!</div>
+</div>
+<div class="bg-status-risk/40 border border-status-risk/50 m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<!-- AP-SOUTH -->
+<div class="py-2 text-primary border-r border-border-muted pr-2 text-right">AP-SOUTH</div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+<div class="bg-status-risk/20 border border-status-risk/30 m-0.5"></div>
+<div class="bg-surface-container m-0.5"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Sidebar Card & Audit Log) spanning 4 cols -->
+<div class="lg:col-span-4 flex flex-col space-y-6">
+<!-- AI Ops Tracking -->
+<div class="bg-surface-card border border-border-muted relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-data-blue"></div>
+<div class="p-4 border-b border-border-muted bg-surface-container-lowest">
+<h3 class="font-label-caps text-label-caps text-primary uppercase">AI Operations</h3>
+</div>
+<div class="p-4 space-y-6">
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<span class="font-data-mono text-data-mono text-on-surface-variant">Total Tokens</span>
+<span class="font-headline-md text-headline-md text-primary">1.2B</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full overflow-hidden">
+<div class="bg-data-blue w-3/4 h-full"></div>
+</div>
+<p class="text-[10px] font-data-mono text-data-blue mt-1 text-right">75% of quota</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-terminal-black border border-border-muted rounded">
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">AGENT SUCCESS</span>
+<span class="font-headline-sm text-headline-sm text-status-success">94.2%</span>
+</div>
+<div class="p-3 bg-terminal-black border border-border-muted rounded">
+<span class="block font-label-caps text-[10px] text-on-surface-variant mb-1">AVG LATENCY</span>
+<span class="font-headline-sm text-headline-sm text-primary">112ms</span>
+</div>
+</div>
+<div class="pt-4 border-t border-border-muted">
+<button class="w-full py-2 bg-transparent border border-outline-variant text-primary font-label-caps text-label-caps hover:bg-surface-container transition-colors rounded">View AI Details</button>
+</div>
+</div>
+</div>
+<!-- Audit Log -->
+<div class="bg-surface-card border border-border-muted flex-1 flex flex-col min-h-[300px]">
+<div class="p-4 border-b border-border-muted bg-surface-container-lowest flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-primary uppercase flex items-center">
+<span class="material-symbols-outlined text-outline-variant mr-2 text-sm">history</span>
+                                    Recent Admin Actions
+                                </h3>
+</div>
+<div class="flex-1 bg-terminal-black p-4 overflow-y-auto">
+<ul class="space-y-3 font-data-mono text-data-mono">
+<li class="flex flex-col border-b border-border-muted/50 pb-2">
+<div class="flex justify-between items-start mb-1">
+<span class="text-data-blue">SYS_ADMIN</span>
+<span class="text-on-surface-variant text-[10px]">14:31:02</span>
+</div>
+<span class="text-primary text-xs">&gt; UPDATE config: DB_CLUSTER_REGION</span>
+<span class="text-status-success text-[10px] mt-1 bg-status-success/10 border border-status-success/30 px-1 inline-block w-max">SUCCESS</span>
+</li>
+<li class="flex flex-col border-b border-border-muted/50 pb-2">
+<div class="flex justify-between items-start mb-1">
+<span class="text-data-blue">SYS_ADMIN</span>
+<span class="text-on-surface-variant text-[10px]">14:28:45</span>
+</div>
+<span class="text-primary text-xs">&gt; FORCE_RESTART node: EU-WEST-04</span>
+<span class="text-status-risk text-[10px] mt-1 bg-status-risk/10 border border-status-risk/30 px-1 inline-block w-max">PENDING</span>
+</li>
+<li class="flex flex-col border-b border-border-muted/50 pb-2">
+<div class="flex justify-between items-start mb-1">
+<span class="text-data-blue">AUTO_AGENT</span>
+<span class="text-on-surface-variant text-[10px]">14:15:10</span>
+</div>
+<span class="text-primary text-xs">&gt; SCALE_UP: api_gateway_pool</span>
+<span class="text-status-success text-[10px] mt-1 bg-status-success/10 border border-status-success/30 px-1 inline-block w-max">SUCCESS</span>
+</li>
+<li class="flex flex-col">
+<div class="flex justify-between items-start mb-1">
+<span class="text-data-blue">SEC_ADMIN</span>
+<span class="text-on-surface-variant text-[10px]">13:42:01</span>
+</div>
+<span class="text-primary text-xs">&gt; REVOKE token: org_728x9</span>
+<span class="text-status-critical text-[10px] mt-1 bg-status-critical/10 border border-status-critical/30 px-1 inline-block w-max">OVERRIDE</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

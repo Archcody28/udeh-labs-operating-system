@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Decision Memory &amp; Lineage Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#25005a",
+                    "primary-fixed-dim": "#a4c9ff",
+                    "surface": "#051424",
+                    "inverse-primary": "#005fad",
+                    "surface-container": "#122131",
+                    "on-secondary": "#3f008e",
+                    "on-tertiary": "#502400",
+                    "tertiary-container": "#df7415",
+                    "inverse-surface": "#d4e4fa",
+                    "on-tertiary-fixed": "#311300",
+                    "primary": "#a4c9ff",
+                    "on-tertiary-container": "#461f00",
+                    "on-surface-variant": "#c0c7d5",
+                    "on-primary-container": "#002a52",
+                    "primary-container": "#3492f6",
+                    "secondary-container": "#6001d1",
+                    "surface-container-lowest": "#010f1f",
+                    "surface-tint": "#a4c9ff",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#273647",
+                    "surface-dim": "#051424",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-background": "#d4e4fa",
+                    "outline": "#8a919e",
+                    "on-primary-fixed-variant": "#004884",
+                    "surface-container-high": "#1c2b3c",
+                    "on-primary": "#00315d",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-surface": "#d4e4fa",
+                    "on-secondary-container": "#c9aeff",
+                    "background": "#051424",
+                    "on-primary-fixed": "#001c39",
+                    "surface-bright": "#2c3a4c",
+                    "secondary": "#d2bbff",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#0d1c2d",
+                    "surface-variant": "#273647",
+                    "primary-fixed": "#d4e3ff",
+                    "tertiary": "#ffb786",
+                    "outline-variant": "#404753",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "secondary-fixed": "#eaddff",
+                    "inverse-on-surface": "#233143",
+                    "tertiary-fixed-dim": "#ffb786"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "xl": "40px",
+                    "margin-desktop": "32px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg-mobile": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.08em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Custom scrollbar for deep space aesthetic */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-lowest');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-container-highest');
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline-variant');
+        }
+
+        .lineage-connector {
+            background: linear-gradient(to right, theme('colors.primary-container'), theme('colors.secondary-container'));
+            opacity: 0.3;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 15px theme('colors.primary/10');
+        }
+        
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-lowest text-primary font-label-md text-label-md h-screen w-20 flex-col items-center py-6 border-r border-outline-variant fixed left-0 top-0 z-50">
+<div class="mb-8 flex flex-col items-center gap-2">
+<div class="h-10 w-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-outline-variant hover:border-primary transition-colors cursor-pointer">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A macro shot of a sleek, futuristic avatar icon rendered in a dark corporate cyber aesthetic. High contrast, glowing electric blue edges against a deep obsidian background, representing a high-level executive user profile in an SRE command center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_41qa7Xm468IX_JdHIDi7R9EO4ra31-ys7j1V6x9qTRFgY6GKKcaMvt8KFUCLj3yVcueUGFJTWdxf9HZjkqWjcBOKz3XT-sKrtYavU4buAeNXEY930BzCTrUr54o7KdARxI8CD8k28KcSKEm_xj9dV-rZSvijXCqFvEARokdsi7hY_CsZp40eVKR-05yPYwiGvkfk1J5WU1Z16L6NSmBaVvP-pVUvLT1n1Yau7UgGE_CW2JN-PhUj4w"/>
+</div>
+<div class="w-12 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mt-2"></div>
+</div>
+<div class="flex flex-col gap-4 w-full">
+<a class="group w-full h-14 flex flex-col items-center justify-center relative hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">groups_3</span>
+<span class="text-[10px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Workforces</span>
+</a>
+<a class="group w-full h-14 flex flex-col items-center justify-center relative hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">terminal</span>
+<span class="text-[10px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Projects</span>
+</a>
+<a class="group w-full h-14 flex flex-col items-center justify-center relative hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">hub</span>
+<span class="text-[10px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Teams</span>
+</a>
+<a class="group w-full h-14 flex flex-col items-center justify-center relative hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 text-primary border-r-2 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="text-[10px] mt-1">Decisions</span>
+</a>
+<a class="group w-full h-14 flex flex-col items-center justify-center relative hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 0;">psychology</span>
+<span class="text-[10px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity">Intelligence</span>
+</a>
+</div>
+<div class="mt-auto">
+<button aria-label="New Initiative" class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-primary transition-colors shadow-[0_0_15px_rgba(52,146,246,0.3)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="bg-surface-dim/80 backdrop-blur-md text-primary font-label-sm text-label-sm h-16 w-full flex items-center border-b border-outline-variant fixed top-0 right-0 left-0 md:left-20 z-40 px-6 justify-between transition-all duration-300">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md tracking-tighter text-primary-fixed-dim">Aegis OS</h1>
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 bg-surface-container-lowest rounded-full border border-outline-variant/50">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="text-on-surface-variant text-[10px] tracking-widest uppercase">Node 0x4A Active</span>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden md:flex items-center bg-surface-container-highest h-9 rounded border border-outline-variant focus-within:ring-1 ring-primary/30 transition-all px-3 w-64 group relative overflow-hidden">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] mr-2" style="font-variation-settings: 'FILL' 0;">search</span>
+<input class="bg-transparent border-none text-on-surface focus:ring-0 p-0 text-sm w-full placeholder-on-surface-variant/50 z-10 relative" placeholder="Query Decisions, Outcomes..." type="text"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity z-0"></div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-9 h-9 flex items-center justify-center rounded text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-high transition-colors focus-within:ring-1 ring-primary/30">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_balance_wallet</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-high transition-colors focus-within:ring-1 ring-primary/30">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">health_and_safety</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded text-on-surface-variant hover:text-primary-fixed-dim hover:bg-surface-container-high transition-colors focus-within:ring-1 ring-primary/30 relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<span class="absolute top-2 right-2 w-1.5 h-1.5 bg-error rounded-full"></span>
+</button>
+</div>
+<div class="h-8 w-8 rounded overflow-hidden border border-outline-variant ml-2 md:hidden">
+<img alt="AI Briefing Hub" class="w-full h-full object-cover" data-alt="Small avatar icon for AI Briefing Hub, showing a stylized abstract eye or lens in deep corporate blues and bright cyan, fitting a dark mode enterprise dashboard interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1VtF3LEc21S2x962WEh2Kx1V_BykvD_M5piRqcSDk2khLn9eVi27-M-YRh8r97QmCOSGGiKAO7VVl90QySExMB9EtQXPrtLe_vyD5C-lIsSQA8sY1h0HroCVip114lwUs2C-lABwwmyalzPwnUHjZ80ujuUazJJ-eelMo_QWcfa3trSZO_S7yQ0IyjCudbCDqDCpyE6y1whgy98rZH9DlZiDYI6pO8lBB3dIxTQ1PvPWvP-vYtZU5Sg"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 md:pb-8 px-4 md:px-8 ml-0 md:ml-20 w-full min-h-screen flex flex-col gap-6 max-w-[1600px] mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-2">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary-fixed-dim font-label-sm text-label-sm border border-secondary-container/30 uppercase tracking-widest">Workspace</span>
+<span class="text-on-surface-variant material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface font-label-md text-label-md">Decision Memory &amp; Lineage</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-on-surface m-0 leading-tight">Governed Decisions</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">Capture, analyze, and trace the architectural and strategic decisions driving UdehLabs infrastructure.</p>
+</div>
+<div class="flex gap-3 w-full md:w-auto">
+<button class="flex-1 md:flex-none h-10 px-4 rounded border border-outline-variant bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Filter
+                </button>
+<button class="flex-1 md:flex-none h-10 px-4 rounded bg-primary-container hover:bg-primary-container/90 text-on-primary-container font-label-md text-label-md transition-colors flex items-center justify-center gap-2 font-bold shadow-[0_0_10px_rgba(52,146,246,0.2)]">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Record Decision
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="bento-grid">
+<!-- List Panel (Left Column) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+<!-- Metrics Row -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container rounded-lg p-4 border border-outline-variant/30 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Active Props</span>
+<span class="font-headline-lg text-headline-lg text-primary-fixed-dim">14</span>
+<div class="mt-2 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[45%]"></div>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-4 border border-outline-variant/30 flex flex-col gap-1 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Ratified (Q3)</span>
+<span class="font-headline-lg text-headline-lg text-secondary-fixed-dim">89</span>
+<div class="mt-2 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary-container w-[78%]"></div>
+</div>
+</div>
+</div>
+<!-- List Container -->
+<div class="bg-surface-container rounded-lg border border-outline-variant/50 flex-1 min-h-[500px] flex flex-col overflow-hidden">
+<div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-md text-headline-md text-on-surface">Registry</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">sort</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto overflow-x-hidden flex flex-col">
+<!-- Item 1 (Selected) -->
+<div class="p-4 border-l-2 border-primary bg-surface-container-highest/50 cursor-pointer relative">
+<div class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-surface-container-highest/50 to-transparent"></div>
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-primary-container/20 text-primary-fixed-dim border border-primary-container/30">Proposed</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 09:41</span>
+</div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 truncate pr-6">Migration to Modular Monolith</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2 mb-3">Transitioning core billing services from dispersed microservices back to a domain-driven modular monolith to reduce latency.</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface-container bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">JH</div>
+<div class="w-6 h-6 rounded-full border border-surface-container bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">AT</div>
+<div class="w-6 h-6 rounded-full border border-surface-container bg-surface-container-highest flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+2</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">comment</span> 12
+                                </span>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-4 border-l-2 border-transparent border-b border-outline-variant/20 hover:bg-surface-container-high/50 cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-secondary-container/20 text-secondary-fixed-dim border border-secondary-container/30">Approved</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 12, 14:20</span>
+</div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 truncate">Deprecate v1 REST API</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2 mb-3">Sunsetting legacy endpoints in favor of GraphQL gateway. Affects all external integrators.</p>
+<div class="flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-surface-container bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface">MK</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">done_all</span> Ratified
+                                </span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-4 border-l-2 border-transparent border-b border-outline-variant/20 hover:bg-surface-container-high/50 cursor-pointer transition-colors opacity-75">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-variant text-on-surface-variant border border-outline-variant">Superseded</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sep 04, 11:00</span>
+</div>
+<h4 class="font-body-lg text-body-lg text-on-surface font-semibold mb-1 truncate line-through decoration-on-surface-variant/50">Adopt MongoDB for Event Store</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm line-clamp-2 mb-3">Initial plan to use Document DB for event sourcing. Overruled by ADR-042 (Postgres JSONB).</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Detail Panel (Right Column) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-4">
+<!-- Main Detail Card -->
+<div class="bg-surface-container rounded-lg border border-outline-variant/50 p-6 glow-effect relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl pointer-events-none transform translate-x-1/2 -translate-y-1/2"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-outline-variant/30 pb-6 mb-6">
+<div>
+<div class="flex items-center gap-3 mb-3">
+<span class="px-2 py-1 rounded text-xs font-bold uppercase tracking-wider bg-primary-container/20 text-primary-fixed-dim border border-primary-container/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">pending_actions</span>
+                                    PROPOSED
+                                </span>
+<span class="font-label-md text-label-md text-on-surface-variant">ADR-108</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface m-0">Migration to Modular Monolith</h2>
+</div>
+<div class="flex gap-2">
+<button class="h-9 px-3 rounded border border-outline-variant bg-transparent hover:bg-surface-container-high text-on-surface font-label-md text-label-md transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+                                Edit
+                            </button>
+<button class="h-9 px-3 rounded bg-secondary-container hover:bg-secondary-container/90 text-on-secondary-container font-label-md text-label-md transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+                                Call Vote
+                            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Main Content -->
+<div class="col-span-1 md:col-span-2 flex flex-col gap-6">
+<section>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">subject</span>
+                                    Context &amp; Reason
+                                </h4>
+<div class="font-body-md text-body-md text-on-surface/90 space-y-4">
+<p>The current microservices architecture for the Billing domain has introduced unacceptable network latency between the <code>invoice-service</code> and <code>ledger-service</code>, averaging ~120ms during P99 load.</p>
+<p>We propose consolidating these tightly coupled domains into a single deployment unit (Modular Monolith) while maintaining strict logical boundaries via bounded contexts in the codebase.</p>
+</div>
+</section>
+<section>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">link</span>
+                                    Supporting Evidence
+                                </h4>
+<div class="flex flex-col gap-2">
+<a class="flex items-center justify-between p-3 rounded bg-surface-container-low border border-outline-variant/30 hover:border-primary/50 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-[20px]">insert_chart</span>
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Datadog APM Latency Report</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Last 30 days analysis</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">open_in_new</span>
+</a>
+<a class="flex items-center justify-between p-3 rounded bg-surface-container-low border border-outline-variant/30 hover:border-primary/50 transition-colors group" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">commit</span>
+<div>
+<div class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Spike: Domain consolidation #4412</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Merged by @jhendricks</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">open_in_new</span>
+</a>
+</div>
+</section>
+</div>
+<!-- Metadata Sidebar -->
+<div class="col-span-1 flex flex-col gap-6 p-4 rounded bg-surface-container-lowest border border-outline-variant/30">
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-3">Stakeholders</h4>
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs text-on-surface">JH</div>
+<span class="font-body-md text-body-md text-on-surface text-sm">J. Hendricks</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim">Author</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-xs text-on-surface">AT</div>
+<span class="font-body-md text-body-md text-on-surface text-sm">A. Torres</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Reviewer</span>
+</div>
+</div>
+</div>
+<hr class="border-outline-variant/30"/>
+<div>
+<h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest mb-3">Affected Entities</h4>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 rounded bg-secondary/15 text-secondary-fixed-dim font-label-sm text-label-sm border border-secondary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">hub</span> Core Billing Team
+                                    </span>
+<span class="px-2 py-1 rounded bg-secondary/15 text-secondary-fixed-dim font-label-sm text-label-sm border border-secondary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">terminal</span> invoice-svc
+                                    </span>
+<span class="px-2 py-1 rounded bg-secondary/15 text-secondary-fixed-dim font-label-sm text-label-sm border border-secondary/20 flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">terminal</span> ledger-svc
+                                    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lineage Graph Section -->
+<div class="bg-surface-container rounded-lg border border-outline-variant/50 p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim">account_tree</span>
+                        Decision Lineage
+                    </h3>
+<div class="relative w-full overflow-x-auto py-8">
+<!-- Abstract Lineage Visualization Container -->
+<div class="min-w-[700px] flex items-center justify-between relative px-8">
+<!-- Connecting Line -->
+<div class="absolute left-16 right-16 top-1/2 h-0.5 lineage-connector -translate-y-1/2 z-0"></div>
+<!-- Node 1: Decision -->
+<div class="relative z-10 flex flex-col items-center gap-3">
+<div class="w-14 h-14 rounded-full bg-surface-container-lowest border-2 border-primary flex items-center justify-center shadow-[0_0_15px_rgba(52,146,246,0.3)]">
+<span class="material-symbols-outlined text-primary text-[24px]">gavel</span>
+</div>
+<div class="text-center">
+<div class="font-label-md text-label-md text-on-surface">ADR-108</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Proposed</div>
+</div>
+</div>
+<!-- Node 2: Task -->
+<div class="relative z-10 flex flex-col items-center gap-3 opacity-50 grayscale">
+<div class="w-14 h-14 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center border-dashed">
+<span class="material-symbols-outlined text-on-surface-variant text-[24px]">task</span>
+</div>
+<div class="text-center">
+<div class="font-label-md text-label-md text-on-surface">PRJ-772</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Pending Approval</div>
+</div>
+</div>
+<!-- Node 3: Result -->
+<div class="relative z-10 flex flex-col items-center gap-3 opacity-30 grayscale">
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest border-2 border-outline-variant flex items-center justify-center border-dashed">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">flag</span>
+</div>
+<div class="text-center">
+<div class="font-label-md text-label-md text-on-surface">Deployment</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Awaiting</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container text-on-surface-variant border-t border-outline-variant/30 flex justify-around items-center z-50 pb-safe">
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">groups_3</span>
+<span class="text-[10px] mt-1 font-label-sm text-label-sm">Workforces</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">terminal</span>
+<span class="text-[10px] mt-1 font-label-sm text-label-sm">Projects</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-primary font-bold" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+<span class="text-[10px] mt-1 font-label-sm text-label-sm">Decisions</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">psychology</span>
+<span class="text-[10px] mt-1 font-label-sm text-label-sm">Intelligence</span>
+</a>
+</nav>
+</body></html>

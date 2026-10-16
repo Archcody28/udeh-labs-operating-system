@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus SRE Command - Attention Queue</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#005236",
+                      "data-text": "#d8e3fb",
+                      "outline": "#8a919e",
+                      "surface-variant": "#2a3548",
+                      "on-primary-fixed-variant": "#004884",
+                      "on-tertiary-fixed": "#002113",
+                      "outline-variant": "#404753",
+                      "inverse-on-surface": "#263143",
+                      "primary-container": "#3492f6",
+                      "on-primary-container": "#002a52",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed": "#001c39",
+                      "surface-deep": "#040e1f",
+                      "surface-container-highest": "#2a3548",
+                      "on-secondary": "#3f008e",
+                      "on-error": "#690005",
+                      "inverse-primary": "#005fad",
+                      "border-active": "#1e293b",
+                      "on-tertiary-container": "#00311f",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "surface-container-low": "#101c2d",
+                      "surface-container": "#152031",
+                      "surface-bright": "#2e3a4c",
+                      "on-surface": "#d7e3fb",
+                      "primary-fixed-dim": "#a4c9ff",
+                      "surface": "#081425",
+                      "tertiary": "#4edea3",
+                      "primary-fixed": "#d4e3ff",
+                      "on-secondary-fixed": "#25005a",
+                      "on-secondary-container": "#c9aeff",
+                      "error-container": "#93000a",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "primary": "#a4c9ff",
+                      "tertiary-container": "#00a572",
+                      "surface-tint": "#a4c9ff",
+                      "on-background": "#d7e3fb",
+                      "on-surface-variant": "#c0c7d5",
+                      "status-healthy": "#10b981",
+                      "secondary-fixed": "#eaddff",
+                      "surface-container-high": "#1f2a3c",
+                      "status-warning": "#f59e0b",
+                      "background": "#081425",
+                      "on-primary": "#00315d",
+                      "tertiary-fixed": "#6ffbbe",
+                      "surface-dim": "#081425",
+                      "status-critical": "#ef4444",
+                      "error": "#ffb4ab",
+                      "inverse-surface": "#d7e3fb",
+                      "surface-container-lowest": "#030e1f",
+                      "secondary-container": "#6001d1",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "secondary": "#d2bbff",
+                      "on-tertiary": "#003824"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "12px",
+                      "gutter": "12px",
+                      "sidebar": "240px",
+                      "margin-desktop": "24px",
+                      "base": "4px",
+                      "standard": "16px",
+                      "compact": "8px"
+              },
+              "fontFamily": {
+                      "data-lg": [
+                              "Geist Mono"
+                      ],
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-sm": [
+                              "Geist Mono"
+                      ],
+                      "label-caps": [
+                              "Geist Mono"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-md": [
+                              "Geist Mono"
+                      ],
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "data-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-sm": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "10px",
+                              {
+                                      "lineHeight": "12px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-md": [
+                              "13px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #081425; /* background */
+            color: #d7e3fb; /* on-background */
+        }
+        
+        /* Custom scrollbar for data dense feel */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #040e1f; /* surface-deep */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #404753; /* outline-variant */
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #8a919e; /* outline */
+        }
+
+        .glow-critical {
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+        }
+        .pulse-healthy {
+            animation: pulse-healthy 2s ease-in-out infinite;
+        }
+        @keyframes pulse-healthy {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        .bento-card {
+            background-color: #152031; /* surface-container */
+            border: 1px solid #1e293b; /* border-active */
+            border-radius: 0.25rem;
+        }
+        
+        .bento-card:hover {
+            background-color: #1f2a3c; /* surface-container-high */
+            border-color: #404753; /* outline-variant */
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden font-body-md antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-low dark:bg-surface-container-low docked fixed left-0 h-full w-[240px] border-r border-outline-variant flex flex-col h-full py-standard z-20 hidden md:flex">
+<div class="px-standard mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-surface-deep border border-outline-variant flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A highly detailed geometric rendering of a futuristic server node in deep indigo and bright neon cyan lighting. The aesthetic is cybernetic, clinical, and high-tech, representing an AI command system core." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDndkYIIin5CLs1bK4UDCaneLPkNcDqNSGIMD21iTtVOznl_wwnA0LKrTXyBn105JwEDuPoc8OkamiTwPiVTraRsHUD6IvA2cFVVmOmLVaTpZajUBo1RX0cxWkwx3xNeJirQZxzYglWPqYkcbhtceLeC-GOsA-aitk2-Yyb1mCZGscX4J09bVLhufv2UzM8VPDnXKPAYkRKCBaOXSLRVWFDpLGzEkUXEQDNFJ_4Ka-BFWwjXRfb8cpvBw"/>
+</div>
+<div>
+<h1 class="text-headline-sm font-headline-sm font-black text-secondary tracking-tight">Sovereign OS</h1>
+<p class="text-data-sm font-data-sm text-on-surface-variant">v4.2.0-stable</p>
+</div>
+</div>
+<button class="mt-6 w-full py-2 bg-secondary text-on-secondary text-data-md font-data-md rounded font-bold hover:bg-secondary-fixed transition-colors">
+                Initialize Protocol
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto px-compact space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-data-md font-data-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-secondary-container text-on-secondary-container border-r-4 border-secondary font-bold translate-x-1 duration-100 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+<span class="text-data-md font-data-md">Attention</span>
+<span class="ml-auto bg-error text-on-error text-label-caps font-label-caps px-1.5 py-0.5 rounded">3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings_input_component</span>
+<span class="text-data-md font-data-md">Operations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span class="text-data-md font-data-md">AI Workforce</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="text-data-md font-data-md">Workflows</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">folder_special</span>
+<span class="text-data-md font-data-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">emergency</span>
+<span class="text-data-md font-data-md">Incidents</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="text-data-md font-data-md">Approvals</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">gpp_maybe</span>
+<span class="text-data-md font-data-md">Security</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">payments</span>
+<span class="text-data-md font-data-md">Cost</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+<span class="text-data-md font-data-md">Automation</span>
+</a>
+</div>
+<div class="mt-auto px-compact space-y-1 pt-4 border-t border-outline-variant mx-standard">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">notifications_active</span>
+<span class="text-data-md font-data-md">Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+<span class="text-data-md font-data-md">Terminal</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col md:ml-[240px] h-full overflow-hidden bg-background">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface border-b border-outline-variant flex justify-between items-center w-full px-margin-desktop h-16 z-10 shrink-0">
+<div class="flex items-center gap-4 flex-1">
+<div class="md:hidden">
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight hidden md:block">Nexus SRE Command</div>
+<div class="flex-1 max-w-md ml-8 relative group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-deep border border-outline-variant rounded py-1.5 pl-10 pr-4 text-data-md font-data-md text-data-text placeholder-outline-variant focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Query telemetry, incidents, assets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded text-on-surface-variant hover:bg-surface-bright transition-colors duration-150 relative">
+<span class="material-symbols-outlined">monitor_heart</span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:bg-surface-bright transition-colors duration-150">
+<span class="material-symbols-outlined">psychology</span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:bg-surface-bright transition-colors duration-150">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button class="p-2 rounded text-on-surface-variant hover:bg-surface-bright transition-colors duration-150">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<div class="h-8 w-8 ml-2 rounded bg-surface-variant border border-outline-variant overflow-hidden cursor-pointer hover:border-primary transition-colors">
+<img alt="Chief Engineer Profile" class="w-full h-full object-cover" data-alt="A minimalist, high-contrast avatar of a chief engineer in a dark tech environment, lit by cool blue and purple screens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvCTrvl7cJ-mFuuqz_zcDwOBpbyCnySZv6g3HrUONOT4_j-vc2gM8f6gOEZr6hjHRniEGB7xCzuuUn7xU7faZzb1fzx6nOl2P_QPjdDn5eYL3XZTzqpQ9yiIeSTI-raeKCwE4Pxzs6IViVoQx9l2ppTEy4PJm6WXpORQV1ShsrAofGKLf8Word05i7P2CeOdCm0gVipZDwvdCifffDDC0fd8D7LDxAgcdkZ75oXxpREEe0UBR8x9qL_g"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop flex flex-col gap-gutter">
+<!-- Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 shrink-0">
+<div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface">Attention Queue</h2>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">High-priority operational items requiring immediate intervention.</p>
+</div>
+<div class="flex flex-wrap gap-2">
+<select class="bg-surface-deep border border-outline-variant rounded text-data-sm font-data-sm text-data-text py-1 pl-2 pr-8 focus:border-primary focus:ring-0">
+<option>Severity: All</option>
+<option>Critical</option>
+<option>High</option>
+<option>Medium</option>
+</select>
+<select class="bg-surface-deep border border-outline-variant rounded text-data-sm font-data-sm text-data-text py-1 pl-2 pr-8 focus:border-primary focus:ring-0">
+<option>Project: All</option>
+<option>Core API</option>
+<option>AI Inference</option>
+<option>Data Lake</option>
+</select>
+<div class="flex bg-surface-deep border border-outline-variant rounded overflow-hidden p-0.5 gap-0.5">
+<button class="px-3 py-1 bg-surface-variant text-on-surface text-data-sm font-data-sm rounded-sm">All</button>
+<button class="px-3 py-1 text-on-surface-variant hover:bg-surface-container text-data-sm font-data-sm rounded-sm transition-colors">Approvals</button>
+<button class="px-3 py-1 text-on-surface-variant hover:bg-surface-container text-data-sm font-data-sm rounded-sm transition-colors">Incidents</button>
+</div>
+</div>
+</div>
+<!-- Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter flex-1 min-h-0">
+<!-- Actionable Queue (Left Col) -->
+<div class="lg:col-span-8 flex flex-col gap-compact overflow-y-auto pr-1">
+<!-- Approval Card -->
+<div class="bento-card p-standard flex flex-col gap-4 border-l-4 border-l-status-warning">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="p-2 bg-surface-deep rounded flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-status-warning">verified_user</span>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline mb-1">APPROVAL REQUIRED</div>
+<h3 class="text-data-lg font-data-lg text-on-surface">Deploy Agent Coder-V2 to Production</h3>
+</div>
+</div>
+<span class="text-data-sm font-data-sm text-on-surface-variant">2m ago</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-surface-deep p-compact rounded border border-outline-variant">
+<div>
+<div class="text-label-caps font-label-caps text-outline">RISK</div>
+<div class="text-data-md font-data-md text-status-warning mt-0.5 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span> HIGH</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">SYSTEMS</div>
+<div class="text-data-md font-data-md text-data-text mt-0.5">Core API</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">REQUESTER</div>
+<div class="text-data-md font-data-md text-data-text mt-0.5">Lead Architect</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">GATES</div>
+<div class="text-data-md font-data-md text-status-healthy mt-0.5">8/8 Passed</div>
+</div>
+</div>
+<div class="flex justify-end gap-2 mt-2">
+<button class="px-4 py-1.5 border border-outline-variant text-on-surface-variant text-data-sm font-data-sm rounded hover:bg-surface-bright transition-colors">Decline</button>
+<button class="px-4 py-1.5 bg-secondary text-on-secondary text-data-sm font-data-sm rounded font-bold hover:bg-secondary-fixed transition-colors shadow-[0_0_8px_rgba(210,187,255,0.2)]">Review Details</button>
+</div>
+</div>
+<!-- Incident Card -->
+<div class="bento-card p-standard flex flex-col gap-4 border-l-4 border-l-status-critical glow-critical bg-surface-container-high">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="p-2 bg-surface-deep rounded flex items-center justify-center shrink-0 border border-status-critical/30">
+<span class="material-symbols-outlined text-status-critical">emergency</span>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-status-critical mb-1 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-critical animate-pulse"></span>
+                                        ACTIVE INCIDENT
+                                    </div>
+<h3 class="text-data-lg font-data-lg text-on-surface">Sector 7G Drift Detected</h3>
+</div>
+</div>
+<span class="text-data-sm font-data-sm text-on-surface-variant">14m ago</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-surface-deep p-compact rounded border border-outline-variant">
+<div>
+<div class="text-label-caps font-label-caps text-outline">STATUS</div>
+<div class="text-data-md font-data-md text-tertiary mt-0.5 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">psychology</span> INVESTIGATING</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">SYSTEMS</div>
+<div class="text-data-md font-data-md text-data-text mt-0.5">AI Inference</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">METRIC</div>
+<div class="text-data-md font-data-md text-status-critical mt-0.5">Latency &gt; 400ms</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">IMPACT</div>
+<div class="text-data-md font-data-md text-data-text mt-0.5">Moderate</div>
+</div>
+</div>
+<div class="bg-surface-deep p-2 rounded border border-outline-variant font-data-sm text-data-sm text-on-surface-variant overflow-hidden">
+<div class="flex items-center gap-2 mb-1"><span class="text-primary">[SYS]</span> Auto-mitigation attempted.</div>
+<div class="flex items-center gap-2"><span class="text-status-critical">[ERR]</span> Fallback cluster unresponsive. Manual intervention required.</div>
+</div>
+<div class="flex justify-end gap-2 mt-2">
+<button class="px-4 py-1.5 border border-outline-variant text-on-surface-variant text-data-sm font-data-sm rounded hover:bg-surface-bright transition-colors">Acknowledge</button>
+<button class="px-4 py-1.5 bg-status-critical text-on-error text-data-sm font-data-sm rounded font-bold hover:bg-error transition-colors">Investigate</button>
+</div>
+</div>
+<!-- Failure Card -->
+<div class="bento-card p-standard flex flex-col gap-4 border-l-4 border-l-status-warning">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="p-2 bg-surface-deep rounded flex items-center justify-center shrink-0 border border-outline-variant">
+<span class="material-symbols-outlined text-outline">account_tree</span>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline mb-1">WORKFLOW FAILURE</div>
+<h3 class="text-data-lg font-data-lg text-on-surface">Workflow 'Data Ingestion' Failed</h3>
+</div>
+</div>
+<span class="text-data-sm font-data-sm text-on-surface-variant">1h ago</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-surface-deep p-compact rounded border border-outline-variant">
+<div class="col-span-2">
+<div class="text-label-caps font-label-caps text-outline">ERROR</div>
+<div class="text-data-md font-data-md text-status-warning mt-0.5 font-bold">TIMEOUT_EXCEEDED</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">NODE</div>
+<div class="text-data-md font-data-md text-data-text mt-0.5">wrk-pool-a</div>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-outline">RETRIES</div>
+<div class="text-data-md font-data-md text-status-warning mt-0.5">3/3</div>
+</div>
+</div>
+<div class="flex justify-end gap-2 mt-2">
+<button class="px-4 py-1.5 border border-border-active text-primary text-data-sm font-data-sm rounded hover:bg-surface-bright transition-colors">Manual Override</button>
+<button class="px-4 py-1.5 border border-outline-variant text-on-surface-variant text-data-sm font-data-sm rounded hover:bg-surface-bright transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">refresh</span> Retry</button>
+</div>
+</div>
+</div>
+<!-- AI Action Proposals (Right Col) -->
+<div class="lg:col-span-4 flex flex-col h-full">
+<div class="bento-card flex flex-col h-full bg-surface-container overflow-hidden">
+<!-- Header -->
+<div class="p-compact border-b border-outline-variant bg-surface-container-highest flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">smart_toy</span>
+<h3 class="text-data-md font-data-md text-on-surface font-bold">AI Operations Assistant</h3>
+</div>
+<!-- Content -->
+<div class="p-standard flex-1 overflow-y-auto flex flex-col gap-4">
+<div class="text-data-sm font-data-sm text-outline-variant uppercase tracking-wider mb-2 border-b border-outline-variant pb-1">Context Analysis</div>
+<!-- AI Block for Top Item -->
+<div class="bg-surface-deep p-compact rounded border border-outline-variant relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div class="ml-2">
+<div class="flex items-center justify-between mb-2">
+<div class="text-label-caps font-label-caps text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary">check_circle</span>
+                                            DEPLOY AGENT CODER-V2
+                                        </div>
+</div>
+<p class="text-body-sm font-body-sm text-data-text leading-relaxed">
+                                        This deployment satisfies 8/8 automated quality gates. Integration tests show nominal performance. Rollback strategy has been verified and simulated against staging.
+                                    </p>
+<div class="mt-3 p-2 bg-surface rounded border border-outline-variant">
+<div class="text-label-caps font-label-caps text-outline mb-1">RECOMMENDATION</div>
+<div class="text-data-md font-data-md text-tertiary font-bold">Approve Deployment</div>
+</div>
+<div class="mt-3 flex gap-2">
+<button class="flex-1 py-1.5 bg-tertiary/10 text-tertiary border border-tertiary/30 rounded text-data-sm font-data-sm hover:bg-tertiary/20 transition-colors text-center">Execute Approval</button>
+</div>
+</div>
+</div>
+<!-- AI Block for Second Item -->
+<div class="bg-surface-deep p-compact rounded border border-outline-variant relative overflow-hidden mt-2 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-critical"></div>
+<div class="ml-2">
+<div class="flex items-center justify-between mb-2">
+<div class="text-label-caps font-label-caps text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-status-critical">timeline</span>
+                                            SECTOR 7G DRIFT
+                                        </div>
+</div>
+<p class="text-body-sm font-body-sm text-data-text leading-relaxed">
+                                        Telemetry indicates potential model degradation. Pattern matches historical incident #4092. Immediate scaling of inference nodes recommended to stabilize latency while investigating root cause.
+                                    </p>
+</div>
+</div>
+</div>
+<!-- Footer Console -->
+<div class="p-compact bg-surface-deep border-t border-outline-variant">
+<div class="flex items-center gap-2 text-data-sm font-data-sm text-outline-variant">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+<span class="animate-pulse">Awaiting command... █</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

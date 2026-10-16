@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Forge - Engineering Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#00a572",
+                        "surface-container-highest": "#31353b",
+                        "on-surface": "#e0e2eb",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "outline-variant": "#404753",
+                        "on-surface-variant": "#c0c7d5",
+                        "status-review": "#f59e0b",
+                        "secondary-container": "#6001d1",
+                        "on-tertiary": "#003824",
+                        "surface-container-high": "#272a31",
+                        "primary": "#a4c9ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "surface-bright": "#363940",
+                        "secondary": "#d2bbff",
+                        "outline": "#8a919e",
+                        "electric-cyan": "#22d3ee",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary": "#3f008e",
+                        "surface-container": "#1c2026",
+                        "on-secondary-container": "#c9aeff",
+                        "inverse-primary": "#005fad",
+                        "on-tertiary-container": "#00311f",
+                        "surface-variant": "#31353b",
+                        "error-container": "#93000a",
+                        "surface-tint": "#a4c9ff",
+                        "on-primary-container": "#002a52",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-primary": "#00315d",
+                        "deep-space-navy": "#0c141e",
+                        "status-fail": "#ef4444",
+                        "on-secondary-fixed": "#25005a",
+                        "surface": "#101419",
+                        "inverse-surface": "#e0e2eb",
+                        "status-pass": "#10b981",
+                        "tertiary": "#4edea3",
+                        "inverse-on-surface": "#2d3137",
+                        "terminal-surface": "#091017",
+                        "background": "#101419",
+                        "surface-container-lowest": "#0b0e14",
+                        "on-primary-fixed-variant": "#004884",
+                        "on-background": "#e0e2eb",
+                        "error": "#ffb4ab",
+                        "charcoal-container": "#18202b",
+                        "surface-dim": "#101419",
+                        "primary-container": "#3492f6",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed": "#001c39",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-fixed": "#eaddff",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#181c22",
+                        "border-technical": "#1e293b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "margin-lg": "24px",
+                        "compact": "8px",
+                        "unit": "4px",
+                        "margin-md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Hanken Grotesk"],
+                        "code-md": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "code-md": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "label-caps": ["10px", { "lineHeight": "14px", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md antialiased overflow-hidden">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-lg h-14 w-full bg-surface dark:bg-surface border-b border-border-technical">
+<div class="flex items-center gap-margin-md">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">UdehLabs Forge</span>
+</div>
+<div class="flex items-center gap-margin-md">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-[18px]">search</span>
+<input class="pl-10 pr-4 py-1 bg-surface-container-lowest border border-border-technical rounded text-body-sm w-64 focus:border-electric-cyan focus:outline-none focus:ring-0 text-on-surface placeholder:text-outline-variant" placeholder="Search resources..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-weight="fill">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</button>
+<button class="bg-electric-cyan text-deep-space-navy px-4 py-1.5 rounded font-code-sm font-bold hover:bg-tertiary-fixed transition-colors">
+                Create PR
+            </button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-border-technical overflow-hidden ml-2">
+<img alt="Lead Engineer Profile" class="w-full h-full object-cover" data-alt="A highly detailed close up of a circuit board emitting a faint blue glow. The lighting is dramatic and moody, reflecting a high-tech engineering environment. The color palette is dominated by deep space navy with electric cyan accents. The aesthetic is modern, precise, and hyper-functional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsGBcvQk5AuPTiKanVZTOSNDjp201sZ18aon9LJWXQHcGqfci4dPzDzWwi0WUsIdiiI011tfW_m6nxPHCLs2qr2GiMjbE94rGY8C2pfi1X4XqySuFT97WwjPNfk0mepPDCBlasCwNuo-lmjIjhSVAIaSfPR9MC4oqBZE1cED4Y1uazYwjvgUsSiEIJVO6b5jV6H1pXbkjbubwi9Mtv7BeJB3YgBFDY9gW9ky0bcIUIsDjDSoJdZOw52g"/>
+</div>
+</div>
+</nav>
+<!-- Main Layout -->
+<div class="flex pt-14 h-screen">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 h-[calc(100vh-14px)] w-64 flex flex-col py-margin-md bg-surface-container-low dark:bg-surface-container-low border-r border-border-technical hidden md:flex">
+<div class="px-margin-md mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface">Project Forge</h2>
+<p class="font-code-sm text-code-sm text-outline-variant mt-1">Production Cluster</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active -->
+<a class="flex items-center gap-compact text-electric-cyan border-l-2 border-electric-cyan bg-surface-container-high px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">code</span>
+<span class="font-label-caps text-label-caps">Codebase</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">merge_type</span>
+<span class="font-label-caps text-label-caps">Pull Requests</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">alt_route</span>
+<span class="font-label-caps text-label-caps">CI/CD</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">security</span>
+<span class="font-label-caps text-label-caps">Security Checks</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+<span class="font-label-caps text-label-caps">Deployments</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-technical pt-4 space-y-1">
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span class="font-label-caps text-label-caps">Docs</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant px-margin-md py-3 hover:bg-surface-container dark:hover:bg-surface-container transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">help_outline</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</aside>
+<!-- Canvas -->
+<main class="flex-1 md:ml-64 bg-deep-space-navy p-margin-lg overflow-y-auto pb-24">
+<header class="mb-margin-lg">
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-6">Engineering Mission Control</h1>
+<!-- Global Metrics Bento -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-compact">
+<div class="bg-charcoal-container border border-border-technical p-margin-md rounded flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-outline">Open PRs</span>
+<div class="flex items-end gap-2">
+<span class="font-code-md text-[24px] leading-none text-electric-cyan">8</span>
+<span class="font-body-sm text-body-sm text-outline-variant pb-1">active</span>
+</div>
+</div>
+<div class="bg-charcoal-container border border-border-technical p-margin-md rounded flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-outline">Avg Review Time</span>
+<div class="flex items-end gap-2">
+<span class="font-code-md text-[24px] leading-none text-on-surface">4h</span>
+<span class="font-body-sm text-body-sm text-status-pass pb-1">↓ 12%</span>
+</div>
+</div>
+<div class="bg-charcoal-container border border-border-technical p-margin-md rounded flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-outline">CI Pass Rate</span>
+<div class="flex items-end gap-2">
+<span class="font-code-md text-[24px] leading-none text-status-pass">98%</span>
+<span class="font-body-sm text-body-sm text-outline-variant pb-1">last 7d</span>
+</div>
+</div>
+<div class="bg-charcoal-container border border-border-technical p-margin-md rounded flex flex-col gap-2 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container to-transparent opacity-50 z-0"></div>
+<span class="font-label-caps text-label-caps text-outline relative z-10">Deploy Frequency</span>
+<div class="flex items-end gap-2 relative z-10">
+<span class="font-code-md text-[24px] leading-none text-primary">12</span>
+<span class="font-body-sm text-body-sm text-outline-variant pb-1">/day</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Row 1: Main Data Density -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-margin-md mb-margin-md">
+<!-- PR Table (Spans 8 cols) -->
+<div class="xl:col-span-8 bg-charcoal-container border border-border-technical rounded flex flex-col overflow-hidden">
+<div class="px-margin-md py-4 border-b border-border-technical flex justify-between items-center bg-surface-container-low">
+<h3 class="font-label-caps text-label-caps text-on-surface">Active Pull Requests</h3>
+<button class="text-electric-cyan font-code-sm text-code-sm hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm whitespace-nowrap">
+<thead class="bg-terminal-surface border-b border-border-technical text-outline-variant">
+<tr>
+<th class="px-4 py-2 font-code-sm font-normal">PR #</th>
+<th class="px-4 py-2 font-normal">Title</th>
+<th class="px-4 py-2 font-normal">Author</th>
+<th class="px-4 py-2 font-normal">Review</th>
+<th class="px-4 py-2 font-normal">CI Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-technical text-on-surface">
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-4 py-2 font-code-sm text-electric-cyan">#1042</td>
+<td class="px-4 py-2">refactor: optimize graph rendering pipeline</td>
+<td class="px-4 py-2">jdoe</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-status-review/10 border border-status-review text-status-review text-[10px] font-code-sm">
+                                            Review
+                                        </span>
+</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center gap-1 text-status-review">
+<span class="w-1.5 h-1.5 rounded-full bg-status-review animate-pulse"></span>
+                                            Running
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-4 py-2 font-code-sm text-electric-cyan">#1041</td>
+<td class="px-4 py-2">feat: add webgl shader support to canvas</td>
+<td class="px-4 py-2">asmith</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-status-pass/10 border border-status-pass text-status-pass text-[10px] font-code-sm">
+                                            Approved
+                                        </span>
+</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center gap-1 text-status-pass">
+<span class="w-1.5 h-1.5 rounded-full bg-status-pass"></span>
+                                            Passing
+                                        </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container transition-colors">
+<td class="px-4 py-2 font-code-sm text-electric-cyan">#1038</td>
+<td class="px-4 py-2">fix: memory leak in navigation listener</td>
+<td class="px-4 py-2">rlee</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-status-fail/10 border border-status-fail text-status-fail text-[10px] font-code-sm">
+                                            Changes
+                                        </span>
+</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center gap-1 text-status-fail">
+<span class="w-1.5 h-1.5 rounded-full bg-status-fail"></span>
+                                            Failed
+                                        </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Pipeline Vis (Spans 4 cols) -->
+<div class="xl:col-span-4 bg-charcoal-container border border-border-technical rounded flex flex-col p-margin-md">
+<h3 class="font-label-caps text-label-caps text-on-surface mb-4">Deployment Pipeline</h3>
+<div class="relative pl-6 space-y-6 before:absolute before:inset-y-2 before:left-[11px] before:w-px before:bg-border-technical">
+<!-- Prod -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-status-pass ring-4 ring-status-pass/20 z-10"></div>
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-code-sm text-on-surface font-bold">Production</span>
+<span class="text-xs text-status-pass bg-status-pass/10 px-1.5 py-0.5 rounded">Live</span>
+</div>
+<div class="bg-terminal-surface border border-border-technical rounded p-2 text-xs">
+<div class="flex justify-between text-outline-variant mb-1">
+<span>v2.4.0</span>
+<span>2h ago</span>
+</div>
+<div class="font-code-sm text-electric-cyan truncate">a9f8b2c merged main</div>
+</div>
+</div>
+<!-- Staging -->
+<div class="relative">
+<div class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-status-review ring-4 ring-status-review/20 z-10"></div>
+<div class="flex justify-between items-start mb-1">
+<span class="font-code-sm text-code-sm text-on-surface font-bold">Staging</span>
+<span class="text-xs text-status-review bg-status-review/10 px-1.5 py-0.5 rounded">Deploying</span>
+</div>
+<div class="bg-terminal-surface border border-border-technical rounded p-2 text-xs">
+<div class="flex justify-between text-outline-variant mb-1">
+<span>v2.4.1-rc</span>
+<span>Running</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-1 mt-2">
+<div class="bg-status-review h-1 rounded-full w-[65%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Secondary Context -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-margin-md">
+<!-- Security -->
+<div class="bg-charcoal-container border border-border-technical rounded p-margin-md">
+<h3 class="font-label-caps text-label-caps text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-electric-cyan">security</span>
+                        Security Posture
+                    </h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center pb-3 border-b border-border-technical">
+<span class="font-body-sm text-body-sm text-outline-variant">Dependency Vulns</span>
+<span class="px-2 py-0.5 rounded bg-status-review/10 border border-status-review text-status-review font-code-sm text-[10px]">2 Low</span>
+</div>
+<div class="flex justify-between items-center pb-3 border-b border-border-technical">
+<span class="font-body-sm text-body-sm text-outline-variant">Secret Scanning</span>
+<span class="px-2 py-0.5 rounded bg-status-pass/10 border border-status-pass text-status-pass font-code-sm text-[10px]">Clean</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-sm text-body-sm text-outline-variant">SAST Score</span>
+<span class="font-headline-md text-headline-md text-primary">A</span>
+</div>
+</div>
+</div>
+<!-- Activity Feed -->
+<div class="bg-charcoal-container border border-border-technical rounded flex flex-col h-64 overflow-hidden">
+<div class="px-margin-md py-4 border-b border-border-technical bg-surface-container-low">
+<h3 class="font-label-caps text-label-caps text-on-surface">Recent Engineering Activity</h3>
+</div>
+<div class="flex-1 p-margin-md overflow-y-auto space-y-3 font-code-sm text-code-sm">
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-[14px] text-electric-cyan mt-0.5">commit</span>
+<div>
+<span class="text-on-surface">jdoe</span> pushed to <span class="text-primary">main</span>
+<div class="text-outline-variant truncate mt-0.5"><span class="text-electric-cyan opacity-80">e4d2a1</span> Update deployment scripts</div>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-[14px] text-status-fail mt-0.5">error</span>
+<div>
+<span class="text-status-fail">Build failed</span> on <span class="text-primary">feature/auth-flow</span>
+<div class="text-outline-variant truncate mt-0.5">Jest test suite timeout</div>
+</div>
+</div>
+<div class="flex gap-3 items-start">
+<span class="material-symbols-outlined text-[14px] text-secondary mt-0.5">merge_type</span>
+<div>
+<span class="text-on-surface">rlee</span> merged PR <span class="text-electric-cyan">#1035</span>
+<div class="text-outline-variant truncate mt-0.5">feat: impl new navigation drawer</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- EngineeringStatusBar -->
+<div class="fixed bottom-0 w-full h-8 z-50 flex justify-between items-center px-gutter w-full overflow-hidden bg-terminal-surface dark:bg-terminal-surface border-t border-border-technical">
+<div class="flex items-center gap-4">
+<span class="font-code-md text-code-md text-primary">Forge_CLI</span>
+<span class="font-code-sm text-code-sm text-status-pass flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-pass"></span>
+                System Nominal
+            </span>
+</div>
+<div class="flex items-center gap-4 font-code-sm text-code-sm">
+<span class="text-outline hover:text-electric-cyan cursor-pointer transition-colors">v2.4.0-stable</span>
+<span class="text-outline hover:text-electric-cyan cursor-pointer transition-colors">us-east-1</span>
+<span class="text-outline hover:text-electric-cyan cursor-pointer transition-colors">CPU: 42%</span>
+</div>
+</div>
+</body></html>

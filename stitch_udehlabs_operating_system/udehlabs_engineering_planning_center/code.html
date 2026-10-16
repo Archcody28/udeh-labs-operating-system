@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Engineering Planning Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#bfc7d6",
+                        "surface-variant": "#343536",
+                        "outline": "#928ea2",
+                        "inverse-on-surface": "#303032",
+                        "tertiary-container": "#5f6774",
+                        "on-secondary-fixed-variant": "#454a00",
+                        "electric-violet": "#DFD1FF",
+                        "on-surface": "#e3e2e3",
+                        "surface-container-high": "#292a2b",
+                        "surface-dim": "#121315",
+                        "secondary-fixed": "#dfed1a",
+                        "on-surface-variant": "#c8c4d9",
+                        "on-error": "#690005",
+                        "on-primary": "#2900a0",
+                        "tertiary-fixed-dim": "#bfc7d6",
+                        "primary-fixed": "#e4dfff",
+                        "surface-tint": "#c6bfff",
+                        "on-primary-fixed-variant": "#3c03dd",
+                        "surface": "#121315",
+                        "surface-container-low": "#1b1c1d",
+                        "inverse-primary": "#5638f3",
+                        "on-tertiary-fixed": "#141c27",
+                        "outline-variant": "#474556",
+                        "tertiary-fixed": "#dbe3f2",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#29313c",
+                        "deep-indigo": "#101214",
+                        "background": "#121315",
+                        "primary-container": "#5e43fb",
+                        "risk-high": "#FF4D4D",
+                        "primary-fixed-dim": "#c6bfff",
+                        "primary": "#c6bfff",
+                        "surface-container": "#1f2021",
+                        "on-secondary-fixed": "#1b1d00",
+                        "secondary": "#f5ff7d",
+                        "inverse-surface": "#e3e2e3",
+                        "on-background": "#e3e2e3",
+                        "slate-surface": "#1C1E21",
+                        "on-secondary-container": "#5d6400",
+                        "surface-bright": "#38393a",
+                        "surface-container-highest": "#343536",
+                        "secondary-fixed-dim": "#c3d000",
+                        "risk-medium": "#FFE48F",
+                        "on-primary-fixed": "#160066",
+                        "on-tertiary-container": "#dee6f5",
+                        "on-secondary": "#2f3300",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#d7e404",
+                        "surface-container-lowest": "#0d0e0f",
+                        "on-primary-container": "#e7e2ff",
+                        "on-tertiary-fixed-variant": "#3f4753",
+                        "error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter-md": "16px",
+                        "unit": "4px",
+                        "density-comfortable": "16px",
+                        "margin-lg": "24px",
+                        "density-compact": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "label-code": ["JetBrains Mono"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "label-code": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #343536;
+            border-radius: 4px;
+        }
+        .glow-hover:hover {
+            box-shadow: 0 0 15px rgba(94, 67, 251, 0.2);
+            border-color: rgba(94, 67, 251, 0.4);
+        }
+        .graph-line {
+            stroke: #8B93A1;
+            stroke-width: 1px;
+            fill: none;
+        }
+        .graph-line-critical {
+            stroke: #DFD1FF;
+            stroke-width: 2px;
+            fill: none;
+            filter: drop-shadow(0 0 4px rgba(223, 209, 255, 0.5));
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen flex flex-col overflow-hidden">
+<!-- Top Navigation -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary docked full-width top-0 border-b border-outline-variant dark:border-outline-variant flat no shadows transition-all duration-150 ease-in-out flex justify-between items-center w-full px-margin-wide h-14 z-50">
+<div class="flex items-center gap-6 h-full px-6">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">UdehLabs Engineering Planning Center</span>
+<nav class="hidden md:flex h-full ml-8">
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors" href="#">Requirements</a>
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-primary dark:text-primary border-b-2 border-primary font-bold pb-1" href="#">Analysis</a>
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors" href="#">Clarifications</a>
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors" href="#">Plans</a>
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors" href="#">Task Graph</a>
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors" href="#">Risk Center</a>
+<a class="h-full flex items-center px-4 font-headline-sm text-headline-sm text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors" href="#">Approvals</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 px-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<img alt="Engineer Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar portrait of a professional software engineer with a neutral expression, high-contrast monochrome lighting, set against a dark tech-focused studio background, sharp focus, futuristic vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGVfxUM5D7ncDeoZEY24N8pCgAURhbnhv9lZzD_veldofhDsiA7jnqHTO7LvtxyU6WkB5F_BrxDy8ncgD0ajcSQif_iQR0W00apDw5QSONiwjwivt0NAuq8qXYtUTn9siWxsWAdl-mXsG4c-HrC_xx68qkyRpkfCaY7PG861iJhgVZLo77_X0IFhvD-oUKfse13VB-YtH1wPxrNDKfIl4Hu1lV6eFhaL7MnsHfnqkpLXau65fpSfENVw"/>
+</div>
+</header>
+<!-- Main Layout -->
+<div class="flex flex-1 overflow-hidden">
+<!-- Side Navigation (Left) -->
+<aside class="bg-surface-container dark:bg-surface-container docked left-0 h-full w-[240px] border-r border-outline-variant dark:border-outline-variant flat no shadows transition-all duration-200 flex flex-col z-40 hidden lg:flex">
+<div class="p-4 border-b border-outline-variant border-opacity-30">
+<div class="flex items-center gap-3 mb-2">
+<img alt="Project Lead" class="w-10 h-10 rounded object-cover" data-alt="A stylized minimalist geometric icon representing a project lead or architect, rendered in sharp lines with subtle purple glows on a deep charcoal background, modern technical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs4FW1EwN2Qzlm2hPCna9smqYLRj3L1nah_KmeDD_KBeVcjaViGkh-TLHY7yoxoy0F8UyHzgGepyMNgLvF60nX-mE1MA82rN83fYMi0waLc7ygquf0O7f7CKSPdnLFbO3l5BNse7k8cprfAdEJd6U6tq0mlqmAoadvPZrnDRXZCWNR2RZ2JfRCNJ1oC2Q2_Lo7cdDHUMuNHTCBxbXGuPys2E8l3Rbwzb5IaF0gOq0n1yd7eDAJb-iFXw"/>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Project Alpha</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Active Sprint 42</p>
+</div>
+</div>
+<button class="w-full mt-4 py-2 bg-primary-container text-white font-label-caps text-label-caps rounded flex justify-center items-center gap-2 hover:bg-inverse-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">add</span> New Analysis
+                </button>
+</div>
+<nav class="flex-1 overflow-y-auto py-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="folder_open">folder_open</span> Repository
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="account_tree">account_tree</span> Dependency Tree
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="analytics">analytics</span> CI/CD Status
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold border-l-4 border-primary font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="info">info</span> Metadata
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="psychology">psychology</span> AI Insights
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-high font-label-caps text-label-caps transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="monitor_heart">monitor_heart</span> System Health
+                </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant border-opacity-30 py-2">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span> Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span> Support
+                </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full bg-background overflow-hidden relative">
+<div class="flex-1 flex h-full overflow-hidden p-gutter-md gap-gutter-md">
+<!-- Left Column: Requirements Workspace (30%) -->
+<section class="w-full lg:w-1/3 flex flex-col gap-gutter-md overflow-hidden">
+<div class="bg-slate-surface border border-outline-variant border-opacity-15 rounded-lg flex flex-col h-full overflow-hidden">
+<div class="p-4 border-b border-outline-variant border-opacity-15 bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">assignment</span>
+                                Requirement Workspace
+                            </h3>
+</div>
+<div class="p-4 overflow-y-auto custom-scrollbar flex-1 flex flex-col gap-4">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">TARGET EPIC</div>
+<div class="font-body-md text-body-md bg-surface-dim p-2 rounded border border-outline-variant border-opacity-20 text-electric-violet">Implement Multi-Tenant MFA</div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-1">BUSINESS OBJECTIVE</div>
+<div class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+                                    Enhance security posture for enterprise clients by enforcing mandatory Multi-Factor Authentication across all tenant environments. Support SMS, Authenticator App (TOTP), and Hardware Keys. Must comply with SOC2 requirements for administrative access.
+                                </div>
+</div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">TECHNICAL CONSTRAINTS</div>
+<ul class="flex flex-col gap-2">
+<li class="flex items-start gap-2 font-body-sm text-body-sm bg-surface-container-low p-2 rounded border border-outline-variant border-opacity-10">
+<span class="material-symbols-outlined text-risk-medium text-[16px] mt-0.5">warning</span>
+                                        Cannot disrupt existing single-tenant legacy sessions during rollout.
+                                    </li>
+<li class="flex items-start gap-2 font-body-sm text-body-sm bg-surface-container-low p-2 rounded border border-outline-variant border-opacity-10">
+<span class="material-symbols-outlined text-tertiary text-[16px] mt-0.5">database</span>
+                                        Requires backward-compatible schema changes to User and Tenant tables.
+                                    </li>
+<li class="flex items-start gap-2 font-body-sm text-body-sm bg-surface-container-low p-2 rounded border border-outline-variant border-opacity-10">
+<span class="material-symbols-outlined text-tertiary text-[16px] mt-0.5">timer</span>
+                                        MFA verification latency must remain under 500ms at 95th percentile.
+                                    </li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Center Column: Analysis & Task Graph (45%) -->
+<section class="w-full lg:w-5/12 flex flex-col gap-gutter-md overflow-hidden h-full">
+<!-- Analysis Pane -->
+<div class="bg-slate-surface border border-outline-variant border-opacity-15 rounded-lg flex flex-col h-2/5 overflow-hidden">
+<div class="p-3 border-b border-outline-variant border-opacity-15 bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">psychology</span>
+                                AI Analysis
+                            </h3>
+<span class="px-2 py-0.5 bg-risk-high bg-opacity-20 text-risk-high border border-risk-high border-opacity-30 rounded font-label-caps text-label-caps">IMPACT: HIGH</span>
+</div>
+<div class="p-0 overflow-y-auto custom-scrollbar flex-1">
+<table class="w-full text-left border-collapse">
+<tbody class="font-body-sm text-body-sm">
+<tr class="border-b border-outline-variant border-opacity-15 hover:bg-surface-container-high transition-colors">
+<td class="p-density-compact text-on-surface-variant w-1/3 align-top">Detected Ambiguity</td>
+<td class="p-density-compact font-label-code text-on-surface">MFA provider for SMS delivery not specified. (Twilio vs. AWS SNS?)</td>
+</tr>
+<tr class="border-b border-outline-variant border-opacity-15 hover:bg-surface-container-high transition-colors">
+<td class="p-density-compact text-on-surface-variant align-top">Affected Domains</td>
+<td class="p-density-compact flex flex-wrap gap-1">
+<span class="px-1.5 py-0.5 bg-surface-container-high border border-outline-variant border-opacity-30 rounded text-tertiary">Authentication</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high border border-outline-variant border-opacity-30 rounded text-tertiary">UI/UX</span>
+<span class="px-1.5 py-0.5 bg-surface-container-high border border-outline-variant border-opacity-30 rounded text-tertiary">Database</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="p-density-compact text-on-surface-variant align-top">Complexity Estimate</td>
+<td class="p-density-compact text-on-surface flex items-center gap-2">
+<div class="w-24 h-2 bg-surface-container-highest rounded overflow-hidden">
+<div class="h-full bg-electric-violet w-3/4"></div>
+</div>
+<span>21 Story Points</span>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="px-4 py-3 mt-2 border-t border-outline-variant border-opacity-15 bg-surface-dim">
+<div class="font-label-caps text-label-caps text-secondary mb-2 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">help_center</span> CLARIFICATION REQUIRED</div>
+<div class="font-body-sm text-body-sm mb-2">Should Hardware Key support utilize WebAuthn standard?</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-container-highest border border-outline-variant border-opacity-40 rounded text-on-surface text-[11px] hover:bg-primary-container hover:text-white transition-colors">Yes, WebAuthn only</button>
+<button class="px-3 py-1 bg-surface-container-highest border border-outline-variant border-opacity-40 rounded text-on-surface text-[11px] hover:bg-primary-container hover:text-white transition-colors">Support legacy FIDO U2F</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Task Graph -->
+<div class="bg-slate-surface border border-outline-variant border-opacity-15 rounded-lg flex flex-col h-3/5 overflow-hidden relative">
+<div class="p-3 border-b border-outline-variant border-opacity-15 bg-surface-container-low flex justify-between items-center absolute w-full z-10 top-0 left-0 bg-opacity-80 backdrop-blur-md">
+<h3 class="font-headline-sm text-headline-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-electric-violet text-[18px]">account_tree</span>
+                                Implementation Sequence
+                            </h3>
+<div class="flex items-center gap-2 font-label-caps text-[10px] text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-electric-violet shadow-[0_0_8px_#DFD1FF]"></span> Critical Path
+                            </div>
+</div>
+<!-- Pseudo-Graph Visualization Container -->
+<div class="flex-1 overflow-auto custom-scrollbar relative p-8 mt-10 bg-deep-indigo bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0ibm9uZSIvPgo8Y2lyY2xlIGN4PSIyIiBjeT0iMiIgcj0iMSIgZmlsbD0iIzM0MzUzNiIvPgo8L3N2Zz4=')]">
+<!-- Graph SVGs for lines -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="min-width: 600px; min-height: 400px;">
+<defs>
+<marker id="arrowhead" markerheight="6" markerwidth="6" orient="auto" refx="5" refy="3">
+<polygon fill="#8B93A1" points="0 0, 6 3, 0 6"></polygon>
+</marker>
+<marker id="arrowhead-critical" markerheight="6" markerwidth="6" orient="auto" refx="5" refy="3">
+<polygon fill="#DFD1FF" points="0 0, 6 3, 0 6"></polygon>
+</marker>
+</defs>
+<!-- Connections -->
+<path class="graph-line-critical" d="M 120 80 L 250 150" marker-end="url(#arrowhead-critical)"></path>
+<path class="graph-line" d="M 120 220 L 250 150" marker-end="url(#arrowhead)"></path>
+<path class="graph-line-critical" d="M 250 150 L 400 150" marker-end="url(#arrowhead-critical)"></path>
+<path class="graph-line-critical" d="M 400 150 L 520 80" marker-end="url(#arrowhead-critical)"></path>
+<path class="graph-line" d="M 400 150 L 520 220" marker-end="url(#arrowhead)"></path>
+<path class="graph-line-critical" d="M 520 80 L 650 150" marker-end="url(#arrowhead-critical)"></path>
+<path class="graph-line" d="M 520 220 L 650 150" marker-end="url(#arrowhead)"></path>
+</svg>
+<!-- Nodes -->
+<div class="relative w-full h-full min-w-[700px] min-h-[300px]">
+<!-- Node 1 -->
+<div class="absolute left-[20px] top-[60px] w-[100px] bg-surface-container-highest border border-electric-violet rounded p-2 text-center glow-hover cursor-pointer shadow-[0_0_10px_rgba(223,209,255,0.2)]">
+<div class="font-label-caps text-[9px] text-electric-violet mb-1">DB</div>
+<div class="font-body-sm text-[10px] leading-tight">Schema Update</div>
+</div>
+<!-- Node 2 -->
+<div class="absolute left-[20px] top-[200px] w-[100px] bg-surface-container-high border border-outline-variant rounded p-2 text-center glow-hover cursor-pointer">
+<div class="font-label-caps text-[9px] text-tertiary mb-1">CONFIG</div>
+<div class="font-body-sm text-[10px] leading-tight">Provider Setup</div>
+</div>
+<!-- Node 3 -->
+<div class="absolute left-[150px] top-[130px] w-[100px] bg-surface-container-highest border border-electric-violet rounded p-2 text-center glow-hover cursor-pointer shadow-[0_0_10px_rgba(223,209,255,0.2)]">
+<div class="font-label-caps text-[9px] text-electric-violet mb-1">SERVICE</div>
+<div class="font-body-sm text-[10px] leading-tight">Auth Extension</div>
+</div>
+<!-- Node 4 -->
+<div class="absolute left-[300px] top-[130px] w-[100px] bg-surface-container-highest border border-electric-violet rounded p-2 text-center glow-hover cursor-pointer shadow-[0_0_10px_rgba(223,209,255,0.2)]">
+<div class="font-label-caps text-[9px] text-electric-violet mb-1">API</div>
+<div class="font-body-sm text-[10px] leading-tight">Endpoint Int.</div>
+</div>
+<!-- Node 5 -->
+<div class="absolute left-[420px] top-[60px] w-[100px] bg-surface-container-highest border border-electric-violet rounded p-2 text-center glow-hover cursor-pointer shadow-[0_0_10px_rgba(223,209,255,0.2)]">
+<div class="font-label-caps text-[9px] text-electric-violet mb-1">FRONTEND</div>
+<div class="font-body-sm text-[10px] leading-tight">UI Impl.</div>
+</div>
+<!-- Node 6 -->
+<div class="absolute left-[420px] top-[200px] w-[100px] bg-surface-container-high border border-outline-variant rounded p-2 text-center glow-hover cursor-pointer">
+<div class="font-label-caps text-[9px] text-tertiary mb-1">SEC</div>
+<div class="font-body-sm text-[10px] leading-tight">Security Audit</div>
+</div>
+<!-- Node 7 -->
+<div class="absolute left-[550px] top-[130px] w-[100px] bg-surface-container-highest border border-electric-violet rounded p-2 text-center glow-hover cursor-pointer shadow-[0_0_10px_rgba(223,209,255,0.2)]">
+<div class="font-label-caps text-[9px] text-electric-violet mb-1">QA</div>
+<div class="font-body-sm text-[10px] leading-tight">Integration Tests</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: Risks & Mitigations (25%) -->
+<aside class="w-full lg:w-[320px] flex flex-col gap-gutter-md overflow-hidden flex-shrink-0">
+<div class="bg-slate-surface border border-outline-variant border-opacity-15 rounded-lg flex flex-col h-full overflow-hidden">
+<div class="p-4 border-b border-outline-variant border-opacity-15 bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-risk-medium text-[18px]">gpp_maybe</span>
+                                Risk Matrix
+                            </h3>
+</div>
+<div class="p-2 overflow-y-auto custom-scrollbar flex-1 flex flex-col gap-2">
+<!-- Risk Item 1 -->
+<div class="bg-surface-container-high p-3 rounded border-l-2 border-risk-high hover:bg-surface-container-highest transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-[10px] text-risk-high bg-risk-high bg-opacity-10 px-1 rounded">SEV-1</span>
+<span class="material-symbols-outlined text-outline-variant text-[14px] cursor-pointer hover:text-on-surface">more_vert</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-semibold text-on-surface mb-1">Session Middleware Breakage</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight mb-2">Updating the token validation logic may invalidate active JWTs prematurely.</p>
+<div class="bg-surface-dim p-2 rounded border border-outline-variant border-opacity-10">
+<div class="font-label-caps text-[9px] text-tertiary mb-1">MITIGATION</div>
+<p class="font-label-code text-[10px] text-primary-fixed-dim">Implement dual-validation layer during rollout period (7 days).</p>
+</div>
+</div>
+<!-- Risk Item 2 -->
+<div class="bg-surface-container-high p-3 rounded border-l-2 border-risk-medium hover:bg-surface-container-highest transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-[10px] text-risk-medium bg-risk-medium bg-opacity-10 px-1 rounded">SEV-2</span>
+<span class="material-symbols-outlined text-outline-variant text-[14px] cursor-pointer hover:text-on-surface">more_vert</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-semibold text-on-surface mb-1">Third-party Rate Limits</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight mb-2">Spike in SMS requests during initial onboarding could trigger provider throttling.</p>
+<div class="bg-surface-dim p-2 rounded border border-outline-variant border-opacity-10">
+<div class="font-label-caps text-[9px] text-tertiary mb-1">MITIGATION</div>
+<p class="font-label-code text-[10px] text-primary-fixed-dim">Batch notifications &amp; implement exponential backoff retry queue.</p>
+</div>
+</div>
+<!-- Risk Item 3 -->
+<div class="bg-surface-container-high p-3 rounded border-l-2 border-tertiary hover:bg-surface-container-highest transition-colors opacity-80">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-[10px] text-tertiary bg-tertiary bg-opacity-10 px-1 rounded">SEV-3</span>
+<span class="material-symbols-outlined text-outline-variant text-[14px] cursor-pointer hover:text-on-surface">more_vert</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-semibold text-on-surface mb-1">Legacy UI Inconsistency</h4>
+<p class="font-body-sm text-[11px] text-on-surface-variant leading-tight">Admin dashboard MFA toggles may not align with new tenant-level settings.</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<!-- Footer Action Bar -->
+<div class="bg-surface-container-lowest border-t border-outline-variant border-opacity-30 p-4 flex justify-between items-center z-20">
+<div class="flex items-center gap-4 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-primary">check_circle</span> Analysis Complete</span>
+<span class="w-px h-4 bg-outline-variant bg-opacity-50"></span>
+<span>Confidence Score: <strong class="text-on-surface">92%</strong></span>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 bg-transparent border border-outline-variant rounded font-label-caps text-label-caps text-on-surface hover:bg-surface-container-high transition-colors">Discard Draft</button>
+<button class="px-6 py-2 bg-surface-container-high border border-primary border-opacity-50 rounded font-label-caps text-label-caps text-primary hover:bg-primary hover:bg-opacity-10 transition-colors">Approve Plan</button>
+<button class="px-6 py-2 bg-primary-container rounded font-label-caps text-label-caps text-white hover:bg-inverse-primary transition-colors shadow-[0_0_15px_rgba(94,67,251,0.3)] flex items-center gap-2">
+                        Handoff to Orchestration <span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

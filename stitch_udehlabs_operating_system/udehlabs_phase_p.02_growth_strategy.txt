@@ -1,0 +1,33 @@
+# UdehLabs | Phase P.02 Growth & Acquisition Strategy
+
+## 1. Growth Funnel Definition
+- **Visitor**: Reaches public landing pages (Search, Direct, Referral).
+- **Prospect**: Explores product value (Landing, Product Demos, Resources).
+- **Lead**: Initiates signup or requests a demo.
+- **User**: Completes signup and verification.
+- **Activated User**: Completes onboarding and triggers first AI/Agent task (First Value).
+- **Retained User**: Returns within 7 days to manage engineering projects.
+- **Customer**: Transitions to a paid tier (Commercial Intelligence).
+
+## 2. Technical Acquisition Foundation
+- **Attribution Engine**: Capturing `utm_source`, `utm_medium`, `utm_campaign` on landing and persisting through signup via secure session/cookie.
+- **SEO Architecture**:
+    - Automatic `sitemap.xml` and `robots.txt` generation.
+    - SSR for public pages (Landing, Pricing, Resources) with dynamic Meta/OG tags.
+    - Canonical URL enforcement to prevent duplicate content penalties.
+- **Analytics Events**:
+    - `growth_landing_view`: Initial visit with attribution metadata.
+    - `growth_signup_start`: User clicks "Build with UdehLabs".
+    - `growth_onboarding_complete`: Transition from setup to workspace.
+    - `growth_activation`: The "First Value" event (linked to P.01 analytics).
+
+## 3. Trust & Social Proof Infrastructure
+- **Security Proof**: Displaying technical certification badges (from A.75).
+- **Case Study Registry**: Structured content system for verified implementation stories.
+- **Resource Center**: Technical guides for AI software engineering and agent orchestration.
+
+## 4. Measuring Success (North Star Metrics)
+- **CAC (Customer Acquisition Cost)**: Attributed across campaigns.
+- **Activation Rate**: % of signups reaching "First Agent Run".
+- **LTV (Lifetime Value)**: Correlated with token usage and subscription tier.
+- **Virality**: Referral and invitation conversion rates.

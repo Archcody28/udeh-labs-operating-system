@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>New Software Request - UdehLabs</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#07006c",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "secondary": "#c0c1ff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-container-highest": "#2d3449",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#007650",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface": "#dae2fd",
+                        "surface-dim": "#0b1326",
+                        "primary-fixed-dim": "#d2bbff",
+                        "outline-variant": "#4a4455",
+                        "surface-container-lowest": "#060e20",
+                        "surface-tint": "#d2bbff",
+                        "background": "#0b1326",
+                        "surface": "#0b1326",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "error": "#ffb4ab",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#b0b2ff",
+                        "inverse-on-surface": "#283044",
+                        "surface-container-high": "#222a3d",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary-container": "#ede0ff",
+                        "primary": "#d2bbff",
+                        "surface-container-low": "#131b2e",
+                        "outline": "#958da1",
+                        "surface-variant": "#2d3449",
+                        "surface-container": "#171f33",
+                        "primary-fixed": "#eaddff",
+                        "tertiary": "#4edea3",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-tertiary": "#003824",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-primary-fixed": "#25005a",
+                        "secondary-container": "#3131c0",
+                        "on-primary": "#3f008e",
+                        "secondary-fixed": "#e1e0ff",
+                        "on-secondary": "#1000a9",
+                        "primary-container": "#7c3aed",
+                        "on-tertiary-container": "#76ffc2",
+                        "surface-bright": "#31394d",
+                        "on-background": "#dae2fd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-md": "16px",
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "table-row-height": "40px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "code-mono": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["11px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "code-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glowing-border {
+            position: relative;
+        }
+        .glowing-border::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            border-radius: inherit;
+            background: linear-gradient(45deg, transparent, rgba(78, 222, 163, 0.3), transparent);
+            z-index: -1;
+            animation: border-glow 3s linear infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes border-glow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .pulse-dot {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- Shared Component: SideNavBar -->
+<nav class="w-[240px] h-screen fixed left-0 top-0 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col py-6 px-4">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center relative overflow-hidden">
+<span class="font-headline-sm text-headline-sm text-on-primary font-bold z-10">U</span>
+<div class="absolute inset-0 bg-gradient-to-tr from-transparent to-white/20"></div>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-80 mt-0.5">Enterprise Portal</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex flex-col gap-2">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<!-- Projects -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">account_tree</span>
+<span class="font-label-caps text-label-caps">Projects</span>
+</a>
+<!-- Requests (ACTIVE based on Semantic Matching for "New Software Request") -->
+<a class="flex items-center gap-3 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:bg-surface-container-high transition-colors duration-200 active:scale-[0.98] transition-transform shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">ad_units</span>
+<span class="font-label-caps text-label-caps">Requests</span>
+</a>
+<!-- Messages -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">forum</span>
+<span class="font-label-caps text-label-caps">Messages</span>
+</a>
+<!-- Deliverables -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">package_2</span>
+<span class="font-label-caps text-label-caps">Deliverables</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors duration-200 rounded-xl group mt-auto" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Shared Component: TopAppBar -->
+<header class="fixed top-0 right-0 left-[240px] h-16 bg-surface/80 dark:bg-surface/80 backdrop-blur-md bg-surface-dim/50 border-b border-outline-variant z-40">
+<div class="flex justify-between items-center px-gutter w-full h-full">
+<!-- Left: Product Name / Context -->
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-primary text-[18px]">add_box</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Project: Quantum Nexus</h2>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary border border-secondary/20 font-code-mono text-code-mono flex items-center gap-1.5 ml-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary pulse-dot"></span>
+                    DRAFT
+                </span>
+</div>
+<!-- Right: Search & Actions -->
+<div class="flex items-center gap-4">
+<!-- Search (Placeholder style logic) -->
+<div class="relative hidden lg:block group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px] group-focus-within:text-primary">search</span>
+<input class="w-64 bg-surface-container h-9 rounded-full pl-9 pr-4 border border-outline-variant text-body-sm font-body-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary-container focus:border-primary transition-all" placeholder="Search resources..." type="text"/>
+</div>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-1">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/50 hover:text-on-surface transition-all focus:ring-2 focus:ring-primary-container">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/50 hover:text-on-surface transition-all focus:ring-2 focus:ring-primary-container">
+<span class="material-symbols-outlined text-[20px]">help</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/50 hover:text-on-surface transition-all focus:ring-2 focus:ring-primary-container overflow-hidden">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<!-- ml-[240px] clears sidebar, pt-[88px] clears header (64px + 24px padding) -->
+<main class="ml-[240px] pt-[88px] p-container-padding max-w-[1600px]">
+<!-- Wizard Header Timeline -->
+<div class="mb-stack-md bg-surface-container-low rounded-xl border border-outline-variant/50 p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+<div class="flex items-center justify-between relative">
+<!-- Track Line -->
+<div class="absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2 h-0.5 bg-surface-container-highest z-0"></div>
+<!-- Active Track -->
+<div class="absolute left-[10%] w-[15%] top-1/2 -translate-y-1/2 h-0.5 bg-primary z-0 shadow-[0_0_8px_rgba(210,187,255,0.5)]"></div>
+<!-- Steps -->
+<!-- Step 1: Active -->
+<div class="relative z-10 flex flex-col items-center gap-3 w-1/4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold shadow-[0_0_12px_rgba(210,187,255,0.4)] border border-primary-fixed-dim">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary">Business Goal</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center gap-3 w-1/4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant border border-outline-variant">
+<span class="font-code-mono text-code-mono">02</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Core Features</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center gap-3 w-1/4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant border border-outline-variant">
+<span class="font-code-mono text-code-mono">03</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Tech Constraints</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center gap-3 w-1/4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant border border-outline-variant">
+<span class="font-code-mono text-code-mono">04</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Timeline &amp; Budget</span>
+</div>
+</div>
+</div>
+<!-- Content Grid: Form (8 col) & AI Sidebar (4 col) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
+<!-- Left: Main Intake Form -->
+<div class="md:col-span-8 flex flex-col gap-stack-md">
+<!-- Form Section Container -->
+<div class="bg-surface-container rounded-xl border border-outline-variant/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] overflow-hidden">
+<div class="p-6 border-b border-outline-variant/30 bg-surface-container-low/50">
+<h3 class="font-headline-md text-headline-md text-on-surface">Define Your Vision</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Provide a high-level overview of the problem you are trying to solve.</p>
+</div>
+<div class="p-6 flex flex-col gap-6">
+<!-- Vision Textarea with AI Extraction -->
+<div class="flex flex-col">
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-2">Describe your vision</label>
+<!-- The input area -->
+<div class="relative group">
+<textarea class="w-full h-40 bg-surface-container-lowest border border-outline-variant rounded-t-xl p-4 font-body-md text-body-md text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary resize-y placeholder-on-surface-variant/50 transition-colors" placeholder="We need a unified platform to manage...">We are looking to build a new internal portal that will consolidate our scattered resource management tools. It needs to handle user authentication robustly, ideally hooking into our existing enterprise identity provider. The core flow revolves around department leads requesting compute resources, which then triggers an approval workflow...</textarea>
+<!-- Decorative AI Scrim on focus -->
+<div class="absolute right-3 top-3 pointer-events-none opacity-0 group-focus-within:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-[18px] animate-pulse">auto_awesome</span>
+</div>
+</div>
+<!-- Live AI Extraction Panel -->
+<div class="bg-surface-container-low border border-t-0 border-outline-variant rounded-b-xl p-4 flex flex-col gap-3 relative overflow-hidden">
+<!-- Subtle grid background pattern -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 16px 16px;"></div>
+<div class="flex items-center gap-2 relative z-10">
+<span class="material-symbols-outlined text-tertiary text-[16px]">psychology</span>
+<span class="font-code-mono text-code-mono text-tertiary uppercase tracking-wider text-[10px]">Identified Requirements</span>
+</div>
+<div class="flex flex-wrap gap-2 relative z-10">
+<div class="px-2.5 py-1 rounded bg-secondary-container/20 border border-secondary/30 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[14px]">category</span>
+<span class="font-body-sm text-body-sm text-on-surface">Internal Portal</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-tertiary-container/20 border border-tertiary/30 flex items-center gap-1.5 glowing-border">
+<span class="material-symbols-outlined text-tertiary text-[14px]">shield_person</span>
+<span class="font-body-sm text-body-sm text-on-surface">Enterprise SSO Auth</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-secondary-container/20 border border-secondary/30 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[14px]">account_tree</span>
+<span class="font-body-sm text-body-sm text-on-surface">Approval Workflow</span>
+</div>
+<div class="px-2.5 py-1 rounded bg-secondary-container/20 border border-secondary/30 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[14px]">dns</span>
+<span class="font-body-sm text-body-sm text-on-surface">Resource Management</span>
+</div>
+<!-- Typing indicator pill -->
+<div class="px-2.5 py-1 rounded border border-outline-variant/30 flex items-center gap-1 opacity-60">
+<div class="w-1 h-1 rounded-full bg-on-surface-variant animate-bounce" style="animation-delay: 0ms;"></div>
+<div class="w-1 h-1 rounded-full bg-on-surface-variant animate-bounce" style="animation-delay: 150ms;"></div>
+<div class="w-1 h-1 rounded-full bg-on-surface-variant animate-bounce" style="animation-delay: 300ms;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Reference Documents Upload -->
+<div class="flex flex-col gap-2">
+<label class="font-label-caps text-label-caps text-on-surface-variant">Reference Documents</label>
+<div class="border-2 border-dashed border-outline-variant hover:border-primary/50 bg-surface-container-lowest hover:bg-surface-container-low/50 transition-colors rounded-xl p-8 flex flex-col items-center justify-center gap-4 cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center group-hover:bg-primary-container/20 group-hover:text-primary transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined text-[24px]">cloud_upload</span>
+</div>
+<div class="text-center">
+<p class="font-headline-sm text-headline-sm text-on-surface">Drag &amp; drop files here</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Supports PDF, DOCX, PNG, or YAML architecture maps (Max 50MB)</p>
+</div>
+<button class="px-4 py-2 mt-2 rounded bg-surface-container-highest text-on-surface font-body-sm text-body-sm border border-outline-variant hover:bg-surface-bright transition-colors">
+                                    Browse Files
+                                </button>
+</div>
+<!-- Attached File preview -->
+<div class="mt-2 flex items-center justify-between p-3 rounded-lg bg-surface-container border border-outline-variant/50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">description</span>
+<div>
+<p class="font-body-sm text-body-sm text-on-surface font-medium">legacy_system_arch.pdf</p>
+<p class="font-code-mono text-code-mono text-on-surface-variant text-[10px]">2.4 MB • Uploaded</p>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Form Actions -->
+<div class="p-6 border-t border-outline-variant/30 bg-surface-container-low/50 flex justify-end gap-3">
+<button class="px-5 py-2.5 rounded-lg border border-outline-variant text-on-surface font-body-md text-body-md hover:bg-surface-container-highest transition-colors">
+                            Save Draft
+                        </button>
+<button class="px-5 py-2.5 rounded-lg bg-primary text-on-primary font-body-md text-body-md font-medium hover:bg-primary-fixed transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(210,187,255,0.2)]">
+                            Continue to Core Features
+                            <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right: AI Intake Assistant (Bento Layout style) -->
+<aside class="md:col-span-4 flex flex-col gap-stack-md sticky top-[104px]">
+<div class="bg-surface-container-lowest border border-outline-variant/50 rounded-xl overflow-hidden shadow-lg shadow-black/50">
+<!-- Assistant Header -->
+<div class="bg-surface-container-low border-b border-outline-variant/30 p-4 flex items-center gap-3 relative overflow-hidden">
+<!-- Background aesthetic -->
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4"></div>
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 border border-primary/30 flex items-center justify-center relative z-10">
+<span class="material-symbols-outlined text-primary text-[18px]">temp_preferences_custom</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+                                Intake Assistant
+                                <span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Live Analysis Active</p>
+</div>
+</div>
+<!-- Suggestions Feed -->
+<div class="p-4 flex flex-col gap-4 max-h-[600px] overflow-y-auto custom-scrollbar">
+<!-- Suggestion Card 1 -->
+<div class="bg-surface-container-low border border-l-4 border-l-tertiary border-outline-variant/30 rounded-r-lg p-3.5 relative overflow-hidden group">
+<!-- Glint effect on hover -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-tertiary text-[20px] shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-2">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+                                        You mentioned user authentication. Consider standardizing with <strong class="text-tertiary">SSO (Single Sign-On)</strong> for enhanced enterprise security compliance.
+                                    </p>
+<div class="flex items-center gap-2 mt-1">
+<button class="px-3 py-1 rounded bg-tertiary-container text-on-tertiary-container font-label-caps text-label-caps hover:brightness-110 transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add</span> Add to Scope
+                                        </button>
+<button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-highest transition-all">
+                                            Dismiss
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Suggestion Card 2 -->
+<div class="bg-surface-container-low border border-l-4 border-l-primary border-outline-variant/30 rounded-r-lg p-3.5">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">phone_iphone</span>
+<div class="flex flex-col gap-2">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+                                        Would you like to include <strong class="text-primary">mobile support</strong>? 64% of internal portals in your sector require responsive mobile views for field operatives.
+                                    </p>
+<div class="flex items-center gap-2 mt-1">
+<button class="px-3 py-1 rounded bg-primary-container text-on-primary-container font-label-caps text-label-caps hover:brightness-110 transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">add</span> Add to Scope
+                                        </button>
+<button class="px-3 py-1 rounded border border-outline-variant text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-container-highest transition-all">
+                                            Dismiss
+                                        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Info Note -->
+<div class="flex items-start gap-2 p-3 rounded-lg bg-surface-container/50 border border-outline-variant/20">
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">info</span>
+<p class="font-code-mono text-code-mono text-on-surface-variant text-[11px] leading-tight">
+                                AI analyzes your input in real-time against UdehLabs historical deployment patterns to suggest optimal architectural paths.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Secondary Context Card (Bento element) -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">rocket_launch</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm text-on-surface text-[14px]">Avg. Time to Scope</p>
+<p class="font-label-caps text-label-caps text-tertiary">~4 Minutes</p>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Custom Scrollbar Style for the sidebar -->
+<style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(149, 141, 161, 0.3);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(149, 141, 161, 0.5);
+        }
+    </style>
+</body></html>

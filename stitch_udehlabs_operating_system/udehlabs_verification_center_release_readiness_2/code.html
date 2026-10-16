@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Verification Center - Nexus SRE Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#081425",
+                        "surface-container-high": "#1f2a3c",
+                        "border-active": "#1e293b",
+                        "surface-tint": "#a4c9ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "primary-container": "#3492f6",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary-fixed": "#002113",
+                        "error-container": "#93000a",
+                        "tertiary-container": "#00a572",
+                        "primary-fixed": "#d4e3ff",
+                        "surface-container-highest": "#2a3548",
+                        "surface-bright": "#2f3a4c",
+                        "secondary": "#d2bbff",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#00311f",
+                        "inverse-on-surface": "#263143",
+                        "inverse-primary": "#005fad",
+                        "on-primary": "#00315d",
+                        "status-healthy": "#10b981",
+                        "on-primary-fixed": "#001c39",
+                        "surface": "#081425",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "on-primary-container": "#002a52",
+                        "on-primary-fixed-variant": "#004884",
+                        "on-background": "#d7e3fb",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "outline-variant": "#404753",
+                        "secondary-fixed": "#eaddff",
+                        "on-secondary": "#3f008e",
+                        "surface-dim": "#081425",
+                        "inverse-surface": "#d7e3fb",
+                        "status-warning": "#f59e0b",
+                        "primary": "#a4c9ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "data-text": "#d8e3fb",
+                        "on-error": "#690005",
+                        "on-surface": "#d7e3fb",
+                        "on-secondary-container": "#c9aeff",
+                        "surface-variant": "#2a3548",
+                        "on-surface-variant": "#c0c7d5",
+                        "on-secondary-fixed": "#25005a",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "secondary-container": "#6001d1",
+                        "status-critical": "#ef4444",
+                        "surface-container-lowest": "#030e1f",
+                        "surface-container": "#152031",
+                        "surface-deep": "#040e1f",
+                        "on-tertiary": "#003824",
+                        "outline": "#8a919e",
+                        "surface-container-low": "#101c2d",
+                        "error": "#ffb4ab",
+                        "tertiary": "#4edea3"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-mobile": "12px",
+                        "compact": "8px",
+                        "margin-desktop": "24px",
+                        "sidebar": "240px",
+                        "standard": "16px",
+                        "base": "4px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["Geist Mono"],
+                        "data-lg": ["Geist Mono"],
+                        "data-sm": ["Geist Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "data-md": ["Geist Mono"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "data-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "data-sm": ["11px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .pulse-warning {
+            animation: pulse-warn 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-warn {
+            0%, 100% { opacity: 1; border-color: rgba(245, 158, 11, 0.8); box-shadow: inset 0 0 8px rgba(245, 158, 11, 0.2); }
+            50% { opacity: .7; border-color: rgba(245, 158, 11, 0.3); box-shadow: inset 0 0 2px rgba(245, 158, 11, 0.1); }
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+        }
+        .bento-item {
+            background-color: theme('colors.surface-container');
+            border: 1px solid theme('colors.border-active');
+            border-radius: theme('borderRadius.DEFAULT');
+            padding: theme('spacing.standard');
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-deep');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-container-highest');
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex font-body-md">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-full py-standard bg-surface-container-low dark:bg-surface-container-low text-secondary dark:text-secondary-fixed-dim docked fixed left-0 h-full w-[240px] border-r border-outline-variant z-50">
+<div class="px-margin-desktop mb-8">
+<h1 class="text-headline-sm font-headline-sm font-black text-secondary uppercase tracking-tight">Sovereign OS</h1>
+<p class="text-label-caps font-label-caps text-on-surface-variant mt-1">v4.2.0-stable</p>
+</div>
+<div class="flex-1 overflow-y-auto px-gutter space-y-1">
+<!-- Tabs based on JSON, identifying 'Operations' or creating a new semantic match if needed. Using Approvals as a proxy for Verification -->
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">dashboard</span>
+<span class="text-data-md font-data-md">Overview</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">priority_high</span>
+<span class="text-data-md font-data-md">Attention</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">settings_input_component</span>
+<span class="text-data-md font-data-md">Operations</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">smart_toy</span>
+<span class="text-data-md font-data-md">AI Workforce</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">account_tree</span>
+<span class="text-data-md font-data-md">Workflows</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">folder_special</span>
+<span class="text-data-md font-data-md">Projects</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">emergency</span>
+<span class="text-data-md font-data-md">Incidents</span>
+</a>
+<!-- Active State: Verification/Approvals -->
+<a class="flex items-center px-standard py-2 rounded bg-secondary-container text-on-secondary-container border-r-4 border-secondary font-bold translate-x-1 duration-100 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-data-md font-data-md">Approvals</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">gpp_maybe</span>
+<span class="text-data-md font-data-md">Security</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">payments</span>
+<span class="text-data-md font-data-md">Cost</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">bolt</span>
+<span class="text-data-md font-data-md">Automation</span>
+</a>
+</div>
+<div class="mt-auto px-gutter pt-4 border-t border-outline-variant space-y-1">
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">notifications_active</span>
+<span class="text-data-md font-data-md">Alerts</span>
+</a>
+<a class="flex items-center px-standard py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined mr-3 text-[18px]">terminal</span>
+<span class="text-data-md font-data-md">Terminal</span>
+</a>
+<div class="px-standard mt-4">
+<button class="w-full bg-secondary text-on-secondary py-2 rounded font-data-md text-data-md uppercase tracking-wider hover:bg-secondary-fixed transition-colors">
+                    Initialize Protocol
+                </button>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[240px] flex flex-col h-full overflow-hidden bg-background">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 bg-surface dark:bg-surface border-b border-outline-variant z-40 shrink-0">
+<div class="flex items-center">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden mr-4 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed-dim tracking-tight flex items-center">
+                    Nexus SRE Command
+                </div>
+</div>
+<div class="flex items-center space-x-6">
+<!-- Search (on_left relative to actions) -->
+<div class="hidden md:flex items-center bg-surface-deep border border-outline-variant rounded px-3 py-1">
+<span class="material-symbols-outlined text-outline text-[16px] mr-2">search</span>
+<input class="bg-transparent border-none text-data-sm font-data-sm text-data-text focus:outline-none focus:ring-0 w-48 placeholder-outline-variant" placeholder="Query Telemetry..." type="text"/>
+</div>
+<div class="flex items-center space-x-4 text-primary dark:text-primary-fixed-dim">
+<button class="hover:bg-surface-bright transition-colors duration-150 p-1 rounded">
+<span class="material-symbols-outlined text-[20px]">monitor_heart</span>
+</button>
+<button class="hover:bg-surface-bright transition-colors duration-150 p-1 rounded">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</button>
+<button class="hover:bg-surface-bright transition-colors duration-150 p-1 rounded">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</button>
+<button class="hover:bg-surface-bright transition-colors duration-150 p-1 rounded">
+<span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+</button>
+</div>
+<div class="h-8 w-8 rounded bg-surface-container-highest border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A futuristic, minimalist avatar depicting a stylized cybernetic owl glowing with soft blue accents against a dark slate background, highly detailed 3d render, clinical lighting, professional corporate SRE aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBa9XVnurAFvW5P1x7AoJ5jv1bR5C1hmkLozUldAgzSWpckFCYhFGBMIiZ6hjzIARBb9sH3x4m60UqNX46R-xm1GOFWZQSTV1hrJvOBH3lJ5K2D4gnGjTW7lfmRNz6M_rRxYFI7vtX1H7gG_GPzzRXsGn68L8eAmPS1ptJCl4gKn_YLdhMsyrSifXFusBpBLGnle77OMBO4r1jtFWQAs9MtUA20d5ChnF-JPim9SoiZtPG23COf3ZeGiA"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 overflow-y-auto p-margin-desktop md:p-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<div class="text-label-caps font-label-caps text-tertiary-fixed mb-1 uppercase">Phase A.72</div>
+<h2 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Verification Center &amp; Release Readiness</h2>
+</div>
+<div class="flex space-x-3">
+<button class="px-4 py-2 border border-border-active rounded text-primary font-data-md text-data-md hover:bg-surface-bright transition-colors">
+                        [ RE-RUN DIAGNOSTICS ]
+                    </button>
+<button class="px-4 py-2 bg-secondary text-on-secondary rounded font-data-md text-data-md opacity-50 cursor-not-allowed">
+                        AUTHORIZE DEPLOYMENT
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="bento-grid">
+<!-- Hero Score Widget (Col span 4) -->
+<div class="bento-item col-span-12 md:col-span-4 flex flex-col justify-between pulse-warning relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3 opacity-20">
+<span class="material-symbols-outlined text-[64px] text-status-warning">warning</span>
+</div>
+<div>
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-2">Release Readiness Score</div>
+<div class="text-[56px] leading-none font-headline-lg text-status-warning mb-1">78<span class="text-headline-md text-on-surface-variant">/100</span></div>
+<div class="text-data-md font-data-md text-status-warning bg-status-warning/10 inline-block px-2 py-1 rounded border border-status-warning/30">CONDITIONALLY READY</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-active">
+<div class="flex justify-between text-data-sm font-data-sm text-on-surface-variant mb-1">
+<span>Confidence Interval</span>
+<span class="text-on-surface">±4.2%</span>
+</div>
+<div class="w-full bg-surface-deep h-1 rounded overflow-hidden">
+<div class="bg-status-warning h-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<!-- Defect Classification (Col span 8) -->
+<div class="bento-item col-span-12 md:col-span-8 flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<div class="text-label-caps font-label-caps text-on-surface-variant">Defect Classification</div>
+<span class="material-symbols-outlined text-outline-variant text-[16px]">bar_chart</span>
+</div>
+<div class="flex-1 flex items-end space-x-2 h-32 mt-auto">
+<!-- Chart Bars -->
+<div class="flex-1 flex flex-col items-center group cursor-crosshair">
+<div class="text-data-sm font-data-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1">12</div>
+<div class="w-full bg-status-critical h-[15%] rounded-t border-t border-white/20 transition-all group-hover:bg-red-400"></div>
+<div class="w-full text-center text-label-caps font-label-caps text-on-surface-variant mt-2 truncate">P0</div>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-crosshair">
+<div class="text-data-sm font-data-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1">45</div>
+<div class="w-full bg-status-warning h-[45%] rounded-t border-t border-white/20 transition-all group-hover:bg-amber-400"></div>
+<div class="w-full text-center text-label-caps font-label-caps text-on-surface-variant mt-2 truncate">P1</div>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-crosshair">
+<div class="text-data-sm font-data-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1">89</div>
+<div class="w-full bg-primary-container h-[80%] rounded-t border-t border-white/20 transition-all group-hover:bg-blue-400"></div>
+<div class="w-full text-center text-label-caps font-label-caps text-on-surface-variant mt-2 truncate">P2</div>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-crosshair">
+<div class="text-data-sm font-data-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1">124</div>
+<div class="w-full bg-surface-variant h-[100%] rounded-t border-t border-white/20 transition-all group-hover:bg-surface-bright"></div>
+<div class="w-full text-center text-label-caps font-label-caps text-on-surface-variant mt-2 truncate">P3</div>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-crosshair">
+<div class="text-data-sm font-data-sm text-on-surface opacity-0 group-hover:opacity-100 transition-opacity mb-1">41</div>
+<div class="w-full bg-surface-variant h-[35%] rounded-t border-t border-white/20 transition-all group-hover:bg-surface-bright"></div>
+<div class="w-full text-center text-label-caps font-label-caps text-on-surface-variant mt-2 truncate">P4</div>
+</div>
+</div>
+</div>
+<!-- Critical Path Tests Grid (Col span 12) -->
+<div class="col-span-12 mt-4">
+<div class="text-label-caps font-label-caps text-on-surface-variant mb-3 flex items-center">
+<span class="w-2 h-2 bg-tertiary-fixed rounded-full mr-2"></span> Critical Path Telemetry
+                    </div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+<!-- Card 1 -->
+<div class="bento-item p-compact hover:bg-surface-bright transition-colors group border-status-healthy">
+<div class="flex justify-between items-start mb-2">
+<span class="text-data-md font-data-md text-on-surface">Auth.Gateway</span>
+<span class="material-symbols-outlined text-[16px] text-status-healthy">check_circle</span>
+</div>
+<div class="text-data-sm font-data-sm text-on-surface-variant mb-4 font-mono">LAT: 42ms | ERR: 0.01%</div>
+<div class="h-8 w-full bg-surface-deep rounded flex items-end gap-[1px] p-1">
+<!-- Sparkline mock -->
+<div class="w-full bg-status-healthy h-[40%]"></div><div class="w-full bg-status-healthy h-[45%]"></div><div class="w-full bg-status-healthy h-[35%]"></div><div class="w-full bg-status-healthy h-[50%]"></div><div class="w-full bg-status-healthy h-[42%]"></div><div class="w-full bg-status-healthy h-[48%]"></div><div class="w-full bg-status-healthy h-[60%]"></div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bento-item p-compact hover:bg-surface-bright transition-colors group border-status-warning bg-status-warning/5">
+<div class="flex justify-between items-start mb-2">
+<span class="text-data-md font-data-md text-on-surface">IAM.Matrix</span>
+<span class="material-symbols-outlined text-[16px] text-status-warning">warning</span>
+</div>
+<div class="text-data-sm font-data-sm text-status-warning mb-4 font-mono">LAT: 215ms | ERR: 1.2%</div>
+<div class="h-8 w-full bg-surface-deep rounded flex items-end gap-[1px] p-1">
+<div class="w-full bg-status-healthy h-[30%]"></div><div class="w-full bg-status-warning h-[75%]"></div><div class="w-full bg-status-warning h-[80%]"></div><div class="w-full bg-status-warning h-[65%]"></div><div class="w-full bg-status-healthy h-[40%]"></div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bento-item p-compact hover:bg-surface-bright transition-colors group border-status-healthy">
+<div class="flex justify-between items-start mb-2">
+<span class="text-data-md font-data-md text-on-surface">AI.Agent.Core</span>
+<span class="material-symbols-outlined text-[16px] text-status-healthy">check_circle</span>
+</div>
+<div class="text-data-sm font-data-sm text-on-surface-variant mb-4 font-mono">TOKENS: 45K/s | CPU: 62%</div>
+<div class="h-8 w-full bg-surface-deep rounded flex items-end gap-[1px] p-1">
+<div class="w-full bg-status-healthy h-[60%]"></div><div class="w-full bg-status-healthy h-[62%]"></div><div class="w-full bg-status-healthy h-[58%]"></div><div class="w-full bg-status-healthy h-[65%]"></div><div class="w-full bg-status-healthy h-[61%]"></div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bento-item p-compact hover:bg-surface-bright transition-colors group border-status-healthy">
+<div class="flex justify-between items-start mb-2">
+<span class="text-data-md font-data-md text-on-surface">Billing.Ledger</span>
+<span class="material-symbols-outlined text-[16px] text-status-healthy">check_circle</span>
+</div>
+<div class="text-data-sm font-data-sm text-on-surface-variant mb-4 font-mono">SYNC: OK | Q: 12</div>
+<div class="h-8 w-full bg-surface-deep rounded flex items-end gap-[1px] p-1">
+<div class="w-full bg-status-healthy h-[20%]"></div><div class="w-full bg-status-healthy h-[25%]"></div><div class="w-full bg-status-healthy h-[15%]"></div><div class="w-full bg-status-healthy h-[22%]"></div><div class="w-full bg-status-healthy h-[18%]"></div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bento-item p-compact hover:bg-surface-bright transition-colors group border-status-critical bg-status-critical/10 shadow-[inset_0_0_8px_rgba(239,68,68,0.2)]">
+<div class="flex justify-between items-start mb-2">
+<span class="text-data-md font-data-md text-status-critical font-bold">Multi.Tenant.Isol</span>
+<span class="material-symbols-outlined text-[16px] text-status-critical">dangerous</span>
+</div>
+<div class="text-data-sm font-data-sm text-status-critical mb-4 font-mono animate-pulse">LEAK_DETECTED</div>
+<div class="h-8 w-full bg-surface-deep rounded flex items-end gap-[1px] p-1">
+<div class="w-full bg-status-critical h-[90%]"></div><div class="w-full bg-status-critical h-[95%]"></div><div class="w-full bg-status-critical h-[100%]"></div><div class="w-full bg-status-critical h-[92%]"></div><div class="w-full bg-status-critical h-[98%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Release Blockers Section (Col span 12) -->
+<div class="col-span-12 mt-4">
+<div class="bg-status-critical/20 border border-status-critical/50 rounded-DEFAULT overflow-hidden flex flex-col md:flex-row">
+<div class="bg-status-critical p-4 flex flex-col justify-center items-center text-white md:w-48 shrink-0">
+<span class="material-symbols-outlined text-[32px] mb-2">block</span>
+<span class="text-headline-sm font-headline-sm text-center">RELEASE<br/>BLOCKERS</span>
+</div>
+<div class="p-0 flex-1 bg-surface-deep">
+<!-- Terminal Style List -->
+<div class="w-full">
+<div class="flex border-b border-border-active bg-surface-container-highest px-4 py-2">
+<div class="w-24 text-label-caps font-label-caps text-on-surface-variant">ID</div>
+<div class="flex-1 text-label-caps font-label-caps text-on-surface-variant">DESCRIPTION</div>
+<div class="w-32 text-label-caps font-label-caps text-on-surface-variant text-right">ASSIGNEE</div>
+</div>
+<div class="px-4 py-3 border-b border-border-active flex items-center hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="w-24 text-data-md font-data-md text-status-critical">[ERR-9021]</div>
+<div class="flex-1 text-data-md font-data-md text-on-surface">Staging Data Leakage in Multi-Tenant Boundary</div>
+<div class="w-32 text-data-sm font-data-sm text-primary text-right font-mono">@sys.sec.ops</div>
+</div>
+<div class="px-4 py-3 border-b border-border-active flex items-center hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="w-24 text-data-md font-data-md text-status-warning">[WRN-4420]</div>
+<div class="flex-1 text-data-md font-data-md text-on-surface">Token Budget Overflow Predication (Agent Core)</div>
+<div class="w-32 text-data-sm font-data-sm text-primary text-right font-mono">@ai.finops</div>
+</div>
+<div class="px-4 py-3 flex items-center hover:bg-surface-bright transition-colors cursor-pointer group">
+<div class="w-24 text-data-md font-data-md text-status-warning">[WRN-4118]</div>
+<div class="flex-1 text-data-md font-data-md text-on-surface">IAM Latency &gt; 200ms threshold during soak test</div>
+<div class="w-32 text-data-sm font-data-sm text-primary text-right font-mono">@plat.inf</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Console -->
+<div class="col-span-12 mt-4 bento-item bg-surface-deep font-mono p-4 border-l-4 border-l-secondary-fixed-dim">
+<div class="text-label-caps font-label-caps text-outline-variant mb-2">SYSTEM.CONSOLE &gt;_</div>
+<div class="text-data-sm text-tertiary-fixed-dim mb-1">&gt; Verifying deployment artifact checksums... OK</div>
+<div class="text-data-sm text-tertiary-fixed-dim mb-1">&gt; Checking dependency graphs... OK</div>
+<div class="text-data-sm text-status-warning mb-1">&gt; Evaluating gate policies... 2 WARNINGS, 1 FAILURE.</div>
+<div class="text-data-sm text-on-surface animate-pulse">&gt; Awaiting manual override or patch submission block...</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

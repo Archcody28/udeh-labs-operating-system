@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Obsidian Financial Engine | Pricing &amp; Plan Selection</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed": "#6ffbbe",
+                        "background": "#0c141e",
+                        "primary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-tint": "#d0bcff",
+                        "primary-fixed-dim": "#d0bcff",
+                        "tertiary": "#ffb95f",
+                        "surface-bright": "#323a45",
+                        "on-tertiary": "#472a00",
+                        "surface": "#0c141e",
+                        "on-primary-container": "#340080",
+                        "on-surface-variant": "#cbc3d7",
+                        "error-container": "#93000a",
+                        "outline": "#958ea0",
+                        "surface-container-high": "#232b35",
+                        "surface-container-highest": "#2d3540",
+                        "secondary": "#4edea3",
+                        "on-secondary-container": "#00311f",
+                        "on-primary-fixed": "#23005c",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "tertiary-container": "#ca8100",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-background": "#dbe3f1",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary": "#003824",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#5516be",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-primary": "#3c0091",
+                        "inverse-primary": "#6d3bd7",
+                        "surface-container-low": "#141c26",
+                        "secondary-container": "#00a572",
+                        "surface-container-lowest": "#070f18",
+                        "primary": "#d0bcff",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#0c141e",
+                        "error": "#ffb4ab",
+                        "inverse-on-surface": "#29313c",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "inverse-surface": "#dbe3f1",
+                        "primary-container": "#a078ff",
+                        "on-surface": "#dbe3f1",
+                        "surface-variant": "#2d3540",
+                        "outline-variant": "#494454",
+                        "on-tertiary-container": "#3e2400",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-container": "#18202b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "unit": "4px",
+                        "stack-lg": "32px",
+                        "container-padding": "24px",
+                        "stack-md": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "data-lg": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "data-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-lg": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .inner-glow { box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1); }
+        .electric-glow:focus-within { box-shadow: 0 0 0 1px #d0bcff, inset 0 0 0 1px #d0bcff; }
+        .bg-grid-pattern { background-image: radial-gradient(#2d3540 1px, transparent 1px); background-size: 24px 24px; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md relative overflow-x-hidden">
+<div class="fixed inset-0 bg-grid-pattern opacity-20 pointer-events-none z-0"></div>
+<!-- Top Navigation -->
+<nav class="flex justify-between items-center w-full px-container-padding h-16 fixed top-0 z-50 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-stack-md">
+<span class="text-body-lg font-body-lg font-bold text-primary">Obsidian Financial Engine</span>
+<div class="hidden md:flex gap-stack-lg ml-stack-lg">
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors" href="#">DASHBOARD</a>
+<a class="text-primary font-bold border-b-2 border-primary font-label-caps text-label-caps" href="#">PRICING</a>
+<a class="text-on-surface-variant font-label-caps text-label-caps hover:text-primary transition-colors" href="#">DOCS</a>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-unit rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-unit rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img alt="User profile switcher" class="w-full h-full object-cover" data-alt="A professional headshot of a financial analyst in a modern office, softly lit with cool blue and violet undertones, reflecting a serious, high-trust corporate environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9PKs9VbhFohR7WKR0ZsAcYsjZogYuX7a8wBL4QbrYchTvMzI18kNmA27VkQOfs2Ye9Jg5ZELSFyi_DNetHtvTKi9zR9Yfn0hJi9NF6JTAFdYMsGt7hBizXer2KnV_3l6oXnXanvlyUbcsOiv-Q0Ah7eyzm-vUlzc4aBrzudcCWqXYJn7Tb2gUEzfirZ9KXqSCKravTlmCvVxld_QEI6y2wMhkv4jZHj90NdEluuQAQN55Erg_j7LxgQ"/>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 mt-16 z-10 w-full max-w-7xl mx-auto px-container-padding py-stack-lg flex flex-col gap-stack-lg">
+<!-- Header -->
+<header class="text-center py-stack-lg max-w-3xl mx-auto">
+<h1 class="text-display-lg font-display-lg text-on-surface mb-stack-sm">Transparent Pricing for Modern Teams</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">Scale your financial intelligence infrastructure securely. Choose the tier that aligns with your data velocity.</p>
+</header>
+<!-- Plan Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-start">
+<!-- Starter Plan -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-container-padding flex flex-col h-full inner-glow relative group hover:border-outline transition-colors">
+<div class="mb-stack-md flex justify-between items-start">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Starter</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">For individual analysts.</p>
+</div>
+</div>
+<div class="mb-stack-lg">
+<div class="flex items-baseline gap-unit">
+<span class="text-headline-md font-headline-md text-on-surface">Free</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">forever</span>
+</div>
+</div>
+<ul class="flex flex-col gap-stack-sm mb-stack-lg flex-1">
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+                        2 AI Agents
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+                        5GB secure storage
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+                        Community support
+                    </li>
+</ul>
+<button class="w-full py-stack-sm px-stack-md rounded-lg border border-outline-variant text-on-surface-variant font-label-caps text-label-caps bg-surface-container-lowest opacity-50 cursor-not-allowed" disabled="">
+                    CURRENT PLAN
+                </button>
+</div>
+<!-- Professional Plan -->
+<div class="bg-surface-container-high border-2 border-primary rounded-xl p-container-padding flex flex-col h-full inner-glow relative group transform md:-translate-y-4 shadow-[0_10px_30px_-10px_rgba(208,188,255,0.15)] z-10">
+<div class="absolute top-0 right-0 bg-primary text-on-primary-container px-stack-sm py-unit rounded-bl-lg rounded-tr-lg font-label-caps text-[10px] tracking-wider font-bold">
+                    RECOMMENDED
+                </div>
+<div class="mb-stack-md flex justify-between items-start mt-stack-sm">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Professional</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">For growing quantitative teams.</p>
+</div>
+</div>
+<div class="mb-stack-lg">
+<div class="flex items-baseline gap-unit">
+<span class="text-headline-md font-headline-md text-on-surface">$49</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">/ seat / mo</span>
+</div>
+</div>
+<ul class="flex flex-col gap-stack-sm mb-stack-lg flex-1">
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+                        20 AI Agents
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+                        50GB high-speed storage
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+                        Priority email support
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+                        Full API access
+                    </li>
+</ul>
+<button class="w-full py-stack-sm px-stack-md rounded-lg bg-primary text-on-primary font-label-caps text-label-caps hover:bg-primary-fixed transition-colors flex items-center justify-center gap-unit inner-glow">
+                    UPGRADE NOW
+                    <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Enterprise Plan -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-container-padding flex flex-col h-full inner-glow relative group hover:border-outline transition-colors">
+<div class="mb-stack-md flex justify-between items-start">
+<div>
+<h2 class="text-headline-sm font-headline-sm text-on-surface">Enterprise</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Institutional grade security.</p>
+</div>
+</div>
+<div class="mb-stack-lg">
+<div class="flex items-baseline gap-unit">
+<span class="text-headline-sm font-headline-sm text-on-surface">Custom Pricing</span>
+</div>
+</div>
+<ul class="flex flex-col gap-stack-sm mb-stack-lg flex-1">
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="check_circle">check_circle</span>
+                        Unlimited AI Agents
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="check_circle">check_circle</span>
+                        1TB+ dedicated storage
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="check_circle">check_circle</span>
+                        24/7 Concierge support
+                    </li>
+<li class="flex items-center gap-stack-sm text-body-sm font-body-sm text-on-surface">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="check_circle">check_circle</span>
+                        L5 Isolation Security
+                    </li>
+</ul>
+<button class="w-full py-stack-sm px-stack-md rounded-lg border border-primary text-primary font-label-caps text-label-caps hover:bg-primary/10 transition-colors">
+                    CONTACT SALES
+                </button>
+</div>
+</div>
+<!-- Technical Capabilities Comparison -->
+<section class="mt-stack-lg bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden inner-glow">
+<div class="p-stack-md border-b border-outline-variant bg-surface-container-low">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Technical Capabilities</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant text-label-caps font-label-caps text-on-surface-variant">
+<th class="p-stack-md font-bold">FEATURE</th>
+<th class="p-stack-md text-center font-bold">STARTER</th>
+<th class="p-stack-md text-center font-bold text-primary">PROFESSIONAL</th>
+<th class="p-stack-md text-center font-bold">ENTERPRISE</th>
+</tr>
+</thead>
+<tbody class="text-body-sm font-body-sm text-on-surface divide-y divide-outline-variant/50">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-stack-md font-medium">Zero-Trust Architecture</td>
+<td class="p-stack-md text-center text-on-surface-variant">-</td>
+<td class="p-stack-md text-center"><span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span></td>
+<td class="p-stack-md text-center"><span class="material-symbols-outlined text-tertiary text-sm" data-icon="check">check</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-stack-md font-medium">Comprehensive Audit Logs</td>
+<td class="p-stack-md text-center text-on-surface-variant">-</td>
+<td class="p-stack-md text-center"><span class="material-symbols-outlined text-primary text-sm" data-icon="check">check</span></td>
+<td class="p-stack-md text-center"><span class="material-symbols-outlined text-tertiary text-sm" data-icon="check">check</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-stack-md font-medium">Agent Mesh Networking</td>
+<td class="p-stack-md text-center text-on-surface-variant">-</td>
+<td class="p-stack-md text-center text-on-surface-variant">-</td>
+<td class="p-stack-md text-center"><span class="material-symbols-outlined text-tertiary text-sm" data-icon="check">check</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="p-stack-md font-medium">Custom Deployment Regions</td>
+<td class="p-stack-md text-center text-on-surface-variant">-</td>
+<td class="p-stack-md text-center text-on-surface-variant">-</td>
+<td class="p-stack-md text-center"><span class="material-symbols-outlined text-tertiary text-sm" data-icon="check">check</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="mt-stack-lg max-w-4xl mx-auto w-full">
+<h3 class="text-headline-sm font-headline-sm text-on-surface mb-stack-md text-center">Frequently Asked Billing Questions</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<div class="bg-surface-container-low p-stack-md rounded-lg border border-outline-variant/50">
+<h4 class="text-data-lg font-data-lg text-on-surface mb-unit flex items-center gap-unit"><span class="material-symbols-outlined text-sm text-secondary" data-icon="info">info</span> How is token usage calculated?</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Tokens are metered per API call based on the complexity of the financial model being executed. Unused tokens roll over for one billing cycle.</p>
+</div>
+<div class="bg-surface-container-low p-stack-md rounded-lg border border-outline-variant/50">
+<h4 class="text-data-lg font-data-lg text-on-surface mb-unit flex items-center gap-unit"><span class="material-symbols-outlined text-sm text-secondary" data-icon="receipt_long">receipt_long</span> What is the refund policy?</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">We offer prorated refunds for seat cancellations within the first 14 days of the billing cycle. Annual plans include a 30-day money-back guarantee.</p>
+</div>
+<div class="bg-surface-container-low p-stack-md rounded-lg border border-outline-variant/50">
+<h4 class="text-data-lg font-data-lg text-on-surface mb-unit flex items-center gap-unit"><span class="material-symbols-outlined text-sm text-secondary" data-icon="group_add">group_add</span> How does seat scaling work?</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">You can add seats at any time. You will be billed a prorated amount for the new seats on your next invoice. Removing seats applies as a credit.</p>
+</div>
+<div class="bg-surface-container-low p-stack-md rounded-lg border border-outline-variant/50 flex flex-col justify-center items-center text-center">
+<h4 class="text-data-lg font-data-lg text-on-surface mb-unit">Still have questions?</h4>
+<button class="text-primary hover:text-primary-fixed transition-colors font-label-caps text-label-caps mt-unit">CONTACT SUPPORT</button>
+</div>
+</div>
+</section>
+</main>
+</body></html>

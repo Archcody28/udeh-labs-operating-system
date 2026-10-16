@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Project Intelligence View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed": "#25005a",
+                    "primary-fixed-dim": "#a4c9ff",
+                    "surface": "#051424",
+                    "inverse-primary": "#005fad",
+                    "surface-container": "#122131",
+                    "on-secondary": "#3f008e",
+                    "on-tertiary": "#502400",
+                    "tertiary-container": "#df7415",
+                    "inverse-surface": "#d4e4fa",
+                    "on-tertiary-fixed": "#311300",
+                    "primary": "#a4c9ff",
+                    "on-tertiary-container": "#461f00",
+                    "on-surface-variant": "#c0c7d5",
+                    "on-primary-container": "#002a52",
+                    "primary-container": "#3492f6",
+                    "secondary-container": "#6001d1",
+                    "surface-container-lowest": "#010f1f",
+                    "surface-tint": "#a4c9ff",
+                    "error": "#ffb4ab",
+                    "surface-container-highest": "#273647",
+                    "surface-dim": "#051424",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-background": "#d4e4fa",
+                    "outline": "#8a919e",
+                    "on-primary-fixed-variant": "#004884",
+                    "surface-container-high": "#1c2b3c",
+                    "on-primary": "#00315d",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-surface": "#d4e4fa",
+                    "on-secondary-container": "#c9aeff",
+                    "background": "#051424",
+                    "on-primary-fixed": "#001c39",
+                    "surface-bright": "#2c3a4c",
+                    "secondary": "#d2bbff",
+                    "on-tertiary-fixed-variant": "#723600",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-low": "#0d1c2d",
+                    "surface-variant": "#273647",
+                    "primary-fixed": "#d4e3ff",
+                    "tertiary": "#ffb786",
+                    "outline-variant": "#404753",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "secondary-fixed": "#eaddff",
+                    "inverse-on-surface": "#233143",
+                    "tertiary-fixed-dim": "#ffb786"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "margin-mobile": "16px",
+                    "xl": "40px",
+                    "margin-desktop": "32px",
+                    "xs": "4px",
+                    "unit": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Hanken Grotesk"],
+                    "label-sm": ["Hanken Grotesk"],
+                    "body-md": ["Hanken Grotesk"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-md": ["Hanken Grotesk"],
+                    "body-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        /* Custom scrollbar for high-density feel */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.outline'); }
+        
+        .cyber-glow { box-shadow: inset 0 0 15px -5px theme('colors.primary'); }
+        .cyber-border { border: 1px solid theme('colors.primary-fixed-dim'); opacity: 0.2; }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col md:flex-row overflow-hidden bg-background font-body-md text-on-surface">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface-container-lowest h-screen w-20 flex-col items-center py-6 border-r border-outline-variant fixed left-0 top-0 z-50">
+<div class="mb-8">
+<span class="material-symbols-outlined text-[32px] font-headline-md text-headline-md font-bold text-primary" data-icon="lens">lens</span>
+</div>
+<div class="flex-1 flex flex-col gap-6 w-full items-center">
+<!-- Workforces -->
+<a class="w-12 h-12 flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 group" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="groups_3">groups_3</span>
+</a>
+<!-- Projects (Active) -->
+<a class="w-12 h-12 flex flex-col items-center justify-center rounded-lg text-primary bg-primary/10 border-l-2 border-primary hover:bg-surface-container-highest transition-colors active:scale-95 duration-150 relative" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="terminal" data-weight="fill">terminal</span>
+<span class="absolute left-14 bg-surface-container-high px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50">Projects</span>
+</a>
+<!-- Teams -->
+<a class="w-12 h-12 flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="hub">hub</span>
+</a>
+<!-- Decisions -->
+<a class="w-12 h-12 flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="gavel">gavel</span>
+</a>
+<!-- Intelligence -->
+<a class="w-12 h-12 flex flex-col items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-highest transition-colors active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="psychology">psychology</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col items-center gap-4">
+<button class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center hover:bg-primary transition-colors active:scale-95" title="New Initiative">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A futuristic, high-tech abstract avatar with neon blue and purple accents on a dark metallic background. Cyberpunk aesthetic, clean, corporate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnvNISnD0vwZOtr9gm21YPNJ7vCivNAJjL_J2_EaMlEK_fGrNQ9DitMaWa7p-d9rDLzJwmu76Ar-Y7-97ftW1_MqzzZRRPZiOAedXSBKfv19sEiJtXIFuwVzTPDCed_Qwr1UOKIol4_K-KJdf1rjUfqkU__reu_rQ0vWr4hKd1P6mpWLSwdC84HnR_MObGBHMoHOlnFs_Vo1n7vQG-0-EGH4Umz59eKbpeo7h58WUUqosoQoYp4UPblQ"/>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-0 md:left-20 z-40 px-6 h-16 w-auto flex justify-between items-center bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant flat no shadows">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md tracking-tighter text-primary-fixed-dim">Aegis OS</h1>
+<span class="text-outline text-sm">/ Project Alpha</span>
+</div>
+<div class="flex-1 max-w-md mx-6 hidden md:block">
+<div class="relative focus-within:ring-1 ring-primary/30 rounded bg-surface-container h-9 flex items-center px-3 border border-outline-variant/50">
+<span class="material-symbols-outlined text-outline mr-2 text-[18px]" data-icon="search">search</span>
+<input class="bg-transparent border-none text-sm w-full text-on-surface focus:outline-none placeholder-outline" placeholder="Query intelligence..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:text-primary-fixed-dim transition-colors relative">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+</button>
+<button class="hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined" data-icon="health_and_safety">health_and_safety</span>
+</button>
+<button class="hover:text-primary-fixed-dim transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 mt-16 md:ml-20 p-6 overflow-y-auto overflow-x-hidden relative h-[calc(100vh-64px)] grid grid-cols-1 md:grid-cols-12 gap-6 content-start">
+<!-- Center Pane: Project Causal Graph -->
+<section class="md:col-span-8 bg-surface-container rounded-lg border border-outline-variant flex flex-col h-[500px] md:h-[calc(100vh-112px)] overflow-hidden relative group">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container-highest/50">
+<h2 class="font-label-md text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="account_tree">account_tree</span>
+                    Project Causal Graph
+                </h2>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded text-xs text-on-surface-variant border border-outline-variant/30 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="filter_list">filter_list</span> All Nodes
+                    </span>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-container-lowest p-6 flex items-center justify-center overflow-hidden">
+<!-- Abstract Causal Graph Vis -->
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-surface-container-lowest to-transparent pointer-events-none"></div>
+<div class="relative w-full h-full flex items-center justify-center cyber-glow">
+<!-- This would ideally be a D3/Canvas element, representing with structured HTML for visual proxy -->
+<div class="flex gap-12 items-center">
+<!-- Requirements Node -->
+<div class="flex flex-col gap-4">
+<div class="bg-surface-container-high border border-outline-variant p-3 rounded w-40 text-center relative z-10 hover:border-primary transition-colors cursor-pointer group">
+<div class="text-xs text-on-surface-variant mb-1">REQ-01</div>
+<div class="text-sm">Latency &lt; 50ms</div>
+<div class="absolute -right-12 top-1/2 w-12 border-t border-dashed border-outline-variant"></div>
+</div>
+<div class="bg-surface-container-high border border-outline-variant p-3 rounded w-40 text-center relative z-10 hover:border-primary transition-colors cursor-pointer">
+<div class="text-xs text-on-surface-variant mb-1">REQ-02</div>
+<div class="text-sm">99.99% Uptime</div>
+<div class="absolute -right-12 top-1/2 w-12 border-t border-dashed border-outline-variant"></div>
+</div>
+</div>
+<!-- Decisions Node -->
+<div class="bg-secondary-container/20 border border-secondary p-4 rounded-full w-32 h-32 flex flex-col items-center justify-center relative z-10 shadow-[0_0_15px_rgba(96,1,209,0.2)]">
+<span class="material-symbols-outlined text-secondary mb-1" data-icon="architecture">architecture</span>
+<div class="text-xs text-center text-secondary font-bold">Architecture<br/>Decision 4</div>
+<div class="absolute -right-12 top-1/2 w-12 border-t border-solid border-secondary/50"></div>
+<!-- Connecting lines backwards (visual only) -->
+<svg class="absolute -left-12 h-[80px] w-12 top-[-20px] pointer-events-none" style="z-index:-1;">
+<path class="text-outline-variant stroke-dasharray-[4,4]" d="M 0,20 C 20,20 20,60 48,60" fill="none" stroke="currentColor"></path>
+</svg>
+</div>
+<!-- AI Agent / Outcomes Node -->
+<div class="flex flex-col gap-6">
+<div class="bg-primary/10 border border-primary p-3 rounded w-48 relative z-10 cyber-glow">
+<div class="flex items-center gap-2 mb-2 border-b border-primary/20 pb-2">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="smart_toy">smart_toy</span>
+<span class="text-xs font-bold text-primary">SRE Agent Alpha</span>
+</div>
+<div class="text-[11px] text-on-surface-variant leading-tight">Deployed Auto-Scaling Policy based on REQ-01.</div>
+</div>
+<div class="bg-surface-container border border-outline-variant p-3 rounded w-48 relative z-10 opacity-70">
+<div class="flex items-center gap-2 mb-2 border-b border-outline-variant pb-2">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="task">task</span>
+<span class="text-xs text-on-surface-variant">Task #442</span>
+</div>
+<div class="text-[11px] text-on-surface-variant leading-tight">Migrate DB Instances. Blocked.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Pane: Intelligence & Context -->
+<div class="md:col-span-4 flex flex-col gap-6 h-[calc(100vh-112px)]">
+<!-- Context Preview -->
+<section class="bg-surface-container rounded-lg border border-outline-variant flex flex-col overflow-hidden h-1/3">
+<div class="p-3 border-b border-outline-variant bg-surface-container-highest/30 flex justify-between items-center">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant tracking-wider uppercase">Context Preview</h3>
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="info">info</span>
+</div>
+<div class="p-4 flex-1 overflow-y-auto">
+<div class="text-xs text-on-surface-variant mb-3 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="bolt">bolt</span>
+                        Active context fueling AI agents
+                    </div>
+<ul class="flex flex-wrap gap-2">
+<li class="bg-secondary/15 text-secondary border border-secondary/30 px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1">
+<span class="w-1 h-1 rounded-full bg-secondary"></span> API_Docs_v3.pdf
+                        </li>
+<li class="bg-surface-variant text-on-surface-variant border border-outline-variant px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1">
+<span class="w-1 h-1 rounded-full bg-primary"></span> Jira_Epic_ALPHA
+                        </li>
+<li class="bg-surface-variant text-on-surface-variant border border-outline-variant px-2 py-1 rounded text-[10px] font-mono flex items-center gap-1">
+<span class="w-1 h-1 rounded-full bg-outline"></span> Q3_Objectives.md
+                        </li>
+</ul>
+</div>
+</section>
+<!-- Active Intelligence List -->
+<section class="bg-surface-container rounded-lg border border-outline-variant flex flex-col overflow-hidden h-2/3">
+<div class="p-3 border-b border-outline-variant bg-surface-container-highest/30 flex justify-between items-center sticky top-0 backdrop-blur-sm z-10">
+<h3 class="font-label-sm text-label-sm text-primary tracking-wider uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="warning">warning</span>
+                        Active Intelligence
+                    </h3>
+</div>
+<div class="flex-1 overflow-y-auto p-2 flex flex-col gap-2">
+<!-- Alert Item Critical -->
+<div class="bg-error-container/10 border border-error/30 p-3 rounded flex flex-col gap-2 hover:bg-error-container/20 transition-colors cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="text-error font-label-md text-sm">Deployment Blocked</span>
+<span class="text-[10px] text-on-surface-variant font-mono">2m ago</span>
+</div>
+<p class="text-xs text-on-surface-variant">Task #442 (DB Migration) conflicts with REQ-02 (Uptime). Estimated impact: High.</p>
+<div class="flex items-center gap-1 mt-1 text-[10px] text-outline font-mono">
+<span class="material-symbols-outlined text-[12px]" data-icon="format_quote">format_quote</span>
+                            Source: Infrastructure Monitoring Agent
+                        </div>
+</div>
+<!-- Alert Item Warning -->
+<div class="bg-tertiary-container/10 border border-tertiary-container/30 p-3 rounded flex flex-col gap-2 hover:bg-tertiary-container/20 transition-colors cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="text-tertiary font-label-md text-sm">Scope Creep Risk</span>
+<span class="text-[10px] text-on-surface-variant font-mono">1h ago</span>
+</div>
+<p class="text-xs text-on-surface-variant">Recent commits to 'auth-service' deviate from Architecture Decision 4. Review recommended.</p>
+<div class="flex items-center gap-1 mt-1 text-[10px] text-outline font-mono">
+<span class="material-symbols-outlined text-[12px]" data-icon="format_quote">format_quote</span>
+                            Source: Codebase Analyzer Agent
+                        </div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

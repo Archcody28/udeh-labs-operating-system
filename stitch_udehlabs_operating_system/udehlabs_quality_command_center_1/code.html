@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quality Command Center - UdehLabs Surgical</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#006a71",
+                        "primary-container": "#00f2ff",
+                        "on-secondary-container": "#00311f",
+                        "surface-dim": "#051424",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface": "#051424",
+                        "error-container": "#93000a",
+                        "outline-variant": "#3a494b",
+                        "secondary-fixed-dim": "#4edea3",
+                        "inverse-primary": "#00696f",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary": "#fff6f0",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#00dbe7",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-container": "#122131",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-tertiary": "#472a00",
+                        "surface-container-highest": "#273647",
+                        "outline": "#849495",
+                        "surface-bright": "#2c3a4c",
+                        "on-surface": "#d4e4fa",
+                        "on-tertiary-container": "#875500",
+                        "on-primary": "#00363a",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-surface-variant": "#b9cacb",
+                        "inverse-on-surface": "#233143",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary-fixed-variant": "#005236",
+                        "secondary": "#4edea3",
+                        "secondary-fixed": "#6ffbbe",
+                        "primary": "#e1fdff",
+                        "tertiary-container": "#ffd4a3",
+                        "on-primary-fixed": "#002022",
+                        "inverse-surface": "#d4e4fa",
+                        "secondary-container": "#00a572",
+                        "surface-variant": "#273647",
+                        "surface-tint": "#00dbe7",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-secondary": "#003824",
+                        "on-background": "#d4e4fa",
+                        "background": "#051424",
+                        "on-primary-fixed-variant": "#004f54",
+                        "primary-fixed": "#74f5ff",
+                        "surface-container-lowest": "#010f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "density-high": "4px",
+                        "gutter": "8px",
+                        "density-medium": "12px",
+                        "unit": "4px",
+                        "container-padding": "16px"
+                    },
+                    "fontFamily": {
+                        "display-md": ["Hanken Grotesk"],
+                        "body-base": ["Hanken Grotesk"],
+                        "data-label": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-base": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-label": ["10px", { "lineHeight": "12px", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom scrollbar for dense data views */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #051424; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #273647; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3a494b; 
+        }
+        
+        /* Subtle scanline overlay for clinical aesthetic */
+        .scanline-overlay::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-base text-body-base h-screen w-screen overflow-hidden scanline-overlay selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-padding h-16 bg-surface border-b border-outline-variant">
+<!-- Brand -->
+<div class="flex items-center gap-4">
+<span class="text-display-md font-display-md font-bold tracking-tighter text-primary-fixed-dim uppercase">UdehLabs Surgical</span>
+</div>
+<!-- Health Telemetry (Center) -->
+<div class="hidden md:flex items-center bg-surface-container-low border border-outline-variant rounded-DEFAULT px-4 py-2 gap-6 font-data-mono text-data-mono">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span class="text-on-surface-variant">Release Safe:</span>
+<span class="text-secondary font-bold">98.4%</span>
+</div>
+<div class="w-px h-4 bg-outline-variant"></div>
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant">Active Incidents:</span>
+<span class="text-primary-fixed-dim">0</span>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-150 cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="monitor_heart">monitor_heart</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-150 cursor-pointer active:opacity-80 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary-fixed transition-colors duration-150 cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="ml-2 w-8 h-8 rounded-full border-2 border-primary-fixed-dim bg-surface-container-highest overflow-hidden flex items-center justify-center cursor-pointer">
+<img alt="Chief Quality Engineer Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTDNc0jNEHA4d8L3W_Su2fO_ODEupQY3iUCRR6a7azLTCdKKLMbx1NyxcDkrBGs_3bGapOlbHLlgoajq4S2SA_JB4wRsqkRkrmOTsYUwuYFmhCFiy6bbeii_0RfmvDkjAZRD-XA1PaX5GR6V1g3ST28US-rVf8XFXiW_MQ6Yn4wF3-YxiHTYRgZCxf6kjsUWQlYEKSquLSL6lwxb_tvTQup_gGeUCm2B1zM8jo_CTwcRSWd5vQHfO2Mw"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="fixed top-16 left-0 h-[calc(100vh-64px)] w-64 flex flex-col z-40 bg-surface-container-low border-r border-outline-variant">
+<!-- SideNav Header -->
+<div class="p-container-padding border-b border-outline-variant flex items-center gap-3">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-container-highest border border-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="dns">dns</span>
+</div>
+<div>
+<h2 class="text-body-base font-display-md font-semibold text-primary">Release Intel</h2>
+<p class="font-data-mono text-data-label text-on-surface-variant mt-1">v4.2.0-STABLE</p>
+</div>
+</div>
+<!-- Main Tabs -->
+<div class="flex-1 overflow-y-auto py-4 flex flex-col gap-1 px-2 font-data-mono text-data-mono">
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-secondary border-r-2 border-secondary font-bold bg-surface-container-high transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined fill" data-icon="dashboard">dashboard</span>
+<span>Quality Overview</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+<span>Test Explorer</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="bug_report">bug_report</span>
+<span>Defect Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span>Release Intelligence</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<span>Performance Baseline</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>AI Quality</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span>Release Verification</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out group" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Quality Reports</span>
+</a>
+</div>
+<!-- Footer Tabs -->
+<div class="p-2 border-t border-outline-variant flex flex-col gap-1 font-data-mono text-data-mono bg-surface-container-lowest">
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Security Audit</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant opacity-70 hover:bg-surface-container-highest hover:text-secondary hover:opacity-100 transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>System Logs</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 h-[calc(100vh-64px)] overflow-y-auto p-container-padding lg:p-6 bg-background">
+<div class="flex items-center justify-between mb-6">
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tighter">Command Center</h1>
+<div class="flex gap-3">
+<button class="px-4 py-2 bg-transparent border border-primary-fixed-dim text-primary-fixed-dim rounded-DEFAULT font-data-mono text-data-mono hover:bg-primary-fixed-dim hover:text-background transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+                    EXPORT AUDIT
+                </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter md:gap-density-medium lg:gap-6">
+<!-- Release Readiness Module (Monolith) -->
+<section class="col-span-12 lg:col-span-7 bg-surface-container-low border border-outline-variant rounded-DEFAULT flex flex-col relative overflow-hidden group">
+<!-- Status Border Indicator -->
+<div class="absolute top-0 left-0 w-full h-1 bg-tertiary-fixed-dim shadow-[0_0_10px_theme(colors.tertiary-fixed-dim)]"></div>
+<div class="p-container-padding flex justify-between items-start border-b border-outline-variant bg-surface-container">
+<div>
+<p class="font-data-label text-data-label text-outline uppercase tracking-widest mb-1">Target Environment</p>
+<h3 class="font-display-md text-display-md text-on-surface">Candidate RC-v4.2.1</h3>
+</div>
+<div class="bg-surface-dim border border-tertiary-fixed-dim px-3 py-1 rounded-DEFAULT flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span class="font-data-mono text-data-mono text-tertiary-fixed-dim uppercase font-bold tracking-wider">READY_WITH_WARNINGS</span>
+</div>
+</div>
+<div class="p-container-padding grid grid-cols-3 gap-4 flex-1">
+<!-- Correctness -->
+<div class="bg-surface-dim p-4 border border-outline-variant rounded-DEFAULT flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Correctness</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-display-lg text-primary-fixed-dim leading-none">100</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1">%</span>
+</div>
+</div>
+<!-- Security -->
+<div class="bg-surface-dim p-4 border border-outline-variant rounded-DEFAULT flex flex-col justify-between">
+<div class="flex items-center justify-between mb-4">
+<span class="font-data-label text-data-label text-on-surface-variant uppercase">Security</span>
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="shield">shield</span>
+</div>
+<div class="flex items-end gap-2">
+<span class="font-display-lg text-display-lg text-primary-fixed-dim leading-none">98</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1">%</span>
+</div>
+</div>
+<!-- Performance -->
+<div class="bg-surface-dim p-4 border border-tertiary-fixed-dim/50 rounded-DEFAULT flex flex-col justify-between relative overflow-hidden">
+<div class="absolute inset-0 bg-tertiary-fixed-dim/5 pointer-events-none"></div>
+<div class="flex items-center justify-between mb-4 relative z-10">
+<span class="font-data-label text-data-label text-tertiary-fixed-dim uppercase">Performance</span>
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-sm" data-icon="warning">warning</span>
+</div>
+<div class="flex items-end gap-2 relative z-10">
+<span class="font-display-lg text-display-lg text-tertiary-fixed-dim leading-none">85</span>
+<span class="font-data-mono text-data-mono text-on-surface-variant mb-1">%</span>
+</div>
+<p class="font-data-label text-data-label text-tertiary-fixed mt-2">Latency Regression Detected</p>
+</div>
+</div>
+</section>
+<!-- Regression Monitor -->
+<section class="col-span-12 lg:col-span-5 bg-surface-container border border-outline-variant rounded-DEFAULT flex flex-col">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-display-md text-body-base text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="show_chart">show_chart</span>
+                        Regression Monitor
+                    </h3>
+<span class="font-data-label text-data-label text-outline">VS PROD BASELINE</span>
+</div>
+<div class="flex-1 p-4 flex flex-col gap-4 justify-center font-data-mono text-data-mono">
+<!-- Metric 1 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-on-surface-variant">API Latency (p99)</span>
+<span class="text-tertiary-fixed-dim">+14ms</span>
+</div>
+<div class="w-full h-8 flex items-end gap-1 opacity-80">
+<div class="w-1/12 bg-secondary/20 h-[30%]"></div>
+<div class="w-1/12 bg-secondary/40 h-[40%]"></div>
+<div class="w-1/12 bg-secondary/30 h-[35%]"></div>
+<div class="w-1/12 bg-secondary/50 h-[45%]"></div>
+<div class="w-1/12 bg-secondary/60 h-[50%]"></div>
+<div class="w-1/12 bg-secondary/40 h-[40%]"></div>
+<div class="w-1/12 bg-tertiary-fixed-dim/60 h-[70%]"></div>
+<div class="w-1/12 bg-tertiary-fixed-dim/80 h-[85%]"></div>
+<div class="w-1/12 bg-tertiary-fixed-dim h-[90%] shadow-[0_0_8px_theme(colors.tertiary-fixed-dim)]"></div>
+<div class="w-1/12 bg-tertiary-fixed-dim/90 h-[88%]"></div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-on-surface-variant">Memory Usage (Peak)</span>
+<span class="text-secondary">-2.1%</span>
+</div>
+<div class="w-full h-8 flex items-end gap-1 opacity-80">
+<div class="w-1/12 bg-secondary/60 h-[80%]"></div>
+<div class="w-1/12 bg-secondary/50 h-[75%]"></div>
+<div class="w-1/12 bg-secondary/70 h-[85%]"></div>
+<div class="w-1/12 bg-secondary/40 h-[60%]"></div>
+<div class="w-1/12 bg-secondary/30 h-[50%]"></div>
+<div class="w-1/12 bg-secondary/40 h-[55%]"></div>
+<div class="w-1/12 bg-secondary/20 h-[40%]"></div>
+<div class="w-1/12 bg-secondary/30 h-[45%]"></div>
+<div class="w-1/12 bg-secondary/20 h-[35%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Requirement Traceability Matrix -->
+<section class="col-span-12 bg-surface border border-outline-variant rounded-DEFAULT overflow-hidden flex flex-col">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center bg-surface-container">
+<h3 class="font-display-md text-body-base text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="account_tree">account_tree</span>
+                        Requirement Traceability Matrix
+                    </h3>
+</div>
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant font-data-label text-data-label text-on-surface-variant uppercase">
+<th class="p-3 font-bold">Requirement ID</th>
+<th class="p-3 font-bold">Linked Task</th>
+<th class="p-3 font-bold">Unit Tests</th>
+<th class="p-3 font-bold">SAST Scan</th>
+<th class="p-3 font-bold">Evidence Hash</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono text-on-surface">
+<tr class="border-b border-outline-variant/30 hover:bg-surface-container-lowest transition-colors">
+<td class="p-3 text-primary-fixed-dim">REQ-AUTH-04</td>
+<td class="p-3 text-outline">DEL-8492</td>
+<td class="p-3">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-sm text-xs">PASSED</span>
+</td>
+<td class="p-3">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-sm text-xs">CLEAN</span>
+</td>
+<td class="p-3 text-on-surface-variant font-bold">[7a9f2b8c]</td>
+</tr>
+<tr class="border-b border-outline-variant/30 hover:bg-surface-container-lowest transition-colors bg-surface-container-low/20">
+<td class="p-3 text-primary-fixed-dim">REQ-CORE-12</td>
+<td class="p-3 text-outline">DEL-8495</td>
+<td class="p-3">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-sm text-xs">PASSED</span>
+</td>
+<td class="p-3">
+<span class="bg-surface-bright text-on-surface-variant px-2 py-0.5 rounded-sm text-xs border border-outline-variant">NOT_EXECUTED</span>
+</td>
+<td class="p-3 text-outline italic">[PENDING]</td>
+</tr>
+<tr class="border-b border-outline-variant/30 hover:bg-surface-container-lowest transition-colors">
+<td class="p-3 text-primary-fixed-dim">REQ-DATA-09</td>
+<td class="p-3 text-outline">DEL-8501</td>
+<td class="p-3">
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded-sm text-xs border border-error">FAILED (2)</span>
+</td>
+<td class="p-3">
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-sm text-xs">CLEAN</span>
+</td>
+<td class="p-3 text-on-surface-variant font-bold">[f4b19d2e]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Active Defect Center -->
+<section class="col-span-12 lg:col-span-6 bg-surface-container border border-outline-variant rounded-DEFAULT flex flex-col">
+<div class="p-4 border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-display-md text-body-base text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-error text-sm" data-icon="bug_report">bug_report</span>
+                        Active Defect Center
+                    </h3>
+<span class="bg-error-container text-on-error-container font-data-mono text-data-label px-2 py-1 rounded-DEFAULT border border-error/50">1 BLOCKER</span>
+</div>
+<div class="p-2 flex flex-col gap-2">
+<!-- Defect Item 1 -->
+<div class="bg-surface-dim p-3 rounded-DEFAULT border-l-2 border-error flex justify-between items-start group hover:bg-surface transition-colors cursor-pointer">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-data-mono text-data-mono text-error font-bold">DEF-902</span>
+<span class="bg-surface-container-highest text-outline px-1.5 py-0.5 rounded-sm text-[10px] uppercase font-data-label tracking-wider border border-outline-variant">TRIAGED</span>
+</div>
+<p class="font-body-base text-body-base text-on-surface">Token TTL Mismatch in Auth Flow</p>
+</div>
+<div class="text-right">
+<span class="block font-data-label text-data-label text-error uppercase">SEVERITY: HIGH</span>
+<span class="block font-data-mono text-body-sm text-outline mt-1">Found in RC-v4.2.1</span>
+</div>
+</div>
+<!-- Defect Item 2 -->
+<div class="bg-surface-dim p-3 rounded-DEFAULT border-l-2 border-tertiary-fixed-dim flex justify-between items-start group hover:bg-surface transition-colors cursor-pointer">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-data-mono text-data-mono text-tertiary-fixed-dim font-bold">DEF-884</span>
+<span class="bg-surface-container-highest text-outline px-1.5 py-0.5 rounded-sm text-[10px] uppercase font-data-label tracking-wider border border-outline-variant">IN_PROGRESS</span>
+</div>
+<p class="font-body-base text-body-base text-on-surface">Telemetry Payload Serialization Delay</p>
+</div>
+<div class="text-right">
+<span class="block font-data-label text-data-label text-tertiary-fixed-dim uppercase">SEVERITY: MED</span>
+<span class="block font-data-mono text-body-sm text-outline mt-1">Found in RC-v4.2.0</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Quality Timeline -->
+<section class="col-span-12 lg:col-span-6 bg-surface-container-low border border-outline-variant rounded-DEFAULT p-4 flex flex-col">
+<div class="border-b border-outline-variant pb-3 mb-4 flex justify-between items-center">
+<h3 class="font-display-md text-body-base text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-sm" data-icon="timeline">timeline</span>
+                        Telemetry Log
+                    </h3>
+</div>
+<div class="flex-1 relative pl-6 font-data-mono text-data-mono text-sm space-y-6 before:content-[''] before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-px before:bg-outline-variant">
+<!-- Log Item 1 -->
+<div class="relative">
+<div class="absolute -left-[29px] top-1 w-2.5 h-2.5 rounded-full bg-primary-fixed-dim shadow-[0_0_8px_theme(colors.primary-fixed-dim)]"></div>
+<div class="flex justify-between items-start">
+<span class="text-on-surface">Architectural Drift: <span class="text-primary-fixed-dim">0.0%</span></span>
+<span class="text-outline text-xs">14:02:45 UTC</span>
+</div>
+<p class="text-on-surface-variant text-xs mt-1">Baseline verification completed.</p>
+</div>
+<!-- Log Item 2 -->
+<div class="relative">
+<div class="absolute -left-[29px] top-1 w-2.5 h-2.5 rounded-full bg-secondary-fixed"></div>
+<div class="flex justify-between items-start">
+<span class="text-on-surface">Security Scan <span class="text-secondary">Passed</span></span>
+<span class="text-outline text-xs">13:45:12 UTC</span>
+</div>
+<p class="text-on-surface-variant text-xs mt-1">SAST/DAST completed with 0 criticals.</p>
+</div>
+<!-- Log Item 3 -->
+<div class="relative">
+<div class="absolute -left-[29px] top-1 w-2.5 h-2.5 rounded-full bg-secondary-fixed"></div>
+<div class="flex justify-between items-start">
+<span class="text-on-surface">CI Build <span class="text-secondary">Successful</span></span>
+<span class="text-outline text-xs">13:10:05 UTC</span>
+</div>
+<p class="text-on-surface-variant text-xs mt-1">Artifact hash generated.</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

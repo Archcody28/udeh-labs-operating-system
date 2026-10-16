@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs AI Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#353434",
+                        "on-primary-fixed": "#1a1c1c",
+                        "primary-fixed": "#e2e2e2",
+                        "electric-violet": "#7c3aed",
+                        "secondary-container": "#6001d1",
+                        "on-secondary-fixed": "#25005a",
+                        "on-secondary": "#3f008e",
+                        "error-container": "#93000a",
+                        "indigo-accent": "#1C85E8",
+                        "primary-container": "#e2e2e2",
+                        "on-primary-fixed-variant": "#454747",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-container": "#00734e",
+                        "surface-variant": "#353434",
+                        "surface": "#141313",
+                        "surface-tint": "#c6c6c7",
+                        "on-tertiary-fixed": "#002113",
+                        "secondary": "#d2bbff",
+                        "primary": "#ffffff",
+                        "outline": "#8e9192",
+                        "status-critical": "#ef4444",
+                        "on-surface": "#e5e2e1",
+                        "on-primary": "#2f3131",
+                        "secondary-fixed": "#eaddff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "background": "#141313",
+                        "surface-card": "#0d1b2a",
+                        "surface-dim": "#141313",
+                        "on-background": "#e5e2e1",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "status-risk": "#f59e0b",
+                        "surface-main": "#0c141e",
+                        "tertiary-container": "#6ffbbe",
+                        "tertiary": "#ffffff",
+                        "outline-variant": "#444748",
+                        "on-secondary-container": "#c9aeff",
+                        "surface-bright": "#3a3939",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#636565",
+                        "on-surface-variant": "#c4c7c8",
+                        "border-muted": "#1e293b",
+                        "surface-container": "#201f1f",
+                        "on-tertiary": "#003824",
+                        "inverse-on-surface": "#313030",
+                        "terminal-black": "#091017",
+                        "tertiary-fixed": "#6ffbbe",
+                        "inverse-primary": "#5d5f5f"
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.125rem",
+                        lg: "0.25rem",
+                        xl: "0.5rem",
+                        full: "0.75rem"
+                    },
+                    spacing: {
+                        compact: "8px",
+                        comfortable: "16px",
+                        margin: "24px",
+                        base: "4px",
+                        gutter: "16px",
+                        sidebar: "260px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md-mobile": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "streaming-text": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    fontSize: {
+                        "headline-md": ["24px", { lineHeight: "32px", fontWeight: "600" }],
+                        "data-mono": ["13px", { lineHeight: "20px", fontWeight: "500" }],
+                        "body-md": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+                        "label-caps": ["11px", { lineHeight: "16px", letterSpacing: "0.08em", fontWeight: "700" }],
+                        "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "headline-md-mobile": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+                        "body-sm": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+                        "streaming-text": ["14px", { lineHeight: "22px", letterSpacing: "-0.01em", fontWeight: "400" }],
+                        "headline-sm": ["18px", { lineHeight: "24px", fontWeight: "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .pulse-border {
+            animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse-border {
+            0%, 100% {
+                border-color: rgba(124, 58, 237, 0.2);
+                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4);
+            }
+            50% {
+                border-color: rgba(124, 58, 237, 0.8);
+                box-shadow: 0 0 0 4px rgba(124, 58, 237, 0);
+            }
+        }
+
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        .scroll-hidden::-webkit-scrollbar {
+            display: none;
+        }
+        .scroll-hidden {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex overflow-hidden">
+<!-- Top Navigation (Mobile) -->
+<nav class="md:hidden flex justify-between items-center w-full px-margin h-14 bg-surface-dim border-b border-muted absolute top-0 z-50">
+<div class="text-headline-sm font-headline-sm font-bold tracking-tighter text-electric-violet">
+            UDEHLABS MISSION CONTROL
+        </div>
+<div class="flex space-x-4">
+<span class="material-symbols-outlined text-on-surface-variant">account_tree</span>
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</div>
+</nav>
+<!-- Side Navigation (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen w-sidebar p-compact space-y-base bg-surface-container-low border-r border-muted shrink-0 z-10">
+<div class="flex items-center gap-3 p-4 mb-4">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-border-muted flex items-center justify-center overflow-hidden">
+<img class="object-cover w-full h-full opacity-80" data-alt="A futuristic minimalist avatar placeholder featuring a stylized cybernetic brain icon, rendered in deep indigo and bright violet on a dark background. The image has a clean, digital aesthetic typical of enterprise software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDR0FSlNJol7hZti8DJQn-1RQeqR5PmpBBJm1vnD8xIDYs2AWjsccKOspHjVgjK9HI1goYUNHNhFW47yh0Q1J6MmdVmA9LMIWZ04Vbohdjr5vyxV4wdZWclIyGsNwEL89Wize-zOgTqoR6pmDtDW-CB5AeZ5JFNbipR7Tt_Mq9UxFO3N0R1ub9jw43j_qiY0_0CDU7J4j5L3Zv0KQgqeYRMmn1-XIroI4gCBD1TgYrpwwp5-09-Wdd0fA"/>
+</div>
+<div>
+<h1 class="text-label-caps font-bold text-electric-violet">ORCHESTRATOR-V1</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Ready for instruction</p>
+</div>
+</div>
+<button class="w-full bg-electric-violet text-primary font-label-caps text-label-caps py-2 px-4 rounded hover:bg-secondary-container transition-colors mb-6 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> NEW MISSION
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded bg-secondary-container text-on-secondary-container border-l-2 border-electric-violet" href="#">
+<span class="material-symbols-outlined text-sm">memory</span>
+<span class="text-label-caps font-label-caps">Architect</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">code</span>
+<span class="text-label-caps font-label-caps">Developer</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span class="text-label-caps font-label-caps">Analyst</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">shield</span>
+<span class="text-label-caps font-label-caps">Security</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">terminal</span>
+<span class="text-label-caps font-label-caps">Terminal</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-muted pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">description</span>
+<span class="text-label-caps font-label-caps">Docs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:bg-surface-container-highest transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">monitoring</span>
+<span class="text-label-caps font-label-caps">Status</span>
+</a>
+</div>
+</aside>
+<!-- Main Workspace (3 Column Layout) -->
+<main class="flex-1 flex flex-col md:flex-row overflow-hidden pt-14 md:pt-0">
+<!-- Center Column: Orchestration Canvas / AI Chat -->
+<section class="flex-1 flex flex-col bg-surface-main relative h-full">
+<!-- Header -->
+<div class="h-14 border-b border-muted flex items-center justify-between px-margin shrink-0 bg-surface/80 backdrop-blur-sm z-10 absolute top-0 w-full md:static">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-electric-violet">memory</span>
+<span class="font-headline-sm text-headline-sm text-primary">Session: PRJ-99 Architecture Review</span>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="text-body-sm font-data-mono font-data-mono">Runtime: 00:14:32</span>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">more_vert</span></button>
+</div>
+</div>
+<!-- Chat Stream / Log Area -->
+<div class="flex-1 overflow-y-auto p-margin space-y-comfortable scroll-hidden mt-14 md:mt-0 pb-32">
+<!-- Background ambient graphic -->
+<div class="absolute inset-0 z-0 pointer-events-none opacity-20" data-alt="A subtle, dark background texture featuring abstract geometric grid lines and glowing data nodes, designed to look like a high-tech radar or cybernetic network map. Deep indigo and dark slate tones dominate the composition." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2D0oL4dX9qOqp1Lar-S4f5_LVsTkJBZoeUTgHQ6EQUQINCRBSttICPPWni4cSoeLSjfwk5zRidgmvF_k45SzL_LpfsamDz75JB1F292zZdy2zQQulzJ8AMDaALFUf8Cvfbkyd9GW3NMjI-ZXiBDyLgnd6p_CxpfTF8Cf1zEVSQ3cmh6HjoEkFe_1wj9wOY6MmspJv_AywG9E0oum-jYrKE4Z9JOQmxjWnyhwf6QAqrcoO2ejcgs2d1Q')"></div>
+<!-- User Message -->
+<div class="flex gap-4 relative z-10">
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-muted flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-on-surface">person</span>
+</div>
+<div class="flex-1 bg-surface-card border border-muted rounded-xl p-4">
+<p class="text-body-md text-on-background">Analyze the current microservices architecture for PRJ-99 and identify potential bottlenecks based on the latest performance logs.</p>
+</div>
+</div>
+<!-- AI Response: Thinking/Log State -->
+<div class="flex gap-4 relative z-10">
+<div class="w-8 h-8 rounded border border-electric-violet bg-surface flex items-center justify-center shrink-0 pulse-border">
+<span class="material-symbols-outlined text-sm text-electric-violet">memory</span>
+</div>
+<div class="flex-1 space-y-compact">
+<div class="flex items-center gap-2 text-label-caps font-label-caps text-on-surface-variant">
+<span>UDEH-ARCHITECT-V2</span>
+<span class="w-1 h-1 rounded-full bg-electric-violet"></span>
+<span>Processing...</span>
+</div>
+<!-- Tool Execution Log -->
+<div class="bg-terminal-black border border-muted rounded p-3 font-data-mono text-data-mono text-on-surface-variant">
+<div class="flex items-start gap-2">
+<span class="text-tertiary">|</span>
+<div class="space-y-1">
+<div class="flex justify-between w-full"><span>&gt; Initializing system scan...</span> <span class="text-tertiary">DONE</span></div>
+<div class="flex justify-between w-full"><span>&gt; Querying Task #104 (Architecture Specs)...</span> <span class="text-tertiary">DONE</span></div>
+<div class="flex justify-between w-full"><span>&gt; Analyzing recent ADRs...</span> <span class="text-tertiary">DONE</span></div>
+<div class="flex justify-between w-full text-primary"><span>&gt; Synthesizing network topology...</span> <span class="inline-block w-2 h-4 bg-electric-violet cursor-blink ml-2 align-middle"></span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Response: Finalized with Citation -->
+<div class="flex gap-4 relative z-10">
+<div class="w-8 h-8 rounded border border-muted bg-surface flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-sm text-electric-violet">memory</span>
+</div>
+<div class="flex-1 space-y-compact">
+<div class="flex items-center gap-2 text-label-caps font-label-caps text-on-surface-variant">
+<span>UDEH-ARCHITECT-V2</span>
+</div>
+<div class="bg-surface-card border border-muted rounded-xl p-4 space-y-4">
+<p class="text-body-md text-on-background font-streaming-text text-streaming-text">
+                                Based on the review of the current topology and <span class="inline-flex items-center gap-1 border border-muted bg-surface-container-low px-1.5 py-0.5 rounded text-xs cursor-pointer hover:border-electric-violet transition-colors">ADR #12 <span class="material-symbols-outlined text-[10px]">open_in_new</span></span>, the primary bottleneck is located at the Authentication Gateway.
+                            </p>
+<div class="border-l-2 border-status-risk pl-4 py-1">
+<p class="text-body-sm text-on-surface-variant mb-2">Risk Assessment: High Latency Spikes</p>
+<p class="text-body-md font-data-mono text-data-mono text-status-risk">
+                                    auth-gateway-svc: P99 latency &gt; 450ms during peak load.
+                                </p>
+</div>
+<p class="text-body-md text-on-background font-streaming-text text-streaming-text">
+                                I recommend implementing a Redis caching layer for token validation to reduce database load. Shall I draft the terraform configuration for this infrastructure change?
+                            </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Command Input Area -->
+<div class="absolute bottom-0 w-full p-margin bg-gradient-to-t from-surface-main via-surface-main to-transparent pt-12 z-20 md:pb-margin pb-20">
+<div class="bg-terminal-black border border-muted rounded-xl p-2 shadow-[0_0_15px_rgba(124,58,237,0.1)] focus-within:border-electric-violet transition-colors flex flex-col">
+<div class="flex items-center gap-2 px-2 pb-2 mb-2 border-b border-surface-container-highest text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">keyboard_command_key</span>
+<span class="text-label-caps font-label-caps">Command Palette</span>
+<div class="ml-auto flex gap-2">
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-xs border border-muted hover:border-outline transition-colors">/summarize</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-xs border border-muted hover:border-outline transition-colors">/find-risks</button>
+</div>
+</div>
+<div class="flex items-end gap-2">
+<textarea class="w-full bg-transparent border-none text-primary font-body-md focus:ring-0 resize-none h-10 max-h-32 placeholder-on-surface-variant scroll-hidden" placeholder="Instruct the orchestrator..."></textarea>
+<button class="w-8 h-8 rounded bg-electric-violet text-primary flex items-center justify-center shrink-0 hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Sidebar: AI Action Center (Desktop only, or hidden on mobile unless toggled) -->
+<aside class="hidden xl:flex flex-col w-80 bg-surface-container-lowest border-l border-muted shrink-0 z-10 h-full overflow-y-auto">
+<div class="p-margin border-b border-muted">
+<h2 class="text-label-caps font-label-caps text-on-surface-variant tracking-widest mb-4">ACTION CENTER</h2>
+<!-- HITL Request Card -->
+<div class="bg-surface-card border-2 border-status-risk rounded-lg p-3 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-12 h-12 bg-status-risk/10 rounded-bl-full"></div>
+<div class="flex items-start gap-2 mb-2">
+<span class="material-symbols-outlined text-status-risk text-sm mt-0.5">warning</span>
+<div>
+<h3 class="text-body-md font-semibold text-primary">Approval Required</h3>
+<p class="text-label-caps font-label-caps text-on-surface-variant">Create Branch: TSK-201</p>
+</div>
+</div>
+<p class="text-body-sm text-on-surface-variant mb-4">Architect agent is requesting to initialize a feature branch for the Redis caching implementation.</p>
+<div class="flex gap-2">
+<button class="flex-1 bg-surface text-primary border border-muted hover:border-outline py-1.5 rounded text-xs font-medium transition-colors">Review</button>
+<button class="flex-1 bg-electric-violet text-primary py-1.5 rounded text-xs font-medium hover:bg-secondary-container transition-colors">Approve</button>
+</div>
+</div>
+</div>
+<div class="p-margin border-b border-muted">
+<h2 class="text-label-caps font-label-caps text-on-surface-variant tracking-widest mb-4">SESSION METRICS</h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-body-sm text-on-surface-variant">Token Usage</span>
+<span class="font-data-mono text-data-mono text-primary">45,201</span>
+</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-electric-violet w-3/4"></div>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="text-body-sm text-on-surface-variant">Est. Cost</span>
+<span class="font-data-mono text-data-mono text-status-risk">$1.42</span>
+</div>
+</div>
+</div>
+<div class="p-margin">
+<h2 class="text-label-caps font-label-caps text-on-surface-variant tracking-widest mb-4">ACTIVE AGENTS</h2>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-2 rounded bg-surface border border-muted">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-body-sm text-primary">UDEH-ARCHITECT-V2</span>
+</div>
+<div class="flex items-center gap-3 p-2 rounded bg-surface border border-muted opacity-50">
+<div class="w-2 h-2 rounded-full bg-surface-variant"></div>
+<span class="text-body-sm text-on-surface-variant">UDEH-SECURITY-SCAN</span>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- Bottom Navigation (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-12 px-margin border-t border-muted bg-terminal-black">
+<a class="flex flex-col items-center justify-center w-full h-full text-electric-violet font-bold relative group" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5 group-hover:scale-110 transition-transform" data-weight="fill">potted_plant</span>
+<span class="text-label-caps font-label-caps text-[9px]">Execution</span>
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-0.5 bg-electric-violet shadow-[0_0_8px_rgba(124,58,237,0.8)]"></div>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5 group-hover:scale-110 transition-transform">database</span>
+<span class="text-label-caps font-label-caps text-[9px]">Resources</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5 group-hover:scale-110 transition-transform">verified_user</span>
+<span class="text-label-caps font-label-caps text-[9px]">Permissions</span>
+</a>
+<a class="flex flex-col items-center justify-center w-full h-full text-on-surface-variant hover:text-primary transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl mb-0.5 group-hover:scale-110 transition-transform">timeline</span>
+<span class="text-label-caps font-label-caps text-[9px]">Activity</span>
+</a>
+</nav>
+</body></html>

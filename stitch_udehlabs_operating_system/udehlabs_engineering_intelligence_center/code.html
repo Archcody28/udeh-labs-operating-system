@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Engineering Intelligence Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-secondary": "#003824",
+                        "on-surface-variant": "#c6c6cd",
+                        "surface-container-lowest": "#010f1f",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#251400",
+                        "on-tertiary-container": "#b47300",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "primary": "#bec6e0",
+                        "outline-variant": "#45464d",
+                        "on-background": "#d4e4fa",
+                        "inverse-on-surface": "#233143",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#0d1c2d",
+                        "on-tertiary-fixed": "#2a1700",
+                        "secondary": "#4edea3",
+                        "on-secondary-fixed": "#002113",
+                        "on-primary": "#283044",
+                        "surface-dim": "#051424",
+                        "on-primary-container": "#798098",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-container-highest": "#273647",
+                        "surface": "#051424",
+                        "inverse-surface": "#d4e4fa",
+                        "surface-variant": "#273647",
+                        "on-tertiary": "#472a00",
+                        "tertiary": "#ffb95f",
+                        "on-primary-fixed": "#131b2e",
+                        "on-surface": "#d4e4fa",
+                        "background": "#051424",
+                        "surface-tint": "#bec6e0",
+                        "secondary-fixed-dim": "#4edea3",
+                        "primary-container": "#0f172a",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary-fixed": "#ffddb8",
+                        "outline": "#909097",
+                        "inverse-primary": "#565e74",
+                        "surface-bright": "#2c3a4c",
+                        "surface-container": "#122131",
+                        "on-error": "#690005",
+                        "on-secondary-container": "#00311f",
+                        "secondary-fixed": "#6ffbbe",
+                        "primary-fixed-dim": "#bec6e0",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#dae2fd",
+                        "secondary-container": "#00a572"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "grid-columns": "12",
+                        "gutter": "12px",
+                        "margin-wide": "32px",
+                        "unit": "4px",
+                        "margin-compact": "16px"
+                    },
+                    "fontFamily": {
+                        "code-sm": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "code-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "code-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "label-caps": ["10px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "headline-sm": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "display-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "code-md": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #051424; /* background */
+            color: #d4e4fa; /* on-surface */
+            font-family: 'Hanken Grotesk', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 20px;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low w-[240px] h-screen fixed left-0 top-0 border-r border-outline-variant flex flex-col py-gutter px-2 z-40">
+<div class="mb-8 px-4 flex flex-col items-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-highest mb-4 flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-secondary" data-icon="hub" style="font-size: 32px;">hub</span>
+</div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-secondary">UdehLabs</h1>
+<p class="font-code-sm text-code-sm text-on-surface-variant text-center">Intelligence Center</p>
+</div>
+<button class="w-full bg-primary-container border border-primary text-primary hover:bg-surface-container-high transition-colors rounded py-2 mb-6 font-code-sm text-code-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+            New Analysis
+        </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded bg-surface-container-highest border-l-2 border-secondary text-secondary font-label-caps text-label-caps opacity-80 scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="account_tree">account_tree</span>
+                Codebase Map
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="rule">rule</span>
+                Architecture Rules
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+                Requirements
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Impact Analysis
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+                Technical Debt
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+                Knowledge Base
+            </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Documentation
+            </a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col ml-[240px] w-[calc(100%-240px)] h-screen overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-surface h-12 w-full flex items-center justify-between px-margin-wide border-b border-outline-variant z-30 shrink-0">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-sm text-headline-sm font-bold text-secondary">UdehLabs EIC</h2>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<div class="flex gap-4">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md scale-98 transition-transform" href="#">Overview</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-body-md text-body-md pt-1" href="#">Modules</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-body-md text-body-md pt-1" href="#">Settings</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<!-- Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-on-surface-variant text-[16px]" data-icon="search">search</span>
+<input class="bg-surface-container-high border-none rounded w-64 pl-8 pr-3 py-1 font-code-sm text-code-sm text-on-surface placeholder-on-surface-variant focus:ring-1 focus:ring-secondary outline-none" placeholder="Symbol / File Search..." type="text"/>
+<div class="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
+<kbd class="bg-surface px-1 rounded text-on-surface-variant font-code-sm text-[9px] border border-outline-variant">⌘</kbd>
+<kbd class="bg-surface px-1 rounded text-on-surface-variant font-code-sm text-[9px] border border-outline-variant">K</kbd>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 overflow-y-auto p-margin-wide bg-background">
+<!-- Header Stats -->
+<div class="mb-8">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Project Intelligence Overview</h3>
+<div class="grid grid-cols-4 gap-4">
+<div class="bg-surface-container-high border border-[#334155] rounded p-4 flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-2">Total Modules</span>
+<span class="font-code-md text-code-md text-secondary text-2xl font-bold">342</span>
+</div>
+<div class="bg-surface-container-high border border-[#334155] rounded p-4 flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-2">Tracked Symbols</span>
+<span class="font-code-md text-code-md text-primary text-2xl font-bold">1.2k</span>
+</div>
+<div class="bg-surface-container-high border border-error rounded p-4 flex flex-col justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-error/5 group-hover:bg-error/10 transition-colors"></div>
+<span class="font-label-caps text-label-caps text-error mb-2 relative z-10 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+                            High Priority Violations
+                        </span>
+<span class="font-code-md text-code-md text-error text-2xl font-bold relative z-10">14</span>
+</div>
+<div class="bg-surface-container-high border border-[#334155] rounded p-4 flex flex-col justify-center">
+<span class="font-label-caps text-label-caps text-tertiary mb-2">Technical Debt</span>
+<div class="flex items-end gap-2">
+<span class="font-code-md text-code-md text-tertiary text-2xl font-bold">8%</span>
+<div class="flex-1 h-2 bg-surface-container-low rounded-full mb-1.5 overflow-hidden border border-outline-variant">
+<div class="h-full bg-tertiary rounded-full w-[8%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Grid Layout -->
+<div class="grid grid-cols-12 gap-6 h-[calc(100vh-280px)] min-h-[600px]">
+<!-- Left Column (Codebase Map & Violations) -->
+<div class="col-span-8 flex flex-col gap-6">
+<!-- Codebase Map -->
+<div class="flex-1 bg-surface-container-high border border-[#334155] rounded flex flex-col overflow-hidden relative">
+<div class="p-3 border-b border-[#334155] flex justify-between items-center bg-surface-container-low/50">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="account_tree">account_tree</span>
+                                Codebase Map
+                            </h4>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-lowest border border-[#334155] font-code-sm text-code-sm text-on-surface-variant text-[9px]">Zoom: 85%</span>
+<span class="px-2 py-0.5 rounded bg-secondary/10 border border-secondary/30 font-code-sm text-code-sm text-secondary text-[9px]">Live Data</span>
+</div>
+</div>
+<div class="flex-1 relative bg-[#0F172A] p-4 overflow-hidden">
+<!-- Abstract SVG Placeholder for Graph -->
+<div class="w-full h-full bg-cover bg-center opacity-40 rounded" data-alt="A highly complex, interactive data visualization graph depicting a software architecture codebase map. Dark theme background with glowing neon green, amber, and crimson nodes connected by thin, sharp intersecting lines. The visual style is technical, dense, and reminiscent of a sophisticated sci-fi mission control interface or cyber-brutalist IDE." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCBcjFLQPku_9LVFfirnI-QmvBpLqLIXnUlMXVnybnLbsrbedyRDbkojsknvHcwzfHSk6iXZMmdiFPNDM9VRPzKu1g-uuWNro_E003XHv22rsJtcLNl6dA2zZ2Xs_KTkFd-lv8jTGdh98vwXAoiISJ3ldQpF8uSQVaU0q4yhVUlsHNV49qTGEIszd0N2-XrIeKKVjdnSTMkQlX-ez0dulUPSb4i_Rwh_l1VBdxT08eZ32kjzvp6AxRaJg')"></div>
+<!-- Overlays to simulate UI on top of map -->
+<div class="absolute top-8 left-8 border-l-2 border-secondary pl-3">
+<div class="font-label-caps text-[10px] text-secondary mb-1">DOMAIN LAYER</div>
+<div class="w-48 h-24 border border-[#334155] bg-surface-container/80 backdrop-blur-sm rounded p-2 flex flex-col justify-between">
+<div class="font-code-sm text-[11px] text-on-surface">Core.Models</div>
+<div class="flex justify-between items-end">
+<div class="font-code-sm text-[9px] text-on-surface-variant">32 Entities</div>
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(78,222,163,0.8)]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Architecture Violations -->
+<div class="h-64 bg-surface-container-high border border-[#334155] rounded flex flex-col">
+<div class="p-3 border-b border-[#334155] bg-surface-container-low/50">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-error" data-icon="gavel">gavel</span>
+                                Active Architecture Violations
+                            </h4>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-1">
+<!-- Violation Item -->
+<div class="flex items-center gap-3 p-2 rounded hover:bg-surface-container transition-colors border border-transparent hover:border-[#334155]">
+<div class="w-6 h-6 rounded flex items-center justify-center bg-error/10 border border-error/20 shrink-0">
+<span class="material-symbols-outlined text-[14px] text-error" data-icon="sync_problem">sync_problem</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="font-code-sm text-code-sm text-on-surface truncate">Circular Dependency: <span class="text-error">PaymentService ↔ OrderRepository</span></div>
+<div class="font-code-sm text-[10px] text-on-surface-variant mt-0.5">Application Layer breaking isolation rules.</div>
+</div>
+<button class="px-2 py-1 rounded bg-transparent border border-[#334155] text-on-surface-variant hover:text-primary font-code-sm text-[10px]">Inspect</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (Intelligence Insights) -->
+<div class="col-span-4 bg-surface-container-high border border-[#334155] rounded flex flex-col">
+<div class="p-3 border-b border-[#334155] bg-surface-container-low/50 flex justify-between items-center">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="insights">insights</span>
+                            Intelligence Insights
+                        </h4>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant cursor-pointer hover:text-secondary" data-icon="filter_list">filter_list</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Insight Card: Risk -->
+<div class="border-l-2 border-error bg-surface-container pl-3 py-2 pr-2 rounded-r relative overflow-hidden group">
+<div class="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-error/5 to-transparent pointer-events-none"></div>
+<div class="flex justify-between items-start mb-1">
+<span class="px-1.5 py-0.5 rounded bg-error/10 text-error font-label-caps text-[8px] border border-error/20">HIGH RISK</span>
+<span class="font-code-sm text-[10px] text-on-surface-variant">Just now</span>
+</div>
+<h5 class="font-code-sm text-[12px] font-bold text-on-surface mb-1">Risk Analysis: 85%</h5>
+<p class="font-code-sm text-[11px] text-on-surface-variant leading-relaxed">
+                                Modifying <span class="text-primary font-bold bg-primary/10 px-1 rounded">User</span> model affects 12 APIs and 4 Database Indexes. Proceed with extreme caution.
+                            </p>
+</div>
+<!-- Insight Card: Ambiguity -->
+<div class="border-l-2 border-tertiary bg-surface-container pl-3 py-2 pr-2 rounded-r relative overflow-hidden">
+<div class="flex justify-between items-start mb-1">
+<span class="px-1.5 py-0.5 rounded bg-tertiary/10 text-tertiary font-label-caps text-[8px] border border-tertiary/20">REQUIREMENT AMBIGUITY</span>
+<span class="font-code-sm text-[10px] text-on-surface-variant">2h ago</span>
+</div>
+<p class="font-code-sm text-[11px] text-on-surface-variant leading-relaxed">
+                                "Improve checkout flow" needs currency definition. Linked to PR <span class="text-secondary font-bold hover:underline cursor-pointer">#442</span>.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Launch Readiness</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "indigo-accent": "#6366f1",
+                        "secondary-fixed-dim": "#4edea3",
+                        "surface-dim": "#0c141e",
+                        "on-primary": "#3f008e",
+                        "surface-container-lowest": "#070f18",
+                        "background": "#0c141e",
+                        "on-tertiary": "#4f2500",
+                        "outline": "#958da1",
+                        "error-orange": "#f97316",
+                        "on-secondary": "#003824",
+                        "inverse-primary": "#732ee4",
+                        "on-error": "#690005",
+                        "terminal-surface": "#091017",
+                        "secondary": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "inverse-on-surface": "#29313c",
+                        "warning-amber": "#f59e0b",
+                        "outline-variant": "#4a4455",
+                        "on-tertiary-container": "#ffe0cd",
+                        "surface-variant": "#2d3540",
+                        "critical-red": "#ef4444",
+                        "surface-container-low": "#141c26",
+                        "on-primary-fixed": "#25005a",
+                        "surface": "#0c141e",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#323a45",
+                        "on-background": "#dbe3f1",
+                        "inverse-surface": "#dbe3f1",
+                        "tertiary-fixed-dim": "#ffb784",
+                        "primary-fixed": "#eaddff",
+                        "primary-fixed-dim": "#d2bbff",
+                        "on-surface": "#dbe3f1",
+                        "success-mint": "#10b981",
+                        "secondary-container": "#00a572",
+                        "secondary-fixed": "#6ffbbe",
+                        "surface-container": "#18202b",
+                        "surface-container-high": "#232b35",
+                        "primary": "#d2bbff",
+                        "on-tertiary-fixed": "#301400",
+                        "surface-container-highest": "#2d3540",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-primary-container": "#ede0ff",
+                        "on-surface-variant": "#ccc3d8",
+                        "on-secondary-container": "#00311f",
+                        "tertiary-container": "#a15100",
+                        "surface-tint": "#d2bbff",
+                        "error-container": "#93000a",
+                        "surface-border": "#1e293b",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed-variant": "#713700",
+                        "tertiary": "#ffb784",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "electric-violet": "#8b5cf6",
+                        "primary-container": "#7c3aed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "standard": "16px",
+                        "compact": "8px",
+                        "large": "24px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-dot {
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: .5; transform: scale(1.2); }
+        }
+        .neon-border:focus-within {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 4px #8b5cf6;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-dim dark:bg-surface-dim border-b border-outline-variant flex justify-between items-center w-full px-standard h-16 shrink-0 z-50 sticky top-0">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-headline-md font-bold text-primary dark:text-primary tracking-tight">UdehLabs Command</span>
+</div>
+<nav class="hidden md:flex gap-6 h-full items-center">
+<!-- Active Tab -->
+<button class="h-full flex items-center text-primary font-bold border-b-2 border-primary pb-1 pt-1 hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="font-body-md text-body-md">Status</span>
+</button>
+<button class="h-full flex items-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80 pt-1">
+<span class="font-body-md text-body-md">Logs</span>
+</button>
+<button class="h-full flex items-center text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80 pt-1">
+<span class="font-body-md text-body-md">Regions</span>
+</button>
+</nav>
+<div class="flex items-center gap-4 text-primary dark:text-primary">
+<div class="relative hidden sm:flex items-center neon-border rounded border border-surface-border bg-surface-container-low h-9 w-64 overflow-hidden">
+<span class="material-symbols-outlined pl-3 text-on-surface-variant text-sm">search</span>
+<input class="w-full bg-transparent border-none text-body-sm text-on-surface focus:ring-0 placeholder:text-on-surface-variant h-full py-0" placeholder="Search systems..." type="text"/>
+</div>
+<button class="hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hover:text-primary transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="Operator Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small, stylized profile avatar showing an anonymous futuristic operator helmet, bathed in dim purple light, high contrast, clean minimalist vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ3GxV10OEWjdbkkMzXFc1h_AiUNMRieFKs5NZQuMyrpcErt7MAVVAEhFg-6rwO3QzA-Td3JNt47pOey6KXBrmGJsQNkF6we8GaL-P82bTD90V6YuuQvuEfAmYFr-Y3YXXgQrgBdlsmelpnuSkO-zkuAau4iheT9cXUzlKFUPpae9DWDJ0zqwWE9_0WC3toTS_zq4JS6W_twNKAPtHTfKGbID5NqcrmOZJByS-6EcW8DnJYnrQW0sshg"/>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex-col bg-surface dark:bg-surface border-r border-outline-variant p-standard z-40 shrink-0">
+<div class="flex items-center gap-3 mb-6">
+<img alt="System Node" class="w-10 h-10 rounded border border-surface-border" data-alt="A tiny glowing node icon representing a server cluster, neon green and deep navy, technical grid background, sharp edges." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPKV0hkafsV075zDZC3B6vO1UyzBGAV4tyqHtRAoW90Nz2vCethpKgvOdexKKsdoXSz7lAaz-ojkbndOR5ol68iuE9T0npI-5YBc76Cw3JCHXxTbKkeDVq9R-k41N6eU2z5x6Y4kYCiWAtFZUzj1ZMz_VDb3GyL-I8AEJxTFaLNpZqNEbkWQF-GHHxSbcwf1wAToZAFpIDB3a4DPMQHXK1WXdNDakjlj78IuY62bqHXuUW2AvG5LSwVw"/>
+<div>
+<h2 class="text-headline-sm font-headline-sm text-primary leading-tight">UdehLabs Admin</h2>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Production Cluster v2.4</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2 overflow-y-auto">
+<button class="w-full flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-3 py-2 border-r-4 border-secondary-container hover:bg-surface-container-high transition-all active:scale-95 duration-100 font-body-md text-body-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span>Validation Hub</span>
+</button>
+<button class="w-full flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100 font-body-md text-body-md">
+<span class="material-symbols-outlined">lock</span>
+<span>Security Audit</span>
+</button>
+<button class="w-full flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100 font-body-md text-body-md">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span>Launch Gate</span>
+</button>
+<button class="w-full flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100 font-body-md text-body-md">
+<span class="material-symbols-outlined">analytics</span>
+<span>Performance</span>
+</button>
+<button class="w-full flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100 font-body-md text-body-md">
+<span class="material-symbols-outlined">history</span>
+<span>Rollback</span>
+</button>
+</nav>
+<div class="mt-auto pt-4 border-t border-surface-border space-y-2">
+<button class="w-full flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all font-body-md text-body-md">
+<span class="material-symbols-outlined">terminal</span>
+<span>Terminal</span>
+</button>
+<button class="w-full flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all font-body-md text-body-md">
+<span class="material-symbols-outlined">menu_book</span>
+<span>Docs</span>
+</button>
+<button class="w-full mt-4 bg-primary-container text-on-primary-container font-headline-sm text-sm py-2 rounded hover:brightness-110 transition-all font-bold">Deploy Now</button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="flex-1 lg:ml-64 bg-surface-container-lowest overflow-y-auto p-standard lg:p-large relative">
+<!-- Decorative background element -->
+<div class="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-surface-container to-transparent opacity-50 pointer-events-none z-0"></div>
+<div class="relative z-10 max-w-7xl mx-auto space-y-large">
+<!-- Hero Section -->
+<section class="bg-surface-container-low border border-surface-border rounded-lg p-large relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-electric-violet"></div>
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed pulse-dot"></span>
+<span class="font-label-caps text-label-caps text-secondary-fixed">GLOBAL LAUNCH STATUS</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">VALIDATING</h1>
+<div class="flex flex-wrap gap-4 text-on-surface-variant font-data-mono text-data-mono">
+<span class="bg-surface-variant px-2 py-1 rounded">App: v1.0.0-rc.1</span>
+<span class="bg-surface-variant px-2 py-1 rounded">Commit: 8faee75</span>
+<span class="bg-surface-variant px-2 py-1 rounded">Dep: 2024-10-21 07:28:00 UTC</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-on-surface-variant block mb-1">COUNTDOWN TO F.06 FINAL BOSS</span>
+<div class="text-4xl font-data-mono font-bold text-primary">T-04:12:59</div>
+</div>
+</section>
+<!-- Validation Matrix Grid -->
+<section>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">grid_view</span>
+                        Validation Matrix
+                    </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-standard">
+<!-- Card 1 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">Auth &amp; Identity</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>Real MFA Verified</li>
+<li>Password Recovery</li>
+<li>Session Security</li>
+</ul>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">AI Reasoning Mesh</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>Gemini 1.5 Pro Sync</li>
+<li>Tool Auth Confirmed</li>
+<li>Context Assembly</li>
+</ul>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">Data Sovereignty</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>L5 Isolation Intact</li>
+<li>Field-Level Class.</li>
+<li>Backup Integrity</li>
+</ul>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">Billing &amp; FinOps</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>Metered Token Usage</li>
+<li>Webhook Idempotency</li>
+</ul>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">SRE &amp; Reliability</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>99.9% SLO Met</li>
+<li>Circuit Breakers</li>
+<li>Global Failover</li>
+</ul>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">Dev Platform</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>API Scopes Active</li>
+<li>Webhook Signatures</li>
+<li>CLI Authenticated</li>
+</ul>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">Globalization</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>Multi-Region Active</li>
+<li>AP-SOUTH/EU-WEST</li>
+<li>Localization Valid</li>
+</ul>
+</div>
+<!-- Card 8 -->
+<div class="bg-surface-container border border-surface-border rounded-lg p-4 relative hover:bg-surface-container-high transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-success-mint rounded-l-lg"></div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-body-md font-bold text-on-surface">Client Experience</h3>
+<span class="bg-secondary-container/10 text-success-mint font-label-caps text-[10px] px-2 py-0.5 rounded border border-success-mint/20">PASS</span>
+</div>
+<ul class="space-y-1 font-body-sm text-body-sm text-on-surface-variant list-disc list-inside">
+<li>Onboarding Flow</li>
+<li>Document Handoff</li>
+<li>Approval Logic</li>
+</ul>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-standard">
+<!-- Analytics / Traffic -->
+<section class="xl:col-span-2 bg-terminal-surface border border-surface-border rounded-lg p-standard flex flex-col">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">monitoring</span>
+                                Live Production Traffic
+                            </h2>
+<div class="flex gap-4">
+<div class="flex items-center gap-1 font-data-mono text-data-mono text-xs">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+<span class="text-on-surface-variant">Lat: 42ms</span>
+</div>
+<div class="flex items-center gap-1 font-data-mono text-data-mono text-xs">
+<span class="w-2 h-2 rounded-full bg-success-mint"></span>
+<span class="text-on-surface-variant">Err: &lt;0.01%</span>
+</div>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest border border-surface-border rounded relative overflow-hidden min-h-[160px]">
+<!-- Mock Graph Background -->
+<div class="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:2rem_2rem] opacity-20"></div>
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/10 to-transparent"></div>
+<!-- SVG Line representation -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path class="opacity-70" d="M0,80 Q10,70 20,75 T40,60 T60,65 T80,40 T100,45" fill="none" stroke="#d2bbff" stroke-width="2"></path>
+<path class="opacity-50" d="M0,90 Q15,85 30,88 T50,85 T70,82 T90,75 T100,78" fill="none" stroke="#4edea3" stroke-width="1.5"></path>
+</svg>
+</div>
+</section>
+<!-- Blocker Registry -->
+<section class="bg-surface-container border border-surface-border rounded-lg p-standard flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-sm">bug_report</span>
+                            Launch Blocker Registry
+                        </h2>
+<div class="flex items-center justify-between bg-surface-container-low border border-surface-border p-3 rounded mb-3">
+<span class="font-body-sm text-on-surface-variant">Critical Blockers (P0/P1)</span>
+<span class="font-data-mono font-bold text-success-mint">0</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low border border-surface-border p-3 rounded mb-4">
+<span class="font-body-sm text-on-surface-variant">Deferred Items (P2/P3)</span>
+<span class="font-data-mono font-bold text-warning-amber">4</span>
+</div>
+<ul class="space-y-2 font-data-mono text-[11px] text-outline-variant flex-1 overflow-y-auto">
+<li class="flex gap-2">
+<span class="text-warning-amber">WRN</span>
+<span class="truncate">Tooltip contrast low on F.02 widget</span>
+</li>
+<li class="flex gap-2">
+<span class="text-warning-amber">WRN</span>
+<span class="truncate">Non-blocking latency spike in eu-west-3</span>
+</li>
+<li class="flex gap-2">
+<span class="text-warning-amber">WRN</span>
+<span class="truncate">Minor localization typo in FR strings</span>
+</li>
+<li class="flex gap-2">
+<span class="text-warning-amber">WRN</span>
+<span class="truncate">Deprecation notice in build logs</span>
+</li>
+</ul>
+</section>
+</div>
+<!-- Action Card -->
+<section class="bg-primary/5 border border-primary/30 rounded-lg p-large text-center">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">READY FOR F.06</h2>
+<p class="font-body-sm text-on-surface-variant max-w-2xl mx-auto mb-6">All systems nominal. Security, performance, and feature gates have passed validation. Proceed with F.06 Final Boss phase to certify v1.0.0-rc.1 for global rollout.</p>
+<button class="bg-electric-violet hover:bg-primary-container text-white font-headline-sm text-sm px-8 py-3 rounded shadow-[0_0_15px_rgba(139,92,246,0.3)] transition-all active:scale-95 border border-primary-fixed-dim/50">
+                        TRIGGER RELEASE CERTIFICATION
+                    </button>
+</section>
+</div>
+</main>
+</div>
+</body></html>

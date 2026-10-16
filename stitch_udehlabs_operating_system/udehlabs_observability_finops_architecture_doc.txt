@@ -1,0 +1,41 @@
+# Phase A.35: Enterprise Observability, FinOps & Resource Governance Architecture
+
+## Overview
+Phase A.35 introduces the **Operational & Financial Intelligence Layer**, transforming UdehLabs into a self-aware, cost-efficient ecosystem. It unifies system telemetry with fiscal accounting, ensuring every execution is release-safe and financially governed.
+
+## Core Components
+
+### 1. Unified Observability Domain (`IObservabilityOrchestrator`)
+- **Multi-Dimensional Telemetry**: Standardizes logs, metrics, traces, and health across Application, Infrastructure, AI, and Security layers.
+- **Golden Signal Enforcement**: Mandates tracking of Latency, Traffic, Errors, and Saturation for all first-class services.
+- **Service & Dependency Health**: Evaluates health based on objective evidence (success rates, latency) with blast-radius mapping for cascading failures.
+
+### 2. FinOps & Cost Intelligence (`IFinOpsManager`)
+- **Cost Allocation Engine**: Attributes provider and resource costs to Organizations, Projects, and Agents using direct and shared-cost rules.
+- **AI Token Accounting**: Tracks input/output/cached tokens per execution, generating provider-neutral cost estimates using configurable pricing metadata.
+- **Anomaly & Forecast Engine**: Detects unusual spending patterns and forecasts future consumption based on historical velocity and active deployment plans.
+
+### 3. Resource & AI Governance (`IResourceGovernor`)
+- **Intelligent Model Routing**: Policies that select AI models based on task complexity, data classification, and active budget state.
+- **Budget Guardrails**: Configurable thresholds (Daily/Monthly) at Platform, Org, and Agent levels. Enforces restrictive policies (Model Switching, Throttling) upon breach.
+- **Environment Governance**: Applies distinct resource limits for Development, Staging, and Production tiers.
+
+### 4. AI Optimization Agent (`ICostOptimizationAgent`)
+- **Efficiency Recommendations**: Analyzes usage to identify oversized resources, idle storage, or expensive model choices.
+- **Root-Cause Evidence Graph**: Correlates operational events (Deployments) with telemetry (Latency Spikes) and financial impact (Cost Spikes).
+
+## Data Models
+- **UsageRecord / CostRecord**: Normalized data for metering and allocation.
+- **ResourceBudget**: Policy-aware limits for AI, Storage, and Compute.
+- **SLO / SLI / ErrorBudget**: Reliability-specific targets and consumption tracking.
+- **OptimizationFinding**: Evidence-backed recommendations for resource efficiency.
+
+## Security & Governance
+- **Tenant-Scoped Observability**: Usage and cost metrics are strictly isolated by `organizationId`.
+- **Infrastructure Privacy**: Telemetry pipelines redact secrets and sensitive configuration metadata before dashboard persistence.
+- **Data Minimization**: Collects only necessary telemetry for operational and financial health.
+
+## Vertical Integration
+- **A.32/A.33 Integration**: Consumes reliability signals for security-aware operational events.
+- **A.18/A.31 Integration**: Links deployment health directly to release-readiness and cost-impact analysis.
+- **A.1/A.34 Integration**: Integrates with Billing for actual charge matching and Data Governance for retention-compliant telemetry storage.

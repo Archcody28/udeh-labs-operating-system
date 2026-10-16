@@ -1,0 +1,35 @@
+# UdehLabs | Phase P.05 Enterprise Readiness & Collaboration Strategy
+
+## 1. Multi-Tenant Organization Model (`IOrganizationEngine`)
+UdehLabs implements a sovereign multi-tenant architecture where the **Organization** is the root security and billing boundary.
+- **Root Authority**: `OWNER` role holds absolute authority over members, billing, and global settings.
+- **Tenant Isolation**: Every database query and AI retrieval must resolve `organizationId` server-side via the `TenantContext`.
+- **Workspace Logic**: Organizations contain multiple `Workspaces`, providing logical separation for different business units or environments (Development, Staging, Production).
+
+## 2. Team & Squad Model (`ISquadOrchestrator`)
+Extends basic project groups into functional **Squads**.
+- **Functional Units**: Teams are defined by collective purpose (e.g., "Frontend Squad", "SecOps Team").
+- **Resource Scoping**: Projects, Agents, and Knowledge can be explicitly scoped to a Team within an Organization.
+- **Collaborative Context**: AI agents can consume "Team Memory" to maintain consistency across different members of the same squad.
+
+## 3. Enterprise IAM & Invitation Lifecycle
+- **Unified Invitation Engine**: Governs the flow from `SENT` -> `PENDING` -> `ACCEPTED`. Secure, single-use tokens prevent replay attacks.
+- **Role-Based Access Control (RBAC)**:
+    - `OWNER`: Billing, global settings, member removal.
+    - `ADMIN`: Team creation, project management, agent provisioning.
+    - `MANAGER`: Task assignment, sprint planning, approval requests.
+    - `DEVELOPER`: Code execution, AI interaction, workflow runs.
+    - `CLIENT`: Read-only roadmap, deliverable approval.
+- **Zero-Trust Session Management**: Organization admins can audit and revoke active sessions for any member to contain security incidents.
+
+## 4. Collaborative AI & Governance
+- **Shared Agents**: Workforce agents are authorized at the Org/Team level. Tool permissions (e.g., repository access) are inherited from the executing user's scope.
+- **Knowledge Sharing Boundaries**:
+    - `PRIVATE`: Only visible to the creator.
+    - `TEAM`: Shared with specific squad members.
+    - `ORGANIZATION`: Institutional knowledge available for global RAG retrieval.
+- **Audit Sovereignty**: Immutable audit logs capture every member change, role shift, and administrative action, ensuring enterprise compliance readiness.
+
+## 5. Security & Offboarding
+- **Immediate Revocation**: Removing a member automatically kills active sessions and invalidates personal API keys associated with the organization.
+- **Ownership Persistence**: Resources (Agents, Projects) owned by a removed member are automatically reassigned to the Organization Owner to prevent orphan states.

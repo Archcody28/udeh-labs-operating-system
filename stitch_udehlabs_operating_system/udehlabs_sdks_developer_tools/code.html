@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs SDKs &amp; Developer Tools</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#eaddff",
+                    "surface-tint": "#00dbe7",
+                    "secondary-fixed-dim": "#d2bbff",
+                    "primary-fixed-dim": "#00dbe7",
+                    "on-surface": "#d5e4fa",
+                    "on-secondary-fixed-variant": "#5a00c6",
+                    "inverse-primary": "#00696f",
+                    "surface-dim": "#051424",
+                    "surface-variant": "#283647",
+                    "on-secondary-container": "#c9aeff",
+                    "on-primary": "#00363a",
+                    "surface-container-highest": "#283647",
+                    "error-container": "#93000a",
+                    "on-background": "#d5e4fa",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#b5c8e6",
+                    "primary-fixed": "#74f5ff",
+                    "on-tertiary-container": "#4f617b",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#1d2b3c",
+                    "on-secondary-fixed": "#25005a",
+                    "surface": "#051424",
+                    "inverse-surface": "#d5e4fa",
+                    "on-primary-fixed": "#002022",
+                    "outline-variant": "#3a494b",
+                    "on-secondary": "#3f008e",
+                    "surface-container": "#122031",
+                    "inverse-on-surface": "#233143",
+                    "surface-container-low": "#0e1c2d",
+                    "primary": "#e1fdff",
+                    "background": "#051424",
+                    "tertiary": "#f5f7ff",
+                    "secondary-container": "#6001d1",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#2c3a4c",
+                    "surface-container-lowest": "#010f1f",
+                    "on-primary-container": "#006a71",
+                    "on-tertiary-fixed": "#081c33",
+                    "outline": "#849495",
+                    "tertiary-container": "#cadcfb",
+                    "tertiary-fixed": "#d3e3ff",
+                    "on-primary-fixed-variant": "#004f54",
+                    "primary-container": "#00f2ff",
+                    "on-surface-variant": "#b9cacb",
+                    "on-tertiary": "#1f3149",
+                    "secondary": "#d2bbff",
+                    "on-tertiary-fixed-variant": "#364861"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "1.5rem",
+                    "stack-compact": "0.5rem",
+                    "stack-default": "1rem",
+                    "margin-page": "2rem",
+                    "stack-loose": "2rem",
+                    "sidebar-width": "280px"
+            },
+            "fontFamily": {
+                    "code-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-caps": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-xl": [
+                            "Hanken Grotesk"
+                    ],
+                    "code-md": [
+                            "JetBrains Mono"
+                    ],
+                    "headline-md": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-sm": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "code-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "1.7",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "1.25",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "label-caps": [
+                            "11px",
+                            {
+                                    "lineHeight": "1",
+                                    "letterSpacing": "0.08em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-xl": [
+                            "40px",
+                            {
+                                    "lineHeight": "1.2",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "code-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.7",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-sm": [
+                            "14px",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "1.6",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .blink-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        /* Subtle glow for Level 3 elements */
+        .ambient-glow {
+            box-shadow: 0 0 20px 0px rgba(0, 219, 231, 0.05); /* surface-tint */
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex h-screen overflow-hidden font-body-md antialiased selection:bg-primary-fixed-dim/30 selection:text-primary-fixed">
+<!-- SideNavBar Component -->
+<aside class="hidden md:flex flex-col h-screen sticky top-0 py-stack-default bg-surface-container-low border-r border-outline-variant/10 docked left-0 w-sidebar-width flat shrink-0 z-40">
+<!-- Header -->
+<div class="px-gutter mb-stack-loose flex items-center gap-stack-compact">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center border border-outline-variant/20 shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A minimalist abstract geometric logo design for a technology organization, featuring sharp angles and a high-contrast dark theme, fitting for a developer tools company. Clean lines, neon cyan accents on a deep navy background." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface leading-tight tracking-tight">UdehLabs</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Developer Portal</span>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-gutter mb-stack-default">
+<button class="w-full bg-primary-fixed-dim text-on-primary-fixed font-label-caps text-label-caps py-2 px-4 rounded hover:brightness-110 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 16px;">add</span>
+                New Project
+            </button>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 overflow-y-auto px-stack-compact flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">layers</span>
+                Apps &amp; Projects
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">vpn_key</span>
+                API Keys
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">webhook</span>
+                Webhooks
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">description</span>
+                Documentation
+            </a>
+<!-- ACTIVE TAB: SDKs -->
+<a class="flex items-center gap-3 px-3 py-2 rounded font-label-caps text-label-caps transition-transform duration-200 text-primary-fixed-dim border-l-2 border-primary-fixed-dim bg-primary/5" href="#">
+<span class="material-symbols-outlined" style="font-size: 18px; font-variation-settings: 'FILL' 1;">terminal</span>
+                SDKs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">list_alt</span>
+                Logs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">bar_chart</span>
+                Usage
+            </a>
+</nav>
+<!-- Footer Tabs -->
+<div class="px-stack-compact mt-auto flex flex-col gap-1 pt-stack-default border-t border-outline-variant/10">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/30 transition-all font-label-caps text-label-caps group" href="#">
+<span class="material-symbols-outlined opacity-70 group-hover:opacity-100 transition-opacity" style="font-size: 18px;">contact_support</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Area Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 h-full overflow-hidden relative">
+<!-- Ambient Background Effect -->
+<div class="absolute top-0 right-0 w-2/3 h-2/3 bg-primary-fixed-dim/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+<!-- TopNavBar Component -->
+<header class="flex justify-between items-center h-16 px-gutter w-full docked full-width top-0 sticky z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm shrink-0">
+<!-- Left Side: Brand/Search -->
+<div class="flex items-center gap-stack-default">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface-variant hover:text-on-surface p-1 rounded hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary-fixed-dim hidden md:block">UdehLabs Developer</span>
+<!-- Search Bar (on_left) -->
+<div class="relative hidden sm:block ml-4">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" style="font-size: 18px;">search</span>
+<input class="bg-surface-container border border-outline-variant/30 rounded text-body-sm font-body-sm text-on-surface pl-10 pr-4 py-1.5 focus:outline-none focus:border-primary-fixed-dim focus:ring-1 focus:ring-primary-fixed-dim/50 transition-all w-64 placeholder:text-on-surface-variant/50" placeholder="Search resources..." type="text"/>
+<div class="absolute right-2 top-1/2 -translate-y-1/2 flex gap-1">
+<kbd class="font-code-sm text-[10px] text-on-surface-variant bg-surface-variant/50 px-1.5 py-0.5 rounded border border-outline-variant/20">⌘</kbd>
+<kbd class="font-code-sm text-[10px] text-on-surface-variant bg-surface-variant/50 px-1.5 py-0.5 rounded border border-outline-variant/20">K</kbd>
+</div>
+</div>
+</div>
+<!-- Right Side: Actions & Profile -->
+<div class="flex items-center gap-stack-compact">
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95 relative group">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-primary-fixed-dim rounded-full shadow-[0_0_8px_rgba(0,219,231,0.8)]"></span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded hover:bg-surface-variant/50 transition-colors cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/20 mx-2"></div>
+<button class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant/30 overflow-hidden hover:ring-2 ring-primary-fixed-dim/50 transition-all cursor-pointer active:scale-95 shrink-0 ml-1">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer, stylized with a subtle cyberpunk or high-tech color grading. Dark background with a rim light of electric blue, fitting for a developer platform user avatar." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</button>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="flex-1 overflow-y-auto p-gutter lg:p-margin-page w-full">
+<div class="max-w-[1600px] mx-auto flex flex-col gap-stack-loose">
+<!-- Page Header -->
+<div class="flex flex-col gap-2 border-b border-outline-variant/10 pb-stack-default">
+<h1 class="font-headline-xl text-headline-xl text-on-surface">SDKs &amp; Developer Tools</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">
+                        Integrate UdehLabs into your stack seamlessly. Discover our official, strongly-typed SDKs and powerful command-line interface designed for modern engineering workflows.
+                    </p>
+</div>
+<!-- SDK Language Cards (Bento style grid) -->
+<section>
+<div class="flex items-center gap-2 mb-stack-default">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">data_object</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Official Client SDKs</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-stack-default">
+<!-- TypeScript Card -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-stack-default flex flex-col gap-stack-default hover:border-primary-fixed-dim/30 transition-colors group ambient-glow relative overflow-hidden">
+<!-- Decorator line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-primary-fixed-dim opacity-50"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#3178c6]/10 flex items-center justify-center border border-[#3178c6]/20">
+<span class="material-symbols-outlined text-[#3178c6]">javascript</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-on-surface font-bold">TypeScript</h3>
+<span class="inline-block mt-1 font-label-caps text-[10px] text-primary-fixed-dim bg-primary-fixed-dim/10 px-2 py-0.5 rounded">v2.4.1</span>
+</div>
+</div>
+<div class="flex gap-2">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#" title="GitHub Repository">
+<span class="material-symbols-outlined" style="font-size: 20px;">code</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#" title="NPM Package">
+<span class="material-symbols-outlined" style="font-size: 20px;">inventory_2</span>
+</a>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                                Fully typed client for Node.js, Edge runtimes, and the browser. Includes React hooks and Next.js helpers.
+                            </p>
+<div class="mt-auto bg-[#000000] rounded-lg border border-outline-variant/20 p-3 relative group/code">
+<span class="font-label-caps text-[10px] text-on-surface-variant absolute -top-2.5 left-3 bg-surface-container px-1">Install</span>
+<code class="font-code-md text-code-md text-primary-fixed-dim">npm install @udehlabs/sdk</code>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-0 group-hover/code:opacity-100 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Python Card -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-stack-default flex flex-col gap-stack-default hover:border-primary-fixed-dim/30 transition-colors group ambient-glow relative overflow-hidden">
+<!-- Decorator line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#FFD43B] to-[#306998] opacity-50"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#306998]/10 flex items-center justify-center border border-[#306998]/20">
+<span class="material-symbols-outlined text-[#FFD43B]">terminal</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-on-surface font-bold">Python</h3>
+<span class="inline-block mt-1 font-label-caps text-[10px] text-primary-fixed-dim bg-primary-fixed-dim/10 px-2 py-0.5 rounded">v1.8.0</span>
+</div>
+</div>
+<div class="flex gap-2">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#" title="GitHub Repository">
+<span class="material-symbols-outlined" style="font-size: 20px;">code</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#" title="PyPI Package">
+<span class="material-symbols-outlined" style="font-size: 20px;">inventory_2</span>
+</a>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                                Pythonic wrapper supporting async/await (via `asyncio`) and traditional synchronous execution. Ideal for data pipelines.
+                            </p>
+<div class="mt-auto bg-[#000000] rounded-lg border border-outline-variant/20 p-3 relative group/code">
+<span class="font-label-caps text-[10px] text-on-surface-variant absolute -top-2.5 left-3 bg-surface-container px-1">Install</span>
+<code class="font-code-md text-code-md text-[#FFD43B]">pip install udehlabs</code>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-0 group-hover/code:opacity-100 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Go Card -->
+<div class="bg-surface-container border border-outline-variant/10 rounded-xl p-stack-default flex flex-col gap-stack-default hover:border-primary-fixed-dim/30 transition-colors group ambient-glow relative overflow-hidden">
+<!-- Decorator line -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#00ADD8] to-[#00ADD8] opacity-50"></div>
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-[#00ADD8]/10 flex items-center justify-center border border-[#00ADD8]/20">
+<span class="material-symbols-outlined text-[#00ADD8]">developer_mode</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-on-surface font-bold">Go</h3>
+<span class="inline-block mt-1 font-label-caps text-[10px] text-primary-fixed-dim bg-primary-fixed-dim/10 px-2 py-0.5 rounded">v0.9.5-beta</span>
+</div>
+</div>
+<div class="flex gap-2">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#" title="GitHub Repository">
+<span class="material-symbols-outlined" style="font-size: 20px;">code</span>
+</a>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                                High-performance, concurrent-safe client for Golang microservices. Built with minimal dependencies.
+                            </p>
+<div class="mt-auto bg-[#000000] rounded-lg border border-outline-variant/20 p-3 relative group/code">
+<span class="font-label-caps text-[10px] text-on-surface-variant absolute -top-2.5 left-3 bg-surface-container px-1">Install</span>
+<code class="font-code-md text-code-md text-[#00ADD8]">go get github.com/udehlabs/udeh-go</code>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-0 group-hover/code:opacity-100 hover:text-on-surface transition-all">
+<span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- CLI Tool Section -->
+<section class="mt-stack-default">
+<div class="bg-surface-container-high border border-outline-variant/10 rounded-2xl overflow-hidden shadow-lg shadow-black/20">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<!-- Content Side -->
+<div class="p-gutter lg:p-stack-loose flex flex-col justify-center border-b lg:border-b-0 lg:border-r border-outline-variant/10 relative">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary-container/20 rounded-bl-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed tracking-wider">Udeh CLI</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Manage infrastructure from your terminal</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                                    Deploy apps, manage API keys, tail live logs, and trigger webhooks without leaving your editor. The <code>udeh-cli</code> is built in Go for speed and zero dependencies.
+                                </p>
+<ul class="flex flex-col gap-3 mb-8">
+<li class="flex items-center gap-2 font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 16px;">check_circle</span>
+                                        Instant local environment bridging
+                                    </li>
+<li class="flex items-center gap-2 font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 16px;">check_circle</span>
+                                        Secure, temporary credential generation
+                                    </li>
+<li class="flex items-center gap-2 font-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-size: 16px;">check_circle</span>
+                                        CI/CD pipeline native commands
+                                    </li>
+</ul>
+<div class="bg-surface-dim rounded-lg border border-outline-variant/30 p-1 flex items-center justify-between group/install">
+<div class="px-3 py-2 overflow-x-auto no-scrollbar">
+<code class="font-code-md text-code-md text-on-surface whitespace-nowrap"><span class="text-outline-variant select-none">$ </span>curl -fsSL https://udehlabs.com/install.sh | sh</code>
+</div>
+<button class="bg-surface-variant hover:bg-surface-bright text-on-surface p-2 rounded transition-colors border border-outline-variant/10 shrink-0 mx-1">
+<span class="material-symbols-outlined" style="font-size: 18px;">content_copy</span>
+</button>
+</div>
+<div class="mt-3 flex gap-4">
+<a class="font-body-sm text-primary-fixed-dim hover:underline flex items-center gap-1" href="#">
+                                         Read the Docs <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+</a>
+<a class="font-body-sm text-on-surface-variant hover:text-on-surface hover:underline flex items-center gap-1" href="#">
+                                         Brew Tap <span class="material-symbols-outlined" style="font-size: 14px;">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Terminal Mockup Side -->
+<div class="bg-[#050505] p-stack-default flex flex-col relative font-code-sm text-code-sm leading-relaxed overflow-hidden">
+<!-- Window controls -->
+<div class="flex gap-1.5 mb-4 px-2">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+</div>
+<div class="flex-1 overflow-y-auto px-2 text-on-surface-variant/80 select-none">
+<div class="mb-3">
+<span class="text-[#27c93f]">user@local</span><span class="text-outline-variant">:</span><span class="text-[#00ADD8]">~/project</span><span class="text-outline-variant">$ </span><span class="text-on-surface">udeh auth login</span>
+</div>
+<div class="mb-4 text-on-surface">
+                                        &gt; Opening browser to authenticate...<br/>
+                                        &gt; Success! Logged in as <span class="text-primary-fixed-dim">dev_team@udehlabs.com</span><br/>
+                                        &gt; Active Org: <span class="text-secondary-fixed">udeh-core-infra</span>
+</div>
+<div class="mb-3">
+<span class="text-[#27c93f]">user@local</span><span class="text-outline-variant">:</span><span class="text-[#00ADD8]">~/project</span><span class="text-outline-variant">$ </span><span class="text-on-surface">udeh apps:list</span>
+</div>
+<!-- ASCII Table representation -->
+<div class="mb-4 text-on-surface-variant/70">
+                                        +-------------------+-----------+-----------------+<br/>
+                                        | NAME              | STATUS    | LAST DEPLOY     |<br/>
+                                        +-------------------+-----------+-----------------+<br/>
+                                        | <span class="text-primary-fixed-dim">api-gateway-prod</span>  | <span class="text-[#27c93f]">running</span>   | 2 mins ago      |<br/>
+                                        | <span class="text-primary-fixed-dim">worker-queue-01</span>   | <span class="text-[#27c93f]">running</span>   | 1 hr ago        |<br/>
+                                        | <span class="text-primary-fixed-dim">auth-service-stg</span>  | <span class="text-[#ffbd2e]">paused</span>    | 2 days ago      |<br/>
+                                        | <span class="text-primary-fixed-dim">legacy-db-sync</span>    | <span class="text-[#ff5f56]">failed</span>    | 4 hrs ago       |<br/>
+                                        +-------------------+-----------+-----------------+
+                                    </div>
+<div>
+<span class="text-[#27c93f]">user@local</span><span class="text-outline-variant">:</span><span class="text-[#00ADD8]">~/project</span><span class="text-outline-variant">$ </span><span class="blink-cursor bg-on-surface/50 w-2 h-4 inline-block align-middle ml-1"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Developer Support -->
+<section class="mt-stack-default mb-stack-loose">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-stack-default border-b border-outline-variant/10 pb-2">Developer Support &amp; Resources</h2>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-stack-default">
+<a class="bg-surface-container-low border border-outline-variant/10 rounded-lg p-stack-default flex items-center gap-4 hover:bg-surface-container hover:border-primary-fixed-dim/20 transition-all group" href="#">
+<div class="w-10 h-10 rounded-full bg-[#5865F2]/10 flex items-center justify-center text-[#5865F2] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<div>
+<h3 class="font-body-lg text-on-surface font-semibold">Discord Community</h3>
+<p class="font-body-sm text-on-surface-variant">Chat with engineers &amp; users</p>
+</div>
+</a>
+<a class="bg-surface-container-low border border-outline-variant/10 rounded-lg p-stack-default flex items-center gap-4 hover:bg-surface-container hover:border-primary-fixed-dim/20 transition-all group" href="#">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center text-on-surface group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">bug_report</span>
+</div>
+<div>
+<h3 class="font-body-lg text-on-surface font-semibold">GitHub Discussions</h3>
+<p class="font-body-sm text-on-surface-variant">Q&amp;A, Feature requests</p>
+</div>
+</a>
+<a class="bg-surface-container-low border border-outline-variant/10 rounded-lg p-stack-default flex items-center gap-4 hover:bg-surface-container hover:border-primary-fixed-dim/20 transition-all group" href="#">
+<div class="w-10 h-10 rounded-full bg-[#27c93f]/10 flex items-center justify-center text-[#27c93f] group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">monitor_heart</span>
+</div>
+<div>
+<h3 class="font-body-lg text-on-surface font-semibold">API Status</h3>
+<p class="font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#27c93f] inline-block animate-pulse"></span>
+                                    All systems operational
+                                </p>
+</div>
+</a>
+</div>
+</section>
+</div>
+</main></div></body></html>

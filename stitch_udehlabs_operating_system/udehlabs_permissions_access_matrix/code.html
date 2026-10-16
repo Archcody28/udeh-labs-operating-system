@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Permissions & Access Matrix | UdehLabs Security</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #031427;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #464555;
+      border-radius: 10px;
+    }
+    .glass-panel {
+      background: rgba(30, 41, 59, 0.8);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(70, 69, 85, 0.3);
+    }
+    .matrix-cell:hover {
+      background-color: rgba(195, 192, 255, 0.05);
+    }
+    .rim-light {
+      border-top: 1px solid rgba(195, 192, 255, 0.2);
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#102034",
+            "secondary-container": "#571bc1",
+            "secondary": "#d0bcff",
+            "surface-container-highest": "#26364a",
+            "surface-container-high": "#1b2b3f",
+            "tertiary-fixed-dim": "#89ceff",
+            "on-tertiary-container": "#b8e0ff",
+            "surface": "#031427",
+            "on-secondary-fixed-variant": "#5516be",
+            "outline": "#918fa1",
+            "inverse-primary": "#4d44e3",
+            "surface-dim": "#031427",
+            "surface-bright": "#2a3a4f",
+            "inverse-surface": "#d3e4fe",
+            "on-secondary-fixed": "#23005c",
+            "tertiary-container": "#006693",
+            "primary-container": "#4f46e5",
+            "surface-variant": "#26364a",
+            "surface-container-low": "#0b1c30",
+            "on-tertiary": "#00344d",
+            "error": "#ffb4ab",
+            "on-tertiary-fixed-variant": "#004c6e",
+            "outline-variant": "#464555",
+            "on-primary-fixed": "#0f0069",
+            "background": "#031427",
+            "on-error": "#690005",
+            "on-surface-variant": "#c7c4d8",
+            "surface-container-lowest": "#000f21",
+            "primary-fixed-dim": "#c3c0ff",
+            "surface-tint": "#c3c0ff",
+            "on-background": "#d3e4fe",
+            "on-primary": "#1d00a5",
+            "error-container": "#93000a",
+            "on-surface": "#d3e4fe",
+            "on-error-container": "#ffdad6",
+            "primary-fixed": "#e2dfff",
+            "on-tertiary-fixed": "#001e2f",
+            "on-secondary": "#3c0091",
+            "tertiary": "#89ceff",
+            "secondary-fixed-dim": "#d0bcff",
+            "secondary-fixed": "#e9ddff",
+            "on-primary-container": "#dad7ff",
+            "on-primary-fixed-variant": "#3323cc",
+            "tertiary-fixed": "#c9e6ff",
+            "primary": "#c3c0ff",
+            "on-secondary-container": "#c4abff",
+            "inverse-on-surface": "#213145"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "sm": "8px",
+            "base": "4px",
+            "lg": "24px",
+            "xl": "32px",
+            "sidebar_collapsed": "64px",
+            "md": "16px",
+            "sidebar_width": "260px",
+            "xs": "4px",
+            "2xl": "48px",
+            "max_content_width": "1440px"
+          },
+          "fontFamily": {
+            "code-sm": ["JetBrains Mono"],
+            "code-md": ["JetBrains Mono"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-caps": ["Inter"],
+            "display": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+            "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar Implementation -->
+<header class="flex justify-between items-center w-full px-md h-16 z-50 bg-surface-container border-b border-outline-variant fixed top-0 left-0">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-bold text-on-surface">UdehLabs Security</span>
+<div class="hidden md:flex gap-md">
+<nav class="flex items-center gap-md">
+<a class="font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-sm py-xs rounded" href="#">Overview</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary px-sm py-xs" href="#">Permissions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-sm py-xs rounded" href="#">Infrastructure</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:bg-surface-container-high transition-colors px-sm py-xs rounded" href="#">Audits</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="bg-surface-container-low border border-outline-variant rounded-lg pl-xl pr-md py-1.5 text-body-md focus:outline-none focus:ring-1 focus:ring-primary w-64" placeholder="Search policies..." type="text"/>
+</div>
+<div class="flex items-center gap-sm">
+<button class="p-sm hover:bg-surface-container-high rounded-full cursor-pointer transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm hover:bg-surface-container-high rounded-full cursor-pointer transition-colors active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="p-sm hover:bg-surface-container-high rounded-full cursor-pointer transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-16 overflow-hidden">
+<!-- SideNavBar Implementation -->
+<aside class="hidden md:flex flex-col h-full py-md border-r border-outline-variant bg-surface-container-low w-sidebar_width flex-shrink-0">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm mb-base">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]">security</span>
+</div>
+<div>
+<div class="font-headline-md text-headline-md text-primary text-lg">Enterprise Audit</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant opacity-70">V2.4.0-Stable</div>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 px-sm">
+<div class="text-label-caps font-label-caps text-on-surface-variant px-md py-sm uppercase tracking-widest text-[10px]">Main Menu</div>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all rounded group" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-primary border-l-2 border-primary bg-surface-container-high font-bold transition-all rounded-r" href="#">
+<span class="material-symbols-outlined text-[22px]">security</span>
+<span class="font-label-caps text-label-caps">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all rounded group" href="#">
+<span class="material-symbols-outlined text-[22px]">list_alt</span>
+<span class="font-label-caps text-label-caps">Logs</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all rounded group" href="#">
+<span class="material-symbols-outlined text-[22px]">verified_user</span>
+<span class="font-label-caps text-label-caps">Compliance</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all rounded group" href="#">
+<span class="material-symbols-outlined text-[22px]">groups</span>
+<span class="font-label-caps text-label-caps">Team</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all rounded group" href="#">
+<span class="material-symbols-outlined text-[22px]">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-md">
+<button class="w-full bg-primary text-on-primary font-bold py-md rounded-lg flex items-center justify-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-caps text-label-caps">Run Audit</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex overflow-hidden bg-background">
+<div class="flex-1 flex flex-col min-w-0">
+<!-- Header & Breadcrumbs -->
+<div class="px-lg py-md border-b border-outline-variant flex items-center justify-between">
+<div>
+<div class="flex items-center gap-sm text-on-surface-variant font-label-caps text-label-caps mb-xs">
+<span>SECURITY</span>
+<span class="material-symbols-outlined text-[12px]">chevron_right</span>
+<span class="text-on-surface">PERMISSIONS MATRIX</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Access Governance Matrix</h1>
+</div>
+<div class="flex gap-sm">
+<button class="flex items-center gap-sm px-md py-sm border border-outline-variant rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">history</span>
+<span class="font-label-caps text-label-caps">View Version History</span>
+</button>
+<button class="flex items-center gap-sm px-md py-sm bg-primary-container text-on-primary-container rounded hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span class="font-label-caps text-label-caps">Apply Changes</span>
+</button>
+</div>
+</div>
+<!-- Matrix Content Area -->
+<div class="flex-1 overflow-auto p-lg custom-scrollbar">
+<div class="min-w-max bg-surface-container-low border border-outline-variant rounded-xl overflow-hidden shadow-2xl">
+<!-- Matrix Grid -->
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant">
+<th class="p-lg text-left sticky left-0 z-10 bg-surface-container-high border-r border-outline-variant w-64">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">Role / Entity</div>
+</th>
+<th class="p-lg text-center min-w-[140px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant">WRITE CODE</div>
+</th>
+<th class="p-lg text-center min-w-[140px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant">DEPLOY PROD</div>
+</th>
+<th class="p-lg text-center min-w-[140px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant">VIEW BILLING</div>
+</th>
+<th class="p-lg text-center min-w-[140px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant">EDIT INFRA</div>
+</th>
+<th class="p-lg text-center min-w-[140px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant">AUDIT LOGS</div>
+</th>
+<th class="p-lg text-center min-w-[140px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant">API MANAGEMENT</div>
+</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Role: Admin -->
+<tr class="matrix-cell group">
+<td class="p-md sticky left-0 z-10 bg-surface-container-low border-r border-outline-variant group-hover:bg-surface-container">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary">admin_panel_settings</span>
+<div>
+<div class="font-bold text-on-surface">Global Admin</div>
+<div class="text-[11px] text-on-surface-variant">Core Infrastructure</div>
+</div>
+</div>
+</td>
+<!-- Permissions Cells -->
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+</tr>
+<!-- Role: Developer -->
+<tr class="matrix-cell group">
+<td class="p-md sticky left-0 z-10 bg-surface-container-low border-r border-outline-variant group-hover:bg-surface-container">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary">engineering</span>
+<div>
+<div class="font-bold text-on-surface">Sr. Developer</div>
+<div class="text-[11px] text-on-surface-variant">Product Team</div>
+</div>
+</div>
+</td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+</tr>
+<!-- Role: AI-Agent-Surgical -->
+<tr class="matrix-cell group">
+<td class="p-md sticky left-0 z-10 bg-surface-container-low border-r border-outline-variant group-hover:bg-surface-container relative">
+<div class="absolute inset-0 bg-primary/5 pointer-events-none"></div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<div>
+<div class="font-bold text-on-surface">AI-Agent-Surgical</div>
+<div class="text-[11px] text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 bg-primary rounded-full animate-pulse"></span>
+                          Active Intelligence
+                        </div>
+</div>
+</div>
+</td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+</tr>
+<!-- Role: Viewer -->
+<tr class="matrix-cell group">
+<td class="p-md sticky left-0 z-10 bg-surface-container-low border-r border-outline-variant group-hover:bg-surface-container">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-outline">visibility</span>
+<div>
+<div class="font-bold text-on-surface">External Auditor</div>
+<div class="text-[11px] text-on-surface-variant">Q4 Compliance</div>
+</div>
+</div>
+</td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+</tr>
+<!-- Role: Billing Manager -->
+<tr class="matrix-cell group">
+<td class="p-md sticky left-0 z-10 bg-surface-container-low border-r border-outline-variant group-hover:bg-surface-container">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-on-tertiary-container">payments</span>
+<div>
+<div class="font-bold text-on-surface">FinOps Lead</div>
+<div class="text-[11px] text-on-surface-variant">Finance Dept</div>
+</div>
+</div>
+</td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container text-[10px] font-bold">FULL</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-[10px] font-bold">READ ONLY</span></div></td>
+<td class="p-md text-center"><div class="flex justify-center"><span class="px-3 py-1 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">NO ACCESS</span></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Bottom Summary -->
+<div class="mt-lg grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="glass-panel p-lg rounded-xl">
+<h3 class="font-label-caps text-label-caps text-primary mb-md">ENTITIES BY ACCESS</h3>
+<div class="space-y-sm">
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Full Administrative</span>
+<span class="text-on-surface font-bold">12</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[15%]"></div>
+</div>
+<div class="flex justify-between items-center text-body-md">
+<span class="text-on-surface-variant">Operational Only</span>
+<span class="text-on-surface font-bold">84</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-lg rounded-xl flex items-center justify-between">
+<div>
+<h3 class="font-label-caps text-label-caps text-primary mb-xs">PENDING REQUESTS</h3>
+<div class="text-display font-display text-2xl">08</div>
+<div class="text-[11px] text-on-surface-variant mt-1">Requires Security Auth</div>
+</div>
+<div class="w-12 h-12 rounded-full border-2 border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">priority_high</span>
+</div>
+</div>
+<div class="glass-panel p-lg rounded-xl relative overflow-hidden">
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[100px]">shield_moon</span>
+</div>
+<h3 class="font-label-caps text-label-caps text-primary mb-md">AUTOMATED GOVERNANCE</h3>
+<div class="flex items-center gap-sm">
+<div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+<span class="text-body-md">Real-time Policy Enforcement Active</span>
+</div>
+<div class="mt-sm text-code-sm font-code-sm text-on-surface-variant bg-surface-container/50 p-xs rounded">
+                Status: healthy (0 latency)
+              </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Simulation & Recent Changes -->
+<div class="w-[340px] border-l border-outline-variant flex flex-col bg-surface-container-low">
+<!-- Policy Simulation Tool -->
+<div class="p-lg border-b border-outline-variant">
+<div class="flex items-center gap-sm mb-lg">
+<span class="material-symbols-outlined text-primary">model_training</span>
+<h2 class="font-headline-md text-headline-md text-lg">Policy Simulator</h2>
+</div>
+<div class="space-y-md">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">TARGET SUBJECT</label>
+<div class="relative">
+<select class="w-full bg-surface-container-high border border-outline-variant rounded-lg px-md py-sm appearance-none focus:outline-none focus:ring-1 focus:ring-primary text-body-md">
+<option>AI-Agent-Surgical-04</option>
+<option>User: john.doe@udehlabs.com</option>
+<option>Group: Product-Ops</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">keyboard_arrow_down</span>
+</div>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant block mb-sm">RESOURCE / SCOPE</label>
+<div class="relative">
+<select class="w-full bg-surface-container-high border border-outline-variant rounded-lg px-md py-sm appearance-none focus:outline-none focus:ring-1 focus:ring-primary text-body-md">
+<option>Production Database (Read)</option>
+<option>AWS S3 Bucket: logs-prod</option>
+<option>Kubernetes: Cluster-East-01</option>
+</select>
+<span class="material-symbols-outlined absolute right-sm top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">keyboard_arrow_down</span>
+</div>
+</div>
+<button class="w-full py-md bg-surface-container-highest border border-primary/30 text-primary rounded-lg font-bold font-label-caps text-label-caps hover:bg-primary/10 transition-colors" onclick="simulateAccess()">
+              TEST ACCESS
+            </button>
+<!-- Simulation Result (Hidden by default) -->
+<div class="hidden p-md rounded bg-green-500/10 border border-green-500/30 flex items-start gap-sm" id="sim-result">
+<span class="material-symbols-outlined text-green-500 text-[18px]">check_circle</span>
+<div>
+<div class="text-green-500 font-bold text-[13px]">ACCESS GRANTED</div>
+<div class="text-[11px] text-on-surface-variant">Matched via 'Surgical-Agent' root policy (ID: 9823).</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Changes Sidebar -->
+<div class="flex-1 flex flex-col overflow-hidden">
+<div class="px-lg py-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant">RECENT AUDIT LOGS</h3>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">filter_list</span>
+</div>
+<div class="flex-1 overflow-auto custom-scrollbar">
+<div class="divide-y divide-outline-variant/30">
+<!-- Log Entry 1 -->
+<div class="p-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex justify-between mb-xs">
+<div class="text-[11px] font-code-sm text-primary uppercase">Policy Updated</div>
+<div class="text-[10px] text-on-surface-variant">2m ago</div>
+</div>
+<div class="text-body-md mb-sm">
+<span class="font-bold text-on-surface">Sarah K.</span> changed 
+                  <span class="text-tertiary">Developer</span> permission on 
+                  <span class="text-tertiary">Deploy Prod</span> to <span class="bg-surface-container-highest px-1 rounded">Read Only</span>
+</div>
+<div class="flex items-center gap-xs">
+<img class="w-5 h-5 rounded-full border border-outline-variant" data-alt="A macro close-up of a professional software engineer's profile avatar, minimalist and modern, soft lighting, dark theme palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO6XpbkNF0OweuTQtjP4P2Mk4n5F1udKLv3hdDzH_NL6EjSfBjrQXfTTDnsDypS_18YbJ3mL5s3d7KnSsnkSHN5ALUtaTj-y2XGHZYront0s2LL-BXo8uxmoHQqJtbww9TgvjNkcunIT9IookrTkQzJ6XveHoRHhwF-laMPJ5ObCSy8r9HHmCDnscnGT-aD0MsWLo_d23KjXJH1Mom6lfqtsm9poCClyt-xF2-mhFRFx8LV0ub5pl_vQ"/>
+<span class="text-[10px] text-on-surface-variant">Admin #429 (L3)</span>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="p-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex justify-between mb-xs">
+<div class="text-[11px] font-code-sm text-error uppercase">Security Alert</div>
+<div class="text-[10px] text-on-surface-variant">14m ago</div>
+</div>
+<div class="text-body-md mb-sm">
+<span class="font-bold text-on-surface">Automated Guard</span> revoked 
+                  <span class="text-tertiary">Agent-99</span> access due to 
+                  <span class="text-error underline">Anomalous Request</span>
+</div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-primary">security</span>
+<span class="text-[10px] text-on-surface-variant">System Governance</span>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="p-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex justify-between mb-xs">
+<div class="text-[11px] font-code-sm text-primary uppercase">Role Created</div>
+<div class="text-[10px] text-on-surface-variant">1h ago</div>
+</div>
+<div class="text-body-md mb-sm">
+<span class="font-bold text-on-surface">Marcus V.</span> initialized new role
+                  <span class="text-tertiary font-bold">'Q4 Auditor (Temporal)'</span>
+</div>
+<div class="flex items-center gap-xs">
+<img class="w-5 h-5 rounded-full border border-outline-variant" data-alt="A professional headshot of a corporate IT security director, sleek and minimalist style, low-key lighting, cool blue and charcoal color tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrKQf45cas_ZY06Y4zs5HNa881k6S7DuXhu9fgl6F5x56FUwK9rNTADWgE-uAtSmlkkqu6mJ1j10NAB_5XA6SJrpQrsbCxzEJXti5FfKzcboS1748vYJErBiHMEi4_MWgeA-x5g8oiEadQdQPtK7T0hSiefj08WZ4aiTJQ0lDCYiMFaTIQ0Yjpp421s2CB-ZNGVemyxNxeNVeN3XC5nWmO1sRmjMhTi77DyKoxLlXS-RBc-aGQziqJGg"/>
+<span class="text-[10px] text-on-surface-variant">Super Admin</span>
+</div>
+</div>
+<!-- Log Entry 4 -->
+<div class="p-lg hover:bg-surface-container transition-colors cursor-pointer group">
+<div class="flex justify-between mb-xs">
+<div class="text-[11px] font-code-sm text-on-surface-variant uppercase">Matrix Sync</div>
+<div class="text-[10px] text-on-surface-variant">3h ago</div>
+</div>
+<div class="text-body-md mb-sm">
+                  Synchronized matrix with 
+                  <span class="text-tertiary">Active Directory</span> global registry.
+                </div>
+<div class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">sync</span>
+<span class="text-[10px] text-on-surface-variant">Cloud Connector</span>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full py-md border-t border-outline-variant text-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-all flex items-center justify-center gap-xs">
+            VIEW FULL AUDIT TRAIL
+            <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Bottom FAB (Hidden on transactional screens as per protocol, but here it fits the 'Apply Change' context if wanted, however we have a button in the header) -->
+<script>
+    function simulateAccess() {
+      const result = document.getElementById('sim-result');
+      result.classList.remove('hidden');
+      result.classList.add('flex');
+      
+      // Basic animation effect
+      result.style.opacity = '0';
+      result.style.transform = 'translateY(10px)';
+      setTimeout(() => {
+        result.style.transition = 'all 0.3s ease';
+        result.style.opacity = '1';
+        result.style.transform = 'translateY(0)';
+      }, 50);
+    }
+
+    // Handle horizontal scroll shadows for the matrix
+    const matrixContainer = document.querySelector('.overflow-auto');
+    matrixContainer.addEventListener('scroll', () => {
+      // Add visual cues if needed for deep scrolling
+    });
+  </script>
+</body></html>

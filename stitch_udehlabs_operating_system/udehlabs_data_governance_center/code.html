@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Data Governance Center - UdehLabs Governance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#29313c",
+                        "secondary": "#d4bbff",
+                        "primary": "#bac3ff",
+                        "on-primary-fixed": "#00105b",
+                        "on-primary": "#15267b",
+                        "access-security": "#ff5722",
+                        "surface-bright": "#323a45",
+                        "lifecycle-archived": "#607d8b",
+                        "outline-variant": "#454651",
+                        "classification-confidential": "#ff9800",
+                        "background": "#0c141e",
+                        "on-tertiary": "#432c00",
+                        "on-secondary-container": "#c6a5ff",
+                        "on-secondary": "#3f0f81",
+                        "tertiary-fixed-dim": "#f6bd58",
+                        "lifecycle-retention": "#9c27b0",
+                        "on-tertiary-container": "#fff6ee",
+                        "classification-restricted": "#f44336",
+                        "on-secondary-fixed-variant": "#572e99",
+                        "on-error": "#690005",
+                        "outline": "#8f909d",
+                        "primary-fixed-dim": "#bac3ff",
+                        "lifecycle-legal-hold": "#e91e63",
+                        "classification-highly-restricted": "#b71c1c",
+                        "tertiary": "#f6bd58",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-lowest": "#070f18",
+                        "surface-container-highest": "#2d3540",
+                        "on-surface-variant": "#c6c5d3",
+                        "on-secondary-fixed": "#260058",
+                        "classification-public": "#4caf50",
+                        "classification-internal": "#ffc107",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#0c141e",
+                        "surface-container-high": "#232b35",
+                        "inverse-primary": "#4858ab",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#5f4100",
+                        "tertiary-fixed": "#ffdeac",
+                        "on-tertiary-fixed": "#281900",
+                        "tertiary-container": "#976900",
+                        "secondary-container": "#572e99",
+                        "surface-tint": "#bac3ff",
+                        "on-background": "#dbe3f1",
+                        "secondary-fixed-dim": "#d4bbff",
+                        "primary-fixed": "#dee0ff",
+                        "surface-container-low": "#141c26",
+                        "surface-container": "#18202b",
+                        "surface-variant": "#2d3540",
+                        "inverse-surface": "#dbe3f1",
+                        "secondary-fixed": "#ebdcff",
+                        "access-support": "#8bc34a",
+                        "on-surface": "#dbe3f1",
+                        "lifecycle-active": "#00bcd4",
+                        "access-development": "#03a9f4",
+                        "primary-container": "#5c6bc0",
+                        "surface": "#0c141e",
+                        "lifecycle-deleted": "#424242",
+                        "on-primary-fixed-variant": "#2f3f92",
+                        "on-primary-container": "#f8f6ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "loose": "24px",
+                        "margin-mobile": "16px",
+                        "compact": "8px",
+                        "comfortable": "16px",
+                        "gutter": "16px",
+                        "margin-desktop": "32px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono", "monospace"],
+                        "display-lg": ["Hanken Grotesk", "sans-serif"],
+                        "headline-lg-mobile": ["Hanken Grotesk", "sans-serif"],
+                        "body-md": ["Hanken Grotesk", "sans-serif"],
+                        "data-mono": ["JetBrains Mono", "monospace"],
+                        "headline-sm": ["Hanken Grotesk", "sans-serif"],
+                        "body-sm": ["Hanken Grotesk", "sans-serif"],
+                        "headline-md": ["Hanken Grotesk", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .pulse-restricted {
+            animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(244, 67, 54, 1); box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.4); }
+            50% { border-color: rgba(244, 67, 54, 0.5); box-shadow: 0 0 0 4px rgba(244, 67, 54, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant">
+<div class="flex items-center gap-loose">
+<span class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary tracking-tight">UdehLabs Governance</span>
+<div class="hidden md:flex items-center gap-compact bg-surface-container-low border border-outline-variant rounded px-compact py-base focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">search</span>
+<input class="bg-transparent border-none text-data-mono font-data-mono text-on-surface placeholder:text-on-surface-variant focus:ring-0 p-0 w-64 h-6" placeholder="Search data assets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-comfortable">
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors p-compact rounded opacity-80 duration-150">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">notifications</span>
+</button>
+<button class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-colors p-compact rounded opacity-80 duration-150">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded bg-surface-container-high border border-outline-variant overflow-hidden ml-compact">
+<img class="w-full h-full object-cover" data-alt="Administrator Profile avatar, sleek digital cyber aesthetic, geometric shapes, cool indigo tones, high contrast, professional corporate headshot style but stylized" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIzxuZdLnMs_eoY9ZS81PSp6HiU3OyFKgAhjnTxUzA_5JmHNyr0UhJ_1UasdughVGzt6J0epkgSYeUY9lHpcTKYAaBSwnAEH6QzAGwG5dl6tPItjE9kEh7pa8vpu5s9yEY-PmHak9hHE1xkCdG22IaFZTxy-bEoU_jxcDB5q7o4L2O87-w0btXzwRTZJQ_Hm9z5Isw93dQo2owVkMVoSwmHXK2LH8_TUz_3ueNe11dLcU41IWlI9WtEw"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar & Main Content Wrapper -->
+<div class="flex flex-1 pt-16 h-full w-full">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 flex flex-col p-compact gap-base bg-surface-container dark:bg-surface-container border-r border-outline-variant dark:border-outline-variant z-40">
+<div class="px-comfortable py-loose border-b border-outline-variant mb-compact flex items-center gap-compact">
+<div class="w-8 h-8 rounded bg-primary/20 border border-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]">admin_panel_settings</span>
+</div>
+<div>
+<h2 class="text-body-md font-body-md font-bold text-on-surface">Governance HQ</h2>
+<p class="text-body-sm font-body-sm text-classification-public">System Secure</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-base">
+<!-- Active Item: Inventory -->
+<a class="flex items-center gap-comfortable px-comfortable py-compact bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container font-bold rounded-lg scale-[0.99] duration-200" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="text-label-caps font-label-caps">Inventory</span>
+</a>
+<a class="flex items-center gap-comfortable px-comfortable py-compact text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">shield_lock</span>
+<span class="text-label-caps font-label-caps">Privacy</span>
+</a>
+<a class="flex items-center gap-comfortable px-comfortable py-compact text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-label-caps font-label-caps">Compliance</span>
+</a>
+<a class="flex items-center gap-comfortable px-comfortable py-compact text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">history_toggle_off</span>
+<span class="text-label-caps font-label-caps">Retention</span>
+</a>
+<a class="flex items-center gap-comfortable px-comfortable py-compact text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high dark:hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="text-label-caps font-label-caps">AI Policies</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-base pt-compact border-t border-outline-variant">
+<button class="w-full bg-primary-container text-on-primary-container py-compact rounded text-label-caps font-label-caps flex items-center justify-center gap-compact hover:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[16px]">policy</span>
+                    Audit Now
+                </button>
+<div class="flex gap-base mt-compact">
+<a class="flex-1 flex justify-center py-compact text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+</a>
+<a class="flex-1 flex justify-center py-compact text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 flex-1 h-full overflow-y-auto bg-background p-margin-desktop">
+<div class="max-w-7xl mx-auto flex flex-col gap-loose">
+<!-- Page Header -->
+<header class="flex justify-between items-end border-b border-outline-variant pb-comfortable">
+<div>
+<h1 class="text-display-lg font-display-lg text-on-surface">Data Governance Center</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-compact">Executive mission control for data health and policy enforcement.</p>
+</div>
+<button class="bg-primary text-on-primary px-comfortable py-compact rounded font-label-caps text-label-caps flex items-center gap-compact border border-transparent hover:bg-primary-fixed transition-colors shadow-[0_0_15px_rgba(186,195,255,0.2)]">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+                        Run Audit
+                    </button>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-comfortable">
+<!-- Stats Row (Spans Full Width in a 4-col mini-grid) -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-4 gap-comfortable">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container border border-outline-variant rounded p-comfortable flex flex-col hover:border-outline transition-colors relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full"></div>
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-compact">Total Data Volume</span>
+<span class="text-headline-md font-headline-md text-on-surface">4.2 PB</span>
+<div class="mt-auto pt-compact flex items-center gap-compact text-classification-public">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="text-data-mono font-data-mono text-[10px]">+1.2% this week</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container border border-outline-variant rounded p-comfortable flex flex-col hover:border-outline transition-colors relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-classification-public/5 rounded-bl-full"></div>
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-compact">Classification Health</span>
+<span class="text-headline-md font-headline-md text-classification-public">98.4%</span>
+<div class="mt-auto pt-compact flex items-center gap-compact text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span class="text-data-mono font-data-mono text-[10px]">Optimal state</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-surface-container border border-outline-variant rounded p-comfortable flex flex-col hover:border-classification-confidential transition-colors relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-classification-confidential/5 rounded-bl-full"></div>
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-compact">Pending Privacy Requests</span>
+<span class="text-headline-md font-headline-md text-classification-confidential">3</span>
+<div class="mt-auto pt-compact flex items-center gap-compact text-classification-confidential">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span class="text-data-mono font-data-mono text-[10px]">Action required</span>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-surface-container border border-outline-variant rounded p-comfortable flex flex-col hover:border-lifecycle-legal-hold transition-colors relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-lifecycle-legal-hold/5 rounded-bl-full"></div>
+<span class="text-label-caps font-label-caps text-on-surface-variant mb-compact">Active Legal Holds</span>
+<span class="text-headline-md font-headline-md text-lifecycle-legal-hold">1</span>
+<div class="mt-auto pt-compact flex items-center gap-compact text-lifecycle-legal-hold">
+<span class="material-symbols-outlined text-[14px]">gavel</span>
+<span class="text-data-mono font-data-mono text-[10px]">Restricted modification</span>
+</div>
+</div>
+</div>
+<!-- Distributions & Alerts -->
+<!-- Left Col: Charts (8 cols) -->
+<div class="col-span-12 md:col-span-8 flex flex-col gap-comfortable">
+<!-- Classification Distribution -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col h-72">
+<div class="p-comfortable border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Data Classification Distribution</h3>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 p-comfortable flex items-center justify-center gap-loose relative">
+<!-- Abstract visual representation of a chart -->
+<div class="w-48 h-48 rounded-full border-[16px] border-surface-container-high relative flex items-center justify-center shadow-[inset_0_0_20px_rgba(0,0,0,0.5)]">
+<div class="absolute inset-[-16px] rounded-full border-[16px] border-transparent border-t-classification-public border-r-classification-internal rotate-45"></div>
+<div class="absolute inset-[-16px] rounded-full border-[16px] border-transparent border-b-classification-confidential border-l-classification-restricted -rotate-12"></div>
+<span class="text-data-mono font-data-mono text-on-surface font-bold text-[20px]">100%</span>
+</div>
+<div class="flex flex-col gap-compact flex-1">
+<div class="flex justify-between items-center bg-surface-container-high px-compact py-base rounded border border-outline-variant">
+<div class="flex items-center gap-compact">
+<div class="w-3 h-3 rounded-full bg-classification-public"></div>
+<span class="text-label-caps font-label-caps text-on-surface">Public</span>
+</div>
+<span class="text-data-mono font-data-mono text-on-surface-variant">45%</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-high px-compact py-base rounded border border-outline-variant">
+<div class="flex items-center gap-compact">
+<div class="w-3 h-3 rounded-full bg-classification-internal"></div>
+<span class="text-label-caps font-label-caps text-on-surface">Internal</span>
+</div>
+<span class="text-data-mono font-data-mono text-on-surface-variant">30%</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-high px-compact py-base rounded border border-outline-variant">
+<div class="flex items-center gap-compact">
+<div class="w-3 h-3 rounded-full bg-classification-confidential"></div>
+<span class="text-label-caps font-label-caps text-on-surface">Confidential</span>
+</div>
+<span class="text-data-mono font-data-mono text-on-surface-variant">20%</span>
+</div>
+<div class="flex justify-between items-center bg-surface-container-high px-compact py-base rounded border border-outline-variant">
+<div class="flex items-center gap-compact">
+<div class="w-3 h-3 rounded-full bg-classification-restricted pulse-restricted"></div>
+<span class="text-label-caps font-label-caps text-on-surface">Restricted</span>
+</div>
+<span class="text-data-mono font-data-mono text-classification-restricted font-bold">5%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Lifecycle Data Aging -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col">
+<div class="p-comfortable border-b border-outline-variant flex justify-between items-center">
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Lifecycle: Data Aging &amp; Retention</h3>
+<span class="text-label-caps font-label-caps text-on-surface-variant bg-surface-container-high px-compact py-base rounded border border-outline-variant">Rolling 30 Days</span>
+</div>
+<div class="p-comfortable">
+<div class="flex flex-col gap-comfortable">
+<!-- Segmented Progress Bar 1 -->
+<div>
+<div class="flex justify-between text-label-caps font-label-caps mb-base">
+<span class="text-lifecycle-active flex items-center gap-base"><span class="material-symbols-outlined text-[14px]">bolt</span> Active</span>
+<span class="text-data-mono font-data-mono">60%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded overflow-hidden flex">
+<div class="h-full bg-lifecycle-active w-[60%]"></div>
+<div class="h-full w-[2px] bg-background"></div>
+</div>
+</div>
+<!-- Segmented Progress Bar 2 -->
+<div>
+<div class="flex justify-between text-label-caps font-label-caps mb-base">
+<span class="text-lifecycle-archived flex items-center gap-base"><span class="material-symbols-outlined text-[14px]">inventory_2</span> Archived</span>
+<span class="text-data-mono font-data-mono">35%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded overflow-hidden flex">
+<div class="h-full bg-lifecycle-archived w-[35%]"></div>
+<div class="h-full w-[2px] bg-background"></div>
+</div>
+</div>
+<!-- Segmented Progress Bar 3 -->
+<div>
+<div class="flex justify-between text-label-caps font-label-caps mb-base">
+<span class="text-lifecycle-deleted flex items-center gap-base"><span class="material-symbols-outlined text-[14px]">delete_sweep</span> Pending Deletion</span>
+<span class="text-data-mono font-data-mono">5%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded overflow-hidden flex">
+<div class="h-full bg-lifecycle-deleted w-[5%] border border-outline-variant/30"></div>
+<div class="h-full w-[2px] bg-background"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Col: Alerts & AI Policy (4 cols) -->
+<div class="col-span-12 md:col-span-4 flex flex-col gap-comfortable">
+<!-- Active Alerts -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col flex-1">
+<div class="p-comfortable border-b border-outline-variant flex gap-compact items-center">
+<span class="material-symbols-outlined text-classification-highly-restricted">warning</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">Active Alerts</h3>
+<span class="ml-auto bg-classification-highly-restricted text-white text-[10px] font-label-caps px-2 py-[2px] rounded">2 NEW</span>
+</div>
+<div class="p-compact flex flex-col gap-compact overflow-y-auto">
+<!-- Alert Item 1 -->
+<div class="bg-surface-container-low border border-classification-highly-restricted/50 rounded p-compact flex flex-col gap-base pulse-restricted relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-classification-highly-restricted"></div>
+<div class="flex justify-between items-start pl-compact">
+<span class="text-label-caps font-label-caps text-classification-highly-restricted">SEVERITY: HIGH</span>
+<span class="text-data-mono font-data-mono text-on-surface-variant text-[10px]">Just now</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface pl-compact">Unauthorized Data Export Attempt</p>
+<div class="flex gap-compact mt-base pl-compact">
+<button class="text-data-mono font-data-mono text-[10px] border border-outline-variant px-2 py-1 rounded hover:bg-surface-container-highest transition-colors">View Logs</button>
+<button class="text-data-mono font-data-mono text-[10px] bg-classification-restricted text-white px-2 py-1 rounded hover:opacity-90 transition-opacity">Block IP</button>
+</div>
+</div>
+<!-- Alert Item 2 -->
+<div class="bg-surface-container-low border border-outline-variant rounded p-compact flex flex-col gap-base relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-classification-confidential"></div>
+<div class="flex justify-between items-start pl-compact">
+<span class="text-label-caps font-label-caps text-classification-confidential">SEVERITY: MEDIUM</span>
+<span class="text-data-mono font-data-mono text-on-surface-variant text-[10px]">2h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface pl-compact">Retention Policy Violation in Project: Alpha</p>
+<div class="flex gap-compact mt-base pl-compact">
+<button class="text-data-mono font-data-mono text-[10px] border border-outline-variant px-2 py-1 rounded hover:bg-surface-container-highest transition-colors">Review Policy</button>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Data Policy Summary -->
+<div class="bg-surface-container border border-outline-variant rounded flex flex-col relative overflow-hidden group">
+<!-- Glassmorphism subtle overlay effect on hover -->
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+<div class="p-comfortable border-b border-outline-variant flex gap-compact items-center">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<h3 class="text-headline-sm font-headline-sm text-on-surface">AI Data Policy</h3>
+</div>
+<div class="p-comfortable flex flex-col gap-comfortable">
+<div>
+<span class="text-label-caps font-label-caps text-classification-public mb-compact block flex items-center gap-base">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Allowed Providers
+                                    </span>
+<div class="flex flex-wrap gap-compact">
+<span class="bg-surface-container-high border border-outline-variant text-on-surface text-data-mono font-data-mono text-[11px] px-2 py-1 rounded">Gemini</span>
+<span class="bg-surface-container-high border border-outline-variant text-on-surface text-data-mono font-data-mono text-[11px] px-2 py-1 rounded flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-lifecycle-active"></div>Internal-Llama
+                                        </span>
+</div>
+</div>
+<div class="pt-compact border-t border-outline-variant/50">
+<span class="text-label-caps font-label-caps text-classification-restricted mb-compact block flex items-center gap-base">
+<span class="material-symbols-outlined text-[14px]">block</span> Restricted Integrations
+                                    </span>
+<div class="flex flex-wrap gap-compact opacity-70">
+<span class="bg-background border border-classification-restricted/30 text-on-surface-variant line-through text-data-mono font-data-mono text-[11px] px-2 py-1 rounded">OpenAI (Public)</span>
+<span class="bg-background border border-classification-restricted/30 text-on-surface-variant line-through text-data-mono font-data-mono text-[11px] px-2 py-1 rounded">Claude (Web)</span>
+</div>
+</div>
+<button class="mt-auto w-full border border-secondary text-secondary py-1.5 rounded text-label-caps font-label-caps hover:bg-secondary/10 transition-colors">Manage AI Scope</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

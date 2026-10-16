@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workforces - NEXUS SRE Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-low": "#101c2d",
+                        "on-primary-fixed-variant": "#004884",
+                        "outline": "#8a919e",
+                        "on-tertiary-container": "#00311f",
+                        "surface-variant": "#2a3548",
+                        "surface-tint": "#a4c9ff",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "tertiary-container": "#00a572",
+                        "status-critical": "#ef4444",
+                        "on-primary-container": "#002a52",
+                        "on-surface": "#d7e3fb",
+                        "on-secondary-fixed": "#25005a",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary": "#3f008e",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "surface-container-high": "#1f2a3c",
+                        "border-active": "#1e293b",
+                        "primary": "#a4c9ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#d7e3fb",
+                        "secondary-container": "#6001d1",
+                        "secondary": "#d2bbff",
+                        "primary-container": "#3492f6",
+                        "tertiary": "#4edea3",
+                        "inverse-on-surface": "#263143",
+                        "background": "#081425",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-surface-variant": "#c0c7d5",
+                        "surface-container": "#152031",
+                        "surface-dim": "#081425",
+                        "on-primary-fixed": "#001c39",
+                        "outline-variant": "#404753",
+                        "on-tertiary": "#003824",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-bright": "#2f3a4c",
+                        "inverse-primary": "#005fad",
+                        "secondary-fixed": "#eaddff",
+                        "surface-deep": "#040e1f",
+                        "surface-container-lowest": "#030e1f",
+                        "on-primary": "#00315d",
+                        "on-background": "#d7e3fb",
+                        "on-secondary-container": "#c9aeff",
+                        "data-text": "#d8e3fb",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-highest": "#2a3548",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab",
+                        "status-warning": "#f59e0b",
+                        "status-healthy": "#10b981",
+                        "surface": "#081425"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "24px",
+                        "gutter": "12px",
+                        "compact": "8px",
+                        "sidebar": "240px",
+                        "margin-mobile": "12px",
+                        "standard": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "data-lg": ["Geist Mono"],
+                        "label-caps": ["Geist Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "data-sm": ["Geist Mono"],
+                        "data-md": ["Geist Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "data-sm": ["11px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "data-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .pulse-healthy { animation: pulseHealthy 2s ease-in-out infinite; }
+        @keyframes pulseHealthy {
+            0% { opacity: 0.6; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.6; transform: scale(0.95); }
+        }
+        
+        /* Grid definitions for standard layout */
+        .grid-bento {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: theme('spacing.gutter');
+        }
+        @media (max-width: 1439px) {
+            .grid-bento { grid-template-columns: repeat(8, 1fr); }
+        }
+        @media (max-width: 767px) {
+            .grid-bento { grid-template-columns: repeat(4, 1fr); }
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden min-h-screen">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 h-14 border-b border-outline-variant bg-surface-container-lowest flex justify-between items-center w-full px-margin-desktop md:ml-[240px] sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<span class="font-label-caps text-label-caps text-primary border border-primary px-2 py-0.5">NEXUS COMMAND</span>
+</div>
+<div class="flex items-center gap-standard">
+<div class="hidden md:flex gap-4 font-data-md text-data-md text-on-surface-variant">
+<span>Budget: $4.2k/5k</span>
+<span class="flex items-center gap-1 text-status-healthy"><div class="w-2 h-2 rounded-full bg-status-healthy pulse-healthy"></div>Status: Healthy</span>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-surface-tint transition-colors cursor-pointer hover:opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-surface-tint transition-colors cursor-pointer hover:opacity-80">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<button class="bg-secondary text-white font-data-md text-data-md px-3 py-1.5 rounded-DEFAULT cursor-pointer hover:opacity-80 active:scale-95 transition-transform flex items-center gap-2">
+                    Initialize Agent
+                </button>
+<img alt="Operator Avatar" class="w-8 h-8 rounded-full border border-outline-variant object-cover ml-2" data-alt="A highly detailed avatar of a futuristic cyberpunk operator with neon highlights, set against a dark, minimalist digital background. The image should feature sharp, modern brutalist design elements and a clinical, technical aesthetic suitable for a high-end command center interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRmWPSZLkEt2kaX0mtnEWP3shTi3ZF4PlgKv0aNSC-GHcy0soFZQ5pVzwhwlVdtl6o_OckX4NV4_RJOEIEdZggM_O-00YjrA0S6ZFjopXH9d3pQPDz7FULia5rMbHPexI9XSyKsGp5FUSvFAnmIGSxSS2MaRGtZXZJuCh1JsdhcSS0bK0JZnk_ZZFNJzxM0momYnzKd00CuT8RtLXEltqVTVidqx7kZnuxnQ165qNGashbs-TuHS4SQg"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-full py-standard fixed left-0 top-0 w-[240px] border-r border-outline-variant bg-surface-deep z-40 mt-14">
+<div class="px-standard mb-6 flex items-center gap-3">
+<img alt="User profile" class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A stylized, technical user profile icon rendered in a dark, clinical aesthetic. It should look like a high-density data badge with subtle glowing accents and sharp geometry, suitable for an SRE command center." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAB67jIzhQ4LrluEfvVhFNVi-D6j7dJFlCsjzwuGqhS8ipYZbKK9LOgoD656E9jdwpJVSLve_vpp3W6D1olZmhjjRQJNnP29TnmppW11U86sEh-aBPUPdcIj5_zeahsqfVI-Gn1Q1fp0CEc-gK5IhyiSU3digOfRuicSJQRvzrXkfanXadrnotwzLNHddqeoLGJfBn09fZpAKJZoVEDo_XkXVYjD43yDAxK-Ahi4dDU94nCa8IkgkXdnQ"/>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-primary tracking-tighter">NEXUS SRE</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">Command Center</div>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-primary font-bold border-l-2 border-primary bg-surface-variant/30 font-body-sm text-body-sm tracking-tight active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hub</span>
+                Workforces
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 font-body-sm text-body-sm tracking-tight active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">smart_toy</span>
+                Agents
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 font-body-sm text-body-sm tracking-tight active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">assignment_turned_in</span>
+                Tasks
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 font-body-sm text-body-sm tracking-tight active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">play_circle</span>
+                Live Runs
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright hover:text-primary transition-colors duration-150 font-body-sm text-body-sm tracking-tight active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">memory</span>
+                Memory
+            </a>
+</div>
+<div class="p-standard mt-auto border-t border-outline-variant">
+<button class="w-full bg-surface-container border border-border-active text-primary font-data-md text-data-md py-2 rounded-DEFAULT hover:bg-surface-bright transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                Initialize Agent
+            </button>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="md:ml-[240px] p-margin-desktop min-h-[calc(100vh-56px)]">
+<div class="mb-6 flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-background mb-1">Active Workforces</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Global squad deployment and autonomous telemetry.</p>
+</div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-DEFAULT bg-surface-container hover:bg-surface-bright text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+</button>
+</div>
+</div>
+<div class="grid-bento">
+<!-- Squad Cards (Bento row 1) -->
+<div class="col-span-12 md:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Customer Ops -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-compact flex flex-col justify-between hover:bg-surface-bright transition-colors relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-label-caps text-primary border border-outline-variant px-1.5 py-0.5 rounded-sm bg-surface-deep">CUSTOMER_OPS</span>
+<div class="flex items-center gap-1 text-status-healthy">
+<div class="w-1.5 h-1.5 rounded-full bg-status-healthy pulse-healthy"></div>
+</div>
+</div>
+<div class="font-data-lg text-data-lg text-on-background mb-1">42 Active</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Success: 98.4%</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/50 flex justify-between items-end">
+<div class="font-data-sm text-data-sm">
+<div class="text-on-surface-variant mb-0.5">Burn Rate</div>
+<div class="text-status-warning">$1.2k/h</div>
+</div>
+<!-- Sparkline placeholder -->
+<div class="w-16 h-6 border-b border-r border-outline-variant relative">
+<div class="absolute bottom-0 left-0 w-full h-[60%] bg-primary/20"></div>
+<div class="absolute bottom-[60%] left-0 w-[20%] h-px bg-primary"></div>
+<div class="absolute bottom-[80%] left-[20%] w-[40%] h-px bg-primary"></div>
+<div class="absolute bottom-[40%] left-[60%] w-[40%] h-px bg-primary"></div>
+</div>
+</div>
+</div>
+<!-- Engineering -->
+<div class="bg-surface-container border border-outline-variant rounded-lg p-compact flex flex-col justify-between hover:bg-surface-bright transition-colors relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent pointer-events-none"></div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-label-caps text-secondary border border-outline-variant px-1.5 py-0.5 rounded-sm bg-surface-deep">ENGINEERING</span>
+<div class="flex items-center gap-1 text-status-warning">
+<div class="w-1.5 h-1.5 rounded-full bg-status-warning"></div>
+</div>
+</div>
+<div class="font-data-lg text-data-lg text-on-background mb-1">18 Active</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant">Success: 92.1%</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/50 flex justify-between items-end">
+<div class="font-data-sm text-data-sm">
+<div class="text-on-surface-variant mb-0.5">Burn Rate</div>
+<div class="text-on-background">$2.8k/h</div>
+</div>
+<!-- Sparkline placeholder -->
+<div class="w-16 h-6 border-b border-r border-outline-variant relative">
+<div class="absolute bottom-0 left-0 w-full h-[40%] bg-secondary/20"></div>
+</div>
+</div>
+</div>
+<!-- SecOps -->
+<div class="bg-surface-container border border-status-critical/30 rounded-lg p-compact flex flex-col justify-between hover:bg-surface-bright transition-colors relative overflow-hidden group shadow-[inset_0_0_8px_rgba(239,68,68,0.2)]">
+<div class="absolute inset-0 bg-gradient-to-br from-status-critical/5 to-transparent pointer-events-none"></div>
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-caps text-label-caps text-status-critical border border-status-critical/50 px-1.5 py-0.5 rounded-sm bg-surface-deep">SEC_OPS</span>
+<div class="flex items-center gap-1 text-status-critical">
+<div class="w-1.5 h-1.5 rounded-full bg-status-critical animate-ping"></div>
+</div>
+</div>
+<div class="font-data-lg text-data-lg text-on-background mb-1">08 Active</div>
+<div class="font-data-sm text-data-sm text-status-critical">Success: 88.9% (Drop)</div>
+</div>
+<div class="mt-4 pt-3 border-t border-outline-variant/50 flex justify-between items-end">
+<div class="font-data-sm text-data-sm">
+<div class="text-on-surface-variant mb-0.5">Burn Rate</div>
+<div class="text-on-background">$0.5k/h</div>
+</div>
+<!-- Sparkline placeholder -->
+<div class="w-16 h-6 border-b border-r border-status-critical/50 relative">
+<div class="absolute bottom-0 left-0 w-full h-[20%] bg-status-critical/20"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Workforce Health (Bento side) -->
+<div class="col-span-12 md:col-span-4 bg-surface-container border border-outline-variant rounded-lg p-standard">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-4 border-b border-outline-variant/50 pb-2">WORKFORCE HEALTH OVERVIEW</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="font-data-md text-data-md text-on-background">System Latency</div>
+<div class="font-data-md text-data-md text-status-healthy">42ms</div>
+</div>
+<div class="w-full bg-surface-deep h-1.5 rounded-full overflow-hidden">
+<div class="bg-status-healthy h-full w-[15%]"></div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="font-data-md text-data-md text-on-background">Avg Accuracy</div>
+<div class="font-data-md text-data-md text-primary">96.8%</div>
+</div>
+<div class="w-full bg-surface-deep h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[96%]"></div>
+</div>
+<div class="pt-4 border-t border-outline-variant/50">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-3">AUTONOMY DISTRIBUTION</div>
+<div class="flex h-6 w-full rounded-sm overflow-hidden gap-[1px] bg-surface-deep">
+<div class="h-full bg-outline w-[10%]" title="L0: Manual"></div>
+<div class="h-full bg-primary/40 w-[20%]" title="L1: Assisted"></div>
+<div class="h-full bg-primary/70 w-[40%]" title="L2: Partial"></div>
+<div class="h-full bg-primary w-[25%]" title="L3: Conditional"></div>
+<div class="h-full bg-secondary w-[5%]" title="L4: High"></div>
+</div>
+<div class="flex justify-between mt-1 font-data-sm text-data-sm text-on-surface-variant">
+<span>L0</span>
+<span>L2</span>
+<span>L4</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Global AI Events Stream -->
+<div class="col-span-12 bg-surface-deep border border-outline-variant rounded-lg overflow-hidden flex flex-col h-[400px]">
+<div class="bg-surface-container px-standard py-2 border-b border-outline-variant flex justify-between items-center sticky top-0">
+<div class="font-label-caps text-label-caps text-on-surface-variant">GLOBAL AI EVENTS [STREAM_LIVE]</div>
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-status-healthy pulse-healthy"></div>
+<span class="font-data-sm text-data-sm text-on-surface-variant">Connected</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-compact font-data-sm text-data-sm space-y-1">
+<!-- Stream items -->
+<div class="flex gap-3 hover:bg-surface-bright/50 p-1 rounded-sm">
+<span class="text-outline w-16 shrink-0">14:02:41</span>
+<span class="text-primary w-24 shrink-0">[CUST_OPS_9]</span>
+<span class="text-on-background">Initiated tool call: <span class="text-secondary">search_knowledge_base</span>(query="refund_policy")</span>
+</div>
+<div class="flex gap-3 hover:bg-surface-bright/50 p-1 rounded-sm">
+<span class="text-outline w-16 shrink-0">14:02:40</span>
+<span class="text-secondary w-24 shrink-0">[ENG_SQUAD_2]</span>
+<span class="text-on-background">Delegated task <em>fix_auth_bug</em> to <span class="text-tertiary">Agent_Sub_4</span></span>
+</div>
+<div class="flex gap-3 hover:bg-surface-bright/50 p-1 rounded-sm bg-status-critical/10 border-l-2 border-status-critical">
+<span class="text-status-critical w-16 shrink-0">14:02:38</span>
+<span class="text-status-critical w-24 shrink-0">[SEC_OPS_1]</span>
+<span class="text-status-critical">ALERT: Failed authentication attempt intercepted. Tool <span class="text-secondary">block_ip</span> executed.</span>
+</div>
+<div class="flex gap-3 hover:bg-surface-bright/50 p-1 rounded-sm">
+<span class="text-outline w-16 shrink-0">14:02:35</span>
+<span class="text-primary w-24 shrink-0">[CUST_OPS_4]</span>
+<span class="text-on-background">Resolved ticket #89421. Autonomy level: L3.</span>
+</div>
+<div class="flex gap-3 hover:bg-surface-bright/50 p-1 rounded-sm">
+<span class="text-outline w-16 shrink-0">14:02:31</span>
+<span class="text-outline w-24 shrink-0">[SYSTEM]</span>
+<span class="text-on-surface-variant">Allocating additional compute to ENG_SQUAD_2 (+4 instances)</span>
+</div>
+<div class="flex gap-3 hover:bg-surface-bright/50 p-1 rounded-sm">
+<span class="text-outline w-16 shrink-0">14:02:29</span>
+<span class="text-primary w-24 shrink-0">[CUST_OPS_9]</span>
+<span class="text-on-background">Received user input: "Where is my order?"</span>
+</div>
+<!-- Filler to show scroll -->
+<div class="flex gap-3 p-1 opacity-50"><span class="text-outline">...</span></div>
+<div class="flex gap-3 p-1 opacity-50"><span class="text-outline">...</span></div>
+<div class="flex gap-3 p-1 opacity-50"><span class="text-outline">...</span></div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Welcome</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#571bc1",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary": "#d0bcff",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "tertiary-fixed": "#c9e6ff",
+                        "on-tertiary": "#00344d",
+                        "on-background": "#d3e4fe",
+                        "on-primary-container": "#dad7ff",
+                        "on-secondary-fixed": "#23005c",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-error": "#690005",
+                        "surface-glass": "rgba(30, 41, 59, 0.7)",
+                        "surface-container-low": "#0b1c30",
+                        "text-on-surface": "#d3e4fe",
+                        "inverse-on-surface": "#213146",
+                        "on-secondary-container": "#c4abff",
+                        "on-primary": "#1d00a5",
+                        "inverse-primary": "#4d44e3",
+                        "primary-container": "#4f46e5",
+                        "surface-bright": "#2a3a4f",
+                        "inverse-surface": "#d3e4fe",
+                        "outline": "#918fa1",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "primary": "#c3c0ff",
+                        "surface-variant": "#26364a",
+                        "border-muted": "#464555",
+                        "background": "#031427",
+                        "surface-dim": "#031427",
+                        "outline-variant": "#464555",
+                        "activation-glow": "rgba(139, 92, 246, 0.25)",
+                        "primary-fixed": "#e2dfff",
+                        "secondary-fixed": "#e9ddff",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "on-tertiary-container": "#b8e0ff",
+                        "tertiary": "#89ceff",
+                        "surface-tint": "#c3c0ff",
+                        "surface": "#031427",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface-container-lowest": "#000f21",
+                        "error-container": "#93000a",
+                        "surface-container": "#102034",
+                        "success-vibrant": "#10b981",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#3c0091",
+                        "surface-container-highest": "#26364a",
+                        "tertiary-container": "#006693",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "on-surface": "#d3e4fe",
+                        "surface-container-high": "#1b2b3f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "max-content-width": "1280px",
+                        "sm": "8px",
+                        "2xl": "48px",
+                        "sidebar-width": "260px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "code-md": ["JetBrains Mono"],
+                        "display-lg": ["Inter"],
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(circle at 50% 0%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                              radial-gradient(circle at 100% 100%, rgba(87, 27, 193, 0.1) 0%, transparent 40%);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glass-panel {
+            background-color: theme('colors.surface-glass');
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid theme('colors.outline-variant');
+            border-left: 1px solid theme('colors.outline-variant');
+            border-right: 1px solid theme('colors.outline-variant');
+        }
+
+        .role-card {
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .role-card:hover {
+            border-color: theme('colors.primary');
+            background-color: theme('colors.surface-container-high');
+        }
+
+        .role-card.selected {
+            border-color: theme('colors.primary-container');
+            background-color: theme('colors.surface-container-high');
+            box-shadow: 0 0 15px theme('colors.activation-glow');
+        }
+
+        .role-card.selected .icon-container {
+            color: theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="antialiased font-body-md text-body-md">
+<div class="bg-pattern"></div>
+<!-- Main Content Area (Centered for Onboarding) -->
+<main class="flex-grow flex items-center justify-center p-md md:p-xl relative z-10 w-full max-w-max-content-width mx-auto">
+<div class="w-full max-w-[640px] flex flex-col gap-xl">
+<!-- Header Section -->
+<div class="text-center flex flex-col gap-sm">
+<h1 class="font-display-lg text-display-lg text-on-surface">Welcome to UdehLabs</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Let's personalize your workspace to fit your workflow.</p>
+</div>
+<!-- Onboarding Card (Glassmorphism) -->
+<div class="glass-panel rounded-xl p-lg flex flex-col gap-lg shadow-lg relative overflow-hidden">
+<!-- Progress Stepper (Dual Track) -->
+<div class="flex flex-col gap-xs w-full">
+<div class="flex justify-between items-center w-full">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-wider">Step 01</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">01/04</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-1/4 rounded-full"></div>
+</div>
+</div>
+<hr class="border-outline-variant my-sm"/>
+<!-- Organization Confirmation -->
+<div class="flex flex-col gap-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">Organization Details</h2>
+<div class="bg-surface-container-lowest p-md rounded-lg border border-border-muted flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="domain">domain</span>
+</div>
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Acme Corp</span>
+<span class="font-body-md text-body-md text-on-surface-variant">Enterprise Plan</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-success-vibrant" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<hr class="border-outline-variant my-sm"/>
+<!-- Role Selection -->
+<div class="flex flex-col gap-md">
+<h2 class="font-headline-md text-headline-md text-on-surface">What is your primary role?</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">We'll use this to configure your initial dashboard widgets and navigation.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mt-sm">
+<!-- Role Option 1 -->
+<div class="role-card rounded-lg border border-border-muted p-md flex flex-col gap-sm" onclick="selectRole(this)">
+<div class="flex items-center gap-sm">
+<div class="icon-container text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Developer</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Focus on API integration, keys, and technical logs.</p>
+</div>
+<!-- Role Option 2 -->
+<div class="role-card rounded-lg border border-border-muted p-md flex flex-col gap-sm" onclick="selectRole(this)">
+<div class="flex items-center gap-sm">
+<div class="icon-container text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="architecture">architecture</span>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Architect</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Focus on system design, workflows, and global metrics.</p>
+</div>
+<!-- Role Option 3 -->
+<div class="role-card rounded-lg border border-border-muted p-md flex flex-col gap-sm" onclick="selectRole(this)">
+<div class="flex items-center gap-sm">
+<div class="icon-container text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Engineering Lead</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Focus on team activity, billing, and project overview.</p>
+</div>
+<!-- Role Option 4 -->
+<div class="role-card rounded-lg border border-border-muted p-md flex flex-col gap-sm" onclick="selectRole(this)">
+<div class="flex items-center gap-sm">
+<div class="icon-container text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined" data-icon="query_stats">query_stats</span>
+</div>
+<span class="font-body-lg text-body-lg font-semibold text-on-surface">Data Analyst</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Focus on analytics, custom reports, and data exports.</p>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-end pt-md mt-sm">
+<button class="bg-primary-container text-on-primary-fixed font-body-lg text-body-lg font-semibold px-lg py-sm rounded-lg hover:shadow-[0_0_10px_rgba(139,92,246,0.25)] transition-all scale-95 active:scale-90 flex items-center gap-sm">
+                        Continue Setup
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Component (Minimal for Onboarding) -->
+<footer class="w-full py-md px-lg flex flex-row-reverse justify-between items-center bg-surface-container border-t border-outline-variant font-label-caps text-label-caps z-20 relative">
+<div class="flex gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-opacity opacity-80 hover:opacity-100" href="#">Help Center</a>
+</div>
+<div class="text-on-surface-variant opacity-80">
+            © 2024 UdehLabs Inc.
+        </div>
+</footer>
+<script>
+        function selectRole(element) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            // Add selected class to clicked card
+            element.classList.add('selected');
+        }
+    </script>
+</body></html>

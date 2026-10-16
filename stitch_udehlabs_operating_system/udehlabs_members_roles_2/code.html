@@ -1,0 +1,556 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>UdehLabs | Member Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1E293B;
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #031427;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#e2dfff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "surface-container-low": "#0b1c30",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "inverse-on-surface": "#213145",
+                      "primary-container": "#4f46e5",
+                      "on-secondary-fixed": "#23005c",
+                      "inverse-surface": "#d3e4fe",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#00344d",
+                      "surface-bright": "#2a3a4f",
+                      "outline-variant": "#464555",
+                      "on-background": "#d3e4fe",
+                      "surface-variant": "#26364a",
+                      "on-secondary": "#3c0091",
+                      "surface-container-high": "#1b2b3f",
+                      "tertiary-container": "#006693",
+                      "surface-dim": "#031427",
+                      "on-tertiary-container": "#b8e0ff",
+                      "tertiary": "#89ceff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#c3c0ff",
+                      "primary": "#c3c0ff",
+                      "background": "#031427",
+                      "on-primary-fixed": "#0f0069",
+                      "secondary": "#d0bcff",
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "surface-container-lowest": "#000f21",
+                      "on-surface": "#d3e4fe",
+                      "on-primary": "#1d00a5",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "secondary-fixed": "#e9ddff",
+                      "on-primary-container": "#dad7ff",
+                      "secondary-container": "#571bc1",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-surface-variant": "#c7c4d8",
+                      "tertiary-fixed": "#c9e6ff",
+                      "surface": "#031427",
+                      "surface-container-highest": "#26364a",
+                      "inverse-primary": "#4d44e3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "sm": "8px",
+                      "sidebar_width": "260px",
+                      "sidebar_collapsed": "64px",
+                      "xs": "4px",
+                      "max_content_width": "1440px",
+                      "lg": "24px",
+                      "2xl": "48px",
+                      "base": "4px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display": ["Inter"],
+                      "code-md": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "code-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary-container selection:text-white">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Semantic Shell) -->
+<aside class="flex flex-col h-full py-md w-sidebar_width bg-surface border-r border-outline-variant shrink-0">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">dataset</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Enterprise AI</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-caps text-label-caps">Projects</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="font-label-caps text-label-caps">AI Workspace</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="font-label-caps text-label-caps">Deployments</span>
+</a>
+<!-- ACTIVE TAB: Settings (Since this is a member management page) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary border-l-2 border-primary bg-primary-container/10 transition-colors active:scale-[0.99] duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</a>
+</nav>
+<div class="px-sm mt-auto space-y-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Help</span>
+</a>
+<div class="flex items-center gap-md px-md py-md mt-sm border-t border-outline-variant">
+<img class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant" data-alt="A professional studio portrait of a technology executive in a dark, minimalist office environment. Soft cinematic lighting with blue and violet undertones. The person is wearing high-end tech-wear, reflecting a sophisticated and reliable professional identity in a high-performance AI company." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwe06jrbHVgNLNjEnuSM_UZaX01OH5pSYJqWlTJ3vDQKqcaRWD0_T32KqsxlAJecQVuYSAI23wFXVYsyEwiAKooZxECY6R5rnmJUqhDjQJ7TQP7cE-Mv1Wotg_-xeIXeECw0sJ9K9uvqWcUMoy_a3pn48FJ3WTgZ4CYR6UP10ic7OIBu53mtZ9q5zl1npADfbyU15E7XL98kZRaFaoDgdc5w2MJDjuK0_m9JRqk23XjUYsZFnjN0NcSA">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps font-bold">Alex Rivera</span>
+<span class="text-[10px] text-on-surface-variant">Admin</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden relative">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant z-10">
+<div class="flex items-center gap-xl">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Member Management</h2>
+<nav class="hidden md:flex items-center gap-lg">
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Organization</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md" href="#">Members &amp; Roles</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Billing</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary-container text-on-primary-container px-md py-sm rounded-lg font-body-md hover:opacity-80 transition-all active:opacity-60 flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+                        Invite Member
+                    </button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-lg space-y-lg">
+<!-- Page Stats / Quick View -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md">
+<div class="p-md rounded-xl bg-surface-container border border-outline-variant">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">Total Members</p>
+<p class="font-headline-lg text-headline-lg">24</p>
+</div>
+<div class="p-md rounded-xl bg-surface-container border border-outline-variant">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">Active Seats</p>
+<p class="font-headline-lg text-headline-lg">18<span class="text-on-surface-variant font-body-md">/50</span></p>
+</div>
+<div class="p-md rounded-xl bg-surface-container border border-outline-variant">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-xs">Pending Invites</p>
+<p class="font-headline-lg text-headline-lg">6</p>
+</div>
+<div class="p-md rounded-xl bg-surface-container border border-outline-variant ai-glow">
+<p class="font-label-caps text-label-caps text-primary mb-xs">AI Agent Licenses</p>
+<p class="font-headline-lg text-headline-lg">12</p>
+</div>
+</div>
+<!-- Tabs Section -->
+<div class="w-full flex border-b border-outline-variant mb-md gap-lg">
+<button class="pb-md text-primary border-b-2 border-primary font-bold transition-all" id="tab-members" onclick="switchTab('members')">Organization Members</button>
+<button class="pb-md text-on-surface-variant hover:text-primary transition-all font-body-md" id="tab-roles" onclick="switchTab('roles')">Roles &amp; Permissions</button>
+<button class="pb-md text-on-surface-variant hover:text-primary transition-all font-body-md flex items-center gap-xs" id="tab-pending" onclick="switchTab('pending')">
+                        Pending Invites
+                        <span class="bg-primary-container text-white text-[10px] px-1.5 py-0.5 rounded-full">6</span>
+</button>
+</div>
+<!-- Members Content -->
+<div class="space-y-md" id="content-members">
+<div class="flex justify-between items-center mb-md">
+<div class="relative w-full max-w-sm">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg pl-10 pr-md py-sm text-body-md focus:border-primary focus:ring-0" placeholder="Search members by name or email..." type="text">
+</div>
+<div class="flex gap-sm">
+<button class="px-md py-sm border border-outline-variant rounded-lg font-body-md hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                                Filter
+                            </button>
+<button class="px-md py-sm border border-outline-variant rounded-lg font-body-md hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">file_download</span>
+                                Export CSV
+                            </button>
+</div>
+</div>
+<!-- Members Data Grid -->
+<div class="rounded-xl border border-outline-variant bg-surface-container overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high border-b border-outline-variant">
+<tr>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Member</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Role</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Status</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Last Active</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-md py-md">
+<div class="flex items-center gap-md">
+<img class="w-9 h-9 rounded-full bg-surface-container-highest" data-alt="A portrait of a senior software architect with a thoughtful expression. The style is professional and minimalist, with a dark background and subtle violet edge lighting to match the enterprise dark mode aesthetic of the UI." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAudpjd4Sid1UB0JjrcZ5ITCyyv_Wlla-nKKXQT_dIMyXsNKXslmCX976iPWzDiZskNt68MnfUSV_SufKpYMgmhGQw9vt1m9hSlWbBEaGq11y4DgDOzfdYmtNqp_mvZuew63XS_jmfcLmr1uxRGj7aPlDvyyPyV2kTpR8mrWSqaGkMdk5MJFRjX8ObFJrUNnKUnrLb8zOa7vCqCAcBN38YC6PZgUobKG_OJ_mH6ZTyeUERQqjlVoPRX1Q">
+<div>
+<p class="font-body-md font-bold text-on-surface">Jordan Vane</p>
+<p class="text-[12px] text-on-surface-variant">jordan@udehlabs.ai</p>
+</div>
+</div>
+</td>
+<td class="px-md py-md">
+<span class="px-xs py-0.5 border border-primary text-primary text-[10px] font-bold rounded uppercase">Owner</span>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-body-md">Active</span>
+</div>
+</td>
+<td class="px-md py-md text-on-surface-variant font-body-md">2 minutes ago</td>
+<td class="px-md py-md text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-sm hover:bg-surface-variant rounded">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-md py-md">
+<div class="flex items-center gap-md">
+<img class="w-9 h-9 rounded-full bg-surface-container-highest" data-alt="A portrait of a female data scientist looking focused, against a minimalist technical backdrop with subtle glowing grid lines. High contrast lighting in shades of deep blue and violet, conveying expertise and intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkmBJVfkgZh_0SKwr070wsDT0qMifvn5RQ7p_4pYndDZXF4_hDBXG4d3SgTrdMggbAB2s7dlU0CAHvCGPc8Ujm9wDcmAhzaJsCgGMrD_5wLDubeBXXhp-xAosj-Abri5bJ75HJk3hz4P2eJwuMbnlPFqVS0l9jy7LHzh5OrbA5tsK7s9_sw3fi8pL3wInTy8lyLnIA1o4wzQZwu4PKTNCwzk88U6P7Z57LziaSN0ErsRHF44tJU5Xi6Q">
+<div>
+<p class="font-body-md font-bold text-on-surface">Elena Soros</p>
+<p class="text-[12px] text-on-surface-variant">elena.s@udehlabs.ai</p>
+</div>
+</div>
+</td>
+<td class="px-md py-md">
+<span class="px-xs py-0.5 border border-secondary text-secondary text-[10px] font-bold rounded uppercase">Admin</span>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-body-md">Active</span>
+</div>
+</td>
+<td class="px-md py-md text-on-surface-variant font-body-md">4 hours ago</td>
+<td class="px-md py-md text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-sm hover:bg-surface-variant rounded">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-md py-md">
+<div class="flex items-center gap-md">
+<img class="w-9 h-9 rounded-full bg-surface-container-highest" data-alt="A profile photo of a young male designer in a clean, modern aesthetic. The lighting is soft and directional, creating a premium professional feel. Colors are muted with a focus on dark tones and subtle indigo highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5iJELv84MKpLgciIbLnLDS8o1lnR_0K4Vufk91z70BwADcBZR65eT2byr7Rqwb8k5Et7o76Yt8JUqimXM7qCQ2SKAVDTnkOHQT5cnNoJZutmzJ1djLAyigyVH3_Mg0_idzt70M3X4gFw5He69PU0MWNjC2uOsZ22bQP1S99LDZbMHBgGd5_tnJhEa5bGaNMrJqUrK8rCrSSEI0EM898A3nILWgLFvLMNDdGgi7JZkgBCGmAOPxvz9MQ">
+<div>
+<p class="font-body-md font-bold text-on-surface">Marcus Wu</p>
+<p class="text-[12px] text-on-surface-variant">m.wu@udehlabs.ai</p>
+</div>
+</div>
+</td>
+<td class="px-md py-md">
+<span class="px-xs py-0.5 border border-outline text-on-surface-variant text-[10px] font-bold rounded uppercase">Member</span>
+</td>
+<td class="px-md py-md">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<div class="w-2 h-2 rounded-full bg-outline"></div>
+<span class="text-body-md">Offline</span>
+</div>
+</td>
+<td class="px-md py-md text-on-surface-variant font-body-md">3 days ago</td>
+<td class="px-md py-md text-right">
+<button class="opacity-0 group-hover:opacity-100 transition-opacity p-sm hover:bg-surface-variant rounded">
+<span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Roles & Permissions Content (Hidden by default) -->
+<div class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg" id="content-roles">
+<div class="glass-panel p-lg rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-md">
+<span class="px-xs py-0.5 border border-primary text-primary text-[10px] font-bold rounded uppercase">Owner</span>
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm">Owner</h3>
+<p class="text-on-surface-variant text-body-md mb-lg">Full unrestricted access to all organization settings, billing, and member management.</p>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-sm">
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Manage Billing
+                            </div>
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Delete Organization
+                            </div>
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Transfer Ownership
+                            </div>
+</div>
+</div>
+<div class="glass-panel p-lg rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-md">
+<span class="px-xs py-0.5 border border-secondary text-secondary text-[10px] font-bold rounded uppercase">Admin</span>
+<span class="material-symbols-outlined text-secondary">admin_panel_settings</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm">Admin</h3>
+<p class="text-on-surface-variant text-body-md mb-lg">Manage members, projects, and deployment settings. Cannot access billing or delete the org.</p>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-sm">
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Invite Members
+                            </div>
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Create Projects
+                            </div>
+<div class="flex items-center gap-xs text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error">cancel</span>
+                                Access Billing
+                            </div>
+</div>
+</div>
+<div class="glass-panel p-lg rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-md">
+<span class="px-xs py-0.5 border border-outline text-on-surface-variant text-[10px] font-bold rounded uppercase">Member</span>
+<span class="material-symbols-outlined text-on-surface-variant">person</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm">Member</h3>
+<p class="text-on-surface-variant text-body-md mb-lg">Can view and contribute to projects assigned to them. Basic creation permissions.</p>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-sm">
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Edit Workspaces
+                            </div>
+<div class="flex items-center gap-xs text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error">cancel</span>
+                                Manage Roles
+                            </div>
+<div class="flex items-center gap-xs text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error">cancel</span>
+                                Org Settings
+                            </div>
+</div>
+</div>
+<div class="glass-panel p-lg rounded-xl flex flex-col">
+<div class="flex justify-between items-start mb-md">
+<span class="px-xs py-0.5 border border-outline text-on-surface-variant text-[10px] font-bold rounded uppercase">Viewer</span>
+<span class="material-symbols-outlined text-on-surface-variant">visibility</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-sm">Viewer</h3>
+<p class="text-on-surface-variant text-body-md mb-lg">Read-only access to specific projects and analytics. Cannot make any changes.</p>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-sm">
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                View Reports
+                            </div>
+<div class="flex items-center gap-xs text-[12px]">
+<span class="material-symbols-outlined text-[16px] text-green-400">check_circle</span>
+                                Read-only Docs
+                            </div>
+<div class="flex items-center gap-xs text-[12px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error">cancel</span>
+                                Export Data
+                            </div>
+</div>
+</div>
+</div>
+<!-- Pending Invites Content (Hidden by default) -->
+<div class="hidden" id="content-pending">
+<div class="rounded-xl border border-outline-variant bg-surface-container overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-high border-b border-outline-variant">
+<tr>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Invitee Email</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Assigned Role</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Sent On</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant">Expires In</th>
+<th class="px-md py-sm font-label-caps text-label-caps text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-md py-md font-body-md text-on-surface">sarah.j@techcorp.io</td>
+<td class="px-md py-md">
+<span class="px-xs py-0.5 border border-outline text-on-surface-variant text-[10px] font-bold rounded uppercase">Member</span>
+</td>
+<td class="px-md py-md text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-md py-md text-on-surface-variant">4 days</td>
+<td class="px-md py-md text-right flex justify-end gap-sm">
+<button class="text-primary hover:underline text-[12px] font-bold">Resend</button>
+<button class="text-error hover:underline text-[12px] font-bold">Revoke</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-variant/20 transition-colors group">
+<td class="px-md py-md font-body-md text-on-surface">dev_contractor@nodes.com</td>
+<td class="px-md py-md">
+<span class="px-xs py-0.5 border border-outline text-on-surface-variant text-[10px] font-bold rounded uppercase">Viewer</span>
+</td>
+<td class="px-md py-md text-on-surface-variant">Oct 14, 2023</td>
+<td class="px-md py-md text-on-surface-variant">6 days</td>
+<td class="px-md py-md text-right flex justify-end gap-sm">
+<button class="text-primary hover:underline text-[12px] font-bold">Resend</button>
+<button class="text-error hover:underline text-[12px] font-bold">Revoke</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Absolute Positioning for AI Atmospheric Background -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03] z-[-1]">
+
+</div>
+</main>
+</div>
+<!-- Invite Modal (Hidden by default) -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center p-md" id="invite-modal">
+<div class="absolute inset-0 bg-background/60 backdrop-blur-sm" onclick="toggleModal()"></div>
+<div class="glass-panel w-full max-w-lg p-xl rounded-xl z-10 relative ai-glow">
+<h2 class="font-headline-md text-headline-md mb-md">Invite new members</h2>
+<p class="text-on-surface-variant text-body-md mb-lg">Add members by email and assign their starting permissions level.</p>
+<form class="space-y-lg" onsubmit="event.preventDefault(); toggleModal();">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-xs block">Email Addresses</label>
+<textarea class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-md text-body-md focus:border-primary focus:ring-0" placeholder="name@company.com, name2@company.com" rows="3"></textarea>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-xs block">Role Assignment</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-sm text-body-md focus:border-primary focus:ring-0">
+<option>Viewer</option>
+<option selected="">Member</option>
+<option>Admin</option>
+</select>
+</div>
+<div>
+<label class="font-label-caps text-label-caps text-on-surface-variant mb-xs block">Project Group</label>
+<select class="w-full bg-surface-container-low border border-outline-variant rounded-lg p-sm text-body-md focus:border-primary focus:ring-0">
+<option>All Projects</option>
+<option>Frontend Team</option>
+<option>LLM Core</option>
+</select>
+</div>
+</div>
+<div class="pt-md flex justify-end gap-md">
+<button class="px-lg py-sm rounded-lg font-body-md hover:bg-surface-variant transition-colors" onclick="toggleModal()" type="button">Cancel</button>
+<button class="px-lg py-sm bg-primary-container text-on-primary-container rounded-lg font-body-md font-bold hover:opacity-80 transition-all active:scale-95" type="submit">Send Invitations</button>
+</div>
+</form>
+</div>
+</div>
+<script>
+        function toggleModal() {
+            const modal = document.getElementById('invite-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        // Add event listener to the "Invite Member" button
+        document.querySelector('button.bg-primary-container').addEventListener('click', toggleModal);
+
+        function switchTab(tabId) {
+            // Update Tab Styling
+            const tabs = ['members', 'roles', 'pending'];
+            tabs.forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                if (t === tabId) {
+                    btn.classList.remove('text-on-surface-variant', 'font-body-md');
+                    btn.classList.add('text-primary', 'border-primary', 'font-bold');
+                    btn.classList.add('border-b-2');
+                } else {
+                    btn.classList.add('text-on-surface-variant', 'font-body-md');
+                    btn.classList.remove('text-primary', 'border-primary', 'font-bold');
+                    btn.classList.remove('border-b-2');
+                }
+            });
+
+            // Update Content Visibility
+            const contents = ['content-members', 'content-roles', 'content-pending'];
+            contents.forEach(c => {
+                const div = document.getElementById(c);
+                if (c === `content-${tabId}`) {
+                    div.classList.remove('hidden');
+                } else {
+                    div.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body></html>

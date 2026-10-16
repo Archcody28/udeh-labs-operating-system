@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Automation Workflows &amp; Preview</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Neural Pattern Background */
+        .bg-neural-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 16px 16px;
+        }
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #273647; 
+            border-radius: 3px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#273647",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#464555",
+                        "on-tertiary-container": "#d4dbf5",
+                        "secondary-fixed": "#ffdadb",
+                        "surface-bright": "#2c3a4c",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#dad7ff",
+                        "outline": "#918fa1",
+                        "on-primary-fixed": "#0f0069",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "inverse-on-surface": "#233143",
+                        "secondary-container": "#b50036",
+                        "on-secondary-fixed-variant": "#92002a",
+                        "surface-container-lowest": "#010f1f",
+                        "secondary": "#ffb2b7",
+                        "surface-container-highest": "#273647",
+                        "surface-tint": "#c3c0ff",
+                        "on-tertiary": "#283044",
+                        "tertiary": "#bec6e0",
+                        "primary-fixed": "#e2dfff",
+                        "background": "#051424",
+                        "on-secondary-fixed": "#40000d",
+                        "tertiary-fixed": "#dae2fd",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "tertiary-container": "#586076",
+                        "primary-container": "#4f46e5",
+                        "inverse-surface": "#d4e4fa",
+                        "surface": "#051424",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-secondary-container": "#ffc2c4",
+                        "on-primary": "#1d00a5",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-dim": "#051424",
+                        "on-surface": "#d4e4fa",
+                        "surface-container-high": "#1c2b3c",
+                        "primary": "#c3c0ff",
+                        "on-background": "#d4e4fa",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container": "#122131",
+                        "inverse-primary": "#4d44e3",
+                        "on-secondary": "#67001b",
+                        "secondary-fixed-dim": "#ffb2b7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin": "24px",
+                        "unit": "4px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "mono-data": ["JetBrains Mono"],
+                        "mono-label": ["JetBrains Mono"],
+                        "body-base": ["Geist"],
+                        "headline-md": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mono-data": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "mono-label": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-base text-body-base antialiased min-h-screen flex overflow-hidden">
+<!-- Shared Component: SideNavBar -->
+<nav class="bg-surface-container-low dark:bg-surface-container-low border-r border-white/10 h-screen w-64 fixed left-0 top-0 flex flex-col py-margin z-40 hidden md:flex">
+<!-- Brand Header -->
+<div class="px-margin mb-8">
+<h1 class="font-display-lg text-headline-md text-primary tracking-tighter mb-1">Core Reasoning</h1>
+<p class="font-mono-label text-mono-label text-on-surface-variant flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                Active Autonomy: Level 4
+            </p>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto">
+<ul class="flex flex-col font-mono-label text-mono-label">
+<li>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+                        Intelligence Overview
+                    </a>
+</li>
+<li>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+                        Agent Mesh
+                    </a>
+</li>
+<li>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">database</span>
+                        Knowledge Fabric
+                    </a>
+</li>
+<!-- ACTIVE TAB -->
+<li>
+<a class="bg-primary-container/20 text-primary border-l-4 border-primary px-4 py-3 flex items-center gap-3" href="#">
+<span class="material-symbols-outlined text-[20px] icon-fill">cloud_download</span>
+                        Automation Workflows
+                    </a>
+</li>
+<li>
+<a class="text-on-surface-variant px-4 py-3 flex items-center gap-3 hover:bg-surface-variant/30 transition-all hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+                        AI Governance
+                    </a>
+</li>
+</ul>
+</div>
+<!-- Action / Footer -->
+<div class="px-4 mt-auto space-y-4">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded border border-transparent hover:opacity-90 transition-opacity font-mono-label text-mono-label flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                Deploy New Agent
+            </button>
+<div class="flex border-t border-white/10 pt-4 gap-4">
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-mono-label text-mono-label" href="#">
+<span class="material-symbols-outlined text-[16px]">description</span> Docs
+                </a>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1 font-mono-label text-mono-label" href="#">
+<span class="material-symbols-outlined text-[16px]">sensors</span> Status
+                </a>
+</div>
+</div>
+</nav>
+<!-- Main Canvas -->
+<main class="flex-1 ml-0 md:ml-64 h-screen overflow-y-auto bg-surface relative">
+<!-- Abstract Header Background -->
+<div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-primary-container/10 to-transparent pointer-events-none -z-10"></div>
+<div class="max-w-container-max mx-auto p-margin md:p-8 space-y-8 mt-4">
+<!-- Page Header -->
+<header class="flex justify-between items-end border-b border-white/10 pb-4">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2">Workflow Orchestration</h2>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Natural Language to Execution Graph Translation</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-surface-variant/50 border border-outline-variant rounded font-mono-label text-mono-label text-tertiary flex items-center gap-2">
+<span class="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                        Compiler Idle
+                    </span>
+<button class="bg-transparent border border-outline-variant hover:border-primary text-on-surface px-4 py-2 rounded transition-colors font-mono-label text-mono-label flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span> Save Draft
+                    </button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded hover:opacity-90 transition-opacity font-mono-label text-mono-label flex items-center gap-2 shadow-[0_0_15px_rgba(79,70,229,0.3)]">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span> Execute Now
+                    </button>
+</div>
+</header>
+<!-- 12-Column Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Zone: Input & Visualizer (Cols 1-8) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Natural Language Input Panel -->
+<section class="bg-surface-container/40 border border-white/10 rounded-lg p-6 backdrop-blur-sm relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary/50 group-hover:bg-primary transition-colors"></div>
+<label class="font-mono-label text-mono-label text-primary uppercase tracking-wider mb-3 block flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+                            Intent Definition
+                        </label>
+<div class="relative">
+<textarea class="w-full bg-surface-container-highest/50 border border-outline-variant rounded p-4 font-body-base text-body-base text-on-surface placeholder:text-on-surface-variant/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none resize-none transition-all" rows="3">Every Monday, summarize our project activity and send the report to the team</textarea>
+<div class="absolute bottom-3 right-3 flex items-center gap-2">
+<span class="text-[10px] font-mono-label text-on-surface-variant bg-surface-container px-2 py-1 rounded border border-outline-variant">AUTO-SYNC ON</span>
+<button class="p-1.5 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-[18px]">magic_button</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Automation Preview (Reasoning Cards) -->
+<section class="bg-surface-container-low border border-white/10 rounded-lg p-6">
+<h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase tracking-wider mb-6 flex items-center gap-2 border-b border-white/5 pb-2">
+<span class="material-symbols-outlined text-[16px]">account_tree</span>
+                            Execution Graph Preview
+                        </h3>
+<!-- Timeline Container -->
+<div class="relative ml-4 md:ml-8 flex flex-col gap-6 before:content-[''] before:absolute before:left-[-15px] before:top-4 before:bottom-4 before:w-[2px] before:bg-outline-variant/30">
+<!-- Step 1 -->
+<div class="relative w-full bg-surface-container border border-white/10 rounded shadow-sm bg-neural-pattern hover:border-primary/50 transition-colors">
+<!-- Node Dot -->
+<div class="absolute left-[-20px] top-4 w-3 h-3 bg-surface border-2 border-primary rounded-full z-10 shadow-[0_0_8px_rgba(79,70,229,0.6)]"></div>
+<div class="p-4 flex items-start gap-4">
+<div class="p-2 bg-surface-variant rounded border border-outline-variant/50 text-tertiary">
+<span class="material-symbols-outlined">data_object</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-mono-label text-mono-label text-secondary">STEP 01</span>
+<span class="font-mono-data text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded">JIRA, GITHUB</span>
+</div>
+<h4 class="font-headline-md text-[16px] text-on-surface leading-tight mb-2">Aggregate Task Events</h4>
+<p class="font-body-base text-[14px] text-on-surface-variant line-clamp-2">Collect all pull requests, closed issues, and sprint board movements from the last 7 days across linked project repositories.</p>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="relative w-full bg-surface-container border border-white/10 rounded shadow-sm bg-neural-pattern hover:border-primary/50 transition-colors">
+<div class="absolute left-[-20px] top-4 w-3 h-3 bg-surface border-2 border-primary rounded-full z-10"></div>
+<div class="p-4 flex items-start gap-4">
+<div class="p-2 bg-primary/10 rounded border border-primary/30 text-primary">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-mono-label text-mono-label text-secondary">STEP 02</span>
+<span class="font-mono-data text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">LLM REASONING</span>
+</div>
+<h4 class="font-headline-md text-[16px] text-on-surface leading-tight mb-2">AI Synthesis</h4>
+<p class="font-body-base text-[14px] text-on-surface-variant">Analyze aggregated raw events to identify key achievements, blockers, and overall project velocity. Extract actionable highlights.</p>
+<!-- Tool Chip -->
+<div class="mt-3 inline-flex items-center gap-2 px-3 py-1 bg-surface-variant border border-outline-variant rounded font-mono-data text-[11px] text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                            Model: Phase-Reasoning-v2
+                                        </div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="relative w-full bg-surface-container border border-white/10 rounded shadow-sm bg-neural-pattern hover:border-primary/50 transition-colors">
+<div class="absolute left-[-20px] top-4 w-3 h-3 bg-surface border-2 border-primary rounded-full z-10"></div>
+<div class="p-4 flex items-start gap-4">
+<div class="p-2 bg-surface-variant rounded border border-outline-variant/50 text-tertiary">
+<span class="material-symbols-outlined">markdown</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-mono-label text-mono-label text-secondary">STEP 03</span>
+<span class="font-mono-data text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded">FORMATTER</span>
+</div>
+<h4 class="font-headline-md text-[16px] text-on-surface leading-tight mb-2">Generate Markdown Report</h4>
+<p class="font-body-base text-[14px] text-on-surface-variant">Transform synthesized insights into a highly structured markdown document matching the standard 'Weekly Update' corporate template.</p>
+</div>
+</div>
+</div>
+<!-- Safety Gate Injection -->
+<div class="relative w-full flex justify-center py-2 z-20">
+<div class="absolute left-[-15px] top-1/2 w-[calc(50%-15px)] h-[1px] bg-outline-variant/50 border-dashed border-t"></div>
+<div class="absolute right-0 top-1/2 w-[calc(50%-15px)] h-[1px] bg-outline-variant/50 border-dashed border-t"></div>
+<div class="bg-surface-container-highest border border-error/50 rounded-full px-4 py-1.5 flex items-center gap-2 shadow-lg backdrop-blur-md">
+<span class="material-symbols-outlined text-[16px] text-error">gavel</span>
+<span class="font-mono-label text-[11px] text-error tracking-wider">SAFETY GATE: REQUIRES APPROVAL</span>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="relative w-full bg-surface-container border border-white/10 rounded shadow-sm bg-neural-pattern hover:border-primary/50 transition-colors">
+<div class="absolute left-[-20px] top-4 w-3 h-3 bg-surface border-2 border-outline-variant rounded-full z-10"></div>
+<div class="p-4 flex items-start gap-4 opacity-75">
+<div class="p-2 bg-surface-variant rounded border border-outline-variant/50 text-tertiary">
+<span class="material-symbols-outlined">send</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-mono-label text-mono-label text-outline">STEP 04</span>
+<span class="font-mono-data text-[10px] text-on-surface-variant bg-surface-container-highest px-2 py-0.5 rounded">SMTP, SLACK</span>
+</div>
+<h4 class="font-headline-md text-[16px] text-on-surface leading-tight mb-2">Distribute Report</h4>
+<p class="font-body-base text-[14px] text-on-surface-variant">Send final markdown artifact to `team-engineering@domain.com` and post summary to `#proj-updates` channel.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Zone: Configuration (Col 9-12) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Execution Parameters Panel -->
+<aside class="bg-surface-container/30 border border-white/10 rounded-lg backdrop-blur-sm sticky top-8">
+<div class="p-5 border-b border-white/5">
+<h3 class="font-mono-label text-mono-label text-primary uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">tune</span>
+                                Context &amp; Parameters
+                            </h3>
+</div>
+<div class="p-5 space-y-6">
+<!-- Frequency -->
+<div>
+<label class="font-mono-label text-[10px] text-on-surface-variant uppercase mb-2 block">Trigger Frequency</label>
+<div class="flex items-center gap-3 bg-surface-container-highest border border-outline-variant/30 rounded p-3">
+<span class="material-symbols-outlined text-tertiary">calendar_clock</span>
+<div>
+<div class="font-mono-data text-[13px] text-on-surface">Every Monday, 08:00 AM</div>
+<div class="font-mono-data text-[10px] text-tertiary/70">CRON: 0 8 * * 1</div>
+</div>
+</div>
+</div>
+<!-- Execution Budget -->
+<div>
+<div class="flex justify-between items-end mb-2">
+<label class="font-mono-label text-[10px] text-on-surface-variant uppercase">Execution Budget (Tokens)</label>
+<span class="font-mono-data text-[10px] text-primary">~45k Est.</span>
+</div>
+<!-- Confidence Indicator Style Bar -->
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden mb-1">
+<div class="h-full bg-primary w-[45%] rounded-full shadow-[0_0_8px_rgba(79,70,229,0.5)]"></div>
+</div>
+<div class="flex justify-between text-[10px] font-mono-data text-on-surface-variant">
+<span>0</span>
+<span>Max Limit: 100k / run</span>
+</div>
+</div>
+<!-- Policy/Governance -->
+<div class="pt-4 border-t border-white/5">
+<label class="font-mono-label text-[10px] text-on-surface-variant uppercase mb-3 block">Applied Policies</label>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 text-sm font-body-base text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-primary mt-0.5">verified</span>
+<span>Data PII Masking (Active)</span>
+</li>
+<li class="flex items-start gap-2 text-sm font-body-base text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-error mt-0.5">rule</span>
+<span>Human-in-the-loop (Required before broadcast)</span>
+</li>
+</ul>
+</div>
+</div>
+</aside>
+<!-- Mini Log / Validation Panel (Simulated Depth) -->
+<aside class="bg-surface-container-lowest border border-white/5 rounded-lg p-4 font-mono-data text-[11px] text-tertiary-fixed-dim/60 shadow-inner">
+<div class="flex items-center gap-2 mb-2 text-on-surface-variant border-b border-white/5 pb-2">
+<span class="material-symbols-outlined text-[14px]">terminal</span> Compiler Trace
+                        </div>
+<div class="space-y-1">
+<p>&gt; Parsing natural language intent...</p>
+<p>&gt; Entities extracted: [temporal: Monday], [action: summarize, send], [target: project activity, team]</p>
+<p>&gt; Mapping to available tools...</p>
+<p class="text-primary">&gt; Graph constructed: 4 nodes, 1 constraint.</p>
+<p class="animate-pulse">_</p>
+</div>
+</aside>
+</div>
+</div>
+</div>
+</main>
+</body></html>

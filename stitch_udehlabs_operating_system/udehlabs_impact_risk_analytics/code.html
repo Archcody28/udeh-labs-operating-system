@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Impact &amp; Risk Analytics - Database Schema Migration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "primary": "#dae2fd",
+                        "primary-container": "#bec6e0",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "primary-fixed-dim": "#bec6e0",
+                        "surface-container-highest": "#273647",
+                        "surface": "#051424",
+                        "surface-bright": "#2c3a4c",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-secondary": "#003824",
+                        "secondary-container": "#00b47d",
+                        "tertiary": "#ffddb8",
+                        "on-secondary-fixed": "#002114",
+                        "background": "#051424",
+                        "primary-fixed": "#dae2fd",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-background": "#d4e4fa",
+                        "tertiary-container": "#ffb95f",
+                        "secondary-fixed": "#6ffbbe",
+                        "on-tertiary": "#472a00",
+                        "surface-container-lowest": "#010f1f",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-error": "#690005",
+                        "surface-deep": "#051424",
+                        "on-secondary-container": "#003e28",
+                        "inverse-surface": "#d4e4fa",
+                        "surface-container-low": "#0d1c2d",
+                        "secondary": "#4edea3",
+                        "surface-variant": "#273647",
+                        "inverse-on-surface": "#233143",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-tint": "#bec6e0",
+                        "on-primary-fixed-variant": "#3e465c",
+                        "surface-graph": "#0f172a",
+                        "on-error-container": "#ffdad6",
+                        "surface-container": "#122131",
+                        "on-surface": "#d4e4fa",
+                        "surface-dim": "#051424",
+                        "on-primary": "#283044",
+                        "on-tertiary-container": "#754900",
+                        "warning-gold": "#f59e0b",
+                        "outline-variant": "#45464d",
+                        "on-surface-variant": "#c6c6cd",
+                        "on-primary-fixed": "#131b2e",
+                        "error-container": "#93000a",
+                        "error-bright": "#ffb4ab",
+                        "outline": "#909097",
+                        "border-muted": "#334155",
+                        "tertiary-fixed": "#ffddb8",
+                        "inverse-primary": "#565e74",
+                        "surface-container-high": "#1c2b3c",
+                        "on-primary-container": "#4a5268"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-wide": "32px",
+                        "margin-compact": "16px",
+                        "unit": "4px",
+                        "topbar-height": "48px",
+                        "sidebar-width": "240px",
+                        "gutter": "12px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "code-md": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "code-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["12px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["10px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "code-md": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "code-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #051424; color: #d4e4fa; }
+        .glass-panel { background: rgba(28, 43, 60, 0.7); backdrop-filter: blur(12px); border: 1px solid #334155; }
+        .glow-emerald { box-shadow: 0 0 12px rgba(78, 222, 163, 0.3); }
+        .glow-error { box-shadow: 0 0 12px rgba(255, 180, 171, 0.3); }
+        .glow-gold { box-shadow: 0 0 12px rgba(245, 158, 11, 0.3); }
+    </style>
+</head>
+<body class="bg-surface font-body-md overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-wide bg-surface-container dark:bg-surface-container docked full-width top-0 h-topbar-height border-b border-border-muted flat no shadows">
+<div class="flex items-center gap-6">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary">UdehLabs Intelligence</span>
+<nav class="hidden md:flex gap-4">
+<a class="text-on-surface-variant font-medium hover:bg-surface-bright transition-colors px-3 py-1 rounded font-label-caps text-label-caps" href="#">Rescan</a>
+<a class="text-on-surface-variant font-medium hover:bg-surface-bright transition-colors px-3 py-1 rounded font-label-caps text-label-caps" href="#">Export Graph</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary hover:bg-surface-bright transition-colors p-1 rounded cursor-pointer" style="font-variation-settings: 'FILL' 0;">notifications</span>
+<span class="material-symbols-outlined text-secondary hover:bg-surface-bright transition-colors p-1 rounded cursor-pointer" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="material-symbols-outlined text-secondary hover:bg-surface-bright transition-colors p-1 rounded cursor-pointer" style="font-variation-settings: 'FILL' 0;">help</span>
+<div class="w-8 h-8 rounded-full bg-surface-bright flex items-center justify-center overflow-hidden border border-border-muted">
+<img alt="Lead Architect Avatar" class="w-full h-full object-cover" data-alt="A macro photography style portrait of a sleek, abstract chrome sphere resting on a dark obsidian surface, illuminated by sharp emerald green edge lighting, evoking a futuristic cyber-intelligence avatar. Deep blacks and vivid greens dominate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEj2hfOE9o4pPfWjUPtFD3beWbY8EZZl7VNY0u3LaRM7LmdhuMVPuW-uCn306-QFKeVVLgDg9rtoxwZ3eGmx2_LIxXjsdQtygZjXIJjftYBadqNK0VsjBAi4PBR35TuUYsQ7Z2UA7PbZYgc4NhCtaHkwWjrJZqhBcByQ4f1g-UESFDbrYkLUfrWFM981dRgsG6lzD41qyp8A-LeNOTqgu9vsmb_iVpJWqXrJo68rMGhpC3X_lj2iHysg"/>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-[240px] z-40 flex flex-col py-unit bg-surface-container-low dark:bg-surface-container-low docked left-0 w-sidebar-height h-screen border-r border-border-muted flat no shadows mt-topbar-height hidden md:flex">
+<div class="px-4 py-6 border-b border-border-muted">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-6 h-6 rounded bg-secondary-container flex items-center justify-center glow-emerald">
+<span class="material-symbols-outlined text-on-secondary text-sm" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h2 class="font-code-md text-code-md text-secondary">CYBER-INTELLIGENCE</h2>
+<p class="font-label-caps text-label-caps text-on-surface-variant">V2.4.0-STABLE</p>
+</div>
+</div>
+<button class="w-full mt-4 bg-surface-container-high border border-secondary text-secondary hover:bg-surface-bright transition-colors py-2 px-4 rounded font-label-caps text-label-caps flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> New Analysis
+            </button>
+</div>
+<nav class="flex-1 overflow-y-auto py-4">
+<ul class="flex flex-col gap-1">
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">dashboard</span> Overview</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">inventory_2</span> Repositories</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">folder_open</span> Files</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">token</span> Symbols</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-secondary bg-surface-container-high border-l-2 border-secondary font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">hub</span> Dependencies</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">api</span> APIs</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">database</span> Database</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">rule</span> Tests</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">security</span> Findings</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">history</span> Snapshots</a></li>
+</ul>
+</nav>
+<div class="p-4 border-t border-border-muted">
+<ul class="flex flex-col gap-1">
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">menu_book</span> Docs</a></li>
+<li><a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#"><span class="material-symbols-outlined text-lg">logout</span> Logout</a></li>
+</ul>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="pt-[calc(48px+32px)] md:pl-[calc(240px+32px)] pr-margin-wide pb-margin-wide min-h-screen">
+<header class="mb-8 flex justify-between items-end">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-2">Impact &amp; Risk Analytics</h1>
+<p class="font-code-md text-code-md text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">database</span>
+                    TARGET: Database Schema Migration [MIG-4092]
+                </p>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-end">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Overall Risk</span>
+<span class="font-headline-md text-headline-md text-error flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error glow-error"></div> HIGH
+                    </span>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- 1. Blast Radius Graph (Spans 8 cols) -->
+<section class="md:col-span-8 glass-panel rounded-lg p-6 flex flex-col min-h-[400px] relative overflow-hidden">
+<header class="flex justify-between items-center mb-4 border-b border-border-muted pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">radar</span> Blast Radius
+                    </h3>
+<span class="font-code-sm text-code-sm text-on-surface-variant">AFFECTED_MODULES: 14</span>
+</header>
+<div class="flex-1 relative w-full h-full border border-border-muted bg-surface-graph rounded overflow-hidden">
+<!-- Placeholder for actual interactive graph, simulating with styled nodes -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-surface-container-high border-2 border-secondary rounded-full flex items-center justify-center glow-emerald z-10">
+<span class="material-symbols-outlined text-secondary">database</span>
+</div>
+<!-- Simulating nodes -->
+<div class="absolute top-[20%] left-[30%] w-10 h-10 bg-surface border border-error rounded-full flex items-center justify-center glow-error">
+<span class="font-code-sm text-code-sm text-error">Auth</span>
+</div>
+<svg class="absolute top-0 left-0 w-full h-full pointer-events-none" style="z-index: 0;">
+<line stroke="#ffb4ab" stroke-dasharray="4" stroke-width="1" x1="50%" x2="32%" y1="50%" y2="25%"></line>
+</svg>
+<div class="absolute top-[70%] left-[70%] w-12 h-12 bg-surface border border-warning-gold rounded-full flex items-center justify-center glow-gold">
+<span class="font-code-sm text-code-sm text-warning-gold">Billing</span>
+</div>
+<svg class="absolute top-0 left-0 w-full h-full pointer-events-none" style="z-index: 0;">
+<line stroke="#f59e0b" stroke-width="1" x1="50%" x2="72%" y1="50%" y2="72%"></line>
+</svg>
+</div>
+</section>
+<!-- 2. Breaking Change Detector (Spans 4 cols) -->
+<section class="md:col-span-4 glass-panel rounded-lg p-6 flex flex-col">
+<header class="flex justify-between items-center mb-4 border-b border-border-muted pb-2">
+<h3 class="font-label-caps text-label-caps text-error flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">warning</span> Breaking Changes
+                    </h3>
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+</header>
+<div class="flex flex-col gap-4 flex-1 overflow-y-auto pr-2">
+<!-- Removed Fields -->
+<div>
+<h4 class="font-code-sm text-code-sm text-on-surface-variant mb-2 border-b border-border-muted pb-1">Removed Fields (3)</h4>
+<ul class="flex flex-col gap-2">
+<li class="bg-surface p-2 rounded border border-border-muted flex justify-between items-center hover:bg-surface-bright transition-colors cursor-pointer">
+<span class="font-code-sm text-code-sm text-on-surface">user_profile.legacy_id</span>
+<span class="font-label-caps text-label-caps text-error bg-error-container px-2 py-1 rounded">CRITICAL</span>
+</li>
+<li class="bg-surface p-2 rounded border border-border-muted flex justify-between items-center hover:bg-surface-bright transition-colors cursor-pointer">
+<span class="font-code-sm text-code-sm text-on-surface">transactions.meta_blob</span>
+<span class="font-label-caps text-label-caps text-warning-gold bg-surface-container-highest px-2 py-1 rounded">WARN</span>
+</li>
+</ul>
+</div>
+<!-- Contract Mismatches -->
+<div class="mt-2">
+<h4 class="font-code-sm text-code-sm text-on-surface-variant mb-2 border-b border-border-muted pb-1">Contract Mismatches (1)</h4>
+<div class="bg-surface p-3 rounded border border-error bg-opacity-10 relative overflow-hidden">
+<div class="absolute left-0 top-0 h-full w-1 bg-error"></div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-error text-sm">api</span>
+<span class="font-code-sm text-code-sm text-on-surface font-bold">API v2 /users/sync</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Expects `legacy_id` which is dropped in this migration.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Dependency Critical Path (Spans 6 cols) -->
+<section class="md:col-span-6 glass-panel rounded-lg p-6">
+<header class="flex justify-between items-center mb-4 border-b border-border-muted pb-2">
+<h3 class="font-label-caps text-label-caps text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">account_tree</span> Critical Path
+                    </h3>
+</header>
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-4 bg-surface p-3 rounded border border-border-muted">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-secondary flex items-center justify-center z-10">
+<span class="font-code-sm text-code-sm text-secondary">01</span>
+</div>
+<div class="flex-1">
+<h4 class="font-code-md text-code-md text-on-surface">Pre-flight Data Migration</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Migrate `legacy_id` mappings to redis cache.</p>
+</div>
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+</div>
+<div class="w-0.5 h-4 bg-border-muted ml-7"></div>
+<div class="flex items-center gap-4 bg-surface p-3 rounded border border-warning-gold bg-opacity-20">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-warning-gold flex items-center justify-center glow-gold z-10">
+<span class="font-code-sm text-code-sm text-warning-gold">02</span>
+</div>
+<div class="flex-1">
+<h4 class="font-code-md text-code-md text-on-surface">Schema Apply</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Execute `V2__drop_legacy_fields.sql`</p>
+</div>
+<span class="material-symbols-outlined text-warning-gold animate-spin">sync</span>
+</div>
+<div class="w-0.5 h-4 bg-border-muted ml-7"></div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded border border-border-muted opacity-50">
+<div class="w-8 h-8 rounded bg-surface-container-lowest border border-outline flex items-center justify-center z-10">
+<span class="font-code-sm text-code-sm text-outline">03</span>
+</div>
+<div class="flex-1">
+<h4 class="font-code-md text-code-md text-on-surface">API Gateway Flip</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Route traffic to v3 endpoints.</p>
+</div>
+<span class="material-symbols-outlined text-outline">schedule</span>
+</div>
+</div>
+</section>
+<!-- 4. Rollback Strategy (Spans 6 cols) -->
+<section class="md:col-span-6 glass-panel rounded-lg p-6 bg-surface-container-high relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-10">
+<span class="material-symbols-outlined text-[100px]">undo</span>
+</div>
+<header class="flex justify-between items-center mb-4 border-b border-border-muted pb-2 relative z-10">
+<h3 class="font-label-caps text-label-caps text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings_backup_restore</span> Rollback Strategy
+                    </h3>
+<span class="bg-secondary-container text-on-secondary px-2 py-1 rounded font-label-caps text-label-caps">ZERO-DOWNTIME</span>
+</header>
+<div class="relative z-10 space-y-4">
+<div class="bg-surface p-4 rounded border border-secondary border-l-4">
+<h4 class="font-code-md text-code-md text-secondary mb-1">Trigger Condition</h4>
+<p class="font-body-sm text-body-sm text-on-surface">Error rate &gt; 1% on `/api/v2/*` within 5 minutes post-apply.</p>
+</div>
+<div class="bg-surface p-4 rounded border border-border-muted">
+<h4 class="font-code-md text-code-md text-on-surface-variant mb-2">Execution Steps</h4>
+<ol class="list-decimal list-inside font-code-sm text-code-sm text-on-surface space-y-1">
+<li>Revert API Gateway routing rule to `v2-stable`.</li>
+<li>Execute `V2_UNDO__restore_legacy_fields.sql`.</li>
+<li>Trigger cache invalidation for `user_profiles:*`.</li>
+</ol>
+</div>
+<button class="w-full mt-2 border border-outline-variant hover:border-secondary text-on-surface hover:text-secondary bg-surface transition-colors py-2 rounded font-label-caps text-label-caps flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-sm">terminal</span> Review Rollback Scripts
+                    </button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

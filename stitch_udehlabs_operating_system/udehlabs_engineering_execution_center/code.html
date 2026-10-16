@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Engineering Execution Center - UdehLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#dae2fd",
+                        "surface-container-lowest": "#010f1f",
+                        "on-primary-container": "#4a5268",
+                        "surface-container-high": "#1c2b3c",
+                        "primary-container": "#bec6e0",
+                        "secondary-fixed-dim": "#4edea3",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-tertiary-container": "#754900",
+                        "primary": "#dae2fd",
+                        "tertiary": "#ffddb8",
+                        "error-container": "#93000a",
+                        "surface-dim": "#051424",
+                        "surface-tint": "#bec6e0",
+                        "outline-variant": "#45464d",
+                        "background": "#051424",
+                        "error-bright": "#ffb4ab",
+                        "on-error": "#690005",
+                        "on-primary-fixed-variant": "#3e465c",
+                        "surface-container-low": "#0d1c2d",
+                        "surface": "#051424",
+                        "on-secondary-fixed": "#002114",
+                        "on-tertiary-fixed": "#2a1700",
+                        "on-tertiary": "#472a00",
+                        "surface-graph": "#0f172a",
+                        "on-primary-fixed": "#131b2e",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#ffb95f",
+                        "outline": "#909097",
+                        "on-secondary": "#003824",
+                        "secondary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#ffb95f",
+                        "surface-container": "#122131",
+                        "primary-fixed-dim": "#bec6e0",
+                        "secondary-container": "#00b47d",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#003e28",
+                        "surface-container-highest": "#273647",
+                        "on-surface": "#d4e4fa",
+                        "warning-gold": "#f59e0b",
+                        "secondary": "#4edea3",
+                        "inverse-surface": "#d4e4fa",
+                        "inverse-on-surface": "#233143",
+                        "surface-variant": "#273647",
+                        "surface-bright": "#2c3a4c",
+                        "tertiary-fixed": "#ffddb8",
+                        "on-primary": "#283044",
+                        "on-tertiary-fixed-variant": "#653e00",
+                        "on-background": "#d4e4fa",
+                        "border-muted": "#334155",
+                        "on-surface-variant": "#c6c6cd",
+                        "inverse-primary": "#565e74",
+                        "surface-deep": "#051424"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "sidebar-width": "240px",
+                        "margin-wide": "32px",
+                        "margin-compact": "16px",
+                        "topbar-height": "48px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "code-md": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["10px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "code-sm": ["11px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "code-md": ["13px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .cyber-glow { box-shadow: 0 0 12px var(--tw-shadow-color); }
+        .cyber-glow-sm { box-shadow: 0 0 8px var(--tw-shadow-color); }
+        .scanline {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to bottom, transparent, rgba(78, 222, 163, 0.1), transparent);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #051424; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #45464d; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="fixed left-0 top-0 h-full w-[240px] z-40 flex flex-col py-unit bg-surface-container-low border-r border-border-muted hidden md:flex">
+<div class="px-margin-compact py-unit mb-unit">
+<h1 class="font-code-md text-code-md text-secondary">CYBER-INTELLIGENCE</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">V2.4.0-STABLE</p>
+</div>
+<div class="px-margin-compact mb-4">
+<button class="w-full flex items-center justify-center gap-2 border border-secondary text-secondary hover:bg-secondary hover:text-on-secondary px-4 py-2 rounded-DEFAULT transition-colors font-code-sm text-code-sm uppercase cyber-glow-sm shadow-secondary/20">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                New Analysis
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto">
+<ul class="flex flex-col gap-1 px-2">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+                        Overview
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-secondary bg-surface-container-high border-l-2 border-secondary font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+                        Repositories
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+                        Files
+                    </a>
+</li>
+</ul>
+</div>
+<div class="mt-auto px-2 border-t border-border-muted pt-2">
+<ul class="flex flex-col gap-1">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+                        Docs
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+                        Logout
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-[240px] h-screen overflow-hidden bg-background">
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 w-full md:w-[calc(100%-240px)] md:ml-[240px] z-50 flex justify-between items-center px-margin-wide bg-surface-container border-b border-border-muted h-topbar-height">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">UdehLabs Intelligence</span>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-4">
+<a class="text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-bright transition-colors px-2 py-1 rounded" href="#">Rescan</a>
+<a class="text-on-surface-variant font-medium font-label-caps text-label-caps hover:bg-surface-bright transition-colors px-2 py-1 rounded" href="#">Export Graph</a>
+</nav>
+<div class="flex items-center gap-2">
+<button class="text-secondary hover:bg-surface-bright p-1.5 rounded transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span></button>
+<button class="text-secondary hover:bg-surface-bright p-1.5 rounded transition-colors"><span class="material-symbols-outlined text-[20px]">settings</span></button>
+<button class="text-secondary hover:bg-surface-bright p-1.5 rounded transition-colors"><span class="material-symbols-outlined text-[20px]">help</span></button>
+</div>
+</div>
+</header>
+<!-- Main Workspace -->
+<main class="flex-1 overflow-y-auto mt-topbar-height p-gutter md:p-margin-wide relative">
+<div class="scanline"></div>
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4 border-b border-border-muted pb-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<div class="w-3 h-3 rounded-full bg-secondary shadow-secondary/50 cyber-glow-sm animate-pulse"></div>
+<span class="font-label-caps text-label-caps text-secondary tracking-widest">RUNNING</span>
+<span class="font-code-sm text-code-sm text-on-surface-variant border-l border-border-muted pl-3">00:14:32</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-primary m-0">MIG-4092: Database Schema Migration</h2>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-warning-gold text-warning-gold hover:bg-warning-gold/10 font-label-caps text-label-caps rounded-DEFAULT flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">pause</span> PAUSE
+                    </button>
+<button class="px-4 py-2 border border-error text-error hover:bg-error/10 font-label-caps text-label-caps rounded-DEFAULT flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px]">undo</span> ROLLBACK
+                    </button>
+<button class="px-4 py-2 bg-secondary text-on-secondary hover:bg-secondary-fixed font-label-caps text-label-caps rounded-DEFAULT flex items-center gap-2 transition-colors cyber-glow-sm shadow-secondary/20">
+<span class="material-symbols-outlined text-[16px]">check_circle</span> APPROVE FOR MERGE
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter h-full pb-8">
+<!-- Left Col: Timeline & Agents -->
+<div class="md:col-span-4 flex flex-col gap-gutter h-full">
+<!-- Execution Timeline -->
+<div class="bg-surface-container-high border border-border-muted rounded-lg flex flex-col h-1/2 relative overflow-hidden">
+<div class="bg-surface-container-highest px-3 py-2 border-b border-border-muted flex justify-between items-center z-10">
+<span class="font-label-caps text-label-caps text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">history</span> EXECUTION TIMELINE
+                            </span>
+<span class="font-code-sm text-code-sm text-secondary">LIVE</span>
+</div>
+<div class="flex-1 p-3 overflow-y-auto font-code-sm text-code-sm text-on-surface-variant">
+<div class="flex gap-3 mb-3">
+<div class="text-on-surface-variant/50 w-12 shrink-0">10:42</div>
+<div><span class="text-primary">Workspace Created</span> [tmp/mig-4092]</div>
+</div>
+<div class="flex gap-3 mb-3">
+<div class="text-on-surface-variant/50 w-12 shrink-0">10:43</div>
+<div><span class="text-tertiary-container">Task Scheduled</span> Analysis</div>
+</div>
+<div class="flex gap-3 mb-3">
+<div class="text-on-surface-variant/50 w-12 shrink-0">10:45</div>
+<div><span class="text-secondary">Agent Assigned</span> (Security Eng)</div>
+</div>
+<div class="flex gap-3 mb-3 p-2 bg-surface-container-lowest border border-border-muted rounded">
+<div class="text-on-surface-variant/50 w-10 shrink-0">10:48</div>
+<div><span class="text-warning-gold">File Modified</span> auth-service.ts</div>
+</div>
+<div class="flex gap-3 mb-3">
+<div class="text-on-surface-variant/50 w-12 shrink-0">10:50</div>
+<div><span class="text-primary">Validation Started</span></div>
+</div>
+<div class="flex gap-3 mb-3">
+<div class="text-on-surface-variant/50 w-12 shrink-0">10:52</div>
+<div class="animate-pulse"><span class="text-secondary">Executing tests...</span></div>
+</div>
+</div>
+</div>
+<!-- Agent Activity -->
+<div class="bg-surface-container-high border border-border-muted rounded-lg flex flex-col h-1/2">
+<div class="bg-surface-container-highest px-3 py-2 border-b border-border-muted flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">memory</span> AGENT ACTIVITY
+                            </span>
+</div>
+<div class="flex-1 p-3 overflow-y-auto space-y-3">
+<!-- Agent Card 1 -->
+<div class="bg-surface-container-lowest border border-border-muted p-3 rounded flex flex-col gap-2 relative">
+<div class="absolute top-0 right-0 w-1 h-full bg-secondary"></div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-primary">BACKEND ENGINEER</span>
+<span class="font-code-sm text-code-sm text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px] animate-spin">refresh</span> IDLE</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface-variant">Task: Refactor DTOs</div>
+<div class="flex gap-2 text-[10px] font-code-sm text-on-surface-variant/70">
+<span>CPU: 4%</span> | <span>MEM: 120MB</span>
+</div>
+</div>
+<!-- Agent Card 2 -->
+<div class="bg-surface-container-lowest border border-secondary/30 p-3 rounded flex flex-col gap-2 relative shadow-[0_0_10px_rgba(78,222,163,0.1)]">
+<div class="absolute top-0 right-0 w-1 h-full bg-secondary animate-pulse"></div>
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-primary">QA ENGINEER</span>
+<span class="font-code-sm text-code-sm text-secondary">ACTIVE</span>
+</div>
+<div class="font-code-sm text-code-sm text-on-surface"><span class="text-secondary">$</span> npm run test:e2e</div>
+<div class="w-full bg-surface-container h-1 rounded overflow-hidden">
+<div class="bg-secondary h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Col: Workspace & Validation -->
+<div class="md:col-span-8 flex flex-col gap-gutter h-full">
+<!-- Workspace & Changes (Diff Viewer) -->
+<div class="bg-surface-container-high border border-border-muted rounded-lg flex flex-col flex-1">
+<div class="bg-surface-container-highest px-3 py-2 border-b border-border-muted flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">code</span> WORKSPACE &amp; CHANGES
+                            </span>
+<div class="flex gap-2 font-code-sm text-code-sm">
+<span class="text-error">+12</span> / <span class="text-secondary">-4</span>
+</div>
+</div>
+<div class="flex-1 bg-[#0d1117] text-on-surface p-4 font-code-md text-code-md overflow-y-auto whitespace-pre font-mono leading-relaxed relative">
+<div class="text-on-surface-variant/50">  1 | import { DB } from '@core/db';</div>
+<div class="text-on-surface-variant/50">  2 | </div>
+<div class="bg-error/20 text-error-bright flex"><div class="w-8 text-right pr-2 text-error/50 shrink-0">- 3</div>| const userQuery = "SELECT * FROM users";</div>
+<div class="bg-secondary/20 text-secondary flex"><div class="w-8 text-right pr-2 text-secondary/50 shrink-0">+ 4</div>| const userQuery = DB.prepare("SELECT * FROM users WHERE active = ?").bind(1);</div>
+<div class="text-on-surface-variant/50">  5 | </div>
+<div class="text-on-surface-variant/50">  6 | export async function getUsers() {</div>
+<div class="text-on-surface-variant/50">  7 |   return await userQuery.all();</div>
+</div>
+</div>
+<!-- Validation Pipeline -->
+<div class="bg-surface-container-high border border-border-muted rounded-lg flex flex-col h-1/3">
+<div class="bg-surface-container-highest px-3 py-2 border-b border-border-muted">
+<span class="font-label-caps text-label-caps text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">rule</span> VALIDATION PIPELINE
+                            </span>
+</div>
+<div class="flex-1 p-4 grid grid-cols-2 md:grid-cols-5 gap-4 items-center">
+<!-- Step 1 -->
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="w-10 h-10 rounded-full border-2 border-secondary text-secondary flex items-center justify-center bg-secondary/10 cyber-glow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface">Typecheck</span>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center gap-2 text-center">
+<div class="w-10 h-10 rounded-full border-2 border-secondary text-secondary flex items-center justify-center bg-secondary/10 cyber-glow-sm">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface">Lint</span>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center gap-2 text-center relative">
+<div class="w-10 h-10 rounded-full border-2 border-warning-gold text-warning-gold flex items-center justify-center bg-warning-gold/10 shadow-[0_0_8px_rgba(245,158,11,0.5)] animate-pulse">
+<span class="material-symbols-outlined text-[20px] animate-spin">sync</span>
+</div>
+<span class="font-label-caps text-label-caps text-warning-gold">Unit Tests</span>
+<div class="absolute top-1/2 -left-full w-full h-[2px] bg-secondary -z-10 translate-y-[18px]"></div>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-col items-center gap-2 text-center opacity-50">
+<div class="w-10 h-10 rounded-full border-2 border-border-muted text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">security</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Security</span>
+</div>
+<!-- Step 5 -->
+<div class="flex flex-col items-center gap-2 text-center opacity-50">
+<div class="w-10 h-10 rounded-full border-2 border-border-muted text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Rules</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

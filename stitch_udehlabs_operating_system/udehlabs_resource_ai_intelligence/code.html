@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Command Center - AI Economics &amp; Resource Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#93000a",
+                        "primary-fixed": "#d5e4fb",
+                        "outline": "#8e9197",
+                        "on-tertiary": "#003738",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "secondary-fixed": "#eaddff",
+                        "surface-variant": "#2d3540",
+                        "primary-container": "#d5e4fb",
+                        "surface-container": "#18202b",
+                        "primary": "#ffffff",
+                        "outline-variant": "#44474c",
+                        "secondary": "#d2bbff",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#25005a",
+                        "on-primary": "#233143",
+                        "intel-cyan": "#00cfd5",
+                        "tertiary-fixed": "#58f8fe",
+                        "on-primary-fixed": "#0d1c2d",
+                        "on-surface-variant": "#c4c6cd",
+                        "primary-fixed-dim": "#b9c8de",
+                        "ruby-incident": "#ef4444",
+                        "tertiary": "#ffffff",
+                        "border-muted": "#1e293b",
+                        "surface-bright": "#323a45",
+                        "emerald-optima": "#10b981",
+                        "surface-container-highest": "#2d3540",
+                        "on-background": "#dbe3f1",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "on-tertiary-fixed": "#002021",
+                        "tertiary-fixed-dim": "#2bdbe1",
+                        "on-primary-container": "#576579",
+                        "on-tertiary-fixed-variant": "#004f52",
+                        "surface-container-low": "#141c26",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#3f008e",
+                        "inverse-primary": "#515f73",
+                        "on-surface": "#dbe3f1",
+                        "on-error": "#690005",
+                        "inverse-surface": "#dbe3f1",
+                        "surface-tint": "#b9c8de",
+                        "secondary-container": "#6001d1",
+                        "amber-alert": "#f59e0b",
+                        "on-secondary-container": "#c9aeff",
+                        "surface": "#0c141e",
+                        "inverse-on-surface": "#29313c",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "surface-container-lowest": "#070f18",
+                        "background": "#0c141e",
+                        "surface-container-high": "#232b35",
+                        "surface-dim": "#0c141e",
+                        "on-tertiary-container": "#007073",
+                        "surface-card": "#0d1b2a",
+                        "tertiary-container": "#58f8fe",
+                        "terminal-black": "#091017"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-sm": "12px",
+                        "compact": "8px",
+                        "margin-lg": "24px",
+                        "comfortable": "16px",
+                        "gutter": "16px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-md-mobile": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-mono": ["13px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-md-mobile": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .ai-glow {
+            box-shadow: inset 0 0 12px 0 rgba(0, 207, 213, 0.1);
+        }
+        .ai-glow-border {
+            box-shadow: 0 0 8px 0 rgba(0, 207, 213, 0.3);
+            border-color: rgba(0, 207, 213, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex overflow-hidden">
+<!-- SideNavBar -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest fixed left-0 top-0 h-full w-[280px] z-40 border-r border-border-muted flex flex-col p-compact gap-base hidden md:flex">
+<div class="px-comfortable py-margin-sm mb-margin-lg">
+<h1 class="font-headline-sm text-headline-sm text-primary">Command Center</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enterprise Observability</p>
+</div>
+<div class="flex-1 flex flex-col gap-base">
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-sm text-body-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-sm text-body-sm">Operations</span>
+</a>
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm bg-primary-container text-on-primary-container rounded-lg font-semibold active:scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-body-sm text-body-sm">FinOps</span>
+</a>
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-body-sm text-body-sm">Resources</span>
+</a>
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-body-sm text-body-sm">Optimization</span>
+</a>
+</div>
+<div class="mt-auto flex flex-col gap-base pt-margin-lg border-t border-border-muted">
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-sm text-body-sm">Support</span>
+</a>
+<a class="flex items-center gap-margin-sm px-comfortable py-margin-sm text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-sm text-body-sm">Settings</span>
+</a>
+</div>
+</nav>
+<!-- TopNavBar (Mobile) -->
+<header class="bg-surface dark:bg-surface fixed top-0 w-full z-50 border-b border-border-muted shadow-sm md:hidden">
+<div class="flex justify-between items-center px-comfortable h-16 w-full">
+<div class="font-headline-md text-headline-md font-bold text-intel-cyan">UdehLabs Command</div>
+<div class="flex items-center gap-margin-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary hover:text-intel-cyan transition-colors duration-200 ease-in-out cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-primary dark:text-primary hover:text-intel-cyan transition-colors duration-200 ease-in-out cursor-pointer" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-primary dark:text-primary hover:text-intel-cyan transition-colors duration-200 ease-in-out cursor-pointer" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 md:ml-[280px] pt-16 md:pt-0 overflow-y-auto h-screen bg-background">
+<div class="p-margin-lg lg:p-margin-lg max-w-[1600px] mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-margin-lg">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary">AI Economics &amp; Resources</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Real-time telemetry and granular attribution for AI agents and infrastructure.</p>
+</div>
+<div class="flex gap-margin-sm">
+<button class="bg-surface-bright border border-outline-variant px-comfortable py-compact rounded font-body-sm text-body-sm hover:bg-surface-variant transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-gutter">
+<!-- KPI Widgets (Top Row) -->
+<div class="col-span-1 md:col-span-3 lg:col-span-3 bg-surface-card border border-border-muted rounded-lg p-comfortable ai-glow relative overflow-hidden">
+<div class="flex justify-between items-start mb-compact">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Total AI Spend (7d)</span>
+<span class="material-symbols-outlined text-amber-alert" data-icon="trending_up">trending_up</span>
+</div>
+<div class="font-data-mono text-display-lg text-primary">$12,450</div>
+<div class="mt-2 flex items-center gap-2">
+<span class="bg-surface-container-low text-emerald-optima px-2 py-1 rounded-sm font-data-mono text-data-mono flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-optima animate-pulse"></span>
+                            -4.2% vs prev
+                        </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Optimization active</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 lg:col-span-3 bg-surface-card border border-border-muted rounded-lg p-comfortable">
+<div class="flex justify-between items-start mb-compact">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Avg Latency</span>
+<span class="material-symbols-outlined text-primary" data-icon="speed">speed</span>
+</div>
+<div class="font-data-mono text-display-lg text-primary">245ms</div>
+<div class="mt-2 font-body-sm text-body-sm text-on-surface-variant">Target: &lt; 300ms (P95)</div>
+</div>
+<div class="col-span-1 md:col-span-6 lg:col-span-6 bg-surface-card border border-border-muted rounded-lg p-comfortable relative overflow-hidden">
+<div class="flex justify-between items-start mb-compact">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Provider Success Rate</span>
+</div>
+<div class="flex gap-margin-lg mt-4">
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-body-sm text-body-sm text-primary">Gemini Pro</span>
+<span class="font-data-mono text-data-mono text-intel-cyan">99.8%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-intel-cyan h-1.5 rounded-full" style="width: 99.8%"></div>
+</div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between mb-1">
+<span class="font-body-sm text-body-sm text-primary">GPT-4 Turbo</span>
+<span class="font-data-mono text-data-mono text-emerald-optima">98.5%</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-emerald-optima h-1.5 rounded-full" style="width: 98.5%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Token Usage Chart -->
+<div class="col-span-1 md:col-span-6 lg:col-span-8 bg-surface-card border border-border-muted rounded-lg p-comfortable min-h-[300px] flex flex-col">
+<div class="flex justify-between items-center mb-margin-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary">Token Utilization Dynamics</h3>
+<div class="flex gap-2">
+<button class="px-2 py-1 bg-surface-container-low border border-border-muted rounded text-data-mono font-data-mono text-on-surface-variant hover:text-primary text-xs">1H</button>
+<button class="px-2 py-1 bg-surface-container-highest border border-border-muted rounded text-data-mono font-data-mono text-primary text-xs">24H</button>
+<button class="px-2 py-1 bg-surface-container-low border border-border-muted rounded text-data-mono font-data-mono text-on-surface-variant hover:text-primary text-xs">7D</button>
+</div>
+</div>
+<div class="flex-1 bg-terminal-black rounded border border-border-muted relative flex items-end p-4">
+<!-- Abstract Line Chart Representation -->
+<div class="w-full h-full flex items-end justify-between gap-1 opacity-80">
+<!-- Input Tokens (Intel Cyan) -->
+<!-- Output Tokens (Emerald Optima) -->
+</div>
+</div>
+</div>
+<!-- Cost per Agent -->
+<div class="col-span-1 md:col-span-6 lg:col-span-4 bg-surface-card border border-border-muted rounded-lg p-comfortable min-h-[300px] flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-margin-sm">Cost per Agent (Top 5)</h3>
+<div class="flex-1 flex flex-col gap-2 overflow-y-auto pr-2">
+<!-- Agent Row -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded border border-transparent hover:border-border-muted transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-intel-cyan"></div>
+<span class="font-body-sm text-body-sm text-primary">Data_Extraction_Agent_V2</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">$4,210</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded border border-transparent hover:border-border-muted transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-optima"></div>
+<span class="font-body-sm text-body-sm text-primary">Support_Routing_Bot</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">$3,150</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded border border-transparent hover:border-border-muted transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-amber-alert"></div>
+<span class="font-body-sm text-body-sm text-primary">Code_Review_Assistant</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant">$2,800</span>
+</div>
+</div>
+</div>
+<!-- Resource Anomaly Timeline -->
+<div class="col-span-1 md:col-span-6 lg:col-span-12 bg-surface-card border border-border-muted rounded-lg p-comfortable">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-margin-sm">Resource Anomaly Timeline</h3>
+<div class="w-full overflow-x-auto">
+<div class="min-w-[800px] flex flex-col gap-4">
+<!-- Timeline Track -->
+<div class="h-16 bg-surface-container-low rounded relative border border-border-muted">
+<!-- Deployment Marker -->
+<div class="absolute left-1/4 top-0 bottom-0 w-px bg-intel-cyan z-10">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface-bright border border-intel-cyan px-2 py-0.5 rounded text-xs font-data-mono text-intel-cyan whitespace-nowrap">v2.1 Deploy</div>
+</div>
+<!-- Anomaly Marker (Ruby) -->
+<div class="absolute left-[40%] top-2 bottom-2 w-4 bg-ruby-incident/20 border border-ruby-incident rounded z-10 flex items-center justify-center group cursor-pointer">
+<div class="hidden group-hover:block absolute -top-8 bg-surface-highest border border-border-muted p-2 rounded text-xs font-body-sm text-primary whitespace-nowrap z-50">
+                                        CPU Spike &gt; 90% (us-east-1)
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

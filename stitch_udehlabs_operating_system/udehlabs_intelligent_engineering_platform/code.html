@@ -1,0 +1,380 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>UdehLabs | The Future of Software</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#1b2b3f",
+                      "on-secondary-fixed": "#23005c",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-primary-fixed": "#0f0069",
+                      "on-background": "#d3e4fe",
+                      "on-tertiary-fixed": "#001e2f",
+                      "on-tertiary": "#00344d",
+                      "surface-variant": "#26364a",
+                      "tertiary": "#89ceff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "surface": "#031427",
+                      "surface-container": "#102034",
+                      "primary": "#c3c0ff",
+                      "on-secondary": "#3c0091",
+                      "on-tertiary-container": "#b8e0ff",
+                      "inverse-surface": "#d3e4fe",
+                      "inverse-primary": "#4d44e3",
+                      "secondary-container": "#571bc1",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "secondary": "#d0bcff",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#0b1c30",
+                      "on-surface": "#d3e4fe",
+                      "on-primary": "#1d00a5",
+                      "surface-container-highest": "#26364a",
+                      "background": "#031427",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "tertiary-container": "#006693",
+                      "outline-variant": "#464555",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "surface-container-lowest": "#000f21",
+                      "outline": "#918fa1",
+                      "surface-tint": "#c3c0ff",
+                      "on-surface-variant": "#c7c4d8",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-error": "#690005",
+                      "surface-dim": "#031427",
+                      "surface-bright": "#2a3a4f",
+                      "primary-fixed": "#e2dfff",
+                      "on-primary-container": "#dad7ff",
+                      "inverse-on-surface": "#213145",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#e9ddff",
+                      "primary-container": "#4f46e5",
+                      "on-secondary-container": "#c4abff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "max_content_width": "1440px",
+                      "md": "16px",
+                      "2xl": "48px",
+                      "sidebar_collapsed": "64px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "sidebar_width": "260px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "code-md": ["JetBrains Mono"],
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "code-sm": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(70, 69, 85, 0.5);
+        }
+        .ai-glow {
+            box-shadow: 0 0 30px 2px rgba(139, 92, 246, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #c3c0ff 0%, #d0bcff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flow-line {
+            background: linear-gradient(90deg, transparent, #4f46e5, transparent);
+            height: 1px;
+            width: 100%;
+        }
+        .nav-sticky {
+            top: 0;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="nav-sticky bg-surface/80 backdrop-blur-md flex justify-between items-center w-full px-lg h-16 border-b border-outline-variant">
+<div class="flex items-center gap-sm">
+<img alt="UdehLabs Logo" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBu_eyv1J_ip7IVn9WmmYIhWkM35-2Kf3pt8mtToROdR-uN1s7AV6vMlIrFpBeCK-6iiAPT22aWkikPbVW92za97EzEW6xafR3hNk_Z9nIBY4RUIZOYjmEhRs_noOhUUQ2weKXHkzprCw5mKRd0-pc8h2z7k_EsLsa-5acLXJ_7lvumu2uU-_-F-Tzhqcmzsic-QX4m5midZB0ZfH7GRulJ81hYbpPYh1PLPkBydsXz31_nqSl1lJhUw">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">UdehLabs</span>
+</div>
+<nav class="hidden md:flex gap-xl">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 transition-all" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-all" href="#">Logs</a>
+<a class="text-on-surface-variant hover:text-primary transition-all" href="#">Agents</a>
+</nav>
+<div class="flex items-center gap-md">
+<div class="flex gap-sm">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-all">history</span>
+</div>
+<button class="bg-primary text-on-primary px-md py-xs rounded-sm font-label-caps text-label-caps hover:opacity-80 active:opacity-60 transition-all">
+                Create New
+            </button>
+</div>
+</header>
+<main class="max-w-[1440px] mx-auto px-lg md:px-2xl py-xl">
+<!-- Hero Section -->
+<section class="relative flex flex-col lg:flex-row items-center gap-xl py-2xl">
+<div class="flex-1 space-y-lg z-10">
+<div class="inline-flex items-center gap-xs px-sm py-1 border border-primary/30 bg-primary/5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-caps text-label-caps text-primary uppercase">v2.4 Live: Neural Engine Updated</span>
+</div>
+<h1 class="font-display text-display leading-tight tracking-tighter">
+                    The Future of <br>
+<span class="gradient-text">Software is Collaborative.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+                    Bridge the gap between human ingenuity and autonomous intelligence. UdehLabs provides the enterprise-grade workspace where developers and AI agents co-write, test, and deploy software at 10x velocity.
+                </p>
+<div class="flex flex-wrap gap-md pt-md">
+<button class="bg-primary-container text-on-primary-container px-xl py-md rounded-lg font-headline-sm text-headline-sm hover:scale-[1.02] active:scale-[0.98] transition-all shadow-lg shadow-primary/20">
+                        Build with UdehLabs
+                    </button>
+<button class="border border-outline-variant bg-surface-container-low text-on-surface px-xl py-md rounded-lg font-headline-sm text-headline-sm hover:bg-surface-variant/50 transition-all">
+                        View Pricing
+                    </button>
+</div>
+</div>
+<div class="flex-1 relative w-full aspect-square md:aspect-video lg:aspect-square">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent rounded-xl"></div>
+<img class="w-full h-full object-cover rounded-xl border border-outline-variant ai-glow" data-alt="A high-fidelity 3D digital art composition showing a diverse software engineer sitting at a minimalist desk with holographic displays, shaking hands with a semi-transparent, glowing AI humanoid figure made of light particles and data streams. The environment is a dark, ultra-modern lab with deep indigo and violet lighting, echoing the UdehLabs brand colors. Photorealistic textures, soft bokeh background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeCZOmul23rk34BbtIDLJHPIdJXR6eUhSbzYzQEcWYtmBiw8evy4vnQhjTEJ1qDGZ6uMkGOCU5OBfqGbW4QClR2v5eAUTMVxVUZfE-RZT_B5n4s836SVe8fIlu_YiNFPE5fysAHD7WpkTSj5uDl9yYNH5gX9XSQOPQEXPobtmHPYZLpg_0vwkwl_eSlzB0T0ndThmj5Eqkh0KOeVxP0d3aLOI3v0PZHVbJXKBQQP25W66NgoXWQDILNQ">
+<!-- Floating Glass Card Micro-interactions -->
+<div class="absolute -bottom-8 -left-8 glass-card p-md rounded-lg hidden md:block">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<div>
+<p class="font-label-caps text-label-caps text-tertiary">Agent Status</p>
+<p class="font-code-sm text-code-sm text-on-surface">Synthesizing pull request #942...</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof -->
+<section class="py-xl border-y border-outline-variant/30 flex flex-col items-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xl tracking-[0.2em]">Trusted by the world's most ambitious labs</p>
+<div class="flex flex-wrap justify-center gap-2xl opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<div class="h-8 w-32 bg-on-surface/10 rounded flex items-center justify-center font-bold">CYBERDINE</div>
+<div class="h-8 w-32 bg-on-surface/10 rounded flex items-center justify-center font-bold">TELLUS.AI</div>
+<div class="h-8 w-32 bg-on-surface/10 rounded flex items-center justify-center font-bold">SYNTHESIS</div>
+<div class="h-8 w-32 bg-on-surface/10 rounded flex items-center justify-center font-bold">ORBITAL</div>
+<div class="h-8 w-32 bg-on-surface/10 rounded flex items-center justify-center font-bold">NEURALUX</div>
+</div>
+</section>
+<!-- Value Props - Bento Grid -->
+<section class="py-2xl">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<div class="glass-card p-xl rounded-xl space-y-md hover:border-primary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-md group-hover:bg-primary group-hover:text-on-primary transition-all">
+<span class="material-symbols-outlined text-3xl">smart_toy</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Intelligent Automation</h3>
+<p class="text-on-surface-variant font-body-md">Autonomous agents that don't just complete code, but understand entire system architectures and business logic.</p>
+</div>
+<div class="glass-card p-xl rounded-xl space-y-md hover:border-secondary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary mb-md group-hover:bg-secondary group-hover:text-on-secondary transition-all">
+<span class="material-symbols-outlined text-3xl">database</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Enterprise Scalability</h3>
+<p class="text-on-surface-variant font-body-md">Built for high-concurrency environments with SOC2 compliance and native air-gapped deployment options.</p>
+</div>
+<div class="glass-card p-xl rounded-xl space-y-md hover:border-tertiary/50 transition-colors group">
+<div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary mb-md group-hover:bg-tertiary group-hover:text-on-tertiary transition-all">
+<span class="material-symbols-outlined text-3xl">group</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Transparent Collaboration</h3>
+<p class="text-on-surface-variant font-body-md">Full visibility into AI decision-making. Audit every prompt, thought process, and code change in real-time.</p>
+</div>
+</div>
+</section>
+<!-- Interactive Pipeline Widget -->
+<section class="py-2xl bg-surface-container-lowest/50 rounded-2xl border border-outline-variant p-lg md:p-2xl">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Continuous AI Evolution</h2>
+<p class="text-on-surface-variant font-body-lg">Watch how UdehLabs accelerates your lifecycle.</p>
+</div>
+<div class="relative flex flex-col md:flex-row justify-between items-center gap-xl py-xl">
+<!-- Connectors for Desktop -->
+<div class="absolute top-1/2 left-0 right-0 h-[1px] bg-outline-variant -translate-y-1/2 hidden md:block z-0"></div>
+<!-- Stage 1: Idea -->
+<div class="flex flex-col items-center gap-md z-10 w-full md:w-auto">
+<div class="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-lg shadow-primary/30 animate-pulse" id="step-1">
+<span class="material-symbols-outlined text-3xl">lightbulb</span>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-label-caps text-primary mb-1">STAGE 01</p>
+<h4 class="font-headline-sm text-headline-sm">Idea</h4>
+<p class="font-code-sm text-code-sm text-on-surface-variant">Natural Language Spec</p>
+</div>
+</div>
+<!-- Stage 2: Code -->
+<div class="flex flex-col items-center gap-md z-10 w-full md:w-auto">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center" id="step-2">
+<span class="material-symbols-outlined text-3xl">code</span>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">STAGE 02</p>
+<h4 class="font-headline-sm text-headline-sm">Code</h4>
+<p class="font-code-sm text-code-sm text-on-surface-variant">Multi-Agent Synthesis</p>
+</div>
+</div>
+<!-- Stage 3: Deploy -->
+<div class="flex flex-col items-center gap-md z-10 w-full md:w-auto">
+<div class="w-16 h-16 rounded-full bg-surface-container-high border border-outline-variant text-on-surface-variant flex items-center justify-center" id="step-3">
+<span class="material-symbols-outlined text-3xl">rocket_launch</span>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">STAGE 03</p>
+<h4 class="font-headline-sm text-headline-sm">Deploy</h4>
+<p class="font-code-sm text-code-sm text-on-surface-variant">Automated Validation</p>
+</div>
+</div>
+</div>
+<!-- Pipeline Log View -->
+<div class="mt-xl glass-card rounded-lg overflow-hidden border border-outline-variant/30">
+<div class="bg-surface-container-highest px-md py-sm flex items-center gap-sm">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary/40"></div>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface-variant ml-md">udeh-engine --verbose</span>
+</div>
+<div class="p-md font-code-md text-code-md space-y-1 h-48 overflow-y-auto" id="terminal-content">
+<p class="text-primary-fixed-dim">[INFO] Initializing collaborative workspace...</p>
+<p class="text-on-surface-variant">[AGENT_1] Analyzing user intent: "Create a scalable data pipeline"</p>
+<p class="text-on-surface-variant">[AGENT_2] Generating schema definitions...</p>
+<p class="text-primary-fixed-dim opacity-50">[SYSTEM] Syncing with human lead: udeh_admin</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="border-t border-outline-variant mt-2xl py-xl bg-surface-container-lowest">
+<div class="max-w-[1440px] mx-auto px-lg flex flex-col md:flex-row justify-between items-start gap-xl">
+<div class="space-y-md max-w-xs">
+<div class="flex items-center gap-sm">
+<img alt="UdehLabs Logo" class="h-6 w-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBu_eyv1J_ip7IVn9WmmYIhWkM35-2Kf3pt8mtToROdR-uN1s7AV6vMlIrFpBeCK-6iiAPT22aWkikPbVW92za97EzEW6xafR3hNk_Z9nIBY4RUIZOYjmEhRs_noOhUUQ2weKXHkzprCw5mKRd0-pc8h2z7k_EsLsa-5acLXJ_7lvumu2uU-_-F-Tzhqcmzsic-QX4m5midZB0ZfH7GRulJ81hYbpPYh1PLPkBydsXz31_nqSl1lJhUw">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">UdehLabs</span>
+</div>
+<p class="text-on-surface-variant font-body-md">Precision engineering meets autonomous intelligence. Building the infrastructure for the next era of development.</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-xl w-full md:w-auto">
+<div class="space-y-sm">
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase">Platform</h5>
+<ul class="space-y-xs text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">Workspace</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Agents</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Enterprise</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase">Company</h5>
+<ul class="space-y-xs text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">About</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+<div class="space-y-sm">
+<h5 class="font-label-caps text-label-caps text-on-surface uppercase">Support</h5>
+<ul class="space-y-xs text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">Docs</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">API</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Status</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="max-w-[1440px] mx-auto px-lg mt-xl pt-md border-t border-outline-variant/30 flex justify-between items-center text-on-surface-variant font-code-sm">
+<p>© 2024 UdehLabs Inc.</p>
+<div class="flex gap-md">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Micro-interaction for the widget
+        let currentStep = 1;
+        const steps = ['step-1', 'step-2', 'step-3'];
+        const terminal = document.getElementById('terminal-content');
+        const logs = [
+            "[INFO] Schema validated.",
+            "[AGENT_1] Refactoring logic for performance...",
+            "[AGENT_3] Running security scan: 0 vulnerabilities found.",
+            "[SYSTEM] Deployment ready for staging.",
+            "[DEPLOY] Successfully pushed to AWS-US-EAST-1",
+            "[INFO] Monitoring active intelligence nodes..."
+        ];
+
+        function rotateSteps() {
+            // Update Visual Steps
+            steps.forEach((id, index) => {
+                const el = document.getElementById(id);
+                if (index + 1 === currentStep) {
+                    el.classList.add('bg-primary', 'text-on-primary', 'animate-pulse');
+                    el.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                } else {
+                    el.classList.remove('bg-primary', 'text-on-primary', 'animate-pulse');
+                    el.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                }
+            });
+
+            // Update Terminal
+            const p = document.createElement('p');
+            p.className = 'text-on-surface-variant';
+            p.textContent = logs[Math.floor(Math.random() * logs.length)];
+            terminal.appendChild(p);
+            terminal.scrollTop = terminal.scrollHeight;
+            if(terminal.children.length > 10) terminal.removeChild(terminal.firstChild);
+
+            currentStep = currentStep >= 3 ? 1 : currentStep + 1;
+        }
+
+        setInterval(rotateSteps, 3000);
+    </script>
+</body></html>

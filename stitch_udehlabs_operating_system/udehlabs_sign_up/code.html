@@ -1,0 +1,371 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>UdehLabs | Enterprise Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        .step-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(195, 192, 255, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "on-secondary-container": "#c4abff",
+                      "primary-fixed": "#e2dfff",
+                      "outline-variant": "#464555",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-primary": "#1d00a5",
+                      "primary": "#c3c0ff",
+                      "surface-bright": "#2a3a4f",
+                      "surface": "#031427",
+                      "surface-container-high": "#1b2b3f",
+                      "secondary": "#d0bcff",
+                      "surface-dim": "#031427",
+                      "error": "#ffb4ab",
+                      "inverse-surface": "#d3e4fe",
+                      "primary-container": "#4f46e5",
+                      "on-secondary": "#3c0091",
+                      "surface-tint": "#c3c0ff",
+                      "tertiary-container": "#006693",
+                      "on-primary-container": "#dad7ff",
+                      "on-surface-variant": "#c7c4d8",
+                      "on-error-container": "#ffdad6",
+                      "inverse-primary": "#4d44e3",
+                      "inverse-on-surface": "#213145",
+                      "tertiary": "#89ceff",
+                      "on-surface": "#d3e4fe",
+                      "outline": "#918fa1",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "surface-variant": "#26364a",
+                      "on-background": "#d3e4fe",
+                      "secondary-container": "#571bc1",
+                      "secondary-fixed": "#e9ddff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#23005c",
+                      "background": "#031427",
+                      "error-container": "#93000a",
+                      "surface-container-highest": "#26364a",
+                      "on-tertiary-container": "#b8e0ff",
+                      "surface-container": "#102034",
+                      "surface-container-lowest": "#000f21",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-primary-fixed": "#0f0069",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "on-tertiary": "#00344d",
+                      "surface-container-low": "#0b1c30"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "md": "16px",
+                      "sidebar_collapsed": "64px",
+                      "sidebar_width": "260px",
+                      "xl": "32px",
+                      "max_content_width": "1440px",
+                      "2xl": "48px",
+                      "sm": "8px",
+                      "base": "4px",
+                      "xs": "4px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "code-sm": ["JetBrains Mono"],
+                      "label-caps": ["Inter"],
+                      "display": ["Inter"],
+                      "code-md": ["JetBrains Mono"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col overflow-x-hidden">
+<!-- Global Header (TopAppBar Context) -->
+<header class="fixed top-0 w-full h-16 flex justify-between items-center px-lg bg-surface/80 backdrop-blur-md border-b border-outline-variant z-50">
+<div class="flex items-center gap-xs">
+<span class="font-headline-md text-headline-md font-extrabold text-primary tracking-tight">UdehLabs</span>
+<span class="text-label-caps font-label-caps px-2 py-0.5 rounded-full border border-primary/30 text-primary bg-primary/5 ml-2">ENTERPRISE</span>
+</div>
+<div class="flex items-center gap-md">
+<span class="text-on-surface-variant font-body-md hidden md:block">Trusted by 2,000+ engineering teams</span>
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="font-label-caps text-label-caps">SOC2 COMPLIANT</span>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-4 relative">
+<!-- Ambient Background Animation -->
+<div class="absolute inset-0 z-0 opacity-40 pointer-events-none">
+
+</div>
+<div class="w-full max-w-[1000px] grid md:grid-cols-2 gap-12 items-center relative z-10">
+<!-- Branding/Social Proof Column -->
+<div class="hidden md:flex flex-col gap-lg">
+<div class="space-y-md">
+<h1 class="font-display text-display leading-tight text-on-surface">Accelerate your AI <br><span class="text-primary">Development.</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Join the next generation of enterprise AI infrastructure. Secure, scalable, and optimized for high-performance workflows.
+                    </p>
+</div>
+<div class="grid grid-cols-1 gap-md mt-4">
+<div class="p-md rounded-xl bg-surface-container border border-outline-variant flex items-start gap-md group hover:border-primary/50 transition-colors">
+<div class="p-2 rounded bg-primary-container/20 text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[18px] text-on-surface">Military-Grade Security</h3>
+<p class="text-on-surface-variant text-body-md">End-to-end encryption for all enterprise data and model weights.</p>
+</div>
+</div>
+<div class="p-md rounded-xl bg-surface-container border border-outline-variant flex items-start gap-md group hover:border-primary/50 transition-colors">
+<div class="p-2 rounded bg-secondary-container/20 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">speed</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[18px] text-on-surface">High-Performance Compute</h3>
+<p class="text-on-surface-variant text-body-md">On-demand access to H100 clusters with zero cold-starts.</p>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md pt-lg border-t border-outline-variant mt-4">
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-background overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up studio portrait of a professional female engineer with tech-inspired soft purple rim lighting, modern aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1-zZ95DQohWWWi4Mhe6MYcO9E1o3SARxOglf_uHBnb7gQZzJ0416GGXkH9OeUJF-LBG0h11zn1eoQYVLUzdBX8V2CgK1JMII-n6jWF5ASC0uU_rIdxarYoEYTqyxv0lFIq6PgyZvcnZyR516fRql9Z1cXxb7r4BcOJGQFC9IY5Epvp1LVSA37fd4PVDhJhlxdlntXwZ6dUWgp9O6kjLoA2M7QTsa6ffSfFtvIk4NbUKfdJ8UAW0evtA">
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-background overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional male data scientist portrait in a dark minimalist office environment with subtle blue lighting accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGyjVbZaLXw78Mor3_Yk-z5idIYyltuyCPLMBaUNydaZlkJiZKvMFT55jSNCcbYw-VFFx_PQbrXOKl2VIrpRbuZvp9iBOWGL5DLj0H3K1VXKLT_alUPB44yjt6Dz3ri_ULCnwAUZlz_8UzvFiSxDKtlciZsb7c_Fwry1F5gxSc5DAlxqs2n9Nzot3jQ1t1OOOYtJoUYIwE5MrGJnobWJ-2V4Rl5zt5UtwOfnO3rMH64In0ahmeKCQftQ">
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-background overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Abstract minimalist corporate logo of a global technology firm, white on a dark navy blue background, high contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArlhwECanoka91KUJGqVuruh8fBhkIZigP7G2Tk7Flzni60aaEWkkWiBMdFLAXc3AhgkVlv1203qFfaA9bf4d0QVgGl-pNblLuvtwh-alxFXvM-AtV01lo8PIjB0X3eHI_1Io4R_KxuGYl1RWIC5BmbfBgTnYCZ_Q_w39DQltHbF_jKP84TVoOl8JW60W4kasCRs9oyfQAgJvwhuTA7V7QvTF9NceL0-rx2VVe-AyM15kf-xYkYYiULg">
+</div>
+</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant uppercase tracking-widest">Global teams rely on UdehLabs</p>
+</div>
+</div>
+<!-- Registration Form Card -->
+<div class="glass-panel p-lg md:p-xl rounded-2xl border border-outline-variant ai-glow w-full">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Create Your Account</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Get started with a free enterprise trial today.</p>
+</div>
+<form class="space-y-lg" id="registrationForm">
+<!-- Form Fields -->
+<div class="space-y-md">
+<div class="space-y-1.5">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="fullName">Full Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-size: 20px;">person</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-on-surface placeholder:text-outline/50 focus:border-primary transition-all font-body-md" id="fullName" placeholder="John Doe" required="" type="text">
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="workEmail">Work Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-size: 20px;">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-on-surface placeholder:text-outline/50 focus:border-primary transition-all font-body-md" id="workEmail" placeholder="john@company.com" required="" type="email">
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" style="font-size: 20px;">lock</span>
+<input class="w-full pl-10 pr-10 py-3 bg-surface-container-low border border-outline-variant rounded-lg text-on-surface placeholder:text-outline/50 focus:border-primary transition-all font-body-md" id="password" oninput="checkPasswordStrength(this.value)" placeholder="••••••••" required="" type="password">
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility</span>
+</button>
+</div>
+<!-- AI Password Strength Indicator -->
+<div class="pt-2 space-y-2">
+<div class="flex justify-between items-center">
+<span class="text-label-caps font-label-caps text-on-surface-variant">PASSWORD STRENGTH</span>
+<span class="text-label-caps font-label-caps text-on-surface-variant" id="strengthLabel">—</span>
+</div>
+<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden flex gap-1">
+<div class="h-full flex-1 bg-outline-variant transition-all duration-300" id="segment1"></div>
+<div class="h-full flex-1 bg-outline-variant transition-all duration-300" id="segment2"></div>
+<div class="h-full flex-1 bg-outline-variant transition-all duration-300" id="segment3"></div>
+<div class="h-full flex-1 bg-outline-variant transition-all duration-300" id="segment4"></div>
+</div>
+<p class="text-code-sm font-code-sm text-outline flex items-start gap-1.5 min-h-[18px]" id="aiFeedback">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">info</span>
+                                    AI Suggestion: Enter a password to see analysis.
+                                </p>
+</div>
+</div>
+</div>
+<!-- Terms Agreement -->
+<div class="flex items-start gap-md group">
+<div class="flex items-center h-5">
+<input class="w-4 h-4 bg-surface-container-low border-outline-variant rounded text-primary focus:ring-primary/20 cursor-pointer" id="terms" required="" type="checkbox">
+</div>
+<label class="text-body-md text-on-surface-variant leading-tight cursor-pointer" for="terms">
+                            I agree to the <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>, including the enterprise data protection agreement.
+                        </label>
+</div>
+<!-- Actions -->
+<div class="space-y-md">
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md text-[16px] py-3.5 rounded-lg font-bold shadow-lg hover:scale-[1.01] active:scale-[0.99] transition-all flex justify-center items-center gap-2 group" type="submit">
+                            Create Account
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex items-center gap-md py-2">
+<div class="h-px flex-grow bg-outline-variant"></div>
+<span class="text-label-caps font-label-caps text-outline">OR</span>
+<div class="h-px flex-grow bg-outline-variant"></div>
+</div>
+<button class="w-full border border-outline-variant bg-surface-container-high text-on-surface font-body-lg py-3 rounded-lg hover:bg-surface-variant transition-all flex justify-center items-center gap-3" type="button">
+<img alt="Google" class="w-5 h-5 grayscale opacity-70 group-hover:grayscale-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDey_2p38lOCmnK_jEuIzT9Hd0FyffPfF-ywDrCLyCC1TQD605gAgk4UTOU9bOryKhY64mzoV6EBe0VEKZMymnqtjd98Y0jcDN4z8BDRKjkjJBw2JOsxoDQfKpNjHiVd-qioFcoqpgcP6LB4gyD2QZvEmvaIJASIPIm1MR1zg57lhvBZrT1D-e1y2CrfJ-oeO8ytzHJXmuloRMcumdkG36rKyIMyi4jZBbsgOBO_xX6vN8NzheNIRuH_Q">
+                            Sign up with Google SSO
+                        </button>
+</div>
+</form>
+<div class="mt-lg text-center">
+<p class="text-body-md text-on-surface-variant">
+                        Already have an organization? <a class="text-primary font-bold hover:underline" href="#">Sign in instead</a>
+</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="w-full px-lg py-lg bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center gap-md border-t border-outline-variant/30 mt-auto z-10">
+<div class="text-label-caps font-label-caps text-outline flex items-center gap-md">
+<span>© 2024 UDEHLABS INC.</span>
+<span class="w-1.5 h-1.5 bg-outline-variant rounded-full"></span>
+<a class="hover:text-primary transition-colors" href="#">STATUS: OPERATIONAL</a>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-2 text-outline hover:text-on-surface cursor-help group transition-colors">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-label-caps font-label-caps">ENCRYPTED END-TO-END</span>
+</div>
+<div class="flex items-center gap-2 text-outline hover:text-on-surface cursor-help group transition-colors">
+<span class="material-symbols-outlined text-[18px]">public</span>
+<span class="text-label-caps font-label-caps">GDPR COMPLIANT</span>
+</div>
+</div>
+</footer>
+<script>
+        function checkPasswordStrength(password) {
+            const segments = [
+                document.getElementById('segment1'),
+                document.getElementById('segment2'),
+                document.getElementById('segment3'),
+                document.getElementById('segment4')
+            ];
+            const label = document.getElementById('strengthLabel');
+            const aiFeedback = document.getElementById('aiFeedback');
+            
+            let score = 0;
+            let feedback = "AI Suggestion: ";
+            
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password) && /[a-z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            // Reset
+            segments.forEach(seg => seg.className = "h-full flex-1 bg-outline-variant transition-all duration-300");
+            
+            if (password.length === 0) {
+                label.textContent = "—";
+                label.className = "text-label-caps font-label-caps text-on-surface-variant";
+                aiFeedback.innerHTML = `<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">info</span> AI Suggestion: Enter a password to see analysis.`;
+                return;
+            }
+
+            // Colors and Logic
+            if (score === 1) {
+                segments[0].classList.replace('bg-outline-variant', 'bg-error');
+                label.textContent = "WEAK";
+                label.className = "text-label-caps font-label-caps text-error";
+                feedback += "Include special characters for enterprise security.";
+            } else if (score === 2) {
+                segments[0].classList.replace('bg-outline-variant', 'bg-error');
+                segments[1].classList.replace('bg-outline-variant', 'bg-error');
+                label.textContent = "FAIR";
+                label.className = "text-label-caps font-label-caps text-error";
+                feedback += "Try adding a mix of numbers and symbols.";
+            } else if (score === 3) {
+                segments[0].classList.replace('bg-outline-variant', 'bg-secondary');
+                segments[1].classList.replace('bg-outline-variant', 'bg-secondary');
+                segments[2].classList.replace('bg-outline-variant', 'bg-secondary');
+                label.textContent = "GOOD";
+                label.className = "text-label-caps font-label-caps text-secondary";
+                feedback += "Strong. Adding a unique phrase makes it better.";
+            } else if (score === 4) {
+                segments.forEach(seg => seg.classList.replace('bg-outline-variant', 'bg-primary'));
+                label.textContent = "EXCELLENT";
+                label.className = "text-label-caps font-label-caps text-primary";
+                feedback += "Enterprise ready. High entropy detected.";
+            }
+
+            aiFeedback.innerHTML = `<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> ${feedback}`;
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">progress_activity</span> Provisioning...`;
+            btn.disabled = true;
+            
+            // Micro-interaction simulation
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Success!`;
+                btn.classList.replace('bg-primary-container', 'bg-green-600');
+                setTimeout(() => {
+                    alert('Registration submitted. In a production environment, you would now be redirected to organization onboarding.');
+                    btn.innerHTML = originalHtml;
+                    btn.disabled = false;
+                    btn.classList.replace('bg-green-600', 'bg-primary-container');
+                }, 1000);
+            }, 2000);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Pricing | UdehLabs Enterprise AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#1b2b3f",
+                      "on-secondary-fixed": "#23005c",
+                      "error": "#ffb4ab",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-primary-fixed": "#0f0069",
+                      "on-background": "#d3e4fe",
+                      "on-tertiary-fixed": "#001e2f",
+                      "on-tertiary": "#00344d",
+                      "surface-variant": "#26364a",
+                      "tertiary": "#89ceff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "surface": "#031427",
+                      "surface-container": "#102034",
+                      "primary": "#c3c0ff",
+                      "on-secondary": "#3c0091",
+                      "on-tertiary-container": "#b8e0ff",
+                      "inverse-surface": "#d3e4fe",
+                      "inverse-primary": "#4d44e3",
+                      "secondary-container": "#571bc1",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "secondary": "#d0bcff",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#0b1c30",
+                      "on-surface": "#d3e4fe",
+                      "on-primary": "#1d00a5",
+                      "surface-container-highest": "#26364a",
+                      "background": "#031427",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "tertiary-container": "#006693",
+                      "outline-variant": "#464555",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "surface-container-lowest": "#000f21",
+                      "outline": "#918fa1",
+                      "surface-tint": "#c3c0ff",
+                      "on-surface-variant": "#c7c4d8",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-error": "#690005",
+                      "surface-dim": "#031427",
+                      "surface-bright": "#2a3a4f",
+                      "primary-fixed": "#e2dfff",
+                      "on-primary-container": "#dad7ff",
+                      "inverse-on-surface": "#213145",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#e9ddff",
+                      "primary-container": "#4f46e5",
+                      "on-secondary-container": "#c4abff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "max_content_width": "1440px",
+                      "md": "16px",
+                      "2xl": "48px",
+                      "sidebar_collapsed": "64px",
+                      "lg": "24px",
+                      "xl": "32px",
+                      "xs": "4px",
+                      "sidebar_width": "260px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "code-md": ["JetBrains Mono"],
+                      "label-caps": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "code-sm": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+            line-height: 1;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #464555; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant flex justify-between items-center w-full px-lg h-16">
+<div class="flex items-center gap-md">
+<img alt="UdehLabs Logo" class="h-8 w-8" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBu_eyv1J_ip7IVn9WmmYIhWkM35-2Kf3pt8mtToROdR-uN1s7AV6vMlIrFpBeCK-6iiAPT22aWkikPbVW92za97EzEW6xafR3hNk_Z9nIBY4RUIZOYjmEhRs_noOhUUQ2weKXHkzprCw5mKRd0-pc8h2z7k_EsLsa-5acLXJ_7lvumu2uU-_-F-Tzhqcmzsic-QX4m5midZB0ZfH7GRulJ81hYbpPYh1PLPkBydsXz31_nqSl1lJhUw">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">UdehLabs</span>
+</div>
+<nav class="hidden md:flex items-center gap-xl">
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Logs</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-body-md" href="#">Agents</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md" href="#">Pricing</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-all">history</button>
+<button class="bg-primary-container text-on-primary-container px-md py-sm rounded-lg font-body-md font-bold hover:opacity-80 transition-all">Create New</button>
+</div>
+</header>
+<main class="pt-32 pb-24 px-md max-w-screen-max_content_width mx-auto">
+<!-- Hero Header -->
+<div class="text-center mb-24">
+<h1 class="font-display text-display text-on-surface mb-md">Transparent Pricing for Modern Teams</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Scale your AI infrastructure with confidence. From solo developers to global enterprises, our plans grow with your requirements.
+            </p>
+</div>
+<!-- Pricing Tiers (Bento Grid Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg mb-32">
+<!-- Starter -->
+<div class="glass-panel p-xl rounded-xl flex flex-col justify-between group hover:border-primary/50 transition-all duration-300">
+<div>
+<span class="font-label-caps text-label-caps text-primary mb-md block">STARTER</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Free</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Perfect for individuals experimenting with agentic workflows.</p>
+<ul class="space-y-md mb-xl">
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                            2 AI Workspace Agents
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                            5GB Shared Storage
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                            Standard Community Support
+                        </li>
+<li class="flex items-center gap-sm text-body-md opacity-50">
+<span class="material-symbols-outlined text-[18px]">block</span>
+                            Custom SLAs
+                        </li>
+</ul>
+</div>
+<button class="w-full py-md border border-outline rounded-lg font-bold hover:bg-surface-variant/50 transition-colors">Start for Free</button>
+</div>
+<!-- Professional -->
+<div class="glass-panel p-xl rounded-xl flex flex-col justify-between relative border-primary/40 ai-glow group scale-105 z-10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary px-md py-xs rounded-full font-label-caps text-[10px]">MOST POPULAR</div>
+<div>
+<span class="font-label-caps text-label-caps text-secondary mb-md block">PROFESSIONAL</span>
+<div class="flex items-baseline gap-xs mb-sm">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">$49</h3>
+<span class="text-on-surface-variant font-body-md">/seat/mo</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Advanced orchestration for teams building production-grade AI.</p>
+<ul class="space-y-md mb-xl">
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                            20 AI Workspace Agents
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                            50GB Shared Storage
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                            Priority Email Support
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+                            API Access &amp; Integrations
+                        </li>
+</ul>
+</div>
+<button class="w-full py-md bg-primary text-on-primary rounded-lg font-bold hover:opacity-90 transition-opacity">Upgrade Now</button>
+</div>
+<!-- Enterprise -->
+<div class="glass-panel p-xl rounded-xl flex flex-col justify-between group hover:border-tertiary/50 transition-all duration-300">
+<div>
+<span class="font-label-caps text-label-caps text-tertiary mb-md block">ENTERPRISE</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Custom</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Surgical precision and security for global organizations.</p>
+<ul class="space-y-md mb-xl">
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+                            Unlimited AI Agents
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+                            1TB+ Dedicated Storage
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+                            24/7 Dedicated Concierge
+                        </li>
+<li class="flex items-center gap-sm text-body-md">
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+                            Advanced Security &amp; SLAs
+                        </li>
+</ul>
+</div>
+<button class="w-full py-md border border-outline rounded-lg font-bold hover:bg-surface-variant/50 transition-colors">Contact Sales</button>
+</div>
+</div>
+<!-- Feature Comparison Table -->
+<section class="mb-32">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xl text-center">Feature Breakdown</h2>
+<div class="overflow-x-auto glass-panel rounded-xl">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="p-lg font-label-caps text-label-caps text-on-surface-variant">Feature</th>
+<th class="p-lg font-label-caps text-label-caps text-primary text-center">Starter</th>
+<th class="p-lg font-label-caps text-label-caps text-secondary text-center">Professional</th>
+<th class="p-lg font-label-caps text-label-caps text-tertiary text-center">Enterprise</th>
+</tr>
+</thead>
+<tbody class="text-body-md">
+<tr class="border-b border-outline-variant hover:bg-surface-variant/30 transition-colors">
+<td class="p-lg text-on-surface font-bold">AI Agent Count</td>
+<td class="p-lg text-center">2</td>
+<td class="p-lg text-center font-bold">20</td>
+<td class="p-lg text-center">Unlimited</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-variant/30 transition-colors">
+<td class="p-lg text-on-surface font-bold">Workspace Storage</td>
+<td class="p-lg text-center">5GB</td>
+<td class="p-lg text-center">50GB</td>
+<td class="p-lg text-center font-bold">1TB+</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-variant/30 transition-colors">
+<td class="p-lg text-on-surface font-bold">Support Tier</td>
+<td class="p-lg text-center">Community</td>
+<td class="p-lg text-center">Priority Email</td>
+<td class="p-lg text-center font-bold">24/7 Dedicated</td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-variant/30 transition-colors">
+<td class="p-lg text-on-surface font-bold">Security Compliance</td>
+<td class="p-lg text-center">Basic</td>
+<td class="p-lg text-center">Advanced</td>
+<td class="p-lg text-center"><span class="material-symbols-outlined text-tertiary">check_circle</span></td>
+</tr>
+<tr class="border-b border-outline-variant hover:bg-surface-variant/30 transition-colors">
+<td class="p-lg text-on-surface font-bold">Human-in-the-loop Controls</td>
+<td class="p-lg text-center">—</td>
+<td class="p-lg text-center"><span class="material-symbols-outlined text-secondary">check_circle</span></td>
+<td class="p-lg text-center"><span class="material-symbols-outlined text-tertiary">check_circle</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-3xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-xl text-center">Frequently Asked Questions</h2>
+<div class="space-y-md">
+<div class="glass-panel p-lg rounded-lg border border-outline-variant/30">
+<button class="flex justify-between items-center w-full text-left font-bold text-on-surface group" onclick="toggleFaq(this)">
+<span>How does UdehLabs ensure AI safety?</span>
+<span class="material-symbols-outlined transition-transform group-[.active]:rotate-180">expand_more</span>
+</button>
+<div class="mt-md text-on-surface-variant hidden faq-content">
+                        We employ a multi-layered verification system including hard-coded constraints, sandboxed execution environments, and real-time behavioral monitoring to ensure every agent action aligns with your organizational policies.
+                    </div>
+</div>
+<div class="glass-panel p-lg rounded-lg border border-outline-variant/30">
+<button class="flex justify-between items-center w-full text-left font-bold text-on-surface group" onclick="toggleFaq(this)">
+<span>What is "Human-in-the-loop"?</span>
+<span class="material-symbols-outlined transition-transform group-[.active]:rotate-180">expand_more</span>
+</button>
+<div class="mt-md text-on-surface-variant hidden faq-content">
+                        Human-in-the-loop (HITL) allows users to set intervention points where an AI agent must wait for human approval before proceeding with high-impact decisions, such as financial transactions or production code merges.
+                    </div>
+</div>
+<div class="glass-panel p-lg rounded-lg border border-outline-variant/30">
+<button class="flex justify-between items-center w-full text-left font-bold text-on-surface group" onclick="toggleFaq(this)">
+<span>Can I change my plan at any time?</span>
+<span class="material-symbols-outlined transition-transform group-[.active]:rotate-180">expand_more</span>
+</button>
+<div class="mt-md text-on-surface-variant hidden faq-content">
+                        Yes, you can upgrade or downgrade your plan instantly. Charges are prorated based on your billing cycle.
+                    </div>
+</div>
+</div>
+</section>
+</main>
+<!-- Simple Footer -->
+<footer class="border-t border-outline-variant py-xl bg-surface-container-lowest">
+<div class="max-w-screen-max_content_width mx-auto px-lg flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex items-center gap-sm">
+<img alt="UdehLabs Logo" class="h-6 w-6 opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBu_eyv1J_ip7IVn9WmmYIhWkM35-2Kf3pt8mtToROdR-uN1s7AV6vMlIrFpBeCK-6iiAPT22aWkikPbVW92za97EzEW6xafR3hNk_Z9nIBY4RUIZOYjmEhRs_noOhUUQ2weKXHkzprCw5mKRd0-pc8h2z7k_EsLsa-5acLXJ_7lvumu2uU-_-F-Tzhqcmzsic-QX4m5midZB0ZfH7GRulJ81hYbpPYh1PLPkBydsXz31_nqSl1lJhUw">
+<span class="font-label-caps text-label-caps text-on-surface-variant">© 2024 UdehLabs Enterprise AI</span>
+</div>
+<div class="flex gap-xl text-on-surface-variant text-body-md">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
+<a class="hover:text-primary" href="#">Security</a>
+<a class="hover:text-primary" href="#">Contact</a>
+</div>
+</div>
+</footer>
+<script>
+        function toggleFaq(btn) {
+            const content = btn.nextElementSibling;
+            const isHidden = content.classList.contains('hidden');
+            
+            // Close all others
+            document.querySelectorAll('.faq-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('button.group').forEach(el => el.classList.remove('active'));
+            
+            if (isHidden) {
+                content.classList.remove('hidden');
+                btn.classList.add('active');
+            }
+        }
+
+        // Simple hover effect for pricing cards
+        document.querySelectorAll('.glass-panel').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

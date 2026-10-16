@@ -1,0 +1,42 @@
+# Phase A.36: Enterprise Reliability Engineering, Disaster Recovery & Business Continuity Architecture
+
+## Overview
+Phase A.36 introduces the **Resilience & Continuity Layer**, transforming UdehLabs from an observable platform into a self-healing, fault-tolerant ecosystem. It establishes formal recovery objectives (RTO/RPO), circuit-breaker patterns, and automated failover protocols to ensure uninterrupted engineering operations.
+
+## Core Components
+
+### 1. Reliability Domain (`IReliabilityOrchestrator`)
+- **Service Dependency Graph**: Maps critical paths between API, Database, AI Providers, and Storage to identify and mitigate single points of failure.
+- **Circuit Breaker Infrastructure**: Prevents cascading failures by isolating failing dependencies (e.g., a stalled AI provider) and enabling graceful degradation.
+- **Bulkhead Isolation**: Separates resource pools for interactive traffic, background jobs, and AI executions to prevent workload starvation.
+
+### 2. Disaster Recovery & Backup (`IDisasterRecoveryManager`)
+- **Recovery Tiers**: Classifies services into Tiers (0-3) with specific RTO (Recovery Time Objective) and RPO (Recovery Point Objective) targets.
+- **Verified Backups**: Implements a continuous backup-and-test workflow, ensuring that data restoration is proven recoverable through automated verification.
+- **Failover Architecture**: Orchestrates provider failover for AI, Email, and Storage, ensuring continuity during regional or provider-specific outages.
+
+### 3. Graceful Degradation & Business Continuity
+- **Minimum Viable Operation**: Defines the platform's smallest safe operating state, protecting core Project and Security functions even during partial outages.
+- **Load Shedding**: Explicitly deprioritizes non-essential workflows (Analytics, Notifications) during extreme traffic to preserve transactional integrity.
+- **Idempotency Guard**: Ensures all critical jobs (Billing, Deployment) support idempotent retries to prevent duplicate business operations.
+
+### 4. Resilience Simulation & Chaos Engineering
+- **Recovery Runbooks**: Structured, auditable blueprints for responding to outages, ranging from database corruption to mass credential compromise.
+- **Controlled Chaos**: A framework for safely simulating dependency latency and worker failures to validate self-healing capabilities.
+- **Reliability Scoring**: An evidence-based posture score derived from MTTR, MTTD, backup health, and SLO compliance.
+
+## Data Models
+- **ServiceDependency**: Mapping of provider-to-consumer relationships and impact.
+- **RecoveryRun / RecoveryStep**: Auditable records of automated or manual recovery actions.
+- **BackupRecord / BackupVerification**: Proof of data integrity and restoration readiness.
+- **BusinessContinuityPlan**: Strategic mappings of critical business functions to recovery strategies.
+
+## Security & Governance
+- **Fail-Closed Policy**: Security-critical systems (IAM, Vault) default to a closed state during catastrophic failure.
+- **Recovery Audit**: Every restoration or failover event is recorded in an immutable, correlation-linked timeline.
+- **Authorization-Aware Recovery**: High-impact actions (Database Restore) require multi-party human approval.
+
+## Vertical Integration
+- **A.32/A.35 Integration**: Consumes Golden Signals and Error Budgets to trigger circuit breakers and load shedding.
+- **A.34 Integration**: Ensures data recovery respects classification, retention, and legal hold policies.
+- **A.18/A.30 Integration**: Links deployment health directly to automated rollback and canary halts.

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Organization Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#2d3541",
+                      "surface-container-lowest": "#070f19",
+                      "on-background": "#dbe3f2",
+                      "secondary-container": "#6001d1",
+                      "data-blue": "#1C85E8",
+                      "on-error-container": "#ffdad6",
+                      "secondary": "#d2bbff",
+                      "primary-container": "#b9c8de",
+                      "error": "#ffb4ab",
+                      "surface-card": "#0d1b2a",
+                      "execution-violet": "#7c3aed",
+                      "on-error": "#690005",
+                      "primary-fixed-dim": "#b9c8de",
+                      "on-tertiary-fixed": "#002113",
+                      "status-critical": "#ef4444",
+                      "status-risk": "#f59e0b",
+                      "surface-container-low": "#141c27",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-tertiary": "#003824",
+                      "terminal-black": "#091017",
+                      "on-tertiary-container": "#005f40",
+                      "on-surface-variant": "#c4c6cd",
+                      "on-surface": "#dbe3f2",
+                      "error-container": "#93000a",
+                      "inverse-surface": "#dbe3f2",
+                      "surface-dim": "#0c141e",
+                      "on-secondary-container": "#c9aeff",
+                      "surface": "#0c141e",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-bright": "#323a45",
+                      "surface-tint": "#b9c8de",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-primary": "#233143",
+                      "outline-variant": "#44474c",
+                      "surface-container-highest": "#2d3541",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "outline": "#8e9197",
+                      "status-success": "#10b981",
+                      "on-secondary-fixed": "#25005a",
+                      "on-primary-container": "#455466",
+                      "border-muted": "#1e293b",
+                      "inverse-on-surface": "#29313c",
+                      "background": "#0c141e",
+                      "on-primary-fixed-variant": "#39485a",
+                      "tertiary": "#70fcbe",
+                      "inverse-primary": "#516072",
+                      "secondary-fixed": "#eaddff",
+                      "on-primary-fixed": "#0d1c2d",
+                      "primary": "#d5e4fb",
+                      "surface-container-high": "#232a36",
+                      "surface-container": "#18202b",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "primary-fixed": "#d5e4fa",
+                      "tertiary-container": "#4fdfa4",
+                      "on-secondary": "#3f008e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "base": "4px",
+                      "density-compact": "8px",
+                      "density-comfortable": "16px",
+                      "container-margin": "24px"
+              },
+              "fontFamily": {
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Pulse Animation for Status Indicators */
+        @keyframes pulse-dot {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(124, 58, 237, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+            }
+        }
+        .animate-pulse-dot {
+            animation: pulse-dot 2s infinite;
+        }
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3541;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #44474c;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md overflow-x-hidden min-h-screen selection:bg-execution-violet selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-gutter h-14 bg-surface-dim border-b border-outline-variant shadow-none hidden md:flex">
+<div class="flex items-center gap-6">
+<span class="font-headline-sm text-headline-sm text-primary">UdehLabs Phase A.39</span>
+<div class="h-4 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-4">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-200" href="#">Organizations</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-200" href="#">Clients</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-200" href="#">Internal</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors duration-200" href="#">Security</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-execution-violet text-white px-4 py-1.5 rounded-DEFAULT font-label-caps text-label-caps hover:opacity-90 transition-opacity">
+                Deploy
+            </button>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<button class="hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+<button class="hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help_outline</span>
+</button>
+<button class="hover:text-primary transition-colors duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-64 flex flex-col py-density-comfortable bg-surface-container-lowest border-r border-outline-variant hidden md:flex z-40">
+<div class="px-4 mb-6">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-DEFAULT bg-surface-variant flex items-center justify-center overflow-hidden border border-border-muted">
+<img alt="Organization Avatar" class="w-full h-full object-cover" data-alt="A sleek, minimalist corporate logo for an advanced AI technology company, featuring abstract geometric nodes connecting in a sharp, high-contrast dark mode aesthetic. The icon uses vibrant execution violet against a terminal black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC18HaGQbHxq5LQ2T0_tno578UFk5RgfaxZjgO1KnDNkw6WdHOOCiSdB9t0nxZH6KKWkXo3gNy7M4GrdcCp9wLVDhnpCHZv1AuAZKjdzhJa3jfRPit1viGwgFq1-0j3HpNfnKeKolXGxpJY-pgR6YrYr9Uw8G56vmcy6mtMk7km8YRGR-r2nitKo73kZlT3yNMrYADxP34n1xYLxwH67EVz1YAGZlHiPzW5GOInkylzMB5A828oTXMGvw"/>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">UdehLabs</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enterprise Tier</p>
+</div>
+</div>
+<button class="mt-4 w-full bg-execution-violet text-white py-2 rounded-DEFAULT font-label-caps text-label-caps hover:bg-opacity-90 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span> Quick Provision
+            </button>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2 overflow-y-auto">
+<a class="flex items-center gap-3 bg-secondary-container/10 text-secondary border-r-4 border-secondary px-4 py-2 font-label-caps text-label-caps scale-[0.98] transition-transform rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">group</span>
+                Members
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">csv</span>
+                Client Portal
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                Onboarding
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+                Billing
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">policy</span>
+                Audit Log
+            </a>
+</nav>
+<div class="mt-auto px-2 pt-4 border-t border-border-muted flex flex-col gap-1">
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+                Documentation
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-2 font-label-caps text-label-caps hover:bg-surface-variant/50 hover:text-on-surface transition-colors rounded-sm" href="#">
+<span class="material-symbols-outlined text-[18px]">support_agent</span>
+                Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pt-14 md:pl-64 min-h-screen flex flex-col">
+<div class="p-container-margin flex-1 grid grid-cols-1 md:grid-cols-12 gap-container-margin items-start">
+<!-- Breadcrumbs & Page Header -->
+<div class="col-span-full flex flex-col gap-1 mb-2">
+<div class="flex items-center text-on-surface-variant font-body-sm text-body-sm gap-2">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span>/</span>
+<span class="text-on-surface">Dashboard</span>
+</div>
+<div class="flex justify-between items-center">
+<h1 class="font-headline-md text-headline-md text-on-surface">Mission Control</h1>
+<button class="bg-execution-violet text-white px-4 py-2 rounded-DEFAULT font-label-caps text-label-caps hover:bg-opacity-90 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add_circle</span> Provision New Organization
+                    </button>
+</div>
+</div>
+<!-- Bento Grid: Provisioning Summary -->
+<div class="col-span-full md:col-span-8 bg-surface-card rounded-lg border border-border-muted overflow-hidden flex flex-col h-[320px]">
+<div class="p-density-comfortable border-b border-border-muted flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">cloud_queue</span>
+                        Provisioning Pipeline
+                    </h3>
+<a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors" href="#">View All</a>
+</div>
+<div class="flex-1 p-density-comfortable overflow-y-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container rounded-DEFAULT p-3 border border-outline-variant flex flex-col gap-2 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-success"></div>
+<div class="flex justify-between items-start pl-2">
+<span class="font-data-mono text-data-mono text-on-surface font-bold">Acme Corp</span>
+<span class="bg-status-success/10 text-status-success font-label-caps text-[9px] px-2 py-0.5 rounded-full border border-status-success/30 flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-status-success"></div> READY
+                                </span>
+</div>
+<div class="pl-2 mt-auto text-on-surface-variant font-body-sm text-body-sm flex justify-between">
+<span>ID: <span class="font-data-mono text-data-mono text-on-surface">ORG-8821</span></span>
+<span>10m ago</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container rounded-DEFAULT p-3 border border-outline-variant flex flex-col gap-2 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-data-blue"></div>
+<div class="flex justify-between items-start pl-2">
+<span class="font-data-mono text-data-mono text-on-surface font-bold">Globex</span>
+<span class="bg-data-blue/10 text-data-blue font-label-caps text-[9px] px-2 py-0.5 rounded-full border border-data-blue/30 flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-data-blue animate-pulse-dot"></div> PROVISIONING
+                                </span>
+</div>
+<div class="pl-2 mt-2">
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-data-blue h-full" style="width: 85%"></div>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant mt-1 font-data-mono">
+<span>Deploying DB...</span>
+<span>85%</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container rounded-DEFAULT p-3 border border-outline-variant flex flex-col gap-2 relative overflow-hidden group hover:border-outline transition-colors">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk"></div>
+<div class="flex justify-between items-start pl-2">
+<span class="font-data-mono text-data-mono text-on-surface font-bold">Stark Ind</span>
+<span class="bg-status-risk/10 text-status-risk font-label-caps text-[9px] px-2 py-0.5 rounded-full border border-status-risk/30 flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-status-risk"></div> SUSPENDED
+                                </span>
+</div>
+<div class="pl-2 mt-auto text-status-risk font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span> Billing Issue
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Security & Compliance Posture -->
+<div class="col-span-full md:col-span-4 bg-surface-card rounded-lg border border-border-muted overflow-hidden flex flex-col h-[320px]">
+<div class="p-density-comfortable border-b border-border-muted flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed-dim">shield_locked</span>
+                        Security Posture
+                    </h3>
+</div>
+<div class="p-density-comfortable flex flex-col items-center justify-center border-b border-border-muted bg-terminal-black">
+<div class="relative w-24 h-24 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-variant stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-status-success stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="92, 100" stroke-width="3"></path>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-display-lg text-[24px] leading-none text-on-surface font-bold">92</span>
+<span class="font-label-caps text-[9px] text-on-surface-variant mt-1">SCORE</span>
+</div>
+</div>
+</div>
+<div class="flex-1 p-density-comfortable flex flex-col gap-2">
+<a class="flex justify-between items-center p-2 rounded-DEFAULT bg-surface-container hover:bg-surface-variant transition-colors border border-outline-variant/50" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-risk text-[16px]">key</span>
+<span class="font-body-sm text-body-sm">Access Reviews</span>
+</div>
+<span class="bg-status-risk/20 text-status-risk font-data-mono text-[10px] px-1.5 py-0.5 rounded">3 OPEN</span>
+</a>
+<a class="flex justify-between items-center p-2 rounded-DEFAULT bg-surface-container hover:bg-surface-variant transition-colors border border-outline-variant/50" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-success text-[16px]">verified_user</span>
+<span class="font-body-sm text-body-sm">Policy Sync</span>
+</div>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-[10px]">UP TO DATE</span>
+</a>
+</div>
+</div>
+<!-- Enterprise Projects Table -->
+<div class="col-span-full md:col-span-8 bg-surface-card rounded-lg border border-border-muted overflow-hidden">
+<div class="p-density-comfortable border-b border-border-muted flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim">business_center</span>
+                        Active Enterprise Projects
+                    </h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest border-b border-border-muted">
+<th class="p-3 font-label-caps text-label-caps text-on-surface-variant font-medium">Project ID</th>
+<th class="p-3 font-label-caps text-label-caps text-on-surface-variant font-medium">Client Org</th>
+<th class="p-3 font-label-caps text-label-caps text-on-surface-variant font-medium w-1/3">Milestone Progress</th>
+<th class="p-3 font-label-caps text-label-caps text-on-surface-variant font-medium">Health</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm divide-y divide-border-muted">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-3 font-data-mono text-data-mono text-primary">PRJ-99A2</td>
+<td class="p-3 text-on-surface">Wayne Enterprises</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-execution-violet h-full" style="width: 60%"></div>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant">60%</span>
+</div>
+</td>
+<td class="p-3">
+<span class="bg-status-success/10 text-status-success font-label-caps text-[9px] px-2 py-0.5 rounded-full border border-status-success/30 inline-flex items-center gap-1">
+                                         ON TRACK
+                                     </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-3 font-data-mono text-data-mono text-primary">PRJ-71B8</td>
+<td class="p-3 text-on-surface">LexCorp</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-status-risk h-full" style="width: 35%"></div>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant">35%</span>
+</div>
+</td>
+<td class="p-3">
+<span class="bg-status-risk/10 text-status-risk font-label-caps text-[9px] px-2 py-0.5 rounded-full border border-status-risk/30 inline-flex items-center gap-1">
+                                         AT RISK
+                                     </span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-3 font-data-mono text-data-mono text-primary">PRJ-44C1</td>
+<td class="p-3 text-on-surface">Massive Dynamic</td>
+<td class="p-3">
+<div class="flex items-center gap-2">
+<div class="flex-1 bg-surface-variant h-1.5 rounded-full overflow-hidden">
+<div class="bg-execution-violet h-full" style="width: 90%"></div>
+</div>
+<span class="font-data-mono text-[10px] text-on-surface-variant">90%</span>
+</div>
+</td>
+<td class="p-3">
+<span class="bg-status-success/10 text-status-success font-label-caps text-[9px] px-2 py-0.5 rounded-full border border-status-success/30 inline-flex items-center gap-1">
+                                         ON TRACK
+                                     </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Client Onboarding Pipeline (Summary Card) -->
+<div class="col-span-full md:col-span-4 bg-surface-card rounded-lg border border-border-muted overflow-hidden">
+<div class="p-density-comfortable border-b border-border-muted flex justify-between items-center bg-surface-container-low">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">alt_route</span>
+                        Onboarding Pipeline
+                    </h3>
+</div>
+<div class="p-density-comfortable flex flex-col gap-3">
+<!-- Stage 1 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center font-data-mono text-[12px] text-on-surface-variant">1</div>
+<span class="font-body-sm text-body-sm text-on-surface">Discovery</span>
+</div>
+<span class="font-data-mono text-data-mono font-bold text-on-surface">12 Leads</span>
+</div>
+<!-- Stage 2 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center font-data-mono text-[12px] text-on-surface-variant">2</div>
+<span class="font-body-sm text-body-sm text-on-surface">Security Review</span>
+</div>
+<span class="font-data-mono text-data-mono font-bold text-status-risk">4 Blocks</span>
+</div>
+<!-- Stage 3 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant flex items-center justify-center font-data-mono text-[12px] text-on-surface-variant">3</div>
+<span class="font-body-sm text-body-sm text-on-surface">Squad Setup</span>
+</div>
+<span class="font-data-mono text-data-mono font-bold text-data-blue">3 Active</span>
+</div>
+<!-- Stage 4 -->
+<div class="flex items-center justify-between pt-2 border-t border-border-muted mt-1">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-execution-violet/20 border border-execution-violet/50 flex items-center justify-center font-data-mono text-[12px] text-execution-violet">4</div>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Active Deployment</span>
+</div>
+<span class="font-data-mono text-data-mono font-bold text-status-success">8 Ready</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

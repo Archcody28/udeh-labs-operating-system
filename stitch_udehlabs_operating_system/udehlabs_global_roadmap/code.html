@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Strategic Roadmap</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #464555;
+            border-radius: 10px;
+        }
+        .roadmap-grid {
+            background-image: linear-gradient(to right, #1e293b 1px, transparent 1px),
+                              linear-gradient(to bottom, #1e293b 1px, transparent 1px);
+            background-size: 100px 40px;
+        }
+        .ai-glow {
+            box-shadow: 0 0 15px 2px rgba(139, 92, 246, 0.1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#d0bcff",
+                      "tertiary-fixed": "#c9e6ff",
+                      "primary-fixed": "#e2dfff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "secondary-container": "#571bc1",
+                      "primary": "#c3c0ff",
+                      "on-primary": "#1d00a5",
+                      "surface-dim": "#031427",
+                      "on-secondary": "#3c0091",
+                      "error-container": "#93000a",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "surface-container-high": "#1b2b3f",
+                      "on-tertiary": "#00344d",
+                      "on-primary-container": "#dad7ff",
+                      "tertiary": "#89ceff",
+                      "surface-variant": "#26364a",
+                      "surface-container-low": "#0b1c30",
+                      "on-surface-variant": "#c7c4d8",
+                      "surface-container-lowest": "#000f21",
+                      "surface": "#031427",
+                      "on-secondary-fixed": "#23005c",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-error": "#690005",
+                      "tertiary-container": "#006693",
+                      "inverse-on-surface": "#213145",
+                      "secondary": "#d0bcff",
+                      "secondary-fixed": "#e9ddff",
+                      "background": "#031427",
+                      "outline-variant": "#464555",
+                      "outline": "#918fa1",
+                      "inverse-surface": "#d3e4fe",
+                      "surface-container": "#102034",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-background": "#d3e4fe",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#c3c0ff",
+                      "surface-bright": "#2a3a4f",
+                      "on-secondary-container": "#c4abff",
+                      "primary-container": "#4f46e5",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "surface-container-highest": "#26364a",
+                      "on-surface": "#d3e4fe",
+                      "inverse-primary": "#4d44e3",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "on-tertiary-container": "#b8e0ff",
+                      "on-primary-fixed": "#0f0069",
+                      "on-error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "md": "16px",
+                      "max_content_width": "1440px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "sidebar_collapsed": "64px",
+                      "base": "4px",
+                      "sm": "8px",
+                      "xs": "4px",
+                      "sidebar_width": "260px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "code-sm": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "code-md": ["JetBrains Mono"],
+                      "label-caps": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<header class="fixed left-0 top-0 w-full h-16 z-[60] bg-surface-dim flex justify-between items-center px-lg border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md font-bold text-primary">UdehLabs Platform</span>
+<div class="hidden md:flex ml-xl gap-md">
+<nav class="flex gap-lg">
+<a class="text-on-surface-variant hover:bg-surface-variant transition-colors active:scale-95 duration-100 font-body-md text-body-md px-sm py-xs" href="#">Projects</a>
+<a class="text-primary font-bold border-b-2 border-primary transition-colors active:scale-95 duration-100 font-body-md text-body-md px-sm py-xs" href="#">Strategic View</a>
+<a class="text-on-surface-variant hover:bg-surface-variant transition-colors active:scale-95 duration-100 font-body-md text-body-md px-sm py-xs" href="#">Resources</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<div class="hidden sm:flex items-center gap-xs text-on-surface-variant bg-surface-container px-md py-xs rounded-lg border border-outline-variant">
+<span class="material-symbols-outlined text-[18px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-48" placeholder="Quick search..." type="text"/>
+<span class="text-label-caps text-[10px] opacity-50 px-1 border border-outline-variant rounded">⌘ K</span>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-2 rounded transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-variant p-2 rounded transition-colors">settings</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary">
+<img alt="User profile" data-alt="A professional high-resolution user profile avatar representing a senior engineering executive in a modern AI technology lab environment. The lighting is cold and atmospheric with blue and violet undertones, reflecting the UdehLabs brand aesthetic. The focus is sharp and detailed." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz2QWSl50lUi6VlnXSgWN9JvUgSw2O07YGXbhrdo4I4mdII8MH79sIhaA-8YX1hHKPkc8no5lIkPlLITQXBS_YDpu-ScjOmVz-CSKX8cJ2LKQz5o8Y9NnQqDyxNdSiWcdajLOv2I5cdlJouueLLRMSuIHRq80xgowY4k3p1SCTTCI0zfHtZDDX0Xiq8xJxAqLX58f2APKMCSPTxMRJ9YETAhAivyYUunTkyVnK_TOBZmepqsmkUtJSmg"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 bottom-0 z-50 flex flex-col w-sidebar_width bg-surface-container border-r border-outline-variant pt-16">
+<div class="p-md flex items-center gap-md border-b border-outline-variant/50">
+<div class="w-10 h-10 bg-primary-container/20 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
+</div>
+<div>
+<p class="font-headline-md text-[16px] font-extrabold text-primary leading-tight">UdehLabs AI</p>
+<p class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant/70">Engineering v2.4</p>
+</div>
+</div>
+<nav class="flex-1 py-md space-y-1">
+<a class="flex items-center text-on-surface-variant px-md py-sm hover:bg-surface-variant/50 hover:text-on-surface transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined mr-md">dashboard</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Dashboard</span>
+</a>
+<a class="flex items-center text-primary bg-primary-container/10 border-l-4 border-primary px-md py-sm active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined mr-md">timeline</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Roadmap</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-md py-sm hover:bg-surface-variant/50 hover:text-on-surface transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined mr-md">view_kanban</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Sprint Board</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-md py-sm hover:bg-surface-variant/50 hover:text-on-surface transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined mr-md">insights</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Analytics</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-md py-sm hover:bg-surface-variant/50 hover:text-on-surface transition-all active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined mr-md">groups</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Team</span>
+</a>
+</nav>
+<div class="p-md mt-auto border-t border-outline-variant/50">
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-bold flex items-center justify-center gap-xs hover:opacity-90 transition-opacity mb-md">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                AI Insight
+            </button>
+<a class="flex items-center text-on-surface-variant px-md py-xs hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined mr-md text-[20px]">description</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Docs</span>
+</a>
+<a class="flex items-center text-on-surface-variant px-md py-xs hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined mr-md text-[20px]">logout</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="pl-[260px] pt-16 min-h-screen flex flex-col">
+<!-- Dashboard Header -->
+<div class="p-xl flex justify-between items-end border-b border-outline-variant/30">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Global Strategic Roadmap</h1>
+<p class="text-on-surface-variant font-body-md">FY24-FY25 multi-quarter trajectory and alignment matrix.</p>
+</div>
+<div class="flex gap-md">
+<div class="flex bg-surface-container p-1 rounded-lg border border-outline-variant">
+<button class="px-md py-xs text-label-caps uppercase bg-primary text-on-primary rounded">Gantt View</button>
+<button class="px-md py-xs text-label-caps uppercase text-on-surface-variant">List View</button>
+<button class="px-md py-xs text-label-caps uppercase text-on-surface-variant">Mesh View</button>
+</div>
+<button class="bg-surface-container text-on-surface border border-outline-variant px-md py-xs rounded flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Filters
+                </button>
+</div>
+</div>
+<div class="flex flex-1 overflow-hidden">
+<!-- Roadmap Area -->
+<div class="flex-1 flex flex-col overflow-auto custom-scrollbar">
+<!-- Timeline Rulers -->
+<div class="sticky top-0 z-20 flex bg-surface-container-low border-b border-outline-variant">
+<div class="w-64 flex-shrink-0 border-r border-outline-variant p-md bg-surface-container-low">
+<span class="text-label-caps text-on-surface-variant">Program Initiatives</span>
+</div>
+<div class="flex overflow-x-auto roadmap-grid">
+<div class="flex-shrink-0 w-[400px] border-r border-outline-variant/30 p-md">
+<span class="text-label-caps text-on-surface font-bold">2024 Q3</span>
+<div class="flex justify-between mt-2 text-[10px] text-on-surface-variant">
+<span>JUL</span><span>AUG</span><span>SEP</span>
+</div>
+</div>
+<div class="flex-shrink-0 w-[400px] border-r border-outline-variant/30 p-md bg-surface-container-lowest/50">
+<span class="text-label-caps text-on-surface font-bold">2024 Q4</span>
+<div class="flex justify-between mt-2 text-[10px] text-on-surface-variant">
+<span>OCT</span><span>NOV</span><span>DEC</span>
+</div>
+</div>
+<div class="flex-shrink-0 w-[400px] border-r border-outline-variant/30 p-md">
+<span class="text-label-caps text-on-surface font-bold">2025 Q1</span>
+<div class="flex justify-between mt-2 text-[10px] text-on-surface-variant">
+<span>JAN</span><span>FEB</span><span>MAR</span>
+</div>
+</div>
+<div class="flex-shrink-0 w-[400px] p-md">
+<span class="text-label-caps text-on-surface font-bold">2025 Q2</span>
+<div class="flex justify-between mt-2 text-[10px] text-on-surface-variant">
+<span>APR</span><span>MAY</span><span>JUN</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Roadmap Lanes -->
+<div class="flex-1 flex flex-col roadmap-grid relative">
+<!-- Core Infrastructure Section -->
+<div class="group border-b border-outline-variant/30">
+<div class="bg-surface-container/30 px-md py-xs font-label-caps text-tertiary-fixed border-l-4 border-tertiary">
+                            Core Infrastructure
+                        </div>
+<div class="flex h-24 items-center">
+<div class="w-64 flex-shrink-0 border-r border-outline-variant/30 px-md py-sm">
+<p class="text-body-md font-semibold">Quantum Cluster V8</p>
+<p class="text-[11px] text-on-surface-variant">Zero-latency node sync</p>
+</div>
+<div class="relative flex-1 h-full flex items-center">
+<!-- Gantt Bar -->
+<div class="absolute left-20 w-[650px] h-12 bg-surface-container-high rounded-lg border border-outline p-1 flex items-stretch">
+<div class="w-[70%] bg-tertiary-container rounded-sm flex items-center px-md overflow-hidden">
+<span class="text-[11px] text-on-tertiary-container font-bold whitespace-nowrap">Provisioning Phase</span>
+</div>
+<div class="w-[30%] bg-surface-variant rounded-sm flex items-center px-md ml-1">
+<span class="text-[11px] text-on-surface-variant whitespace-nowrap">Testing</span>
+</div>
+<!-- Autonomy Band -->
+<div class="absolute -bottom-2 left-0 right-0 h-1 flex rounded-full overflow-hidden bg-outline-variant">
+<div class="w-[20%] bg-blue-400" title="Human Focus"></div>
+<div class="w-[80%] bg-primary shadow-sm" title="AI Autonomy"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Model Training Section -->
+<div class="group border-b border-outline-variant/30">
+<div class="bg-surface-container/30 px-md py-xs font-label-caps text-primary border-l-4 border-primary">
+                            AI Model Training
+                        </div>
+<div class="flex h-24 items-center">
+<div class="w-64 flex-shrink-0 border-r border-outline-variant/30 px-md py-sm">
+<p class="text-body-md font-semibold">Nexus Logic Engine</p>
+<p class="text-[11px] text-on-surface-variant">RAG v4 Fine-tuning</p>
+</div>
+<div class="relative flex-1 h-full flex items-center">
+<div class="absolute left-[380px] w-[700px] h-12 glass-panel ai-glow rounded-lg border border-primary/30 p-1 flex items-stretch">
+<div class="w-[45%] bg-primary-container rounded-sm flex items-center px-md">
+<span class="text-[11px] text-on-primary-container font-bold">Deep Learning Sweep</span>
+</div>
+<div class="w-[55%] bg-surface-variant/40 rounded-sm flex items-center px-md ml-1">
+<span class="text-[11px] text-on-surface-variant">Validation</span>
+</div>
+<!-- Autonomy Band -->
+<div class="absolute -bottom-2 left-0 right-0 h-1 flex rounded-full overflow-hidden bg-outline-variant">
+<div class="w-[5%] bg-blue-400"></div>
+<div class="w-[95%] bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex h-24 items-center">
+<div class="w-64 flex-shrink-0 border-r border-outline-variant/30 px-md py-sm">
+<p class="text-body-md font-semibold">Vision Synthesis 2.0</p>
+<p class="text-[11px] text-on-surface-variant">Temporal coherence lab</p>
+</div>
+<div class="relative flex-1 h-full flex items-center">
+<div class="absolute left-[150px] w-[420px] h-12 bg-surface-container-high rounded-lg border border-outline-variant p-1 flex items-stretch">
+<div class="w-full bg-primary-container/40 rounded-sm flex items-center px-md">
+<span class="text-[11px] text-primary font-bold">Architecture Design</span>
+</div>
+<!-- Autonomy Band -->
+<div class="absolute -bottom-2 left-0 right-0 h-1 flex rounded-full overflow-hidden bg-outline-variant">
+<div class="w-[85%] bg-blue-400"></div>
+<div class="w-[15%] bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Client Deliverables Section -->
+<div class="group border-b border-outline-variant/30">
+<div class="bg-surface-container/30 px-md py-xs font-label-caps text-secondary border-l-4 border-secondary">
+                            Client Deliverables
+                        </div>
+<div class="flex h-24 items-center">
+<div class="w-64 flex-shrink-0 border-r border-outline-variant/30 px-md py-sm">
+<p class="text-body-md font-semibold">Apex Fintech Integration</p>
+<p class="text-[11px] text-on-surface-variant">Real-time fraud detection</p>
+</div>
+<div class="relative flex-1 h-full flex items-center">
+<div class="absolute left-[620px] w-[500px] h-12 bg-surface-container-high rounded-lg border border-secondary/30 p-1 flex items-stretch">
+<div class="w-[60%] bg-secondary-container rounded-sm flex items-center px-md">
+<span class="text-[11px] text-on-secondary-container font-bold">Deployment Ring 1</span>
+</div>
+<div class="w-[40%] bg-surface-variant rounded-sm flex items-center px-md ml-1">
+<span class="text-[11px] text-on-surface-variant">Support</span>
+</div>
+<!-- Autonomy Band -->
+<div class="absolute -bottom-2 left-0 right-0 h-1 flex rounded-full overflow-hidden bg-outline-variant">
+<div class="w-[40%] bg-blue-400"></div>
+<div class="w-[60%] bg-primary"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Strategic Outlook Sidebar -->
+<div class="w-80 border-l border-outline-variant bg-surface-container-low p-lg flex flex-col gap-lg">
+<section>
+<h3 class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant mb-md">Strategic Outlook</h3>
+<div class="space-y-md">
+<div class="glass-panel p-md rounded-lg border border-outline-variant/50">
+<p class="text-[11px] text-on-surface-variant uppercase mb-1">Human Focus</p>
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md text-on-surface">32%</span>
+<div class="flex-1 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="bg-blue-400 h-full w-[32%]"></div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-md rounded-lg border border-outline-variant/50 ai-glow">
+<p class="text-[11px] text-primary uppercase mb-1">AI Autonomy Index</p>
+<div class="flex items-center gap-md">
+<span class="font-headline-md text-headline-md text-primary">68%</span>
+<div class="flex-1 h-1.5 bg-outline-variant rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[68%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h3 class="font-label-caps text-label-caps uppercase tracking-widest text-on-surface-variant mb-md">Active KPIs</h3>
+<div class="space-y-sm">
+<div class="flex justify-between items-center p-sm hover:bg-surface-variant/30 rounded transition-colors">
+<span class="text-body-md">Model Convergence</span>
+<span class="text-tertiary font-code-md text-[13px]">99.8%</span>
+</div>
+<div class="flex justify-between items-center p-sm hover:bg-surface-variant/30 rounded transition-colors">
+<span class="text-body-md">Inference Overhead</span>
+<span class="text-error font-code-md text-[13px]">12ms</span>
+</div>
+<div class="flex justify-between items-center p-sm hover:bg-surface-variant/30 rounded transition-colors">
+<span class="text-body-md">Token Efficiency</span>
+<span class="text-on-secondary-container font-code-md text-[13px]">+14.2%</span>
+</div>
+</div>
+</section>
+<section class="mt-auto">
+<div class="rounded-xl overflow-hidden relative h-40 group cursor-pointer border border-primary/20">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 transition-all duration-500" data-alt="A futuristic digital data visualization representing complex neural network connections and strategic growth trajectories in a dark, high-tech UdehLabs corporate environment. The colors are deep indigo, violet, and electric blue with sharp white data points." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCX_rX7eOeXjJl_I_jkubfOzeFdMx8dihtLVEwbLbhgd6R8Faab-iFtzDEoG4SFYHcDn-4UnwKWnAsPsQwcgOlB85myX0V0kAtD3ONP1utA-GfliVRrmHc_qw7wPKEXa04R_wZ7V9eTPfO2Oee4Ve_fbCucImz-WiXmEfN2zflx_1NbkIhntLU6zE2TWCw-F84Ske_YYgJCc1yUfjZzq4VVgpPZBnUAaL9AQlh-S7ZhGfSxFGPYQ8BGbA"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10"></div>
+<div class="absolute bottom-0 left-0 p-md z-20">
+<p class="text-label-caps text-primary mb-1">Upcoming Report</p>
+<p class="text-body-md font-bold leading-tight">FY25 Global Market Expansion Strategy</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Only for specific roadmap planning) -->
+<button class="fixed right-8 bottom-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+<script>
+        // Simple micro-interactions for the timeline
+        document.querySelectorAll('.glass-panel').forEach(panel => {
+            panel.addEventListener('mouseenter', () => {
+                panel.style.transform = 'translateY(-2px)';
+                panel.style.transition = 'transform 0.2s ease-out';
+            });
+            panel.addEventListener('mouseleave', () => {
+                panel.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Command Palette Logic (Mock)
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                alert('Command Palette: Strategic search initiated...');
+            }
+        });
+    </script>
+</body></html>

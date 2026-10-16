@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Client Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#b8e0ff",
+                      "background": "#031427",
+                      "surface-container-low": "#0b1c30",
+                      "primary": "#c3c0ff",
+                      "primary-container": "#4f46e5",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "surface-container": "#102034",
+                      "error": "#ffb4ab",
+                      "on-tertiary": "#00344d",
+                      "outline-variant": "#464555",
+                      "secondary-container": "#571bc1",
+                      "on-tertiary-fixed": "#001e2f",
+                      "inverse-on-surface": "#213145",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-background": "#d3e4fe",
+                      "error-container": "#93000a",
+                      "on-primary-container": "#dad7ff",
+                      "surface-container-lowest": "#000f21",
+                      "inverse-primary": "#4d44e3",
+                      "secondary-fixed": "#e9ddff",
+                      "surface-container-highest": "#26364a",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-surface-variant": "#c7c4d8",
+                      "outline": "#918fa1",
+                      "surface-tint": "#c3c0ff",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "tertiary": "#89ceff",
+                      "surface-variant": "#26364a",
+                      "inverse-surface": "#d3e4fe",
+                      "secondary": "#d0bcff",
+                      "on-error-container": "#ffdad6",
+                      "on-primary": "#1d00a5",
+                      "surface-bright": "#2a3a4f",
+                      "primary-fixed": "#e2dfff",
+                      "on-surface": "#d3e4fe",
+                      "on-secondary": "#3c0091",
+                      "tertiary-container": "#006693",
+                      "on-primary-fixed": "#0f0069",
+                      "surface-container-high": "#1b2b3f",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "surface": "#031427",
+                      "surface-dim": "#031427",
+                      "on-secondary-fixed": "#23005c",
+                      "on-secondary-container": "#c4abff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sm": "8px",
+                      "base": "4px",
+                      "lg": "24px",
+                      "sidebar_collapsed": "64px",
+                      "2xl": "48px",
+                      "sidebar_width": "260px",
+                      "xs": "4px",
+                      "xl": "32px",
+                      "max_content_width": "1440px",
+                      "md": "16px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "display": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "code-sm": [
+                              "JetBrains Mono"
+                      ],
+                      "code-md": [
+                              "JetBrains Mono"
+                      ],
+                      "label-caps": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.1",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "code-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px 2px rgba(139, 92, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-lg min-h-screen flex items-center justify-center p-md sm:p-lg relative overflow-hidden">
+<!-- Abstract Background Element -->
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary-container blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] rounded-full bg-secondary-container blur-[150px]"></div>
+</div>
+<div class="w-full max-w-4xl z-10">
+<!-- Header -->
+<div class="mb-xl text-center">
+<h1 class="font-display text-display text-on-surface mb-sm">UdehLabs</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Client Onboarding Portal</p>
+</div>
+<!-- Stepper -->
+<div class="mb-xl px-lg">
+<div class="flex items-center justify-between relative">
+<!-- Progress Line -->
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-full h-[2px] bg-surface-container-high z-0"></div>
+<div class="absolute left-0 top-1/2 transform -translate-y-1/2 w-1/3 h-[2px] bg-primary z-0 transition-all duration-300" id="progress-bar"></div>
+<!-- Steps -->
+<div class="relative z-10 flex flex-col items-center group cursor-pointer" onclick="goToStep(1)">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md shadow-sm transition-all duration-300 border-2 border-transparent" id="step-1-circle">
+                        1
+                    </div>
+<span class="mt-sm font-label-caps text-label-caps text-primary tracking-wider uppercase transition-colors" id="step-1-text">Organization</span>
+</div>
+<div class="relative z-10 flex flex-col items-center group cursor-pointer" onclick="goToStep(2)">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-headline-md text-headline-md shadow-sm border-2 border-surface-container-high transition-all duration-300" id="step-2-circle">
+                        2
+                    </div>
+<span class="mt-sm font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase transition-colors" id="step-2-text">Primary Contact</span>
+</div>
+<div class="relative z-10 flex flex-col items-center group cursor-pointer" onclick="goToStep(3)">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-headline-md text-headline-md shadow-sm border-2 border-surface-container-high transition-all duration-300" id="step-3-circle">
+                        3
+                    </div>
+<span class="mt-sm font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase transition-colors" id="step-3-text">Environment</span>
+</div>
+</div>
+</div>
+<!-- Form Container -->
+<div class="bg-surface-container-low border border-surface-container-high rounded-xl shadow-lg p-lg sm:p-2xl relative overflow-hidden glass-panel ai-glow">
+<!-- Step 1: Organization Details -->
+<div class="transition-opacity duration-300 block" id="step-1-content">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-lg">Organization Details</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Company Name</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md" placeholder="e.g. Acme Corp" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Industry</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md appearance-none">
+<option value="">Select Industry</option>
+<option value="fintech">Fintech</option>
+<option value="healthtech">Healthtech</option>
+<option value="ecommerce">E-commerce</option>
+<option value="saas">Enterprise SaaS</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Company Size</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md appearance-none">
+<option value="">Select Size</option>
+<option value="1-10">1-10 Employees</option>
+<option value="11-50">11-50 Employees</option>
+<option value="51-200">51-200 Employees</option>
+<option value="201-500">201-500 Employees</option>
+<option value="500+">500+ Employees</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Step 2: Primary Contact & Goals -->
+<div class="transition-opacity duration-300 hidden" id="step-2-content">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-lg">Primary Contact &amp; Goals</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Full Name</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md" placeholder="Jane Doe" type="text"/>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Job Title</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md" placeholder="CTO" type="text"/>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Work Email</label>
+<input class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md" placeholder="jane@acmecorp.com" type="email"/>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Primary Software Goals (Briefly)</label>
+<textarea class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md resize-none h-24" placeholder="e.g. Modernize legacy architecture, implement AI features..."></textarea>
+</div>
+</div>
+</div>
+<!-- Step 3: Technical Environment -->
+<div class="transition-opacity duration-300 hidden" id="step-3-content">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-lg">Technical Environment &amp; Budget</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Current Cloud Provider</label>
+<div class="flex flex-wrap gap-sm">
+<label class="cursor-pointer">
+<input class="peer sr-only" name="cloud" type="radio" value="aws"/>
+<div class="px-md py-sm border border-outline-variant rounded-lg text-on-surface-variant peer-checked:bg-primary-container/20 peer-checked:text-primary peer-checked:border-primary transition-all font-body-md text-body-md">AWS</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="cloud" type="radio" value="gcp"/>
+<div class="px-md py-sm border border-outline-variant rounded-lg text-on-surface-variant peer-checked:bg-primary-container/20 peer-checked:text-primary peer-checked:border-primary transition-all font-body-md text-body-md">GCP</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="cloud" type="radio" value="azure"/>
+<div class="px-md py-sm border border-outline-variant rounded-lg text-on-surface-variant peer-checked:bg-primary-container/20 peer-checked:text-primary peer-checked:border-primary transition-all font-body-md text-body-md">Azure</div>
+</label>
+<label class="cursor-pointer">
+<input class="peer sr-only" name="cloud" type="radio" value="other"/>
+<div class="px-md py-sm border border-outline-variant rounded-lg text-on-surface-variant peer-checked:bg-primary-container/20 peer-checked:text-primary peer-checked:border-primary transition-all font-body-md text-body-md">Other/None</div>
+</label>
+</div>
+</div>
+<div class="col-span-1 md:col-span-2">
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-sm uppercase tracking-wider">Estimated Project Budget Range</label>
+<select class="w-full bg-surface-container border border-outline-variant rounded-lg px-md py-sm text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors font-body-md text-body-md appearance-none">
+<option value="">Select Budget Range</option>
+<option value="under50k">&lt; $50,000</option>
+<option value="50k-100k">$50,000 - $100,000</option>
+<option value="100k-250k">$100,000 - $250,000</option>
+<option value="250k-500k">$250,000 - $500,000</option>
+<option value="500k+">$500,000+</option>
+</select>
+</div>
+<div class="col-span-1 md:col-span-2 mt-sm">
+<label class="flex items-start gap-sm cursor-pointer group">
+<div class="relative flex items-center justify-center w-5 h-5 mt-0.5 border border-outline-variant rounded bg-surface-container group-hover:border-primary transition-colors">
+<input class="peer sr-only" type="checkbox"/>
+<span class="material-symbols-outlined text-[16px] text-primary opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant leading-tight">I agree to the <a class="text-primary hover:underline" href="#">Terms of Service</a> and acknowledge the <a class="text-primary hover:underline" href="#">Privacy Policy</a>.</span>
+</label>
+</div>
+</div>
+</div>
+<!-- Navigation Buttons -->
+<div class="mt-xl pt-lg border-t border-surface-container-high flex justify-between items-center">
+<button class="invisible px-lg py-sm font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface transition-colors flex items-center gap-xs uppercase tracking-wider" id="prev-btn" onclick="prevStep()">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                    Back
+                </button>
+<button class="px-lg py-sm bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:bg-primary-fixed-dim transition-colors flex items-center gap-xs shadow-sm uppercase tracking-wider ml-auto" id="next-btn" onclick="nextStep()">
+                    Continue
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="hidden px-lg py-sm bg-primary-container text-on-primary-container rounded-lg font-label-caps text-label-caps hover:bg-inverse-primary transition-colors flex items-center gap-xs shadow-md uppercase tracking-wider ai-glow ml-auto" id="submit-btn" onclick="submitForm()">
+                    Submit Request
+                    <span class="material-symbols-outlined text-[18px]">check_circle</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        function updateUI() {
+            // Update Progress Bar
+            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+
+            // Update Circles and Text
+            for (let i = 1; i <= totalSteps; i++) {
+                const circle = document.getElementById(`step-${i}-circle`);
+                const text = document.getElementById(`step-${i}-text`);
+                
+                if (i < currentStep) {
+                    // Completed
+                    circle.className = 'w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md shadow-sm transition-all duration-300 border-2 border-transparent';
+                    circle.innerHTML = '<span class="material-symbols-outlined text-[20px]">check</span>';
+                    text.className = 'mt-sm font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase transition-colors';
+                } else if (i === currentStep) {
+                    // Current
+                    circle.className = 'w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-md text-headline-md shadow-sm transition-all duration-300 border-2 border-transparent';
+                    circle.innerHTML = i;
+                    text.className = 'mt-sm font-label-caps text-label-caps text-primary tracking-wider uppercase transition-colors font-bold';
+                } else {
+                    // Future
+                    circle.className = 'w-10 h-10 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center font-headline-md text-headline-md shadow-sm border-2 border-surface-container-high transition-all duration-300';
+                    circle.innerHTML = i;
+                    text.className = 'mt-sm font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase transition-colors';
+                }
+            }
+
+            // Update Content Visibility
+            for (let i = 1; i <= totalSteps; i++) {
+                const content = document.getElementById(`step-${i}-content`);
+                if (i === currentStep) {
+                    content.classList.remove('hidden');
+                    // Small delay to allow display:block to apply before fading in
+                    setTimeout(() => {
+                        content.classList.add('opacity-100');
+                        content.classList.remove('opacity-0');
+                    }, 50);
+                } else {
+                    content.classList.add('hidden', 'opacity-0');
+                    content.classList.remove('opacity-100');
+                }
+            }
+
+            // Update Buttons
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const submitBtn = document.getElementById('submit-btn');
+
+            if (currentStep === 1) {
+                prevBtn.classList.add('invisible');
+            } else {
+                prevBtn.classList.remove('invisible');
+            }
+
+            if (currentStep === totalSteps) {
+                nextBtn.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+            } else {
+                nextBtn.classList.remove('hidden');
+                submitBtn.classList.add('hidden');
+            }
+        }
+
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                updateUI();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateUI();
+            }
+        }
+
+        function goToStep(step) {
+            // Optional: Add validation logic here before allowing jump
+            if (step >= 1 && step <= totalSteps) {
+                currentStep = step;
+                updateUI();
+            }
+        }
+
+        function submitForm() {
+            // Simulate form submission
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">sync</span> Processing...';
+            btn.disabled = true;
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                alert('Onboarding request submitted successfully!');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                // Reset form optionally
+                // currentStep = 1; updateUI();
+            }, 1500);
+        }
+
+        // Initialize UI
+        updateUI();
+    </script>
+</body></html>

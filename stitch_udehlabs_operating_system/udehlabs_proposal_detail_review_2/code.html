@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proposal Detail &amp; Review - Deliverables</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "outline": "#99907c",
+                        "secondary-container": "#006b75",
+                        "on-surface-variant": "#d0c5af",
+                        "estimate-slate": "#94A3B8",
+                        "outline-variant": "#4d4635",
+                        "on-primary": "#3c2f00",
+                        "tertiary": "#c0d0e6",
+                        "surface-container": "#18202b",
+                        "on-secondary": "#00363c",
+                        "approval-gold": "#D4AF37",
+                        "secondary-fixed-dim": "#82d3de",
+                        "on-background": "#dbe3f1",
+                        "surface-container-high": "#232b35",
+                        "primary-container": "#d4af37",
+                        "surface-card": "#121C29",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#241a00",
+                        "surface-variant": "#2d3540",
+                        "on-tertiary": "#233143",
+                        "surface": "#0c141e",
+                        "on-secondary-fixed": "#001f23",
+                        "status-caution": "#F59E0B",
+                        "contract-teal": "#006D77",
+                        "border-subtle": "#1E293B",
+                        "inverse-primary": "#735c00",
+                        "on-tertiary-fixed-variant": "#39485a",
+                        "surface-container-highest": "#2d3540",
+                        "secondary-fixed": "#9ff0fb",
+                        "on-secondary-fixed-variant": "#004f56",
+                        "inverse-on-surface": "#29313c",
+                        "primary-fixed-dim": "#e9c349",
+                        "tertiary-fixed-dim": "#b9c8de",
+                        "on-tertiary-container": "#384658",
+                        "primary": "#f2ca50",
+                        "primary-fixed": "#ffe088",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-dim": "#0c141e",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-low": "#141c26",
+                        "background": "#0c141e",
+                        "surface-tint": "#e9c349",
+                        "surface-bright": "#323a45",
+                        "tertiary-container": "#a5b4ca",
+                        "surface-container-lowest": "#070f18",
+                        "tertiary-fixed": "#d4e4fa",
+                        "error-container": "#93000a",
+                        "on-secondary-container": "#98e9f4",
+                        "on-primary-container": "#554300",
+                        "inverse-surface": "#dbe3f1",
+                        "on-tertiary-fixed": "#0d1c2d",
+                        "on-surface": "#dbe3f1",
+                        "secondary": "#82d3de",
+                        "status-positive": "#10B981"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "component-gap-sm": "8px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "section-padding": "48px",
+                        "gutter": "24px",
+                        "component-gap-md": "16px"
+                    },
+                    "fontFamily": {
+                        "data-mono-sm": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono-lg": ["JetBrains Mono"],
+                        "summary-title": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "data-mono-sm": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono-lg": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "summary-title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["32px", { "lineHeight": "40px", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        .ambient-plumb-shadow { box-shadow: 0 0 20px 12px rgba(0, 0, 0, 0.25); }
+        
+        /* Custom Scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.surface-container-lowest'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: theme('borderRadius.DEFAULT'); }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.on-surface-variant'); }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-full py-component-gap-md px-4 bg-surface-container border-r border-outline-variant shadow-none w-64 z-20 shrink-0">
+<div class="mb-margin">
+<div class="flex items-center gap-component-gap-sm mb-unit">
+<img alt="Proposal Context" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A macro shot of a sleek, dark metallic server blade with glowing gold led indicators in a high-tech data center, cinematic lighting, corporate modern aesthetic, representing high-fidelity infrastructure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnk7VLZRnc2YGlb6mUsn9NHK29XPsojDeCjJzOp3ijmMSBGdoyiXCnf4QtM80BKuFOAf9QLhz-5PgCRGTPZCPnzkWOJ-Lu_67TOWsx3VcIIA4EINE8XN8kHaf6A3WPw9u2rdvWnGT6Vehizr1LGvulQTTwbuHT2uVTpaR3Orr_fZl_WBqjD6_rSyC-SdZ5-ePpH2vjl--I8cBV6dnukBwJFyRMhANsTdKswkGsorbenTQhbmPYWmoF6A"/>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Proposal v2.4</h2>
+<p class="font-data-mono-sm text-data-mono-sm text-on-surface-variant">ID: PR-9928-X</p>
+</div>
+</div>
+<button class="w-full mt-4 border border-border-subtle bg-surface hover:bg-surface-variant text-secondary font-label-caps text-label-caps py-2 px-4 rounded-DEFAULT transition-all text-left flex justify-between items-center">
+                Compare Versions
+                <span class="material-symbols-outlined text-[16px]">history</span>
+</button>
+</div>
+<nav class="flex-1 space-y-unit overflow-y-auto pr-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" data-icon="summarize">summarize</span>
+<span class="font-label-caps text-label-caps">Summary</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" data-icon="list_alt">list_alt</span>
+<span class="font-label-caps text-label-caps">Scope &amp; Features</span>
+</a>
+<!-- Active Tab: Deliverables -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-secondary-container text-on-secondary-container font-bold translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2" data-weight="fill">inventory_2</span>
+<span class="font-label-caps text-label-caps">Deliverables</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-caps text-label-caps">Timeline</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" data-icon="payments">payments</span>
+<span class="font-label-caps text-label-caps">Commercials</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" data-icon="gavel">gavel</span>
+<span class="font-label-caps text-label-caps">Legal &amp; Terms</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary transition-colors" data-icon="history">history</span>
+<span class="font-label-caps text-label-caps">Audit History</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 bg-background relative">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between px-margin py-2 w-full bg-surface-container-high border-b border-outline-variant shadow-md z-10 shrink-0">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container rounded-full transition-colors active:scale-95 duration-150 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="font-summary-title text-summary-title text-approval-gold">
+                    Proposal v2.4 | <span class="opacity-80">SENT_TO_CLIENT</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="font-label-caps text-label-caps text-primary mr-4 hidden lg:block">
+                    UdehLabs Commercial
+                </div>
+<button class="px-4 py-2 border border-border-subtle rounded-DEFAULT text-on-surface-variant font-label-caps text-label-caps hover:bg-surface-variant transition-colors active:scale-95 flex items-center gap-2">
+                    Compare
+                    <span class="material-symbols-outlined text-[16px]">difference</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Canvas (Bento Grid Layout) -->
+<main class="flex-1 overflow-y-auto p-gutter pb-32">
+<div class="max-w-7xl mx-auto grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Left Column: Deliverables List (8 cols) -->
+<div class="xl:col-span-8 space-y-component-gap-md">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-surface">Project Deliverables</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Detailed breakdown of in-scope commercial assets and engineering artifacts.</p>
+</div>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-1 px-2 py-1 rounded bg-status-positive/10 text-status-positive font-data-mono-sm text-data-mono-sm border border-status-positive/20">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> 12 In Scope
+                            </span>
+</div>
+</div>
+<!-- Deliverable Card 1 -->
+<article class="bg-surface-card border border-border-subtle rounded-lg p-6 ambient-plumb-shadow relative overflow-hidden group hover:border-contract-teal transition-colors">
+<!-- Traceability Header -->
+<div class="absolute top-0 left-0 w-full px-6 py-1 bg-surface-container-lowest border-b border-border-subtle flex justify-between items-center opacity-70">
+<span class="font-label-caps text-[9px] text-estimate-slate">ORG: UDEH-CORP-INT</span>
+<span class="font-label-caps text-[9px] text-estimate-slate">HASH: 0x9f8a...2b1c</span>
+</div>
+<div class="mt-6 flex justify-between items-start mb-4">
+<div>
+<h3 class="font-summary-title text-summary-title text-on-surface mb-1">Cloud Infrastructure Setup</h3>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-status-positive/15 text-status-positive font-label-caps text-label-caps border border-status-positive/30">
+                                        In Scope
+                                    </span>
+<span class="font-data-mono-sm text-data-mono-sm text-estimate-slate flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 40 hrs
+                                    </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-contract-teal transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Provisioning and configuration of highly available multi-region AWS environments, including VPCs, load balancers, and initial ECS clusters required for the core orchestrator layer.
+                        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-outline-variant/30">
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-2">Acceptance Criteria</h4>
+<ul class="space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-contract-teal mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Terraform scripts committed to main branch.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-contract-teal mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Successful deployment to staging environment.</span>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-2">Traceability Linkages</h4>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded border border-border-subtle font-data-mono-sm text-data-mono-sm text-secondary flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[14px]">link</span> REQ-001
+                                    </span>
+<span class="px-2 py-1 bg-surface-variant rounded border border-border-subtle font-data-mono-sm text-data-mono-sm text-secondary flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[14px]">link</span> REQ-005
+                                    </span>
+</div>
+</div>
+</div>
+</article>
+<!-- Deliverable Card 2 -->
+<article class="bg-surface-card border border-border-subtle rounded-lg p-6 ambient-plumb-shadow relative overflow-hidden group hover:border-contract-teal transition-colors">
+<div class="absolute top-0 left-0 w-full px-6 py-1 bg-surface-container-lowest border-b border-border-subtle flex justify-between items-center opacity-70">
+<span class="font-label-caps text-[9px] text-estimate-slate">ORG: UDEH-CORP-INT</span>
+<span class="font-label-caps text-[9px] text-estimate-slate">HASH: 0x4d2e...9a4f</span>
+</div>
+<div class="mt-6 flex justify-between items-start mb-4">
+<div>
+<h3 class="font-summary-title text-summary-title text-on-surface mb-1">Commercial Dashboard UI</h3>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded-sm bg-status-positive/15 text-status-positive font-label-caps text-label-caps border border-status-positive/30">
+                                        In Scope
+                                    </span>
+<span class="font-data-mono-sm text-data-mono-sm text-estimate-slate flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 120 hrs
+                                    </span>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-contract-teal transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                            Implementation of the executive operating layer interface, featuring rigid grid layouts, data-heavy bento cards, and the hybrid elevation styling defined in the brand guidelines.
+                        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-outline-variant/30">
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-2">Acceptance Criteria</h4>
+<ul class="space-y-2">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-contract-teal mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Pixel-perfect match to Figma designs.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-contract-teal mt-0.5">check</span>
+<span class="font-body-md text-body-md text-on-surface-variant text-sm">Cross-browser compatibility (Chrome, Safari, Edge).</span>
+</li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-2">Traceability Linkages</h4>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-surface-variant rounded border border-border-subtle font-data-mono-sm text-data-mono-sm text-secondary flex items-center gap-1 cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[14px]">link</span> REQ-012
+                                    </span>
+</div>
+</div>
+</div>
+</article>
+<!-- Add Deliverable Button -->
+<button class="w-full py-4 border border-dashed border-outline-variant rounded-lg text-on-surface-variant hover:text-primary hover:border-primary hover:bg-primary/5 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-caps text-label-caps">Propose Additional Deliverable</span>
+</button>
+</div>
+<!-- Right Column: Executive Summary Sidebar (4 cols) -->
+<div class="xl:col-span-4 space-y-component-gap-md">
+<!-- Summary Card -->
+<div class="bg-surface-container-low border border-border-subtle rounded-lg p-6 sticky top-0">
+<h2 class="font-summary-title text-summary-title text-on-surface mb-6 flex items-center gap-2 border-b border-border-subtle pb-4">
+<span class="material-symbols-outlined text-approval-gold">analytics</span>
+                            Executive Summary
+                        </h2>
+<div class="space-y-6">
+<!-- Totals -->
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-2">Estimated Total Effort</h4>
+<div class="font-data-mono-lg text-data-mono-lg text-primary flex items-end gap-1">
+                                    480 <span class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mb-1">Hours</span>
+</div>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-2">Project Timeline</h4>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">calendar_month</span>
+<span class="font-body-md text-body-md text-on-surface">12 Weeks (Est. Delivery Q3)</span>
+</div>
+</div>
+<!-- Financial Highlight (Unit-Prefix Pattern) -->
+<div class="bg-surface-container rounded border border-border-subtle overflow-hidden">
+<div class="px-4 py-2 bg-surface-container-highest border-b border-border-subtle flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-estimate-slate">Total Investment</span>
+</div>
+<div class="p-4 flex items-center">
+<div class="bg-surface-variant px-3 py-2 rounded-l text-estimate-slate font-data-mono-lg border border-r-0 border-border-subtle">$</div>
+<div class="bg-surface px-4 py-2 rounded-r border border-border-subtle flex-1 font-data-mono-lg text-data-mono-lg text-on-surface">
+                                        125,000.00
+                                    </div>
+</div>
+</div>
+<!-- Risk Assessment -->
+<div>
+<h4 class="font-label-caps text-label-caps text-estimate-slate mb-3">Risk Assessment</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded bg-surface border border-border-subtle">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-caution"></span>
+<span class="font-body-md text-body-md text-on-surface text-sm">Timeline Slippage</span>
+</div>
+<span class="font-label-caps text-[10px] text-status-caution bg-status-caution/10 px-2 py-0.5 rounded border border-status-caution/20">Medium</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded bg-surface border border-border-subtle">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-positive"></span>
+<span class="font-body-md text-body-md text-on-surface text-sm">Technical Feasibility</span>
+</div>
+<span class="font-label-caps text-[10px] text-status-positive bg-status-positive/10 px-2 py-0.5 rounded border border-status-positive/20">Low</span>
+</div>
+</div>
+</div>
+<!-- Clarification Hub Link (Internal) -->
+<div class="mt-8 p-4 rounded bg-surface-variant relative overflow-hidden group cursor-pointer border border-border-subtle hover:border-outline transition-colors">
+<!-- Redacted Watermark Pattern for internal notes -->
+<div class="absolute inset-0 opacity-5 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, theme('colors.on-surface') 10px, theme('colors.on-surface') 20px);"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">forum</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold text-sm">Internal Clarifications</span>
+</div>
+<span class="bg-error/20 text-error font-data-mono-sm px-1.5 py-0.5 rounded text-xs">2 New</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-end items-center gap-component-gap-md px-margin py-4 bg-surface-container-highest border-t border-approval-gold shadow-2xl">
+<div class="mr-auto font-label-caps text-label-caps text-on-surface hidden md:block">
+            UdehLabs Executive Control Layer
+        </div>
+<div class="flex items-center gap-4">
+<button class="border border-estimate-slate text-estimate-slate px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 transition-all bg-transparent">
+                Internal Approve
+            </button>
+<button class="border border-estimate-slate text-estimate-slate px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 transition-all bg-transparent">
+                Send to Client
+            </button>
+<!-- Active Actions from Prompt -->
+<button class="border border-contract-teal text-contract-teal bg-contract-teal/10 px-6 py-2 rounded-lg font-label-caps text-label-caps hover:bg-contract-teal/20 transition-all shadow-[inset_0_0_8px_rgba(0,109,119,0.2)]">
+                Request Revision
+            </button>
+<button class="bg-approval-gold text-on-primary font-bold px-6 py-2 rounded-lg font-label-caps text-label-caps hover:brightness-110 active:scale-98 transition-all shadow-lg shadow-approval-gold/20">
+                Sign &amp; Authorize
+            </button>
+</div>
+</footer>
+</body></html>

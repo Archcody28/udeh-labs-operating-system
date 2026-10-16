@@ -1,0 +1,39 @@
+# UdehLabs | Phase P.01 Product Activation Strategy
+
+## 1. Product Readiness Definition
+- **What UdehLabs Does**: Provides an autonomous, enterprise-grade AI software engineering factory.
+- **Who It Is For**: CTOs, Engineering Leads, and Product Teams looking to accelerate development with autonomous AI squads.
+- **Primary Problem**: The friction and latency in moving from technical specs to verified production code.
+- **First Valuable Outcome**: A successfully executed autonomous engineering task with verifiable implementation evidence.
+
+## 2. Optimized First-User Journey
+1. **Discover**: Landing Page (SCREEN_336) clearly articulating the "Future of Software is Collaborative."
+2. **Landing**: Obvious CTA "Build with UdehLabs" leading to Signup.
+3. **Signup**: Simplified form (SCREEN_334) with SSO options.
+4. **Verification**: Multi-factor identity check (Phase A.31/A.33 legacy).
+5. **Onboarding**: Step-by-step persona and organization setup.
+6. **Workspace**: Automatic provisioning of the primary AI workspace (SCREEN_330).
+7. **Activation Event**: "First Agent Run" - user triggers an agent to analyze code or generate a spec.
+
+## 3. Product Analytics Plan (Lifecycle Events)
+- `landing_view`
+- `signup_started`
+- `signup_completed`
+- `onboarding_started`
+- `onboarding_completed`
+- `workspace_provisioned`
+- `first_agent_invocation` (Primary Activation)
+- `first_task_verified`
+- `core_value_experienced`
+
+## 4. Onboarding Checklist Implementation
+- [ ] Profile Verification
+- [ ] Organization Provisioning
+- [ ] Connect Repository / Initialize Template
+- [ ] First AI Interaction
+- [ ] Launch Autonomous Squad
+
+## 5. Success Metrics
+- **Activation Rate**: % of users reaching 'First Agent Invocation' within 10 minutes of signup.
+- **Time to Value**: Duration from landing to 'First Task Verified'.
+- **Retention**: 7-day return rate for active project management.

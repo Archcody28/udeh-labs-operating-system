@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CogniCore - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#232a36",
+                        "on-secondary": "#3f008e",
+                        "background": "#0c141e",
+                        "execution-violet": "#7c3aed",
+                        "terminal-black": "#091017",
+                        "secondary-container": "#6001d1",
+                        "tertiary-fixed": "#6ffbbe",
+                        "outline-variant": "#44474c",
+                        "tertiary-container": "#6ffbbe",
+                        "on-primary": "#233143",
+                        "surface": "#0c141e",
+                        "on-secondary-fixed": "#25005a",
+                        "tertiary": "#ffffff",
+                        "border-muted": "#1e293b",
+                        "secondary-fixed": "#eaddff",
+                        "inverse-on-surface": "#29313c",
+                        "inverse-primary": "#515f73",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "surface-container": "#18202b",
+                        "on-background": "#dbe3f2",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "secondary": "#d2bbff",
+                        "surface-tint": "#b9c8de",
+                        "data-blue": "#1C85E8",
+                        "surface-container-low": "#141c27",
+                        "surface-container-highest": "#2d3541",
+                        "on-tertiary": "#003824",
+                        "primary-fixed": "#d5e4fb",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-surface-variant": "#c4c6cd",
+                        "on-secondary-container": "#c9aeff",
+                        "primary-container": "#d5e4fb",
+                        "on-tertiary-container": "#00734e",
+                        "outline": "#8e9197",
+                        "error-container": "#93000a",
+                        "inverse-surface": "#dbe3f2",
+                        "on-tertiary-fixed": "#002113",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-dim": "#0c141e",
+                        "primary-fixed-dim": "#b9c8de",
+                        "status-success": "#10b981",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-surface": "#dbe3f2",
+                        "surface-bright": "#323a45",
+                        "primary": "#ffffff",
+                        "error": "#ffb4ab",
+                        "surface-container-lowest": "#070f19",
+                        "surface-variant": "#2d3541",
+                        "status-critical": "#ef4444",
+                        "surface-card": "#0d1b2a",
+                        "on-primary-fixed": "#0d1c2d",
+                        "status-risk": "#f59e0b",
+                        "on-primary-container": "#576579",
+                        "secondary-fixed-dim": "#d2bbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "container-margin": "24px",
+                        "sidebar_width": "260px",
+                        "density-compact": "8px",
+                        "density-comfortable": "16px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .data-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom scrollbar for terminal vibes */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0c141e; border-left: 1px solid #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #2d3541; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #44474c; }
+
+        /* Pulse dot animation */
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .animate-pulse-dot { animation: pulse-dot 2s infinite; }
+    </style>
+</head>
+<body class="bg-background text-on-surface h-screen overflow-hidden flex selection:bg-execution-violet selection:text-white">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen sticky left-0 top-0 w-sidebar_width bg-surface-container-lowest border-r border-border-muted py-container-margin z-50">
+<!-- Brand/Header -->
+<div class="px-container-margin mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-execution-violet flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">memory</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">CogniCore</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Enterprise Memory</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 overflow-y-auto px-4 flex flex-col gap-1">
+<a class="flex items-center gap-compact text-on-surface-variant hover:text-on-surface px-comfortable py-density-compact rounded hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">database</span>
+<span class="font-body-md text-body-md">Collections</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant hover:text-on-surface px-comfortable py-density-compact rounded hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">source</span>
+<span class="font-body-md text-body-md">Sources</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant hover:text-on-surface px-comfortable py-density-compact rounded hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">memory</span>
+<span class="font-body-md text-body-md">Memory</span>
+</a>
+<!-- Active State Navigation -->
+<a class="flex items-center gap-compact bg-surface-container-high text-primary border-l-4 border-execution-violet px-comfortable py-density-compact rounded-r opacity-90 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-body-md text-body-md font-medium">Search</span>
+</a>
+</div>
+<!-- CTA & Footer Tabs -->
+<div class="px-4 mt-auto flex flex-col gap-4">
+<button class="w-full bg-execution-violet hover:bg-secondary-container text-white font-body-md text-body-md font-medium py-2 px-4 rounded transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Collection
+            </button>
+<div class="h-px bg-border-muted w-full my-2"></div>
+<a class="flex items-center gap-compact text-on-surface-variant hover:text-on-surface px-comfortable py-density-compact rounded hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-compact text-on-surface-variant hover:text-on-surface px-comfortable py-density-compact rounded hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">help</span>
+<span class="font-body-md text-body-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden bg-background">
+<!-- TopAppBar (Shared Component adapted for context) -->
+<header class="h-16 w-full sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-muted flex items-center justify-between px-container-margin shrink-0">
+<div class="flex items-center gap-6">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-sm text-headline-sm font-bold text-on-surface">UdehLabs</div>
+<!-- Search Nav Links (Contextual to TopAppBar rules) -->
+<nav class="hidden lg:flex gap-6">
+<a class="text-primary font-bold border-b-2 border-execution-violet h-16 flex items-center px-1" href="#">Intelligent Search</a>
+<a class="text-on-surface-variant font-medium h-16 flex items-center px-1 hover:text-primary transition-colors" href="#">Cluster Health</a>
+<a class="text-on-surface-variant font-medium h-16 flex items-center px-1 hover:text-primary transition-colors" href="#">Conflict Logs</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2 rounded hover:bg-surface-container">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="hidden md:flex border border-outline-variant text-on-surface font-body-md text-body-md px-4 py-1.5 rounded hover:bg-surface-container transition-colors items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-success animate-pulse-dot"></span>
+                    Deploy Agent
+                </button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-border-muted flex items-center justify-center overflow-hidden ml-2">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A macro photograph of an abstract iridescent metallic surface catching a deep violet light, serving as a futuristic default user avatar profile picture. High contrast, sharp details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk0w0OHlN6i6zScvgRnexp0LLM85LB6ylRBpO7XXBnnCf7EIi3AWMACV5XmcNNikYFfjzNVA3fkFMe9E4ovkKyd74zS6GxI9mvqGRYGS_6ZmnTrfysp4KcUB6ZqDy_0_uGFwsZQlNvUuqg6XfCGiiyE2O7jhanN3_8DFH_aa4xY4J5Rl3GDYwPtSPY8RoETh1dhSjWE4bm3y8A_NaYI66DAFY37lsiEb49djdDjHWaVZBsw4DN_jcgWw"/>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto overflow-x-hidden p-container-margin flex flex-col md:flex-row gap-6">
+<!-- Filters Sidebar (4 Columns) -->
+<aside class="w-full md:w-64 shrink-0 flex flex-col gap-6">
+<!-- Status Block -->
+<div class="bg-surface-card border border-border-muted rounded p-4 relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-execution-violet"></div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Index Status</span>
+<div class="flex items-center gap-1.5 bg-status-success/10 border border-status-success/30 px-2 py-0.5 rounded text-[10px] text-status-success font-data-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-status-success animate-pulse-dot"></span>
+                            LIVE
+                        </div>
+</div>
+<div class="font-data-mono text-data-mono text-primary">14.2M Documents</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Last sync: 2m ago</div>
+</div>
+<!-- Filter Form -->
+<form class="flex flex-col gap-6">
+<!-- Source Type -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Source Type</h3>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded flex items-center justify-center border transition-colors group-hover:border-primary bg-status-success/20 border-status-success">
+<span class="material-symbols-outlined text-[14px] text-status-success" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Repositories</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded flex items-center justify-center border border-outline-variant bg-transparent transition-colors group-hover:border-primary">
+<!-- Unchecked empty state -->
+</div>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Documentation</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<div class="w-5 h-5 rounded flex items-center justify-center border transition-colors group-hover:border-primary bg-status-success/20 border-status-success">
+<span class="material-symbols-outlined text-[14px] text-status-success" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface group-hover:text-primary transition-colors">Tickets (JIRA/Linear)</span>
+</label>
+</div>
+</div>
+<!-- Collection -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Collection</h3>
+<div class="relative">
+<select class="w-full bg-terminal-black border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface appearance-none focus:outline-none focus:ring-1 focus:ring-execution-violet focus:border-execution-violet transition-shadow">
+<option>Core Infrastructure</option>
+<option>Frontend Monorepo</option>
+<option>Payments Service</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<!-- Date Range -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest mb-3">Date Range</h3>
+<div class="relative">
+<select class="w-full bg-terminal-black border border-outline-variant rounded px-3 py-2 font-body-md text-body-md text-on-surface appearance-none focus:outline-none focus:ring-1 focus:ring-execution-violet focus:border-execution-violet transition-shadow">
+<option>Last 30 Days</option>
+<option>Last 7 Days</option>
+<option>Custom Range...</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</form>
+</aside>
+<!-- Search Canvas (8 Columns) -->
+<section class="flex-1 flex flex-col gap-6 min-w-0">
+<!-- Search Input Area -->
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-execution-violet text-xl" style="font-variation-settings: 'FILL' 0;">magic_button</span>
+</div>
+<input class="w-full bg-terminal-black border-2 border-outline-variant rounded-lg pl-12 pr-24 py-4 font-headline-sm text-headline-sm text-primary placeholder-on-surface-variant focus:outline-none focus:border-execution-violet focus:ring-1 focus:ring-execution-violet transition-all shadow-[0_0_15px_rgba(124,58,237,0.1)] focus:shadow-[0_0_20px_rgba(124,58,237,0.2)]" placeholder="Ask anything..." type="text" value="Why did the payments service fail last week?"/>
+<div class="absolute inset-y-0 right-0 pr-2 flex items-center">
+<button class="bg-execution-violet hover:bg-secondary-container text-white px-4 py-2 rounded font-body-md text-body-md font-medium transition-colors">
+                            Search
+                        </button>
+</div>
+</div>
+<!-- AI Grounded Response Section (Bento Block) -->
+<div class="bg-surface-card border border-border-muted rounded-lg overflow-hidden flex flex-col">
+<div class="bg-surface-container border-b border-border-muted px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2 text-execution-violet">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label-caps text-label-caps font-bold tracking-widest uppercase">Synthesized Insight</span>
+</div>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1" title="Copy to clipboard">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1" title="Feedback">
+<span class="material-symbols-outlined text-sm">thumb_up</span>
+</button>
+</div>
+</div>
+<div class="p-6 font-body-md text-body-md text-on-surface leading-relaxed flex flex-col gap-4 relative">
+<!-- Accent vertical line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-execution-violet"></div>
+<p>
+                            Based on indexed incident logs and the engineering runbook, the payments service failure on October 14th was caused by an unexpected rate limit saturation in the downstream third-party gateway API 
+                            <a class="inline-flex items-center gap-1 bg-surface-container border border-outline-variant px-1.5 py-0.5 rounded text-xs text-data-blue font-data-mono hover:border-data-blue hover:bg-data-blue/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[10px]">receipt_long</span>
+                                Incident #TKT-441
+                            </a>. 
+                        </p>
+<p>
+                            A recent deployment introduced a regression in the retry logic, causing exponential backoff to fail silently and instead hammer the gateway with immediate retries during a minor network flutter 
+                            <a class="inline-flex items-center gap-1 bg-surface-container border border-outline-variant px-1.5 py-0.5 rounded text-xs text-data-blue font-data-mono hover:border-data-blue hover:bg-data-blue/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[10px]">code</span>
+                                PR-8992
+                            </a>.
+                        </p>
+<p>
+                            The mitigation detailed in the updated documentation suggests configuring the <code>MAX_RETRIES</code> env var and ensuring jitter is applied to the delay function 
+                            <a class="inline-flex items-center gap-1 bg-surface-container border border-outline-variant px-1.5 py-0.5 rounded text-xs text-data-blue font-data-mono hover:border-data-blue hover:bg-data-blue/10 transition-colors group" href="#">
+<span class="material-symbols-outlined text-[10px]">description</span>
+                                Payment Runbook v2
+                            </a>.
+                        </p>
+</div>
+</div>
+<!-- Results List (Traditional Hits) -->
+<div class="flex flex-col gap-4 mt-2">
+<div class="flex items-center justify-between border-b border-border-muted pb-2">
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Source Documents</h2>
+<span class="font-data-mono text-data-mono text-on-surface-variant text-xs">Found 3 relevant sources in 0.4s</span>
+</div>
+<!-- Result Item 1 -->
+<div class="group bg-surface hover:bg-surface-container border border-transparent hover:border-border-muted p-4 rounded transition-all cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded bg-terminal-black border border-outline-variant flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-status-critical">bug_report</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-headline-sm text-body-md font-bold text-data-blue group-hover:underline truncate">Incident #TKT-441: Outage in Stripe Gateway Comm</h3>
+<span class="font-data-mono text-[10px] text-on-surface-variant shrink-0">Oct 14, 2023</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-surface-container-highest border border-outline-variant px-2 py-0.5 rounded text-[10px] font-label-caps uppercase text-on-surface-variant">JIRA</span>
+<span class="bg-status-critical/10 border border-status-critical/30 px-2 py-0.5 rounded text-[10px] font-label-caps uppercase text-status-critical">P1-CRITICAL</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                                    At 14:00 UTC, the payments service started throwing 429 Too Many Requests from the Stripe gateway. The connection pool exhausted shortly after. Investigating recent changes to the retry wrapper...
+                                </p>
+</div>
+</div>
+</div>
+<!-- Result Item 2 -->
+<div class="group bg-surface hover:bg-surface-container border border-transparent hover:border-border-muted p-4 rounded transition-all cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded bg-terminal-black border border-outline-variant flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-execution-violet">menu_book</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-headline-sm text-body-md font-bold text-data-blue group-hover:underline truncate">Payment Runbook v2 (Recovery Procedures)</h3>
+<span class="font-data-mono text-[10px] text-on-surface-variant shrink-0">Oct 15, 2023</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-surface-container-highest border border-outline-variant px-2 py-0.5 rounded text-[10px] font-label-caps uppercase text-on-surface-variant">Confluence</span>
+<span class="bg-status-success/10 border border-status-success/30 px-2 py-0.5 rounded text-[10px] font-label-caps uppercase text-status-success">VERIFIED</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                                    ...If a cascading failure occurs due to rate limits, immediately scale down the worker pods to 1. Ensure the env var MAX_RETRIES=3 and JITTER_ENABLED=true before scaling back up...
+                                </p>
+</div>
+</div>
+</div>
+<!-- Result Item 3 -->
+<div class="group bg-surface hover:bg-surface-container border border-transparent hover:border-border-muted p-4 rounded transition-all cursor-pointer">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded bg-terminal-black border border-outline-variant flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-on-surface">code</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<h3 class="font-headline-sm text-body-md font-bold text-data-blue group-hover:underline truncate">PR-8992: Refactor network retry wrapper</h3>
+<span class="font-data-mono text-[10px] text-on-surface-variant shrink-0">Oct 12, 2023</span>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-surface-container-highest border border-outline-variant px-2 py-0.5 rounded text-[10px] font-label-caps uppercase text-on-surface-variant">GitHub</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+                                    This PR refactors the <code>withRetry</code> decorator. Note: Removed the legacy jitter calculation to simplify the math, assuming standard exponential backoff is sufficient... (Reverted in PR-9001)
+                                </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

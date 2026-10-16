@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | Engineering Execution Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-container": "#c9aeff",
+                      "tertiary-fixed": "#c9e6ff",
+                      "secondary": "#d2bbff",
+                      "outline-variant": "#44474c",
+                      "surface-variant": "#273647",
+                      "on-error": "#690005",
+                      "surface-container": "#122131",
+                      "status-pending": "#64748B",
+                      "on-background": "#d4e4fa",
+                      "surface-tint": "#b7c8e1",
+                      "tertiary-container": "#001522",
+                      "background": "#051424",
+                      "surface-dim": "#051424",
+                      "status-unavailable": "#EF4444",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "status-available": "#10B981",
+                      "status-busy": "#F59E0B",
+                      "on-secondary-fixed": "#25005a",
+                      "surface-elevation-2": "#0F2944",
+                      "tertiary": "#89ceff",
+                      "surface-elevation-1": "#0A1F35",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#0d1c2d",
+                      "error": "#ffb4ab",
+                      "border-muted": "#1E293B",
+                      "secondary-fixed": "#eaddff",
+                      "inverse-surface": "#d4e4fa",
+                      "outline": "#8e9197",
+                      "surface-bright": "#2c3a4c",
+                      "surface-container-highest": "#273647",
+                      "on-tertiary": "#00344d",
+                      "primary": "#b7c8e1",
+                      "inverse-primary": "#505f76",
+                      "secondary-container": "#6001d1",
+                      "on-primary-fixed": "#0b1c30",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "on-tertiary-container": "#0086bf",
+                      "surface": "#051424",
+                      "primary-fixed-dim": "#b7c8e1",
+                      "surface-container-lowest": "#010f1f",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "on-primary-fixed-variant": "#38485d",
+                      "on-surface": "#d4e4fa",
+                      "on-surface-variant": "#c4c6cd",
+                      "primary-fixed": "#d3e4fe",
+                      "primary-container": "#031427",
+                      "surface-container-high": "#1c2b3c",
+                      "on-primary-container": "#6f7f97",
+                      "on-secondary": "#3f008e",
+                      "on-primary": "#213146",
+                      "engineering-accent": "#8B5CF6",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#233143"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-gap": "1.25rem",
+                      "grid-gutter": "1rem",
+                      "client-density": "1.5rem",
+                      "grid-margin": "2rem",
+                      "engineering-density": "0.5rem"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Inter"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-command": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Hanken Grotesk"
+                      ],
+                      "code-snippet": [
+                              "JetBrains Mono"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-command": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "code-snippet": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-surface');
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .status-accent-bar-ready {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: theme('colors.status-available');
+        }
+        .status-accent-bar-blocked {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: theme('colors.status-unavailable');
+        }
+        .status-accent-bar-completed {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: theme('colors.status-pending');
+        }
+        .status-accent-bar-running {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: theme('colors.engineering-accent');
+        }
+
+        /* Custom Scrollbar for Engineering Density */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant'); 
+            border-radius: theme('borderRadius.full');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline'); 
+        }
+
+        .pulse-dot {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(139, 92, 246, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden text-body-sm font-body-sm">
+<!-- Shared Component: SideNavBar -->
+<nav class="hidden md:flex fixed left-0 top-0 h-full w-64 flex-col bg-surface-container-low border-r border-border-muted z-50">
+<!-- Brand/Context Switcher -->
+<div class="h-16 flex items-center px-4 border-b border-border-muted bg-surface-elevation-2">
+<div class="flex items-center gap-3 w-full">
+<div class="w-8 h-8 rounded-lg bg-engineering-accent flex items-center justify-center text-white font-bold">
+                    UL
+                </div>
+<div class="flex-col overflow-hidden">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface truncate">UdehLabs</h1>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase truncate">AI Architecture Workspace</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant" data-icon="unfold_more">unfold_more</span>
+</div>
+</div>
+<div class="p-4">
+<button class="w-full bg-primary text-on-primary font-body-sm text-body-sm font-semibold rounded h-10 flex items-center justify-center gap-2 hover:bg-opacity-90 transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                New ADR
+            </button>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+                Domain
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+                Data
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-primary border-r-2 border-primary bg-surface-elevation-1 scale-98 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="api">api</span>
+                API
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+                Security
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+                AI
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="foundation">foundation</span>
+                Infrastructure
+            </a>
+</div>
+<!-- Footer Links -->
+<div class="p-2 border-t border-border-muted space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                Settings
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+</div>
+</nav>
+<!-- Shared Component: TopAppBar -->
+<header class="hidden md:flex fixed top-0 right-0 w-[calc(100%-16rem)] justify-between items-center px-engineering-density h-14 z-40 bg-surface-container/80 backdrop-blur-md border-b border-border-muted">
+<div class="flex items-center gap-6 pl-4">
+<span class="font-headline-md text-headline-md tracking-tighter text-on-surface font-bold">UdehLabs ArchSpace</span>
+<nav class="flex gap-4">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-200" href="#">Architecture Maps</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-200" href="#">ADR Registry</a>
+<a class="text-primary border-b-2 border-primary font-bold opacity-80 transition-opacity pb-4 mt-4" href="#">Version History</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-200" href="#">Approvals</a>
+</nav>
+</div>
+<div class="flex items-center gap-4 pr-4">
+<div class="flex gap-2 text-on-surface-variant">
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="notifications">notifications</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="history">history</span></button>
+<button class="hover:text-primary transition-colors"><span class="material-symbols-outlined" data-icon="account_tree">account_tree</span></button>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 border border-border-muted text-on-surface rounded font-body-sm text-body-sm hover:bg-surface-elevation-2 transition-colors">Review</button>
+<button class="px-3 py-1.5 bg-primary text-on-primary rounded font-body-sm text-body-sm font-semibold hover:bg-opacity-90 transition-colors">Publish Release</button>
+</div>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-border-muted object-cover" data-alt="A small circular avatar placeholder image for a user profile in a technical dashboard context, deep navy blue background with a subtle geometric pattern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoqyI_pKioeRfIj7u2R2tyvddoBrj8D1ix2aD-cnFgRg2BJZDhHDpUlK93J5SztCJ7N-snNjTWgr6sZ_KctUQ8mHbGtuRvR7iljWLysMaXEt_AtNKBev6y88Ura5Oqr4AWBdqWhmLQ3l7Aru302VRIgY5-xMZNz_c-4bc0Rvc5cOySvrXfDNl4Sad30AM7BNNVIY4X5rflkdyqjGFfLy1rcireGZIVWeJdfwf6rHjYF786PuyEt7Hr5g"/>
+</div>
+</header>
+<!-- Main Content Area (Offset for side/top navs) -->
+<main class="flex-1 md:ml-64 md:mt-14 overflow-y-auto p-4 md:p-6 bg-background flex flex-col gap-6">
+<!-- Execution Header -->
+<header class="flex justify-between items-end border-b border-border-muted pb-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Project Apollo Core</span>
+<span class="px-2 py-0.5 rounded border border-engineering-accent/30 bg-engineering-accent/10 text-engineering-accent font-label-caps text-label-caps flex items-center gap-1">
+<div class="w-2 h-2 rounded-full bg-engineering-accent pulse-dot"></div>
+                        RUNNING - AI_ASSISTED
+                    </span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">SESSION: EXE-992A-4B</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Execution Workspace</h2>
+</div>
+<div class="flex gap-6 text-right">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Compute Cost</span>
+<span class="font-headline-md text-headline-md text-on-surface">$1.42</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Tokens Used</span>
+<span class="font-headline-md text-headline-md text-on-surface">42,105</span>
+</div>
+</div>
+</header>
+<!-- Progress Bar -->
+<section class="w-full">
+<div class="flex justify-between mb-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Overall Progress</span>
+<span class="font-label-caps text-label-caps text-on-surface">45%</span>
+</div>
+<div class="w-full h-2 bg-surface-elevation-2 rounded-full overflow-hidden flex gap-[1px]">
+<div class="h-full bg-primary" style="width: 25%"></div>
+<div class="h-full bg-primary" style="width: 20%"></div>
+<div class="h-full bg-border-muted flex-1"></div>
+</div>
+</section>
+<!-- Main Workspace Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6 h-full min-h-0">
+<!-- Left Sidebar: Task Queue (3 cols) -->
+<aside class="xl:col-span-3 flex flex-col gap-4 bg-surface-elevation-1 rounded-lg border border-border-muted overflow-hidden relative">
+<div class="p-3 border-b border-border-muted bg-surface-elevation-2">
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="list_alt">list_alt</span>
+                        Task Queue
+                    </h3>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-2">
+<!-- Completed Task -->
+<div class="relative bg-surface-container-low p-3 rounded border border-border-muted opacity-60">
+<div class="status-accent-bar-completed rounded-l"></div>
+<div class="pl-4">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-label-caps text-status-pending">COMPLETED</span>
+<span class="material-symbols-outlined text-[14px] text-status-pending" data-icon="check_circle">check_circle</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-medium text-on-surface">Setup Base Interfaces</h4>
+</div>
+</div>
+<!-- Running Task -->
+<div class="relative bg-surface-elevation-2 p-3 rounded border border-engineering-accent/50 shadow-[inset_0_0_15px_rgba(139,92,246,0.1)]">
+<div class="status-accent-bar-running rounded-l"></div>
+<div class="pl-4">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-label-caps text-engineering-accent">IN PROGRESS</span>
+<span class="material-symbols-outlined text-[14px] text-engineering-accent animate-spin" data-icon="sync">sync</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-medium text-on-surface">Implement IAIEngineeringPlanningContextBuilder</h4>
+</div>
+</div>
+<!-- Blocked Task -->
+<div class="relative bg-surface-container-low p-3 rounded border border-border-muted">
+<div class="status-accent-bar-blocked rounded-l"></div>
+<div class="pl-4">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-label-caps text-status-unavailable">BLOCKED</span>
+<span class="material-symbols-outlined text-[14px] text-status-unavailable" data-icon="block">block</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-medium text-on-surface">Integrate Context Provider</h4>
+<p class="text-xs text-on-surface-variant mt-1 line-clamp-1">Depends on current task</p>
+</div>
+</div>
+<!-- Ready Task -->
+<div class="relative bg-surface-container-low p-3 rounded border border-border-muted">
+<div class="status-accent-bar-ready rounded-l"></div>
+<div class="pl-4">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-caps text-label-caps text-status-available">READY</span>
+</div>
+<h4 class="font-body-sm text-body-sm font-medium text-on-surface">Write Unit Tests</h4>
+</div>
+</div>
+</div>
+</aside>
+<!-- Center/Right Area (9 cols) -->
+<div class="xl:col-span-9 flex flex-col gap-6 h-full min-h-0">
+<!-- Current Task Focus Card -->
+<section class="bg-surface-elevation-1 rounded-lg border border-engineering-accent/30 p-6 flex flex-col gap-4 relative overflow-hidden">
+<!-- Subtle background glow -->
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-engineering-accent/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-caps text-label-caps text-engineering-accent uppercase mb-1 block">Current Execution Target</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Implement IAIEngineeringPlanningContextBuilder</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 max-w-2xl">Constructing the main context builder class adhering to the newly defined interfaces. Ensuring proper injection of dependencies and data hydration from project repositories.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 border border-border-muted text-on-surface rounded font-label-caps text-label-caps hover:bg-surface-elevation-2 transition-colors">Request Refinement</button>
+<button class="px-4 py-2 border border-border-muted text-on-surface rounded font-label-caps text-label-caps hover:bg-surface-elevation-2 transition-colors">Manual Override</button>
+<button class="px-4 py-2 bg-engineering-accent text-white rounded font-label-caps text-label-caps font-semibold hover:bg-opacity-90 transition-colors shadow-lg shadow-engineering-accent/20">Approve Changes</button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-2">
+<!-- Changeset Summary -->
+<div class="bg-surface-container-low p-4 rounded border border-border-muted">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-3 block">Changeset Summary</span>
+<div class="flex items-center gap-6">
+<div class="flex flex-col">
+<span class="text-2xl font-semibold text-on-surface">4</span>
+<span class="text-xs text-on-surface-variant uppercase">Files Modified</span>
+</div>
+<div class="flex gap-3">
+<span class="px-2 py-1 rounded bg-status-available/10 text-status-available border border-status-available/20 font-code-snippet text-code-snippet">+124</span>
+<span class="px-2 py-1 rounded bg-status-unavailable/10 text-status-unavailable border border-status-unavailable/20 font-code-snippet text-code-snippet">-12</span>
+</div>
+</div>
+</div>
+<!-- Verification Panel -->
+<div class="bg-surface-container-low p-4 rounded border border-border-muted flex flex-col gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-1 block">Verification Checks</span>
+<div class="flex justify-between items-center text-sm">
+<span class="font-body-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-status-available" data-icon="check">check</span> TypeScript</span>
+<span class="font-label-caps text-status-available bg-status-available/10 px-2 py-0.5 rounded border border-status-available/20">PASS</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-body-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-status-available" data-icon="check">check</span> Linting</span>
+<span class="font-label-caps text-status-available bg-status-available/10 px-2 py-0.5 rounded border border-status-available/20">PASS</span>
+</div>
+<div class="flex justify-between items-center text-sm">
+<span class="font-body-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-status-unavailable" data-icon="close">close</span> Unit Tests</span>
+<span class="font-label-caps text-status-unavailable bg-status-unavailable/10 px-2 py-0.5 rounded border border-status-unavailable/20 flex items-center gap-1">2 FAIL - Retrying <span class="material-symbols-outlined text-[12px] animate-spin" data-icon="sync">sync</span></span>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Activity Log Stream -->
+<section class="flex-1 min-h-0 bg-surface-elevation-1 rounded-lg border border-border-muted flex flex-col overflow-hidden">
+<div class="p-3 border-b border-border-muted bg-surface-elevation-2 flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="terminal">terminal</span>
+                            AI Activity Log
+                        </h3>
+<span class="flex items-center gap-2 text-xs text-on-surface-variant">
+                            Live Stream <div class="w-1.5 h-1.5 rounded-full bg-status-available animate-pulse"></div>
+</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 font-code-snippet text-code-snippet bg-[#020a12] text-on-surface-variant space-y-2">
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:11.04</span>
+<span class="text-primary">[System] Initialization complete. Loading context for IAIEngineeringPlanningContextBuilder.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:12.45</span>
+<span class="text-tertiary">Analyzing repository structure...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:14.88</span>
+<span>Found 3 relevant interfaces in src/core/planning/interfaces.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:18.12</span>
+<span class="text-engineering-accent">Generating proposal for context builder implementation...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:22.05</span>
+<span>Drafting initial class structure and dependency injection points.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:25.33</span>
+<span class="text-tertiary">Running verification...</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:27.90</span>
+<span class="text-status-available">TypeScript compiler checks passed.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:29.15</span>
+<span class="text-status-unavailable">Unit tests failed. 2 assertions did not match expected mock outputs in builder.spec.ts.</span>
+</div>
+<div class="flex gap-4">
+<span class="text-on-surface-variant/50 shrink-0">14:02:29.50</span>
+<span class="text-engineering-accent">Analyzing test failures and generating patch...</span>
+</div>
+<div class="flex gap-4 items-center">
+<span class="text-on-surface-variant/50 shrink-0">14:02:31.00</span>
+<span class="text-on-surface flex items-center gap-2">Retrying unit test suite... <span class="material-symbols-outlined text-[14px] animate-spin text-status-pending" data-icon="hourglass_empty">hourglass_empty</span></span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

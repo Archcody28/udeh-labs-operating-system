@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Delivery Intelligence - Project Alpha</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#233143",
+                        "on-secondary-container": "#c9aeff",
+                        "on-primary-fixed": "#0d1c2d",
+                        "error": "#ffb4ab",
+                        "on-tertiary": "#003824",
+                        "background": "#0c141e",
+                        "status-critical": "#ef4444",
+                        "status-risk": "#f59e0b",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "secondary-container": "#6001d1",
+                        "surface-dim": "#0c141e",
+                        "outline-variant": "#44474c",
+                        "inverse-primary": "#515f73",
+                        "on-tertiary-container": "#00734e",
+                        "on-background": "#dbe3f2",
+                        "on-tertiary-fixed": "#002113",
+                        "terminal-black": "#091017",
+                        "data-blue": "#1C85E8",
+                        "secondary-fixed": "#eaddff",
+                        "tertiary": "#ffffff",
+                        "surface-container-low": "#141c27",
+                        "surface-container": "#18202b",
+                        "surface-container-lowest": "#070f19",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#576579",
+                        "on-error": "#690005",
+                        "execution-violet": "#7c3aed",
+                        "primary-fixed": "#d5e4fb",
+                        "on-secondary": "#3f008e",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "outline": "#8e9197",
+                        "surface-card": "#0d1b2a",
+                        "surface-container-high": "#232a36",
+                        "on-surface": "#dbe3f2",
+                        "status-success": "#10b981",
+                        "inverse-surface": "#dbe3f2",
+                        "inverse-on-surface": "#29313c",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-container-highest": "#2d3541",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-tint": "#b9c8de",
+                        "surface-variant": "#2d3541",
+                        "on-surface-variant": "#c4c6cd",
+                        "surface": "#0c141e",
+                        "tertiary-container": "#6ffbbe",
+                        "border-muted": "#1e293b",
+                        "primary-fixed-dim": "#b9c8de",
+                        "on-secondary-fixed": "#25005a",
+                        "primary": "#ffffff",
+                        "surface-bright": "#323a45",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "secondary": "#d2bbff",
+                        "primary-container": "#d5e4fb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "gutter": "16px",
+                        "density-comfortable": "16px",
+                        "sidebar_width": "260px",
+                        "base": "4px",
+                        "density-compact": "8px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "data-mono": ["JetBrains Mono"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #0c141e; color: #dbe3f2; }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+        .card { background-color: #0d1b2a; border: 1px solid #1e293b; }
+        .terminal { background-color: #091017; border: 1px solid #1e293b; }
+        .accent-left { border-left: 4px solid #7c3aed; }
+        .accent-left-risk { border-left: 4px solid #f59e0b; }
+        .accent-left-success { border-left: 4px solid #10b981; }
+        .accent-left-critical { border-left: 4px solid #ef4444; }
+        
+        .timeline-node { width: 12px; height: 12px; border-radius: 50%; }
+        .timeline-node.active { background-color: #7c3aed; }
+        .timeline-node.inactive { border: 1px solid #44474c; }
+        .timeline-line { width: 1px; background-color: #44474c; }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-dot { animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        
+        /* Custom scrollbar for terminal */
+        .terminal::-webkit-scrollbar { width: 6px; }
+        .terminal::-webkit-scrollbar-track { background: #091017; }
+        .terminal::-webkit-scrollbar-thumb { background: #1e293b; }
+    </style>
+</head>
+<body class="font-body-md bg-background text-on-surface antialiased overflow-x-hidden flex h-screen">
+<!-- SideNavBar -->
+<nav class="w-sidebar_width h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-muted flex flex-col h-screen py-density-comfortable transition-colors duration-150 ease-in-out z-20">
+<div class="px-container-margin mb-8">
+<div class="font-headline-sm text-headline-sm font-bold text-primary mb-1">Project Alpha</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">AI Delivery Engine</div>
+</div>
+<div class="flex-1 overflow-y-auto px-container-margin space-y-2">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-body-md text-body-md">Overview</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">view_kanban</span>
+<span class="font-body-md text-body-md">Board</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">list_alt</span>
+<span class="font-body-md text-body-md">Backlog</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">rebase_edit</span>
+<span class="font-body-md text-body-md">Sprints</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">package_2</span>
+<span class="font-body-md text-body-md">Releases</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-primary bg-surface-container-high border-l-4 border-execution-violet transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="font-body-md text-body-md">AI Delivery Intelligence</span>
+</a>
+</div>
+<div class="px-container-margin mt-auto space-y-4 pt-4 border-t border-muted">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-container transition-colors duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu_book</span>
+<span class="font-body-md text-body-md">Documentation</span>
+</a>
+<button class="w-full py-2 px-4 bg-transparent border border-muted text-on-surface font-body-md text-body-md rounded hover:bg-surface-container transition-colors">
+                Invite Team
+            </button>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-sidebar_width h-16 bg-surface border-b border-muted flex justify-between items-center px-container-margin w-[calc(100%-260px)] z-10 transition-all duration-200">
+<div class="flex items-center space-x-6">
+<div class="font-headline-md text-headline-md font-bold text-primary">Project Alpha</div>
+<nav class="hidden md:flex space-x-4">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Sprint 12 Health: 94%</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-all duration-200" href="#">Live Deployments</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="flex items-center space-x-2 text-on-surface-variant">
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">search</span></button>
+<button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+</div>
+<button class="px-3 py-1 bg-transparent border border-muted text-on-surface font-label-caps text-label-caps rounded hover:bg-surface-container transition-colors">Start Sprint</button>
+<button class="px-3 py-1 bg-execution-violet text-white font-label-caps text-label-caps rounded hover:bg-secondary-container transition-colors">New Task</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-sidebar_width mt-16 p-container-margin w-[calc(100%-260px)] h-[calc(100vh-64px)] overflow-y-auto">
+<div class="max-w-7xl mx-auto space-y-gutter">
+<!-- Page Header -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary">AI Delivery Intelligence</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 flex items-center">
+<span class="w-2 h-2 rounded-full bg-execution-violet mr-2 animate-pulse-dot"></span>
+                        Live analysis of Sprint 12 execution.
+                    </p>
+</div>
+<div class="font-label-caps text-label-caps px-2 py-1 border border-execution-violet/30 bg-execution-violet/10 text-execution-violet rounded">
+                    SYS_STATUS: OPTIMAL
+                </div>
+</div>
+<!-- Bento Grid -->
+<div class="bento-grid">
+<!-- 1. Daily Standup Summary (Spans 8 cols) -->
+<section class="col-span-12 lg:col-span-8 card accent-left p-density-comfortable flex flex-col">
+<div class="flex items-center justify-between mb-4 border-b border-muted pb-2">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-execution-violet" style="font-variation-settings: 'FILL' 1;">summarize</span>
+                            AI Daily Standup Summary
+                        </h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Last 24h</span>
+</div>
+<div class="terminal flex-1 p-4 overflow-y-auto font-data-mono text-data-mono">
+<div class="text-on-surface-variant mb-2">&gt;&gt; GENERATING EXECUTIVE SUMMARY...</div>
+<div class="mb-4">
+<span class="text-data-blue">[TEAM ALPHA]</span> Merged 14 PRs focusing on the auth microservice. <span class="text-status-success">velocity +12%</span> vs yesterday.
+                        </div>
+<div class="mb-4">
+<span class="text-data-blue">[TEAM BETA]</span> Blocked on DB migration #442. <span class="text-status-critical">WARNING:</span> Approaching SLA breach for downstream dependents.
+                        </div>
+<div>
+<span class="text-data-blue">[AI_INSIGHT]</span> Code review cycle time has decreased by 4h. Recommend focusing QA resources on staging environment deployment 12.4 to maintain flow.
+                        </div>
+</div>
+</section>
+<!-- 2. Risk Radar (Spans 4 cols) -->
+<section class="col-span-12 lg:col-span-4 card accent-left-risk p-density-comfortable">
+<div class="flex items-center justify-between mb-4 border-b border-muted pb-2">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-status-risk" style="font-variation-settings: 'FILL' 1;">radar</span>
+                            Risk Radar
+                        </h2>
+</div>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-status-critical/10 border border-status-critical/30 flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-status-critical text-[16px]">warning</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold">API Deprecation</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">3 endpoints in active use will deprecate in 48h.</div>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<div class="w-8 h-8 rounded bg-status-risk/10 border border-status-risk/30 flex items-center justify-center shrink-0 mt-1">
+<span class="material-symbols-outlined text-status-risk text-[16px]">schedule</span>
+</div>
+<div>
+<div class="font-body-md text-body-md font-bold">Schedule Slip</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant">Feature X is 2 days behind critical path.</div>
+</div>
+</li>
+</ul>
+</section>
+<!-- 3. Sprint Health (Spans 4 cols) -->
+<section class="col-span-12 lg:col-span-4 card p-density-comfortable">
+<div class="flex items-center justify-between mb-4 border-b border-muted pb-2">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+                            Sprint Health
+                        </h2>
+</div>
+<div class="space-y-6 mt-4">
+<div>
+<div class="flex justify-between font-label-caps text-label-caps mb-1">
+<span>Velocity (Points)</span>
+<span class="text-execution-violet">84 / 100</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-execution-violet" style="width: 84%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between font-label-caps text-label-caps mb-1">
+<span>Capacity Burn</span>
+<span class="text-status-risk">92%</span>
+</div>
+<div class="h-2 w-full bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-status-risk" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Traceability Map (Spans 8 cols) -->
+<section class="col-span-12 lg:col-span-8 card p-density-comfortable">
+<div class="flex items-center justify-between mb-4 border-b border-muted pb-2">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+                            Traceability Map (Live)
+                        </h2>
+</div>
+<div class="relative w-full h-48 bg-surface-container-lowest rounded border border-muted p-4 flex items-center justify-center">
+<!-- Simplified visual representation of flow -->
+<div class="flex items-center justify-between w-full max-w-2xl">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded border border-execution-violet bg-execution-violet/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-execution-violet">description</span>
+</div>
+<span class="font-label-caps text-label-caps">REQ-112</span>
+</div>
+<div class="flex-1 h-px bg-execution-violet/50 mx-4 relative">
+<div class="absolute w-2 h-2 rounded-full bg-execution-violet -top-[3.5px] right-0"></div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded border border-execution-violet bg-execution-violet/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-execution-violet">task</span>
+</div>
+<span class="font-label-caps text-label-caps">TSK-409</span>
+</div>
+<div class="flex-1 h-px bg-execution-violet/50 mx-4 relative">
+<div class="absolute w-2 h-2 rounded-full bg-execution-violet -top-[3.5px] right-0 animate-pulse-dot"></div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded border border-status-risk bg-status-risk/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-status-risk">commit</span>
+</div>
+<span class="font-label-caps text-label-caps text-status-risk">PR-88</span>
+</div>
+<div class="flex-1 h-px bg-muted mx-4 relative">
+<div class="absolute w-2 h-2 rounded-full bg-muted -top-[3.5px] right-0"></div>
+</div>
+<div class="flex flex-col items-center opacity-50">
+<div class="w-10 h-10 rounded border border-outline-variant bg-surface-container flex items-center justify-center mb-2">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<span class="font-label-caps text-label-caps">DEPLOY</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Bottleneck Detection (Spans 12 cols) -->
+<section class="col-span-12 card accent-left-critical p-density-comfortable">
+<div class="flex items-center justify-between mb-4 border-b border-muted pb-2">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-status-critical" style="font-variation-settings: 'FILL' 1;">hourglass_disabled</span>
+                            Bottleneck Detection
+                        </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="border border-muted p-4 rounded bg-surface-container-lowest">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Blocked PRs</div>
+<div class="font-display-lg text-display-lg text-status-critical">3</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Avg wait time: 18h</div>
+</div>
+<div class="border border-muted p-4 rounded bg-surface-container-lowest">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">Slow Reviews</div>
+<div class="font-display-lg text-display-lg text-status-risk">5</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Exceeding SLA</div>
+</div>
+<div class="border border-muted p-4 rounded bg-surface-container-lowest">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2">QA Queue</div>
+<div class="font-display-lg text-display-lg">12</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-1">Stable</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

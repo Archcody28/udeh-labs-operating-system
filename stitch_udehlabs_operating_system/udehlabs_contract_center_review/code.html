@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contract Center &amp; Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed-dim": "#d2bbff",
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#005f40",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "on-primary-container": "#455466",
+                      "on-secondary-container": "#c9aeff",
+                      "primary": "#d5e4fb",
+                      "surface-container-highest": "#2d3541",
+                      "status-risk": "#f59e0b",
+                      "on-secondary-fixed": "#25005a",
+                      "execution-violet": "#7c3aed",
+                      "on-surface-variant": "#c4c6cd",
+                      "inverse-primary": "#516072",
+                      "surface-bright": "#323a45",
+                      "surface-dim": "#0c141e",
+                      "terminal-black": "#091017",
+                      "on-primary": "#233143",
+                      "error-container": "#93000a",
+                      "tertiary": "#70fcbe",
+                      "data-blue": "#1C85E8",
+                      "on-secondary": "#3f008e",
+                      "on-tertiary": "#003824",
+                      "outline": "#8e9197",
+                      "background": "#0c141e",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "surface-container": "#18202b",
+                      "surface-container-lowest": "#070f19",
+                      "status-success": "#10b981",
+                      "surface-card": "#0d1b2a",
+                      "primary-container": "#b9c8de",
+                      "inverse-on-surface": "#29313c",
+                      "on-error-container": "#ffdad6",
+                      "secondary": "#d2bbff",
+                      "border-muted": "#1e293b",
+                      "surface-container-low": "#141c27",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "status-critical": "#ef4444",
+                      "on-tertiary-fixed": "#002113",
+                      "on-primary-fixed": "#0d1c2d",
+                      "surface-variant": "#2d3541",
+                      "surface-tint": "#b9c8de",
+                      "primary-fixed": "#d5e4fa",
+                      "secondary-container": "#6001d1",
+                      "tertiary-fixed": "#6ffbbe",
+                      "surface-container-high": "#232a36",
+                      "on-primary-fixed-variant": "#39485a",
+                      "on-surface": "#dbe3f2",
+                      "surface": "#0c141e",
+                      "tertiary-container": "#4fdfa4",
+                      "primary-fixed-dim": "#b9c8de",
+                      "outline-variant": "#44474c",
+                      "on-background": "#dbe3f2",
+                      "secondary-fixed": "#eaddff",
+                      "inverse-surface": "#dbe3f2",
+                      "error": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "density-compact": "8px",
+                      "base": "4px",
+                      "container-margin": "24px",
+                      "density-comfortable": "16px"
+              },
+              "fontFamily": {
+                      "data-mono": [
+                              "JetBrains Mono"
+                      ],
+                      "label-caps": [
+                              "JetBrains Mono"
+                      ],
+                      "headline-sm": [
+                              "Hanken Grotesk"
+                      ],
+                      "display-lg": [
+                              "Hanken Grotesk"
+                      ],
+                      "headline-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-md": [
+                              "Hanken Grotesk"
+                      ],
+                      "body-sm": [
+                              "Hanken Grotesk"
+                      ]
+              },
+              "fontSize": {
+                      "data-mono": [
+                              "13px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-caps": [
+                              "11px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-sm": [
+                              "18px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "18px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Hanken+Grotesk:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .pulse-dot {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(var(--tw-colors-status-success), 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(var(--tw-colors-status-success), 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(var(--tw-colors-status-success), 0); }
+        }
+        .bg-pulse-risk {
+            animation: pulse-bg-risk 2s infinite alternate;
+        }
+        @keyframes pulse-bg-risk {
+            0% { background-color: rgba(245, 158, 11, 0.1); }
+            100% { background-color: rgba(245, 158, 11, 0.2); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex selection:bg-execution-violet selection:text-white">
+<!-- SideNavBar -->
+<nav class="hidden md:flex bg-surface-container dark:bg-surface-container font-label-caps text-label-caps docked left-0 h-full w-[240px] border-r border-outline-variant dark:border-outline-variant flat no shadows duration-150 ease-in-out fixed left-0 top-0 h-screen flex flex-col pt-20 z-40">
+<div class="px-container-margin mb-8 flex items-center gap-density-compact">
+<img alt="Governance Logo" class="w-8 h-8 rounded-DEFAULT" data-alt="A minimalist, highly technical abstract geometric logo representing artificial intelligence and corporate governance. The design is sleek, using sharp angles and subtle glowing accents in execution-violet, set against a dark terminal-black background. High contrast, precise, vector-art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWKuFD2U8eVcBZjsOqxFQZQTV4H8T5pIYlyLNqEZx89xYYpyYwuJNdOaPwKVGzzG94jBab_bO1dWG2Co-9B1PZJfXCTV8GwiGOCmXv8ecxneQ7qz1EPYAUFuJr6945eE7m4VMmmkmAeCEQtc1Z_-NCGZk5V9Mkh7FT_J1hUTfFhE-7DYj1CHQ0o-7wNmM8IRv5DHIbH-zjuwwwU4N3UNIMB4wLf2p7IsO-f94YYCUlFHRPiXSksMkwiw"/>
+<div>
+<div class="font-headline-md text-headline-md font-extrabold text-primary">Global Governance</div>
+<div class="text-on-surface-variant">Enterprise Tier</div>
+</div>
+</div>
+<div class="px-container-margin mb-6">
+<button class="w-full bg-execution-violet hover:bg-execution-violet/90 text-white font-headline-sm text-headline-sm py-density-compact rounded-DEFAULT flex items-center justify-center gap-base transition-colors">
+<span class="material-symbols-outlined text-sm">add</span> New Report
+            </button>
+</div>
+<ul class="flex-1 flex flex-col gap-base">
+<li>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">business</span>
+                    Organization
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                    Reporting
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-primary dark:text-primary border-l-4 border-primary bg-primary-container/10 transition-all" href="#">
+<span class="material-symbols-outlined">gavel</span>
+                    Compliance
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+                    Audit Logs
+                </a>
+</li>
+</ul>
+<div class="mt-auto pb-container-margin">
+<ul class="flex flex-col gap-base">
+<li>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+                        Settings
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-density-comfortable px-container-margin py-density-compact text-on-surface-variant hover:bg-surface-variant transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+                        Support
+                    </a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-[240px] pt-16 md:pt-0 min-h-screen bg-background">
+<!-- TopNavBar (Mobile Only / Responsive Header) -->
+<header class="md:hidden bg-surface dark:bg-surface font-body-md text-body-md docked full-width top-0 border-b border-outline-variant dark:border-outline-variant shadow-sm cursor-pointer active:opacity-80 flex justify-between items-center w-full px-lg h-16 fixed z-50">
+<div class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">AIGovernance</div>
+<div class="flex items-center gap-density-comfortable">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<img alt="Executive Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A sleek, highly stylized avatar of a professional executive. The portrait is rendered in a digital, high-contrast style using the Cyber-Fleet Command aesthetic, featuring cool data-blue tones and subtle execution-violet highlights on a terminal-black background. Sharp, modern, corporate authority." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsuk1SDy7t-2C7DbBDwTcuPSd58yjX_vKgOOnfraaz8FFrcy6-INnjQdrZDA6ZhJiiTQ3upSCVeOhE04_hK_lDPntrfNM3_mXYPoRkEy3oUyjUfRJscLfIVDTnY9r-9ZKBw9nK6EcpA8YdxqCK-N_SuAG_urYg0S7aGtr7X20M7Z3NNtixABfHUT3YdDbrbLi74Dq_-OujgkjaPtLkb8IwzUnSI2mahpYH6Gv_pvQ4LpLU_RVmjmN6GQ"/>
+</div>
+</header>
+<div class="p-container-margin max-w-[1600px] mx-auto h-full flex flex-col gap-gutter">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-4">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Contract Center</h1>
+<p class="text-on-surface-variant font-data-mono text-data-mono">EXECUTION_PHASE_LEGAL_MGMT // SYS_READY</p>
+</div>
+<div class="flex gap-density-compact">
+<button class="bg-surface-container-high border border-outline-variant text-on-surface hover:border-outline px-4 py-2 rounded-DEFAULT font-headline-sm text-headline-sm transition-colors">
+                        Archive
+                    </button>
+<button class="bg-execution-violet text-white px-4 py-2 rounded-DEFAULT font-headline-sm text-headline-sm flex items-center gap-2 hover:bg-execution-violet/90 transition-colors">
+<span class="material-symbols-outlined text-sm">upload_file</span> Import Draft
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter flex-1">
+<!-- Left Column: Active Contracts List (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-card border border-border-muted rounded-lg p-density-comfortable flex-1">
+<div class="flex justify-between items-center mb-density-comfortable pb-density-compact border-b border-border-muted">
+<h2 class="font-headline-md text-headline-md text-on-surface">Active Engagements</h2>
+<span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+</div>
+<div class="flex flex-col gap-density-compact">
+<!-- Contract Item: Active/Reviewing -->
+<div class="bg-surface-container border border-execution-violet/50 rounded-DEFAULT p-density-compact cursor-pointer relative overflow-hidden group">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-execution-violet"></div>
+<div class="flex justify-between items-start mb-1">
+<span class="font-headline-sm text-headline-sm text-primary">Project Alpha MSA</span>
+<span class="font-label-caps text-label-caps text-execution-violet bg-execution-violet/10 px-2 py-0.5 rounded-sm">INTERNAL REVIEW</span>
+</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant mb-2">ID: CTR-8924-A</div>
+<div class="flex justify-between items-center font-body-sm text-body-sm text-outline">
+<span>Nexus Corp</span>
+<span>Updated: 2h ago</span>
+</div>
+</div>
+<!-- Contract Item: Signing -->
+<div class="bg-surface-container border border-border-muted hover:border-outline-variant rounded-DEFAULT p-density-compact cursor-pointer transition-colors border-l-status-risk border-l-2">
+<div class="flex justify-between items-start mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Data Processing Addendum</span>
+<span class="font-label-caps text-label-caps text-status-risk bg-status-risk/10 px-2 py-0.5 rounded-sm flex items-center gap-1">
+<div class="w-1.5 h-1.5 rounded-full bg-status-risk pulse-dot"></div> SIGNING
+                                    </span>
+</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant mb-2">ID: DPA-1102-X</div>
+<div class="flex justify-between items-center font-body-sm text-body-sm text-outline">
+<span>Vanguard Tech</span>
+<span>Waiting on Client</span>
+</div>
+</div>
+<!-- Contract Item: Executed -->
+<div class="bg-surface-container border border-border-muted rounded-DEFAULT p-density-compact opacity-70">
+<div class="flex justify-between items-start mb-1">
+<span class="font-headline-sm text-headline-sm text-on-surface line-through decoration-outline">Q3 Service Agreement</span>
+<span class="font-label-caps text-label-caps text-status-success bg-status-success/10 px-2 py-0.5 rounded-sm">EXECUTED</span>
+</div>
+<div class="font-data-mono text-data-mono text-on-surface-variant mb-2">ID: SOW-5591-B</div>
+<div class="flex justify-between items-center font-body-sm text-body-sm text-outline">
+<span>Aegis Systems</span>
+<span>Executed: 12 Oct</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Contract Review Canvas (8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Top Action Bar for Active Contract -->
+<div class="bg-surface-card border border-border-muted rounded-lg p-density-compact flex justify-between items-center">
+<div class="flex items-center gap-density-comfortable px-2">
+<span class="material-symbols-outlined text-execution-violet">description</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary">Project Alpha MSA - v2.4 (Draft)</h3>
+<div class="font-data-mono text-data-mono text-on-surface-variant text-[10px]">CTR-8924-A // LAST_SYNC: 14:32:00Z</div>
+</div>
+</div>
+<div class="flex gap-density-compact">
+<button class="bg-status-risk/10 text-status-risk border border-status-risk/30 hover:bg-status-risk/20 px-4 py-2 rounded-DEFAULT font-headline-sm text-headline-sm transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">edit_note</span> Request Revision
+                            </button>
+<button class="bg-execution-violet text-white px-4 py-2 rounded-DEFAULT font-headline-sm text-headline-sm hover:bg-execution-violet/90 transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(124,58,237,0.3)]">
+<span class="material-symbols-outlined text-sm">draw</span> Approve &amp; Sign
+                            </button>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-gutter h-[600px]">
+<!-- Document Viewer Canvas (2/3 width) -->
+<div class="lg:col-span-2 bg-terminal-black border border-border-muted rounded-lg flex flex-col relative overflow-hidden">
+<!-- Toolbar -->
+<div class="h-10 border-b border-border-muted bg-surface-container-low flex justify-between items-center px-density-comfortable">
+<div class="flex gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary">zoom_in</span>
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary">zoom_out</span>
+<span class="material-symbols-outlined text-sm cursor-pointer hover:text-primary">format_list_bulleted</span>
+</div>
+<div class="font-data-mono text-[10px] text-outline">PAGE 1/14</div>
+</div>
+<!-- Document Content Area (Simulated) -->
+<div class="flex-1 p-8 overflow-y-auto font-body-md text-on-surface bg-terminal-black/90 relative">
+<!-- Divergence Highlight -->
+<div class="absolute right-4 top-12 bg-status-risk/10 border border-status-risk p-2 rounded text-status-risk font-data-mono text-data-mono max-w-[200px] backdrop-blur-sm">
+<div class="flex items-center gap-1 mb-1 font-bold">
+<span class="material-symbols-outlined text-[14px]">warning</span> DIVERGENCE DETECTED
+                                    </div>
+<div class="text-[10px] text-outline">Liability cap increased from $1M to $5M in latest client revision.</div>
+</div>
+<div class="max-w-2xl mx-auto bg-surface p-8 shadow-sm text-on-surface-variant font-serif">
+<h1 class="text-2xl font-bold text-center mb-6 text-on-surface">MASTER SERVICES AGREEMENT</h1>
+<p class="mb-4">This Master Services Agreement ("Agreement") is entered into as of October 24, 2023, by and between Nexus Corp ("Client") and Global Governance Enterprise ("Provider").</p>
+<h2 class="text-xl font-semibold mt-6 mb-2 text-on-surface">1. Services</h2>
+<p class="mb-4">Provider shall provide the artificial intelligence monitoring and governance services as described in applicable Statements of Work...</p>
+<h2 class="text-xl font-semibold mt-6 mb-2 text-status-risk bg-pulse-risk inline-block px-1">2. Limitation of Liability</h2>
+<p class="mb-4"><span class="bg-status-risk/20 border-b border-status-risk pb-0.5">IN NO EVENT SHALL EITHER PARTY'S AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THIS AGREEMENT EXCEED $5,000,000 USD.</span></p>
+<p class="mb-4">...</p>
+</div>
+</div>
+</div>
+<!-- Right Panel: Tracking & History (1/3 width) -->
+<div class="lg:col-span-1 flex flex-col gap-gutter">
+<!-- Signature Status Tracker -->
+<div class="bg-surface-card border border-border-muted rounded-lg p-density-comfortable">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">checklist</span> Execution Status
+                                </h3>
+<div class="flex flex-col gap-3 relative before:absolute before:inset-y-2 before:left-3 before:w-0.5 before:bg-border-muted">
+<!-- Status Item: Completed -->
+<div class="relative flex gap-3 z-10">
+<div class="w-6 h-6 rounded-full bg-status-success flex items-center justify-center shrink-0 border-2 border-surface-card">
+<span class="material-symbols-outlined text-[12px] text-on-tertiary">check</span>
+</div>
+<div class="flex-1 pb-2">
+<div class="font-headline-sm text-body-sm text-on-surface">Finance Review</div>
+<div class="font-data-mono text-[10px] text-status-success">APPROVED - Sarah Jenkins</div>
+</div>
+</div>
+<!-- Status Item: Active -->
+<div class="relative flex gap-3 z-10">
+<div class="w-6 h-6 rounded-full bg-execution-violet flex items-center justify-center shrink-0 border-2 border-surface-card shadow-[0_0_8px_rgba(124,58,237,0.5)]">
+<span class="material-symbols-outlined text-[12px] text-white">schedule</span>
+</div>
+<div class="flex-1 pb-2">
+<div class="font-headline-sm text-body-sm text-primary font-bold">UdehLabs Rep (You)</div>
+<div class="font-data-mono text-[10px] text-execution-violet">ACTION REQUIRED</div>
+</div>
+</div>
+<!-- Status Item: Pending -->
+<div class="relative flex gap-3 z-10">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 border-2 border-border-muted">
+<div class="w-2 h-2 rounded-full bg-outline-variant"></div>
+</div>
+<div class="flex-1">
+<div class="font-headline-sm text-body-sm text-on-surface-variant">Client Lead</div>
+<div class="font-data-mono text-[10px] text-outline-variant">PENDING COUNTERSIGN</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Version History -->
+<div class="bg-surface-card border border-border-muted rounded-lg p-density-comfortable flex-1 overflow-y-auto">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span> Version Log
+                                </h3>
+<div class="font-data-mono text-data-mono text-[11px] flex flex-col gap-2">
+<div class="p-2 bg-surface-container border border-border-muted rounded">
+<div class="text-primary mb-1">v2.4 [CURRENT]</div>
+<div class="text-on-surface-variant">Client upload - Nexus Legal</div>
+<div class="text-status-risk mt-1">&gt; Term 'Liability' altered</div>
+</div>
+<div class="p-2 border border-border-muted/50 rounded opacity-70">
+<div class="text-on-surface mb-1">v2.3</div>
+<div class="text-on-surface-variant">Internal Review - Legal Ops</div>
+<div class="text-data-blue mt-1">&gt; Approved standard terms</div>
+</div>
+<div class="p-2 border border-border-muted/50 rounded opacity-50">
+<div class="text-on-surface mb-1">v2.2</div>
+<div class="text-on-surface-variant">Initial Draft Generated</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

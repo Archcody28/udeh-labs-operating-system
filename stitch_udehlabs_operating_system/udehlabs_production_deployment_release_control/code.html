@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Deployment Pipeline</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#ccc3d8",
+                        "inverse-on-surface": "#29313c",
+                        "on-secondary-fixed": "#002022",
+                        "surface-variant": "#2d3540",
+                        "inverse-surface": "#dbe3f1",
+                        "primary": "#d2bbff",
+                        "on-tertiary-fixed": "#002113",
+                        "secondary-fixed": "#74f5ff",
+                        "secondary": "#ddfcff",
+                        "secondary-container": "#00f1fe",
+                        "surface-container-highest": "#2d3540",
+                        "on-surface": "#dbe3f1",
+                        "tertiary-container": "#007650",
+                        "outline": "#958da1",
+                        "on-primary-fixed": "#25005a",
+                        "secondary-fixed-dim": "#00dbe7",
+                        "surface-bright": "#323a45",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#0c141e",
+                        "on-primary": "#3f008e",
+                        "surface-container-low": "#141c26",
+                        "surface-container-lowest": "#070f18",
+                        "on-secondary-container": "#006a70",
+                        "tertiary": "#4edea3",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "primary-container": "#7c3aed",
+                        "on-tertiary-container": "#76ffc2",
+                        "inverse-primary": "#732ee4",
+                        "on-secondary": "#00363a",
+                        "surface-tint": "#d2bbff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container": "#18202b",
+                        "outline-variant": "#4a4455",
+                        "primary-fixed": "#eaddff",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface": "#0c141e",
+                        "on-background": "#dbe3f1",
+                        "on-tertiary": "#003824",
+                        "background": "#0c141e",
+                        "on-error-container": "#ffdad6",
+                        "on-primary-container": "#ede0ff",
+                        "primary-fixed-dim": "#d2bbff",
+                        "surface-container-high": "#232b35"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "stack-md": "16px",
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "unit": "4px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-mono": ["JetBrains Mono", "monospace"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display": ["Hanken Grotesk"],
+                        "caption": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "caption": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body { background-color: #0c141e; color: #dbe3f1; }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(12, 20, 30, 0.9) 0%, rgba(17, 27, 39, 0.9) 100%);
+            border: 1px solid #1e293b;
+            backdrop-filter: blur(10px);
+        }
+        .neon-border-glow:focus-within {
+            border-color: #7c3aed;
+            box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
+        }
+        .terminal-bg { background-color: #05080b; }
+        .grid-overlay {
+            background-image: 
+                linear-gradient(to right, rgba(30, 41, 59, 0.2) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.2) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md bg-surface antialiased h-screen overflow-hidden flex flex-col grid-overlay">
+<!-- TopNavBar -->
+<nav class="bg-surface-dim dark:bg-surface-dim border-b border-outline-variant flex justify-between items-center w-full px-container-padding h-16 shrink-0 z-50 relative">
+<div class="flex items-center gap-6">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary tracking-tight">UdehLabs Infra</div>
+<div class="hidden md:flex gap-6 ml-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Status</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Logs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors cursor-pointer active:opacity-80" href="#">Regions</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer transition-colors" data-icon="notifications">notifications</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A futuristic avatar for an operator profile, stylized with glowing neon elements, high contrast lighting, dark background, cyberpunk aesthetic, detailed digital art." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDr3urg05GFbp1hJP6wToz7TLoasbwg3rouncIJuFkt5ndW5VP70-KufMO7H4kO3ckxhpthdT9utFN85JKi8_glx_ghereOuTfcXM7WgTK16LHdK156xfTnu4TJOt4JHIARyd4hXZadhC6pJ0_MzeCiXFeM2AAv4cDEUJaRTg1_YASDBlSbXxuUAoJMQxCXaVdHCGVXMf3SSwklFelPys3ZinQ_9RJkRlveQE2q-iYsKSrVchQz_8sxww"/>
+</div>
+</div>
+</nav>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden xl:flex flex-col fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface dark:bg-surface border-r border-outline-variant p-stack-md z-40 shrink-0">
+<div class="mb-stack-lg flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-variant border border-outline flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="dns">dns</span>
+</div>
+<div>
+<div class="font-headline-sm text-primary font-semibold">UdehLabs Admin</div>
+<div class="font-caption text-caption text-on-surface-variant">Production Cluster v2.4</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-unit">
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+<span>Secrets</span>
+</a>
+<a class="flex items-center gap-3 bg-primary-container text-on-primary-container rounded-lg px-3 py-2 border-r-4 border-secondary-container hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="rocket_launch">rocket_launch</span>
+<span>Pipelines</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span>Monitoring</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-variant px-3 py-2 rounded-lg hover:bg-surface-container-high transition-all active:scale-95 duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Rollback</span>
+</a>
+</nav>
+<div class="mt-auto flex flex-col gap-stack-sm border-t border-outline-variant pt-stack-md">
+<button class="w-full bg-primary-container text-on-primary-container font-semibold py-2 rounded-lg hover:opacity-90 transition-opacity">Deploy Now</button>
+<div class="flex gap-2 mt-stack-sm">
+<a class="flex-1 flex justify-center items-center gap-2 text-on-surface-variant hover:text-primary py-2 rounded hover:bg-surface-variant transition-colors text-caption font-caption" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="terminal">terminal</span>
+                        Terminal
+                    </a>
+<a class="flex-1 flex justify-center items-center gap-2 text-on-surface-variant hover:text-primary py-2 rounded hover:bg-surface-variant transition-colors text-caption font-caption" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="menu_book">menu_book</span>
+                        Docs
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 xl:ml-64 p-container-padding overflow-y-auto h-full relative">
+<header class="mb-stack-lg flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Deployment Pipeline</h1>
+<p class="text-on-surface-variant flex items-center gap-2 font-label-mono text-label-mono">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse shadow-[0_0_8px_rgba(0,241,254,0.6)]"></span>
+                        LIVE DEPLOYMENT: v1.0.0-rc.1
+                    </p>
+</div>
+<div class="flex gap-3">
+<div class="px-3 py-1 border border-outline rounded flex items-center gap-2 bg-surface-container-low text-caption font-caption">
+<span class="material-symbols-outlined text-[16px] text-tertiary" data-icon="check_circle">check_circle</span>
+                        Environment: PROD-EU-WEST
+                    </div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- 1. Live Deployment Monitor -->
+<section class="col-span-12 lg:col-span-8 glass-card rounded-xl p-stack-md relative overflow-hidden group">
+<!-- Subtle active glow -->
+<div class="absolute inset-0 border border-secondary-container opacity-20 rounded-xl pointer-events-none"></div>
+<div class="absolute -inset-1 bg-secondary-container/5 blur-xl rounded-xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div class="flex justify-between items-center mb-stack-md border-b border-outline-variant pb-stack-sm">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="timeline">timeline</span>
+                            Pipeline Telemetry
+                        </h2>
+<span class="font-label-mono text-label-mono text-secondary-container border border-secondary-container/30 bg-secondary-container/10 px-2 py-0.5 rounded">RUNNING</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center relative py-stack-md gap-4 md:gap-0">
+<!-- Progress Line -->
+<div class="hidden md:block absolute top-1/2 left-8 right-8 h-[2px] bg-surface-container-high -translate-y-1/2 z-0">
+<div class="h-full bg-primary-container w-[70%] relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-primary-container rounded-full animate-ping opacity-75"></div>
+</div>
+</div>
+<!-- Nodes -->
+<div class="flex flex-col items-center z-10 gap-2 w-24">
+<div class="w-10 h-10 rounded-full bg-surface-container-low border-2 border-tertiary flex items-center justify-center text-tertiary shadow-[0_0_10px_rgba(78,222,163,0.3)]">
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface">Build</span>
+<span class="text-[10px] text-tertiary">3m 12s</span>
+</div>
+<div class="flex flex-col items-center z-10 gap-2 w-24">
+<div class="w-10 h-10 rounded-full bg-surface-container-low border-2 border-tertiary flex items-center justify-center text-tertiary shadow-[0_0_10px_rgba(78,222,163,0.3)]">
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface">Test</span>
+<span class="text-[10px] text-tertiary">14m 05s</span>
+</div>
+<div class="flex flex-col items-center z-10 gap-2 w-24">
+<div class="w-10 h-10 rounded-full bg-surface-container-low border-2 border-tertiary flex items-center justify-center text-tertiary shadow-[0_0_10px_rgba(78,222,163,0.3)]">
+<span class="material-symbols-outlined text-[20px]" data-icon="check">check</span>
+</div>
+<span class="font-label-mono text-label-mono text-on-surface">Artifact</span>
+<span class="text-[10px] text-tertiary">v1.0.0-rc.1</span>
+</div>
+<div class="flex flex-col items-center z-10 gap-2 w-24 relative">
+<!-- Active pulse indicator -->
+<div class="absolute -inset-2 bg-primary-container/20 rounded-full blur-md animate-pulse"></div>
+<div class="w-10 h-10 rounded-full bg-primary-container border-2 border-primary-fixed flex items-center justify-center text-on-primary-container relative z-10 shadow-[0_0_15px_rgba(124,58,237,0.5)]">
+<span class="material-symbols-outlined text-[20px] animate-spin" data-icon="sync" style="animation-duration: 3s;">sync</span>
+</div>
+<span class="font-label-mono text-label-mono text-primary font-bold">Deploy</span>
+<span class="text-[10px] text-primary">Rolling 60%</span>
+</div>
+<div class="flex flex-col items-center z-10 gap-2 w-24">
+<div class="w-10 h-10 rounded-full bg-surface-container-low border-2 border-surface-variant flex items-center justify-center text-outline-variant">
+<span class="material-symbols-outlined text-[20px]" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<span class="font-label-mono text-label-mono text-outline-variant">Health</span>
+<span class="text-[10px] text-outline-variant">Pending</span>
+</div>
+</div>
+</section>
+<!-- 2. Build Immutability Verification -->
+<section class="col-span-12 lg:col-span-4 glass-card rounded-xl p-stack-md flex flex-col">
+<div class="border-b border-outline-variant pb-stack-sm mb-stack-sm flex justify-between items-center">
+<h3 class="font-body-md text-body-md font-semibold text-on-surface">Immutability Hash</h3>
+<span class="material-symbols-outlined text-outline text-[18px]" data-icon="fingerprint">fingerprint</span>
+</div>
+<div class="flex-1 flex flex-col gap-3 font-label-mono text-label-mono text-[11px] overflow-hidden">
+<div class="bg-surface-container-highest p-2 rounded border border-outline-variant/50">
+<div class="text-on-surface-variant mb-1 flex justify-between">
+<span>api-gateway:v1.0.0-rc.1</span>
+<span class="text-tertiary">Verified</span>
+</div>
+<div class="text-outline break-all select-all">sha256:8b2a3f7c9e1d4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b</div>
+</div>
+<div class="bg-surface-container-highest p-2 rounded border border-outline-variant/50">
+<div class="text-on-surface-variant mb-1 flex justify-between">
+<span>auth-service:v2.1.4</span>
+<span class="text-tertiary">Verified</span>
+</div>
+<div class="text-outline break-all select-all">sha256:1f2e3d4c5b6a79887766554433221100ffeeddccbbaa99887766554433221100</div>
+</div>
+<div class="bg-surface-container-highest p-2 rounded border border-outline-variant/50 border-l-2 border-l-secondary-container">
+<div class="text-on-surface-variant mb-1 flex justify-between">
+<span class="text-secondary-container">payment-processor:v3.0.1</span>
+<span class="text-secondary-container animate-pulse">Syncing</span>
+</div>
+<div class="text-outline break-all select-all">sha256:a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2</div>
+</div>
+</div>
+</section>
+<!-- 4. Health Check Terminal -->
+<section class="col-span-12 lg:col-span-8 glass-card rounded-xl overflow-hidden flex flex-col h-64 border border-outline-variant relative">
+<div class="bg-surface-container-high px-4 py-2 border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-outline-variant" data-icon="terminal">terminal</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant text-[11px]">health-probe-tty</span>
+</div>
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-surface-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-surface-variant"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-surface-variant"></div>
+</div>
+</div>
+<div class="terminal-bg flex-1 p-4 font-label-mono text-[12px] leading-relaxed overflow-y-auto text-slate-400 font-medium">
+<div class="flex"><span class="text-primary mr-2">➜</span> <span class="text-on-surface">curl -I http://internal-lb/health/live</span></div>
+<div class="text-tertiary">HTTP/1.1 200 OK</div>
+<div>Date: Wed, 21 Oct 2023 07:28:00 GMT</div>
+<div>Content-Type: application/json</div>
+<div class="mb-2">X-Node-ID: prod-eu-west-node-01</div>
+<div class="flex"><span class="text-primary mr-2">➜</span> <span class="text-on-surface">curl -I http://internal-lb/health/ready</span></div>
+<div class="text-secondary-container animate-pulse">Waiting for endpoints to register... (2/3 pods ready)</div>
+<div>[INFO] pod/payment-processor-78f9b4c-kx2 has not passed readiness probe</div>
+<div>[WARN] Connection refused to 10.42.1.15:8080</div>
+<div class="flex items-center mt-2">
+<span class="text-primary mr-2">➜</span>
+<span class="w-2 h-4 bg-outline-variant animate-pulse"></span>
+</div>
+</div>
+</section>
+<!-- 3. Rollback Readiness & 5. Runbook -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- Rollback Panel -->
+<section class="glass-card rounded-xl p-stack-md border border-error/20 bg-gradient-to-br from-error-container/10 to-surface">
+<h3 class="font-body-md text-body-md font-semibold text-error mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span>
+                            Rollback Protocol
+                        </h3>
+<p class="text-caption font-caption text-on-surface-variant mb-4">
+                            Previous stable release <span class="font-label-mono text-on-surface">v1.0.0-beta.4</span> is preserved. Artifacts are cached and ready for instant inversion.
+                        </p>
+<div class="relative group cursor-not-allowed">
+<div class="absolute inset-0 bg-surface-container-highest/80 backdrop-blur-[2px] z-10 flex items-center justify-center rounded-lg border border-outline-variant border-dashed">
+<span class="font-label-mono text-[10px] text-outline flex items-center gap-1 uppercase tracking-widest"><span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span> Deployment in Progress</span>
+</div>
+<button class="w-full bg-error text-on-error font-body-md font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]" data-icon="fast_rewind">fast_rewind</span>
+                                Trigger Manual Rollback
+                            </button>
+</div>
+</section>
+<!-- Runbook -->
+<section class="glass-card rounded-xl p-stack-md flex-1">
+<h3 class="font-body-md text-body-md font-semibold text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary" data-icon="menu_book">menu_book</span>
+                            Quick Runbook
+                        </h3>
+<ul class="space-y-2 text-caption font-caption text-on-surface-variant">
+<li class="flex items-start gap-2 border-b border-outline-variant/30 pb-2">
+<span class="font-label-mono text-primary">01</span>
+<span>Monitor readiness probes in terminal above.</span>
+</li>
+<li class="flex items-start gap-2 border-b border-outline-variant/30 pb-2">
+<span class="font-label-mono text-primary">02</span>
+<span>If timeout &gt; 5m, check database migration logs.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="font-label-mono text-primary">03</span>
+<span>Execute rollback if error rate spikes &gt; 2%.</span>
+</li>
+</ul>
+</section>
+</div>
+</div>
+</main>
+</div>
+</body></html>

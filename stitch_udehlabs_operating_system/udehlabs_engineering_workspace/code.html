@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Engineering Workspace - Task Detail</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#1000a9",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-tertiary-fixed": "#002113",
+                        "surface-tint": "#d2bbff",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "primary-fixed": "#eaddff",
+                        "secondary-container": "#3131c0",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "inverse-on-surface": "#283044",
+                        "on-primary-container": "#ede0ff",
+                        "surface-container-highest": "#2d3449",
+                        "on-secondary-container": "#b0b2ff",
+                        "surface-container-lowest": "#060e20",
+                        "on-secondary-fixed": "#07006c",
+                        "primary-container": "#7c3aed",
+                        "surface-variant": "#2d3449",
+                        "error-container": "#93000a",
+                        "secondary-fixed": "#e1e0ff",
+                        "surface-container-low": "#131b2e",
+                        "outline": "#958da1",
+                        "surface-container": "#171f33",
+                        "on-tertiary-container": "#76ffc2",
+                        "surface": "#0b1326",
+                        "tertiary": "#4edea3",
+                        "on-surface-variant": "#ccc3d8",
+                        "tertiary-container": "#007650",
+                        "on-error": "#690005",
+                        "surface-container-high": "#222a3d",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#31394d",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-primary-fixed": "#25005a",
+                        "on-tertiary": "#003824",
+                        "on-background": "#dae2fd",
+                        "outline-variant": "#4a4455",
+                        "primary-fixed-dim": "#d2bbff",
+                        "surface-dim": "#0b1326",
+                        "on-surface": "#dae2fd",
+                        "primary": "#d2bbff",
+                        "inverse-surface": "#dae2fd",
+                        "on-primary": "#3f008e",
+                        "error": "#ffb4ab",
+                        "secondary": "#c0c1ff",
+                        "background": "#0b1326"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "stack-sm": "8px",
+                        "container-padding": "24px",
+                        "unit": "4px",
+                        "table-row-height": "40px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "code-mono": ["Inter"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-caps": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "code-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "800" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex overflow-hidden font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex w-60 h-screen sticky left-0 top-0 border-r border-outline-variant bg-surface-container-low flex-col py-container-padding flex-shrink-0 z-40">
+<!-- Header -->
+<div class="px-container-padding mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary tracking-tight leading-none">DevPortal</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-1">V-2.4.0-Stable</p>
+</div>
+</div>
+</div>
+<!-- Main Navigation -->
+<div class="flex-1 overflow-y-auto px-gutter space-y-1">
+<!-- Dashboard (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Codebase (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">code</span>
+<span>Codebase</span>
+</a>
+<!-- Tasks (Active) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-primary font-bold border-r-2 border-primary bg-secondary-container/10 transition-colors duration-200 opacity-90 scale-95" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span>Tasks</span>
+</a>
+<!-- AI Workspace (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">neurology</span>
+<span>AI Workspace</span>
+</a>
+<!-- Settings (Inactive) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</div>
+<!-- Footer Navigation -->
+<div class="mt-auto px-gutter space-y-1 pt-4 border-t border-outline-variant/30">
+<button class="w-full mb-4 bg-primary-container text-on-primary-container font-headline-sm text-headline-sm py-2 px-4 rounded-DEFAULT hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                New Deploy
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span>Help</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-DEFAULT text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span>Logs</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-screen overflow-hidden">
+<!-- Header area for task context -->
+<header class="h-16 border-b border-outline-variant bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-between px-container-padding flex-shrink-0">
+<div class="flex items-center gap-4">
+<span class="font-code-mono text-code-mono text-tertiary bg-tertiary/10 px-2 py-1 rounded">TASK-8492</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface truncate max-w-xl">Implement Distributed Caching Layer for Auth Microservice</h2>
+<span class="px-2 py-0.5 rounded-full bg-error-container/20 border border-error-container text-error text-label-caps font-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">priority_high</span> HIGH PRIORITY
+                </span>
+</div>
+<div class="flex items-center gap-3">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-2">
+<span class="material-symbols-outlined">share</span>
+</button>
+<div class="h-6 w-px bg-outline-variant"></div>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-1.5 rounded-DEFAULT font-body-sm text-body-sm transition-colors border border-outline-variant">
+                    Save Draft
+                </button>
+<button class="bg-primary text-on-primary px-4 py-1.5 rounded-DEFAULT font-body-sm text-body-sm font-semibold hover:bg-primary-fixed transition-colors">
+                    Submit PR
+                </button>
+</div>
+</header>
+<!-- Workspace Grid -->
+<div class="flex-1 overflow-hidden flex flex-col lg:flex-row">
+<!-- Center Canvas: Task Details & Code Explorer -->
+<div class="flex-1 flex flex-col h-full border-r border-outline-variant bg-surface overflow-y-auto">
+<!-- Task Description Panel -->
+<div class="p-container-padding border-b border-outline-variant">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">description</span>
+                            Requirements &amp; Specifications
+                        </h3>
+<div class="flex items-center gap-2 text-on-surface-variant font-code-mono text-code-mono">
+<span>Assignee:</span>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-1 rounded">
+<img class="w-4 h-4 rounded-full object-cover" data-alt="A small, professional headshot avatar of a software engineer, futuristic cyberpunk lighting, dark background, 50x50 pixels, high contrast, sharp focus, corporate tech vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJSn3F7aTlfuTOMnKAJBFbaaAmvJJAPBjmqpY_TNgggsQCLmL7Y06LW1qjetzWw03pbKKDrVds3T-YM-1YBM6ukNZ9H5pztrVDwa7p_Er42_kz9imqP1h5Zt_0Gmuw82OTv0Xt3BQgUmDbDQByGmIz6oqzxTapagjY4eD8QfH82oQRFAcZqEE-AfUyyPoALjb6Qjfq1sIq97lYnGKqI4c2gWoSNyVDahf3MPi1XxuTAY6yYap-pB2MbA"/>
+                                @alex.dev
+                            </div>
+</div>
+</div>
+<div class="prose prose-invert max-w-none font-body-md text-body-md text-on-surface-variant space-y-4">
+<p>The current authentication service is experiencing high latency during peak load due to frequent database queries for session validation. We need to implement a Redis-based distributed caching layer to store active JWT session states.</p>
+<ul class="list-disc pl-5 space-y-1">
+<li>Integrate <code class="font-code-mono text-code-mono bg-surface-container px-1 py-0.5 rounded text-tertiary">ioredis</code> client into the auth module.</li>
+<li>Implement cache aside pattern for session retrieval.</li>
+<li>Ensure cache invalidation on explicit logout or password reset events.</li>
+<li>Target hit rate: &gt; 95%. Max latency budget: 5ms.</li>
+</ul>
+</div>
+</div>
+<!-- Code Explorer Widget -->
+<div class="flex-1 flex flex-col min-h-[400px]">
+<div class="h-10 bg-surface-container-low border-b border-outline-variant flex items-center px-4 justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">folder_open</span>
+<span class="font-code-mono text-code-mono text-on-surface">auth-service / src</span>
+</div>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-surface-container rounded text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</button>
+<button class="p-1 hover:bg-surface-container rounded text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Editor Split View -->
+<div class="flex-1 flex">
+<!-- File Tree -->
+<div class="w-64 border-r border-outline-variant bg-surface-container-lowest p-2 overflow-y-auto font-code-mono text-code-mono">
+<ul class="space-y-1">
+<li>
+<div class="flex items-center gap-2 py-1 px-2 hover:bg-surface-container-high rounded cursor-pointer text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+<span>controllers</span>
+</div>
+</li>
+<li>
+<div class="flex items-center gap-2 py-1 px-2 hover:bg-surface-container-high rounded cursor-pointer text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+<span>middlewares</span>
+</div>
+</li>
+<li>
+<div class="flex items-center gap-2 py-1 px-2 hover:bg-surface-container-high rounded cursor-pointer text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-tertiary">folder_open</span>
+<span class="text-on-surface">services</span>
+</div>
+<ul class="pl-6 mt-1 space-y-1 border-l border-outline-variant/30 ml-3">
+<li>
+<div class="flex items-center gap-2 py-1 px-2 hover:bg-surface-container-high rounded cursor-pointer text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span>auth.service.ts</span>
+</div>
+</li>
+<li>
+<div class="flex items-center gap-2 py-1 px-2 bg-secondary-container/20 rounded cursor-pointer text-primary border-l-2 border-primary -ml-[1px]">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span>session.cache.ts</span>
+<span class="ml-auto text-[10px] bg-tertiary/20 text-tertiary px-1 rounded">M</span>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- Main Editor -->
+<div class="flex-1 bg-[#000000] flex flex-col">
+<!-- Tabs -->
+<div class="flex bg-surface-container-low border-b border-outline-variant overflow-x-auto">
+<div class="px-4 py-2 bg-[#000000] border-t-2 border-primary border-r border-outline-variant flex items-center gap-2 min-w-max">
+<span class="material-symbols-outlined text-primary text-[14px]">description</span>
+<span class="font-code-mono text-code-mono text-on-surface">session.cache.ts</span>
+<button class="ml-2 hover:text-error transition-colors"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</div>
+<div class="px-4 py-2 hover:bg-surface-container-high border-r border-outline-variant flex items-center gap-2 text-on-surface-variant min-w-max cursor-pointer">
+<span class="material-symbols-outlined text-[14px]">description</span>
+<span class="font-code-mono text-code-mono">auth.service.ts</span>
+</div>
+</div>
+<!-- Code Content (Mock) -->
+<div class="flex-1 p-4 font-code-mono text-code-mono overflow-auto relative">
+<div class="absolute left-0 top-0 bottom-0 w-10 bg-surface-container-lowest border-r border-outline-variant/50 flex flex-col items-center py-4 text-outline-variant select-none">
+<span>12</span><span>13</span><span>14</span><span class="text-tertiary">15</span><span class="text-tertiary">16</span><span class="text-tertiary">17</span><span>18</span><span>19</span>
+</div>
+<pre class="pl-8 text-on-surface-variant leading-relaxed"><span class="text-primary">import</span> { Injectable } <span class="text-primary">from</span> <span class="text-tertiary">'@nestjs/common'</span>;
+<span class="text-primary">import</span> { RedisService } <span class="text-primary">from</span> <span class="text-tertiary">'./redis.service'</span>;
+
+<span class="text-primary">@Injectable()</span>
+<span class="text-primary">export class</span> SessionCacheService {
+    <span class="text-primary">constructor</span>(<span class="text-primary">private readonly</span> redisService: RedisService) {}
+
+<div class="bg-tertiary/10 -mx-4 px-4 border-l-2 border-tertiary py-1">    <span class="text-primary">async</span> getSession(sessionId: <span class="text-tertiary">string</span>): <span class="text-tertiary">Promise&lt;Session | null&gt;</span> {
+        <span class="text-primary">const</span> cached = <span class="text-primary">await</span> <span class="text-primary">this</span>.redisService.get(`session:${sessionId}`);
+        <span class="text-primary">return</span> cached ? JSON.parse(cached) : <span class="text-primary">null</span>;
+    }</div>
+    
+    <span class="text-outline-variant italic">// ... more implementation</span>
+}
+                                </pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom: Verification Status Grid -->
+<div class="h-48 border-t border-outline-variant bg-surface-container-lowest p-container-padding flex-shrink-0">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">verified</span> VERIFICATION GATES
+                    </h4>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Unit Tests -->
+<div class="bg-surface p-3 rounded-lg border border-outline-variant/50 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface">Unit Tests</span>
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-headline-md text-headline-md text-on-surface">248<span class="text-body-sm text-on-surface-variant font-normal">/248</span></span>
+<span class="font-code-mono text-code-mono text-tertiary bg-tertiary/10 px-1 rounded text-[10px]">PASS</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-full"></div>
+</div>
+</div>
+<!-- Security Scan -->
+<div class="bg-surface p-3 rounded-lg border border-outline-variant/50 flex flex-col justify-between relative overflow-hidden">
+<!-- Animated scanning effect -->
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent w-full h-full -translate-x-full animate-[scan_2s_ease-in-out_infinite]"></div>
+<div class="flex items-center justify-between mb-2 relative z-10">
+<span class="font-body-sm text-body-sm text-on-surface">SAST Security Scan</span>
+<span class="material-symbols-outlined text-secondary animate-pulse">radar</span>
+</div>
+<div class="flex items-end justify-between relative z-10">
+<span class="font-headline-sm text-headline-sm text-secondary">Scanning...</span>
+<span class="font-code-mono text-code-mono text-secondary bg-secondary/10 px-1 rounded text-[10px]">IN PROG</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-2 rounded-full overflow-hidden relative z-10">
+<div class="bg-secondary h-full w-[65%] rounded-full"></div>
+</div>
+</div>
+<!-- Quality Gates -->
+<div class="bg-surface p-3 rounded-lg border border-error-container/50 bg-error-container/5 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="font-body-sm text-body-sm text-on-surface">Code Coverage</span>
+<span class="material-symbols-outlined text-error">warning</span>
+</div>
+<div class="flex items-end justify-between">
+<span class="font-headline-md text-headline-md text-error">78.4%</span>
+<span class="font-code-mono text-code-mono text-error bg-error/10 px-1 rounded text-[10px]">FAIL (&lt;80%)</span>
+</div>
+<div class="w-full bg-surface-container h-1 mt-2 rounded-full overflow-hidden flex">
+<div class="bg-tertiary h-full w-[78.4%]"></div>
+<div class="bg-error h-full flex-1"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: AI Engineering Copilot -->
+<div class="w-80 lg:w-96 bg-surface-container flex flex-col border-l border-outline-variant flex-shrink-0 z-10 shadow-[-8px_0_16px_rgba(0,0,0,0.4)]">
+<!-- Copilot Header -->
+<div class="p-4 border-b border-outline-variant bg-surface-container-high flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[16px]">neurology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">AI Copilot</h3>
+</div>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+</div>
+<!-- Chat/Activity Area -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- AI Message -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]">smart_toy</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg rounded-tl-none border border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant">
+                            I noticed you are implementing the caching layer. I've analyzed <code class="text-primary font-code-mono">auth.service.ts</code> and found potential race conditions during concurrent cache writes.
+                        </div>
+</div>
+<!-- Proposed Patch Card -->
+<div class="ml-11 bg-surface-container-highest border border-outline-variant/50 rounded-lg overflow-hidden">
+<div class="px-3 py-2 bg-surface-container-low border-b border-outline-variant/50 flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">auto_fix_high</span> PROPOSED PATCH
+                            </span>
+<span class="text-[10px] text-on-surface-variant font-code-mono">mutex-lock.diff</span>
+</div>
+<div class="p-3 font-code-mono text-code-mono text-[11px] bg-[#000000] overflow-x-auto">
+<div class="text-error">- await this.redis.set(key, val);</div>
+<div class="text-tertiary">+ await this.redis.set(key, val, 'NX', 'EX', 3600);</div>
+</div>
+<div class="p-2 flex gap-2 bg-surface-container-low">
+<button class="flex-1 bg-surface hover:bg-surface-bright text-on-surface text-body-sm font-body-sm py-1 rounded border border-outline-variant transition-colors">Dismiss</button>
+<button class="flex-1 bg-primary/20 hover:bg-primary/30 text-primary text-body-sm font-body-sm py-1 rounded border border-primary/50 transition-colors">Apply</button>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex gap-3 flex-row-reverse">
+<div class="w-8 h-8 rounded-full bg-surface-bright flex-shrink-0 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A small, professional headshot avatar of a software engineer, futuristic cyberpunk lighting, dark background, 50x50 pixels, high contrast, sharp focus, corporate tech vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh7DgUn0J7fa54ixim-AFIO5A3iSQHeQg-hoaF8fjzwZxhyVjKkzmsLOcx1wr_2Kh5OGcnkHX2IXls4SlFgXi5wZS4_47TOOHFLjriG3WM1hZY5nzWayJWXt1z0ObXyFNyTJX3mt1jifgorULdO33FzZZ4a1i8lCXb7SwBtHPLvLtvg0S3SjELqiec2V3B-uPIWudI11iSKCInhmekAFwxiIymkLTw4ljHxZ019wA6D0hJ3O-lketpPA"/>
+</div>
+<div class="bg-primary-container/20 p-3 rounded-lg rounded-tr-none border border-primary/30 text-body-sm font-body-sm text-on-surface">
+                            Can you generate the unit tests for the cache aside fallback logic?
+                        </div>
+</div>
+<!-- AI Generating State -->
+<div class="flex gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/20 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px] animate-spin">sync</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg rounded-tl-none border border-outline-variant/30 text-body-sm font-body-sm text-on-surface-variant flex items-center gap-2">
+                            Generating test suites...
+                            <span class="flex gap-1">
+<span class="w-1 h-1 bg-primary rounded-full animate-bounce" style="animation-delay: 0s;"></span>
+<span class="w-1 h-1 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+<span class="w-1 h-1 bg-primary rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
+</span>
+</div>
+</div>
+</div>
+<!-- Input Area -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-high">
+<div class="relative">
+<textarea class="w-full bg-surface border border-outline-variant rounded-lg pl-3 pr-10 py-2 text-body-sm font-body-sm text-on-surface placeholder-on-surface-variant focus:border-primary focus:ring-1 focus:ring-primary resize-none" placeholder="Ask Copilot to explain code, generate tests, or suggest fixes..." rows="2"></textarea>
+<button class="absolute right-2 bottom-2 text-primary hover:text-primary-fixed transition-colors p-1 bg-primary/10 rounded">
+<span class="material-symbols-outlined text-[20px]">send</span>
+</button>
+</div>
+<div class="flex gap-2 mt-2">
+<button class="text-[10px] font-code-mono bg-surface-bright px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">/explain</button>
+<button class="text-[10px] font-code-mono bg-surface-bright px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">/test</button>
+<button class="text-[10px] font-code-mono bg-surface-bright px-2 py-1 rounded text-on-surface-variant hover:text-on-surface">/refactor</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<style>
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Custom scrollbar for webkit */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060e20; /* surface-container-lowest */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2d3449; /* outline-variant */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4a4455;
+        }
+    </style>
+</body></html>

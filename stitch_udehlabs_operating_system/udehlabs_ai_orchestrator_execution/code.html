@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - AI Orchestrator</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#d2bbff",
+                        "surface": "#0c141e",
+                        "on-secondary-container": "#c9aeff",
+                        "outline": "#8e9197",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-bright": "#323a45",
+                        "primary-fixed-dim": "#b9c8de",
+                        "status-critical": "#ef4444",
+                        "secondary-container": "#6001d1",
+                        "surface-container-highest": "#2d3541",
+                        "on-primary-fixed": "#0e1c2d",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "surface-container-high": "#232a36",
+                        "on-tertiary-fixed": "#002113",
+                        "on-tertiary-container": "#009063",
+                        "on-tertiary": "#003824",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "tertiary": "#4edea3",
+                        "primary": "#b9c8de",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#141c27",
+                        "inverse-on-surface": "#29313c",
+                        "on-surface": "#dbe3f2",
+                        "primary-container": "#051424",
+                        "on-secondary-fixed": "#25005a",
+                        "on-surface-variant": "#c4c6cd",
+                        "surface-dim": "#0c141e",
+                        "background": "#0c141e",
+                        "outline-variant": "#44474c",
+                        "surface-container-lowest": "#070f19",
+                        "status-risk": "#f59e0b",
+                        "inverse-surface": "#dbe3f2",
+                        "on-secondary": "#3f008e",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#00170c",
+                        "inverse-primary": "#515f72",
+                        "on-primary-fixed-variant": "#3a485a",
+                        "surface-card": "#0d1b2a",
+                        "border-muted": "#1e293b",
+                        "on-error": "#690005",
+                        "execution-violet": "#7c3aed",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "primary-fixed": "#d5e4fa",
+                        "surface-variant": "#2d3541",
+                        "secondary-fixed": "#eaddff",
+                        "on-primary-container": "#717f93",
+                        "on-background": "#dbe3f2",
+                        "data-blue": "#1C85E8",
+                        "surface-tint": "#b9c8de",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "surface-container": "#18202b",
+                        "on-primary": "#233143",
+                        "status-success": "#10b981"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "density-compact": "8px",
+                        "gutter": "16px",
+                        "base": "4px",
+                        "density-comfortable": "16px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["11px", { "lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "data-mono": ["13px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-violet {
+            box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7);
+            animation: pulse-v 2s infinite;
+        }
+        @keyframes pulse-v {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(124, 58, 237, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(124, 58, 237, 0); }
+        }
+        .data-flow-line {
+            stroke-dasharray: 4;
+            animation: dash 1s linear infinite;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: -8; }
+        }
+        /* Custom Scrollbar for dark theme */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0c141e; }
+        ::-webkit-scrollbar-thumb { background: #2d3541; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #44474c; }
+    </style>
+</head>
+<body class="bg-primary-container text-on-surface font-body-md antialiased overflow-hidden selection:bg-execution-violet selection:text-white">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-primary font-headline-sm text-headline-sm docked full-width top-0 sticky z-40 border-b border-outline-variant flat no shadows opacity-80 active:opacity-100 flex justify-between items-center h-16 w-full pl-72 pr-gutter">
+<div class="flex items-center gap-6">
+<span class="font-display-lg text-display-lg font-black text-on-surface">UdehLabs Delivery</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-primary border-b-2 border-primary pb-1" href="#">Project: Alpha-9</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Health: Healthy</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">notifications</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">history</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">account_circle</span></button>
+<button class="bg-execution-violet text-white px-4 py-1.5 rounded-DEFAULT font-label-caps uppercase hover:bg-secondary-container transition-colors">Deploy</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container-low text-primary dark:text-primary font-body-md text-body-md h-screen w-64 flex flex-col fixed left-0 top-0 border-r border-outline-variant flat no shadows flex flex-col h-full py-density-comfortable px-base z-50">
+<div class="mb-8 px-4 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden border border-border-muted">
+<img alt="UdehLabs User Avatar" class="w-full h-full object-cover" data-alt="A highly detailed close-up of a digital avatar in a futuristic, cybernetic style. The avatar features glowing neon violet circuitry patterns on dark skin, illuminated by dramatic side lighting against a deep space black background. The aesthetic is high-tech corporate cyberpunk, emphasizing precision and secure access." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEYlDEGsMlQlzt1dSpuwS4uQhrjhyAXeNjvKGtWZ2Ekllutk9tNAn1Ly8XVRyLnFYuUX6GIEOje71MvXPlcGHMtrkmiXe3Jb10ke0OAOiJXAVGP-z2GYHCYjcxC4IeYGg-r0X9-GMjMXUZkpEdZYjD2ridFL80gl2ShsfC8KyMyRy9urJqfpUZ3hR1kB5V87ReHvfuL3E93u87cO7sSSLubNn8_l7B4yKWBJE_opGhH2dZYourjYw1Rw"/>
+</div>
+<div>
+<div class="font-display-lg text-display-lg font-bold text-on-surface text-lg">UdehLabs</div>
+<div class="font-label-caps text-on-surface-variant text-[10px] uppercase">Command Center</div>
+</div>
+</div>
+<button class="mx-4 mb-6 bg-execution-violet text-white py-2 rounded-DEFAULT font-label-caps uppercase hover:bg-secondary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">add</span> New Pipeline
+        </button>
+<nav class="flex-1 space-y-1 px-2">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">dashboard</span> Dashboard
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">local_shipping</span> Delivery
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">bolt</span> Sprints
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">inventory_2</span> Repositories
+            </a>
+<a class="bg-secondary-container text-on-secondary-container rounded-lg font-bold flex items-center gap-3 px-3 py-2" href="#">
+<span class="material-symbols-outlined">psychology</span> AI Orchestrator
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">verified_user</span> Quality Gates
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">rocket_launch</span> Release Center
+            </a>
+</nav>
+<div class="mt-auto space-y-1 px-2 pt-4 border-t border-border-muted">
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">settings</span> Settings
+            </a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors hover:bg-surface-container-highest scale-95 transition-transform duration-150 flex items-center gap-3 px-3 py-2 rounded-DEFAULT" href="#">
+<span class="material-symbols-outlined">help</span> Support
+            </a>
+</div>
+</aside>
+<!-- Main Canvas (12-column grid structure within a flex container to account for sidebar) -->
+<main class="ml-64 mt-16 p-gutter h-[calc(100vh-64px)] overflow-y-auto">
+<div class="grid grid-cols-12 gap-gutter h-full">
+<!-- Left Pane: Active Orchestration (7 cols) -->
+<section class="col-span-12 lg:col-span-7 flex flex-col gap-gutter h-full">
+<!-- Map Header -->
+<div class="flex justify-between items-center">
+<h1 class="font-headline-md text-headline-md text-on-surface">Active Orchestration Flow</h1>
+<div class="flex gap-2">
+<span class="inline-flex items-center gap-1.5 font-label-caps text-execution-violet uppercase bg-surface-container-high px-2 py-1 border border-border-muted rounded-DEFAULT">
+<span class="w-2 h-2 rounded-full bg-execution-violet pulse-violet"></span> Executing
+                        </span>
+</div>
+</div>
+<!-- Orchestration Canvas -->
+<div class="bg-surface-card border border-border-muted rounded-lg flex-1 relative overflow-hidden flex flex-col">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-execution-violet"></div> <!-- Accent strip -->
+<!-- Visualization Area -->
+<div class="flex-1 p-6 relative">
+<!-- SVG Connecting Lines -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+<path class="data-flow-line" d="M 120 100 C 200 100, 200 220, 280 220" fill="none" stroke="#1C85E8" stroke-width="1.5"></path>
+<path d="M 400 220 C 480 220, 480 100, 560 100" fill="none" stroke="#8e9197" stroke-dasharray="4" stroke-width="1"></path>
+</svg>
+<!-- Nodes -->
+<div class="relative z-10 w-full h-full">
+<!-- Node 1: Planner -->
+<div class="absolute top-[60px] left-[20px] w-48 bg-surface-container-high border border-status-success rounded-DEFAULT p-3 shadow-lg">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-status-success text-[18px]">done_all</span>
+<span class="font-label-caps text-on-surface uppercase">Arch. Planner</span>
+</div>
+<div class="font-data-mono text-body-sm text-on-surface-variant">Specs Generated</div>
+<div class="mt-2 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-status-success w-full"></div>
+</div>
+</div>
+<!-- Node 2: Coder (Active) -->
+<div class="absolute top-[180px] left-[260px] w-48 bg-surface-container-high border border-execution-violet rounded-DEFAULT p-3 shadow-[0_0_15px_rgba(124,58,237,0.15)]">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-execution-violet text-[18px] animate-spin-slow">code</span>
+<span class="font-label-caps text-on-surface uppercase">Core Coder</span>
+</div>
+<div class="font-data-mono text-body-sm text-on-surface-variant">Refactoring auth.ts...</div>
+<div class="mt-2 h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-execution-violet w-3/4 pulse-violet"></div>
+</div>
+</div>
+<!-- Node 3: Reviewer -->
+<div class="absolute top-[60px] left-[500px] w-48 bg-surface-container-high border border-border-muted rounded-DEFAULT p-3 opacity-60">
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-outline text-[18px]">policy</span>
+<span class="font-label-caps text-outline uppercase">Sec. Reviewer</span>
+</div>
+<div class="font-data-mono text-body-sm text-outline">Pending Input</div>
+<div class="mt-2 h-1 w-full bg-surface-container-highest rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent Registry Quick View -->
+<div class="bg-surface-card border border-border-muted rounded-lg p-4">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-outline"></div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">group_work</span> Agent Registry Status
+                     </h2>
+<div class="grid grid-cols-3 gap-4">
+<div class="flex items-center gap-3 p-2 border border-border-muted rounded-DEFAULT bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-full bg-status-success/20 flex items-center justify-center text-status-success">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div>
+<div class="font-label-caps text-on-surface">SYS-ADMIN</div>
+<div class="font-data-mono text-[10px] text-status-success">IDLE</div>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 border border-execution-violet/30 rounded-DEFAULT bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-full bg-execution-violet/20 flex items-center justify-center text-execution-violet">
+<span class="material-symbols-outlined text-[16px] animate-pulse">memory</span>
+</div>
+<div>
+<div class="font-label-caps text-on-surface">CODE-GEN</div>
+<div class="font-data-mono text-[10px] text-execution-violet">ACTIVE</div>
+</div>
+</div>
+<div class="flex items-center gap-3 p-2 border border-border-muted rounded-DEFAULT bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-full bg-outline/20 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[16px]">pause</span>
+</div>
+<div>
+<div class="font-label-caps text-on-surface">DB-MIGRATE</div>
+<div class="font-data-mono text-[10px] text-outline">OFFLINE</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Pane: Logs & Approvals (5 cols) -->
+<section class="col-span-12 lg:col-span-5 flex flex-col gap-gutter h-full overflow-hidden">
+<!-- Human Approval Queue -->
+<div class="bg-surface-card border border-status-risk/50 rounded-lg p-0 flex flex-col shrink-0 relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-status-risk"></div>
+<div class="p-4 border-b border-border-muted flex justify-between items-center bg-surface-container-high/50">
+<h2 class="font-headline-sm text-headline-sm text-status-risk flex items-center gap-2">
+<span class="material-symbols-outlined">warning</span> Action Required
+                        </h2>
+<span class="bg-status-risk text-surface-container-lowest font-label-caps px-2 py-0.5 rounded-DEFAULT">1 PENDING</span>
+</div>
+<div class="p-4">
+<div class="border border-border-muted rounded-DEFAULT bg-surface-container-lowest p-3">
+<div class="flex justify-between items-start mb-2">
+<div>
+<div class="font-label-caps text-on-surface mb-1">PROD DB MIGRATION</div>
+<div class="font-data-mono text-body-sm text-on-surface-variant">Agent 'DB-MIGRATE' proposing schema drop on `users_legacy`.</div>
+</div>
+<span class="font-data-mono text-[10px] text-outline">2m ago</span>
+</div>
+<div class="flex gap-2 mt-3">
+<button class="flex-1 bg-transparent border border-outline text-on-surface hover:bg-surface-container-highest py-1.5 rounded-DEFAULT font-label-caps transition-colors">Deny</button>
+<button class="flex-1 bg-status-risk text-surface-container-lowest hover:bg-status-risk/80 py-1.5 rounded-DEFAULT font-label-caps transition-colors">Approve Execution</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Execution Log -->
+<div class="bg-surface-container-lowest border border-border-muted rounded-lg flex-1 flex flex-col overflow-hidden relative shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-data-blue"></div>
+<div class="p-3 border-b border-border-muted flex justify-between items-center bg-surface-container-low sticky top-0 z-10">
+<h2 class="font-label-caps text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">terminal</span> Execution Log
+                        </h2>
+<span class="font-data-mono text-[10px] text-data-blue">TAIL -F</span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 font-data-mono text-[12px] leading-relaxed space-y-2">
+<div class="text-outline">
+<span class="text-on-surface-variant">[14:32:01]</span> <span class="text-data-blue">INFO</span> [Planner] Task sequence generated. 3 agents assigned.
+                        </div>
+<div class="text-outline">
+<span class="text-on-surface-variant">[14:32:05]</span> <span class="text-status-success">SUCCESS</span> [Planner] Context loaded from git ref <span class="text-tertiary">a1b2c3d</span>.
+                        </div>
+<div class="text-outline">
+<span class="text-on-surface-variant">[14:32:10]</span> <span class="text-execution-violet">EXEC</span> [Coder] Initiating rewrite of <span class="text-on-surface">src/lib/auth.ts</span>
+</div>
+<div class="pl-4 border-l border-border-muted my-2 text-on-surface-variant">
+                            &gt; Tools Used: AST_Parser, Typescript_Compiler<br/>
+                            &gt; Files Affected: 1<br/>
+                            &gt; Verification Result: Pending
+                        </div>
+<div class="text-outline">
+<span class="text-on-surface-variant">[14:33:15]</span> <span class="text-status-risk">WARN</span> [Coder] Deprecated API detected in line 42. Attempting auto-fix.
+                        </div>
+<div class="text-on-surface">
+<span class="text-on-surface-variant">[14:33:40]</span> <span class="text-execution-violet animate-pulse">WAIT</span> [Coder] Generating unit tests...<span class="inline-block w-1.5 h-3 bg-execution-violet ml-1 animate-ping"></span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

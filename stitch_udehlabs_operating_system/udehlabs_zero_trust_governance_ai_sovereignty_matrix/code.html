@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zero-Trust Governance | UdehLabs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&amp;family=Geist+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#ddfcff",
+                    "outline-variant": "#4a4455",
+                    "surface-variant": "#273647",
+                    "inverse-primary": "#732ee4",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#bec6e0",
+                    "outline": "#958da1",
+                    "on-tertiary-container": "#dee5ff",
+                    "tertiary": "#bec6e0",
+                    "tertiary-fixed": "#dae2fd",
+                    "surface-container-highest": "#273647",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#ccc3d8",
+                    "on-primary": "#3f008e",
+                    "on-secondary": "#00363a",
+                    "on-secondary-fixed-variant": "#004f54",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "surface-tint": "#d2bbff",
+                    "on-secondary-fixed": "#002022",
+                    "on-error-container": "#ffdad6",
+                    "on-surface": "#d4e4fa",
+                    "secondary-container": "#00f1fe",
+                    "secondary-fixed-dim": "#00dbe7",
+                    "on-background": "#d4e4fa",
+                    "on-tertiary-fixed": "#131b2e",
+                    "inverse-surface": "#d4e4fa",
+                    "background": "#051424",
+                    "on-tertiary-fixed-variant": "#3f465c",
+                    "surface-container-low": "#0d1c2d",
+                    "primary-container": "#7c3aed",
+                    "primary": "#d2bbff",
+                    "error-container": "#93000a",
+                    "surface-bright": "#2c3a4c",
+                    "on-primary-container": "#ede0ff",
+                    "primary-fixed-dim": "#d2bbff",
+                    "inverse-on-surface": "#233143",
+                    "secondary-fixed": "#74f5ff",
+                    "on-secondary-container": "#006a70",
+                    "surface-dim": "#051424",
+                    "tertiary-container": "#5e667d",
+                    "surface-container": "#122131",
+                    "on-primary-fixed": "#25005a",
+                    "surface-container-high": "#1c2b3c",
+                    "on-tertiary": "#283044",
+                    "surface": "#051424",
+                    "surface-container-lowest": "#010f1f",
+                    "primary-fixed": "#eaddff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "8px",
+                    "lg": "24px",
+                    "unit": "4px",
+                    "xl": "48px",
+                    "xs": "4px",
+                    "md": "16px",
+                    "gutter": "16px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Hanken Grotesk"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "label-caps": ["Geist Mono"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "data-mono-sm": ["Geist Mono"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "data-mono-lg": ["Geist Mono"],
+                    "body-md": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "data-mono-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "data-mono-lg": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #020617; /* Base Navy Layer */
+            color: #d4e4fa; /* on-background */
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        .glow-critical {
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.3);
+        }
+        .glow-active {
+            box-shadow: 0 0 10px rgba(0, 241, 254, 0.3);
+        }
+        .zebra-row:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .btn-ghost {
+            border: 1px solid #00f1fe; /* Cyan border */
+            color: #00f1fe;
+            transition: all 200ms ease;
+        }
+        .btn-ghost:hover {
+            box-shadow: inset 0 0 10px rgba(0, 241, 254, 0.2);
+            background-color: rgba(0, 241, 254, 0.05);
+        }
+        .btn-primary {
+            background-color: #7c3aed; /* Indigo */
+            color: white;
+            transition: all 200ms ease;
+        }
+        .btn-primary:hover {
+            box-shadow: inset 0 0 15px rgba(255,255,255,0.2);
+            background-color: #6d28d9;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface-container-lowest dark:bg-surface-container-lowest h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-white/10 backdrop-blur-xl flex flex-col h-full py-lg gap-md z-50">
+<!-- Brand -->
+<div class="px-lg mb-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed text-[32px]" style="font-variation-settings: 'FILL' 1;">security</span>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-secondary-fixed tracking-tight">SOC Command</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Enterprise Unit 01</p>
+</div>
+</div>
+<!-- Tabs -->
+<div class="flex-1 flex flex-col gap-1 px-3">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary-fixed border-l-2 border-secondary-fixed bg-secondary/5 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">fingerprint</span>
+<span>Identity</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/20 hover:text-secondary-fixed transition-colors duration-200 font-body-md text-body-md border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined">shield_with_heart</span>
+<span>Posture</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/20 hover:text-secondary-fixed transition-colors duration-200 font-body-md text-body-md border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined">psychology_alt</span>
+<span>AI Security</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/20 hover:text-secondary-fixed transition-colors duration-200 font-body-md text-body-md border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined">key</span>
+<span>Secrets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant/20 hover:text-secondary-fixed transition-colors duration-200 font-body-md text-body-md border-l-2 border-transparent" href="#">
+<span class="material-symbols-outlined">policy</span>
+<span>Audit</span>
+</a>
+</div>
+<!-- CTA & Footer -->
+<div class="px-lg pb-lg flex flex-col gap-4">
+<button class="btn-primary w-full py-2 rounded font-body-md text-body-md font-semibold flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">rocket_launch</span>
+                Deploy Agent
+            </button>
+<div class="border-t border-white/10 pt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-secondary-fixed transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-secondary-fixed transition-colors duration-200 font-body-md text-body-md" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+</div>
+<!-- Profile Avatar Placeholder -->
+<div class="flex items-center gap-3 px-3 pt-2">
+<img alt="Security Analyst Profile" class="w-8 h-8 rounded-full border border-white/20 object-cover" data-alt="A highly detailed close-up of a futuristic security analyst avatar. Cyberpunk aesthetics, neon blue lighting, dark background, sharp focus, digital art style. 8k resolution, cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvp8oScuAEDGv0YYru8tebsOwAD1HBy4A_jy8sLr6aS58n5B1qhghMTG7ixIiL0wHsiji3pj-hOAT2r54xPQjLt_Fx0VtthkxLxePQIQ7TLirfLwthnDZLrR6fPjLWh9ruyOONV0YP83UCr8JA3IoL1qyKPeDMLlWNJUw9bOc23uthJHQAsfYYP947r0XpHGKbp2iLXE_7tcxRE9DcZR7GJNgRat-a-C3fEJ9pmFmZoNwQGKAF85vvMw"/>
+<div class="flex flex-col">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface">Admin_01</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed">Superuser</span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md border-b border-white/10 docked full-width top-0 h-16 sticky flex justify-between items-center px-lg w-full z-40">
+<div class="flex items-center gap-4 w-1/3">
+<h2 class="font-headline-md text-headline-md font-black text-secondary-fixed uppercase tracking-wider">Aegis AI SOC</h2>
+</div>
+<!-- Search -->
+<div class="w-1/3 flex justify-center">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-secondary-fixed transition-colors">search</span>
+<input class="w-full bg-surface-container-highest border border-white/10 rounded-full py-2 pl-10 pr-4 font-body-md text-body-md text-on-surface focus:outline-none focus:border-secondary-container focus:ring-1 focus:ring-secondary-container transition-all" placeholder="Search identities, boundaries, rules..." type="text"/>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center justify-end gap-4 w-1/3">
+<button class="text-on-surface-variant hover:text-secondary-fixed transition-all p-2 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary-fixed transition-all p-2 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="text-on-surface-variant hover:text-secondary-fixed transition-all p-2 rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="bg-error-container text-on-error-container border border-error/50 hover:bg-error hover:text-on-error px-4 py-1.5 rounded font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-2 transition-colors glow-critical">
+<span class="material-symbols-outlined text-[16px]">emergency</span>
+                    Emergency Lock
+                </button>
+<img alt="User Avatar" class="w-8 h-8 rounded-full border border-white/20 object-cover cursor-pointer hover:border-secondary-fixed transition-colors" data-alt="A highly detailed close-up of a futuristic security analyst avatar. Cyberpunk aesthetics, neon blue lighting, dark background, sharp focus, digital art style. 8k resolution, cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFhiwycO5BetYcTL0r0L0OKtMgN9ysUYShAmpye7n7rg5XXTUkanRHY0N6kaYjpf74lDu_Juo87fMXc__mnQ7ddtN4n3IZekg7RuLUUxp4Aba4cZgbOtjEI2C11KaC_E7EjcRMGA06xZbwV1xomUC_S6FBhVsB-Uh1RnM4X0EHzDJsb8Upjr_qAaDj2f3QhVuBcR_r-tXRiGADKjgMV6HePudNeS3S1KK7CoAZL6SS-KH4LSII4fIjnQ"/>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 p-lg overflow-y-auto">
+<div class="max-w-[1440px] mx-auto space-y-lg">
+<!-- Header -->
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface">Zero-Trust Governance</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Manage isolation rules, identity health, and automated DLP for UdehLabs.</p>
+</div>
+<div class="flex gap-3">
+<button class="btn-ghost px-4 py-2 rounded font-data-mono-lg text-data-mono-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">download</span> Export Matrix
+                        </button>
+<button class="btn-primary px-4 py-2 rounded font-body-md text-body-md font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span> New Rule
+                        </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- 1. Trust Boundary Matrix (Col Span 8) -->
+<div class="col-span-12 xl:col-span-8 glass-panel rounded-xl p-md flex flex-col h-[450px]">
+<div class="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-secondary-fixed">grid_on</span>
+<h3 class="font-headline-md text-headline-md">Trust Boundary Matrix</h3>
+</div>
+<button class="text-on-surface-variant hover:text-secondary-fixed text-sm flex items-center gap-1 font-label-caps uppercase"><span class="material-symbols-outlined text-[16px]">edit</span> Configure</button>
+</div>
+<div class="flex-1 overflow-auto rounded border border-white/5 bg-surface-container-lowest">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-high border-b border-white/10 font-label-caps text-label-caps text-on-surface-variant uppercase">
+<tr>
+<th class="p-3 font-medium">Source / Entity</th>
+<th class="p-3 font-medium">Target Project</th>
+<th class="p-3 font-medium">Protocol</th>
+<th class="p-3 font-medium">Isolation State</th>
+<th class="p-3 font-medium text-right">Action</th>
+</tr>
+</thead>
+<tbody class="font-data-mono-sm text-data-mono-sm text-on-surface">
+<tr class="border-b border-white/5 zebra-row">
+<td class="p-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary-fixed glow-active"></span> Agent_Omega_1</td>
+<td class="p-3">Project_Alpha_Core</td>
+<td class="p-3">mTLS / gRPC</td>
+<td class="p-3"><span class="bg-secondary-container/10 text-secondary-container px-2 py-1 rounded">Strict Isolation</span></td>
+<td class="p-3 text-right"><button class="text-outline-variant hover:text-secondary-fixed"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-white/5 zebra-row">
+<td class="p-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary-fixed glow-active"></span> Ext_Provider_AWS</td>
+<td class="p-3">DataLake_Ingest</td>
+<td class="p-3">HTTPS / REST</td>
+<td class="p-3"><span class="bg-error/10 text-error px-2 py-1 rounded">Quarantined</span></td>
+<td class="p-3 text-right"><button class="text-outline-variant hover:text-secondary-fixed"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-white/5 zebra-row">
+<td class="p-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary-fixed glow-active"></span> Agent_Delta_2</td>
+<td class="p-3">Project_Beta_Analytics</td>
+<td class="p-3">Kafka / SASL</td>
+<td class="p-3"><span class="bg-tertiary/10 text-tertiary px-2 py-1 rounded">Permissive (Audit)</span></td>
+<td class="p-3 text-right"><button class="text-outline-variant hover:text-secondary-fixed"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-white/5 zebra-row">
+<td class="p-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-surface-variant"></span> Agent_Sigma_Down</td>
+<td class="p-3">Project_Gamma_Ops</td>
+<td class="p-3">--</td>
+<td class="p-3"><span class="bg-surface-variant/50 text-on-surface-variant px-2 py-1 rounded">Offline</span></td>
+<td class="p-3 text-right"><button class="text-outline-variant hover:text-secondary-fixed"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></td>
+</tr>
+<tr class="border-b border-white/5 zebra-row">
+<td class="p-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-secondary-fixed glow-active"></span> UI_Gateway</td>
+<td class="p-3">All_Projects</td>
+<td class="p-3">WSS</td>
+<td class="p-3"><span class="bg-secondary-container/10 text-secondary-container px-2 py-1 rounded">Strict Isolation</span></td>
+<td class="p-3 text-right"><button class="text-outline-variant hover:text-secondary-fixed"><span class="material-symbols-outlined text-[18px]">more_vert</span></button></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- 2. Identity Health (Col Span 4) -->
+<div class="col-span-12 xl:col-span-4 glass-panel rounded-xl p-md flex flex-col h-[450px]">
+<div class="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-primary-fixed-dim">health_and_safety</span>
+<h3 class="font-headline-md text-headline-md">Identity Health</h3>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto pr-2 space-y-3">
+<!-- Identity Card -->
+<div class="bg-surface-container-highest rounded border border-white/5 p-3 hover:border-white/20 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div class="font-data-mono-lg text-data-mono-lg text-secondary-fixed">IDX-992-ALPHA</div>
+<span class="bg-secondary-container/20 text-secondary-container text-xs px-1.5 rounded font-label-caps">Lvl 4 Auth</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span> Agent Identity
+                                </div>
+<div class="w-full bg-surface-container-lowest rounded-full h-1.5 mb-1">
+<div class="bg-secondary-fixed h-1.5 rounded-full" style="width: 98%"></div>
+</div>
+<div class="flex justify-between font-data-mono-sm text-data-mono-sm text-on-surface-variant">
+<span>Health Score</span>
+<span class="text-secondary-fixed">98/100</span>
+</div>
+</div>
+<!-- Identity Card -->
+<div class="bg-surface-container-highest rounded border border-error/30 p-3 relative overflow-hidden">
+<div class="absolute inset-0 bg-error/5 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-2 relative z-10">
+<div class="font-data-mono-lg text-data-mono-lg text-error">IDX-404-BETA</div>
+<span class="bg-error/20 text-error text-xs px-1.5 rounded font-label-caps">Lvl 2 Auth</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant mb-3 relative z-10">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span> Agent Identity
+                                </div>
+<div class="w-full bg-surface-container-lowest rounded-full h-1.5 mb-1 relative z-10">
+<div class="bg-error h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+<div class="flex justify-between font-data-mono-sm text-data-mono-sm text-on-surface-variant relative z-10">
+<span>Health Score</span>
+<span class="text-error">45/100 (Degraded)</span>
+</div>
+</div>
+<!-- Identity Card -->
+<div class="bg-surface-container-highest rounded border border-white/5 p-3 hover:border-white/20 transition-colors">
+<div class="flex justify-between items-start mb-2">
+<div class="font-data-mono-lg text-data-mono-lg text-on-surface">IDX-112-GAMMA</div>
+<span class="bg-surface-variant text-on-surface-variant text-xs px-1.5 rounded font-label-caps">Lvl 1 Auth</span>
+</div>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant mb-3">
+<span class="material-symbols-outlined text-[16px]">api</span> API Gateway
+                                </div>
+<div class="w-full bg-surface-container-lowest rounded-full h-1.5 mb-1">
+<div class="bg-on-surface-variant h-1.5 rounded-full" style="width: 85%"></div>
+</div>
+<div class="flex justify-between font-data-mono-sm text-data-mono-sm text-on-surface-variant">
+<span>Health Score</span>
+<span>85/100</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Redaction & Masking (Col Span 6) -->
+<div class="col-span-12 xl:col-span-6 glass-panel rounded-xl p-md flex flex-col h-[350px]">
+<div class="flex justify-between items-center mb-4 pb-2 border-b border-white/10">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-inverse-primary">visibility_off</span>
+<h3 class="font-headline-md text-headline-md">DLP: Redaction &amp; Masking</h3>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-secondary-fixed">ACTIVE</span>
+<div class="w-3 h-3 rounded-full bg-secondary-fixed animate-pulse"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<!-- Rule Toggles -->
+<div class="space-y-3 bg-surface-container-lowest p-3 rounded border border-white/5">
+<h4 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Active Policies</h4>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface group-hover:text-secondary-fixed transition-colors">PII Masking (Strict)</span>
+<div class="relative">
+<input checked="" class="sr-only" type="checkbox"/>
+<div class="block bg-secondary-fixed w-8 h-4 rounded-full"></div>
+<div class="dot absolute left-1 top-1 bg-surface-container-lowest w-2 h-2 rounded-full transition transform translate-x-4"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface group-hover:text-secondary-fixed transition-colors">Token Redaction</span>
+<div class="relative">
+<input checked="" class="sr-only" type="checkbox"/>
+<div class="block bg-secondary-fixed w-8 h-4 rounded-full"></div>
+<div class="dot absolute left-1 top-1 bg-surface-container-lowest w-2 h-2 rounded-full transition transform translate-x-4"></div>
+</div>
+</label>
+<label class="flex items-center justify-between cursor-pointer group">
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface group-hover:text-secondary-fixed transition-colors">Context Scramble</span>
+<div class="relative">
+<input class="sr-only" type="checkbox"/>
+<div class="block bg-surface-variant w-8 h-4 rounded-full"></div>
+<div class="dot absolute left-1 top-1 bg-on-surface-variant w-2 h-2 rounded-full transition"></div>
+</div>
+</label>
+</div>
+<!-- Log Preview -->
+<div class="bg-[#0a0a0a] rounded border border-white/10 p-3 font-data-mono-sm text-data-mono-sm text-outline flex flex-col relative overflow-hidden">
+<div class="absolute top-0 right-0 bg-surface-variant/50 px-2 py-1 text-[10px] rounded-bl">LIVE STREAM</div>
+<h4 class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">Masked Output Preview</h4>
+<div class="flex-1 overflow-y-auto space-y-1 mt-2 opacity-80">
+<p>&gt; [AI_AGENT] Processing request for user <span class="bg-primary/20 text-primary px-1 rounded">***REDACTED***</span></p>
+<p>&gt; [SYSTEM] DB connection string: <span class="bg-primary/20 text-primary px-1 rounded">MASKED_URI</span></p>
+<p>&gt; [AI_AGENT] Generating summary based on doc ID <span class="text-secondary-fixed">DOC-7729</span></p>
+<p>&gt; [DLP_ENGINE] <span class="text-secondary-container">Rule matches: 2. Action: Applied.</span></p>
+<p class="animate-pulse">&gt; ...</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Break-Glass Emergency (Col Span 6) -->
+<div class="col-span-12 xl:col-span-6 glass-panel rounded-xl p-md flex flex-col h-[350px] relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-error to-transparent"></div>
+<div class="flex justify-between items-center mb-4 pb-2 border-b border-error/20">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined">warning</span>
+<h3 class="font-headline-md text-headline-md">Break-Glass Access</h3>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-4">
+<!-- Active Request -->
+<div class="bg-error/5 border border-error/20 rounded p-4 flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<div>
+<h4 class="font-body-md text-body-md font-semibold text-on-surface">Emergency DB Access</h4>
+<p class="font-data-mono-sm text-data-mono-sm text-on-surface-variant mt-1">Req: Admin_04 | Rsn: Critical Outage T-01</p>
+</div>
+<div class="bg-surface-container-lowest px-3 py-1 rounded font-data-mono-lg text-data-mono-lg text-error border border-error/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] animate-spin">timer</span>
+                                        04:59
+                                    </div>
+</div>
+<div class="flex justify-between items-center mt-2 border-t border-error/10 pt-3">
+<div class="flex items-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant">Multi-Sig Status:</span>
+<span class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed glow-active" title="Approved (Admin_01)"></span>
+<span class="w-2 h-2 rounded-full bg-surface-variant" title="Pending"></span>
+<span class="w-2 h-2 rounded-full bg-surface-variant" title="Pending"></span>
+</span>
+<span class="font-data-mono-sm text-data-mono-sm text-on-surface ml-1">1/3</span>
+</div>
+<div class="flex gap-2">
+<button class="text-error hover:bg-error/10 px-3 py-1 rounded font-label-caps transition-colors">DENY</button>
+<button class="bg-secondary-fixed/20 text-secondary-fixed border border-secondary-fixed/50 hover:bg-secondary-fixed hover:text-on-secondary-fixed px-3 py-1 rounded font-label-caps transition-colors">APPROVE</button>
+</div>
+</div>
+</div>
+<!-- Queue Empty State (Hidden, just structure) -->
+<div class="hidden flex-1 border border-dashed border-white/10 rounded flex items-center justify-center text-on-surface-variant font-data-mono-sm">
+                                No active break-glass requests.
+                            </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

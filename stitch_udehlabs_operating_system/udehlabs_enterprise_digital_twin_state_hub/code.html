@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Enterprise Digital Twin - Nexus AI Command</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=Geist+Mono:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "surface-container-low": "#101c2d",
+                        "on-primary": "#00315d",
+                        "on-tertiary-fixed": "#002113",
+                        "primary-fixed": "#d4e3ff",
+                        "on-secondary": "#3f008e",
+                        "on-background": "#d7e3fb",
+                        "surface-container-highest": "#2a3548",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-tertiary": "#003824",
+                        "surface": "#081425",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-surface": "#d7e3fb",
+                        "secondary-container": "#6001d1",
+                        "tertiary-container": "#00a572",
+                        "on-error-container": "#ffdad6",
+                        "status-critical": "#ef4444",
+                        "primary": "#a4c9ff",
+                        "data-text": "#d8e3fb",
+                        "secondary": "#d2bbff",
+                        "surface-container": "#152031",
+                        "on-tertiary-container": "#00311f",
+                        "error": "#ffb4ab",
+                        "surface-container-high": "#1f2a3c",
+                        "on-surface-variant": "#c0c7d5",
+                        "border-active": "#1e293b",
+                        "on-primary-container": "#002a52",
+                        "primary-container": "#3492f6",
+                        "outline-variant": "#404753",
+                        "surface-dim": "#081425",
+                        "secondary-fixed": "#eaddff",
+                        "surface-container-lowest": "#030e1f",
+                        "inverse-on-surface": "#263143",
+                        "tertiary-fixed": "#6ffbbe",
+                        "on-secondary-fixed": "#25005a",
+                        "outline": "#8a919e",
+                        "inverse-surface": "#d7e3fb",
+                        "inverse-primary": "#005fad",
+                        "surface-bright": "#2f3a4c",
+                        "tertiary": "#4edea3",
+                        "surface-deep": "#040e1f",
+                        "status-healthy": "#10b981",
+                        "on-primary-fixed-variant": "#004884",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#a4c9ff",
+                        "on-primary-fixed": "#001c39",
+                        "on-secondary-container": "#c9aeff",
+                        "background": "#081425",
+                        "status-warning": "#f59e0b",
+                        "surface-tint": "#a4c9ff",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "surface-variant": "#2a3548"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "gutter": "12px",
+                        "compact": "8px",
+                        "margin-mobile": "12px",
+                        "sidebar": "240px",
+                        "margin-desktop": "24px",
+                        "standard": "16px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "data-lg": ["Geist Mono"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["Geist Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "data-md": ["Geist Mono"],
+                        "data-sm": ["Geist Mono"],
+                        "body-sm": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "data-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "data-md": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "data-sm": ["11px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-healthy {
+            animation: pulse-health 2s ease-in-out infinite;
+        }
+        @keyframes pulse-health {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .glow-critical {
+            box-shadow: 0 0 12px 2px rgba(239, 68, 68, 0.6);
+        }
+        .data-grid-row:hover {
+            background-color: theme('colors.surface-bright');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen w-full overflow-hidden flex flex-col selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex items-center gap-gutter">
+<span class="material-symbols-outlined text-primary text-[24px]">hub</span>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">NEXUS AI COMMAND</span>
+</div>
+<div class="hidden md:flex items-center gap-standard h-full">
+<button class="h-full px-compact flex items-center justify-center font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-bright hover:text-primary transition-colors active:scale-95 duration-100 uppercase">
+                LIVE VIEW
+            </button>
+<button class="h-full px-compact flex items-center justify-center font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-bright hover:text-primary transition-colors active:scale-95 duration-100 uppercase">
+                FLEET
+            </button>
+<button class="h-full px-compact flex items-center justify-center font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1 hover:bg-surface-bright hover:text-primary transition-colors active:scale-95 duration-100 uppercase">
+                REPORTS
+            </button>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="hidden lg:flex items-center bg-surface-deep border border-border-active rounded px-compact py-base gap-base">
+<span class="material-symbols-outlined text-outline text-[16px]">search</span>
+<input class="bg-transparent border-none text-data-text font-data-sm text-data-sm focus:ring-0 w-32 placeholder:text-outline-variant py-0" placeholder="Search telemetry..." type="text"/>
+</div>
+<button class="bg-secondary text-surface-container-lowest font-label-caps text-label-caps px-standard py-compact rounded active:scale-95 duration-100">
+                INITIATE SIMULATION
+            </button>
+<div class="flex items-center gap-compact">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-base active:scale-95 duration-100">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-base active:scale-95 duration-100 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-status-critical rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors p-base active:scale-95 duration-100">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-sidebar z-40 flex flex-col py-standard bg-surface-container-low border-r border-outline-variant">
+<div class="px-standard mb-standard flex items-center gap-compact">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center border border-border-active">
+<span class="material-symbols-outlined text-on-surface-variant">terminal</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm text-primary uppercase">OPERATOR_01</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant">SRE COMMAND HUB</div>
+</div>
+</div>
+<div class="px-standard mb-standard">
+<button class="w-full bg-surface-container-highest border border-border-active text-secondary font-label-caps text-label-caps py-compact rounded hover:bg-surface-bright transition-colors flex items-center justify-center gap-base">
+<span class="material-symbols-outlined text-[16px]">add</span>
+                NEW SIMULATION
+            </button>
+</div>
+<div class="flex-1 overflow-y-auto px-base flex flex-col gap-base">
+<button class="flex items-center gap-compact w-full px-compact py-compact bg-secondary-container text-on-secondary-container rounded-lg mx-2 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-200 text-left">
+<span class="material-symbols-outlined text-[18px]">precision_manufacturing</span>
+<span class="font-data-md text-data-md uppercase">Digital Twin</span>
+</button>
+<button class="flex items-center gap-compact w-full px-compact py-compact text-on-surface-variant hover:text-on-surface mx-2 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-200 text-left">
+<span class="material-symbols-outlined text-[18px]">online_prediction</span>
+<span class="font-data-md text-data-md uppercase">Predictions</span>
+</button>
+<button class="flex items-center gap-compact w-full px-compact py-compact text-on-surface-variant hover:text-on-surface mx-2 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-200 text-left">
+<span class="material-symbols-outlined text-[18px]">model_training</span>
+<span class="font-data-md text-data-md uppercase">Simulation</span>
+</button>
+<button class="flex items-center gap-compact w-full px-compact py-compact text-on-surface-variant hover:text-on-surface mx-2 hover:bg-surface-container-highest transition-all active:translate-x-1 duration-200 text-left">
+<span class="material-symbols-outlined text-[18px]">query_stats</span>
+<span class="font-data-md text-data-md uppercase">Optimization</span>
+</button>
+</div>
+<div class="px-base mt-auto flex flex-col gap-base pt-standard border-t border-border-active">
+<button class="flex items-center gap-compact w-full px-compact py-compact text-on-surface-variant hover:text-on-surface mx-2 hover:bg-surface-container-highest transition-all text-left">
+<span class="material-symbols-outlined text-[18px]">biotech</span>
+<span class="font-data-md text-data-md uppercase">Diagnostics</span>
+</button>
+<button class="flex items-center gap-compact w-full px-compact py-compact text-on-surface-variant hover:text-on-surface mx-2 hover:bg-surface-container-highest transition-all text-left">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span class="font-data-md text-data-md uppercase">Terminal</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-sidebar mt-16 p-compact h-[calc(100vh-64px)] overflow-y-auto bg-surface flex flex-col gap-compact">
+<!-- Header Banner -->
+<header class="bg-surface-container border border-border-active p-standard rounded flex justify-between items-center">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Enterprise Logical Twin</h1>
+<div class="flex items-center gap-compact mt-base">
+<span class="w-2 h-2 rounded-full bg-status-healthy pulse-healthy"></span>
+<span class="font-data-sm text-data-sm text-status-healthy uppercase">SYNC ACTIVE // LAG: 12ms</span>
+<span class="font-data-sm text-data-sm text-outline-variant">|</span>
+<span class="font-data-sm text-data-sm text-outline-variant uppercase">ENV: PROD-ALPHA-09</span>
+</div>
+</div>
+<div class="flex gap-gutter">
+<div class="bg-surface-deep border border-border-active p-compact rounded text-right min-w-[120px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">State Divergence</div>
+<div class="font-data-lg text-data-lg text-status-warning mt-base">0.42%</div>
+</div>
+<div class="bg-surface-deep border border-border-active p-compact rounded text-right min-w-[120px]">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">Nodes Active</div>
+<div class="font-data-lg text-data-lg text-primary mt-base">14,208</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-compact flex-1 min-h-[600px]">
+<!-- Dependency Graph (Main Canvas) -->
+<section class="col-span-12 xl:col-span-8 bg-surface-container border border-border-active rounded flex flex-col">
+<div class="p-compact border-b border-border-active flex justify-between items-center bg-surface-container-highest">
+<div class="flex items-center gap-compact">
+<span class="material-symbols-outlined text-[16px] text-primary">account_tree</span>
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Dependency &amp; Blast Radius</h2>
+</div>
+<div class="flex gap-compact">
+<button class="p-base bg-surface-deep border border-border-active rounded hover:bg-surface-bright text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">zoom_in</span></button>
+<button class="p-base bg-surface-deep border border-border-active rounded hover:bg-surface-bright text-on-surface-variant"><span class="material-symbols-outlined text-[16px]">zoom_out</span></button>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-deep overflow-hidden p-compact flex items-center justify-center">
+<!-- Placeholder for Network Visualization -->
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(circle at 50% 50%, theme('colors.primary-container') 1px, transparent 1px); background-size: 24px 24px;"></div>
+<!-- Simulated Node Network -->
+<div class="relative w-full h-full">
+<!-- Central Hub -->
+<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded bg-surface-container-high border-2 border-primary flex items-center justify-center z-10 pulse-healthy">
+<span class="material-symbols-outlined text-primary">dns</span>
+</div>
+<!-- Failing Node Simulation -->
+<div class="absolute top-1/4 left-3/4 transform -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded bg-surface-container-high border-2 border-status-critical flex items-center justify-center z-10 glow-critical">
+<span class="material-symbols-outlined text-status-critical">warning</span>
+<!-- Blast Radius Indicator -->
+<div class="absolute w-32 h-32 rounded-full border border-status-critical/30 bg-status-critical/5 -z-10 animate-pulse"></div>
+</div>
+<!-- Healthy Node -->
+<div class="absolute bottom-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded bg-surface-container-high border border-status-healthy flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-status-healthy text-[16px]">router</span>
+</div>
+<!-- SVG Lines connecting nodes (static representation) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+<line opacity="0.5" stroke="theme('colors.status-critical')" stroke-dasharray="4" stroke-width="1" x1="50%" x2="75%" y1="50%" y2="25%"></line>
+<line opacity="0.3" stroke="theme('colors.primary')" stroke-width="1" x1="50%" x2="25%" y1="50%" y2="66%"></line>
+</svg>
+</div>
+<div class="absolute bottom-compact right-compact bg-surface-container-highest border border-border-active p-compact rounded opacity-80 backdrop-blur-sm">
+<div class="font-data-sm text-data-sm text-outline-variant mb-1">LEGEND</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2"><span class="w-2 h-2 bg-status-healthy rounded-full"></span><span class="font-data-sm text-data-sm">Nominal</span></div>
+<div class="flex items-center gap-2"><span class="w-2 h-2 bg-status-critical rounded-full glow-critical"></span><span class="font-data-sm text-data-sm">Critical Divergence</span></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Side Panel: Sandbox & Snapshots -->
+<section class="col-span-12 xl:col-span-4 flex flex-col gap-compact">
+<!-- Scenario Sandbox -->
+<div class="bg-surface-container border border-border-active rounded flex-1 flex flex-col">
+<div class="p-compact border-b border-border-active flex justify-between items-center bg-surface-container-highest">
+<div class="flex items-center gap-compact">
+<span class="material-symbols-outlined text-[16px] text-secondary">science</span>
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Scenario Sandbox</h2>
+</div>
+</div>
+<div class="p-compact flex flex-col gap-compact flex-1 bg-surface-deep">
+<div class="font-data-md text-data-md text-on-surface-variant">What-If Modeling Parameters</div>
+<div class="flex flex-col gap-base">
+<label class="font-label-caps text-label-caps text-outline-variant">TARGET COMPONENT</label>
+<input class="bg-surface-container border border-border-active text-primary font-data-md text-data-md p-compact rounded focus:border-primary focus:ring-0 w-full font-mono" type="text" value="eu-west-node-07"/>
+</div>
+<div class="flex flex-col gap-base">
+<label class="font-label-caps text-label-caps text-outline-variant">SIMULATED STATE</label>
+<select class="bg-surface-container border border-border-active text-on-surface font-data-md text-data-md p-compact rounded focus:border-primary focus:ring-0 w-full appearance-none">
+<option>HARD_FAILURE_TIMEOUT</option>
+<option>LATENCY_SPIKE_500MS</option>
+<option>DATA_CORRUPTION_PARTIAL</option>
+</select>
+</div>
+<div class="mt-auto pt-compact border-t border-border-active">
+<button class="w-full bg-secondary-container text-on-secondary-container border border-secondary font-label-caps text-label-caps py-compact rounded hover:bg-secondary hover:text-surface-container-lowest transition-colors flex items-center justify-center gap-base active:scale-95 duration-100">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+                                RUN SIMULATION
+                            </button>
+</div>
+</div>
+</div>
+<!-- Operational Snapshots -->
+<div class="bg-surface-container border border-border-active rounded h-1/2 flex flex-col">
+<div class="p-compact border-b border-border-active flex justify-between items-center bg-surface-container-highest">
+<div class="flex items-center gap-compact">
+<span class="material-symbols-outlined text-[16px] text-tertiary">history</span>
+<h2 class="font-label-caps text-label-caps text-on-surface uppercase tracking-widest">Operational Snapshots</h2>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto bg-surface-deep p-0">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface-container-highest border-b border-border-active">
+<tr>
+<th class="p-compact font-label-caps text-label-caps text-outline-variant font-normal">VERSION</th>
+<th class="p-compact font-label-caps text-label-caps text-outline-variant font-normal">TIMESTAMP</th>
+<th class="p-compact font-label-caps text-label-caps text-outline-variant font-normal text-right">STATE</th>
+</tr>
+</thead>
+<tbody class="font-data-sm text-data-sm">
+<tr class="data-grid-row border-b border-border-active cursor-pointer transition-colors">
+<td class="p-compact text-primary">v2.4.19-alpha</td>
+<td class="p-compact text-on-surface-variant">10:42:01 UTC</td>
+<td class="p-compact text-right text-status-healthy">STABLE</td>
+</tr>
+<tr class="data-grid-row border-b border-border-active cursor-pointer transition-colors">
+<td class="p-compact text-primary">v2.4.18-beta</td>
+<td class="p-compact text-on-surface-variant">09:15:22 UTC</td>
+<td class="p-compact text-right text-status-warning">DIVERGED</td>
+</tr>
+<tr class="data-grid-row border-b border-border-active cursor-pointer transition-colors bg-surface-container-highest">
+<td class="p-compact text-primary">v2.4.17-stable</td>
+<td class="p-compact text-on-surface-variant">08:00:00 UTC</td>
+<td class="p-compact text-right text-status-healthy">STABLE</td>
+</tr>
+<tr class="data-grid-row border-b border-border-active cursor-pointer transition-colors">
+<td class="p-compact text-outline-variant">v2.4.16-stable</td>
+<td class="p-compact text-outline-variant">YESTERDAY</td>
+<td class="p-compact text-right text-outline-variant">ARCHIVED</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+</main>
+</body></html>

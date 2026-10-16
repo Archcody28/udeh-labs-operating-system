@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Application &amp; Credential Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#8e9192",
+                        "primary-fixed-dim": "#c6c6c7",
+                        "on-error": "#690005",
+                        "surface-tint": "#c6c6c7",
+                        "primary-fixed": "#e2e2e2",
+                        "on-background": "#d8e3fb",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "on-primary-fixed-variant": "#454747",
+                        "tertiary": "#ffffff",
+                        "on-surface": "#d8e3fb",
+                        "tertiary-fixed": "#6ffbbe",
+                        "outline-variant": "#444748",
+                        "inverse-on-surface": "#263143",
+                        "on-primary-container": "#636565",
+                        "primary": "#ffffff",
+                        "surface-container-high": "#1f2a3c",
+                        "surface-dim": "#081425",
+                        "on-tertiary-container": "#00734e",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "status-critical": "#ef4444",
+                        "surface-container": "#152031",
+                        "on-secondary": "#3f008e",
+                        "secondary-container": "#6001d1",
+                        "execution-violet": "#7c3aed",
+                        "secondary": "#d2bbff",
+                        "on-primary-fixed": "#1a1c1c",
+                        "primary-container": "#e2e2e2",
+                        "surface-container-lowest": "#040e1f",
+                        "surface": "#081425",
+                        "data-blue": "#1C85E8",
+                        "secondary-fixed": "#eaddff",
+                        "border-muted": "#1e293b",
+                        "inverse-surface": "#d8e3fb",
+                        "surface-variant": "#2a3548",
+                        "status-risk": "#f59e0b",
+                        "on-tertiary": "#003824",
+                        "on-secondary-container": "#c9aeff",
+                        "error-container": "#93000a",
+                        "surface-bright": "#2f3a4c",
+                        "on-primary": "#2f3131",
+                        "error": "#ffb4ab",
+                        "on-secondary-fixed": "#25005a",
+                        "on-surface-variant": "#c4c7c8",
+                        "terminal-black": "#091017",
+                        "on-tertiary-fixed": "#002113",
+                        "status-success": "#10b981",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "tertiary-container": "#6ffbbe",
+                        "inverse-primary": "#5d5f5f",
+                        "surface-container-low": "#111c2d",
+                        "surface-card": "#0d1b2a",
+                        "background": "#081425",
+                        "surface-container-highest": "#2a3548"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "gutter": "16px",
+                        "sidebar_width": "260px",
+                        "container-margin": "24px",
+                        "density-comfortable": "16px",
+                        "density-compact": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "data-mono": ["JetBrains Mono"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "data-mono": ["13px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                        "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.08em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md h-screen overflow-hidden flex">
+<!-- SideNavBar -->
+<aside class="bg-surface-container dark:bg-surface-container docked h-screen w-sidebar_width left-0 border-r border-border-muted flat no shadows fixed left-0 top-0 h-full flex flex-col py-gutter z-20 hidden md:flex">
+<!-- Header -->
+<div class="px-gutter mb-8 flex items-center space-x-3">
+<img alt="Project Aether Logo" class="w-8 h-8 rounded object-cover" data-alt="A stylized geometric logo representing Project Aether, rendered in neon violet and emerald green lines on a deep black background. The aesthetic is cybernetic and high-tech, fitting a dark mode developer portal. 8k resolution, crisp vector style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRiRS0nwqJls1ocmlJjVuE5G6w-wH0DOaSBsBsSaWTOMAIiMs5D55BHEB7SDUi-dN_C_8NtYVz0O1ENsyE-UHCRC77_a8if7UiA--qja7fIaXRUrisZBOAXTubWvI0aEFjCSB14neqQfJZUO7xtkbgkdZrrzqmKDnrBIidbZl_wQ3ARHQyn-gWpjsHgcWWzN7iUNwyL9Y0dYsR6wwc3S8-Ts0q2RubU2RERegP0C20hHzb2eNoCEMGjg"/>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">Developer Portal</h1>
+<p class="font-data-mono text-data-mono text-on-surface-variant">v2.4.0-stable</p>
+</div>
+</div>
+<!-- Main Navigation -->
+<nav class="flex-1 overflow-y-auto space-y-1 px-2">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Documentation</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="api">api</span>
+<span>APIs</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span>Applications</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded bg-surface-container-high border-l-4 border-execution-violet text-primary dark:text-primary transition-transform translate-x-1 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="vpn_key" style="font-variation-settings: 'FILL' 1;">vpn_key</span>
+<span>Credentials</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-variant dark:hover:bg-surface-variant transition-all font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span>Marketplace</span>
+</a>
+</nav>
+<!-- Footer Actions -->
+<div class="px-gutter mt-auto space-y-4">
+<button class="w-full bg-execution-violet text-white font-label-caps text-label-caps py-2 rounded flex items-center justify-center space-x-2 hover:bg-secondary-container transition-colors shadow-lg shadow-execution-violet/20">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Create New App</span>
+</button>
+<div class="border-t border-border-muted pt-4 space-y-1">
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-variant transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span>Support</span>
+</a>
+<a class="flex items-center space-x-3 px-3 py-2 rounded text-on-surface-variant hover:bg-surface-variant transition-colors font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span>Terminal</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col md:ml-sidebar_width h-full relative">
+<!-- TopAppBar (Mobile & Tablet) -->
+<header class="bg-surface dark:bg-surface docked full-width top-0 border-b border-border-muted flat no shadows flex justify-between items-center w-full px-gutter h-16 md:hidden z-10 relative">
+<div class="flex items-center space-x-3">
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-headline-sm text-headline-sm font-bold text-primary dark:text-primary tracking-tighter">AetherEngine</span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings">settings</span>
+<img alt="Lead AI Engineer Avatar" class="w-8 h-8 rounded-full border border-border-muted object-cover" data-alt="A futuristic minimalist avatar placeholder for a Lead AI Engineer. Rendered in monochromatic deep space dark mode tones with a subtle glowing edge. High fidelity technical look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdZIOGov5ji_eyrV8U11v2Il6aBwb6unpZJoAnO5KDcoHkDPRcKSu7NuLzYvB5qIG6JEh_WZ5VHdiRD6hUL_U4FB2yfpBSBQOOQs6bwMVdKoyv2YyJ216JJ0Ntboqiqgwb5do8-i2awHPM00zP3h44_vBBeEZHnMjnecqhe-BjLPz5h6EZY9w_kcCTlLMRYM_zNFpUoQ9OEUuHDh2hnQFxA0Co57MiZvSufPBNo-fpoyqPDU3uKN0kQw"/>
+</div>
+</header>
+<!-- Scrollable Content Area -->
+<div class="flex-1 overflow-y-auto p-container-margin space-y-8 relative">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between space-y-4 md:space-y-0">
+<div>
+<h2 class="font-display-lg text-display-lg text-primary mb-2">Credentials &amp; Access</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Manage zero-trust application identities, rotate API keys, and monitor OAuth client authorizations across environments.</p>
+</div>
+<div class="flex space-x-3">
+<button class="bg-surface-card border border-border-muted text-on-surface font-label-caps text-label-caps px-4 py-2 rounded hover:bg-surface-container-high transition-colors flex items-center space-x-2">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span>Audit Logs</span>
+</button>
+<button class="bg-execution-violet text-white font-label-caps text-label-caps px-4 py-2 rounded hover:bg-secondary-container transition-colors shadow-lg shadow-execution-violet/20 flex items-center space-x-2">
+<span class="material-symbols-outlined" data-icon="key">key</span>
+<span>Generate Key</span>
+</button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Registered Applications (Spans 8 columns) -->
+<section class="md:col-span-8 bg-surface-card border border-border-muted rounded-xl flex flex-col overflow-hidden relative">
+<div class="absolute inset-0 pointer-events-none opacity-5">
+<span class="material-symbols-outlined absolute top-4 right-4 text-9xl transform rotate-12" data-icon="grid_view">grid_view</span>
+</div>
+<div class="p-6 border-b border-border-muted bg-surface-container-low flex justify-between items-center relative z-10">
+<h3 class="font-headline-md text-headline-md text-primary flex items-center space-x-2">
+<span class="material-symbols-outlined text-execution-violet" data-icon="apps">apps</span>
+<span>Registered Applications</span>
+</h3>
+<div class="flex space-x-2">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="bg-terminal-black border border-border-muted text-on-surface font-data-mono text-data-mono rounded pl-9 pr-3 py-1.5 focus:ring-1 focus:ring-execution-violet focus:border-execution-violet w-48" placeholder="Filter apps..." type="text"/>
+</div>
+</div>
+</div>
+<div class="flex-1 overflow-x-auto relative z-10">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-muted/50 bg-surface-dim">
+<th class="py-3 px-6 font-label-caps text-label-caps text-on-surface-variant font-bold tracking-wider">App Name</th>
+<th class="py-3 px-6 font-label-caps text-label-caps text-on-surface-variant font-bold tracking-wider">Client ID</th>
+<th class="py-3 px-6 font-label-caps text-label-caps text-on-surface-variant font-bold tracking-wider">Environment</th>
+<th class="py-3 px-6 font-label-caps text-label-caps text-on-surface-variant font-bold tracking-wider text-right">Status</th>
+</tr>
+</thead>
+<tbody class="font-data-mono text-data-mono text-on-surface">
+<tr class="border-b border-border-muted/50 hover:bg-surface-container-highest/50 transition-colors group">
+<td class="py-4 px-6 flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-border-muted flex items-center justify-center text-execution-violet">
+<span class="material-symbols-outlined text-sm" data-icon="payment">payment</span>
+</div>
+<span class="font-medium text-primary">Billing Gateway</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">client_8f92a1b...</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-status-success/10 text-status-success border border-status-success/20">PROD</span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end space-x-2">
+<div class="w-2 h-2 rounded-full bg-status-success animate-pulse"></div>
+<span>Active</span>
+</div>
+</td>
+</tr>
+<tr class="border-b border-border-muted/50 hover:bg-surface-container-highest/50 transition-colors group">
+<td class="py-4 px-6 flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-border-muted flex items-center justify-center text-data-blue">
+<span class="material-symbols-outlined text-sm" data-icon="analytics">analytics</span>
+</div>
+<span class="font-medium text-primary">Telemetry Service</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">client_3x77v9c...</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-data-blue/10 text-data-blue border border-data-blue/20">STG</span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end space-x-2">
+<div class="w-2 h-2 rounded-full bg-status-success"></div>
+<span>Active</span>
+</div>
+</td>
+</tr>
+<tr class="border-b border-border-muted/50 hover:bg-surface-container-highest/50 transition-colors group">
+<td class="py-4 px-6 flex items-center space-x-3">
+<div class="w-8 h-8 rounded bg-surface-container-high border border-border-muted flex items-center justify-center text-status-risk">
+<span class="material-symbols-outlined text-sm" data-icon="bug_report">bug_report</span>
+</div>
+<span class="font-medium text-primary">QA Bot Alpha</span>
+</td>
+<td class="py-4 px-6 text-on-surface-variant">client_9p22m4k...</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-status-risk/10 text-status-risk border border-status-risk/20">DEV</span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="flex items-center justify-end space-x-2">
+<div class="w-2 h-2 rounded-full bg-status-risk"></div>
+<span>Degraded</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- High-Security Credentials (Spans 4 columns) -->
+<section class="md:col-span-4 flex flex-col space-y-gutter">
+<!-- KPI / Status Card -->
+<div class="bg-surface-card border border-border-muted rounded-xl p-6 relative overflow-hidden border-l-4 border-l-status-critical">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl" data-icon="security">security</span>
+</div>
+<div class="relative z-10">
+<h4 class="font-label-caps text-label-caps text-status-critical mb-1">Security Alert</h4>
+<p class="font-headline-sm text-headline-sm text-primary mb-4">1 Key Pending Rotation</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">API Key for 'Legacy Sync' is older than 90 days. Zero-trust policy requires immediate rotation.</p>
+<button class="bg-status-critical/10 text-status-critical border border-status-critical/30 font-label-caps text-label-caps px-4 py-2 rounded hover:bg-status-critical/20 transition-colors w-full">
+                                Review Key
+                            </button>
+</div>
+</div>
+<!-- API Keys List -->
+<div class="bg-surface-card border border-border-muted rounded-xl flex-1 flex flex-col overflow-hidden">
+<div class="p-4 border-b border-border-muted bg-surface-container-low flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center space-x-2">
+<span class="material-symbols-outlined text-execution-violet" data-icon="vpn_key">vpn_key</span>
+<span>Active API Keys</span>
+</h3>
+</div>
+<div class="flex-1 overflow-y-auto p-2 space-y-2">
+<!-- Key Item 1 -->
+<div class="p-3 bg-surface-container rounded border border-border-muted hover:border-execution-violet/50 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="key">key</span>
+<span class="font-data-mono text-data-mono text-primary">Production Core API</span>
+</div>
+<span class="font-label-caps text-[9px] px-1.5 py-0.5 bg-status-success/10 text-status-success rounded">VALID</span>
+</div>
+<div class="font-data-mono text-xs text-on-surface-variant mb-3 flex items-center justify-between bg-terminal-black p-1.5 rounded border border-border-muted/50">
+<span class="truncate mr-2">sk_live_8f9...</span>
+<button class="text-execution-violet hover:text-white" title="Copy">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-border-muted/50">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Created: 12 days ago</span>
+<div class="flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="text-execution-violet font-label-caps text-[10px] hover:underline">ROTATE</button>
+<button class="text-status-critical font-label-caps text-[10px] hover:underline">REVOKE</button>
+</div>
+</div>
+</div>
+<!-- Key Item 2 -->
+<div class="p-3 bg-surface-container rounded border border-status-critical/30 border-l-2 border-l-status-critical hover:border-status-critical/50 transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-status-critical text-sm" data-icon="key">key</span>
+<span class="font-data-mono text-data-mono text-primary">Legacy Sync (v1)</span>
+</div>
+<span class="font-label-caps text-[9px] px-1.5 py-0.5 bg-status-critical/10 text-status-critical rounded">EXPIRED</span>
+</div>
+<div class="font-data-mono text-xs text-on-surface-variant mb-3 flex items-center justify-between bg-terminal-black p-1.5 rounded border border-border-muted/50">
+<span class="truncate mr-2">sk_test_1b4...</span>
+<button class="text-on-surface-variant" disabled="" title="Key Expired">
+<span class="material-symbols-outlined text-sm" data-icon="block">block</span>
+</button>
+</div>
+<div class="flex justify-between items-center mt-2 pt-2 border-t border-border-muted/50">
+<span class="font-body-sm text-body-sm text-status-critical flex items-center"><span class="material-symbols-outlined text-[12px] mr-1" data-icon="warning">warning</span> 92 days ago</span>
+<div class="flex space-x-2">
+<button class="text-execution-violet font-label-caps text-[10px] hover:underline">ROTATE</button>
+<button class="text-status-critical font-label-caps text-[10px] hover:underline font-bold">REVOKE</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+</body></html>

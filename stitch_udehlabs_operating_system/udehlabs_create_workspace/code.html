@@ -1,0 +1,408 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>UdehLabs | Create Workspace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e293b;
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #464555;
+            border-radius: 10px;
+        }
+        .template-card:hover {
+            border-color: #c3c0ff;
+            background: rgba(195, 192, 255, 0.05);
+        }
+        .template-card.active {
+            border-color: #c3c0ff;
+            background: rgba(195, 192, 255, 0.1);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed": "#e2dfff",
+                      "on-tertiary-fixed": "#001e2f",
+                      "surface-container-low": "#0b1c30",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "inverse-on-surface": "#213145",
+                      "primary-container": "#4f46e5",
+                      "on-secondary-fixed": "#23005c",
+                      "inverse-surface": "#d3e4fe",
+                      "error-container": "#93000a",
+                      "on-tertiary": "#00344d",
+                      "surface-bright": "#2a3a4f",
+                      "outline-variant": "#464555",
+                      "on-background": "#d3e4fe",
+                      "surface-variant": "#26364a",
+                      "on-secondary": "#3c0091",
+                      "surface-container-high": "#1b2b3f",
+                      "tertiary-container": "#006693",
+                      "surface-dim": "#031427",
+                      "on-tertiary-container": "#b8e0ff",
+                      "tertiary": "#89ceff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "error": "#ffb4ab",
+                      "surface-tint": "#c3c0ff",
+                      "primary": "#c3c0ff",
+                      "background": "#031427",
+                      "on-primary-fixed": "#0f0069",
+                      "secondary": "#d0bcff",
+                      "on-error": "#690005",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "surface-container-lowest": "#000f21",
+                      "on-surface": "#d3e4fe",
+                      "on-primary": "#1d00a5",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "secondary-fixed": "#e9ddff",
+                      "on-primary-container": "#dad7ff",
+                      "secondary-container": "#571bc1",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "on-surface-variant": "#c7c4d8",
+                      "tertiary-fixed": "#c9e6ff",
+                      "surface": "#031427",
+                      "surface-container-highest": "#26364a",
+                      "inverse-primary": "#4d44e3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "sm": "8px",
+                      "sidebar_width": "260px",
+                      "sidebar_collapsed": "64px",
+                      "xs": "4px",
+                      "max_content_width": "1440px",
+                      "lg": "24px",
+                      "2xl": "48px",
+                      "base": "4px",
+                      "xl": "32px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display": ["Inter"],
+                      "code-md": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "code-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="flex overflow-hidden h-screen bg-background text-on-surface">
+<!-- Sidebar Component (Mapped from JSON) -->
+<aside class="flex flex-col h-full py-md bg-surface border-r border-outline-variant w-sidebar_width hidden md:flex">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">UdehLabs</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">Enterprise AI</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-xs">
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-primary border-l-2 border-primary bg-primary-container/10 transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                Projects
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+                AI Workspace
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                Deployments
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-sm space-y-xs">
+<button class="w-full flex items-center justify-center gap-sm py-md mb-md bg-primary-container text-on-primary-container rounded font-label-caps text-label-caps active:scale-[0.99] transition-all">
+<span class="material-symbols-outlined">add</span>
+                New Project
+            </button>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help
+            </a>
+<a class="flex items-center gap-md px-md py-sm font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-variant/50 transition-colors" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+                User Profile
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 flex flex-col relative overflow-hidden">
+<!-- TopAppBar Component (Mapped from JSON) -->
+<header class="flex justify-between items-center w-full px-lg h-16 bg-surface/80 backdrop-blur-md border-b border-outline-variant z-10">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-extrabold text-primary">UdehLabs</span>
+<nav class="hidden md:flex gap-lg items-center h-full">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Logs</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-all" href="#">Agents</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="bg-surface-container border border-outline-variant rounded-full pl-10 pr-4 py-1.5 text-xs w-64 focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="Quick search..." type="text">
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary">history</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="Close-up professional portrait of a tech lead with a neutral background, high-definition and studio lighting, representing a modern enterprise user profile in a clean, professional aesthetic using deep blues and soft greys." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlOXUPuz9fs09jn7jfn7B5HKfjS4-5VUlHcPrq0F4YBJrLEuT386UcAFdGMI3pUws3wfXuEa3TVcv6vgbV_jUVv5boFzJLFJAlS8NEKpKfjVKWWKkpPA5ulsGGeCkBPr1nuOE-luUiw7bRsYkht6c8vQHDgDnOheSmmEAA2kU_qX8WQhbhKEorMZMTGN3ctehEBOzP2WzyDqnuRoUwk3BhFvm6qvQc28y6FFVN5-QfjNI2bhTICF6PYA">
+</div>
+</div>
+</header>
+<!-- Dynamic Content Area -->
+<section class="flex-1 overflow-y-auto custom-scrollbar p-lg lg:p-2xl max-w-max_content_width mx-auto w-full relative">
+<!-- Background Decorative Shaders -->
+<div class="absolute top-0 right-0 w-1/3 h-1/2 opacity-20 pointer-events-none">
+
+</div>
+<div class="relative z-10">
+<div class="mb-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Provision Workspace</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mt-sm">Configure your computational environment. UdehLabs provides high-precision scaling and state-of-the-art AI infrastructure out of the box.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-xl">
+<!-- Config Form -->
+<div class="lg:col-span-8 space-y-xl">
+<!-- Core Details Card -->
+<div class="glass-panel p-lg rounded-xl ai-glow">
+<h3 class="font-label-caps text-label-caps text-primary uppercase mb-md">System Parameters</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">WORKSPACE NAME</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded p-md font-code-md text-code-md text-on-surface focus:border-primary transition-all focus:outline-none" placeholder="e.g. neuro-vision-prod" type="text">
+</div>
+<div class="space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">REGION</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded p-md font-code-md text-code-md text-on-surface focus:border-primary transition-all focus:outline-none appearance-none">
+<option>us-east-alpha (Virginia)</option>
+<option>eu-central-sigma (Frankfurt)</option>
+<option>ap-southeast-gamma (Singapore)</option>
+</select>
+</div>
+<div class="md:col-span-2 space-y-xs">
+<label class="font-label-caps text-label-caps text-on-surface-variant">DEFAULT AI MODEL</label>
+<div class="flex items-center gap-md bg-surface-container-lowest border border-outline-variant rounded p-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<select class="flex-1 bg-transparent border-none p-0 font-code-md text-code-md text-on-surface focus:ring-0 focus:outline-none">
+<option>UdehLabs Neural-4 (Large)</option>
+<option>DeepSeek-V3 Open-Weights</option>
+<option>Llama-3.1 70B Quantized</option>
+</select>
+<span class="font-label-caps text-label-caps text-primary bg-primary/10 px-2 py-0.5 rounded">RECOMMENDED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Template Selection -->
+<div>
+<h3 class="font-label-caps text-label-caps text-primary uppercase mb-md">Project Templates</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Web App Template -->
+<button class="template-card glass-panel rounded-xl p-md text-left flex flex-col gap-sm active transition-all group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">language</span>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Web App</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Next.js + Tailwind + Edge</p>
+</div>
+</button>
+<!-- Mobile App Template -->
+<button class="template-card glass-panel rounded-xl p-md text-left flex flex-col gap-sm transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">smartphone</span>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Mobile App</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">React Native + Expo</p>
+</div>
+</button>
+<!-- AI Microservice -->
+<button class="template-card glass-panel rounded-xl p-md text-left flex flex-col gap-sm transition-all group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">memory</span>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">AI Microservice</p>
+<p class="font-label-caps text-[10px] text-on-surface-variant">Python + FastAPI + CUDA</p>
+</div>
+</button>
+</div>
+</div>
+<!-- Infrastructure Scaling -->
+<div class="glass-panel p-lg rounded-xl">
+<h3 class="font-label-caps text-label-caps text-primary uppercase mb-md">Infrastructure Scaling</h3>
+<div class="space-y-md">
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded border border-outline-variant/30">
+<div class="flex gap-md items-start">
+<span class="material-symbols-outlined text-secondary mt-0.5">dynamic_feed</span>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">Elastic Auto-scaling</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Adjust nodes dynamically based on inference load</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-md bg-surface-container-low rounded border border-outline-variant/30">
+<div class="flex gap-md items-start">
+<span class="material-symbols-outlined text-secondary mt-0.5">verified_user</span>
+<div>
+<p class="font-body-md text-body-md font-bold text-on-surface">High Availability (Multi-AZ)</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Deploy replicas across multiple availability zones</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox">
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Info / Summary -->
+<div class="lg:col-span-4 space-y-lg">
+<div class="glass-panel p-lg rounded-xl flex flex-col gap-md sticky top-0">
+<h3 class="font-label-caps text-label-caps text-on-surface uppercase border-b border-outline-variant pb-md">Workspace Preview</h3>
+<div class="space-y-md">
+<div class="bg-surface-container-lowest p-md rounded border border-primary/20">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-xs">PROJECTED HOURLY COST</p>
+<p class="font-headline-md text-headline-md font-bold text-primary">$1.24<span class="text-xs font-normal text-on-surface-variant"> / hr</span></p>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between font-label-caps text-[10px]">
+<span class="text-on-surface-variant">COMPUTE CAPACITY</span>
+<span class="text-secondary">85% OPTIMIZED</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[85%]"></div>
+</div>
+</div>
+<ul class="space-y-sm">
+<li class="flex items-center gap-sm font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                        Global Edge Deployment
+                                    </li>
+<li class="flex items-center gap-sm font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                        24/7 AI Health Monitoring
+                                    </li>
+<li class="flex items-center gap-sm font-body-md text-body-md text-on-surface">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+                                        Isolated VNet Environment
+                                    </li>
+</ul>
+</div>
+<button class="w-full bg-primary-container hover:bg-primary-container/90 text-on-primary-container py-md rounded-lg font-label-caps text-label-caps flex items-center justify-center gap-md transition-all mt-md group" id="createBtn" onclick="simulateCreation()">
+<span>INITIALIZE WORKSPACE</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span>
+</button>
+<div class="hidden mt-md space-y-md" id="loader">
+<div class="flex items-center gap-sm">
+<div class="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+<p class="font-code-sm text-code-sm text-on-surface-variant">Allocating compute nodes...</p>
+</div>
+<div class="h-1 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-0 transition-all duration-300" id="progress"></div>
+</div>
+</div>
+</div>
+<!-- Info Card -->
+<div class="p-lg rounded-xl border border-dashed border-outline-variant">
+<h4 class="font-label-caps text-label-caps text-on-surface font-bold mb-xs">QUICK START GUIDE</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Your workspace will be ready in approximately 45 seconds. Once live, you can connect via the CLI or use the embedded AI terminal.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Micro-interaction Logic -->
+<script>
+        function simulateCreation() {
+            const btn = document.getElementById('createBtn');
+            const loader = document.getElementById('loader');
+            const progress = document.getElementById('progress');
+            
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-not-allowed');
+            loader.classList.remove('hidden');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    btn.innerHTML = 'WORKSPACE LIVE';
+                    btn.classList.remove('bg-primary-container');
+                    btn.classList.add('bg-green-600', 'opacity-100');
+                } else {
+                    width += Math.random() * 15;
+                    if (width > 100) width = 100;
+                    progress.style.width = width + '%';
+                }
+            }, 600);
+        }
+
+        // Toggle active state for template cards
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+    </script>
+</body></html>

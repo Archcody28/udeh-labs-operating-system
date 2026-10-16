@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs - Incident Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#dae2fd",
+                        "outline": "#958da1",
+                        "outline-variant": "#4a4455",
+                        "on-secondary-fixed": "#07006c",
+                        "on-error": "#690005",
+                        "tertiary": "#4edea3",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#0b1326",
+                        "on-secondary-fixed-variant": "#2f2ebe",
+                        "surface-container": "#171f33",
+                        "on-secondary": "#1000a9",
+                        "secondary-fixed": "#e1e0ff",
+                        "secondary-container": "#3131c0",
+                        "secondary": "#c0c1ff",
+                        "surface-container-highest": "#2d3449",
+                        "on-tertiary": "#003824",
+                        "surface-variant": "#2d3449",
+                        "on-primary-fixed": "#25005a",
+                        "primary-fixed-dim": "#d2bbff",
+                        "surface": "#0b1326",
+                        "error-container": "#93000a",
+                        "surface-bright": "#31394d",
+                        "surface-tint": "#d2bbff",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#6ffbbe",
+                        "surface-container-lowest": "#060e20",
+                        "on-primary": "#3f008e",
+                        "on-tertiary-fixed": "#002113",
+                        "background": "#0b1326",
+                        "on-tertiary-container": "#76ffc2",
+                        "surface-container-high": "#222a3d",
+                        "on-background": "#dae2fd",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-surface-variant": "#ccc3d8",
+                        "primary": "#d2bbff",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "primary-container": "#7c3aed",
+                        "surface-container-low": "#131b2e",
+                        "primary-fixed": "#eaddff",
+                        "secondary-fixed-dim": "#c0c1ff",
+                        "on-surface": "#dae2fd",
+                        "on-primary-container": "#ede0ff",
+                        "on-secondary-container": "#b0b2ff",
+                        "inverse-primary": "#732ee4",
+                        "tertiary-container": "#007650",
+                        "inverse-on-surface": "#283044"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "24px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "unit": "4px",
+                        "table-row-height": "40px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "code-mono": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "code-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "label-caps": ["11px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "800" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .terminal-bg { background-color: #000000; }
+        .pulse-border { animation: pulseBorder 2s infinite; }
+        @keyframes pulseBorder {
+            0% { border-color: rgba(255, 180, 171, 0.2); }
+            50% { border-color: rgba(255, 180, 171, 1); }
+            100% { border-color: rgba(255, 180, 171, 0.2); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background flex h-screen overflow-hidden font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- SideNavBar from JSON -->
+<nav class="fixed left-0 top-0 h-full w-60 border-r border-outline-variant/20 bg-surface-container-low flex flex-col py-stack-md z-20">
+<div class="px-gutter mb-8">
+<h1 class="font-headline-md text-headline-md text-primary">Operator Console</h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Cluster: US-EAST-1</p>
+</div>
+<ul class="flex-1 flex flex-col gap-1 px-2">
+<!-- Mapping tabs, none active as this is a focused incident view, but adhering to the shell concept -->
+<li><a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">lan</span><span class="font-body-md text-body-md">Environments</span></a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">rocket_launch</span><span class="font-body-md text-body-md">Deployments</span></a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-body-md text-body-md">Release Candidates</span></a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">package_2</span><span class="font-body-md text-body-md">Artifacts</span></a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">history</span><span class="font-body-md text-body-md">History</span></a></li>
+<li><a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">Settings</span></a></li>
+</ul>
+<div class="mt-auto px-2 pt-4 border-t border-outline-variant/20 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="font-body-md text-body-md">Documentation</span></a>
+<a class="flex items-center gap-3 px-3 py-2 rounded text-on-surface-variant font-medium hover:bg-surface-container-highest/50 transition-all" href="#"><span class="material-symbols-outlined text-[20px]">help_center</span><span class="font-body-md text-body-md">Support</span></a>
+</div>
+</nav>
+<div class="flex-1 flex flex-col ml-60 min-w-0">
+<!-- TopNavBar from JSON -->
+<header class="docked full-width top-0 border-b border-outline-variant/30 bg-background flex justify-between items-center w-full px-container-padding h-16 z-10 sticky">
+<div class="flex items-center gap-8">
+<div class="font-display-lg text-display-lg font-bold text-primary">UdehLabs Deployment Center</div>
+<nav class="flex gap-6 h-full items-end">
+<a class="text-on-surface-variant font-medium hover:text-tertiary transition-colors duration-200 pb-1 font-body-md text-body-md" href="#">Global Status</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Incidents</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded font-body-md text-body-md font-medium hover:bg-inverse-primary transition-colors">Deploy New</button>
+<button class="border border-error text-error px-4 py-2 rounded font-body-md text-body-md font-medium hover:bg-error-container/10 transition-colors">Emergency Stop</button>
+<div class="flex gap-2 text-on-surface-variant">
+<button class="p-2 hover:text-tertiary transition-colors"><span class="material-symbols-outlined">notifications_active</span></button>
+<button class="p-2 hover:text-tertiary transition-colors"><span class="material-symbols-outlined">settings_suggest</span></button>
+</div>
+<img alt="User Operator Profile" class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small, circular avatar portrait of a technical system administrator wearing glasses in a dimly lit server room environment with cool blue lighting, representing a professional user operator profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmXYi-S6HtcqoqNrabR4vtVb1RlrIHwY7pyVAXB3OsK-m5uf6MV4gz6dFfmCr6v8nkw8jFrwDKyVDv-xfqFkZbezxyD-N1KIkDBzWx1-uOd7_7de-D9iNnAPCos4u619e03qEc0CyNYDSn_PEJTuXDXEar6uLI3O-wgecw0Rls-slep2Wk9BaXy5lqHTJSXmy1TSolWf7rbY5BxUmv1RIbCSES5K761gMLcVjoD3p0W7qlLkvHq1KEBg"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto p-container-padding">
+<div class="max-w-7xl mx-auto grid grid-cols-12 gap-gutter">
+<!-- Incident Header -->
+<div class="col-span-12 bg-surface-container rounded-lg p-6 border border-outline-variant/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] mb-4">
+<div class="flex justify-between items-start mb-4">
+<div>
+<div class="flex items-center gap-3 mb-2">
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded font-label-caps text-label-caps flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">warning</span>SEV-1</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Database Latency Spike</h2>
+</div>
+<p class="font-code-mono text-code-mono text-on-surface-variant">INC-20231027-A9F4 • Cluster: US-EAST-PROD-DB01</p>
+</div>
+<div class="flex items-center gap-6 text-right">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Status</p>
+<p class="font-body-md text-body-md text-tertiary flex items-center gap-1 justify-end"><span class="material-symbols-outlined text-[16px] animate-pulse">radio_button_checked</span> Investigating</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Duration</p>
+<p class="font-code-mono text-code-mono text-on-surface text-lg">00:18:42</p>
+</div>
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1">Commander</p>
+<p class="font-body-md text-body-md text-on-surface flex items-center gap-2 justify-end">
+<span class="material-symbols-outlined text-[16px]">person</span> A. Turing
+                                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Left Column (8 cols) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<!-- Investigation Evidence (Logs & Metrics) -->
+<div class="bg-surface-container rounded-lg border border-outline-variant/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] flex flex-col">
+<div class="p-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-highest/30 rounded-t-lg">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2"><span class="material-symbols-outlined">terminal</span> Investigation Evidence</h3>
+<div class="flex gap-2">
+<span class="bg-surface-variant text-on-surface-variant px-2 py-1 rounded font-code-mono text-code-mono text-[10px]">pg_stat_activity</span>
+<span class="bg-error/20 text-error px-2 py-1 rounded font-code-mono text-code-mono text-[10px]">DB CPU: 92%</span>
+</div>
+</div>
+<div class="terminal-bg p-4 font-code-mono text-code-mono text-on-surface-variant h-64 overflow-y-auto rounded-b-lg">
+<div class="flex gap-4 mb-1 hover:bg-surface-container-highest/20 px-2 -mx-2 rounded"><span class="text-outline">14:03:12</span><span class="text-error">[WARN]</span><span>Lock wait timeout exceeded on relation 'billing_invoices'</span></div>
+<div class="flex gap-4 mb-1 hover:bg-surface-container-highest/20 px-2 -mx-2 rounded"><span class="text-outline">14:03:15</span><span class="text-error">[WARN]</span><span>Slow Query (12.4s): CREATE INDEX CONCURRENTLY idx_billing_tenant_date ON billing_records (tenant_id, created_at);</span></div>
+<div class="flex gap-4 mb-1 hover:bg-surface-container-highest/20 px-2 -mx-2 rounded"><span class="text-outline">14:03:18</span><span class="text-error">[CRIT]</span><span>Active connections reached 95% of max_connections threshold.</span></div>
+<div class="flex gap-4 mb-1 hover:bg-surface-container-highest/20 px-2 -mx-2 rounded"><span class="text-outline">14:04:01</span><span class="text-tertiary">[INFO]</span><span>Auto-vacuum process suspended to prioritize user queries.</span></div>
+<div class="flex gap-4 mb-1 hover:bg-surface-container-highest/20 px-2 -mx-2 rounded"><span class="text-outline">14:05:22</span><span class="text-error">[WARN]</span><span>Slow Query (18.1s): SELECT * FROM billing_records WHERE tenant_id = 'tn_8492' ...</span></div>
+</div>
+</div>
+<!-- Live Incident Timeline -->
+<div class="bg-surface-container rounded-lg p-6 border border-outline-variant/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-6 flex items-center gap-2"><span class="material-symbols-outlined">timeline</span> Live Incident Timeline</h3>
+<div class="relative pl-6 border-l border-outline-variant/30 flex flex-col gap-6">
+<div class="relative">
+<div class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-error ring-4 ring-surface-container"></div>
+<div class="flex gap-4 items-start">
+<span class="font-code-mono text-code-mono text-outline w-12 pt-0.5">[14:02]</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Alert Fired: High Database Latency</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Prometheus detected p99 query latency &gt; 5000ms.</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-surface-variant ring-4 ring-surface-container border border-outline-variant"></div>
+<div class="flex gap-4 items-start">
+<span class="font-code-mono text-code-mono text-outline w-12 pt-0.5">[14:04]</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Incident Created</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Automated ticket generation via PagerDuty.</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-surface-variant ring-4 ring-surface-container border border-outline-variant"></div>
+<div class="flex gap-4 items-start">
+<span class="font-code-mono text-code-mono text-outline w-12 pt-0.5">[14:05]</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Commander Assigned</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">A. Turing acknowledged and took command.</p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[31px] top-0.5 w-3 h-3 rounded-full bg-secondary ring-4 ring-surface-container shadow-[0_0_8px_rgba(192,193,255,0.5)]"></div>
+<div class="flex gap-4 items-start">
+<span class="font-code-mono text-code-mono text-secondary w-12 pt-0.5">[14:08]</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium text-secondary">Change Correlation Identified</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Deployment DEP-8021 flagged as potentially related.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column (4 cols) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<!-- AI Incident Assistant -->
+<div class="bg-surface-container-high rounded-lg p-5 border border-primary/30 shadow-[0_0_15px_rgba(124,58,237,0.1)]">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]">smart_toy</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">AI Insights</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface mb-4 leading-relaxed">
+                            Database latency spike correlates with concurrent index creation initiated in the Billing module. 
+                        </p>
+<div class="bg-background rounded p-3 border border-outline-variant/20">
+<p class="font-label-caps text-label-caps text-tertiary mb-1">Recommendation</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Check lock wait times on `billing_records` table and consider terminating the DDL transaction to restore query performance.</p>
+</div>
+</div>
+<!-- Change Correlation -->
+<div class="bg-surface-container rounded-lg p-5 border border-error/40 pulse-border relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">difference</span> Suspect Change</h3>
+<p class="font-code-mono text-code-mono text-error mb-3">DEP-8021 (Migration: Billing Indexes)</p>
+<div class="flex justify-between items-end">
+<div class="text-on-surface-variant font-body-sm text-body-sm">
+<p>Deployed: 14:00 (2m before alert)</p>
+<p>Author: system_ci</p>
+</div>
+<button class="bg-surface-bright hover:bg-surface-container-highest text-on-surface px-3 py-1.5 rounded border border-outline-variant/30 font-body-sm text-body-sm transition-colors flex items-center gap-1">
+                                Investigate Diff <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Action Center -->
+<div class="bg-surface-container rounded-lg p-5 border border-outline-variant/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.1)] mt-auto">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Command Actions</h3>
+<div class="flex flex-col gap-3">
+<button class="w-full bg-surface-bright hover:bg-surface-container-highest text-on-surface py-2 rounded border border-outline-variant/30 font-body-md text-body-md font-medium transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">chat</span> Post Update
+                            </button>
+<button class="w-full bg-surface-bright hover:bg-surface-container-highest text-on-surface py-2 rounded border border-outline-variant/30 font-body-md text-body-md font-medium transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">menu_book</span> Execute Runbook
+                            </button>
+<div class="h-px bg-outline-variant/30 my-1 w-full"></div>
+<button class="w-full bg-error-container hover:bg-error/80 text-on-error-container py-2 rounded font-body-md text-body-md font-bold transition-colors flex justify-center items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">undo</span> Rollback DEP-8021
+                            </button>
+<button class="w-full bg-transparent hover:bg-tertiary/10 text-tertiary border border-tertiary/50 py-2 rounded font-body-md text-body-md font-medium transition-colors flex justify-center items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span> Resolve Incident
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

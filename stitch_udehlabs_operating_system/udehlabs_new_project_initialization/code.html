@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs | New Project Initialization</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#6001d1",
+                        "surface": "#051424",
+                        "primary-container": "#031427",
+                        "inverse-primary": "#505f76",
+                        "surface-container": "#122131",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "engineering-accent": "#8B5CF6",
+                        "surface-bright": "#2c3a4c",
+                        "primary-fixed-dim": "#b7c8e1",
+                        "status-available": "#10B981",
+                        "on-tertiary-container": "#0086bf",
+                        "on-error-container": "#ffdad6",
+                        "background": "#051424",
+                        "on-secondary": "#3f008e",
+                        "secondary": "#d2bbff",
+                        "surface-container-high": "#1c2b3c",
+                        "secondary-fixed": "#eaddff",
+                        "on-background": "#d4e4fa",
+                        "status-busy": "#F59E0B",
+                        "surface-elevation-2": "#0F2944",
+                        "tertiary-fixed": "#c9e6ff",
+                        "surface-dim": "#051424",
+                        "outline": "#8e9197",
+                        "surface-variant": "#273647",
+                        "on-primary-fixed": "#0b1c30",
+                        "status-unavailable": "#EF4444",
+                        "on-secondary-fixed": "#25005a",
+                        "on-primary-fixed-variant": "#38485d",
+                        "border-muted": "#1E293B",
+                        "status-pending": "#64748B",
+                        "on-surface-variant": "#c4c6cd",
+                        "on-error": "#690005",
+                        "primary-fixed": "#d3e4fe",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#001522",
+                        "surface-container-low": "#0d1c2d",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "surface-elevation-1": "#0A1F35",
+                        "surface-container-highest": "#273647",
+                        "on-tertiary": "#00344d",
+                        "surface-tint": "#b7c8e1",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "inverse-on-surface": "#233143",
+                        "tertiary": "#89ceff",
+                        "on-secondary-container": "#c9aeff",
+                        "primary": "#b7c8e1",
+                        "inverse-surface": "#d4e4fa",
+                        "on-primary": "#213146",
+                        "outline-variant": "#44474c",
+                        "on-surface": "#d4e4fa",
+                        "on-primary-container": "#6f7f97",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "surface-container-lowest": "#010f1f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "grid-margin": "2rem",
+                        "grid-gutter": "1rem",
+                        "engineering-density": "0.5rem",
+                        "stack-gap": "1.25rem",
+                        "client-density": "1.5rem"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "code-snippet": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "display-command": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-caps": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "code-snippet": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-command": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Base styles */
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        /* Custom Scrollbar for dense areas */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.border-muted'); 
+            border-radius: theme('borderRadius.full');
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline-variant'); 
+        }
+        
+        /* Input Focus Transitions */
+        .tech-input {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .tech-input:focus {
+            outline: none;
+            border-bottom-color: theme('colors.engineering-accent');
+            box-shadow: 0 1px 0 0 theme('colors.engineering-accent');
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+<!-- The TopAppBar Shell is suppressed here because this is a Linear/Transactional initialization wizard -->
+<!-- The SideNav Shell is also suppressed -->
+<!-- Wizard Container -->
+<main class="flex-grow flex flex-col items-center justify-center p-grid-margin">
+<!-- Header -->
+<div class="w-full max-w-4xl mb-stack-gap text-center">
+<h1 class="font-headline-lg text-headline-lg text-primary mb-2">UdehLabs | New Project Initialization</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Configure environment parameters and establish baseline requirements.</p>
+</div>
+<!-- Bento Grid Layout for Wizard -->
+<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-12 gap-grid-gutter">
+<!-- Sidebar / Stepper (Col 1-4) -->
+<div class="md:col-span-4 bg-surface-elevation-1 rounded-xl border border-border-muted p-stack-gap flex flex-col">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant mb-stack-gap uppercase">Initialization Sequence</h2>
+<ul class="space-y-4 flex-grow relative before:absolute before:inset-y-0 before:left-3 before:w-px before:bg-border-muted before:-z-10">
+<!-- Step 1: Active -->
+<li class="flex items-start gap-3 relative">
+<div class="w-6 h-6 rounded-full bg-engineering-accent flex items-center justify-center shrink-0 border-2 border-surface-elevation-1 shadow-[0_0_10px_rgba(139,92,246,0.3)]">
+<span class="font-label-caps text-[10px] font-bold text-white">1</span>
+</div>
+<div class="pt-0.5">
+<h3 class="font-label-caps text-label-caps text-primary font-bold">Project Identity</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 hidden md:block">Nomenclature and baseline definition.</p>
+</div>
+</li>
+<!-- Step 2: Pending -->
+<li class="flex items-start gap-3 relative">
+<div class="w-6 h-6 rounded-full bg-surface-container-high border border-border-muted flex items-center justify-center shrink-0">
+<span class="font-label-caps text-[10px] text-on-surface-variant">2</span>
+</div>
+<div class="pt-0.5 opacity-60">
+<h3 class="font-label-caps text-label-caps text-on-surface">Client &amp; Type</h3>
+</div>
+</li>
+<!-- Step 3: Pending -->
+<li class="flex items-start gap-3 relative">
+<div class="w-6 h-6 rounded-full bg-surface-container-high border border-border-muted flex items-center justify-center shrink-0">
+<span class="font-label-caps text-[10px] text-on-surface-variant">3</span>
+</div>
+<div class="pt-0.5 opacity-60">
+<h3 class="font-label-caps text-label-caps text-on-surface">Objectives &amp; Requirements</h3>
+</div>
+</li>
+<!-- Step 4: Pending -->
+<li class="flex items-start gap-3 relative">
+<div class="w-6 h-6 rounded-full bg-surface-container-high border border-border-muted flex items-center justify-center shrink-0">
+<span class="font-label-caps text-[10px] text-on-surface-variant">4</span>
+</div>
+<div class="pt-0.5 opacity-60">
+<h3 class="font-label-caps text-label-caps text-on-surface">Timeline &amp; Team</h3>
+</div>
+</li>
+<!-- Step 5: Pending -->
+<li class="flex items-start gap-3 relative">
+<div class="w-6 h-6 rounded-full bg-surface-container-high border border-border-muted flex items-center justify-center shrink-0">
+<span class="font-label-caps text-[10px] text-on-surface-variant">5</span>
+</div>
+<div class="pt-0.5 opacity-60">
+<h3 class="font-label-caps text-label-caps text-on-surface">Review &amp; Launch</h3>
+</div>
+</li>
+</ul>
+</div>
+<!-- Content Area (Col 5-12) -->
+<div class="md:col-span-8 bg-surface-elevation-1 rounded-xl border border-border-muted p-grid-margin flex flex-col relative overflow-hidden">
+<!-- Ambient Glow effect -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-engineering-accent/5 rounded-full blur-3xl -z-10 pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-engineering-accent" style="font-variation-settings: 'FILL' 1;">fingerprint</span>
+<h2 class="font-headline-md text-headline-md text-primary">Project Identity Configuration</h2>
+</div>
+<form class="space-y-6">
+<!-- Project Name -->
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider" for="projectName">Project Name <span class="text-error">*</span></label>
+<input class="tech-input w-full bg-surface-container-high border-0 border-b-2 border-border-muted rounded-t font-body-md text-body-md text-on-surface px-4 py-3 placeholder-on-surface-variant/50 focus:ring-0" id="projectName" name="projectName" placeholder="e.g., Project Nova" type="text"/>
+</div>
+<!-- Project Slug -->
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider" for="projectSlug">Project Slug / ID <span class="text-error">*</span></label>
+<div class="flex rounded-t overflow-hidden">
+<span class="bg-surface-container inline-flex items-center px-4 border-0 border-b-2 border-border-muted font-code-snippet text-code-snippet text-on-surface-variant">
+                                    udehlabs.com/p/
+                                </span>
+<input class="tech-input flex-grow bg-surface-container-high border-0 border-b-2 border-border-muted font-code-snippet text-code-snippet text-primary px-4 py-3 placeholder-on-surface-variant/50 focus:ring-0" id="projectSlug" name="projectSlug" placeholder="project-nova" type="text"/>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 opacity-70">Used for repository creation and internal URLs.</p>
+</div>
+<!-- Description -->
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase tracking-wider" for="projectDesc">Technical Summary</label>
+<textarea class="tech-input w-full bg-surface-container-high border-0 border-b-2 border-border-muted rounded-t font-body-md text-body-md text-on-surface px-4 py-3 placeholder-on-surface-variant/50 focus:ring-0 resize-none" id="projectDesc" name="projectDesc" placeholder="Brief technical overview of the project scope..." rows="4"></textarea>
+</div>
+</form>
+</div>
+<!-- Footer Actions -->
+<div class="mt-8 pt-6 border-t border-border-muted flex justify-end gap-3">
+<button class="px-4 py-2 rounded font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface border border-border-muted hover:bg-surface-container transition-colors" type="button">
+                        Cancel
+                    </button>
+<button class="px-6 py-2 rounded bg-engineering-accent text-white font-label-caps text-label-caps hover:bg-engineering-accent/90 transition-colors shadow-[0_0_15px_rgba(139,92,246,0.2)] flex items-center gap-2" type="button">
+                        Next Step
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

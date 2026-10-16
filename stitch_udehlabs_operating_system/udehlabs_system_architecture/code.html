@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs System Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .node-active {
+            border-color: #c3c0ff !important;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+            background: #1e1b4b !important;
+        }
+        .canvas-grid {
+            background-image: radial-gradient(#1e293b 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .log-line:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #464555;
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e293b;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#464555",
+                        "secondary-fixed": "#e9ddff",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "on-primary-container": "#dad7ff",
+                        "surface-container-lowest": "#000f21",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "on-tertiary-container": "#b8e0ff",
+                        "on-primary": "#1d00a5",
+                        "on-secondary-container": "#c4abff",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-dim": "#031427",
+                        "on-background": "#d3e4fe",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#004c6e",
+                        "tertiary-fixed": "#c9e6ff",
+                        "outline": "#918fa1",
+                        "tertiary": "#89ceff",
+                        "on-secondary-fixed": "#23005c",
+                        "tertiary-container": "#006693",
+                        "primary-container": "#4f46e5",
+                        "background": "#031427",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "inverse-primary": "#4d44e3",
+                        "on-secondary": "#3c0091",
+                        "inverse-surface": "#d3e4fe",
+                        "surface-container-highest": "#26364a",
+                        "surface-bright": "#2a3a4f",
+                        "secondary": "#d0bcff",
+                        "surface-container": "#102034",
+                        "secondary-container": "#571bc1",
+                        "primary": "#c3c0ff",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#89ceff",
+                        "surface": "#031427",
+                        "primary-fixed": "#e2dfff",
+                        "inverse-on-surface": "#213145",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-tertiary-fixed": "#001e2f",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-surface": "#d3e4fe",
+                        "on-tertiary": "#00344d",
+                        "surface-variant": "#26364a",
+                        "surface-container-high": "#1b2b3f",
+                        "surface-container-low": "#0b1c30",
+                        "surface-tint": "#c3c0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "sidebar_width": "260px",
+                        "sidebar_collapsed": "64px",
+                        "base": "4px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "2xl": "48px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "max_content_width": "1440px"
+                    },
+                    "fontFamily": {
+                        "display": ["Inter"],
+                        "code-sm": ["JetBrains Mono"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "code-md": ["JetBrains Mono"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex h-screen w-full overflow-hidden">
+<!-- Sidebar Navigation (Predicted from JSON) -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-md bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant dark:border-outline-variant w-[260px] z-50">
+<div class="px-md mb-xl">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary leading-tight">Infrastructure</h1>
+<p class="font-label-caps text-[10px] tracking-widest text-on-surface-variant uppercase">Global Observability</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-sm space-y-1">
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+<span class="font-label-caps text-label-caps">Deployments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-primary font-bold border-l-2 border-primary bg-secondary-container/10 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+<span class="font-label-caps text-label-caps">Infrastructure</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">security</span>
+<span class="font-label-caps text-label-caps">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="font-label-caps text-label-caps">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto px-sm border-t border-outline-variant pt-md">
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="font-label-caps text-label-caps">Documentation</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded text-on-surface-variant hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Workspace -->
+<main class="flex-1 ml-[260px] flex flex-col relative h-full">
+<!-- Top Navigation (Predicted from JSON) -->
+<header class="flex justify-between items-center px-lg h-16 w-full z-40 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant sticky top-0">
+<div class="flex items-center gap-xl">
+<span class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-surface">UdehLabs Architecture</span>
+<nav class="hidden md:flex gap-lg">
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">Network Map</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-body-md text-body-md" href="#">Architecture</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">Logs</a>
+<a class="text-on-surface-variant font-body-md text-body-md hover:text-primary transition-colors" href="#">Metrics</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="px-md py-1.5 text-body-md font-medium text-on-surface-variant border border-outline-variant rounded hover:bg-surface-container-highest transition-colors">Staging</button>
+<button class="px-md py-1.5 text-body-md font-medium bg-primary-container text-on-primary-container rounded active:scale-95 transition-transform">Production</button>
+<div class="flex items-center gap-sm ml-sm text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant overflow-hidden ml-sm">
+<img class="w-full h-full object-cover" data-alt="A professional user profile avatar for a lead software engineer in a dark tech-focused environment. The portrait is high-contrast with cool blue tones, highlighting facial features with a cinematic soft-box light. The engineer is wearing dark technical apparel, looking focused and calm, set against a blurred futuristic office background with neon circuit patterns." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvBCIr2jvZ85sdUPj8gMh6cgUbGbxzkPt3NbTUyaYHEpaT4l2r8cUys7kodB6BeoniFL3aos7aLINi79mYv7G88y1JmSzuwK-MNIIiriH0tK_sMiLLWObQsxWJE04406ut2M1FFOt_qFp7npe5ReBQf033oCwepelwXH9bizLlcPxDDX--watfqkXmeUvAiEL90QtNiUafQIMAl4l6gMk1l5EGWX-x1ZmqODl2ROJnVXaMseo7qev33Q"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Container -->
+<div class="flex-1 relative overflow-hidden flex">
+<!-- Architecture Diagram Canvas -->
+<div class="flex-1 canvas-grid relative overflow-hidden bg-surface-container-lowest" id="diagram-canvas">
+<!-- SVG Connections (Visualizing dependencies) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-40">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="0" refy="3.5">
+<polygon fill="#464555" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<!-- User Gateway to Auth -->
+<path d="M 280 200 L 480 200" fill="none" marker-end="url(#arrowhead)" stroke="#464555" stroke-width="2"></path>
+<!-- Auth to Agent Orchestration -->
+<path d="M 640 200 L 800 300" fill="none" marker-end="url(#arrowhead)" stroke="#464555" stroke-width="2"></path>
+<!-- Gateway to Agent Orchestration (Direct) -->
+<path d="M 280 220 C 400 350, 600 350, 800 320" fill="none" marker-end="url(#arrowhead)" stroke="#464555" stroke-width="2"></path>
+<!-- Agent Orchestration to Vector DB -->
+<path d="M 960 300 L 1100 200" fill="none" marker-end="url(#arrowhead)" stroke="#464555" stroke-width="2"></path>
+<!-- Agent Orchestration to Model Cluster -->
+<path d="M 960 340 L 1100 450" fill="none" marker-end="url(#arrowhead)" stroke="#464555" stroke-width="2"></path>
+</svg>
+<!-- Nodes -->
+<!-- User Gateway -->
+<div class="absolute cursor-pointer glass-panel p-md w-48 rounded-xl border border-outline-variant hover:border-primary transition-all z-10" id="node-gateway" onclick="selectNode('gateway')" style="left: 100px; top: 150px;">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-secondary">lan</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Gateway</span>
+</div>
+<div class="text-body-md font-bold mb-xs">User Gateway</div>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="text-[10px] text-on-surface-variant">99.9% Uptime</span>
+</div>
+</div>
+<!-- Auth Service -->
+<div class="absolute cursor-pointer glass-panel p-md w-48 rounded-xl border border-outline-variant hover:border-primary transition-all z-10" id="node-auth" onclick="selectNode('auth')" style="left: 480px; top: 150px;">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-tertiary">lock_open</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Service</span>
+</div>
+<div class="text-body-md font-bold mb-xs">Auth Service</div>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] text-on-surface-variant">Auth0 Managed</span>
+</div>
+</div>
+<!-- Agent Orchestration -->
+<div class="absolute cursor-pointer glass-panel p-md w-48 rounded-xl border border-outline-variant hover:border-primary transition-all z-10 node-active" id="node-orch" onclick="selectNode('orch')" style="left: 800px; top: 280px;">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary">hub</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Core Layer</span>
+</div>
+<div class="text-body-md font-bold mb-xs">Agent Orchestration</div>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+<span class="text-[10px] text-on-surface-variant">Scaling Up</span>
+</div>
+</div>
+<!-- Vector DB -->
+<div class="absolute cursor-pointer glass-panel p-md w-48 rounded-xl border border-outline-variant hover:border-primary transition-all z-10" id="node-vector" onclick="selectNode('vector')" style="left: 1100px; top: 150px;">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-secondary-fixed">database</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Storage</span>
+</div>
+<div class="text-body-md font-bold mb-xs">Vector DB</div>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] text-on-surface-variant">Pinecone - High Perf</span>
+</div>
+</div>
+<!-- Model Inference Cluster -->
+<div class="absolute cursor-pointer glass-panel p-md w-56 rounded-xl border border-outline-variant hover:border-primary transition-all z-10" id="node-inference" onclick="selectNode('inference')" style="left: 1100px; top: 400px;">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-error">memory</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Compute</span>
+</div>
+<div class="text-body-md font-bold mb-xs">Inference Cluster</div>
+<div class="flex items-center gap-xs">
+<div class="w-2 h-2 rounded-full bg-green-500"></div>
+<span class="text-[10px] text-on-surface-variant">8x NVIDIA H100</span>
+</div>
+</div>
+<!-- Floating Logs (Bottom Left) -->
+<div class="absolute bottom-md left-md w-[400px] h-[200px] glass-panel rounded-lg flex flex-col z-30">
+<div class="px-md py-sm border-b border-outline-variant flex justify-between items-center bg-surface-container-high/50">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-sm text-primary">terminal</span>
+<span class="font-label-caps text-[10px] uppercase">Infrastructure Logs</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-code-sm">LIVE FEED</span>
+</div>
+<div class="flex-1 p-sm font-code-sm text-[11px] overflow-y-auto space-y-1 bg-surface-container-low/30">
+<div class="log-line text-on-surface-variant"><span class="text-outline">[14:32:11]</span> <span class="text-green-400">INFO</span> Gateway: Routing request 9a2b to Orchestrator</div>
+<div class="log-line text-on-surface-variant"><span class="text-outline">[14:32:12]</span> <span class="text-blue-400">AUTH</span> Auth-Service: Token validated for user_id: 8821</div>
+<div class="log-line text-on-surface-variant"><span class="text-outline">[14:32:12]</span> <span class="text-primary">CORE</span> Orchestrator: Initializing sub-agent workflow "Research"</div>
+<div class="log-line text-on-surface-variant"><span class="text-outline">[14:32:14]</span> <span class="text-yellow-400">WARN</span> VectorDB: Query latency spike +45ms (Zone: US-East)</div>
+<div class="log-line text-on-surface-variant"><span class="text-outline">[14:32:15]</span> <span class="text-green-400">INFO</span> Inference: Processing tensor shard (ID: v5-992)</div>
+<div class="log-line text-on-surface-variant"><span class="text-outline">[14:32:16]</span> <span class="text-green-400">INFO</span> Orchestrator: Response aggregated and returning to Gateway</div>
+</div>
+</div>
+</div>
+<!-- Details Sidebar (Right) -->
+<div class="w-[350px] bg-surface-container-low border-l border-outline-variant z-40 overflow-y-auto" id="details-panel">
+<div class="p-lg">
+<div class="flex items-center justify-between mb-lg">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface" id="detail-title">Agent Orchestration</h2>
+<span class="material-symbols-outlined text-primary cursor-pointer">open_in_full</span>
+</div>
+<!-- Status Cards -->
+<div class="grid grid-cols-2 gap-sm mb-lg">
+<div class="p-md bg-surface-container rounded-lg border border-outline-variant">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1">CPU LOAD</div>
+<div class="text-headline-md font-bold text-primary" id="cpu-stat">68.4%</div>
+</div>
+<div class="p-md bg-surface-container rounded-lg border border-outline-variant">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1">RAM USAGE</div>
+<div class="text-headline-md font-bold text-secondary" id="ram-stat">12.2GB</div>
+</div>
+<div class="p-md bg-surface-container rounded-lg border border-outline-variant">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1">ERROR RATE</div>
+<div class="text-headline-md font-bold text-error" id="error-stat">0.04%</div>
+</div>
+<div class="p-md bg-surface-container rounded-lg border border-outline-variant">
+<div class="font-label-caps text-[10px] text-on-surface-variant mb-1">REPLICAS</div>
+<div class="text-headline-md font-bold text-tertiary" id="replica-stat">12 / 16</div>
+</div>
+</div>
+<!-- Active Processes (Bento Style) -->
+<div class="mb-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md uppercase tracking-wider">Dependency Graph</h3>
+<div class="space-y-sm" id="dependency-list">
+<div class="flex items-center justify-between p-sm bg-surface-container-high rounded border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">north_east</span>
+<span class="text-body-md">User Gateway</span>
+</div>
+<span class="font-code-sm text-[10px] text-on-surface-variant">Upstream</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-high rounded border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">south_east</span>
+<span class="text-body-md">Vector DB</span>
+</div>
+<span class="font-code-sm text-[10px] text-on-surface-variant">Downstream</span>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-high rounded border border-outline-variant/30">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px] text-outline">south_east</span>
+<span class="text-body-md">Inference Cluster</span>
+</div>
+<span class="font-code-sm text-[10px] text-on-surface-variant">Downstream</span>
+</div>
+</div>
+</div>
+<!-- Environment Info -->
+<div>
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-md uppercase tracking-wider">Service Metadata</h3>
+<div class="bg-surface-container p-md rounded-lg space-y-md">
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant">Region</span>
+<span class="font-code-md text-on-surface">us-east-1</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant">Runtime</span>
+<span class="font-code-md text-on-surface">Python 3.11 / Rust</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant">Last Deployment</span>
+<span class="font-code-md text-on-surface">22m ago</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-body-md text-on-surface-variant">Git SHA</span>
+<span class="font-code-md text-primary">df82a1c</span>
+</div>
+</div>
+</div>
+<!-- AI Insights -->
+<div class="mt-lg p-md bg-[#1E1B4B] rounded-xl border border-primary/30 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-2 opacity-20 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-primary text-[48px]">auto_awesome</span>
+</div>
+<div class="flex items-center gap-sm mb-sm text-primary">
+<span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+<span class="font-label-caps text-label-caps">AI Optimization Hub</span>
+</div>
+<p class="text-body-md text-on-primary-container leading-relaxed">
+                            Detected recurring latency pattern between Orchestration and Inference Cluster. Suggesting <span class="font-bold underline cursor-pointer">dynamic scaling policy</span> adjustment.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const nodeData = {
+            gateway: {
+                title: 'User Gateway',
+                cpu: '12.4%',
+                ram: '4.1GB',
+                error: '0.01%',
+                replicas: '4 / 4',
+                deps: [
+                    { name: 'External Client', type: 'Upstream', icon: 'public' },
+                    { name: 'Auth Service', type: 'Downstream', icon: 'south_east' },
+                    { name: 'Orchestration', type: 'Downstream', icon: 'south_east' }
+                ]
+            },
+            auth: {
+                title: 'Auth Service',
+                cpu: '5.1%',
+                ram: '2.0GB',
+                error: '0.00%',
+                replicas: '2 / 2',
+                deps: [
+                    { name: 'User Gateway', type: 'Upstream', icon: 'north_east' },
+                    { name: 'Orchestration', type: 'Downstream', icon: 'south_east' }
+                ]
+            },
+            orch: {
+                title: 'Agent Orchestration',
+                cpu: '68.4%',
+                ram: '12.2GB',
+                error: '0.04%',
+                replicas: '12 / 16',
+                deps: [
+                    { name: 'User Gateway', type: 'Upstream', icon: 'north_east' },
+                    { name: 'Vector DB', type: 'Downstream', icon: 'south_east' },
+                    { name: 'Inference Cluster', type: 'Downstream', icon: 'south_east' }
+                ]
+            },
+            vector: {
+                title: 'Vector DB',
+                cpu: '42.1%',
+                ram: '64.0GB',
+                error: '0.02%',
+                replicas: 'Managed',
+                deps: [
+                    { name: 'Orchestration', type: 'Upstream', icon: 'north_east' }
+                ]
+            },
+            inference: {
+                title: 'Inference Cluster',
+                cpu: '91.8%',
+                ram: '1,280GB',
+                error: '0.12%',
+                replicas: '8 / 8 H100s',
+                deps: [
+                    { name: 'Orchestration', type: 'Upstream', icon: 'north_east' }
+                ]
+            }
+        };
+
+        function selectNode(nodeId) {
+            // Update active state in UI
+            document.querySelectorAll('[id^="node-"]').forEach(el => el.classList.remove('node-active'));
+            document.getElementById(`node-${nodeId}`).classList.add('node-active');
+
+            const data = nodeData[nodeId];
+            
+            // Update Detail Panel
+            document.getElementById('detail-title').innerText = data.title;
+            document.getElementById('cpu-stat').innerText = data.cpu;
+            document.getElementById('ram-stat').innerText = data.ram;
+            document.getElementById('error-stat').innerText = data.error;
+            document.getElementById('replica-stat').innerText = data.replicas;
+
+            // Update Dependencies
+            const depList = document.getElementById('dependency-list');
+            depList.innerHTML = '';
+            data.deps.forEach(dep => {
+                const div = document.createElement('div');
+                div.className = 'flex items-center justify-between p-sm bg-surface-container-high rounded border border-outline-variant/30';
+                div.innerHTML = `
+                    <div class="flex items-center gap-sm">
+                        <span class="material-symbols-outlined text-[18px] text-outline">${dep.icon}</span>
+                        <span class="text-body-md">${dep.name}</span>
+                    </div>
+                    <span class="font-code-sm text-[10px] text-on-surface-variant">${dep.type}</span>
+                `;
+                depList.appendChild(div);
+            });
+        }
+
+        // Initialize with default node
+        selectNode('orch');
+    </script>
+</body></html>

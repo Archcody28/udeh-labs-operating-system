@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Discovery - Client Project Request</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#7645e0",
+                    "on-primary-fixed": "#25005a",
+                    "on-secondary-container": "#b3b1ff",
+                    "surface-dim": "#0c141e",
+                    "surface-variant": "#2d3540",
+                    "on-surface-variant": "#ccc3d8",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "on-secondary-fixed": "#0f0069",
+                    "on-tertiary": "#3c0091",
+                    "on-tertiary-container": "#ece1ff",
+                    "surface-container": "#18202b",
+                    "surface-container-highest": "#2d3540",
+                    "tertiary-fixed": "#e9ddff",
+                    "intelligence-indigo": "#4f46e5",
+                    "surface-tint": "#d2bbff",
+                    "ai-shimmer": "linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%)",
+                    "on-tertiary-fixed": "#23005c",
+                    "on-primary": "#3f008e",
+                    "on-error": "#690005",
+                    "secondary-fixed-dim": "#c3c0ff",
+                    "surface-container-low": "#141c26",
+                    "on-background": "#dbe3f1",
+                    "error": "#ffb4ab",
+                    "tertiary": "#d0bcff",
+                    "primary-fixed": "#eaddff",
+                    "surface-container-lowest": "#070f18",
+                    "on-primary-container": "#ede0ff",
+                    "clarification-violet": "#8b5cf6",
+                    "background": "#0c141e",
+                    "inverse-on-surface": "#29313c",
+                    "tertiary-fixed-dim": "#d0bcff",
+                    "inverse-surface": "#dbe3f1",
+                    "surface-bright": "#323a45",
+                    "on-error-container": "#ffdad6",
+                    "primary-container": "#7c3aed",
+                    "secondary-fixed": "#e2dfff",
+                    "on-secondary": "#1d00a5",
+                    "outline-variant": "#4a4455",
+                    "secondary-container": "#3626ce",
+                    "secondary": "#c3c0ff",
+                    "surface-container-high": "#232b35",
+                    "surface": "#0c141e",
+                    "primary-fixed-dim": "#d2bbff",
+                    "error-container": "#93000a",
+                    "confidence-high": "#10b981",
+                    "primary": "#d2bbff",
+                    "confidence-medium": "#f59e0b",
+                    "on-secondary-fixed-variant": "#3323cc",
+                    "on-surface": "#dbe3f1",
+                    "outline": "#958da1",
+                    "confidence-low": "#ef4444",
+                    "inverse-primary": "#732ee4",
+                    "on-tertiary-fixed-variant": "#5516be"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-discovery": "40px",
+                    "unit": "4px",
+                    "gutter": "16px",
+                    "density-client": "24px",
+                    "density-engineer": "8px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": [
+                            "Hanken Grotesk"
+                    ],
+                    "data-mono-lg": [
+                            "JetBrains Mono"
+                    ],
+                    "display-xl": [
+                            "Hanken Grotesk"
+                    ],
+                    "headline-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "body-lg": [
+                            "Hanken Grotesk"
+                    ],
+                    "label-caps-sm": [
+                            "JetBrains Mono"
+                    ],
+                    "body-md": [
+                            "Hanken Grotesk"
+                    ]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "data-mono-lg": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "display-xl": [
+                            "64px",
+                            {
+                                    "lineHeight": "72px",
+                                    "letterSpacing": "-0.03em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "letterSpacing": "-0.01em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-caps-sm": [
+                            "10px",
+                            {
+                                    "lineHeight": "14px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "fontWeight": "400"
+                            }
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- TopNavBar (JSON Injected) - Hidden on Discovery Wizard for deeper focus, as per UX Goal. 
+         Wait, UX Goal says: linear/transactional or onboarding splash screens exclude shell. 
+         This is a multi-step wizard (linear), but it's part of the main "New Request" flow. 
+         Let's keep TopAppBar to show "UdehLabs Discovery" brand and "My Requests" exit hatch. -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-discovery py-4 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl shadow-sm">
+<div class="font-headline-lg text-headline-lg font-bold text-on-surface dark:text-on-surface">UdehLabs Discovery</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">My Requests</a>
+<a class="text-primary border-b-2 border-primary font-bold hover:text-primary transition-colors font-body-md text-body-md Active: opacity-80" href="#">Discovery Sessions</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-caps-sm text-label-caps-sm hover:brightness-110 transition-colors">New Request</button>
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden">
+<img alt="User profile avatar" class="object-cover w-full h-full" data-alt="A small, professional user avatar portrait of an engineer looking confidently at the camera. Soft, high-key studio lighting with a neutral, corporate backdrop. High resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWwfQo81tcNBkn8lgwaYOSzxAggD6BiuRgfp30JstdJOnlJOZfUrPsJPqa72WB8xVXoQJXdParjs5MVOuwHdvtQUWWT5PHeMsPSUeS-o1LO791GcDISu4YW-7YB9U4BF_LH6k8wbpBYwNchEX20QgLiDfRUGOiOl-lu5oJnQUnWUliXwBVgDkNykJ4NvmJPPbrc9Vv0YvO6HXXmq_ZehkgemFsA8i-99kYKMK2QNDxnPBfeq8SGk0zyw"/>
+</div>
+</div>
+</header>
+<!-- Main Discovery Layout -->
+<main class="flex-1 mt-[88px] mb-[104px] grid grid-cols-1 xl:grid-cols-12 gap-gutter px-density-client md:px-margin-discovery py-8 max-w-7xl mx-auto w-full">
+<!-- Left: Wizard Canvas (Cols 1-8) -->
+<div class="xl:col-span-8 flex flex-col gap-density-client">
+<!-- Progress Stepper -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center font-label-caps-sm text-label-caps-sm text-on-surface-variant">
+<span>STEP 4 OF 10</span>
+<span>40% COMPLETED</span>
+</div>
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden flex">
+<div class="h-full bg-confidence-high w-[10%]"></div>
+<div class="h-full bg-confidence-high w-[10%]"></div>
+<div class="h-full bg-confidence-high w-[10%]"></div>
+<div class="h-full bg-intelligence-indigo w-[10%] relative overflow-hidden">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+<div class="h-full w-[60%]"></div>
+</div>
+<h1 class="font-display-xl text-display-xl md:text-[48px] md:leading-[56px] mt-4">Desired Features</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Define the core capabilities your product needs. Our intelligence engine will suggest technical requirements based on these features.</p>
+</div>
+<!-- Input Area -->
+<div class="bg-surface-container p-6 rounded-xl border border-surface-container-high shadow-lg">
+<div class="flex flex-col gap-4">
+<label class="font-label-caps-sm text-label-caps-sm text-on-surface">ADD A NEW FEATURE</label>
+<div class="flex gap-2">
+<input class="flex-1 bg-surface h-12 rounded-lg border border-outline-variant px-4 font-body-lg text-body-lg text-on-surface focus:border-intelligence-indigo focus:ring-1 focus:ring-intelligence-indigo outline-none" placeholder="e.g. User Authentication with SSO" type="text"/>
+<button class="bg-surface-container-highest text-on-surface px-6 h-12 rounded-lg font-label-caps-sm text-label-caps-sm hover:bg-surface-bright transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="add" style="font-variation-settings: 'FILL' 0;">add</span>
+                            ADD
+                        </button>
+</div>
+</div>
+</div>
+<!-- Suggested Features Catalog -->
+<div class="flex flex-col gap-4 mt-4">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-lg text-headline-lg text-[24px] leading-[32px]">Features Catalog</h2>
+<span class="font-label-caps-sm text-label-caps-sm text-intelligence-indigo flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="auto_awesome">auto_awesome</span>
+                        AI SUGGESTIONS
+                    </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Catalog Item 1 -->
+<div class="bg-surface-container p-4 rounded-lg border border-surface-container-high hover:border-intelligence-indigo/50 transition-colors group cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-tertiary-container bg-tertiary-container/10 p-2 rounded-lg" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+<div class="h-6 w-6 rounded-full border border-outline-variant group-hover:border-intelligence-indigo flex items-center justify-center text-transparent group-hover:text-intelligence-indigo transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</div>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-[18px] leading-[24px] mb-1">Role-Based Access</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Granular permission structures for different user types.</p>
+<div class="mt-3 flex gap-2">
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-label-caps-sm text-on-surface">SECURITY</span>
+<span class="px-2 py-1 bg-confidence-high/20 text-confidence-high rounded text-[10px] font-label-caps-sm">HIGH IMPACT</span>
+</div>
+</div>
+<!-- Catalog Item 2 -->
+<div class="bg-surface-container p-4 rounded-lg border border-surface-container-high hover:border-intelligence-indigo/50 transition-colors group cursor-pointer relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-clarification-violet/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-2 relative z-10">
+<span class="material-symbols-outlined text-clarification-violet bg-clarification-violet/10 p-2 rounded-lg" data-icon="query_stats" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<div class="h-6 w-6 rounded-full border border-outline-variant group-hover:border-intelligence-indigo flex items-center justify-center text-transparent group-hover:text-intelligence-indigo transition-colors">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+</div>
+</div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-[18px] leading-[24px] mb-1 relative z-10">Real-time Analytics</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 relative z-10">Live data visualization dashboards with export capabilities.</p>
+<div class="mt-3 flex gap-2 relative z-10">
+<span class="px-2 py-1 bg-surface-container-high rounded text-[10px] font-label-caps-sm text-on-surface">DATA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: AI Discovery Assistant Sidebar (Cols 9-12) -->
+<div class="xl:col-span-4 h-full">
+<div class="sticky top-[120px] bg-surface-container/50 backdrop-blur-[20px] border border-[rgba(139,92,246,0.2)] rounded-xl p-6 shadow-[0_8px_24px_rgba(79,70,229,0.15)] flex flex-col gap-6 relative overflow-hidden">
+<!-- Shimmer border effect via pseudo-element simulation -->
+<div class="absolute inset-0 border-2 rounded-xl pointer-events-none opacity-30" style="border-image: linear-gradient(135deg, #4f46e5 0%, #8b5cf6 100%) 1;"></div>
+<div class="flex items-center gap-3 border-b border-surface-container-high pb-4 relative z-10">
+<div class="w-8 h-8 rounded bg-intelligence-indigo/20 flex items-center justify-center text-intelligence-indigo relative">
+<span class="material-symbols-outlined text-[20px] animate-pulse" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-[16px] leading-[20px]">AI Discovery Assistant</h3>
+<p class="font-label-caps-sm text-label-caps-sm text-clarification-violet mt-1">ANALYZING REQUIREMENTS</p>
+</div>
+</div>
+<div class="flex flex-col gap-4 relative z-10">
+<p class="font-body-md text-body-md text-on-surface">To help refine your technical stack, I need a bit more context about the features you just added.</p>
+<!-- Chat Bubbles -->
+<div class="bg-surface-container-high p-4 rounded-lg rounded-tl-none text-on-surface font-body-md text-body-md">
+                        What primary problem are you trying to solve with Real-time Analytics?
+                    </div>
+<div class="bg-surface-container p-4 rounded-lg border border-outline-variant">
+<textarea class="w-full bg-transparent outline-none resize-none font-body-md text-body-md text-on-surface placeholder-on-surface-variant" placeholder="Type your answer..." rows="2"></textarea>
+<div class="flex justify-end mt-2">
+<button class="text-intelligence-indigo font-label-caps-sm text-label-caps-sm hover:text-clarification-violet transition-colors flex items-center gap-1">
+                                SUBMIT <span class="material-symbols-outlined text-[14px]" data-icon="send">send</span>
+</button>
+</div>
+</div>
+<div class="bg-surface-container-high p-4 rounded-lg rounded-tl-none text-on-surface font-body-md text-body-md mt-2 opacity-60">
+                        Who are the main users interacting with these dashboards?
+                    </div>
+</div>
+<!-- Confidence Gauge -->
+<div class="mt-auto pt-6 border-t border-surface-container-high relative z-10 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full border-4 border-surface-container-highest border-t-confidence-medium border-r-confidence-medium transform rotate-45 flex items-center justify-center">
+<span class="transform -rotate-45 font-label-caps-sm text-label-caps-sm text-confidence-medium">65%</span>
+</div>
+<div>
+<p class="font-label-caps-sm text-label-caps-sm text-on-surface">REQUIREMENT CLARITY</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-[12px]">More details needed for exact estimation.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (JSON Injected) -->
+<footer class="fixed bottom-0 left-0 w-full z-40 flex justify-between items-center px-margin-discovery py-6 bg-surface-container-low/90 dark:bg-surface-container-low/90 backdrop-blur-lg border-t border-outline-variant shadow-lg">
+<div class="font-label-caps-sm text-label-caps-sm text-on-surface-variant">Autosaved 2 minutes ago</div>
+<div class="flex gap-4">
+<button class="text-on-surface-variant border border-outline px-6 py-3 rounded-lg font-label-caps-sm text-label-caps-sm hover:brightness-110 scale-95 active:scale-90 transition-transform">Save Draft</button>
+<button class="text-on-surface-variant border border-outline px-6 py-3 rounded-lg font-label-caps-sm text-label-caps-sm hover:brightness-110 scale-95 active:scale-90 transition-transform">Back</button>
+<button class="bg-primary-container text-on-primary-container rounded-lg px-6 py-3 font-bold font-label-caps-sm text-label-caps-sm hover:brightness-110 scale-95 active:scale-90 transition-transform">Next</button>
+</div>
+</footer>
+</body></html>

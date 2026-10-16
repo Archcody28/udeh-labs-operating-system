@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Engineering Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#2d3449",
+                        "on-background": "#dae2fd",
+                        "on-tertiary-container": "#0d0096",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#372abf",
+                        "inverse-surface": "#dae2fd",
+                        "outline": "#958ea0",
+                        "inverse-on-surface": "#283044",
+                        "tertiary-fixed": "#e1e0ff",
+                        "surface-container-lowest": "#060e20",
+                        "secondary-fixed": "#e3dfff",
+                        "tertiary-container": "#8083ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#e9ddff",
+                        "on-primary": "#3c0091",
+                        "surface": "#0b1326",
+                        "tertiary-fixed-dim": "#c0c1ff",
+                        "primary-container": "#a078ff",
+                        "secondary": "#c3c0ff",
+                        "surface-container-high": "#222a3d",
+                        "surface-container-low": "#131b2e",
+                        "surface-dim": "#0b1326",
+                        "outline-variant": "#494454",
+                        "surface-variant": "#2d3449",
+                        "on-tertiary-fixed": "#07006c",
+                        "on-secondary": "#1f00a4",
+                        "on-secondary-container": "#b4b0ff",
+                        "on-surface": "#dae2fd",
+                        "on-primary-container": "#340080",
+                        "inverse-primary": "#6d3bd7",
+                        "background": "#0b1326",
+                        "surface-tint": "#d0bcff",
+                        "on-tertiary": "#1000a9",
+                        "primary": "#d0bcff",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#2f2ebe",
+                        "secondary-fixed-dim": "#c3c0ff",
+                        "on-secondary-fixed": "#100069",
+                        "on-primary-fixed": "#23005c",
+                        "secondary-container": "#3a2dc2",
+                        "tertiary": "#c0c1ff",
+                        "primary-fixed-dim": "#d0bcff",
+                        "surface-bright": "#31394d",
+                        "on-primary-fixed-variant": "#5516be",
+                        "surface-container": "#171f33",
+                        "on-error": "#690005",
+                        "on-surface-variant": "#cbc3d7",
+                        "accent-cyan": "#00f0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "max-width": "1440px",
+                        "unit": "4px",
+                        "gutter": "16px",
+                        "density-comfortable": "16px",
+                        "density-high": "8px",
+                        "margin-safe": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Hanken Grotesk"],
+                        "mono-data": ["JetBrains Mono"],
+                        "headline-sm": ["Hanken Grotesk"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "body-sm": ["Hanken Grotesk"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "mono-data": ["13px", { "lineHeight": "18px", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-sm": ["12px", { "lineHeight": "16px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body { font-family: 'Hanken Grotesk', sans-serif; }
+        .data-card {
+            background-color: theme('colors.surface-container-low');
+            border: 1px solid theme('colors.outline-variant');
+            border-radius: theme('borderRadius.lg');
+        }
+        .data-card-header {
+            border-bottom: 1px solid theme('colors.outline-variant');
+        }
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .glass-panel {
+            background: rgba(19, 27, 46, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(218, 226, 253, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-x-hidden flex h-screen w-screen">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest flex flex-col border-r border-outline-variant z-50">
+<div class="p-gutter flex items-center gap-3 border-b border-outline-variant pb-4">
+<div class="w-10 h-10 rounded-lg overflow-hidden bg-surface-container flex-shrink-0">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="A highly detailed 3D render of a futuristic corporate logo featuring interconnected glowing geometric nodes in deep indigo and electric violet, set against a dark metallic background, representing enterprise data intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1DMZLDi8l8EU7WI9ui3w7FCpcp7Ss1IqyXCdALSSRTENT8Y-nscQFX1ypmgi3dUXWeV2HeGvQkeBw066RHJt9Z-pRtd9lwBsZ8MbaAx5UDAlr1nV36wmMI6QVPYTV7z5aXdznxM5kvcK0oUvgyygeSy8723ClZ4fGAEeIwJvmn5yO-4Wi8zagcvKezFPymP_HYx866JGDd4sHF35-FjPl1106ddt2ckIRlGHkkAHfPCmeb51Hm-CNIg"/>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary truncate">UdehLabs Intelligence</h1>
+<p class="font-label-md text-label-md text-on-surface-variant truncate">Enterprise Console</p>
+</div>
+</div>
+<div class="p-density-comfortable">
+<button class="w-full bg-primary text-on-primary py-2 px-4 rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Analysis
+            </button>
+</div>
+<ul class="flex flex-col gap-1 p-2 flex-grow overflow-y-auto mt-2">
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]">leaderboard</span>
+                    Executive
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-body-md text-body-md text-on-primary-container bg-primary-container font-bold active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">engineering</span>
+                    Engineering
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+                    AI
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]">database</span>
+                    Knowledge
+                </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg font-body-md text-body-md text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined text-[20px]">security</span>
+                    Security
+                </a>
+</li>
+</ul>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 sticky flex justify-between items-center h-14 px-gutter bg-surface-container-low border-b border-outline-variant z-40">
+<div class="flex items-center gap-6">
+<div class="font-headline-sm text-headline-sm font-black text-on-surface tracking-tight">Deep Intelligence Platform</div>
+<nav class="hidden md:flex gap-4">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest rounded px-2 py-1 transition-colors" href="#">Time Range</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest rounded px-2 py-1 transition-colors" href="#">Organization</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Project</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative focus-within:ring-1 focus-within:ring-primary rounded-lg">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[18px]">search</span>
+<input class="bg-surface-container-highest border border-outline-variant rounded-lg pl-9 pr-4 py-1.5 text-sm focus:outline-none focus:border-primary text-on-surface w-64" placeholder="Search resources..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+</button>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-3 py-1.5 rounded-lg font-label-md text-label-md hover:bg-opacity-80 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+                    Ask AI
+                </button>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 overflow-y-auto p-gutter bg-surface">
+<div class="max-w-max-width mx-auto flex flex-col gap-6">
+<!-- DORA Metrics Header -->
+<div class="flex items-center justify-between mb-2">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Engineering Velocity</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Real-time DORA metrics and system reliability for core platforms.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container/20 border border-secondary-container text-secondary font-label-md text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> SYSTEM STABLE
+                        </span>
+</div>
+</div>
+<!-- Top Section: DORA Metrics Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Deployment Frequency -->
+<div class="data-card p-density-comfortable relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Deployment Freq</span>
+<span class="material-symbols-outlined text-primary text-[20px]">rocket_launch</span>
+</div>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-headline-lg text-headline-lg metric-value text-on-surface">14.2</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">/ day</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-accent-cyan relative z-10">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-mono-data text-mono-data text-[11px]">+2.4% vs last week</span>
+</div>
+</div>
+<!-- Lead Time for Changes -->
+<div class="data-card p-density-comfortable relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Lead Time</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">schedule</span>
+</div>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-headline-lg text-headline-lg metric-value text-on-surface">2.4</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">hours</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-accent-cyan relative z-10">
+<span class="material-symbols-outlined text-[14px]">trending_down</span>
+<span class="font-mono-data text-mono-data text-[11px]">-15 mins vs last week</span>
+</div>
+</div>
+<!-- Change Failure Rate -->
+<div class="data-card p-density-comfortable relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-error/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">Change Failure Rate</span>
+<span class="material-symbols-outlined text-error text-[20px]">warning</span>
+</div>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-headline-lg text-headline-lg metric-value text-on-surface">1.8</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">%</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-on-surface-variant relative z-10">
+<span class="material-symbols-outlined text-[14px]">horizontal_rule</span>
+<span class="font-mono-data text-mono-data text-[11px]">Stable</span>
+</div>
+</div>
+<!-- MTTR -->
+<div class="data-card p-density-comfortable relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-tertiary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase">MTTR</span>
+<span class="material-symbols-outlined text-tertiary text-[20px]">build_circle</span>
+</div>
+<div class="flex items-baseline gap-2 relative z-10">
+<span class="font-headline-lg text-headline-lg metric-value text-on-surface">45</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">mins</span>
+</div>
+<div class="mt-2 flex items-center gap-1 text-error relative z-10">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span class="font-mono-data text-mono-data text-[11px]">+5 mins vs last week</span>
+</div>
+</div>
+</div>
+<!-- Middle Section: Charts Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Deployment Success Rate Chart -->
+<div class="data-card col-span-1 lg:col-span-2 flex flex-col h-80">
+<div class="data-card-header p-density-comfortable flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Deployment Success Rate</h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 font-label-md text-[10px] text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-primary"></div> STAGING</span>
+<span class="flex items-center gap-1 font-label-md text-[10px] text-on-surface-variant"><div class="w-2 h-2 rounded-full bg-accent-cyan"></div> PROD</span>
+</div>
+</div>
+<div class="p-density-comfortable flex-1 relative w-full h-full">
+<canvas id="deploymentChart"></canvas>
+</div>
+</div>
+<!-- Build & Test Reliability -->
+<div class="data-card col-span-1 flex flex-col h-80">
+<div class="data-card-header p-density-comfortable">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Build Reliability</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Failures per top repos (Last 7d)</p>
+</div>
+<div class="p-density-comfortable flex-1 relative w-full h-full">
+<canvas id="buildChart"></canvas>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script>
+        // Set default Chart.js config for dark theme
+        Chart.defaults.color = '#958ea0';
+        Chart.defaults.font.family = 'JetBrains Mono';
+        Chart.defaults.scale.grid.color = 'rgba(73, 68, 84, 0.2)';
+
+        // Deployment Chart (Area)
+        const ctxDeploy = document.getElementById('deploymentChart').getContext('2d');
+        
+        // Create gradients
+        const gradPrimary = ctxDeploy.createLinearGradient(0, 0, 0, 300);
+        gradPrimary.addColorStop(0, 'rgba(208, 188, 255, 0.4)'); // Primary
+        gradPrimary.addColorStop(1, 'rgba(208, 188, 255, 0)');
+
+        const gradCyan = ctxDeploy.createLinearGradient(0, 0, 0, 300);
+        gradCyan.addColorStop(0, 'rgba(0, 240, 255, 0.4)'); // Cyan
+        gradCyan.addColorStop(1, 'rgba(0, 240, 255, 0)');
+
+        new Chart(ctxDeploy, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [
+                    {
+                        label: 'Staging',
+                        data: [98, 95, 99, 92, 97, 100, 99],
+                        borderColor: '#d0bcff', // Primary
+                        backgroundColor: gradPrimary,
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 0
+                    },
+                    {
+                        label: 'Prod',
+                        data: [100, 99, 98, 100, 96, 100, 100],
+                        borderColor: '#00f0ff', // Cyan
+                        backgroundColor: gradCyan,
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { min: 80, max: 100, border: { display: false } },
+                    x: { border: { display: false }, grid: { display: false } }
+                },
+                interaction: { mode: 'index', intersect: false }
+            }
+        });
+
+        // Build Chart (Bar)
+        const ctxBuild = document.getElementById('buildChart').getContext('2d');
+        new Chart(ctxBuild, {
+            type: 'bar',
+            data: {
+                labels: ['auth-svc', 'ai-gateway', 'core-api', 'web-ui'],
+                datasets: [{
+                    data: [12, 5, 2, 8],
+                    backgroundColor: ['#d0bcff', '#00f0ff', '#8083ff', '#494454'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, border: { display: false } },
+                    x: { border: { display: false }, grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body></html>

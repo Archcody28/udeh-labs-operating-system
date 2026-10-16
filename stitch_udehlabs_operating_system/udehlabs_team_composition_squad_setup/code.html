@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Engineering | Team Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #031427;
+            color: #d3e4fe;
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #1e293b;
+        }
+        .ai-glow {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #c3c0ff;
+            ring: 1px solid #c3c0ff;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #031427;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#000f21",
+                      "secondary-fixed-dim": "#d0bcff",
+                      "outline-variant": "#464555",
+                      "surface": "#031427",
+                      "primary-fixed-dim": "#c3c0ff",
+                      "outline": "#918fa1",
+                      "on-secondary-container": "#c4abff",
+                      "background": "#031427",
+                      "tertiary-fixed-dim": "#89ceff",
+                      "secondary-fixed": "#e9ddff",
+                      "on-secondary": "#3c0091",
+                      "on-surface-variant": "#c7c4d8",
+                      "on-secondary-fixed": "#23005c",
+                      "surface-container-low": "#0b1c30",
+                      "surface-container-highest": "#26364a",
+                      "secondary": "#d0bcff",
+                      "primary-container": "#4f46e5",
+                      "on-primary": "#1d00a5",
+                      "on-error": "#690005",
+                      "tertiary": "#89ceff",
+                      "primary": "#c3c0ff",
+                      "on-background": "#d3e4fe",
+                      "on-secondary-fixed-variant": "#5516be",
+                      "on-tertiary": "#00344d",
+                      "inverse-surface": "#d3e4fe",
+                      "tertiary-container": "#006693",
+                      "surface-dim": "#031427",
+                      "surface-container-high": "#1b2b3f",
+                      "on-error-container": "#ffdad6",
+                      "surface-container": "#102034",
+                      "surface-bright": "#2a3a4f",
+                      "error": "#ffb4ab",
+                      "inverse-on-surface": "#213145",
+                      "surface-variant": "#26364a",
+                      "primary-fixed": "#e2dfff",
+                      "on-primary-container": "#dad7ff",
+                      "error-container": "#93000a",
+                      "on-tertiary-container": "#b8e0ff",
+                      "on-tertiary-fixed-variant": "#004c6e",
+                      "secondary-container": "#571bc1",
+                      "inverse-primary": "#4d44e3",
+                      "on-tertiary-fixed": "#001e2f",
+                      "tertiary-fixed": "#c9e6ff",
+                      "on-primary-fixed-variant": "#3323cc",
+                      "on-primary-fixed": "#0f0069",
+                      "surface-tint": "#c3c0ff",
+                      "on-surface": "#d3e4fe"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "max_content_width": "1440px",
+                      "sidebar_width": "260px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "base": "4px",
+                      "2xl": "48px",
+                      "sm": "8px",
+                      "sidebar_collapsed": "64px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display": ["Inter"],
+                      "code-md": ["JetBrains Mono"],
+                      "headline-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "code-sm": ["JetBrains Mono"]
+              },
+              "fontSize": {
+                      "label-caps": ["11px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "code-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="flex overflow-hidden h-screen">
+<!-- SideNavBar Anchor -->
+<aside class="fixed left-0 top-0 h-screen w-sidebar_width border-r border-outline-variant bg-surface-container-low flex flex-col z-50">
+<div class="p-lg">
+<div class="flex items-center gap-sm mb-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">business</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Nexus</span>
+</div>
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-70">Global Workspace</p>
+</div>
+<nav class="flex-1 px-md space-y-xs overflow-y-auto">
+<div class="font-label-caps text-label-caps text-on-surface-variant px-sm py-xs mt-md">Management</div>
+<a class="flex items-center gap-md px-sm py-md rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">business</span>
+<span class="font-body-md text-body-md">Organization</span>
+</a>
+<!-- Active State determined by "Team Setup" -->
+<a class="flex items-center gap-md px-sm py-md rounded-lg text-primary border-l-2 border-primary bg-primary-container/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-body-md text-body-md">Team Setup</span>
+</a>
+<a class="flex items-center gap-md px-sm py-md rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md text-body-md">AI Agents</span>
+</a>
+<a class="flex items-center gap-md px-sm py-md rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-body-md text-body-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-sm py-md rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-body-md text-body-md">Network</span>
+</a>
+</nav>
+<div class="p-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary font-label-caps text-label-caps py-md rounded-lg active:scale-95 transition-transform">
+                New Environment
+            </button>
+<div class="mt-md space-y-xs">
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+                    Docs
+                </a>
+<a class="flex items-center gap-md px-sm py-sm text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Workspace Content -->
+<main class="flex-1 ml-sidebar_width flex flex-col h-screen">
+<!-- TopNavBar Anchor -->
+<header class="h-16 border-b border-outline-variant bg-surface/80 backdrop-blur-md flex justify-between items-center px-lg shrink-0">
+<div class="flex items-center gap-xl">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface">Onboarding Hub</h1>
+<nav class="hidden md:flex gap-lg">
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-label-caps text-label-caps text-primary font-bold border-b-2 border-primary pb-1" href="#">Provisioning</a>
+<a class="font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Audits</a>
+</nav>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary cursor-pointer">help_outline</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden border border-outline">
+<img class="w-full h-full object-cover" data-alt="A professional user profile avatar for a tech executive, minimalist studio lighting, deep blue and dark gray color scheme, sharp focus, digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPtThIJ-WXFntkq196IAirbKW7FtN0c8mAxln2GigXmHMR4YXZ645L0oqI7Ol0qO9wsdyOK791tKN-n-o9AH-DoBi8kg_4iS7SG6H5I0aWQ9Bg2gdUIinet2AREcV4ldFPLRF5v2JMAvocsB2QTMcM6rD952ijjCJkzYYbyXf2DvUNqLxbyHbZrKM3Qj8Q7wZ4U7D8UU6eoZabhBRm3LjjwtZceSRm4rWWWubF4xqx6MsQBD_WIuVvcQ"/>
+</div>
+<button class="bg-primary text-on-primary font-label-caps text-label-caps px-lg py-sm rounded-lg active:opacity-80 transition-opacity">
+                    Deploy Cluster
+                </button>
+</div>
+</header>
+<!-- Onboarding Canvas -->
+<div class="flex-1 overflow-y-auto p-xl">
+<!-- Progress Stepper -->
+<div class="max-w-[1200px] mx-auto mb-2xl">
+<div class="flex items-center justify-between relative">
+<div class="absolute top-1/2 left-0 w-full h-[2px] bg-surface-container-highest -translate-y-1/2 z-0"></div>
+<div class="absolute top-1/2 left-0 w-1/4 h-[2px] bg-primary -translate-y-1/2 z-0"></div>
+<div class="z-10 flex flex-col items-center gap-sm">
+<div class="h-10 w-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold">1</div>
+<span class="font-label-caps text-label-caps text-primary">Team Composition</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-sm">
+<div class="h-10 w-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold">2</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Agent Provisioning</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-sm">
+<div class="h-10 w-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold">3</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Resource Allocation</span>
+</div>
+<div class="z-10 flex flex-col items-center gap-sm">
+<div class="h-10 w-10 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold">4</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant">Summary</span>
+</div>
+</div>
+</div>
+<!-- Split Layout Content -->
+<div class="max-w-[1200px] mx-auto grid grid-cols-12 gap-xl">
+<!-- Left Panel: Configuration -->
+<div class="col-span-12 lg:col-span-8 space-y-lg">
+<section class="glass-panel p-xl rounded-xl space-y-lg">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-headline-md">settings_input_component</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Squad Definition</h2>
+</div>
+<div class="grid grid-cols-2 gap-lg">
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">SQUAD NAME</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md font-code-md text-code-md text-primary placeholder:text-outline/50" type="text" value="Core Infrastructure"/>
+</div>
+<div class="space-y-sm">
+<label class="font-label-caps text-label-caps text-on-surface-variant">PRIMARY DOMAIN</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md font-code-md text-code-md text-on-surface">
+<option>Cloud Architecture</option>
+<option>Distributed Systems</option>
+<option>Cybersecurity Operations</option>
+<option>AI Model Training</option>
+</select>
+</div>
+</div>
+</section>
+<section class="glass-panel p-xl rounded-xl space-y-lg">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-headline-md">person_add</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">Human Members</h2>
+</div>
+<button class="flex items-center gap-sm text-primary font-label-caps text-label-caps hover:bg-primary-container/10 px-md py-sm rounded-lg transition-colors">
+<span class="material-symbols-outlined">add</span>
+                                INVITE MEMBER
+                            </button>
+</div>
+<div class="space-y-md">
+<!-- Member Row 1 -->
+<div class="flex items-center justify-between p-md bg-surface-container-low border border-outline-variant rounded-lg group hover:border-primary transition-colors">
+<div class="flex items-center gap-md">
+<div class="h-10 w-10 rounded bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold font-code-md">JD</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Jameson Duarte</p>
+<p class="font-code-sm text-code-sm text-outline">j.duarte@nexus.engineering</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<select class="bg-transparent border-none font-code-sm text-code-sm text-primary focus:ring-0">
+<option>Lead Engineer</option>
+<option>Senior Dev</option>
+<option>DevOps</option>
+</select>
+<button class="material-symbols-outlined text-outline group-hover:text-error transition-colors">delete</button>
+</div>
+</div>
+<!-- Member Row 2 -->
+<div class="flex items-center justify-between p-md bg-surface-container-low border border-outline-variant rounded-lg group hover:border-primary transition-colors">
+<div class="flex items-center gap-md">
+<div class="h-10 w-10 rounded bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold font-code-md">MK</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Maya Kurosawa</p>
+<p class="font-code-sm text-code-sm text-outline">m.kuro@nexus.engineering</p>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<select class="bg-transparent border-none font-code-sm text-code-sm text-primary focus:ring-0">
+<option>Senior Dev</option>
+<option>Lead Engineer</option>
+<option>DevOps</option>
+</select>
+<button class="material-symbols-outlined text-outline group-hover:text-error transition-colors">delete</button>
+</div>
+</div>
+<!-- Member Row 3 (Empty State/Add) -->
+<div class="flex items-center justify-between p-md bg-surface-container-low/30 border border-dashed border-outline-variant rounded-lg hover:border-outline transition-colors cursor-pointer">
+<div class="flex items-center gap-md text-outline">
+<div class="h-10 w-10 rounded border border-dashed border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</div>
+<span class="font-body-md text-body-md italic">Add additional team member...</span>
+</div>
+</div>
+</div>
+</section>
+<div class="flex justify-end gap-md pt-md">
+<button class="px-2xl py-md font-label-caps text-label-caps text-on-surface-variant hover:text-on-surface">SAVE DRAFT</button>
+<button class="px-2xl py-md bg-primary text-on-primary rounded-lg font-label-caps text-label-caps font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">NEXT: PROVISION AGENTS</button>
+</div>
+</div>
+<!-- Right Panel: Squad Preview -->
+<div class="col-span-12 lg:col-span-4">
+<div class="glass-panel p-xl rounded-xl sticky top-0 ai-glow overflow-hidden">
+<div class="absolute -right-12 -top-12 h-32 w-32 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="space-y-xl relative z-10">
+<div class="pb-md border-b border-outline-variant">
+<h3 class="font-label-caps text-label-caps text-primary mb-xs">SQUAD PREVIEW</h3>
+<div class="font-headline-md text-headline-md font-bold text-on-surface">Core Infrastructure</div>
+</div>
+<div class="space-y-lg">
+<div class="space-y-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant">SQUAD COMPOSITION</p>
+<div class="flex items-center gap-md">
+<div class="h-2 flex-1 bg-surface-container-highest rounded-full overflow-hidden flex">
+<div class="h-full bg-primary w-2/5"></div>
+<div class="h-full bg-secondary w-1/5"></div>
+</div>
+<span class="font-code-sm text-code-sm text-on-surface">2/10 Members</span>
+</div>
+</div>
+<div class="space-y-md">
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-secondary-container">ESTIMATED THROUGHPUT</p>
+<p class="font-code-md text-code-md text-secondary">High-Bandwidth (98%)</p>
+</div>
+</div>
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div>
+<p class="font-label-caps text-label-caps text-on-tertiary-container">AI-SQUAD SYNERGY</p>
+<p class="font-code-md text-code-md text-tertiary">Awaiting Agent Sync</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant/30">
+<p class="font-code-sm text-code-sm text-outline italic leading-relaxed">
+                                    "This squad is currently human-heavy. Adding AI Agents in the next step will unlock 24/7 provisioning and automated audit trails."
+                                </p>
+</div>
+<div class="rounded-xl overflow-hidden h-40 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A high-tech digital schematic showing an abstract team structure with connected nodes and glowing data lines, deep navy background with indigo and violet accents, cinematic lighting, 3D architectural rendering style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFVdbA4F9kgWFDs-pGB1FJEDOp5r8Ot4JYB5OxDRm2EecueuyOFLaG6GKtEPt2b0QLAgibC99rvlKR9Ulwen9SmKcXZefFwIEIb-I1yTYwEozTDF0OaWKwVsDfz2mLzF-pNgLingBWA9T0mT5lU_Xn6ysNoHyiM_A0ZOWcOpCKe4GiRVw4u0-dkQ6EcFXFHOkIfNtpsXSJOtaDoV91i4oPRUE7aYuPQRD-BIhRfeOr4L21JzeDjFLl2w"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual micro-interaction scripts -->
+<script>
+        // Simple animation on member hover
+        document.querySelectorAll('.group').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.querySelector('.material-symbols-outlined').style.transform = 'scale(1.1)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.querySelector('.material-symbols-outlined').style.transform = 'scale(1.0)';
+            });
+        });
+
+        // Search bar interaction (placeholder logic)
+        const searchInput = document.createElement('input');
+        // Not implemented but setup for future command palette logic
+    </script>
+</body></html>

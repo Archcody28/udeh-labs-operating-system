@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UdehLabs Multi-Objective Optimization Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&amp;family=Hanken+Grotesk:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#690005",
+                      "surface-container-low": "#101c2d",
+                      "on-primary": "#00315d",
+                      "on-tertiary-fixed": "#002113",
+                      "primary-fixed": "#d4e3ff",
+                      "on-secondary": "#3f008e",
+                      "on-background": "#d7e3fb",
+                      "surface-container-highest": "#2a3548",
+                      "on-tertiary-fixed-variant": "#005236",
+                      "on-tertiary": "#003824",
+                      "surface": "#081425",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-surface": "#d7e3fb",
+                      "secondary-container": "#6001d1",
+                      "tertiary-container": "#00a572",
+                      "on-error-container": "#ffdad6",
+                      "status-critical": "#ef4444",
+                      "primary": "#a4c9ff",
+                      "data-text": "#d8e3fb",
+                      "secondary": "#d2bbff",
+                      "surface-container": "#152031",
+                      "on-tertiary-container": "#00311f",
+                      "error": "#ffb4ab",
+                      "surface-container-high": "#1f2a3c",
+                      "on-surface-variant": "#c0c7d5",
+                      "border-active": "#1e293b",
+                      "on-primary-container": "#002a52",
+                      "primary-container": "#3492f6",
+                      "outline-variant": "#404753",
+                      "surface-dim": "#081425",
+                      "secondary-fixed": "#eaddff",
+                      "surface-container-lowest": "#030e1f",
+                      "inverse-on-surface": "#263143",
+                      "tertiary-fixed": "#6ffbbe",
+                      "on-secondary-fixed": "#25005a",
+                      "outline": "#8a919e",
+                      "inverse-surface": "#d7e3fb",
+                      "inverse-primary": "#005fad",
+                      "surface-bright": "#2f3a4c",
+                      "tertiary": "#4edea3",
+                      "surface-deep": "#040e1f",
+                      "status-healthy": "#10b981",
+                      "on-primary-fixed-variant": "#004884",
+                      "error-container": "#93000a",
+                      "primary-fixed-dim": "#a4c9ff",
+                      "on-primary-fixed": "#001c39",
+                      "on-secondary-container": "#c9aeff",
+                      "background": "#081425",
+                      "status-warning": "#f59e0b",
+                      "surface-tint": "#a4c9ff",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "tertiary-fixed-dim": "#4edea3",
+                      "surface-variant": "#2a3548"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "gutter": "12px",
+                      "compact": "8px",
+                      "margin-mobile": "12px",
+                      "sidebar": "240px",
+                      "margin-desktop": "24px",
+                      "standard": "16px"
+              },
+              "fontFamily": {
+                      "body-md": ["Hanken Grotesk"],
+                      "headline-lg": ["Hanken Grotesk"],
+                      "data-lg": ["Geist Mono"],
+                      "headline-md": ["Hanken Grotesk"],
+                      "label-caps": ["Geist Mono"],
+                      "headline-sm": ["Hanken Grotesk"],
+                      "data-md": ["Geist Mono"],
+                      "data-sm": ["Geist Mono"],
+                      "body-sm": ["Hanken Grotesk"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "data-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-caps": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                      "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "data-md": ["13px", {"lineHeight": "18px", "fontWeight": "500"}],
+                      "data-sm": ["11px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #081425;
+            color: #d7e3fb;
+            font-family: 'Hanken Grotesk', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .pulse-border {
+            animation: pulse-border-anim 2s infinite ease-in-out;
+        }
+        
+        @keyframes pulse-border-anim {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        .glow-critical {
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.8);
+        }
+
+        .data-row {
+            height: 32px;
+            border-bottom: 1px solid #404753;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col md:flex-row">
+<!-- TopNavBar (Mobile Only) / Desktop Header -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop h-16 bg-surface-container-lowest dark:bg-surface-container-lowest border-b border-outline-variant md:hidden">
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tighter">NEXUS AI COMMAND</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-bright rounded p-1 transition-colors">menu</span>
+</div>
+</header>
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col fixed left-0 top-0 bottom-0 w-sidebar z-40 bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant py-standard">
+<div class="px-4 mb-8 flex flex-col gap-2 border-b border-outline-variant pb-4">
+<div class="font-headline-sm text-headline-sm text-primary font-bold tracking-tighter">UDEHLABS SRE</div>
+<div class="flex items-center gap-3 mt-4">
+<div class="w-10 h-10 rounded bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+<div>
+<div class="font-data-md text-data-md text-secondary">OPERATOR_01</div>
+<div class="font-label-caps text-label-caps text-on-surface-variant mt-1">SRE COMMAND HUB</div>
+</div>
+</div>
+</div>
+<div class="flex-grow flex flex-col gap-1 overflow-y-auto scrollbar-hide">
+<div class="px-2 mb-2 font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider pl-4">Core Systems</div>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all mx-2 rounded active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+<span class="font-data-md text-data-md">Digital Twin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all mx-2 rounded active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">online_prediction</span>
+<span class="font-data-md text-data-md">Predictions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest transition-all mx-2 rounded active:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">model_training</span>
+<span class="font-data-md text-data-md">Simulation</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 bg-secondary-container text-on-secondary-container rounded-lg mx-2 active:translate-x-1 duration-200 shadow-sm border border-secondary/20 relative" href="#">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-secondary rounded-r"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">query_stats</span>
+<span class="font-data-md text-data-md font-bold">Optimization</span>
+</a>
+</div>
+<div class="mt-auto px-4 pt-4 border-t border-outline-variant flex flex-col gap-2">
+<button class="w-full bg-secondary text-surface-deep font-data-md text-data-md font-bold py-2 px-4 rounded border border-secondary hover:bg-secondary-fixed transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span> NEW SIMULATION
+            </button>
+<div class="flex gap-2 mt-4 justify-around text-on-surface-variant">
+<button class="hover:text-primary transition-colors flex flex-col items-center gap-1" title="Diagnostics">
+<span class="material-symbols-outlined text-lg">biotech</span>
+</button>
+<button class="hover:text-primary transition-colors flex flex-col items-center gap-1" title="Terminal">
+<span class="material-symbols-outlined text-lg">terminal</span>
+</button>
+<button class="hover:text-primary transition-colors flex flex-col items-center gap-1" title="Settings">
+<span class="material-symbols-outlined text-lg">settings</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-sidebar pt-16 md:pt-0 p-compact md:p-gutter overflow-y-auto h-screen w-full bg-surface">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-gutter gap-4 bg-surface-container-lowest p-4 rounded-lg border border-border-active">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface m-0">Multi-Objective Optimization</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">AI-generated proposals for organization-wide efficiency balancing Cost, Latency, and Reliability.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="bg-surface-deep px-3 py-1.5 rounded border border-border-active flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-status-healthy pulse-border"></span>
+<span class="font-data-sm text-data-sm text-status-healthy">SYS_HEALTHY</span>
+</div>
+<button class="bg-surface-container-high border border-border-active text-on-surface px-4 py-1.5 rounded font-data-md text-data-md hover:bg-surface-bright transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">refresh</span> RE-EVALUATE
+                </button>
+</div>
+</div>
+<!-- Dashboard Grid (Bento Box Style) -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-compact md:gap-gutter">
+<!-- Constraint Enforcement Panel (Col 1-4) -->
+<div class="md:col-span-4 bg-surface-container border border-border-active rounded-lg flex flex-col h-full">
+<div class="p-compact border-b border-border-active bg-surface-container-high flex justify-between items-center rounded-t-lg">
+<span class="font-label-caps text-label-caps text-on-surface-variant">CONSTRAINT ENFORCEMENT</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">tune</span>
+</div>
+<div class="p-4 flex-grow flex flex-col gap-6">
+<!-- Constraint: Max Latency -->
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-end">
+<label class="font-data-md text-data-md text-on-surface">Global Max Latency</label>
+<span class="font-data-sm text-data-sm text-status-warning bg-status-warning/10 px-2 py-0.5 rounded">WARN_THRESH</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="flex-1 h-1 bg-surface-deep rounded appearance-none cursor-pointer accent-primary" max="1000" min="100" type="range" value="500"/>
+<div class="bg-surface-deep border border-border-active px-2 py-1 rounded w-20 text-center font-data-lg text-data-lg text-primary">
+                                500ms
+                            </div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant mt-1">
+<span>100ms (Hard Realtime)</span>
+<span>1000ms (Batch)</span>
+</div>
+</div>
+<!-- Constraint: Min Reliability -->
+<div class="flex flex-col gap-2 pt-4 border-t border-border-active">
+<div class="flex justify-between items-end">
+<label class="font-data-md text-data-md text-on-surface">Min Reliability Target</label>
+<span class="font-data-sm text-data-sm text-status-healthy bg-status-healthy/10 px-2 py-0.5 rounded">SLO_ALIGNED</span>
+</div>
+<div class="flex items-center gap-3">
+<input class="flex-1 h-1 bg-surface-deep rounded appearance-none cursor-pointer accent-tertiary" max="99.999" min="99" step="0.001" type="range" value="99.9"/>
+<div class="bg-surface-deep border border-border-active px-2 py-1 rounded w-24 text-center font-data-lg text-data-lg text-tertiary">
+                                99.9%
+                            </div>
+</div>
+<div class="flex justify-between font-label-caps text-label-caps text-on-surface-variant mt-1">
+<span>99.0% (Tier 3)</span>
+<span>99.999% (Tier 1)</span>
+</div>
+</div>
+<!-- Cost Cap -->
+<div class="flex flex-col gap-2 pt-4 border-t border-border-active">
+<div class="flex justify-between items-end">
+<label class="font-data-md text-data-md text-on-surface">Monthly Token Cost Cap</label>
+</div>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant font-data-md text-data-md">$</span>
+<input class="w-full bg-surface-deep border border-border-active rounded py-1.5 pl-7 pr-3 font-data-lg text-data-lg text-on-surface focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" type="text" value="45,000"/>
+</div>
+</div>
+<div class="mt-auto pt-4">
+<button class="w-full border border-border-active text-primary font-data-md text-data-md py-2 rounded hover:bg-surface-bright transition-colors">
+                            APPLY CONSTRAINTS
+                        </button>
+</div>
+</div>
+</div>
+<!-- Optimization Proposals (Col 5-12) -->
+<div class="md:col-span-8 flex flex-col gap-compact md:gap-gutter">
+<!-- Macro Trade-off Overview -->
+<div class="grid grid-cols-3 gap-compact md:gap-gutter">
+<div class="bg-surface-container border border-border-active rounded-lg p-3 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">attach_money</span> PROJECTED SAVINGS
+                        </div>
+<div class="font-headline-md text-headline-md text-status-healthy">18.4%</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant mt-1">-$8,240 / month</div>
+</div>
+<div class="bg-surface-container border border-border-active rounded-lg p-3 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">speed</span> LATENCY DELTA
+                        </div>
+<div class="font-headline-md text-headline-md text-status-warning">+42ms</div>
+<div class="font-data-sm text-data-sm text-on-surface-variant mt-1">Aggregated mean</div>
+</div>
+<div class="bg-surface-container border border-border-active rounded-lg p-3 flex flex-col justify-between">
+<div class="font-label-caps text-label-caps text-on-surface-variant mb-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">verified_user</span> RISK SCORE
+                        </div>
+<div class="font-headline-md text-headline-md text-on-surface flex items-end gap-1">
+                            12.4 <span class="font-data-sm text-data-sm text-on-surface-variant mb-1">/ 100</span>
+</div>
+<div class="font-data-sm text-data-sm text-status-healthy mt-1">Low Risk</div>
+</div>
+</div>
+<!-- Proposals List -->
+<div class="bg-surface-container border border-border-active rounded-lg flex-1 flex flex-col overflow-hidden">
+<div class="p-compact border-b border-border-active bg-surface-container-high flex justify-between items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant">AI GENERATED PROPOSALS (3)</span>
+<div class="flex gap-2">
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Filter"><span class="material-symbols-outlined text-sm">filter_list</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors" title="Sort"><span class="material-symbols-outlined text-sm">sort</span></button>
+</div>
+</div>
+<div class="overflow-y-auto flex-1">
+<!-- Proposal 1 -->
+<div class="p-4 border-b border-border-active hover:bg-surface-bright transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">change_circle</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface m-0 group-hover:text-primary transition-colors">Model Downgrade: Non-Critical Workflows</h3>
+</div>
+<span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded font-label-caps text-label-caps border border-primary/30">HIGH IMPACT</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Switch background classification tasks from GPT-4o to Gemini 1.5 Flash. Accuracy degradation estimated at &lt; 0.2% based on historical telemetry.</p>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-surface-deep border border-border-active rounded p-2 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">EXPECTED BENEFIT</span>
+<span class="font-data-md text-data-md text-status-healthy">-18% Tokens</span>
+</div>
+<div class="bg-surface-deep border border-border-active rounded p-2 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">RISK SCORE</span>
+<div class="flex items-center gap-1">
+<div class="w-16 h-1 bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-status-healthy" style="width: 15%;"></div>
+</div>
+<span class="font-data-sm text-data-sm text-on-surface">15</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-border-active pt-3 mt-2">
+<span class="font-data-sm text-data-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-xs">history</span> Audit Trail: Requires 2 Approvals</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-deep border border-border-active text-on-surface rounded font-data-md text-data-md hover:border-outline transition-colors">DETAILS</button>
+<button class="px-3 py-1 bg-secondary text-surface-deep border border-secondary rounded font-data-md text-data-md font-bold hover:bg-secondary-fixed transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">check_circle</span> APPROVE
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Proposal 2 -->
+<div class="p-4 border-b border-border-active hover:bg-surface-bright transition-colors group">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">memory</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface m-0 group-hover:text-primary transition-colors">Cache TTL Optimization</h3>
+</div>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded font-label-caps text-label-caps border border-border-active">MED IMPACT</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Increase Redis cache TTL for vector embeddings from 1h to 4h. Reduces redundant API calls during peak loads.</p>
+<div class="grid grid-cols-2 gap-4 mb-4">
+<div class="bg-surface-deep border border-border-active rounded p-2 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">EXPECTED BENEFIT</span>
+<span class="font-data-md text-data-md text-tertiary">-120ms P99 Latency</span>
+</div>
+<div class="bg-surface-deep border border-border-active rounded p-2 flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant">RISK SCORE</span>
+<div class="flex items-center gap-1">
+<div class="w-16 h-1 bg-surface-container-high rounded overflow-hidden">
+<div class="h-full bg-status-warning" style="width: 45%;"></div>
+</div>
+<span class="font-data-sm text-data-sm text-on-surface">45</span>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-border-active pt-3 mt-2">
+<span class="font-data-sm text-data-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-xs">rule</span> Auto-approvable per policy</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-surface-deep border border-border-active text-on-surface rounded font-data-md text-data-md hover:border-outline transition-colors">DETAILS</button>
+<button class="px-3 py-1 bg-surface-deep border border-status-healthy text-status-healthy rounded font-data-md text-data-md hover:bg-status-healthy/10 transition-colors flex items-center gap-1">
+                                         EXECUTE
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
