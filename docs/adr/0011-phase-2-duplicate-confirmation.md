@@ -1,0 +1,3 @@
+# ADR 0002 — update 2026-10-16 (Phase 2): content DUPLICATE confirmed from Phase 1 evidence (1-byte trailing-newline delta); both files preserved untouched; canonical filename selection deferred to HD-03. Status: Proposed.
+Covers ADR 0002 (exec pair), 0003 (intel pair), 0005 (data pair), 0007 (proposal pair): each pair verified content-identical in Phase 1; Phase 2 marks CONTENT canonical (either file) with filename choice = HD-03. ADR 0004 (A.9 vs A.21) and 0008 (portal) confirmed genuine forks -> HD-05/HD-04. ADR 0006 needs byte verify -> HD-03. ADR 0009/0010 remain inventory-only -> HD-01/HD-02/HD-06. No history rewritten; all Proposed.
+
