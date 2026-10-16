@@ -1,0 +1,22 @@
+# Domain Invariants — Phase 4
+Date 2026-10-16. Only repository-evidenced rules.
+
+- INV-TEN-01 Organization context is server-resolved (org-arch-doc). [Tenancy/Security]
+- INV-TEN-02 Cross-tenant access prohibited (org-arch-doc, A.33). [Tenancy/Security]
+- INV-TEN-03 Workspace belongs to exactly one org; organizationId immutable. [Consistency/Tenancy]
+- INV-SEC-01 Sensitive actions require step-up auth (A.33/A.51). [Security]
+- INV-SEC-02 Credentials/tokens never logged or exposed (A.33). [Security]
+- INV-SEC-03 Least-privilege repo/tool paths (A.24). [Security]
+- INV-CON-01 Proposal approvals are version-pinned (A.43). [Consistency/Lifecycle]
+- INV-CON-02 Revision creates new ProposalVersion with diff; never mutates sent version (A.43). [Consistency]
+- INV-CON-03 Lineage/audit records append-only (A.64/A.21). [Consistency/Audit]
+- INV-LIF-01 High-risk engineering actions require human approval (A.9). [Lifecycle/AI safety]
+- INV-LIF-02 Release requires verification gate evidence (A.17). [Lifecycle]
+- INV-LIF-03 Deployment rollback path must exist conceptually (A.18; mechanism UNRESOLVED). [Lifecycle]
+- INV-AUD-01 Every approval, agent tool call, security event, contract action audited immutably (A.21/A.33/A.43). [Audit]
+- INV-AUD-02 Audit records immutable, correlated via correlationId. [Audit]
+- INV-AI-01 L5 full autonomy disabled (A.9). [AI safety]
+- INV-AI-02 Agents are scoped principals; policy-bound tools (A.21/A.33). [AI safety/Security]
+- INV-AI-03 High-risk AI ops pause for human approval (A.21 HITL). [AI safety]
+- INV-AI-04 Approved execution is version-pinned (agent/policy/plan) (A.21). [AI safety/Consistency]
+- INV-AI-05 Budget breach halts run (A.21). [AI safety]
