@@ -1,6 +1,6 @@
 # ADR 0010 — Repeated Dashboards / Interfaces
 
-- **Status:** Proposed (unresolved — inventory only)
+- **Status:** Partially accepted (Phase 3: families canonical per screen inventory SCR-011/024/030/035/050-055; command-vs-dashboard-vs-workspace semantics RESOLVED; per-family iteration pick + SRE consolidation REMAIN Proposed → HD-06narrow. No dashboard deleted.)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts (top-level concept directories surveyed 2026-10-16)

@@ -1,6 +1,6 @@
 # ADR 0002 — AI Engineering Execution Architecture Duplicates
 
-- **Status:** Proposed (unresolved — no canonical version selected)
+- **Status:** Accepted (Phase 3: DUPLICATE — content identical, `_1` canonical pointer; `_2` preserved, do not reference in new work)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts

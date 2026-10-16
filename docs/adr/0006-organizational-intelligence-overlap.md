@@ -1,6 +1,6 @@
 # ADR 0006 — Organizational Intelligence Overlap
 
-- **Status:** Proposed (unresolved)
+- **Status:** Accepted (Phase 3: DUPLICATE — Compare-Object 2026-10-16 returned empty = byte-identical; `_2.md` canonical pointer as Markdown norm; `_1.txt` preserved)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts

@@ -1,6 +1,6 @@
 # ADR 0009 — Authentication / Login / Onboarding Overlap
 
-- **Status:** Proposed (unresolved — inventory only, no design selected)
+- **Status:** Partially accepted (Phase 3: conceptual identity model RESOLVED per organization_architecture_doc + A.33 — User→Member(org-scoped Role)→Invitation; org = tenant; AI = scoped principal; verification separate from authN. Mechanism — credentials/SSO/MFA/session — and onboarding-flow unification REMAIN Proposed → HD-01narrow/HD-07)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts (top-level concept directories surveyed 2026-10-16)

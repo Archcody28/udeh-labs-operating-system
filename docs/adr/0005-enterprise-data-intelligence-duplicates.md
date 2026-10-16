@@ -1,6 +1,6 @@
 # ADR 0005 — Enterprise Data Intelligence Duplicates
 
-- **Status:** Proposed (unresolved — no canonical version selected)
+- **Status:** Accepted (Phase 3: DUPLICATE — content identical, `_1` canonical pointer; `_2` preserved)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts

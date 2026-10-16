@@ -1,6 +1,6 @@
 # ADR 0008 — Developer Portal Overlap
 
-- **Status:** Proposed (unresolved — genuine architectural fork)
+- **Status:** Accepted as Variant (Phase 3: MERGED vocabulary — doc_1 = Developer Workforce (profiles/skills/availability/assignment); doc_2 = Engineering Workspace (A.24 IDE-like, human interface to A.21); both coexist, distinct names; shared DeveloperSkill junction)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts

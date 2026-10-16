@@ -1,6 +1,6 @@
 # ADR 0004 — AI Engineering Orchestration Drift (Phase A.9 vs A.21)
 
-- **Status:** Proposed (unresolved — genuine architectural fork)
+- **Status:** Accepted as Variant/layered (Phase 3: A.9 = coordination plane — OrchestrationSession/Assignment/Locks/L0-L4 incl. L5 ban; A.21 = execution plane — AgentRun/Plan/Policy/Result; A.9 decomposes/delegates INTO A.21; verify/deploy consumed as tools)
 - **Date:** 2026-10-16
 
 ## Conflicting artifacts
