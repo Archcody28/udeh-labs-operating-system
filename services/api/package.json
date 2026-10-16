@@ -1,0 +1,30 @@
+{
+  "name": "@udehlabs/api",
+  "version": "0.5.0",
+  "private": true,
+  "description": "UdehLabs Phase 5 persistence + minimal API foundation",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/copy-migrations.cjs",
+    "start": "node dist/app/server.js",
+    "migrate": "node dist/persistence/migrate.js",
+    "seed": "node dist/app/seed.js",
+    "test:unit": "node --test dist/tests/unit.test.js",
+    "test:integration": "node --test dist/tests/integration.test.js",
+    "test": "node --test dist/tests/unit.test.js",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "node --check dist/app/server.js && echo lint-ok"
+  },
+  "dependencies": {
+    "pg": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.7.0",
+    "@types/pg": "^8.10.9",
+    "typescript": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
