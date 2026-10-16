@@ -16,9 +16,19 @@ export abstract class BaseRepository {
   }
 
   protected async findByIdInOrg<T>(id: string, organizationId: string, tx?: PoolClient): Promise<T> {
-    const res = await this.query(`SELECT * FROM ${this.table} WHERE id = $1 AND organization_id = $2`, [id, organizationId], tx);
+    const res = await this.query("SELECT * FROM " + this.table + " WHERE id = $1 AND organization_id = $2", [id, organizationId], tx);
     if (res.rowCount === 0) throw new NotFoundError(this.table);
     return res.rows[0] as T;
+  }
+
+  /**
+   * Nullable tenant read for routes that must not oracle existence.
+   * Returns null when the row is outside the caller's tenant; the route
+   * maps that to 403 (never a raw 404 that leaks cross-tenant existence).
+   */
+  protected async findOwnedInOrg<T>(id: string, organizationId: string, tx?: PoolClient): Promise<T | null> {
+    const res = await this.query("SELECT * FROM " + this.table + " WHERE id = $1 AND organization_id = $2", [id, organizationId], tx);
+    return (res.rows[0] as T) ?? null;
   }
 }
 
