@@ -160,12 +160,19 @@ before(async () => {
   assert.equal(accepted.status, 200);
   carolToken = (accepted.json as { data: { token: string } }).data.token;
 
-  // Cross-tenant projects created from each org.
-  const { getPool } = await import("../persistence/db.js");
-  const rowsA = await getPool().query("SELECT id FROM projects WHERE organization_id = $1 LIMIT 1", [aliceOrgId]);
-  if (rowsA.rowCount) pAId = rowsA.rows[0].id;
-  const rowsB = await getPool().query("SELECT id FROM projects WHERE organization_id = $1 LIMIT 1", [bobOrgId]);
-  if (rowsB.rowCount) pBId = rowsB.rows[0].id;
+  // Cross-tenant projects: org creation only provisions a workspace, so
+  // create one project per org explicitly for the grant/isolation tests.
+  async function createProject(token: string, orgId: string, wsId: string, name: string) {
+    const { status, json } = await api(`/api/v1/organizations/${orgId}/projects`, {
+      method: "POST",
+      token,
+      body: { name, workspaceId: wsId },
+    });
+    assert.equal(status, 201, `create project ${name}: ${JSON.stringify(json)}`);
+    return (json as { data: { id: string } }).data.id;
+  }
+  pAId = await createProject(aliceToken, aliceOrgId, wsAId, `A Project ${SUFFIX}`);
+  pBId = await createProject(bobToken, bobOrgId, wsBId, `B Project ${SUFFIX}`);
 });
 
 after(async () => {
@@ -269,7 +276,7 @@ describe("postgres integration", { skip: !hasDb } as never, () => {
   // --- authentication & session lifecycle ---
 
   it("auth lifecycle: register, login, me, rotate, logout", async () => {
-    const alice = await register(`alice${SUFFIX}@example.com`);
+    const alice = await register(`lifecycle${SUFFIX}@example.com`);
     const { data } = await login(alice.data.email);
     assert.ok(data.principal.subjectId);
     const me = await api("/api/v1/auth/me", { token: data.token });
@@ -457,7 +464,8 @@ describe("postgres integration", { skip: !hasDb } as never, () => {
 
   it("grant lifecycle: owner can grant to active members, revoke removes it", async () => {
     const rows = await memberRows(aliceOrgId, aliceToken);
-    const target = rows.data.find((m) => m.userId !== carolUserId) ?? rows.data[0];
+    const target = rows.data.find((m) => m.status === "active" && m.userId !== carolUserId)
+      ?? rows.data.find((m) => m.status === "active" && m.userId === aliceUserId);
     assert.ok(target, "expected a target member (any active member)");
 
     const grant = await api(`/api/v1/organizations/${aliceOrgId}/projects/${pAId}/grants`, {
@@ -501,7 +509,7 @@ describe("postgres integration", { skip: !hasDb } as never, () => {
       [aliceOrgId],
     );
     assert.ok(rows.rowCount, "project.grant.created event");
-    assert.equal(rows.rows[0].actor_id, carolUserId, "grant attributed to the acting principal");
+    assert.equal(rows.rows[0].actor_id, aliceUserId, "grant attributed to the acting principal");
 
     const rev = await getPool().query(
       "SELECT action FROM audit_events WHERE organization_id = $1 AND action IN ('project.grant.created','project.grant.revoked') ORDER BY id DESC LIMIT 2",

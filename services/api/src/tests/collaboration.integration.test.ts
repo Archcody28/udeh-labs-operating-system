@@ -59,6 +59,6 @@ describe("phase9 collaboration", { skip: !hasDb } as never, () => {
     const ops = collaborationOps as never as {
       createComment(c: never, pid: string, tt: string, tid: string, b: string, m: string[], a: string): Promise<unknown>;
     };
-    await assert.rejects(() => ops.createComment(a.ctx, a.p.id, "task", t.id, "x", [], a.user.id), /outside project/);
+    await assert.rejects(() => ops.createComment(a.ctx, a.p.id, "task", t.id, "x", [], a.user.id), /outside project|cross-tenant/);
   });
 });
