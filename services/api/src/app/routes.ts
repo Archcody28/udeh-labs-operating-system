@@ -111,6 +111,18 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
   }
   const { handleOrgRoutes } = await import("./tenancyRoutes.js");
   if (await handleOrgRoutes(req, res, cid, url, method)) return;
+  const { handleRequestRoutes } = await import("./requestRoutes.js");
+  if (await handleRequestRoutes(req, res, cid, url, method)) return;
+  const { handleProposalRoutes } = await import("./proposalRoutes.js");
+  if (await handleProposalRoutes(req, res, cid, url, method)) return;
+  const { handleCommercialTxRoutes } = await import("./commercialTxRoutes.js");
+  if (await handleCommercialTxRoutes(req, res, cid, url, method)) return;
+  const { handleContractRoutes } = await import("./contractRoutes.js");
+  if (await handleContractRoutes(req, res, cid, url, method)) return;
+  const { handleEngineeringRoutes } = await import("./engineeringRoutes.js");
+  if (await handleEngineeringRoutes(req, res, cid, url, method)) return;
+  const { handleEngineeringTxRoutes } = await import("./engineeringTxRoutes.js");
+  if (await handleEngineeringTxRoutes(req, res, cid, url, method)) return;
   const { handleGuardedRoutes } = await import("./guardedRoutes.js");
   if (await handleGuardedRoutes(req, res, cid, url, method)) return;
   return sendJson(res, 404, { code: "NOT_FOUND", message: "not found", correlationId: cid, retryable: false }, cid);

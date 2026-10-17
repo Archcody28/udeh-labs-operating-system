@@ -43,9 +43,18 @@ jobs:
         run: npm run build --prefix services/api
       - name: Unit tests
         run: npm run test:unit --prefix services/api
+      - name: Domain tests
+        run: node --test dist/tests/domain.test.js
+        working-directory: services/api
       - name: Migrate
         run: npm run migrate --prefix services/api
       - name: Integration tests (real PostgreSQL)
         run: npm run test:integration --prefix services/api
+      - name: Domain integration (real PostgreSQL)
+        run: node --test dist/tests/domain.integration.test.js
+        working-directory: services/api
+      - name: Security tests (real PostgreSQL)
+        run: node --test dist/tests/security.test.js
+        working-directory: services/api
       - name: Secret scan
         run: python scripts/secret_scan.py --redact

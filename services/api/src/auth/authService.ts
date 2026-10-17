@@ -101,14 +101,20 @@ export class AuthService {
 
   async createOrganization(principal: AuthPrincipal, name: string, slug: string, correlationId: string) {
     if (principal.assurance === "none" || !principal.subjectId) throw new UnauthorizedError();
-    const result = await this.orgs.createWithPrimaryWorkspace(
-      name.trim(), slug.trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-"));
-    await this.memberships.upsertActive(
-      { organizationId: result.org.id, correlationId } as never,
-      principal.subjectId, "owner", principal.subjectId);
-    await this.audits.append(
-      { organizationId: result.org.id, actorId: principal.subjectId, principalType: "human", correlationId },
-      "organization.created", "organization", result.org.id, "success", { slug: result.org.slug });
+    const cleanSlug = slug.trim().toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+    // Atomic: org + primary workspace + owner membership + audit in one tx.
+    const result = await withTransaction(async (tx) => {
+      const org = await this.orgs.create(name.trim(), cleanSlug, tx);
+      const { WorkspaceRepository } = await import("../persistence/tenancyRepositories.js");
+      const wsRepo = new WorkspaceRepository();
+      const wctx = { organizationId: org.id, correlationId } as never;
+      const workspace = await wsRepo.create(wctx, "Primary", `${cleanSlug}-primary`, true, tx);
+      await this.memberships.upsertActive(wctx, principal.subjectId, "owner", principal.subjectId, tx);
+      await this.audits.append(
+        { organizationId: org.id, actorId: principal.subjectId, principalType: "human", correlationId } as never,
+        "organization.created", "organization", org.id, "success", { slug: org.slug }, tx);
+      return { org, workspace };
+    });
     return result;
   }
 

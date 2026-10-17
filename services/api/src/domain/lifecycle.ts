@@ -6,6 +6,8 @@ export const WorkspaceStatus = ["active", "archived"] as const;
 export const ProjectStatus = ["active", "archived"] as const; // UNRESOLVED per catalog; archive path enforced
 export const InvitationStatus = ["sent", "accepted", "expired", "revoked"] as const;
 export const MembershipStatus = ["active", "suspended", "removed"] as const;
+export const ClientRequestStatus = ["submitted", "elaborated", "closed"] as const;
+export const RequirementStatus = ["draft", "accepted"] as const;
 export const ProposalStatus = ["draft", "in_review", "sent", "approved", "rejected"] as const;
 export const ProposalVersionStatus = ["draft", "sent", "superseded", "approved"] as const;
 export const ContractStatus = ["ready", "signed", "active"] as const;
@@ -45,6 +47,9 @@ const TRANSITIONS: Record<string, Record<string, string[]>> = {
   project: { active: ["archived"], archived: [] },
   invitation: { sent: ["accepted", "expired", "revoked"], accepted: [], expired: [], revoked: [] },
   membership: { active: ["suspended", "removed"], suspended: ["active", "removed"], removed: [] },
+  client_request: { submitted: ["elaborated"], elaborated: ["closed"], closed: [] },
+  requirement: { draft: ["accepted"], accepted: [] },
+  proposal_version: { draft: ["sent"], sent: ["approved", "superseded"], approved: [], superseded: [] },
   proposal: { draft: ["in_review", "sent"], in_review: ["sent", "draft"], sent: ["approved", "rejected"], approved: [], rejected: [] },
   contract: { ready: ["signed"], signed: ["active"], active: [] },
   approval: { requested: ["approved", "denied"], approved: [], denied: [] },

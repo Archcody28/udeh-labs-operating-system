@@ -78,10 +78,15 @@ export function authHeaders(res: ServerResponse, token: string, secure: boolean)
   res.setHeader("Set-Cookie", sessionCookie(token, secure));
 }
 
-export function rateLimitKey(req: IncomingMessage, suffix: string): string {
+export function rateLimitKey(req: IncomingMessage, suffix: string, scope?: { principalId?: string; organizationId?: string }): string {
   const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim()
     ?? req.socket.remoteAddress ?? "unknown";
-  return `${ip}:${suffix}`;
+  // Tenant-scoped key: ip + principal + org + action. No cross-tenant collisions:
+  // org B traffic can never consume org A's bucket, and anonymous traffic
+  // stays in its own ip-only bucket.
+  const p = scope?.principalId ? `p=${scope.principalId}` : "p=anon";
+  const o = scope?.organizationId ? `o=${scope.organizationId}` : "o=none";
+  return `${ip}|${p}|${o}:${suffix}`;
 }
 
 export { authService, loginLimiter, sensitiveLimiter, sendJson };

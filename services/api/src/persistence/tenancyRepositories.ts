@@ -6,6 +6,15 @@ import { withTransaction } from "./db.js";
 
 export interface Organization { id: string; name: string; slug: string; status: string; version: number; }
 
+/**
+ * Tenant-owned repository rule (Phase 7): organizations are only readable
+ * through membership scope. `findById` (unscoped) is intentionally absent —
+ * callers must use `findForMember` so a direct repository call can never
+ * bypass tenant filtering. `create`/`setStatus` remain privileged
+ * service-internal operations (creation is followed by membership insert in
+ * the same transaction; status changes are owner-only service calls).
+ */
+
 export class OrganizationRepository extends BaseRepository {
   protected table = "organizations";
 
@@ -27,14 +36,18 @@ export class OrganizationRepository extends BaseRepository {
     });
   }
 
-  async findById(id: string, tx?: PoolClient): Promise<Organization> {
-    const res = await this.query("SELECT * FROM organizations WHERE id = $1", [id], tx);
+  async findForMember(id: string, userId: string, tx?: PoolClient): Promise<Organization> {
+    const res = await this.query(
+      `SELECT o.* FROM organizations o JOIN memberships m ON m.organization_id = o.id
+        WHERE o.id = $1 AND m.user_id = $2 AND m.status = 'active'`, [id, userId], tx);
     if (res.rowCount === 0) throw new (await import("../domain/errors.js")).NotFoundError("organizations");
     return res.rows[0] as Organization;
   }
 
   async setStatus(id: string, version: number, to: string, tx?: PoolClient): Promise<Organization> {
-    const cur = await this.findById(id, tx);
+    const res = await this.query("SELECT * FROM organizations WHERE id = $1", [id], tx);
+    if (res.rowCount === 0) throw new (await import("../domain/errors.js")).NotFoundError("organizations");
+    const cur = res.rows[0] as Organization;
     assertTransition("organization", cur.status, to);
     return (await updateWithVersion("organizations", id, version, { status: to }, tx)) as Organization;
   }
