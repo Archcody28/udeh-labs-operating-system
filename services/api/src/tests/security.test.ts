@@ -115,6 +115,7 @@ let wsBId = "";
 let pAId = "";
 let pBId = "";
 let aliceSessionId = "";
+let aliceUserId = "";
 
 before(async () => {
   if (!hasDb) return;
@@ -129,7 +130,9 @@ before(async () => {
 
   // Alice and Bob each own an organization; they can never see each other's data.
   const alice = await register(`alice${SUFFIX}@example.com`);
-  aliceToken = (await login(alice.data.email)).data.token;
+  const aliceLoggedIn = await login(alice.data.email);
+  aliceToken = aliceLoggedIn.data.token;
+  aliceUserId = aliceLoggedIn.data.principal.subjectId;
   const a = await createOrg(aliceToken, `A Org ${SUFFIX}`, `a-${SUFFIX}`);
   aliceOrgId = a.data.organization.id;
   wsAId = a.data.primaryWorkspace.id;
@@ -424,8 +427,8 @@ describe("postgres integration", { skip: !hasDb } as never, () => {
   });
 
   it("step-up: stepped-up assurance enables sensitive membership mutation", async () => {
-    const rows = await getPool().query("SELECT id FROM sessions WHERE user_id = $1", [carolUserId]);
-    assert.ok(rows.rowCount, "expected an active carol session");
+    const rows = await getPool().query("SELECT id FROM sessions WHERE user_id = $1", [aliceUserId]);
+    assert.ok(rows.rowCount, "expected an active alice session");
     aliceSessionId = rows.rows[0].id;
     await new SessionRepository().elevate(aliceSessionId);
 
