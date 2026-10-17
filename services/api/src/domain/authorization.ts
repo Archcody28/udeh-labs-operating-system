@@ -43,9 +43,11 @@ export type Permission =
   | "commercial.requirement.read" | "commercial.requirement.create" | "commercial.requirement.update"
   | "commercial.proposal.read" | "commercial.proposal.create" | "commercial.proposal.update" | "commercial.proposal.accept"
   | "commercial.contract.read" | "commercial.contract.create" | "commercial.contract.sign" | "commercial.contract.activate"
-  | "engineering.task.read" | "engineering.task.create" | "engineering.task.update"
+  | "engineering.task.read" | "engineering.task.create" | "engineering.task.update" | "engineering.task.assign"
   | "engineering.patch.read" | "engineering.patch.create" | "engineering.patch.approve"
   | "engineering.review.read" | "engineering.review.create" | "engineering.review.decide"
+  | "collaboration.comment.read" | "collaboration.comment.create" | "collaboration.comment.update"
+  | "collaboration.activity.read"
   | "deployment.read" | "deployment.create"
   | "agent.run" | "agent.read" | "agent.approve"
   | "org.manage" | "org.read" | "member.manage"
@@ -63,9 +65,11 @@ export type CanonicalPermission =
   | "commercial.requirement.read" | "commercial.requirement.create" | "commercial.requirement.update"
   | "commercial.proposal.read" | "commercial.proposal.create" | "commercial.proposal.update" | "commercial.proposal.accept"
   | "commercial.contract.read" | "commercial.contract.create" | "commercial.contract.sign" | "commercial.contract.activate"
-  | "engineering.task.read" | "engineering.task.create" | "engineering.task.update"
+  | "engineering.task.read" | "engineering.task.create" | "engineering.task.update" | "engineering.task.assign"
   | "engineering.patch.read" | "engineering.patch.create" | "engineering.patch.approve"
   | "engineering.review.read" | "engineering.review.create" | "engineering.review.decide"
+  | "collaboration.comment.read" | "collaboration.comment.create" | "collaboration.comment.update"
+  | "collaboration.activity.read"
   | "deployment.read" | "deployment.create"
   | "agent.run" | "agent.read" | "agent.approve";
 
@@ -86,8 +90,10 @@ const COMMERCIAL_ALL: CanonicalPermission[] = ["commercial.request.read", "comme
   "commercial.proposal.read", "commercial.proposal.create", "commercial.proposal.update", "commercial.proposal.accept",
   "commercial.contract.read", "commercial.contract.create", "commercial.contract.sign", "commercial.contract.activate"];
 const ENG_ALL: CanonicalPermission[] = ["engineering.task.read", "engineering.task.create", "engineering.task.update",
-  "engineering.patch.read", "engineering.patch.create", "engineering.patch.approve",
-  "engineering.review.read", "engineering.review.create", "engineering.review.decide"];
+  "engineering.task.assign", "engineering.patch.read", "engineering.patch.create", "engineering.patch.approve",
+  "engineering.review.read", "engineering.review.create", "engineering.review.decide",
+  "collaboration.comment.read", "collaboration.comment.create", "collaboration.comment.update",
+  "collaboration.activity.read"];
 
 const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
   owner: ["organization.read", "organization.update", "member.read", "member.update",
@@ -113,15 +119,19 @@ const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
     ...ENG_ALL, "deployment.read", "agent.run", "agent.read"],
   designer: ["organization.read", "member.read", "workspace.read", "project.read",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read",
-    "engineering.task.read", "engineering.task.update", "agent.read", "invitation.accept"],
+    "engineering.task.read", "engineering.task.update", "agent.read", "invitation.accept",
+    "collaboration.comment.read", "collaboration.comment.create", "collaboration.activity.read"],
   client: ["organization.read", "workspace.read", "project.read", "invitation.accept",
-    "commercial.request.read", "commercial.proposal.read", "commercial.contract.read"],
+    "commercial.request.read", "commercial.proposal.read", "commercial.contract.read",
+    "collaboration.comment.read", "collaboration.activity.read"],
   support: ["organization.read", "member.read", "workspace.read", "project.read",
     "commercial.request.read", "commercial.contract.read",
-    "engineering.task.read", "deployment.read", "agent.read"],
+    "engineering.task.read", "deployment.read", "agent.read",
+    "collaboration.comment.read", "collaboration.activity.read"],
   auditor: ["organization.read", "member.read", "workspace.read", "project.read",
     "audit.read", "commercial.request.read", "commercial.proposal.read", "commercial.contract.read",
-    "engineering.task.read", "deployment.read", "agent.read"]
+    "engineering.task.read", "deployment.read", "agent.read",
+    "collaboration.comment.read", "collaboration.activity.read"]
 };
 
 function canonicalize(p: Permission): CanonicalPermission[] {

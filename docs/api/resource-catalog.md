@@ -1,5 +1,6 @@
-# API Resource Catalog — Phase 4
-Date 2026-10-16. Resource = conceptual; no endpoints implemented. R-xxx IDs.
+# API Resource Catalog — Phase 4 (updated Phase 9: implemented collaboration)
+
+Date 2026-10-16, Phase 9 additions 2026-10-17.
 
 | ID | Resource | Domain | Entity | Scope | Ops (conceptual) | Workflows |
 |---|---|---|---|---|---|---|
@@ -25,5 +26,12 @@ Date 2026-10-16. Resource = conceptual; no endpoints implemented. R-xxx IDs.
 | R-20 | audit-events | D-08 | ENT-034 | org(+ws/proj) | read-only (append by system) | all |
 | R-21 | api-credentials/integrations | D-08 | ENT-041/042 | org | issue/revoke/configure | W-13 |
 | R-22 | workforce (profiles/skills) | D-04 | ENT-040 | org | assign/update-availability | W-02/W-06 |
+
+
+| R-23 | project-members (derived) | D-04 collab | grants+memberships | project | list (grants manage via existing endpoints) | W-06 |
+| R-24 | task-assignments | D-04 collab | engineering_task + ledger | project | assign/reassign/unassign (idempotent, version-pinned) | W-06 |
+| R-25 | comments | D-04 collab | comment | project+target | create/list/edit/tombstone, validated mentions | W-06 |
+| R-26 | activity-timeline | D-04 collab | activity_event (intent seam) | project | read keyset feed, filter by type | W-06 |
+| R-27 | delivery-summary | D-04 collab | engineering_task projection | project | read-only aggregation | W-06 |
 
 Invoice/billing excluded (weak evidence, UNRESOLVED). Each resource maps to entity + owning domain per checklist.

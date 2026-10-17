@@ -56,5 +56,14 @@ jobs:
       - name: Security tests (real PostgreSQL)
         run: node --test dist/tests/security.test.js
         working-directory: services/api
+      - name: Collaboration tests
+        run: node --test dist/tests/collaboration.test.js
+        working-directory: services/api
+      - name: Collaboration integration (real PostgreSQL)
+        run: node --test dist/tests/collaboration.integration.test.js
+        working-directory: services/api
+      - name: Collaboration security (real PostgreSQL)
+        run: node --test dist/tests/collaboration.security.test.js
+        working-directory: services/api
       - name: Secret scan
         run: python scripts/secret_scan.py --redact
