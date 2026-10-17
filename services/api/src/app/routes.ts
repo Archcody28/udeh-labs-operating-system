@@ -1,4 +1,5 @@
 import { IncomingMessage, ServerResponse } from "node:http";
+import { createHash } from "node:crypto";
 import { getPool } from "../persistence/db.js";
 import { OrganizationRepository, WorkspaceRepository } from "../persistence/tenancyRepositories.js";
 import { ProjectRepository } from "../persistence/projectRepository.js";
@@ -10,6 +11,7 @@ import { sendJson, readJsonBody, page } from "../api/http.js";
 import { ValidationError } from "../domain/errors.js";
 import { authService, authenticate, guardOrgRoute } from "../auth/guards.js";
 import { authHeaders, checkRateLimit, loginLimiter, rateLimitKey, sensitiveLimiter } from "../auth/guards.js";
+import { ipLoginLimiter } from "../domain/rateLimit.js";
 import { toPublicPrincipal, isAuthenticated } from "../domain/principal.js";
 import { UnauthorizedError } from "../domain/authorization.js";
 
@@ -59,9 +61,14 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
     return sendJson(res, 201, { data: out, correlationId: cid }, cid);
   }
   if (method === "POST" && url.pathname === "/api/v1/auth/login") {
-    checkRateLimit(loginLimiter, rateLimitKey(req, "login"));
+    // Coarse per-IP spray defense first (cheap shed), then a strict
+    // per-(ip, account) bucket after the body identifies the account.
+    // Account identifier is hashed — never stored or logged in the clear.
+    checkRateLimit(ipLoginLimiter, rateLimitKey(req, "login-ip"));
     const body = await readJsonBody(req);
     if (!body.email || !body.password) throw new UnauthorizedError("invalid email or password");
+    const account = createHash("sha256").update(String(body.email).trim().toLowerCase()).digest("hex").slice(0, 16);
+    checkRateLimit(loginLimiter, rateLimitKey(req, `login:${account}`));
     const out = await authService.login(String(body.email), String(body.password), cid, {
       userAgent: req.headers["user-agent"] as string | undefined,
       ip: req.socket.remoteAddress ?? undefined

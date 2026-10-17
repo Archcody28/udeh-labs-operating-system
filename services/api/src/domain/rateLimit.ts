@@ -26,6 +26,10 @@ export class RateLimiter {
   }
 }
 
-/** Classifications per api-security-contract; login-class is strictest. */
+/** Classifications per api-security-contract; login-class is strictest.
+ * Login is keyed per (ip, account-hash): strict per-account throttle without
+ * cross-account collisions (shared NAT, and deterministic test suites).
+ * ipLoginLimiter is the coarse per-IP spray defense. All in-process only. */
 export const loginLimiter = new RateLimiter(5, 60_000);
+export const ipLoginLimiter = new RateLimiter(30, 60_000);
 export const sensitiveLimiter = new RateLimiter(20, 60_000);
