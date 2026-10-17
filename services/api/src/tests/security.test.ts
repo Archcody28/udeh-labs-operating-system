@@ -51,7 +51,7 @@ async function api(path: string, call: { method?: string; body?: unknown; token?
   return { status: res.status, json };
 }
 
-const base = "http://127.0.0.1:0";
+let base = "http://127.0.0.1:0";
 
 async function register(email: string) {
   const { status, json } = await api("/api/v1/auth/register", {
@@ -125,6 +125,7 @@ before(async () => {
   await new Promise<void>((resolve) => {
     app.listen(0, "127.0.0.1", resolve);
   });
+  base = `http://127.0.0.1:${(app.address() as { port: number }).port}`;
 
   // Alice and Bob each own an organization; they can never see each other's data.
   const alice = await register(`alice${SUFFIX}@example.com`);
