@@ -53,7 +53,13 @@ export type Permission =
   | "org.manage" | "org.read" | "member.manage"
   | "commercial.approve" | "commercial.read"
   | "engineering.manage" | "engineering.read"
-  | "deployment.trigger" | "agent.invoke";
+  | "deployment.trigger" | "agent.invoke"
+  | "agent.create" | "agent.update" | "agent.cancel"
+  | "agent.plan.read" | "agent.plan.approve"
+  | "agent.result.read"
+  | "agent.tool.execute"
+  | "agent.policy.read" | "agent.policy.update"
+  | "orchestration.session.create" | "orchestration.session.manage";
 
 export type CanonicalPermission =
   | "organization.read" | "organization.update"
@@ -71,7 +77,13 @@ export type CanonicalPermission =
   | "collaboration.comment.read" | "collaboration.comment.create" | "collaboration.comment.update"
   | "collaboration.activity.read"
   | "deployment.read" | "deployment.create"
-  | "agent.run" | "agent.read" | "agent.approve";
+  | "agent.run" | "agent.read" | "agent.approve"
+  | "agent.create" | "agent.update" | "agent.cancel"
+  | "agent.plan.read" | "agent.plan.approve"
+  | "agent.result.read"
+  | "agent.tool.execute"
+  | "agent.policy.read" | "agent.policy.update"
+  | "orchestration.session.create" | "orchestration.session.manage";
 
 const LEGACY_ALIAS: Record<string, CanonicalPermission[]> = {
   "org.manage": ["organization.update"],
@@ -94,6 +106,10 @@ const ENG_ALL: CanonicalPermission[] = ["engineering.task.read", "engineering.ta
   "engineering.review.read", "engineering.review.create", "engineering.review.decide",
   "collaboration.comment.read", "collaboration.comment.create", "collaboration.comment.update",
   "collaboration.activity.read"];
+const AI_ALL: CanonicalPermission[] = ["agent.create", "agent.update", "agent.cancel",
+  "agent.plan.read", "agent.plan.approve", "agent.result.read", "agent.tool.execute",
+  "agent.policy.read", "agent.policy.update",
+  "orchestration.session.create", "orchestration.session.manage"];
 
 const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
   owner: ["organization.read", "organization.update", "member.read", "member.update",
@@ -101,22 +117,22 @@ const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
     "workspace.archive", "project.read", "project.create", "project.update",
     "project.archive", "audit.read", "invitation.create", "invitation.accept",
     ...COMMERCIAL_ALL, ...ENG_ALL,
-    "deployment.read", "deployment.create", "agent.run", "agent.read", "agent.approve"],
+    "deployment.read", "deployment.create", "agent.run", "agent.read", "agent.approve", ...AI_ALL],
   admin: ["organization.read", "member.read", "member.update", "member.remove",
     "workspace.read", "workspace.create", "workspace.update",
     "project.read", "project.create", "project.update",
     "audit.read", "invitation.create", "invitation.accept",
     ...COMMERCIAL_ALL, "engineering.task.read", "engineering.patch.read", "engineering.review.read",
-    "deployment.read", "agent.read", "agent.approve", "agent.run"],
+    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL],
   manager: ["organization.read", "member.read",
     "workspace.read", "workspace.create",
     "project.read", "project.create", "project.update", "invitation.accept",
     ...COMMERCIAL_ALL, ...ENG_ALL,
-    "deployment.read", "agent.run", "agent.read"],
+    "deployment.read", "agent.run", "agent.read", ...AI_ALL],
   developer: ["organization.read", "member.read",
     "workspace.read", "project.read", "invitation.accept",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read", "commercial.contract.read",
-    ...ENG_ALL, "deployment.read", "agent.run", "agent.read"],
+    ...ENG_ALL, "deployment.read", "agent.run", "agent.read", ...AI_ALL],
   designer: ["organization.read", "member.read", "workspace.read", "project.read",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read",
     "engineering.task.read", "engineering.task.update", "agent.read", "invitation.accept",
@@ -182,7 +198,7 @@ const STEP_UP_ACTIONS: ReadonlySet<string> = new Set([
   "organization.update", "org.manage",
   "member.update", "member.remove", "member.manage",
   "deployment.create", "deployment.trigger",
-  "agent.approve", "agent.run",
+  "agent.approve", "agent.run", "agent.cancel", "agent.plan.approve", "agent.policy.update",
   "project.archive", "workspace.archive",
   "credential.rotate", "commercial.approve", "commercial.proposal.accept",
   "commercial.contract.sign", "commercial.contract.activate",

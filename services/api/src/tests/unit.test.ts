@@ -1,6 +1,7 @@
 // Pure unit tests: no DB. Run: npm run build && node --test dist/tests/unit.test.js
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import "./ai.unit.test.js";
 import { assertTransition, validateName } from "../domain/lifecycle.js";
 import { toEnvelope, NotFoundError, ValidationError, AppError } from "../domain/errors.js";
 import { hashPassword, verifyPassword, newOpaqueToken, sha256Hex } from "../domain/credentials.js";

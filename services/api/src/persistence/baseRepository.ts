@@ -1,4 +1,4 @@
-import { PoolClient } from "pg";
+import { PoolClient, QueryResult } from "pg";
 import { getPool } from "./db.js";
 import { ConflictError, NotFoundError } from "../domain/errors.js";
 
@@ -6,7 +6,7 @@ import { ConflictError, NotFoundError } from "../domain/errors.js";
 export abstract class BaseRepository {
   protected abstract table: string;
 
-  protected async query(text: string, params: unknown[], tx?: PoolClient) {
+  protected async query(text: string, params: unknown[], tx?: PoolClient): Promise<QueryResult<any>> {
     const runner = tx ?? getPool();
     try {
       return await runner.query(text, params as unknown[]);
