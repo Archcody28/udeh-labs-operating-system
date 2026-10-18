@@ -12,14 +12,16 @@ Phase 10 established the AI platform foundation: agents, versions, policies, run
 
 ## 2. Decision — Execution Aggregate
 
-Two new tables form the execution aggregate; everything else reuses existing Phase 8/9/10 artifacts:
+Two new tables form the execution aggregate (plus a Phase 11 verification
+follow-up table); everything else reuses existing Phase 8/9/10 artifacts:
 
 | Table | Purpose |
 |---|---|
 | `engineering_runs` | Execution aggregate root: Org → Workspace → Project → Task → Agent → Policy → AI principal |
 | `engineering_iterations` | Bounded Plan→Implement→Validate→Review→Revise cycle; one row per iteration |
+| `engineering_plans` (migration 019) | Plans bound to `engineering_runs`. The Phase 10 `agent_plans.run_id` FK points at `agent_runs`, so engineering plans need their own table; the domain `run_id` alias is preserved for compatibility. |
 
-Reused: `engineering_tasks`, `agent_plans`, `code_patches` (extended with AI provenance), `reviews`, `agent_runs`, `activity_events`, `audit_events`, `domain_idempotency`, `tool_definitions`/`tool_invocations`.
+Reused: `engineering_tasks`, `code_patches` (extended with AI provenance), `reviews`, `agent_runs`, `activity_events`, `audit_events`, `domain_idempotency`, `tool_definitions`/`tool_invocations`.
 
 ### EngineeringRun lifecycle
 

@@ -110,9 +110,12 @@ export async function handleEngineeringExecutionRoutes(
       if (!orgId) throw new ForbiddenError("organization context required");
       const g = await guardOrgRoute(req, cid, orgId, "agent.run");
       if (!body.iterationId) throw new ValidationError("iterationId required");
+      const report = body.report && typeof body.report === "object" && !Array.isArray(body.report)
+        ? body.report as import("../domain/engineeringExecution.js").ValidationReport : undefined;
       const out = await engineeringExecutionService.validatePatch(g.ctx, runId,
-        String(body.iterationId), actorOf(g));
-      return sendJson(res, 200, { data: out, correlationId: cid }, cid), true;
+        String(body.iterationId), actorOf(g), report);
+      return sendJson(res, out.validationStatus === "validation_passed" ? 200 : 422,
+        { data: out, correlationId: cid }, cid), true;
     }
     if (method === "POST" && suffix === "/review") {
       const body = await readJsonBody(req);

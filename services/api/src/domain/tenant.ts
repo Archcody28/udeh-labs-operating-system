@@ -39,7 +39,9 @@ export function resolveTenantContext(
   return {
     organizationId: requestedOrganizationId,
     actorId: principal.subjectId,
-    principalType: principal.kind === "system" ? "system" : "human",
+    // Faithful principal typing: an agent principal stays "agent" so
+    // service-level self-approval guards cannot be bypassed via HTTP.
+    principalType: principal.kind,
     correlationId
   };
 }

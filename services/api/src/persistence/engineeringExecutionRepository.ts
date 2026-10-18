@@ -50,6 +50,30 @@ export class EngineeringExecutionRepository extends BaseRepository {
     if (t.rowCount === 0) throw new NotFoundError("engineering_tasks");
     const task = t.rows[0];
     if (task.project_id !== projectId) throw new ConflictError("task outside project");
+    // Tenant-scope every referenced agent artifact: a run may never bind an
+    // agent, agent version, or policy that belongs to another organization.
+    const agent = await this.query(
+      "SELECT organization_id, project_id FROM agents WHERE id=$1", [agentId], tx);
+    if (agent.rowCount === 0 || agent.rows[0].organization_id !== ctx.organizationId) {
+      throw new NotFoundError("agents");
+    }
+    if (agent.rows[0].project_id && agent.rows[0].project_id !== projectId) {
+      throw new ConflictError("agent outside project");
+    }
+    const version = await this.query(
+      "SELECT organization_id, agent_id FROM agent_versions WHERE id=$1", [agentVersionId], tx);
+    if (version.rowCount === 0 || version.rows[0].organization_id !== ctx.organizationId) {
+      throw new NotFoundError("agent_versions");
+    }
+    if (version.rows[0].agent_id !== agentId) throw new ConflictError("agent version does not belong to agent");
+    const policy = await this.query(
+      "SELECT organization_id, project_id FROM agent_policies WHERE id=$1", [policyId], tx);
+    if (policy.rowCount === 0 || policy.rows[0].organization_id !== ctx.organizationId) {
+      throw new NotFoundError("agent_policies");
+    }
+    if (policy.rows[0].project_id && policy.rows[0].project_id !== projectId) {
+      throw new ConflictError("policy outside project");
+    }
     const res = await this.query(
       `INSERT INTO engineering_runs(organization_id, project_id, engineering_task_id, agent_id,
         agent_version_id, policy_id, principal_id, correlation_id, status, max_iterations, budget, idempotency_key)
@@ -57,6 +81,14 @@ export class EngineeringExecutionRepository extends BaseRepository {
       [ctx.organizationId, projectId, taskId, agentId, agentVersionId, policyId, principalId,
         correlationId, maxIterations, JSON.stringify(budget), idempotencyKey ?? null], tx);
     return res.rows[0];
+  }
+
+  /** Tenant-scoped idempotency replay lookup (unique per organization). */
+  async findRunByKey(ctx: TenantContext, key: string, tx?: PoolClient): Promise<EngineeringRunRow | null> {
+    const res = await this.query(
+      "SELECT * FROM engineering_runs WHERE organization_id=$1 AND idempotency_key=$2",
+      [ctx.organizationId, key], tx);
+    return res.rowCount ? res.rows[0] : null;
   }
 
   async findRun(ctx: TenantContext, id: string, tx?: PoolClient): Promise<EngineeringRunRow> {
@@ -97,7 +129,9 @@ export class EngineeringExecutionRepository extends BaseRepository {
       waiting_approval: ["executing", "failed", "halted", "escalated"],
       executing: ["validation", "failed", "halted", "escalated"],
       validation: ["review", "failed", "halted", "escalated"],
-      review: ["completed", "failed", "halted", "escalated"],
+      // review → executing re-opens the loop when a human requests changes;
+      // review → completed marks the approved run ready for application.
+      review: ["completed", "executing", "failed", "halted", "escalated"],
       completed: [], failed: [], halted: [], escalated: []
     };
     if (!(ok[cur.status] ?? []).includes(to)) {
@@ -129,6 +163,16 @@ export class EngineeringExecutionRepository extends BaseRepository {
   async findIteration(ctx: TenantContext, id: string, tx?: PoolClient): Promise<EngineeringIterationRow> {
     const res = await this.query(
       "SELECT * FROM engineering_iterations WHERE id=$1 AND organization_id=$2", [id, ctx.organizationId], tx);
+    if (res.rowCount === 0) throw new NotFoundError("engineering_iterations");
+    return res.rows[0];
+  }
+
+  /** Iteration bound to a Phase 8 review within a given run (tenant-scoped). */
+  async findIterationByReview(ctx: TenantContext, reviewId: string, runId: string,
+    tx?: PoolClient): Promise<EngineeringIterationRow> {
+    const res = await this.query(
+      `SELECT * FROM engineering_iterations WHERE review_id=$1 AND engineering_run_id=$2 AND organization_id=$3`,
+      [reviewId, runId, ctx.organizationId], tx);
     if (res.rowCount === 0) throw new NotFoundError("engineering_iterations");
     return res.rows[0];
   }
@@ -182,6 +226,40 @@ export class EngineeringExecutionRepository extends BaseRepository {
   async setRunFailure(ctx: TenantContext, id: string, version: number, category: string,
     tx?: PoolClient) {
     return updateWithVersion("engineering_runs", id, version, { failure_category: category }, tx);
+  }
+
+  /** Autonomous-engineering plans bound to engineering_runs (NOT Phase 10 agent_runs). */
+  async createPlan(ctx: TenantContext, runId: string, hash: string,
+    body: Record<string, unknown>, tx?: PoolClient) {
+    const res = await this.query(
+      `INSERT INTO engineering_plans(organization_id, engineering_run_id, content_hash, body)
+       VALUES ($1,$2,$3,$4) RETURNING *,
+       engineering_run_id AS run_id`,
+      [ctx.organizationId, runId, hash, JSON.stringify(body)], tx);
+    const row = res.rows[0];
+    if (typeof row.body === "string") { try { row.body = JSON.parse(row.body); } catch { /* keep raw */ } }
+    return row;
+  }
+
+  async findPlan(ctx: TenantContext, id: string, tx?: PoolClient) {
+    const res = await this.query(
+      `SELECT *, engineering_run_id AS run_id FROM engineering_plans
+       WHERE id=$1 AND organization_id=$2`, [id, ctx.organizationId], tx);
+    if (res.rowCount === 0) throw new NotFoundError("engineering_plans");
+    const row = res.rows[0];
+    if (typeof row.body === "string") { try { row.body = JSON.parse(row.body); } catch { /* keep raw */ } }
+    return row;
+  }
+
+  async setPlanStatus(ctx: TenantContext, id: string, status: string, version: number,
+    tx?: PoolClient) {
+    await this.findPlan(ctx, id, tx);
+    const res = await this.query(
+      `UPDATE engineering_plans SET status=$3, version=version+1, updated_at=now()
+       WHERE id=$1 AND version=$2 RETURNING *, engineering_run_id AS run_id`,
+      [id, version, status], tx);
+    if (res.rowCount === 0) throw new ConflictError("engineering_plans: stale version");
+    return res.rows[0];
   }
 }
 

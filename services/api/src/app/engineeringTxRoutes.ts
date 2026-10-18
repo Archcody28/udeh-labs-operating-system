@@ -4,6 +4,7 @@ import { ValidationError } from "../domain/errors.js";
 import { guardOrgRoute } from "../auth/guards.js";
 import { assertProjectInHierarchy } from "../domain/tenant.js";
 import { tasks, patches, reviews, deployments, engineeringService, diffHash } from "../domain/engineeringService.js";
+import { engineeringExecutionService } from "../domain/engineeringExecution.js";
 import { AuditRepository } from "../persistence/auditRepository.js";
 import { getPool } from "../persistence/db.js";
 
@@ -58,10 +59,29 @@ export async function handleEngineeringTxRoutes(
     const [, orgId, id] = m;
     const g = await guardOrgRoute(req, cid, orgId, "engineering.review.decide");
     const body = await readJsonBody(req);
-    if (body.patchVersion === undefined || body.reviewVersion === undefined || !body.patchId || !body.projectId) {
-      throw new ValidationError("projectId, patchId, patchVersion, reviewVersion required");
+    if (body.reviewVersion === undefined || !body.projectId) {
+      throw new ValidationError("projectId, reviewVersion required");
     }
     await scopeProject(orgId, String(body.projectId));
+    const decision = body.decision === "changes_requested" ? "changes_requested" : "approved";
+    // Reviews bound to an autonomous-engineering iteration are decided
+    // through the execution service (Phase 8 review infrastructure reused;
+    // no duplicate review system). This also syncs iteration + run state.
+    const bound = await getPool().query(
+      "SELECT engineering_run_id FROM engineering_iterations WHERE review_id=$1 AND organization_id=$2",
+      [id, orgId]);
+    if (bound.rowCount && bound.rows[0].engineering_run_id) {
+      const out = await engineeringExecutionService.decideReview(g.ctx,
+        bound.rows[0].engineering_run_id, id, decision, String(body.note ?? ""),
+        Number(body.reviewVersion), g.principal.subjectId);
+      return sendJson(res, 200, { data: out, correlationId: cid }, cid), true;
+    }
+    if (decision !== "approved") {
+      throw new ValidationError("changes_requested is only supported for autonomous engineering reviews");
+    }
+    if (body.patchVersion === undefined || !body.patchId) {
+      throw new ValidationError("patchId, patchVersion required");
+    }
     const out = await engineeringService.approvePatch(g.ctx, String(body.projectId), String(body.patchId),
       id, Number(body.patchVersion), Number(body.reviewVersion), String(body.note ?? ""), g.principal.subjectId);
     return sendJson(res, 200, { data: out, correlationId: cid }, cid), true;
