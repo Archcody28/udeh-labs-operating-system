@@ -74,3 +74,4 @@ stakeholder review resolves them.
 | 0008  | Developer portal overlap | Proposed |
 | 0009  | Authentication/login/onboarding overlap | Proposed |
 | 0010  | Repeated dashboards/interfaces | Proposed |
+| 0018  | Autonomous Engineering Architecture | Accepted |

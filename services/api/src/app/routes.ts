@@ -123,6 +123,8 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
   if (await handleEngineeringRoutes(req, res, cid, url, method)) return;
   const { handleEngineeringTxRoutes } = await import("./engineeringTxRoutes.js");
   if (await handleEngineeringTxRoutes(req, res, cid, url, method)) return;
+  const { handleEngineeringExecutionRoutes } = await import("./engineeringExecutionRoutes.js");
+  if (await handleEngineeringExecutionRoutes(req, res, cid, url, method)) return;
   const { handleCollaborationRoutes, handleCollaborationTx } = await import("./collaborationRoutes.js");
   if (await handleCollaborationRoutes(req, res, cid, url, method)) return;
   if (await handleCollaborationTx(req, res, cid, url, method)) return;
