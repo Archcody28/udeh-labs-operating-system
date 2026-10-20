@@ -28,6 +28,9 @@ export const AgentResultStatus = ["produced", "verified", "rejected"] as const;
 export const AgentDelegationStatus = ["requested", "accepted", "completed"] as const;
 // UNRESOLVED / PROPOSED preserved as constants:
 export const AgentMemoryStatus = ["active", "governed", "purged"] as const; // UNRESOLVED
+export const BillingSubscriptionStatus = ["trialing", "active", "past_due", "canceled"] as const;
+export const BillingInvoiceStatus = ["draft", "open", "paid", "void", "refunded"] as const;
+export const BillingPaymentStatus = ["pending", "succeeded", "failed", "canceled"] as const;
 export const WorkflowStatus = ["defined", "active", "disabled"] as const;
 export const IncidentStatus = ["detected", "triaged", "investigating", "remediated", "resolved"] as const; // PROPOSED
 export const ReleaseStatus = ["staged", "gated", "released", "rejected"] as const; // PROPOSED
@@ -63,7 +66,19 @@ const TRANSITIONS: Record<string, Record<string, string[]>> = {
   },
   incident: { detected: ["triaged"], triaged: ["investigating"], investigating: ["remediated"], remediated: ["resolved"], resolved: [] },
   release: { staged: ["gated"], gated: ["released", "rejected"], released: [], rejected: [] },
-  verification_run: { queued: ["running"], running: ["passed", "failed"], passed: [], failed: [] }
+  verification_run: { queued: ["running"], running: ["passed", "failed"], passed: [], failed: [] },
+  billing_subscription: {
+    trialing: ["active", "canceled"], active: ["past_due", "canceled"],
+    past_due: ["active", "canceled"], canceled: []
+  },
+  billing_invoice: {
+    draft: ["open", "void"], open: ["paid", "void"],
+    paid: ["refunded"], void: [], refunded: []
+  },
+  billing_payment: {
+    pending: ["succeeded", "failed", "canceled"], failed: ["pending"],
+    succeeded: [], canceled: []
+  }
 };
 
 export function assertTransition(machine: string, from: string, to: string): void {

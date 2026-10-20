@@ -48,7 +48,7 @@ jobs:
         working-directory: services/api
       - name: Migrate
         run: npm run migrate --prefix services/api
-      - name: Verify migrations (20 applied incl 020_integrations)
+      - name: Verify migrations (21 applied incl 021_billing)
         run: node scripts/verify-migrations.mjs
         working-directory: services/api
       - name: Integration tests (real PostgreSQL)
@@ -82,6 +82,15 @@ jobs:
         working-directory: services/api
       - name: Engineering execution integration (real PostgreSQL)
         run: node --test dist/tests/engineeringExecution.integration.test.js
+        working-directory: services/api
+      - name: Billing unit tests (deterministic, no DB)
+        run: node --test dist/tests/billing.unit.test.js
+        working-directory: services/api
+      - name: Billing integration (real PostgreSQL)
+        run: node --test dist/tests/billing.integration.test.js
+        working-directory: services/api
+      - name: Billing security (real PostgreSQL)
+        run: node --test dist/tests/billing.security.test.js
         working-directory: services/api
       - name: GitHub live contract (optional; skipped unless GITHUB_TEST_TOKEN is set)
         run: node --test dist/tests/github.live.test.js

@@ -60,7 +60,10 @@ export type Permission =
   | "agent.tool.execute"
   | "agent.policy.read" | "agent.policy.update"
   | "integration.read" | "integration.connect" | "integration.disconnect" | "repository.link"
-  | "orchestration.session.create" | "orchestration.session.manage";
+  | "orchestration.session.create" | "orchestration.session.manage"
+  | "billing.subscription.read" | "billing.subscription.manage"
+  | "billing.invoice.read" | "billing.invoice.manage" | "billing.invoice.refund"
+  | "billing.payment.manage" | "billing.usage.record" | "billing.admin";
 
 export type CanonicalPermission =
   | "organization.read" | "organization.update"
@@ -85,7 +88,10 @@ export type CanonicalPermission =
   | "agent.tool.execute"
   | "agent.policy.read" | "agent.policy.update"
   | "integration.read" | "integration.connect" | "integration.disconnect" | "repository.link"
-  | "orchestration.session.create" | "orchestration.session.manage";
+  | "orchestration.session.create" | "orchestration.session.manage"
+  | "billing.subscription.read" | "billing.subscription.manage"
+  | "billing.invoice.read" | "billing.invoice.manage" | "billing.invoice.refund"
+  | "billing.payment.manage" | "billing.usage.record" | "billing.admin";
 
 const LEGACY_ALIAS: Record<string, CanonicalPermission[]> = {
   "org.manage": ["organization.update"],
@@ -115,24 +121,31 @@ const AI_ALL: CanonicalPermission[] = ["agent.create", "agent.update", "agent.ca
 
 const INT_ALL: CanonicalPermission[] = ["integration.read", "integration.connect", "integration.disconnect", "repository.link"];
 
+const BILLING_OWNER: CanonicalPermission[] = ["billing.subscription.read", "billing.subscription.manage",
+  "billing.invoice.read", "billing.invoice.manage", "billing.invoice.refund",
+  "billing.payment.manage", "billing.usage.record", "billing.admin"];
+const BILLING_MGR: CanonicalPermission[] = ["billing.subscription.read", "billing.subscription.manage",
+  "billing.invoice.read", "billing.invoice.manage", "billing.payment.manage", "billing.usage.record"];
+const BILLING_READ: CanonicalPermission[] = ["billing.subscription.read", "billing.invoice.read"];
+
 const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
   owner: ["organization.read", "organization.update", "member.read", "member.update",
     "member.remove", "workspace.read", "workspace.create", "workspace.update",
     "workspace.archive", "project.read", "project.create", "project.update",
     "project.archive", "audit.read", "invitation.create", "invitation.accept",
     ...COMMERCIAL_ALL, ...ENG_ALL, ...INT_ALL,
-    "deployment.read", "deployment.create", "agent.run", "agent.read", "agent.approve", ...AI_ALL],
+    "deployment.read", "deployment.create", "agent.run", "agent.read", "agent.approve", ...AI_ALL, ...BILLING_OWNER],
   admin: ["organization.read", "member.read", "member.update", "member.remove",
     "workspace.read", "workspace.create", "workspace.update",
     "project.read", "project.create", "project.update",
     "audit.read", "invitation.create", "invitation.accept",
     ...COMMERCIAL_ALL, "engineering.task.read", "engineering.patch.read", "engineering.review.read",
-    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL, ...INT_ALL],
+    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL, ...INT_ALL, ...BILLING_OWNER],
   manager: ["organization.read", "member.read",
     "workspace.read", "workspace.create",
     "project.read", "project.create", "project.update", "invitation.accept",
     ...COMMERCIAL_ALL, ...ENG_ALL,
-    "deployment.read", "agent.run", "agent.read", "integration.read", "repository.link", ...AI_ALL],
+    "deployment.read", "agent.run", "agent.read", "integration.read", "repository.link", ...AI_ALL, ...BILLING_MGR],
   developer: ["organization.read", "member.read",
     "workspace.read", "project.read", "invitation.accept",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read", "commercial.contract.read",
@@ -151,7 +164,7 @@ const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
   auditor: ["organization.read", "member.read", "workspace.read", "project.read",
     "audit.read", "commercial.request.read", "commercial.proposal.read", "commercial.contract.read",
     "engineering.task.read", "deployment.read", "agent.read",
-    "collaboration.comment.read", "collaboration.activity.read"]
+    "collaboration.comment.read", "collaboration.activity.read", ...BILLING_READ]
 };
 
 function canonicalize(p: Permission): CanonicalPermission[] {
@@ -206,6 +219,8 @@ const STEP_UP_ACTIONS: ReadonlySet<string> = new Set([
   "project.archive", "workspace.archive",
   "credential.rotate", "commercial.approve", "commercial.proposal.accept",
   "commercial.contract.sign", "commercial.contract.activate",
+  "billing.subscription.manage", "billing.invoice.manage", "billing.invoice.refund",
+  "billing.payment.manage",
 ]);
 
 export function requiresStepUp(action: string): boolean {
