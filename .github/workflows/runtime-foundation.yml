@@ -84,9 +84,6 @@ jobs:
         run: node --test dist/tests/engineeringExecution.integration.test.js
         working-directory: services/api
       - name: GitHub live contract (optional; skipped unless GITHUB_TEST_TOKEN is set)
-        if: ${{ secrets.GITHUB_TEST_TOKEN != '' }}
-        env:
-          GITHUB_TEST_TOKEN: ${{ secrets.GITHUB_TEST_TOKEN }}
         run: node --test dist/tests/github.live.test.js
         working-directory: services/api
       - name: Secret scan
