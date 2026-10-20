@@ -130,6 +130,10 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
   if (await handleCollaborationTx(req, res, cid, url, method)) return;
   const { handleAiRoutes } = await import("./aiRoutes.js");
   if (await handleAiRoutes(req, res, cid, url, method)) return;
+  const { handleIntegrationRoutes } = await import("./integrationRoutes.js");
+  if (await handleIntegrationRoutes(req, res, cid, url, method)) return;
+  const { handleWebhookRoutes } = await import("./webhookRoutes.js");
+  if (await handleWebhookRoutes(req, res, cid, url, method)) return;
   const { handleGuardedRoutes } = await import("./guardedRoutes.js");
   if (await handleGuardedRoutes(req, res, cid, url, method)) return;
   return sendJson(res, 404, { code: "NOT_FOUND", message: "not found", correlationId: cid, retryable: false }, cid);

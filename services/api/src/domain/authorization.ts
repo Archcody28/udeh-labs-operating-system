@@ -59,6 +59,7 @@ export type Permission =
   | "agent.result.read"
   | "agent.tool.execute"
   | "agent.policy.read" | "agent.policy.update"
+  | "integration.read" | "integration.connect" | "integration.disconnect" | "repository.link"
   | "orchestration.session.create" | "orchestration.session.manage";
 
 export type CanonicalPermission =
@@ -83,6 +84,7 @@ export type CanonicalPermission =
   | "agent.result.read"
   | "agent.tool.execute"
   | "agent.policy.read" | "agent.policy.update"
+  | "integration.read" | "integration.connect" | "integration.disconnect" | "repository.link"
   | "orchestration.session.create" | "orchestration.session.manage";
 
 const LEGACY_ALIAS: Record<string, CanonicalPermission[]> = {
@@ -111,24 +113,26 @@ const AI_ALL: CanonicalPermission[] = ["agent.create", "agent.update", "agent.ca
   "agent.policy.read", "agent.policy.update",
   "orchestration.session.create", "orchestration.session.manage"];
 
+const INT_ALL: CanonicalPermission[] = ["integration.read", "integration.connect", "integration.disconnect", "repository.link"];
+
 const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
   owner: ["organization.read", "organization.update", "member.read", "member.update",
     "member.remove", "workspace.read", "workspace.create", "workspace.update",
     "workspace.archive", "project.read", "project.create", "project.update",
     "project.archive", "audit.read", "invitation.create", "invitation.accept",
-    ...COMMERCIAL_ALL, ...ENG_ALL,
+    ...COMMERCIAL_ALL, ...ENG_ALL, ...INT_ALL,
     "deployment.read", "deployment.create", "agent.run", "agent.read", "agent.approve", ...AI_ALL],
   admin: ["organization.read", "member.read", "member.update", "member.remove",
     "workspace.read", "workspace.create", "workspace.update",
     "project.read", "project.create", "project.update",
     "audit.read", "invitation.create", "invitation.accept",
     ...COMMERCIAL_ALL, "engineering.task.read", "engineering.patch.read", "engineering.review.read",
-    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL],
+    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL, ...INT_ALL],
   manager: ["organization.read", "member.read",
     "workspace.read", "workspace.create",
     "project.read", "project.create", "project.update", "invitation.accept",
     ...COMMERCIAL_ALL, ...ENG_ALL,
-    "deployment.read", "agent.run", "agent.read", ...AI_ALL],
+    "deployment.read", "agent.run", "agent.read", "integration.read", "repository.link", ...AI_ALL],
   developer: ["organization.read", "member.read",
     "workspace.read", "project.read", "invitation.accept",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read", "commercial.contract.read",

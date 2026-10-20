@@ -65,5 +65,14 @@ jobs:
       - name: Collaboration security (real PostgreSQL)
         run: node --test dist/tests/collaboration.security.test.js
         working-directory: services/api
+      - name: Provider seam + GitHub adapter (deterministic, no live GitHub)
+        run: node --test dist/tests/provider.unit.test.js dist/tests/github.unit.test.js
+        working-directory: services/api
+      - name: Provider integration + security (real PostgreSQL)
+        run: node --test dist/tests/provider.integration.test.js
+        working-directory: services/api
+      - name: GitHub live contract (optional; skipped unless GITHUB_TEST_TOKEN is set)
+        run: node --test dist/tests/github.live.test.js
+        working-directory: services/api
       - name: Secret scan
         run: python scripts/secret_scan.py --redact
