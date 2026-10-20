@@ -12,6 +12,7 @@ import { validateDraftOutput, checkBudget } from "./aiPolicy.js";
 import { recordActivity } from "./collaborationService.js";
 import { NotFoundError, ConflictError, StateTransitionError, ValidationError } from "./errors.js";
 import { ForbiddenError } from "./authorization.js";
+import { publishDomainEvent } from "./domainEvents.js";
 
 const execRepo = engineeringExecutionRepository;
 const patches = new PatchRepository();
@@ -113,6 +114,19 @@ export class EngineeringExecutionService {
         await auditRepo.append({ ...ctx, projectId: run.project_id, actorId, principalType: ctx.principalType ?? "system" },
           "engineering.plan.failed", "engineering_run", runId, "failed",
           { reason: err instanceof Error ? err.message : String(err), category: this.categoryOf(err) }, tx);
+        // INV-EVT-01: the failed-run event commits with the failure state.
+        await publishDomainEvent(tx, {
+          organizationId: ctx.organizationId,
+          workspaceId: ctx.workspaceId ?? null,
+          projectId: run.project_id,
+          eventType: "agent.run.failed",
+          aggregateType: "engineering_run",
+          aggregateId: runId,
+          actorUserId: actorId,
+          principalType: ctx.principalType ?? "system",
+          payload: { runId, category: this.categoryOf(err) },
+          correlationId: ctx.correlationId,
+        });
         failure = err;
         return null;
       }
@@ -426,6 +440,19 @@ export class EngineeringExecutionService {
         { runId, decision, note: note.slice(0, 200), iteration: iteration.iteration_number }, tx);
       await recordActivity(ctx, run.project_id, "review.decided", "review",
         reviewId, { runId, decision, reviewerUserId: actorId }, tx);
+      // INV-EVT-01: the review decision event commits with the decision.
+      await publishDomainEvent(tx, {
+        organizationId: ctx.organizationId,
+        workspaceId: ctx.workspaceId ?? null,
+        projectId: run.project_id,
+        eventType: "review.decided",
+        aggregateType: "review",
+        aggregateId: reviewId,
+        actorUserId: actorId,
+        principalType: "human",
+        payload: { reviewId, decision },
+        correlationId: ctx.correlationId,
+      });
       const outIteration = await execRepo.findIteration(ctx, iteration.id, tx);
       const outRun = await execRepo.findRun(ctx, runId, tx);
       return { review: decisionRow, iteration: outIteration, run: outRun };
@@ -533,6 +560,21 @@ export class EngineeringExecutionService {
     await auditRepo.append({ ...ctx, projectId: run.project_id, actorId, principalType: ctx.principalType ?? "system" },
       to === "escalated" ? "engineering.escalated" : "engineering.execution.failed",
       "engineering_run", run.id, "failed", { category, reason: err instanceof Error ? err.message : String(err) }, tx);
+    // INV-EVT-01: a failed agent run notifies org members who can read runs.
+    if (to === "failed") {
+      await publishDomainEvent(tx, {
+        organizationId: ctx.organizationId,
+        workspaceId: ctx.workspaceId ?? null,
+        projectId: run.project_id,
+        eventType: "agent.run.failed",
+        aggregateType: "engineering_run",
+        aggregateId: run.id,
+        actorUserId: actorId,
+        principalType: ctx.principalType ?? "system",
+        payload: { runId: run.id, category },
+        correlationId: ctx.correlationId,
+      });
+    }
     if (to === "escalated") {
       await recordActivity(ctx, run.project_id, "ai.escalated", "engineering_run",
         run.id, { reason: category }, tx);

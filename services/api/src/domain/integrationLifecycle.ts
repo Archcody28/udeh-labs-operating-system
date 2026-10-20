@@ -9,6 +9,7 @@ import { secretVault } from "./integrationSecrets.js";
 import { withTransaction, getPool } from "../persistence/db.js";
 import { AuditRepository } from "../persistence/auditRepository.js";
 import { TERMINAL } from "./integrationService.js";
+import { publishDomainEvent } from "./domainEvents.js";
 
 const audits = new AuditRepository();
 
@@ -38,6 +39,19 @@ export const integrationLifecycle = {
     const moved = await withTransaction(async (tx) => {
       const m = await integrationRepository.transition(ctx, id, version, to, tx);
       await integrationRepository.revokeCredentials(id, tx);
+      // INV-EVT-01: the disconnect/revocation event commits atomically with
+      // the state transition, so no notification can be lost.
+      await publishDomainEvent(tx, {
+        organizationId: ctx.organizationId,
+        workspaceId: ctx.workspaceId ?? null,
+        eventType: to === "revoked" ? "integration.revoked" : "integration.disconnected",
+        aggregateType: "integration",
+        aggregateId: id,
+        actorUserId: ctx.actorId ?? null,
+        principalType: ctx.principalType ?? "human",
+        payload: { integrationId: id, kind: String(cur.kind) },
+        correlationId: ctx.correlationId,
+      });
       return m;
     });
     await secretVault().revoke(`integration:${id}:installation-token`);

@@ -6,6 +6,8 @@ import "./engineeringExecution.unit.test.js";
 import "./provider.unit.test.js";
 import "./github.unit.test.js";
 import "./billing.unit.test.js";
+import "./notification.unit.test.js";
+import "./observability.unit.test.js";
 import { assertTransition, validateName } from "../domain/lifecycle.js";
 import { toEnvelope, NotFoundError, ValidationError, AppError } from "../domain/errors.js";
 import { hashPassword, verifyPassword, newOpaqueToken, sha256Hex } from "../domain/credentials.js";

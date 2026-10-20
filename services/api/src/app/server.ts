@@ -4,11 +4,17 @@ import { migrateUp } from "../persistence/migrate.js";
 import { correlationIdOf, sendError } from "../api/http.js";
 import { loadConfig } from "../config.js";
 import { handleRoute } from "./routes.js";
+import { bootstrapNotificationProviders } from "../domain/notificationBootstrap.js";
+import { startDispatchWorker } from "../domain/notificationService.js";
+import { instrumentRequest } from "../observability/http.js";
+import { setupObservability } from "../observability/setup.js";
 
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const cid = correlationIdOf(req);
+  const boundHandler = (r: IncomingMessage, response: ServerResponse) =>
+    handleRoute(r, response, cid);
   try {
-    await handleRoute(req, res, cid);
+    await instrumentRequest(req, res, boundHandler);
   } catch (err) {
     sendError(res, err, cid);
   }
@@ -23,8 +29,25 @@ if (isMain) {
   const cfg = loadConfig();
   process.env.DATABASE_URL = cfg.databaseUrl;
   migrateUp(cfg.databaseUrl).then(
-    () => createApp().listen(cfg.port, () => console.log(`api listening :${cfg.port}`)),
+    () => {
+      setupObservability();
+      bootstrapNotificationProviders();
+      // The dispatcher may run in-process or in a separate worker deployment.
+      // NOTIFICATION_WORKER_ENABLED=false keeps the API read/write path only.
+      const worker = cfg.notificationWorker.enabled
+        ? startDispatchWorker({
+            intervalMs: cfg.notificationWorker.intervalMs,
+            batchSize: cfg.notificationWorker.batchSize,
+          })
+        : { stop: () => { /* worker not started in this process */ } };
+      const server = createApp().listen(cfg.port, () => console.log(`api listening :${cfg.port}`));
+      for (const s of ["SIGINT", "SIGTERM"]) {
+        process.on(s, () => {
+          worker.stop();
+          void closePool().then(() => server.close(() => process.exit(0)));
+        });
+      }
+    },
     (e: unknown) => { console.error("migrate failed", e); process.exit(1); }
   );
-  for (const s of ["SIGINT", "SIGTERM"]) process.on(s, () => { void closePool().then(() => process.exit(0)); });
 }

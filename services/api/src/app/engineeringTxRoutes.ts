@@ -6,7 +6,8 @@ import { assertProjectInHierarchy } from "../domain/tenant.js";
 import { tasks, patches, reviews, deployments, engineeringService, diffHash } from "../domain/engineeringService.js";
 import { engineeringExecutionService } from "../domain/engineeringExecution.js";
 import { AuditRepository } from "../persistence/auditRepository.js";
-import { getPool } from "../persistence/db.js";
+import { getPool, withTransaction } from "../persistence/db.js";
+import { publishDomainEvent } from "../domain/domainEvents.js";
 
 const audits = new AuditRepository();
 
@@ -93,7 +94,23 @@ export async function handleEngineeringTxRoutes(
     await scopeProject(orgId, projectId);
     const body = await readJsonBody(req);
     const key = body.idempotencyKey ? String(body.idempotencyKey) : undefined;
-    const row = await deployments.create(g.ctx, projectId, key);
+    // INV-EVT-01: the deployment row and its event commit together.
+    const row = await withTransaction(async (tx) => {
+      const created = await deployments.create(g.ctx, projectId, key, tx);
+      await publishDomainEvent(tx, {
+        organizationId: g.ctx.organizationId,
+        workspaceId: g.ctx.workspaceId ?? null,
+        projectId,
+        eventType: "deployment.triggered",
+        aggregateType: "deployment",
+        aggregateId: String(created.id),
+        actorUserId: g.principal.subjectId,
+        principalType: "human",
+        payload: { deploymentId: String(created.id) },
+        correlationId: g.ctx.correlationId,
+      });
+      return created;
+    });
     await audits.append({ ...g.ctx, projectId, actorId: g.principal.subjectId, principalType: "human" },
       "deployment.triggered", "deployment", row.id, "success", {});
     return sendJson(res, 201, { data: row, correlationId: cid }, cid), true;

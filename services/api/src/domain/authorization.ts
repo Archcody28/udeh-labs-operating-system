@@ -63,7 +63,8 @@ export type Permission =
   | "orchestration.session.create" | "orchestration.session.manage"
   | "billing.subscription.read" | "billing.subscription.manage"
   | "billing.invoice.read" | "billing.invoice.manage" | "billing.invoice.refund"
-  | "billing.payment.manage" | "billing.usage.record" | "billing.admin";
+  | "billing.payment.manage" | "billing.usage.record" | "billing.admin"
+  | "notification.read" | "notification.preferences.manage" | "notification.admin";
 
 export type CanonicalPermission =
   | "organization.read" | "organization.update"
@@ -91,7 +92,8 @@ export type CanonicalPermission =
   | "orchestration.session.create" | "orchestration.session.manage"
   | "billing.subscription.read" | "billing.subscription.manage"
   | "billing.invoice.read" | "billing.invoice.manage" | "billing.invoice.refund"
-  | "billing.payment.manage" | "billing.usage.record" | "billing.admin";
+  | "billing.payment.manage" | "billing.usage.record" | "billing.admin"
+  | "notification.read" | "notification.preferences.manage" | "notification.admin";
 
 const LEGACY_ALIAS: Record<string, CanonicalPermission[]> = {
   "org.manage": ["organization.update"],
@@ -128,43 +130,48 @@ const BILLING_MGR: CanonicalPermission[] = ["billing.subscription.read", "billin
   "billing.invoice.read", "billing.invoice.manage", "billing.payment.manage", "billing.usage.record"];
 const BILLING_READ: CanonicalPermission[] = ["billing.subscription.read", "billing.invoice.read"];
 
+// Every authenticated member reads their own notifications and manages their
+// own preferences; operational notification administration is owner/admin only.
+const NOTIFY_SELF: CanonicalPermission[] = ["notification.read", "notification.preferences.manage"];
+const NOTIFY_ADMIN: CanonicalPermission[] = ["notification.admin"];
+
 const ROLE_PERMISSIONS: Record<CanonicalRole, CanonicalPermission[]> = {
   owner: ["organization.read", "organization.update", "member.read", "member.update",
     "member.remove", "workspace.read", "workspace.create", "workspace.update",
     "workspace.archive", "project.read", "project.create", "project.update",
     "project.archive", "audit.read", "invitation.create", "invitation.accept",
-    ...COMMERCIAL_ALL, ...ENG_ALL, ...INT_ALL,
+    ...COMMERCIAL_ALL, ...ENG_ALL, ...INT_ALL, ...NOTIFY_SELF, ...NOTIFY_ADMIN,
     "deployment.read", "deployment.create", "agent.run", "agent.read", "agent.approve", ...AI_ALL, ...BILLING_OWNER],
   admin: ["organization.read", "member.read", "member.update", "member.remove",
     "workspace.read", "workspace.create", "workspace.update",
     "project.read", "project.create", "project.update",
     "audit.read", "invitation.create", "invitation.accept",
     ...COMMERCIAL_ALL, "engineering.task.read", "engineering.patch.read", "engineering.review.read",
-    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL, ...INT_ALL, ...BILLING_OWNER],
+    "deployment.read", "agent.read", "agent.approve", "agent.run", ...AI_ALL, ...INT_ALL, ...NOTIFY_SELF, ...NOTIFY_ADMIN, ...BILLING_OWNER],
   manager: ["organization.read", "member.read",
     "workspace.read", "workspace.create",
     "project.read", "project.create", "project.update", "invitation.accept",
-    ...COMMERCIAL_ALL, ...ENG_ALL,
+    ...COMMERCIAL_ALL, ...ENG_ALL, ...NOTIFY_SELF,
     "deployment.read", "agent.run", "agent.read", "integration.read", "repository.link", ...AI_ALL, ...BILLING_MGR],
   developer: ["organization.read", "member.read",
     "workspace.read", "project.read", "invitation.accept",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read", "commercial.contract.read",
-    ...ENG_ALL, "deployment.read", "agent.run", "agent.read", ...AI_ALL],
+    ...ENG_ALL, "deployment.read", "agent.run", "agent.read", ...AI_ALL, ...NOTIFY_SELF],
   designer: ["organization.read", "member.read", "workspace.read", "project.read",
     "commercial.request.read", "commercial.requirement.read", "commercial.proposal.read",
     "engineering.task.read", "engineering.task.update", "agent.read", "invitation.accept",
-    "collaboration.comment.read", "collaboration.comment.create", "collaboration.activity.read"],
+    "collaboration.comment.read", "collaboration.comment.create", "collaboration.activity.read", ...NOTIFY_SELF],
   client: ["organization.read", "workspace.read", "project.read", "invitation.accept",
     "commercial.request.read", "commercial.proposal.read", "commercial.contract.read",
-    "collaboration.comment.read", "collaboration.activity.read"],
+    "collaboration.comment.read", "collaboration.activity.read", ...NOTIFY_SELF],
   support: ["organization.read", "member.read", "workspace.read", "project.read",
     "commercial.request.read", "commercial.contract.read",
     "engineering.task.read", "deployment.read", "agent.read",
-    "collaboration.comment.read", "collaboration.activity.read"],
+    "collaboration.comment.read", "collaboration.activity.read", ...NOTIFY_SELF],
   auditor: ["organization.read", "member.read", "workspace.read", "project.read",
     "audit.read", "commercial.request.read", "commercial.proposal.read", "commercial.contract.read",
     "engineering.task.read", "deployment.read", "agent.read",
-    "collaboration.comment.read", "collaboration.activity.read", ...BILLING_READ]
+    "collaboration.comment.read", "collaboration.activity.read", ...NOTIFY_SELF, ...BILLING_READ]
 };
 
 function canonicalize(p: Permission): CanonicalPermission[] {
@@ -189,7 +196,23 @@ export function permissionsFor(role: string): Permission[] {
 export function canInOrg(principal: AuthPrincipal, organizationId: string, permission: Permission): boolean {
   const m = membershipIn(principal, organizationId);
   if (!m) return false;
-  const held = new Set<CanonicalPermission>(ROLE_PERMISSIONS[normalizeRole(m.role)] ?? []);
+  return canRoleInOrg(m.role, organizationId, permission);
+}
+
+/**
+ * Role → permission check without a principal (used by recipient resolution
+ * where only the stored membership role is available). Normalizes the role and
+ * applies the same canonical mapping as canInOrg.
+ */
+export function canRoleInOrg(role: string, organizationId: string, permission: Permission): boolean {
+  void organizationId; // role matrix is org-independent today; kept for ABAC future
+  let normalized: CanonicalRole;
+  try {
+    normalized = normalizeRole(role);
+  } catch {
+    return false;
+  }
+  const held = new Set<CanonicalPermission>(ROLE_PERMISSIONS[normalized] ?? []);
   return canonicalize(permission).some((c) => held.has(c));
 }
 
@@ -221,6 +244,7 @@ const STEP_UP_ACTIONS: ReadonlySet<string> = new Set([
   "commercial.contract.sign", "commercial.contract.activate",
   "billing.subscription.manage", "billing.invoice.manage", "billing.invoice.refund",
   "billing.payment.manage",
+  "notification.admin",
 ]);
 
 export function requiresStepUp(action: string): boolean {

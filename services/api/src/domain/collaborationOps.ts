@@ -4,6 +4,7 @@ import { withTransaction } from "../persistence/db.js";
 import { invalidMentions, resolveTarget, validateBody } from "../persistence/collaborationRepository.js";
 import { CommentTarget, audits, collabRepos, idem, recordActivity, scopeCollabProject, updateWithVersion } from "./collaborationService.js";
 import { ConflictError, NotFoundError } from "./errors.js";
+import { publishDomainEvent } from "./domainEvents.js";
 
 /** Phase 9 collaboration operations: assignments + comments, transactional. */
 export class CollaborationOps {
@@ -34,6 +35,22 @@ export class CollaborationOps {
         "engineering_task", taskId, { assignee }, tx);
       await audits.append({ ...ctx, projectId, actorId, principalType: "human" },
         action === "unassigned" ? "task.unassigned" : "task.assigned", "engineering_task", taskId, "success", { assignee }, tx);
+      // INV-EVT-01: the domain event and its outbox row commit in the SAME
+      // transaction as the assignment mutation.
+      if (assignee) {
+        await publishDomainEvent(tx, {
+          organizationId: ctx.organizationId,
+          workspaceId: ctx.workspaceId ?? null,
+          projectId,
+          eventType: action === "unassigned" ? "task.unassigned" : "task.assigned",
+          aggregateType: "engineering_task",
+          aggregateId: taskId,
+          actorUserId: actorId,
+          principalType: "human",
+          payload: { taskId, assigneeUserId: assignee, action },
+          correlationId: ctx.correlationId,
+        });
+      }
       const out = upd.rows[0];
       if (key) await idem.save(ctx, "collab:assign", key, out, tx);
       return out;
@@ -63,6 +80,28 @@ export class CollaborationOps {
       if (mentions.length) await recordActivity(ctx, projectId, "comment.mentioned", "comment", row.id, { mentioned: [...new Set(mentions)] }, tx);
       await audits.append({ ...ctx, projectId, actorId, principalType: "human" },
         "comment.added", "comment", row.id, "success", { target, targetId }, tx);
+      // INV-EVT-01: mentioned users are notified from a durable, immutable
+      // event committed in the same transaction as the comment.
+      if (mentions.length) {
+        await publishDomainEvent(tx, {
+          organizationId: ctx.organizationId,
+          workspaceId: ctx.workspaceId ?? null,
+          projectId,
+          eventType: "comment.mentioned",
+          aggregateType: "comment",
+          aggregateId: String(row.id),
+          actorUserId: actorId,
+          principalType: "human",
+          payload: {
+            commentId: String(row.id),
+            targetType: target,
+            targetId,
+            mentionedUserIds: [...new Set(mentions)],
+            excerpt: clean.slice(0, 200),
+          },
+          correlationId: ctx.correlationId,
+        });
+      }
       if (key) await idem.save(ctx, "collab:comment", key, row, tx);
       return row;
     });

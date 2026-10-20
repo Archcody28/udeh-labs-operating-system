@@ -18,6 +18,7 @@ import {
 } from "./billing.js";
 import { getBillingProvider } from "./billingProvider.js";
 import { sanitizeForAudit } from "./integrationSecrets.js";
+import { publishDomainEvent } from "./domainEvents.js";
 
 const plans = new BillingPlanRepository();
 const customers = new BillingCustomerRepository();
@@ -166,6 +167,23 @@ export const billingInvoiceService = {
       const payload = { invoiceId: invoice.id, invoiceNumber, totalMinor: totals.total };
       await idem.save(ctx, "billing.invoice-create", idemKey, payload, tx);
       await audits.append({ ...ctx, actorId, principalType: "human" }, "billing.invoice-created", "invoice", String(invoice.id), "success", sanitizeForAudit(payload) as Record<string, unknown>, tx);
+      // INV-EVT-01: the invoice-created event commits with the invoice.
+      await publishDomainEvent(tx, {
+        organizationId: ctx.organizationId,
+        workspaceId: ctx.workspaceId ?? null,
+        eventType: "billing.invoice.created",
+        aggregateType: "billing_invoice",
+        aggregateId: String(invoice.id),
+        actorUserId: actorId,
+        principalType: "human",
+        payload: {
+          invoiceId: String(invoice.id),
+          invoiceNumber,
+          totalMinor: totals.total,
+          currency: String(invoice.currency),
+        },
+        correlationId: ctx.correlationId,
+      });
       return { replayed: false as const, invoice };
     });
   },
@@ -216,11 +234,38 @@ export const billingPaymentService = {
           await updateWithVersion("billing_invoices", invoiceId, Number(inv.version), { status: "paid" }, tx);
         }
         await audits.append({ ...ctx, actorId, principalType: "human" }, "billing.payment-succeeded", "payment", String(created.payment.id), "success", { invoiceId }, tx);
+        // INV-EVT-01: payment outcome events commit with the payment state.
+        await publishDomainEvent(tx, {
+          organizationId: ctx.organizationId,
+          workspaceId: ctx.workspaceId ?? null,
+          eventType: "billing.payment.succeeded",
+          aggregateType: "billing_payment",
+          aggregateId: String(created.payment.id),
+          actorUserId: actorId,
+          principalType: "human",
+          payload: { paymentId: String(created.payment.id), invoiceId },
+          correlationId: ctx.correlationId,
+        });
         return { replayed: false as const, payment: { id: pay.id, status: pay.status } };
       }
       assertPaymentTransition("pending", "failed");
       const pay = await updateWithVersion("billing_payments", String(created.payment.id), Number(current.version) + 1, { status: "failed", failure_code: result.failureCode }, tx);
       await audits.append({ ...ctx, actorId, principalType: "human" }, "billing.payment-failed", "payment", String(created.payment.id), "success", { invoiceId, failureCode: result.failureCode }, tx);
+      await publishDomainEvent(tx, {
+        organizationId: ctx.organizationId,
+        workspaceId: ctx.workspaceId ?? null,
+        eventType: "billing.payment.failed",
+        aggregateType: "billing_payment",
+        aggregateId: String(created.payment.id),
+        actorUserId: actorId,
+        principalType: "human",
+        payload: {
+          paymentId: String(created.payment.id),
+          invoiceId,
+          failureCode: String(result.failureCode ?? "unknown"),
+        },
+        correlationId: ctx.correlationId,
+      });
       return { replayed: false as const, payment: { id: pay.id, status: pay.status } };
     });
   },

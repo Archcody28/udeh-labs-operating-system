@@ -1,6 +1,5 @@
 import { IncomingMessage, ServerResponse } from "node:http";
 import { createHash } from "node:crypto";
-import { getPool } from "../persistence/db.js";
 import { OrganizationRepository, WorkspaceRepository } from "../persistence/tenancyRepositories.js";
 import { ProjectRepository } from "../persistence/projectRepository.js";
 import { AuditRepository } from "../persistence/auditRepository.js";
@@ -9,6 +8,8 @@ import { InvitationRepository } from "../persistence/invitationRepository.js";
 import { SessionRepository } from "../persistence/sessionRepository.js";
 import { sendJson, readJsonBody, page } from "../api/http.js";
 import { ValidationError } from "../domain/errors.js";
+import { liveness } from "../observability/health.js";
+import { checkReadiness } from "../observability/readiness.js";
 import { authService, authenticate, guardOrgRoute } from "../auth/guards.js";
 import { authHeaders, checkRateLimit, loginLimiter, rateLimitKey, sensitiveLimiter } from "../auth/guards.js";
 import { ipLoginLimiter } from "../domain/rateLimit.js";
@@ -46,11 +47,13 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
   const secure = secureCookies();
 
   if (method === "GET" && url.pathname === "/health") {
-    return sendJson(res, 200, { status: "ok", correlationId: cid }, cid);
+    const result = liveness();
+    return sendJson(res, 200, { status: result.status, correlationId: cid }, cid);
   }
   if (method === "GET" && url.pathname === "/ready") {
-    await getPool().query("SELECT 1");
-    return sendJson(res, 200, { status: "ready", correlationId: cid }, cid);
+    const result = await checkReadiness();
+    const status = result.allUp ? 200 : 503;
+    return sendJson(res, status, { status: result.status, correlationId: cid }, cid);
   }
   if (method === "POST" && url.pathname === "/api/v1/auth/register") {
     checkRateLimit(sensitiveLimiter, rateLimitKey(req, "register"));
@@ -142,5 +145,7 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
   if (await handleBillingWebhookRoutes(req, res, cid, url, method)) return;
   const { handleGuardedRoutes } = await import("./guardedRoutes.js");
   if (await handleGuardedRoutes(req, res, cid, url, method)) return;
+  const { handleNotificationRoutes } = await import("./notificationRoutes.js");
+  if (await handleNotificationRoutes(req, res, cid, url, method)) return;
   return sendJson(res, 404, { code: "NOT_FOUND", message: "not found", correlationId: cid, retryable: false }, cid);
 }
