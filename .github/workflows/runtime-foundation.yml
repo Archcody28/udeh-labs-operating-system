@@ -48,6 +48,9 @@ jobs:
         working-directory: services/api
       - name: Migrate
         run: npm run migrate --prefix services/api
+      - name: Verify migrations (20 applied incl 020_integrations)
+        run: node scripts/verify-migrations.mjs
+        working-directory: services/api
       - name: Integration tests (real PostgreSQL)
         run: npm run test:integration --prefix services/api
       - name: Domain integration (real PostgreSQL)
@@ -65,13 +68,25 @@ jobs:
       - name: Collaboration security (real PostgreSQL)
         run: node --test dist/tests/collaboration.security.test.js
         working-directory: services/api
+      - name: AI tests (deterministic, no live provider)
+        run: node --test dist/tests/ai.unit.test.js
+        working-directory: services/api
+      - name: Engineering execution unit tests
+        run: node --test dist/tests/engineeringExecution.unit.test.js
+        working-directory: services/api
       - name: Provider seam + GitHub adapter (deterministic, no live GitHub)
         run: node --test dist/tests/provider.unit.test.js dist/tests/github.unit.test.js
         working-directory: services/api
       - name: Provider integration + security (real PostgreSQL)
         run: node --test dist/tests/provider.integration.test.js
         working-directory: services/api
+      - name: Engineering execution integration (real PostgreSQL)
+        run: node --test dist/tests/engineeringExecution.integration.test.js
+        working-directory: services/api
       - name: GitHub live contract (optional; skipped unless GITHUB_TEST_TOKEN is set)
+        if: ${{ secrets.GITHUB_TEST_TOKEN != '' }}
+        env:
+          GITHUB_TEST_TOKEN: ${{ secrets.GITHUB_TEST_TOKEN }}
         run: node --test dist/tests/github.live.test.js
         working-directory: services/api
       - name: Secret scan
