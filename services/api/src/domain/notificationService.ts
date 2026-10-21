@@ -39,6 +39,7 @@ import {
   isRetryableFailure,
 } from "./notificationProvider.js";
 import { DEFAULT_RETRY_POLICY, backoffDelayMs, shouldRetry } from "./notificationRetry.js";
+import { withTimeout, TimeoutError } from "./timeout.js";
 import { AuditRepository } from "../persistence/auditRepository.js";
 import { log } from "../observability/logger.js";
 import { metrics } from "../observability/metrics.js";
@@ -53,6 +54,11 @@ export interface DispatchOptions {
   workerId?: string;
   batchSize?: number;
   leaseMs?: number;
+  /**
+   * Deadline for a single provider call. A provider that never answers must
+   * not hold the worker slot (and the delivery lease) forever.
+   */
+  providerTimeoutMs?: number;
 }
 
 export interface DispatchResult {
@@ -179,8 +185,11 @@ function templateContext(event: Record<string, unknown>): Record<string, unknown
  * The provider call happens OUTSIDE any transaction. Retryable failures back
  * off deterministically; terminal failures and exhausted attempts dead-letter.
  */
-async function deliverOne(row: Awaited<ReturnType<typeof claimDueDeliveries>>[number], workerId: string):
-  Promise<"delivered" | "retried" | "dead_letter" | "lost"> {
+async function deliverOne(
+  row: Awaited<ReturnType<typeof claimDueDeliveries>>[number],
+  workerId: string,
+  providerTimeoutMs: number
+): Promise<"delivered" | "retried" | "dead_letter" | "lost"> {
   const nrow = await notifications.get(row.notification_id);
   if (!nrow) {
     await deadLetterDelivery(row.id, "notification_missing", "parent notification not found", workerId);
@@ -269,7 +278,15 @@ async function deliverOne(row: Awaited<ReturnType<typeof claimDueDeliveries>>[nu
   };
 
   try {
-    const result = await provider.send(req); // outside any DB transaction
+    // The provider call is bounded: a hung provider must not pin the worker
+    // slot (and the delivery lease) indefinitely. The delivery id is the
+    // provider idempotency key, so a timed-out call that lands later is
+    // deduplicated by the provider rather than double-delivered.
+    const result = await withTimeout(
+      () => provider!.send(req),
+      providerTimeoutMs,
+      `notification_provider:${provider!.name}`
+    ); // outside any DB transaction
     const durationSec = (Date.now() - deliveryStartedAt) / 1000;
     const channel = normalizeChannel(row.channel);
     await recordProviderOperation({
@@ -302,8 +319,26 @@ async function deliverOne(row: Awaited<ReturnType<typeof claimDueDeliveries>>[nu
     return ok ? "delivered" : "lost";
   } catch (err) {
     const e = err as NotifyProviderError;
-    const retryable = e instanceof NotifyProviderError ? isRetryableFailure(e.failure) : false;
-    const code = e.failure ?? "provider_error";
+    // A deadline overrun is a transient transport condition, not a terminal
+    // rejection: it is classified as `timeout` (a retryable failure) so the
+    // delivery is retried with backoff instead of being dead-lettered.
+    const timedOut = err instanceof TimeoutError;
+    const retryable = timedOut
+      ? true
+      : e instanceof NotifyProviderError
+        ? isRetryableFailure(e.failure)
+        : false;
+    const code = timedOut ? "timeout" : e.failure ?? "provider_error";
+    if (timedOut) {
+      try {
+        metrics.increment(
+          "udehlabs_notification_provider_timeouts_total",
+          { channel: normalizeChannel(row.channel) }
+        );
+      } catch {
+        // FAIL OPEN
+      }
+    }
     await recordProviderOperation({
       deliveryId: row.id, organizationId: row.organization_id, provider: provider.name,
       channel: row.channel, attempt: row.attempt_count, idempotencyKey: row.id,
@@ -354,13 +389,20 @@ async function deliverOne(row: Awaited<ReturnType<typeof claimDueDeliveries>>[nu
 export async function dispatchOnce(opts: DispatchOptions = {}): Promise<DispatchResult> {
   const workerId = opts.workerId ?? newWorkerId();
   const batchSize = Math.min(Math.max(opts.batchSize ?? 25, 1), 100);
-  const leaseMs = opts.leaseMs ?? 30_000;
+  const leaseMs = Math.max(opts.leaseMs ?? 60_000, 1_000);
+  // The provider deadline must fit INSIDE the lease. If a provider call
+  // outlives the lease, the row is reclaimed by another worker while the
+  // first call is still in flight, and the notification is delivered twice.
+  // The lease is therefore stretched to at least twice the provider deadline.
+  const providerTimeoutMs = Math.max(opts.providerTimeoutMs ?? 10_000, 100);
+  const effectiveLeaseMs = Math.max(leaseMs, providerTimeoutMs * 2);
+  const effectiveProviderTimeoutMs = Math.min(providerTimeoutMs, effectiveLeaseMs - 1);
   const result: DispatchResult = { workerId, routed: 0, delivered: 0, retried: 0, deadLettered: 0, skipped: 0 };
 
   let tickFailed = false;
   let tickError: unknown;
   try {
-    const outbox = await claimDueOutbox(batchSize, workerId, leaseMs);
+    const outbox = await claimDueOutbox(batchSize, workerId, effectiveLeaseMs);
     for (const row of outbox) {
       try {
         const r = await routeOne(row, workerId);
@@ -374,10 +416,10 @@ export async function dispatchOnce(opts: DispatchOptions = {}): Promise<Dispatch
       }
     }
 
-    const dels = await claimDueDeliveries(batchSize, workerId, leaseMs);
+    const dels = await claimDueDeliveries(batchSize, workerId, effectiveLeaseMs);
     for (const row of dels) {
       try {
-        const r = await deliverOne(row, workerId);
+        const r = await deliverOne(row, workerId, effectiveProviderTimeoutMs);
         if (r === "delivered") result.delivered += 1;
         else if (r === "retried") result.retried += 1;
         else if (r === "dead_letter") result.deadLettered += 1;
@@ -416,27 +458,135 @@ export async function dispatchOnce(opts: DispatchOptions = {}): Promise<Dispatch
 export { newWorkerId };
 
 /**
+ * Startup recovery: reset outbox and delivery rows that are stuck in
+ * `processing` with an expired claim so they are reclaimed on the next tick.
+ *
+ * Deterministic rules:
+ * - A row in `processing` whose `claim_expires_at` is in the past represents
+ *   work interrupted by a crash or shutdown. It is safe to retry: claim
+ *   ownership is single-writer, completions are guarded by `claimed_by`, and
+ *   notification creation/delivery are idempotent (unique per notification +
+ *   channel, provider idempotency key = delivery id).
+ * - Rows with a live claim are left alone: another worker may legitimately be
+ *   mid-flight. Never blindly reset every `processing` row.
+ * - The reset status is `retryable_failure` with `next_attempt_at = now()` so
+ *   the row becomes immediately eligible for reclaim without being marked
+ *   complete (durable state stays recoverable, never falsely successful).
+ */
+export async function recoverStaleClaims(): Promise<{
+  outboxRecovered: number; deliveriesRecovered: number;
+}> {
+  const outboxRes = await getPool().query(
+    `UPDATE outbox_events o
+       SET status='retryable_failure', claimed_by=NULL, claim_expires_at=NULL,
+           next_attempt_at=now(), last_error_code='stale_claim',
+           last_error_message='interrupted claim recovered at startup',
+           version=version+1, updated_at=now()
+     WHERE o.status='processing'
+       AND o.claim_expires_at IS NOT NULL
+       AND o.claim_expires_at <= now()`
+  );
+  const deliveryRes = await getPool().query(
+    `UPDATE notification_deliveries d
+       SET status='retryable_failure', claimed_by=NULL, claim_expires_at=NULL,
+           next_attempt_at=now(), last_error_code='stale_claim',
+           last_error_message='interrupted claim recovered at startup',
+           version=version+1, updated_at=now()
+     WHERE d.status='processing'
+       AND d.claim_expires_at IS NOT NULL
+       AND d.claim_expires_at <= now()`
+  );
+
+  const result = {
+    outboxRecovered: outboxRes.rowCount ?? 0,
+    deliveriesRecovered: deliveryRes.rowCount ?? 0,
+  };
+  try {
+    log.info("notification.startup_recovery", "stale claims recovered at startup", result);
+    // The metric label vocabulary is closed: `recovery` is a declared
+    // outcome, so the counter is actually recorded rather than folded to
+    // "unknown".
+    metrics.increment("udehlabs_notification_worker_ticks_total", { result: "recovery" });
+    if (result.outboxRecovered > 0) {
+      metrics.increment("udehlabs_notification_recovered_claims_total", { kind: "outbox" });
+    }
+    if (result.deliveriesRecovered > 0) {
+      metrics.increment("udehlabs_notification_recovered_claims_total", { kind: "delivery" });
+    }
+  } catch {
+    // FAIL OPEN: telemetry must not block recovery.
+  }
+  return result;
+}
+
+/**
  * Long-running dispatcher loop. Each tick claims a bounded batch; a failing
  * tick never kills the loop (errors are logged and the next tick retries).
  * Multiple processes may run this concurrently — claiming is atomic.
  */
 export function startDispatchWorker(opts: DispatchOptions & { intervalMs?: number } = {}): {
-  stop: () => void;
+  stop: () => Promise<void>;
 } {
   const intervalMs = Math.max(opts.intervalMs ?? 1_000, 50);
   const workerId = opts.workerId ?? newWorkerId();
   let stopped = false;
-  const timer = setInterval(() => {
+  let currentTick: Promise<unknown> | null = null;
+  let timer: NodeJS.Timeout | undefined;
+
+  // Consecutive tick failures escalate the wait between attempts so a
+  // database outage does not produce a hot retry loop that starves the API
+  // of pool connections. The delay resets as soon as a tick succeeds.
+  // This counter MUST live outside `tick`: a counter scoped to the tick
+  // would always be 1 and the backoff would never escalate.
+  let consecutiveFailures = 0;
+  const maxBackoffMs = Math.max(intervalMs * 30, 30_000);
+
+  const schedule = (delayMs: number): void => {
     if (stopped) return;
-    void dispatchOnce({ ...opts, workerId }).catch((err: unknown) => {
+    timer = setTimeout(() => { void tick(); }, delayMs);
+    if (typeof timer.unref === "function") timer.unref();
+  };
+
+  const tick = async (): Promise<void> => {
+    if (stopped) return;
+    const run = dispatchOnce({ ...opts, workerId });
+    currentTick = run;
+    try {
+      await run;
+      consecutiveFailures = 0;
+    } catch (err) {
       // Never crash the process on a transient DB/provider error.
-      console.error("notification dispatch tick failed", { workerId, error: String(err) });
-    });
-  }, intervalMs);
-  // Do not hold the event loop open on shutdown.
-  if (typeof timer.unref === "function") timer.unref();
+      consecutiveFailures += 1;
+      try {
+        log.error("notification.worker_tick_failed", "dispatch tick failed", {
+          workerId,
+          error_code: (err as { code?: string } | null)?.code ?? "unknown",
+          consecutive_failures: consecutiveFailures
+        });
+      } catch {
+        // FAIL OPEN: telemetry must never kill the worker loop.
+      }
+    }
+    const backoff = Math.min(intervalMs * 2 ** consecutiveFailures, maxBackoffMs);
+    schedule(consecutiveFailures > 0 ? backoff : intervalMs);
+  };
+
+  schedule(intervalMs);
   return {
-    stop: () => { stopped = true; clearInterval(timer); },
+    stop: async () => {
+      stopped = true;
+      if (timer) clearTimeout(timer);
+      // Let the in-flight tick finish so no claim is abandoned mid-processing.
+      // Claims are lease-bounded, so even a crash mid-tick is recoverable.
+      if (currentTick) {
+        try {
+          await currentTick;
+        } catch {
+          // The tick already logged its own failure. Shutdown must not fail
+          // because the last tick failed: the lease makes the work recoverable.
+        }
+      }
+    },
   };
 }
 

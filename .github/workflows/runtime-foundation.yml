@@ -101,6 +101,12 @@ jobs:
       - name: Notification security (real PostgreSQL)
         run: node --test dist/tests/notification.security.test.js
         working-directory: services/api
+      - name: Reliability unit tests (deterministic, no DB)
+        run: node --test dist/tests/reliability.unit.test.js
+        working-directory: services/api
+      - name: Reliability integration + recovery (real PostgreSQL)
+        run: node --test dist/tests/reliability.integration.test.js
+        working-directory: services/api
       - name: GitHub live contract (optional; skipped unless GITHUB_TEST_TOKEN is set)
         run: node --test dist/tests/github.live.test.js
         working-directory: services/api

@@ -16,9 +16,21 @@ export async function handleWebhookRoutes(req: IncomingMessage, res: ServerRespo
   const integrationId = m[1];
   const raw = await new Promise<string>((resolve, reject) => {
     let s = "";
-    req.on("data", (c) => { s += c; if (s.length > 1_000_000) reject(new Error("body too large")); });
-    req.on("end", () => resolve(s));
-    req.on("error", reject);
+    // Stop accumulating once the limit is exceeded: an inert reader keeps a
+    // hostile client from streaming unbounded data into memory even though
+    // the promise has already been rejected.
+    let done = false;
+    req.on("data", (c) => {
+      if (done) return;
+      s += c;
+      if (s.length > 1_000_000) {
+        done = true;
+        s = "";
+        reject(new Error("body too large"));
+      }
+    });
+    req.on("end", () => { if (!done) { done = true; resolve(s); } });
+    req.on("error", (e) => { if (!done) { done = true; reject(e); } });
   });
   const pool = getPool();
   const integ = (await pool.query("SELECT * FROM integrations WHERE id=$1", [integrationId])).rows[0] as { id: string; kind: string; status: string; organization_id: string } | undefined;

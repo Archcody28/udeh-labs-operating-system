@@ -248,7 +248,31 @@ export const DEFAULT_METRICS: MetricDescriptor[] = [
     name: `${METRIC_PREFIX}notification_worker_ticks_total`,
     type: "counter",
     help: "Notification dispatcher ticks, by outcome.",
-    labelValues: { result: ["ok", "error"] },
+    labelValues: { result: ["ok", "error", "recovery"] },
+  },
+  {
+    name: `${METRIC_PREFIX}notification_provider_timeouts_total`,
+    type: "counter",
+    help: "Notification provider calls that exceeded their deadline.",
+    labelValues: { channel: CHANNELS },
+  },
+  {
+    name: `${METRIC_PREFIX}notification_recovered_claims_total`,
+    type: "counter",
+    help: "Outbox/delivery rows reclaimed after an interrupted claim.",
+    labelValues: { kind: ["outbox", "delivery"] },
+  },
+  {
+    name: `${METRIC_PREFIX}db_retries_total`,
+    type: "counter",
+    help: "Database operations retried after a transient failure.",
+    labelValues: { operation: ["read", "write"] },
+  },
+  {
+    name: `${METRIC_PREFIX}shutdown_events_total`,
+    type: "counter",
+    help: "Shutdown sequence events, by outcome.",
+    labelValues: { result: ["graceful", "forced", "step_failed"] },
   },
   {
     name: `${METRIC_PREFIX}readiness_dependency_up`,

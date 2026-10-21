@@ -12,7 +12,8 @@
  * - Fail open on telemetry: a broken metrics/log sink never affects the
  *   readiness result.
  */
-import { getPool } from "../persistence/db.js";
+import { getPool, withDbRetry } from "../persistence/db.js";
+import { withTimeout } from "../domain/timeout.js";
 import { metrics } from "./metrics.js";
 import { log } from "./logger.js";
 
@@ -29,15 +30,34 @@ export interface ReadinessResult {
 
 const CRITICAL_DEPS = ["postgres"] as const;
 
-/** Check every critical dependency and record per-dependency gauges. */
-export async function checkReadiness(): Promise<ReadinessResult> {
-  const deps: DependencyStatus[] = [];
+/** Default deadline for the dependency check. A hung probe fails closed. */
+const DEFAULT_READINESS_TIMEOUT_MS = 2_000;
 
-  // Postgres — a single cheap query. Raw errors are swallowed; we only
-  // record up/down so no connection details leak.
+/**
+ * Check every critical dependency and record per-dependency gauges.
+ *
+ * Each check is bounded by a deadline: a probe that hangs forever is
+ * indistinguishable from a down dependency, and an orchestrator that waits
+ * on a hanging probe will eventually kill a healthy process. A timed-out
+ * dependency is reported as DOWN (fail closed), never as up.
+ */
+export async function checkReadiness(
+  opts: { timeoutMs?: number } = {}
+): Promise<ReadinessResult> {
+  const deps: DependencyStatus[] = [];
+  const timeoutMs = Math.max(opts.timeoutMs ?? DEFAULT_READINESS_TIMEOUT_MS, 100);
+
+  // Postgres - a single cheap query. Raw errors are swallowed; we only
+  // record up/down so no connection details leak. A transient connection
+  // failure is retried briefly (a read is safe to repeat); a terminal
+  // failure or a deadline overrun is reported as down.
   let postgresUp = false;
   try {
-    await getPool().query("SELECT 1");
+    await withTimeout(
+      () => withDbRetry(() => getPool().query("SELECT 1"), { attempts: 2, baseDelayMs: 25 }),
+      timeoutMs,
+      "readiness:postgres"
+    );
     postgresUp = true;
   } catch {
     postgresUp = false;

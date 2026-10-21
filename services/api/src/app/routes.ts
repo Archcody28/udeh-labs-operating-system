@@ -41,6 +41,17 @@ function secureCookies(): boolean {
   return (process.env.COOKIE_SECURE ?? (process.env.NODE_ENV === "production" ? "true" : "false")) === "true";
 }
 
+/**
+ * Deadline for the readiness dependency check. Read from the environment so
+ * an operator can tune it without a rebuild; clamped to a sane range.
+ */
+function readinessTimeoutMs(): number {
+  const raw = process.env.READINESS_TIMEOUT_MS;
+  const n = raw === undefined || raw === "" ? 2_000 : Number(raw);
+  if (!Number.isFinite(n)) return 2_000;
+  return Math.min(Math.max(Math.trunc(n), 100), 60_000);
+}
+
 export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid: string): Promise<void> {
   const url = new URL(req.url ?? "/", "http://localhost");
   const method = req.method ?? "GET";
@@ -51,7 +62,9 @@ export async function handleRoute(req: IncomingMessage, res: ServerResponse, cid
     return sendJson(res, 200, { status: result.status, correlationId: cid }, cid);
   }
   if (method === "GET" && url.pathname === "/ready") {
-    const result = await checkReadiness();
+    // The probe is bounded: a hanging dependency check must fail closed
+    // rather than pin the probe (and the orchestrator's timeout).
+    const result = await checkReadiness({ timeoutMs: readinessTimeoutMs() });
     const status = result.allUp ? 200 : 503;
     return sendJson(res, status, { status: result.status, correlationId: cid }, cid);
   }

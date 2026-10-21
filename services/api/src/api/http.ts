@@ -27,13 +27,32 @@ export function sendError(res: ServerResponse, err: unknown, correlationId: stri
 export function readJsonBody(req: IncomingMessage): Promise<Record<string, unknown>> {
   return new Promise((resolve, reject) => {
     let raw = "";
-    req.on("data", (c) => { raw += c; if (raw.length > 1_000_000) reject(new Error("body too large")); });
+    // Once the limit is exceeded the reader must STOP accumulating and must
+    // not resolve later: the promise is already settled, but the string kept
+    // growing, so a malicious client could still stream unbounded data into
+    // memory. The `done` flag makes the reader inert after rejection.
+    let done = false;
+    req.on("data", (c) => {
+      if (done) return;
+      raw += c;
+      if (raw.length > 1_000_000) {
+        done = true;
+        raw = "";
+        reject(new Error("body too large"));
+      }
+    });
     req.on("end", () => {
+      if (done) return;
+      done = true;
       if (!raw) return resolve({});
       try { resolve(JSON.parse(raw) as Record<string, unknown>); }
       catch { reject(new Error("invalid JSON body")); }
     });
-    req.on("error", reject);
+    req.on("error", (e) => {
+      if (done) return;
+      done = true;
+      reject(e);
+    });
   });
 }
 
