@@ -11,9 +11,9 @@
  */
 import {
   NotificationProvider, NotifyProviderError, NotifyRequest, NotifyResult,
-} from "../notificationProvider.js";
-import { NotificationChannel } from "../notificationChannels.js";
-import { secretVault } from "../integrationSecrets.js";
+} from "../notificationProvider.ts";
+import { NotificationChannel } from "../notificationChannels.ts";
+import { secretVault } from "../integrationSecrets.ts";
 
 /** SecretVault reference for the email provider credential (by reference only). */
 export const EMAIL_CREDENTIAL_REF = "notification:email:provider-credential";

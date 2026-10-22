@@ -10,9 +10,9 @@
  * one, email routes are created with the `unconfigured` provider and are
  * terminal-dead-lettered by the dispatcher rather than silently dropped.
  */
-import { registerNotificationProvider, setChannelDefault } from "./notificationProvider.js";
-import { InAppProvider } from "./notificationProviders/inAppProvider.js";
-import { EmailProvider, EmailTransport } from "./notificationProviders/emailProvider.js";
+import { registerNotificationProvider, setChannelDefault } from "./notificationProvider.ts";
+import { InAppProvider } from "./notificationProviders/inAppProvider.ts";
+import { EmailProvider, EmailTransport } from "./notificationProviders/emailProvider.ts";
 
 let emailTransport: EmailTransport | null = null;
 let booted = false;

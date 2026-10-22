@@ -8,8 +8,8 @@
  */
 import {
   NotificationProvider, NotifyProviderError, NotifyRequest, NotifyResult,
-} from "../notificationProvider.js";
-import { NotificationChannel } from "../notificationChannels.js";
+} from "../notificationProvider.ts";
+import { NotificationChannel } from "../notificationChannels.ts";
 
 export class InAppProvider implements NotificationProvider {
   readonly name = "in_app";

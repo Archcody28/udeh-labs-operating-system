@@ -18,32 +18,32 @@
  * - Cross-tenant / removed recipients are re-verified before delivery.
  */
 import { createHash, randomUUID } from "node:crypto";
-import { getPool, withTransaction } from "../persistence/db.js";
+import { getPool, withTransaction } from "../persistence/db.ts";
 import {
   claimDueOutbox, completeOutbox, retryOutbox, deadLetterOutbox, OutboxRow,
-} from "../persistence/notificationOutboxRepository.js";
+} from "../persistence/notificationOutboxRepository.ts";
 import {
   DeliveryRepository, claimDueDeliveries, completeDelivery, retryDelivery,
   deadLetterDelivery, markNotificationDelivered,
-} from "../persistence/notificationDeliveryRepository.js";
-import { NotificationRepository } from "../persistence/notificationRepository.js";
+} from "../persistence/notificationDeliveryRepository.ts";
+import { NotificationRepository } from "../persistence/notificationRepository.ts";
 import {
   PreferenceRepository, recordProviderOperation,
-} from "../persistence/notificationPreferenceRepository.js";
-import { routeFor, RouteSpec } from "./notificationRouting.js";
-import { NotificationChannel } from "./notificationChannels.js";
-import { resolveRecipients } from "./notificationRecipients.js";
-import { renderNotification } from "./notificationTemplates.js";
+} from "../persistence/notificationPreferenceRepository.ts";
+import { routeFor, RouteSpec } from "./notificationRouting.ts";
+import { NotificationChannel } from "./notificationChannels.ts";
+import { resolveRecipients } from "./notificationRecipients.ts";
+import { renderNotification } from "./notificationTemplates.ts";
 import {
   NotifyProviderError, NotifyRequest, NotificationProvider, providerForChannel,
   isRetryableFailure,
-} from "./notificationProvider.js";
-import { DEFAULT_RETRY_POLICY, backoffDelayMs, shouldRetry } from "./notificationRetry.js";
-import { withTimeout, TimeoutError } from "./timeout.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { log } from "../observability/logger.js";
-import { metrics } from "../observability/metrics.js";
-import { normalizeChannel, normalizeResult } from "../observability/vocabulary.js";
+} from "./notificationProvider.ts";
+import { DEFAULT_RETRY_POLICY, backoffDelayMs, shouldRetry } from "./notificationRetry.ts";
+import { withTimeout, TimeoutError } from "./timeout.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { log } from "../observability/logger.ts";
+import { metrics } from "../observability/metrics.ts";
+import { normalizeChannel, normalizeResult } from "../observability/vocabulary.ts";
 
 const notifications = new NotificationRepository();
 const deliveries = new DeliveryRepository();

@@ -8,8 +8,8 @@
  * Failure taxonomy mirrors the integration ProviderError pattern (ADR 0020):
  * no raw provider internals escape the adapter boundary.
  */
-import { AppError } from "./errors.js";
-import { NotificationChannel } from "./notificationChannels.js";
+import { AppError } from "./errors.ts";
+import { NotificationChannel } from "./notificationChannels.ts";
 
 export const NOTIFY_FAILURES = [
   "rate_limited",

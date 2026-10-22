@@ -7,9 +7,9 @@
  * no route is simply not delivered (outbox consumers other than notifications
  * may still read it).
  */
-import { DomainEventType } from "./domainEvents.js";
-import { NotificationChannel } from "./notificationChannels.js";
-import { Permission } from "./authorization.js";
+import { DomainEventType } from "./domainEvents.ts";
+import { NotificationChannel } from "./notificationChannels.ts";
+import { Permission } from "./authorization.ts";
 
 /** How recipients are derived. All strategies are authorization-aware and
  * server-resolved; the payload never supplies tenant-authorized recipients. */

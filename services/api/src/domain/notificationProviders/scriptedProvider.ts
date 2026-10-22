@@ -6,8 +6,8 @@
  */
 import {
   NotificationProvider, NotifyProviderError, NotifyRequest, NotifyResult,
-} from "../notificationProvider.js";
-import { NotificationChannel } from "../notificationChannels.js";
+} from "../notificationProvider.ts";
+import { NotificationChannel } from "../notificationChannels.ts";
 
 export type ScriptedOutcome =
   | { kind: "succeed" }
