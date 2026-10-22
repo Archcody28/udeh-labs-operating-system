@@ -1,9 +1,9 @@
 import { PoolClient } from "pg";
-import { TenantContext } from "../domain/tenancy.js";
-import { EngineeringTaskRepository } from "../persistence/taskRepository.js";
-import { PatchRepository, ReviewRepository, DeploymentRepository } from "../persistence/engineeringRepositories.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { withTransaction } from "../persistence/db.js";
+import { TenantContext } from "../domain/tenancy.ts";
+import { EngineeringTaskRepository } from "../persistence/taskRepository.ts";
+import { PatchRepository, ReviewRepository, DeploymentRepository } from "../persistence/engineeringRepositories.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { withTransaction } from "../persistence/db.ts";
 import { createHash } from "node:crypto";
 
 const tasks = new EngineeringTaskRepository();

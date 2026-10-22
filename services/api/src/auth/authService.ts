@@ -1,20 +1,20 @@
 import { createHash } from "node:crypto";
-import { UserRepository } from "../persistence/userRepository.js";
-import { SessionRepository } from "../persistence/sessionRepository.js";
-import { MembershipRepository } from "../persistence/membershipRepository.js";
-import { InvitationRepository } from "../persistence/invitationRepository.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { OrganizationRepository } from "../persistence/tenancyRepositories.js";
-import { withTransaction } from "../persistence/db.js";
-import { hashPassword, newOpaqueToken, sha256Hex } from "../domain/credentials.js";
-import { validatePasswordPolicy, validateEmail, verifyPassword } from "../domain/credentials.js";
-import { AuthPrincipal } from "../domain/principal.js";
-import { ForbiddenError, UnauthorizedError } from "../domain/authorization.js";
-import { normalizeRole, requirePermission } from "../domain/authorization.js";
-import { LocalPasswordProvider } from "./localProvider.js";
-import { issuePrincipal } from "./provider.js";
-import { ValidationError } from "../domain/errors.js";
-import { validateName } from "../domain/lifecycle.js";
+import { UserRepository } from "../persistence/userRepository.ts";
+import { SessionRepository } from "../persistence/sessionRepository.ts";
+import { MembershipRepository } from "../persistence/membershipRepository.ts";
+import { InvitationRepository } from "../persistence/invitationRepository.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { OrganizationRepository } from "../persistence/tenancyRepositories.ts";
+import { withTransaction } from "../persistence/db.ts";
+import { hashPassword, newOpaqueToken, sha256Hex } from "../domain/credentials.ts";
+import { validatePasswordPolicy, validateEmail, verifyPassword } from "../domain/credentials.ts";
+import { AuthPrincipal } from "../domain/principal.ts";
+import { ForbiddenError, UnauthorizedError } from "../domain/authorization.ts";
+import { normalizeRole, requirePermission } from "../domain/authorization.ts";
+import { LocalPasswordProvider } from "./localProvider.ts";
+import { issuePrincipal } from "./provider.ts";
+import { ValidationError } from "../domain/errors.ts";
+import { validateName } from "../domain/lifecycle.ts";
 
 const GENERIC_FAILURE = "invalid email or password";
 
@@ -167,7 +167,7 @@ export class AuthService {
 
   private async ensureBootstrapOrg(): Promise<{ id: string }> {
     if (this.bootstrapOrg) return this.bootstrapOrg;
-    const { getPool } = await import("../persistence/db.js");
+    const { getPool } = await import("../persistence/db.ts");
     const res = await getPool().query("SELECT id FROM organizations ORDER BY created_at LIMIT 1");
     if (res.rowCount) {
       this.bootstrapOrg = { id: res.rows[0].id as string };
@@ -179,7 +179,7 @@ export class AuthService {
   }
 
   private async verifyPasswordCheck(userId: string, password: string): Promise<void> {
-    const { getPool } = await import("../persistence/db.js");
+    const { getPool } = await import("../persistence/db.ts");
     const res = await getPool().query("SELECT password_hash FROM user_credentials WHERE user_id = $1", [userId]);
     const hash = res.rows[0]?.password_hash as string | undefined;
     if (hash && hash !== "set" && !(await verifyPassword(password, hash))) {

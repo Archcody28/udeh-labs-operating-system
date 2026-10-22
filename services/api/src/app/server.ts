@@ -1,15 +1,15 @@
 import { createServer, IncomingMessage, ServerResponse } from "node:http";
-import { closePool } from "../persistence/db.js";
-import { migrateUp } from "../persistence/migrate.js";
-import { correlationIdOf, sendError } from "../api/http.js";
-import { loadConfig } from "../config.js";
-import { handleRoute } from "./routes.js";
-import { bootstrapNotificationProviders } from "../domain/notificationBootstrap.js";
-import { startDispatchWorker, recoverStaleClaims } from "../domain/notificationService.js";
-import { instrumentRequest } from "../observability/http.js";
-import { setupObservability } from "../observability/setup.js";
-import { log } from "../observability/logger.js";
-import { closeServer, installSignalHandlers } from "./shutdown.js";
+import { closePool } from "../persistence/db.ts";
+import { migrateUp } from "../persistence/migrate.ts";
+import { correlationIdOf, sendError } from "../api/http.ts";
+import { loadConfig } from "../config.ts";
+import { handleRoute } from "./routes.ts";
+import { bootstrapNotificationProviders } from "../domain/notificationBootstrap.ts";
+import { startDispatchWorker, recoverStaleClaims } from "../domain/notificationService.ts";
+import { instrumentRequest } from "../observability/http.ts";
+import { setupObservability } from "../observability/setup.ts";
+import { log } from "../observability/logger.ts";
+import { closeServer, installSignalHandlers } from "./shutdown.ts";
 
 async function route(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const cid = correlationIdOf(req);

@@ -1,12 +1,12 @@
 import { IncomingMessage, ServerResponse } from "node:http";
-import { sendJson, readJsonBody, page } from "../api/http.js";
-import { ValidationError } from "../domain/errors.js";
-import { guardOrgRoute } from "../auth/guards.js";
-import { assertProjectInHierarchy } from "../domain/tenant.js";
-import { ProjectRepository } from "../persistence/projectRepository.js";
-import { tasks, patches, reviews, deployments, engineeringService, diffHash } from "../domain/engineeringService.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { getPool } from "../persistence/db.js";
+import { sendJson, readJsonBody, page } from "../api/http.ts";
+import { ValidationError } from "../domain/errors.ts";
+import { guardOrgRoute } from "../auth/guards.ts";
+import { assertProjectInHierarchy } from "../domain/tenant.ts";
+import { ProjectRepository } from "../persistence/projectRepository.ts";
+import { tasks, patches, reviews, deployments, engineeringService, diffHash } from "../domain/engineeringService.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { getPool } from "../persistence/db.ts";
 
 const projects = new ProjectRepository();
 const audits = new AuditRepository();

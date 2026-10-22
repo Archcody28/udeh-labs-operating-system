@@ -1,8 +1,8 @@
 import { PoolClient } from "pg";
-import { BaseRepository, updateWithVersion } from "./baseRepository.js";
-import { validateName, assertTransition } from "../domain/lifecycle.js";
-import { TenantContext } from "../domain/tenancy.js";
-import { withTransaction } from "./db.js";
+import { BaseRepository, updateWithVersion } from "./baseRepository.ts";
+import { validateName, assertTransition } from "../domain/lifecycle.ts";
+import { TenantContext } from "../domain/tenancy.ts";
+import { withTransaction } from "./db.ts";
 
 export interface Organization { id: string; name: string; slug: string; status: string; version: number; }
 

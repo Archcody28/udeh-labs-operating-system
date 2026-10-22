@@ -1,5 +1,5 @@
 /** Lifecycle constants mirroring docs/architecture/lifecycle-state-models.md + entity-catalog.md. */
-import { StateTransitionError, ValidationError } from "./errors.js";
+import { StateTransitionError, ValidationError } from "./errors.ts";
 
 export const OrganizationStatus = ["provisioning", "active", "suspended"] as const;
 export const WorkspaceStatus = ["active", "archived"] as const;

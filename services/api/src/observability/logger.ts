@@ -15,7 +15,7 @@
  */
 import { randomUUID } from "node:crypto";
 import { AsyncLocalStorage } from "node:async_hooks";
-import { redactFields, sanitizeString, MAX_MESSAGE_LENGTH } from "./redaction.js";
+import { redactFields, sanitizeString, MAX_MESSAGE_LENGTH } from "./redaction.ts";
 
 export const LOG_LEVELS = ["debug", "info", "warn", "error"] as const;
 export type LogLevel = (typeof LOG_LEVELS)[number];

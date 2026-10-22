@@ -5,10 +5,10 @@ import { ProposalRepository } from "../persistence/proposalRepository.js";
 import { ProposalVersionRepository, ContractRepository } from "../persistence/versionContractRepositories.js";
 import { IdempotencyRepository } from "../persistence/idempotencyRepository.js";
 import { ProjectRepository } from "../persistence/projectRepository.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { withTransaction } from "../persistence/db.js";
-import { ConflictError } from "../domain/errors.js";
-import { getPool } from "../persistence/db.js";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { withTransaction } from "../persistence/db.ts";
+import { ConflictError } from "../domain/errors.ts";
+import { getPool } from "../persistence/db.ts";
 
 const proposals = new ProposalRepository();
 const versions = new ProposalVersionRepository();

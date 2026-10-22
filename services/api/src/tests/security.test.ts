@@ -579,4 +579,80 @@ describe("postgres integration", { skip: !hasDb } as never, () => {
       /append-only/
     );
   });
+
+  // ---------------------------------------------------------------------------
+  // Phase 17 regression tests: adversarial security baseline
+  // ---------------------------------------------------------------------------
+
+  it("cross-tenant integration BOLA: mallory cannot list alice's integrations", async () => {
+    const aliceInt = await api("/api/v1/integrations", {
+      method: "POST",
+      token: aliceToken,
+      body: { organizationId: aliceOrgId, kind: "github", name: `phase17-int-${SUFFIX}` },
+    });
+    assert.equal(aliceInt.status, 201, `alice integration create: ${JSON.stringify(aliceInt.json)}`);
+    const aliceIntId = (aliceInt.json as { data: { id: string } }).data.id;
+
+    const malloryList = await api("/api/v1/integrations", { token: bobToken });
+    assert.equal(malloryList.status, 200);
+    const malloryInts = (malloryList.json as { data: Array<{ id: string }> }).data ?? [];
+    assert.ok(!malloryInts.some((i) => i.id === aliceIntId), "mallory must not see alice's integration");
+
+    const malloryGet = await api(`/api/v1/integrations/${aliceIntId}`, { token: bobToken });
+    assert.ok(malloryGet.status === 403 || malloryGet.status === 404, `mallory get integration: ${malloryGet.status}`);
+  });
+
+  it("session rotation invalidates old token", async () => {
+    const rotate = await api("/api/v1/auth/rotate", { method: "POST", token: aliceToken });
+    assert.equal(rotate.status, 200, `rotate: ${JSON.stringify(rotate.json)}`);
+    const newToken = (rotate.json as { data: { token: string } }).data.token;
+    assert.ok(newToken, "new token returned");
+
+    const oldMe = await api("/api/v1/auth/me", { token: aliceToken });
+    assert.equal(oldMe.status, 401, `old token must be invalidated: ${oldMe.status}`);
+
+    const newMe = await api("/api/v1/auth/me", { token: newToken });
+    assert.equal(newMe.status, 200, `new token must work: ${newMe.status}`);
+  });
+
+  it("credential non-disclosure: /auth/me contains no secrets", async () => {
+    const me = await api("/api/v1/auth/me", { token: bobToken });
+    assert.equal(me.status, 200);
+    const meJson = JSON.stringify(me.json);
+    assert.ok(!meJson.includes("passwordHash"), "no passwordHash in /auth/me");
+    assert.ok(!meJson.includes("secret"), "no secret in /auth/me");
+    assert.ok(!meJson.includes("apiKey"), "no apiKey in /auth/me");
+    assert.ok(!meJson.includes("accessToken"), "no accessToken in /auth/me");
+    assert.ok(!meJson.includes("refreshToken"), "no refreshToken in /auth/me");
+    assert.ok(!meJson.includes("privateKey"), "no privateKey in /auth/me");
+  });
+
+  it("credential non-disclosure: registration response contains no secrets", async () => {
+    const reg = await api("/api/v1/auth/register", {
+      method: "POST",
+      body: { email: `phase17-reg-${SUFFIX}@example.com`, password: ALT_PASSWORD, displayName: "Phase17 Reg" },
+    });
+    assert.equal(reg.status, 201, `register: ${JSON.stringify(reg.json)}`);
+    const regJson = JSON.stringify(reg.json);
+    assert.ok(!regJson.includes("passwordHash"), "no passwordHash in registration response");
+    assert.ok(!regJson.includes("secret"), "no secret in registration response");
+    assert.ok(!regJson.includes("apiKey"), "no apiKey in registration response");
+    assert.ok(!regJson.includes("accessToken"), "no accessToken in registration response");
+    assert.ok(!regJson.includes("refreshToken"), "no refreshToken in registration response");
+    assert.ok(!regJson.includes("privateKey"), "no privateKey in registration response");
+  });
+
+  it("credential non-disclosure: login response contains no secrets", async () => {
+    const loginRes = await api("/api/v1/auth/login", {
+      method: "POST",
+      body: { email: `phase17-login-${SUFFIX}@example.com`, password: ALT_PASSWORD },
+    });
+    const loginJson = JSON.stringify(loginRes.json ?? {});
+    assert.ok(!loginJson.includes("passwordHash"), "no passwordHash in login response");
+    assert.ok(!loginJson.includes("secret"), "no secret in login response");
+    assert.ok(!loginJson.includes("apiKey"), "no apiKey in login response");
+    assert.ok(!loginJson.includes("accessToken"), "no accessToken in login response");
+    assert.ok(!loginJson.includes("refreshToken"), "no refreshToken in login response");
+    assert.ok(!loginJson.includes("privateKey"), "no privateKey in login response");
+  });
 });

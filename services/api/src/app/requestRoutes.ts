@@ -1,11 +1,11 @@
 import { IncomingMessage, ServerResponse } from "node:http";
-import { sendJson, readJsonBody, page } from "../api/http.js";
-import { ValidationError } from "../domain/errors.js";
-import { guardOrgRoute } from "../auth/guards.js";
-import { assertWorkspaceInOrg } from "../domain/tenant.js";
-import { WorkspaceRepository } from "../persistence/tenancyRepositories.js";
-import { ClientRequestRepository, RequirementRepository } from "../persistence/commercialRepositories.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
+import { sendJson, readJsonBody, page } from "../api/http.ts";
+import { ValidationError } from "../domain/errors.ts";
+import { guardOrgRoute } from "../auth/guards.ts";
+import { assertWorkspaceInOrg } from "../domain/tenant.ts";
+import { WorkspaceRepository } from "../persistence/tenancyRepositories.ts";
+import { ClientRequestRepository, RequirementRepository } from "../persistence/commercialRepositories.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
 
 const workspaces = new WorkspaceRepository();
 const requests = new ClientRequestRepository();

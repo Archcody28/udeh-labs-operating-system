@@ -16,8 +16,8 @@
  * to a forced exit instead of starting a second drain.
  */
 import { Server } from "node:http";
-import { log } from "../observability/logger.js";
-import { metrics } from "../observability/metrics.js";
+import { log } from "../observability/logger.ts";
+import { metrics } from "../observability/metrics.ts";
 
 export interface ShutdownStep {
   /** Stable name for the step (logged, never a secret). */

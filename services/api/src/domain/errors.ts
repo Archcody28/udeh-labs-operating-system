@@ -11,14 +11,18 @@ export type ErrorCode =
 
 export class AppError extends Error {
   constructor(
-    public code: ErrorCode,
+    code: ErrorCode,
     message: string,
-    public httpStatus: number,
-    public retryable = false,
-    public fields?: { field: string; issue: string }[]
+    httpStatus: number,
+    retryable = false,
+    fields?: { field: string; issue: string }[]
   ) {
     super(message);
     this.name = "AppError";
+    this.code = code;
+    this.httpStatus = httpStatus;
+    this.retryable = retryable;
+    this.fields = fields;
   }
 }
 

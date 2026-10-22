@@ -12,6 +12,8 @@
     "seed": "node dist/app/seed.js",
     "test:unit": "node --test dist/tests/unit.test.js",
     "test:integration": "node --test dist/tests/integration.test.js",
+    "test:new": "node --test --test-reporter=dot-progress services/api/src/tests/*.test.ts",
+    "test:all": "node --test --test-reporter=dot-progress services/api/src/tests/*.test.ts",
     "test": "node --test dist/tests/unit.test.js",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "lint": "node --check dist/app/server.js && echo lint-ok"

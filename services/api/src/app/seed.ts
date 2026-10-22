@@ -1,11 +1,11 @@
 /** Deterministic synthetic dev seed. Never for production. Respects org→ws→project. */
 import { randomBytes } from "node:crypto";
-import { migrateUp } from "../persistence/migrate.js";
-import { OrganizationRepository, WorkspaceRepository } from "../persistence/tenancyRepositories.js";
-import { ProjectRepository } from "../persistence/projectRepository.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { UserRepository } from "../persistence/userRepository.js";
-import { MembershipRepository } from "../persistence/membershipRepository.js";
+import { migrateUp } from "../persistence/migrate.ts";
+import { OrganizationRepository, WorkspaceRepository } from "../persistence/tenancyRepositories.ts";
+import { ProjectRepository } from "../persistence/projectRepository.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { UserRepository } from "../persistence/userRepository.ts";
+import { MembershipRepository } from "../persistence/membershipRepository.ts";
 
 async function main(): Promise<void> {
   const url = process.env.DATABASE_URL ?? "postgresql://udehlabs:udehlabs_dev@localhost:5432/udehlabs_dev";

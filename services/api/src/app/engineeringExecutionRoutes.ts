@@ -1,10 +1,10 @@
 import { IncomingMessage, ServerResponse } from "node:http";
-import { sendJson, readJsonBody, page } from "../api/http.js";
-import { ValidationError } from "../domain/errors.js";
-import { guardOrgRoute } from "../auth/guards.js";
-import { ForbiddenError } from "../domain/authorization.js";
-import { engineeringExecutionService } from "../domain/engineeringExecution.js";
-import { engineeringExecutionRepository } from "../persistence/engineeringExecutionRepository.js";
+import { sendJson, readJsonBody, page } from "../api/http.ts";
+import { ValidationError } from "../domain/errors.ts";
+import { guardOrgRoute } from "../auth/guards.ts";
+import { ForbiddenError } from "../domain/authorization.ts";
+import { engineeringExecutionService } from "../domain/engineeringExecution.ts";
+import { engineeringExecutionRepository } from "../persistence/engineeringExecutionRepository.ts";
 
 const execRepo = engineeringExecutionRepository;
 

@@ -1,6 +1,6 @@
 import { Pool, PoolClient, QueryResult } from "pg";
-import { log } from "../observability/logger.js";
-import { metrics } from "../observability/metrics.js";
+import { log } from "../observability/logger.ts";
+import { metrics } from "../observability/metrics.ts";
 
 /** Single pooled entry point. No raw client leaks outside repositories. */
 let pool: Pool | null = null;

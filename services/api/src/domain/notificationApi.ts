@@ -6,11 +6,11 @@
  * cross-tenant id never resolves (INV-TEN-*).
  */
 import { TenantContext } from "./tenancy.js";
-import { NotificationRepository } from "../persistence/notificationRepository.js";
-import { PreferenceRepository } from "../persistence/notificationPreferenceRepository.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { NotificationChannel, isNotificationChannel } from "./notificationChannels.js";
-import { ValidationError } from "./errors.js";
+import { NotificationRepository } from "../persistence/notificationRepository.ts";
+import { PreferenceRepository } from "../persistence/notificationPreferenceRepository.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { NotificationChannel, isNotificationChannel } from "./notificationChannels.ts";
+import { ValidationError } from "./errors.ts";
 import { ForbiddenError } from "./authorization.js";
 
 const notifications = new NotificationRepository();

@@ -1,12 +1,12 @@
 /** Phase 11: Autonomous Engineering execution domain service. */
 import { PoolClient } from "pg";
 import { TenantContext } from "./tenancy.js";
-import { withTransaction } from "../persistence/db.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { engineeringExecutionRepository } from "../persistence/engineeringExecutionRepository.js";
-import { PatchRepository, ReviewRepository } from "../persistence/engineeringRepositories.js";
-import { AiError, sanitizeUntrusted } from "./aiErrors.js";
-import { AIProvider } from "./aiProvider.js";
+import { withTransaction } from "../persistence/db.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { engineeringExecutionRepository } from "../persistence/engineeringExecutionRepository.ts";
+import { PatchRepository, ReviewRepository } from "../persistence/engineeringRepositories.ts";
+import { AiError, sanitizeUntrusted } from "./aiErrors.ts";
+import { AIProvider } from "./aiProvider.ts";
 import { hashJson } from "./aiRuntime.js";
 import { validateDraftOutput, checkBudget } from "./aiPolicy.js";
 import { recordActivity } from "./collaborationService.js";

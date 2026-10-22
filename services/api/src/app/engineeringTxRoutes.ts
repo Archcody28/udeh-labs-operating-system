@@ -1,13 +1,13 @@
 import { IncomingMessage, ServerResponse } from "node:http";
-import { sendJson, readJsonBody } from "../api/http.js";
-import { ValidationError } from "../domain/errors.js";
-import { guardOrgRoute } from "../auth/guards.js";
-import { assertProjectInHierarchy } from "../domain/tenant.js";
-import { tasks, patches, reviews, deployments, engineeringService, diffHash } from "../domain/engineeringService.js";
-import { engineeringExecutionService } from "../domain/engineeringExecution.js";
-import { AuditRepository } from "../persistence/auditRepository.js";
-import { getPool, withTransaction } from "../persistence/db.js";
-import { publishDomainEvent } from "../domain/domainEvents.js";
+import { sendJson, readJsonBody } from "../api/http.ts";
+import { ValidationError } from "../domain/errors.ts";
+import { guardOrgRoute } from "../auth/guards.ts";
+import { assertProjectInHierarchy } from "../domain/tenant.ts";
+import { tasks, patches, reviews, deployments, engineeringService, diffHash } from "../domain/engineeringService.ts";
+import { engineeringExecutionService } from "../domain/engineeringExecution.ts";
+import { AuditRepository } from "../persistence/auditRepository.ts";
+import { getPool, withTransaction } from "../persistence/db.ts";
+import { publishDomainEvent } from "../domain/domainEvents.ts";
 
 const audits = new AuditRepository();
 

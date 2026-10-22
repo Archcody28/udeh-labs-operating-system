@@ -1,6 +1,6 @@
 import { PoolClient, QueryResult } from "pg";
-import { getPool } from "./db.js";
-import { ConflictError, NotFoundError } from "../domain/errors.js";
+import { getPool } from "./db.ts";
+import { ConflictError, NotFoundError } from "../domain/errors.ts";
 
 /** Base repository: parameterized queries, tenant scoping, error mapping. */
 export abstract class BaseRepository {
