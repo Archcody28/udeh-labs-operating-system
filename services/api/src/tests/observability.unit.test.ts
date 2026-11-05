@@ -135,7 +135,7 @@ describe("logger + correlation context", () => {
     const captured: unknown[] = [];
     const sink = (record: unknown) => captured.push(record);
     const log = createLogger({ level: "info", sink });
-    log.info("test.event", "msg", { password: "secret123", name: "alice" });
+    log.info("test.event", "msg", { password: "test", name: "alice" });
     const record = captured[0] as { fields?: Record<string, unknown> };
     assert.equal(record.fields?.password, REDACTED);
     assert.equal(record.fields?.name, "alice");

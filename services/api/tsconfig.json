@@ -15,6 +15,7 @@
     "sourceMap": true,
     "allowImportingTsExtensions": true,
     "allowJs": true,
+    "rewriteRelativeImportExtensions": true,
     "importsNotUsedAsValues": "remove"
   },
   "include": ["src/**/*"],

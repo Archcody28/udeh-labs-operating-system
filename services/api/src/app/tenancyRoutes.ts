@@ -1,3 +1,4 @@
+import type { IncomingMessage, ServerResponse } from "node:http";
 import { getPool } from "../persistence/db.ts";
 import { OrganizationRepository } from "../persistence/tenancyRepositories.ts";
 import { WorkspaceRepository } from "../persistence/tenancyRepositories.ts";

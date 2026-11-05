@@ -10,6 +10,11 @@ export type ErrorCode =
   | "INTERNAL";
 
 export class AppError extends Error {
+  declare code: ErrorCode;
+  declare httpStatus: number;
+  declare retryable: boolean;
+  declare fields?: { field: string; issue: string }[];
+
   constructor(
     code: ErrorCode,
     message: string,
